@@ -14,6 +14,8 @@
 		9D13C7F6248784330058A7BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D13C7F5248784330058A7BF /* Assets.xcassets */; };
 		9D13C7F9248784330058A7BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D13C7F7248784330058A7BF /* LaunchScreen.storyboard */; };
 		9D13C80B248788390058A7BF /* SignButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D13C80A248788390058A7BF /* SignButton.swift */; };
+		9D13C80F248795E40058A7BF /* LoginTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D13C80E248795E40058A7BF /* LoginTextView.xib */; };
+		9D13C811248796900058A7BF /* LoginTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D13C810248796900058A7BF /* LoginTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		9D13C7F8248784330058A7BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9D13C7FA248784330058A7BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D13C80A248788390058A7BF /* SignButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignButton.swift; sourceTree = "<group>"; };
+		9D13C80E248795E40058A7BF /* LoginTextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginTextView.xib; sourceTree = "<group>"; };
+		9D13C810248796900058A7BF /* LoginTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +96,7 @@
 		9D13C8022487849E0058A7BF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9D13C810248796900058A7BF /* LoginTextView.swift */,
 				9D13C809248788280058A7BF /* Button */,
 			);
 			path = View;
@@ -131,6 +136,7 @@
 		9D13C807248784DA0058A7BF /* Xib */ = {
 			isa = PBXGroup;
 			children = (
+				9D13C80E248795E40058A7BF /* LoginTextView.xib */,
 			);
 			path = Xib;
 			sourceTree = "<group>";
@@ -211,6 +217,7 @@
 				9D13C7F9248784330058A7BF /* LaunchScreen.storyboard in Resources */,
 				9D13C7F6248784330058A7BF /* Assets.xcassets in Resources */,
 				9D13C7F42487842E0058A7BF /* Main.storyboard in Resources */,
+				9D13C80F248795E40058A7BF /* LoginTextView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D13C80B248788390058A7BF /* SignButton.swift in Sources */,
+				9D13C811248796900058A7BF /* LoginTextView.swift in Sources */,
 				9D13C7F12487842E0058A7BF /* ViewController.swift in Sources */,
 				9D13C7ED2487842E0058A7BF /* AppDelegate.swift in Sources */,
 				9D13C7EF2487842E0058A7BF /* SceneDelegate.swift in Sources */,

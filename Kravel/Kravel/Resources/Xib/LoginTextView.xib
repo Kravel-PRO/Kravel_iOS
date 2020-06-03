@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginTextView" customModule="Kravel" customModuleProvider="target">
+            <connections>
+                <outlet property="loginButton" destination="Zi4-Ez-Lsd" id="DBC-hk-VtW"/>
+                <outletCollection property="marginViews" destination="wiq-6H-NOF" collectionClass="NSMutableArray" id="d4n-t4-Ke7"/>
+                <outletCollection property="marginViews" destination="MlU-ul-Nxh" collectionClass="NSMutableArray" id="lhr-UT-W4e"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="370"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zi4-Ez-Lsd" customClass="SignButton" customModule="Kravel" customModuleProvider="target">
+                    <rect key="frame" x="44" y="290" width="287" height="56"/>
+                    <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Zi4-Ez-Lsd" secondAttribute="height" multiplier="41:8" id="N6z-kr-GDg"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" title="로그인 하기">
+                        <color key="titleColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이메일 계정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H55-OL-wPV">
+                    <rect key="frame" x="16" y="42" width="73.666666666666671" height="19.333333333333329"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="0.070588235294117646" green="0.070588235294117646" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wiq-6H-NOF">
+                    <rect key="frame" x="16" y="69.333333333333329" width="343" height="52"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="이메일을 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wdD-D0-rwM">
+                            <rect key="frame" x="16" y="15.666666666666671" width="311" height="21"/>
+                            <color key="textColor" red="0.070588235294117646" green="0.0" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="wdD-D0-rwM" firstAttribute="leading" secondItem="wiq-6H-NOF" secondAttribute="leading" constant="16" id="0wE-A1-0vS"/>
+                        <constraint firstAttribute="width" secondItem="wiq-6H-NOF" secondAttribute="height" multiplier="343:52" id="LKU-Bg-gBN"/>
+                        <constraint firstItem="wdD-D0-rwM" firstAttribute="centerY" secondItem="wiq-6H-NOF" secondAttribute="centerY" id="d4G-i1-Dvk"/>
+                        <constraint firstAttribute="trailing" secondItem="wdD-D0-rwM" secondAttribute="trailing" constant="16" id="pfu-Ao-1EU"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MlU-ul-Nxh">
+                    <rect key="frame" x="16" y="172.66666666666666" width="343" height="52"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀번호를 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v0p-3N-g4N">
+                            <rect key="frame" x="16" y="15" width="311" height="22"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <textInputTraits key="textInputTraits" textContentType="password"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="v0p-3N-g4N" firstAttribute="centerY" secondItem="MlU-ul-Nxh" secondAttribute="centerY" id="ZXV-3c-bGx"/>
+                        <constraint firstAttribute="trailing" secondItem="v0p-3N-g4N" secondAttribute="trailing" constant="16" id="fQN-cQ-6Zg"/>
+                        <constraint firstItem="v0p-3N-g4N" firstAttribute="leading" secondItem="MlU-ul-Nxh" secondAttribute="leading" constant="16" id="q7c-bi-7Nb"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hJe-z7-fy6">
+                    <rect key="frame" x="15.999999999999996" y="145.33333333333334" width="55.666666666666657" height="19.333333333333343"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="0.070588235294117646" green="0.070588235294117646" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="hJe-z7-fy6" firstAttribute="top" secondItem="wiq-6H-NOF" secondAttribute="bottom" constant="24" id="10f-ez-zIV"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Zi4-Ez-Lsd" secondAttribute="bottom" constant="24" id="48x-wJ-dLj"/>
+                <constraint firstItem="Zi4-Ez-Lsd" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.765333" id="8m0-tc-BEE"/>
+                <constraint firstItem="H55-OL-wPV" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="9bw-e1-9HY"/>
+                <constraint firstItem="Zi4-Ez-Lsd" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="Gui-jG-Iw8"/>
+                <constraint firstItem="MlU-ul-Nxh" firstAttribute="top" secondItem="hJe-z7-fy6" secondAttribute="bottom" constant="8" id="Lnn-jL-hQI"/>
+                <constraint firstItem="MlU-ul-Nxh" firstAttribute="height" secondItem="wiq-6H-NOF" secondAttribute="height" id="WcP-Ey-L8j"/>
+                <constraint firstItem="hJe-z7-fy6" firstAttribute="leading" secondItem="wiq-6H-NOF" secondAttribute="leading" id="a5u-3J-d17"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="wiq-6H-NOF" secondAttribute="trailing" constant="16" id="bFg-Bd-MSJ"/>
+                <constraint firstItem="wiq-6H-NOF" firstAttribute="leading" secondItem="H55-OL-wPV" secondAttribute="leading" id="bwb-Fn-82G"/>
+                <constraint firstItem="MlU-ul-Nxh" firstAttribute="leading" secondItem="hJe-z7-fy6" secondAttribute="leading" id="dSE-dw-sHq"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="MlU-ul-Nxh" secondAttribute="trailing" constant="16" id="m4S-AD-CM5"/>
+                <constraint firstItem="H55-OL-wPV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="42" id="nKv-JW-YCP"/>
+                <constraint firstItem="wiq-6H-NOF" firstAttribute="top" secondItem="H55-OL-wPV" secondAttribute="bottom" constant="8" id="yYC-e4-J5E"/>
+            </constraints>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-391.19999999999999" y="28.817733990147783"/>
+        </view>
+    </objects>
+</document>
