@@ -41,6 +41,14 @@ class SetLanguageVC: UIViewController {
             languageButton.locationButton = .languageView(isSelected: !isSelected)
             languageButton.layer.borderColor = !isSelected ? UIColor.grapefruit.cgColor : UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1.0).cgColor
             languageButton.setTitleColor(!isSelected ? UIColor.grapefruit : UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1.0), for: .normal)
+            
+            if !isSelected {
+                for button in languageButtons {
+                    if button == languageButton { continue }
+                    guard let otherButton = button as? CustomButton else { return }
+                    otherButton.locationButton = .languageView(isSelected: false)
+                }
+            }
         default: break
         }
     }
