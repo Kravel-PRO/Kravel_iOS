@@ -23,7 +23,7 @@ class LoginTextView: UIView {
     
     @IBOutlet weak var loginButton: UIButton! {
         willSet {
-            guard let loginButton = newValue as? SignButton else { return }
+            guard let loginButton = newValue as? CustomButton else { return }
             loginButton.locationButton = .textView
         }
     }
@@ -31,16 +31,23 @@ class LoginTextView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         initView()
+        setCorner()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initView()
+        setCorner()
     }
     
     private func initView() {
         guard let view = Bundle.main.loadNibNamed(LoginTextView.identifier, owner: self, options: nil)?.first as? UIView else { return }
         view.frame = self.bounds
         self.addSubview(view)
+    }
+    
+    private func setCorner() {
+        layer.cornerRadius = bounds.width / 20
+        layer.masksToBounds = true
     }
 }

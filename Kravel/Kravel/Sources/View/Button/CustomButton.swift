@@ -8,10 +8,11 @@
 
 import UIKit
 
-class SignButton: UIButton {
+class CustomButton: UIButton {
     enum LocationButton {
         case textView
         case initView
+        case languageView(isSelected: Bool)
     }
     
     var locationButton: LocationButton? = nil {
@@ -20,10 +21,15 @@ class SignButton: UIButton {
                 switch locationButton {
                 case .initView:
                     setTitleColor(.white, for: .normal)
-                    setTitleColor(UIColor(red: 255/255, green: 103/255, blue: 97/255, alpha: 1.0), for: .highlighted)
+                    setTitleColor(.grapefruit, for: .highlighted)
+                    layer.borderColor = UIColor.white.cgColor
                 case .textView:
                     setTitleColor(UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1.0), for: .normal)
                     setTitleColor(.white, for: .highlighted)
+                    layer.borderColor = UIColor.white.cgColor
+                case .languageView:
+                    setTitleColor(UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1.0), for: .normal)
+                    layer.borderColor = UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1.0).cgColor
                 }
             }
         }
@@ -36,12 +42,13 @@ class SignButton: UIButton {
                 case .initView:
                     self.backgroundColor = isHighlighted ? .white : .clear
                 case .textView:
-                    self.backgroundColor = isHighlighted ? UIColor(red: 255/255, green: 103/255, blue: 97/255, alpha: 1.0) : UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
+                    self.backgroundColor = isHighlighted ? .grapefruit : UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
+                case .languageView: break
                 }
             }
         }
     }
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setBorder()
@@ -53,7 +60,6 @@ class SignButton: UIButton {
     }
 
     private func setBorder() {
-        self.layer.borderColor = UIColor.white.cgColor
         self.layer.borderWidth = 2
         self.layer.cornerRadius = self.frame.width / 11
     }

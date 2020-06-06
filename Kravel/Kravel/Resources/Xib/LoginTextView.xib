@@ -19,7 +19,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="370"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zi4-Ez-Lsd" customClass="SignButton" customModule="Kravel" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zi4-Ez-Lsd" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
                     <rect key="frame" x="44" y="290" width="287" height="56"/>
                     <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -49,7 +49,6 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstItem="wdD-D0-rwM" firstAttribute="leading" secondItem="wiq-6H-NOF" secondAttribute="leading" constant="16" id="0wE-A1-0vS"/>
-                        <constraint firstAttribute="width" secondItem="wiq-6H-NOF" secondAttribute="height" multiplier="343:52" id="LKU-Bg-gBN"/>
                         <constraint firstItem="wdD-D0-rwM" firstAttribute="centerY" secondItem="wiq-6H-NOF" secondAttribute="centerY" id="d4G-i1-Dvk"/>
                         <constraint firstAttribute="trailing" secondItem="wdD-D0-rwM" secondAttribute="trailing" constant="16" id="pfu-Ao-1EU"/>
                     </constraints>
@@ -92,6 +91,7 @@
                 <constraint firstItem="MlU-ul-Nxh" firstAttribute="leading" secondItem="hJe-z7-fy6" secondAttribute="leading" id="dSE-dw-sHq"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="MlU-ul-Nxh" secondAttribute="trailing" constant="16" id="m4S-AD-CM5"/>
                 <constraint firstItem="H55-OL-wPV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="42" id="nKv-JW-YCP"/>
+                <constraint firstItem="wiq-6H-NOF" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.140541" id="q9G-ib-lde"/>
                 <constraint firstItem="wiq-6H-NOF" firstAttribute="top" secondItem="H55-OL-wPV" secondAttribute="bottom" constant="8" id="yYC-e4-J5E"/>
             </constraints>
             <nil key="simulatedBottomBarMetrics"/>
