@@ -13,6 +13,7 @@ class CustomButton: UIButton {
         case textView
         case initView
         case languageView(isSelected: Bool)
+        case signupView
     }
     
     var locationButton: LocationButton? = nil {
@@ -30,6 +31,10 @@ class CustomButton: UIButton {
                 case .languageView:
                     setTitleColor(UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1.0), for: .normal)
                     layer.borderColor = UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1.0).cgColor
+                case .signupView:
+                    setTitleColor(UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1.0), for: .normal)
+                    setTitleColor(.white, for: .highlighted)
+                    layer.borderColor = UIColor.white.cgColor
                 }
             }
         }
@@ -44,6 +49,8 @@ class CustomButton: UIButton {
                 case .textView:
                     self.backgroundColor = isHighlighted ? .grapefruit : UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
                 case .languageView: break
+                case .signupView:
+                    self.backgroundColor = isHighlighted ? .grapefruit : UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
                 }
             }
         }

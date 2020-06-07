@@ -11,6 +11,15 @@ import UIKit
 class LoginTextView: UIView {
     static let identifier = "LoginTextView"
     
+    var delegate: UITextFieldDelegate? {
+        didSet {
+            if let delegate = delegate {
+                emailTextField.delegate = delegate
+                pwTextField.delegate = delegate
+            }
+        }
+    }
+    
     @IBOutlet var marginViews: [UIView]! {
         didSet {
             marginViews.forEach { view in
@@ -27,6 +36,9 @@ class LoginTextView: UIView {
             loginButton.locationButton = .textView
         }
     }
+    
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var pwTextField: UITextField!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,5 +61,20 @@ class LoginTextView: UIView {
     private func setCorner() {
         layer.cornerRadius = bounds.width / 20
         layer.masksToBounds = true
+    }
+    
+    func setBorderColor(of textField: UITextField) {
+        let layerColor: UIColor = textField.text == "" ? UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1.0) : .grapefruit
+        if textField == emailTextField { marginViews[0].layer.borderColor = layerColor.cgColor }
+        else { marginViews[1].layer.borderColor = layerColor.cgColor }
+    }
+    
+    func clear() {
+        emailTextField.text = ""
+        pwTextField.text = ""
+        self.endEditing(true)
+        marginViews.forEach { view in
+            view.layer.borderColor = UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1.0).cgColor
+        }
     }
 }

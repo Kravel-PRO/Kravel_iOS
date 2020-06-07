@@ -23,27 +23,48 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var titleLabel: UILabel! {
+        didSet {
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 10
+            let attributedString = NSMutableAttributedString(string: "오늘도\nKravel과 함께\n여행을 떠나볼까요?", attributes: [.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 24), .paragraphStyle: paragraphStyle])
+            attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 24), range: ("오늘도\nKravel과 함께\n여행을 떠나볼까요?" as NSString).range(of: "오늘도"))
+            titleLabel.attributedText = attributedString
+            titleLabel.alpha = 0
+        }
+    }
+    
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var backViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var loginTextViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var loginTextView: LoginTextView!
+    @IBOutlet weak var loginTextView: LoginTextView! {
+        didSet {
+            loginTextView.delegate = self
+        }
+    }
     
     private var isToggle: Bool = false {
         didSet {
             if isToggle {
                 signupButton.alpha = 0
                 signinButton.alpha = 0
+                titleLabel.transform = CGAffineTransform(translationX: 0, y: 50)
                 backViewBottomConstraint.constant = loginTextView.frame.height - (loginTextView.frame.height/2)
                 loginTextViewTopConstraint.constant = -loginTextView.frame.height/2
-                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
+                UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
+                    self.titleLabel.alpha = 1
+                    self.titleLabel.transform = .identity
                     self.view.layoutIfNeeded()
                 }, completion: nil)
             } else {
                 backViewBottomConstraint.constant = 0
                 loginTextViewTopConstraint.constant = 0
-                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
+                UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
+                    self.titleLabel.alpha = 0
                     self.view.layoutIfNeeded()
-                }, completion: nil)
+                }, completion: { isCompletion in
+                    self.loginTextView.clear()
+                })
                 
                 signinButton.transform = CGAffineTransform(translationX: 0, y: -30)
                 signupButton.transform = CGAffineTransform(translationX: 0, y: -30)
@@ -63,6 +84,11 @@ class ViewController: UIViewController {
         addGesture()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
     private func addGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapView))
         backgroundView.addGestureRecognizer(tapGesture)
@@ -74,6 +100,12 @@ class ViewController: UIViewController {
     
     @IBAction func clickLogin(_ sender: Any) {
         isToggle = isToggle ? false : true
+    }
+}
+
+extension ViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        loginTextView.setBorderColor(of: textField)
     }
 }
 

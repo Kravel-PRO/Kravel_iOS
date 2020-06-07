@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D014C3E248C4A5E00758FCC /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D014C3D248C4A5E00758FCC /* SignupVC.swift */; };
+		9D014C40248C4C3600758FCC /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D014C3F248C4C3600758FCC /* UIViewController+Extensions.swift */; };
 		9D13C7ED2487842E0058A7BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D13C7EC2487842E0058A7BF /* AppDelegate.swift */; };
 		9D13C7EF2487842E0058A7BF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D13C7EE2487842E0058A7BF /* SceneDelegate.swift */; };
 		9D13C7F12487842E0058A7BF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D13C7F02487842E0058A7BF /* ViewController.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9D014C3D248C4A5E00758FCC /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
+		9D014C3F248C4C3600758FCC /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		9D13C7E92487842E0058A7BF /* Kravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D13C7EC2487842E0058A7BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D13C7EE2487842E0058A7BF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 			children = (
 				9D13C7F02487842E0058A7BF /* ViewController.swift */,
 				9D3D162A2488DA7200AE1B4C /* SetLanguageVC.swift */,
+				9D014C3D248C4A5E00758FCC /* SignupVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				9D3D162E2488E2C700AE1B4C /* UIColor+Additions.swift */,
+				9D014C3F248C4C3600758FCC /* UIViewController+Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -234,9 +240,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D014C3E248C4A5E00758FCC /* SignupVC.swift in Sources */,
 				9D13C80B248788390058A7BF /* CustomButton.swift in Sources */,
 				9D3D162B2488DA7200AE1B4C /* SetLanguageVC.swift in Sources */,
 				9D13C811248796900058A7BF /* LoginTextView.swift in Sources */,
+				9D014C40248C4C3600758FCC /* UIViewController+Extensions.swift in Sources */,
 				9D13C7F12487842E0058A7BF /* ViewController.swift in Sources */,
 				9D13C7ED2487842E0058A7BF /* AppDelegate.swift in Sources */,
 				9D13C7EF2487842E0058A7BF /* SceneDelegate.swift in Sources */,
