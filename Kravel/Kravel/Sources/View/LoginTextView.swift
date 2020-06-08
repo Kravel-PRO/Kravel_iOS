@@ -23,7 +23,7 @@ class LoginTextView: UIView {
     @IBOutlet var marginViews: [UIView]! {
         didSet {
             marginViews.forEach { view in
-                view.layer.borderColor = UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1.0).cgColor
+                view.layer.borderColor = UIColor.veryLightPink.cgColor
                 view.layer.borderWidth = 1
                 view.layer.cornerRadius = view.frame.width / 15
             }
@@ -64,7 +64,7 @@ class LoginTextView: UIView {
     }
     
     func setBorderColor(of textField: UITextField) {
-        let layerColor: UIColor = textField.text == "" ? UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1.0) : .grapefruit
+        let layerColor: UIColor = textField.text == "" ? .veryLightPink : .grapefruit
         if textField == emailTextField { marginViews[0].layer.borderColor = layerColor.cgColor }
         else { marginViews[1].layer.borderColor = layerColor.cgColor }
     }
@@ -74,7 +74,7 @@ class LoginTextView: UIView {
         pwTextField.text = ""
         self.endEditing(true)
         marginViews.forEach { view in
-            view.layer.borderColor = UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1.0).cgColor
+            view.layer.borderColor = UIColor.veryLightPink.cgColor
         }
     }
 }

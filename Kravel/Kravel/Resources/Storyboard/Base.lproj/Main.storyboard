@@ -147,6 +147,12 @@
                                                                     <constraint firstItem="Z8Q-Yk-ef1" firstAttribute="leading" secondItem="Zs8-Oi-cXE" secondAttribute="leading" constant="16" id="hWr-Gq-QX9"/>
                                                                 </constraints>
                                                             </view>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이메일 형식이 옳지 않습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qza-R1-A2Q">
+                                                                <rect key="frame" x="204.66666666666663" y="0.0" width="138.33333333333337" height="14.333333333333334"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <color key="textColor" red="0.99215686274509807" green="0.035294117647058823" blue="0.035294117647058823" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
@@ -156,7 +162,9 @@
                                                             <constraint firstAttribute="width" secondItem="6bh-vB-rkh" secondAttribute="height" multiplier="343:79" id="9oS-jy-q0y"/>
                                                             <constraint firstItem="YCB-JQ-xjd" firstAttribute="leading" secondItem="6bh-vB-rkh" secondAttribute="leading" id="CWg-2Q-hjS"/>
                                                             <constraint firstAttribute="trailing" secondItem="Zs8-Oi-cXE" secondAttribute="trailing" id="VIB-LE-8hh"/>
+                                                            <constraint firstItem="Qza-R1-A2Q" firstAttribute="top" secondItem="6bh-vB-rkh" secondAttribute="top" id="jdp-dz-gXv"/>
                                                             <constraint firstItem="Zs8-Oi-cXE" firstAttribute="height" secondItem="6bh-vB-rkh" secondAttribute="height" multiplier="0.658228" id="mZR-Qn-RPx"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Qza-R1-A2Q" secondAttribute="trailing" id="owI-gs-ee0"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fYb-z5-7zX">
@@ -172,9 +180,9 @@
                                                                 <rect key="frame" x="0.0" y="27" width="343" height="52"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="6자리 이상으로 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vYr-Fs-U0w">
-                                                                        <rect key="frame" x="16" y="15.666666666666629" width="311" height="21"/>
+                                                                        <rect key="frame" x="16" y="16" width="311" height="20"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                                     </textField>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -185,13 +193,21 @@
                                                                     <constraint firstItem="vYr-Fs-U0w" firstAttribute="centerY" secondItem="r8i-f2-HqA" secondAttribute="centerY" id="a6s-v1-JIv"/>
                                                                 </constraints>
                                                             </view>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6자리 이상 입력해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BnT-i6-DWX">
+                                                                <rect key="frame" x="221" y="0.0" width="122" height="14.333333333333334"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <color key="textColor" red="0.99215686274509807" green="0.035294117647058823" blue="0.035294117647058823" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="r8i-f2-HqA" secondAttribute="trailing" id="16D-rQ-h6a"/>
                                                             <constraint firstAttribute="width" secondItem="fYb-z5-7zX" secondAttribute="height" multiplier="343:79" id="3yn-lD-2E7"/>
+                                                            <constraint firstItem="BnT-i6-DWX" firstAttribute="top" secondItem="fYb-z5-7zX" secondAttribute="top" id="88M-qe-1Wc"/>
                                                             <constraint firstItem="c10-Hs-uCX" firstAttribute="top" secondItem="fYb-z5-7zX" secondAttribute="top" id="BIP-Kk-4hb"/>
                                                             <constraint firstItem="r8i-f2-HqA" firstAttribute="leading" secondItem="fYb-z5-7zX" secondAttribute="leading" id="CT7-e9-Sfn"/>
+                                                            <constraint firstAttribute="trailing" secondItem="BnT-i6-DWX" secondAttribute="trailing" id="E7M-bu-uLP"/>
                                                             <constraint firstAttribute="bottom" secondItem="r8i-f2-HqA" secondAttribute="bottom" id="d6r-qG-iqn"/>
                                                             <constraint firstItem="c10-Hs-uCX" firstAttribute="leading" secondItem="fYb-z5-7zX" secondAttribute="leading" id="xDu-f6-jVt"/>
                                                         </constraints>
@@ -209,9 +225,9 @@
                                                                 <rect key="frame" x="0.0" y="27" width="343" height="52"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="다시 한 번 비밀번호를 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qoQ-yj-SxF">
-                                                                        <rect key="frame" x="16" y="15.666666666666629" width="311" height="21"/>
+                                                                        <rect key="frame" x="16" y="16" width="311" height="20"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                                     </textField>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -222,15 +238,23 @@
                                                                     <constraint firstAttribute="width" secondItem="2vv-QW-INM" secondAttribute="height" multiplier="343:52" id="jNb-dx-Qky"/>
                                                                 </constraints>
                                                             </view>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호가 같지 않습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P3p-9Z-ams">
+                                                                <rect key="frame" x="218.33333333333334" y="0.0" width="124.66666666666666" height="14.333333333333334"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <color key="textColor" red="0.99215686274509807" green="0.035294117647058823" blue="0.035294117647058823" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="P3p-9Z-ams" secondAttribute="trailing" id="Edf-X6-Ewx"/>
                                                             <constraint firstItem="cYz-zh-10l" firstAttribute="top" secondItem="NVS-Xe-ZI4" secondAttribute="top" id="NrB-Tr-Xjt"/>
                                                             <constraint firstAttribute="trailing" secondItem="2vv-QW-INM" secondAttribute="trailing" id="QwD-ln-AKm"/>
                                                             <constraint firstAttribute="bottom" secondItem="2vv-QW-INM" secondAttribute="bottom" id="TuW-CT-GzQ"/>
                                                             <constraint firstItem="cYz-zh-10l" firstAttribute="leading" secondItem="NVS-Xe-ZI4" secondAttribute="leading" id="bNT-bq-0MP"/>
                                                             <constraint firstItem="2vv-QW-INM" firstAttribute="leading" secondItem="NVS-Xe-ZI4" secondAttribute="leading" id="m4d-lF-qgG"/>
                                                             <constraint firstAttribute="width" secondItem="NVS-Xe-ZI4" secondAttribute="height" multiplier="343:79" id="qLV-Wt-CYn"/>
+                                                            <constraint firstItem="P3p-9Z-ams" firstAttribute="top" secondItem="NVS-Xe-ZI4" secondAttribute="top" id="wpS-C1-d9c"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KSJ-cv-59H">
@@ -367,6 +391,13 @@
                         <outletCollection property="marginViews" destination="2fz-hq-RtP" collectionClass="NSMutableArray" id="POn-wi-tIN"/>
                         <outletCollection property="sexButtons" destination="lvi-KK-cVY" collectionClass="NSMutableArray" id="X5t-XN-OUn"/>
                         <outletCollection property="sexButtons" destination="dED-Zf-2yS" collectionClass="NSMutableArray" id="F9h-pT-J0h"/>
+                        <outletCollection property="textFields" destination="Z8Q-Yk-ef1" collectionClass="NSMutableArray" id="gfd-mJ-y9m"/>
+                        <outletCollection property="textFields" destination="vYr-Fs-U0w" collectionClass="NSMutableArray" id="ZZB-3X-54Q"/>
+                        <outletCollection property="textFields" destination="qoQ-yj-SxF" collectionClass="NSMutableArray" id="KSq-j6-E8n"/>
+                        <outletCollection property="textFields" destination="6oU-ek-QCh" collectionClass="NSMutableArray" id="1Jb-S7-Ot0"/>
+                        <outletCollection property="validLabels" destination="Qza-R1-A2Q" collectionClass="NSMutableArray" id="zzZ-qG-I3Y"/>
+                        <outletCollection property="validLabels" destination="BnT-i6-DWX" collectionClass="NSMutableArray" id="soO-7s-GoO"/>
+                        <outletCollection property="validLabels" destination="P3p-9Z-ams" collectionClass="NSMutableArray" id="2mO-Uz-DLE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D0J-40-L08" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
