@@ -282,14 +282,14 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="gYp-Iv-oNK">
                                                                 <rect key="frame" x="0.0" y="28.333333333333258" width="343" height="89"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ms-LC-m8X">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvi-KK-cVY" customClass="SexButton" customModule="Kravel" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="166" height="89"/>
-                                                                        <state key="normal" title="Button"/>
-                                                                    </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YHk-X2-dec">
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dED-Zf-2yS" customClass="SexButton" customModule="Kravel" customModuleProvider="target">
                                                                         <rect key="frame" x="177" y="0.0" width="166" height="89"/>
-                                                                        <state key="normal" title="Button"/>
-                                                                    </button>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                    </view>
                                                                 </subviews>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="gYp-Iv-oNK" secondAttribute="height" multiplier="343:89" id="qoE-GR-B86"/>
@@ -365,6 +365,8 @@
                         <outletCollection property="marginViews" destination="r8i-f2-HqA" collectionClass="NSMutableArray" id="Za7-kx-A7G"/>
                         <outletCollection property="marginViews" destination="2vv-QW-INM" collectionClass="NSMutableArray" id="1Zn-8v-fa5"/>
                         <outletCollection property="marginViews" destination="2fz-hq-RtP" collectionClass="NSMutableArray" id="POn-wi-tIN"/>
+                        <outletCollection property="sexButtons" destination="lvi-KK-cVY" collectionClass="NSMutableArray" id="X5t-XN-OUn"/>
+                        <outletCollection property="sexButtons" destination="dED-Zf-2yS" collectionClass="NSMutableArray" id="F9h-pT-J0h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D0J-40-L08" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -34,6 +34,15 @@ class SignupVC: UIViewController {
         }
     }
     
+    @IBOutlet var sexButtons: [SexButton]! {
+        didSet {
+            sexButtons[0].sex = .man
+            sexButtons[1].sex = .woman
+            sexButtons.forEach { button in
+                button.delegate = self
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,5 +75,18 @@ class SignupVC: UIViewController {
 extension SignupVC: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         <#code#>
+    }
+}
+
+extension SignupVC: XibButtonDelegate {
+    func clickButton(of sex: Sex) {
+        switch sex {
+        case .man:
+            sexButtons[0].setSelectedState(by: true)
+            sexButtons[1].setSelectedState(by: false)
+        case .woman:
+            sexButtons[0].setSelectedState(by: false)
+            sexButtons[1].setSelectedState(by: true)
+        }
     }
 }
