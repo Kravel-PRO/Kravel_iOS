@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lQV-gJ-zCl">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="80V-ij-rWR">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,17 +12,17 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6yi-JZ-OF4">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgSign" translatesAutoresizingMaskIntoConstraints="NO" id="Xfj-qW-ukN">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tXi-2Z-Ntg" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
-                                        <rect key="frame" x="44" y="690" width="287" height="56"/>
+                                        <rect key="frame" x="48.666666666666657" y="642.33333333333337" width="316.66666666666674" height="61.666666666666629"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="tXi-2Z-Ntg" secondAttribute="height" multiplier="41:8" id="AHm-RX-GL4"/>
                                         </constraints>
@@ -35,7 +35,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgF-fF-zpJ" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
-                                        <rect key="frame" x="44" y="618" width="287" height="56"/>
+                                        <rect key="frame" x="48.666666666666657" y="564.33333333333337" width="316.66666666666674" height="62"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <state key="normal" title="로그인 하기"/>
                                         <connections>
@@ -43,7 +43,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Xf-q2-WmO">
-                                        <rect key="frame" x="16" y="174" width="57" height="28.666666666666657"/>
+                                        <rect key="frame" x="16" y="130" width="57" height="28.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -66,7 +66,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ybR-bJ-5Ql" customClass="LoginTextView" customModule="Kravel" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="812" width="375" height="370"/>
+                                <rect key="frame" x="0.0" y="736" width="414" height="335.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                         </subviews>
@@ -182,7 +182,7 @@
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="6자리 이상으로 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vYr-Fs-U0w">
                                                                         <rect key="frame" x="16" y="16" width="311" height="20"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                                     </textField>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -227,7 +227,7 @@
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="다시 한 번 비밀번호를 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qoQ-yj-SxF">
                                                                         <rect key="frame" x="16" y="16" width="311" height="20"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                                     </textField>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -384,6 +384,7 @@
                     <size key="freeformSize" width="375" height="1300"/>
                     <connections>
                         <outlet property="signupButton" destination="Iru-70-ByE" id="Qqp-qx-aEN"/>
+                        <outlet property="signupScrollView" destination="WHV-DR-1BS" id="41N-qY-70Q"/>
                         <outlet property="titleLabel" destination="Yrb-7o-VhW" id="kCn-Gs-ufi"/>
                         <outletCollection property="marginViews" destination="Zs8-Oi-cXE" collectionClass="NSMutableArray" id="qDb-3L-YdS"/>
                         <outletCollection property="marginViews" destination="r8i-f2-HqA" collectionClass="NSMutableArray" id="Za7-kx-A7G"/>
@@ -409,11 +410,11 @@
             <objects>
                 <viewController id="Nt2-MV-1tu" customClass="SetLanguageVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n9L-fI-XKI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7a-XW-5IN" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
-                                <rect key="frame" x="44" y="698" width="287" height="56"/>
+                                <rect key="frame" x="48.666666666666657" y="650.33333333333337" width="316.66666666666674" height="61.666666666666629"/>
                                 <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="i7a-XW-5IN" secondAttribute="height" multiplier="41:8" id="RTR-yv-A4x"/>
@@ -424,16 +425,16 @@
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please set the language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyX-3c-eGU">
-                                <rect key="frame" x="65" y="233" width="245" height="26.333333333333314"/>
+                                <rect key="frame" x="84.666666666666686" y="189" width="245" height="26.333333333333343"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <color key="textColor" red="0.15294117647058825" green="0.15294117647058825" blue="0.15294117647058825" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="9qL-qU-nMi">
-                                <rect key="frame" x="44" y="318.33333333333331" width="287" height="209.99999999999994"/>
+                                <rect key="frame" x="48.666666666666657" y="274.33333333333331" width="316.66666666666674" height="227.33333333333331"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OCk-Jk-vTl" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="287" height="56"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="316.66666666666669" height="61.666666666666664"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="OCk-Jk-vTl" secondAttribute="height" multiplier="41:8" id="zrS-cT-KSE"/>
                                         </constraints>
@@ -446,7 +447,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmz-Mt-vDe" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="77" width="287" height="56"/>
+                                        <rect key="frame" x="0.0" y="82.666666666666686" width="316.66666666666669" height="62"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="중국어">
                                             <color key="titleColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
@@ -456,7 +457,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wQd-7o-lWd" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="154" width="287" height="56"/>
+                                        <rect key="frame" x="0.0" y="165.66666666666669" width="316.66666666666669" height="61.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="영어">
                                             <color key="titleColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
@@ -498,7 +499,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lQV-gJ-zCl" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Gu5-Qe-iQH">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -510,8 +511,88 @@
             </objects>
             <point key="canvasLocation" x="461.60000000000002" y="128.57142857142858"/>
         </scene>
+        <!--WelcomeVC-->
+        <scene sceneID="Jh1-S2-MHn">
+            <objects>
+                <viewController id="80V-ij-rWR" customClass="WelcomeVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="838-Gn-ejB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PxX-7r-5XW">
+                                <rect key="frame" x="107.66666666666667" y="182" width="198.66666666666663" height="198.66666666666663"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="seQ-dt-bu1">
+                                        <rect key="frame" x="0.0" y="1" width="198.66666666666666" height="197.33333333333331"/>
+                                        <color key="tintColor" red="0.93333333333333335" green="0.40392156862745099" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="seQ-dt-bu1" firstAttribute="top" secondItem="PxX-7r-5XW" secondAttribute="top" id="482-jD-LQz"/>
+                                    <constraint firstAttribute="trailing" secondItem="seQ-dt-bu1" secondAttribute="trailing" id="7lE-bi-czu"/>
+                                    <constraint firstItem="seQ-dt-bu1" firstAttribute="leading" secondItem="PxX-7r-5XW" secondAttribute="leading" id="NPl-Ad-1bu"/>
+                                    <constraint firstAttribute="bottom" secondItem="seQ-dt-bu1" secondAttribute="bottom" id="bYz-1M-4Oi"/>
+                                    <constraint firstAttribute="width" secondItem="PxX-7r-5XW" secondAttribute="height" multiplier="1:1" id="yT4-bO-ahb"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xwl-tt-9H6" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
+                                <rect key="frame" x="48.666666666666657" y="650.33333333333337" width="316.66666666666674" height="61.666666666666629"/>
+                                <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Xwl-tt-9H6" secondAttribute="height" multiplier="41:8" id="loB-mp-sTm"/>
+                                </constraints>
+                                <state key="normal" title="여행 떠나기">
+                                    <color key="titleColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="환영합니다!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zzg-zV-k4k">
+                                <rect key="frame" x="151" y="416.66666666666669" width="112" height="28.666666666666686"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <color key="textColor" red="0.070588235294117646" green="0.070588235294117646" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YK7-Wa-dz6">
+                                <rect key="frame" x="60.666666666666657" y="459.33333333333331" width="292.66666666666674" height="100.33333333333331"/>
+                                <string key="text">K-culture과 함께 색다른 여행을 떠나는 서비스,
+Kravel입니다.
+내가 좋아하는 아이돌이 다녀간 곳부터
+요즘 인기 많은 드라마 촬영지까지!
+예쁜 인증샷과 함께 소중한 추억을
+만들어 보아요!</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.15294117647058825" green="0.15294117647058825" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="YK7-Wa-dz6" firstAttribute="centerX" secondItem="C1g-Ll-gWP" secondAttribute="centerX" id="7ra-J1-Vha"/>
+                            <constraint firstItem="PxX-7r-5XW" firstAttribute="centerX" secondItem="C1g-Ll-gWP" secondAttribute="centerX" id="Hbr-q6-ene"/>
+                            <constraint firstItem="C1g-Ll-gWP" firstAttribute="bottom" secondItem="Xwl-tt-9H6" secondAttribute="bottom" constant="24" id="Hk5-eT-R90"/>
+                            <constraint firstItem="Xwl-tt-9H6" firstAttribute="width" secondItem="838-Gn-ejB" secondAttribute="width" multiplier="0.765333" id="P0f-fd-IHu"/>
+                            <constraint firstItem="PxX-7r-5XW" firstAttribute="width" secondItem="838-Gn-ejB" secondAttribute="width" multiplier="0.48" id="PM7-s6-NY4"/>
+                            <constraint firstItem="Xwl-tt-9H6" firstAttribute="centerX" secondItem="C1g-Ll-gWP" secondAttribute="centerX" id="ZY8-IF-8ul"/>
+                            <constraint firstItem="Zzg-zV-k4k" firstAttribute="top" secondItem="PxX-7r-5XW" secondAttribute="bottom" constant="36" id="mgi-IT-pf9"/>
+                            <constraint firstItem="YK7-Wa-dz6" firstAttribute="width" secondItem="838-Gn-ejB" secondAttribute="width" multiplier="0.70667" id="pq9-TN-fXW"/>
+                            <constraint firstItem="Zzg-zV-k4k" firstAttribute="centerX" secondItem="C1g-Ll-gWP" secondAttribute="centerX" id="qrL-nw-uuy"/>
+                            <constraint firstItem="YK7-Wa-dz6" firstAttribute="top" secondItem="Zzg-zV-k4k" secondAttribute="bottom" constant="14" id="uG4-fS-YWd"/>
+                            <constraint firstItem="PxX-7r-5XW" firstAttribute="top" secondItem="C1g-Ll-gWP" secondAttribute="top" constant="182" id="vdo-SB-7YW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="C1g-Ll-gWP"/>
+                    </view>
+                    <connections>
+                        <outlet property="goTripButton" destination="Xwl-tt-9H6" id="3lb-bf-ZCv"/>
+                        <outlet property="illustrateTopConstraint" destination="vdo-SB-7YW" id="cQl-AN-hvh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kgM-t4-BGs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="461.60000000000002" y="838.66995073891633"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bgSign" width="375" height="812"/>
+        <image name="person.circle.fill" catalog="system" width="128" height="121"/>
     </resources>
 </document>

@@ -18,6 +18,7 @@
 		9D13C80B248788390058A7BF /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D13C80A248788390058A7BF /* CustomButton.swift */; };
 		9D13C80F248795E40058A7BF /* LoginTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D13C80E248795E40058A7BF /* LoginTextView.xib */; };
 		9D13C811248796900058A7BF /* LoginTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D13C810248796900058A7BF /* LoginTextView.swift */; };
+		9D16A44B24909798005E691E /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D16A44A24909798005E691E /* WelcomeVC.swift */; };
 		9D3D162B2488DA7200AE1B4C /* SetLanguageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3D162A2488DA7200AE1B4C /* SetLanguageVC.swift */; };
 		9D3D162F2488E2C700AE1B4C /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3D162E2488E2C700AE1B4C /* UIColor+Additions.swift */; };
 		9D5DBB45248D5BAD00D82D40 /* SexButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D5DBB44248D5BAD00D82D40 /* SexButton.xib */; };
@@ -39,6 +40,7 @@
 		9D13C80A248788390058A7BF /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		9D13C80E248795E40058A7BF /* LoginTextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginTextView.xib; sourceTree = "<group>"; };
 		9D13C810248796900058A7BF /* LoginTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextView.swift; sourceTree = "<group>"; };
+		9D16A44A24909798005E691E /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		9D3D162A2488DA7200AE1B4C /* SetLanguageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLanguageVC.swift; sourceTree = "<group>"; };
 		9D3D162E2488E2C700AE1B4C /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		9D5DBB44248D5BAD00D82D40 /* SexButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SexButton.xib; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				9D13C7F02487842E0058A7BF /* ViewController.swift */,
 				9D3D162A2488DA7200AE1B4C /* SetLanguageVC.swift */,
 				9D014C3D248C4A5E00758FCC /* SignupVC.swift */,
+				9D16A44A24909798005E691E /* WelcomeVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				9D5DBB47248D5BBF00D82D40 /* SexButton.swift in Sources */,
 				9D014C3E248C4A5E00758FCC /* SignupVC.swift in Sources */,
 				9D13C80B248788390058A7BF /* CustomButton.swift in Sources */,
+				9D16A44B24909798005E691E /* WelcomeVC.swift in Sources */,
 				9D3D162B2488DA7200AE1B4C /* SetLanguageVC.swift in Sources */,
 				9DA80457248E9200003826B9 /* String+Extensions.swift in Sources */,
 				9D13C811248796900058A7BF /* LoginTextView.swift in Sources */,

@@ -9,6 +9,18 @@
 import UIKit
 
 class SignupVC: UIViewController {
+    @IBOutlet weak var signupScrollView: UIScrollView! {
+        didSet {
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(viewTouched))
+            gesture.numberOfTouchesRequired = 1
+            signupScrollView.addGestureRecognizer(gesture)
+        }
+    }
+    
+    @objc func viewTouched() {
+        self.view.endEditing(true)
+    }
+    
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {
             titleLabel.text = "Kravel과 함께\n색다른\n여행을 떠나볼까요?"
@@ -132,6 +144,12 @@ extension SignupVC: UITextFieldDelegate {
         UIView.animate(withDuration: 0.3) {
             validLabel.alpha = 1.0
         }
+    }
+}
+
+extension SignupVC {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
 

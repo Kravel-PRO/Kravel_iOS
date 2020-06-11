@@ -14,6 +14,7 @@ class CustomButton: UIButton {
         case initView
         case languageView(isSelected: Bool)
         case signupView
+        case welcomeView
     }
     
     var locationButton: LocationButton? = nil {
@@ -25,14 +26,18 @@ class CustomButton: UIButton {
                     setTitleColor(.grapefruit, for: .highlighted)
                     layer.borderColor = UIColor.white.cgColor
                 case .textView:
-                    setTitleColor(UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1.0), for: .normal)
+                    setTitleColor(.veryLightPink, for: .normal)
                     setTitleColor(.white, for: .highlighted)
                     layer.borderColor = UIColor.white.cgColor
                 case .languageView:
-                    setTitleColor(UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1.0), for: .normal)
+                    setTitleColor(.veryLightPink, for: .normal)
                     layer.borderColor = UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1.0).cgColor
                 case .signupView:
-                    setTitleColor(UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1.0), for: .normal)
+                    setTitleColor(.veryLightPink, for: .normal)
+                    setTitleColor(.white, for: .highlighted)
+                    layer.borderColor = UIColor.white.cgColor
+                case .welcomeView:
+                    setTitleColor(.veryLightPink, for: .normal)
                     setTitleColor(.white, for: .highlighted)
                     layer.borderColor = UIColor.white.cgColor
                 }
@@ -50,6 +55,8 @@ class CustomButton: UIButton {
                     self.backgroundColor = isHighlighted ? .grapefruit : UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
                 case .languageView: break
                 case .signupView:
+                    self.backgroundColor = isHighlighted ? .grapefruit : UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
+                case .welcomeView:
                     self.backgroundColor = isHighlighted ? .grapefruit : UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
                 }
             }
