@@ -23,6 +23,7 @@
 		9D3D162F2488E2C700AE1B4C /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3D162E2488E2C700AE1B4C /* UIColor+Additions.swift */; };
 		9D5DBB45248D5BAD00D82D40 /* SexButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D5DBB44248D5BAD00D82D40 /* SexButton.xib */; };
 		9D5DBB47248D5BBF00D82D40 /* SexButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5DBB46248D5BBF00D82D40 /* SexButton.swift */; };
+		9D8C0A2524BC515A005C1F58 /* Tabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D8C0A2424BC515A005C1F58 /* Tabbar.storyboard */; };
 		9DA80457248E9200003826B9 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA80456248E9200003826B9 /* String+Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		9D3D162E2488E2C700AE1B4C /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		9D5DBB44248D5BAD00D82D40 /* SexButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SexButton.xib; sourceTree = "<group>"; };
 		9D5DBB46248D5BBF00D82D40 /* SexButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SexButton.swift; sourceTree = "<group>"; };
+		9D8C0A2424BC515A005C1F58 /* Tabbar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tabbar.storyboard; sourceTree = "<group>"; };
 		9DA80456248E9200003826B9 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,6 +154,7 @@
 			children = (
 				9D13C7F22487842E0058A7BF /* Main.storyboard */,
 				9D13C7F7248784330058A7BF /* LaunchScreen.storyboard */,
+				9D8C0A2424BC515A005C1F58 /* Tabbar.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D8C0A2524BC515A005C1F58 /* Tabbar.storyboard in Resources */,
 				9D13C7F9248784330058A7BF /* LaunchScreen.storyboard in Resources */,
 				9D13C7F6248784330058A7BF /* Assets.xcassets in Resources */,
 				9D5DBB45248D5BAD00D82D40 /* SexButton.xib in Resources */,

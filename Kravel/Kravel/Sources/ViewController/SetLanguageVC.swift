@@ -19,12 +19,11 @@ class SetLanguageVC: UIViewController {
         }
     }
     
-    private var isSelected: [Bool] = [false, false, false]
-    
     @IBOutlet weak var startButton: UIButton! {
         willSet {
             guard let customButton = newValue as? CustomButton else { return }
-            customButton.locationButton = .textView
+            customButton.isUserInteractionEnabled = false
+            customButton.locationButton = .languageViewStart
         }
     }
     
@@ -43,17 +42,36 @@ class SetLanguageVC: UIViewController {
             languageButton.setTitleColor(!isSelected ? UIColor.grapefruit : UIColor(red: 185/255, green: 185/255, blue: 185/255, alpha: 1.0), for: .normal)
             
             if !isSelected {
+                startButton.isUserInteractionEnabled = true
+                startButton.setTitleColor(.white, for: .normal)
+                startButton.backgroundColor = .grapefruit
                 for button in languageButtons {
                     if button == languageButton { continue }
                     guard let otherButton = button as? CustomButton else { return }
                     otherButton.locationButton = .languageView(isSelected: false)
                 }
+            } else {
+                startButton.isUserInteractionEnabled = false
+                startButton.setTitleColor(.veryLightPink, for: .normal)
+                startButton.backgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
             }
         default: break
         }
     }
     
-    private func onePick() {
-        
+    @IBAction func start(_ sender: Any) {
+        languageButtons.forEach { button in
+            guard let button = button as? CustomButton else { return }
+            switch button.locationButton {
+            case .languageView(let isSelected):
+                if isSelected {
+                    guard let startVC = self.storyboard?.instantiateViewController(identifier: "StartRoot") as? UINavigationController else { return }
+                    startVC.modalPresentationStyle = .fullScreen
+                    self.present(startVC, animated: true, completion: nil)
+                    return
+                }
+            default: return
+            }
+        }
     }
 }
