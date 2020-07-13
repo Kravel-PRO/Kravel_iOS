@@ -14,9 +14,10 @@ class CategoryTabbar: UIView {
     
     @IBOutlet weak var categoryCollectionView: UICollectionView! {
         didSet {
-            categoryCollectionView.register(UINib(nibName: CategoryCell.nibName, bundle: nil), forCellWithReuseIdentifier: CategoryCell.identifier)
+            categoryCollectionView.contentInsetAdjustmentBehavior = .never
             categoryCollectionView.dataSource = self
             categoryCollectionView.delegate = self
+            categoryCollectionView.register(UINib(nibName: CategoryCell.nibName, bundle: nil), forCellWithReuseIdentifier: CategoryCell.identifier)
             categoryCollectionView.showsHorizontalScrollIndicator = false
             categoryCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: [])
         }

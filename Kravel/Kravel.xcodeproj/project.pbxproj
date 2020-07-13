@@ -32,6 +32,9 @@
 		9DEDA6AC24BCB76E00E978F5 /* CategoryTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6AB24BCB76E00E978F5 /* CategoryTabbar.swift */; };
 		9DEDA6B024BCC74300E978F5 /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEDA6AE24BCC74300E978F5 /* CategoryCell.xib */; };
 		9DEDA6B224BCD09400E978F5 /* KCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6B124BCD09300E978F5 /* KCategory.swift */; };
+		9DEDA6BC24BCEE0400E978F5 /* PagingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6BB24BCEE0400E978F5 /* PagingViewCell.swift */; };
+		9DEDA6BE24BCEEF000E978F5 /* TalentChildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6BD24BCEEF000E978F5 /* TalentChildVC.swift */; };
+		9DEDA6C024BCEEFC00E978F5 /* MovieChildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6BF24BCEEFC00E978F5 /* MovieChildVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +65,9 @@
 		9DEDA6AB24BCB76E00E978F5 /* CategoryTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTabbar.swift; sourceTree = "<group>"; };
 		9DEDA6AE24BCC74300E978F5 /* CategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCell.xib; sourceTree = "<group>"; };
 		9DEDA6B124BCD09300E978F5 /* KCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KCategory.swift; sourceTree = "<group>"; };
+		9DEDA6BB24BCEE0400E978F5 /* PagingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingViewCell.swift; sourceTree = "<group>"; };
+		9DEDA6BD24BCEEF000E978F5 /* TalentChildVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalentChildVC.swift; sourceTree = "<group>"; };
+		9DEDA6BF24BCEEFC00E978F5 /* MovieChildVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieChildVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +152,8 @@
 				9D16A44A24909798005E691E /* WelcomeVC.swift */,
 				9D8C0A2624BC525C005C1F58 /* HomeVC.swift */,
 				9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */,
+				9DEDA6BD24BCEEF000E978F5 /* TalentChildVC.swift */,
+				9DEDA6BF24BCEEFC00E978F5 /* MovieChildVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -216,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */,
+				9DEDA6BB24BCEE0400E978F5 /* PagingViewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -308,6 +317,7 @@
 				9D014C3E248C4A5E00758FCC /* SignupVC.swift in Sources */,
 				9D13C80B248788390058A7BF /* CustomButton.swift in Sources */,
 				9D16A44B24909798005E691E /* WelcomeVC.swift in Sources */,
+				9DEDA6BE24BCEEF000E978F5 /* TalentChildVC.swift in Sources */,
 				9D8C0A2724BC525C005C1F58 /* HomeVC.swift in Sources */,
 				9D3D162B2488DA7200AE1B4C /* SetLanguageVC.swift in Sources */,
 				9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */,
@@ -317,9 +327,11 @@
 				9D014C40248C4C3600758FCC /* UIViewController+Extensions.swift in Sources */,
 				9DEDA6B224BCD09400E978F5 /* KCategory.swift in Sources */,
 				9D13C7F12487842E0058A7BF /* ViewController.swift in Sources */,
+				9DEDA6C024BCEEFC00E978F5 /* MovieChildVC.swift in Sources */,
 				9D13C7ED2487842E0058A7BF /* AppDelegate.swift in Sources */,
 				9D13C7EF2487842E0058A7BF /* SceneDelegate.swift in Sources */,
 				9D3D162F2488E2C700AE1B4C /* UIColor+Additions.swift in Sources */,
+				9DEDA6BC24BCEE0400E978F5 /* PagingViewCell.swift in Sources */,
 				9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
