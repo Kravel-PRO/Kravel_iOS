@@ -9,23 +9,9 @@
 import UIKit
 
 class HomeVC: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        exaa()
-    }
-    
-    private func exaa() {
-        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-        
-        var popUpView: UIView = {
-            let backView = UIView(frame: CGRect(x: 0, y: self.view.frame.height - 300, width: self.view.frame.width, height: 300))
-            backView.backgroundColor = .black
-            return backView
-        }()
-        
-        window?.addSubview(popUpView)
     }
 }
