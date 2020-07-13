@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1ZW-eI-tDm">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,7 +13,7 @@
             <objects>
                 <viewController id="WDK-c7-4Vu" customClass="HomeVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AJf-Mt-VO0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="V0L-7b-5ir"/>
@@ -29,14 +29,14 @@
             <objects>
                 <viewController id="41I-hU-nJW" customClass="SearchVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SJq-HC-3k2">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ndi-93-yU6">
-                                <rect key="frame" x="16" y="104" width="382" height="52"/>
+                                <rect key="frame" x="16" y="104" width="343" height="46.666666666666657"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="연예인, 드라마 등을 검색해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9ep-8a-AQm">
-                                        <rect key="frame" x="16" y="17" width="350" height="18.5"/>
+                                        <rect key="frame" x="16" y="14.000000000000002" width="311" height="18.666666666666671"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -49,58 +49,67 @@
                                     <constraint firstItem="9ep-8a-AQm" firstAttribute="leading" secondItem="Ndi-93-yU6" secondAttribute="leading" constant="16" id="Von-gf-p8e"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pER-WV-xdR">
-                                <rect key="frame" x="0.0" y="172" width="414" height="48"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l5o-Dx-8aH" customClass="CategoryTabbar" customModule="Kravel" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="166.66666666666666" width="375" height="44.333333333333343"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="pER-WV-xdR" secondAttribute="height" multiplier="69:8" id="u2S-wN-9ba"/>
+                                    <constraint firstAttribute="width" secondItem="l5o-Dx-8aH" secondAttribute="height" multiplier="414:49" id="4uM-0V-H7d"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Eda-ZW-sTh">
-                                    <size key="itemSize" width="210" height="47"/>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MZO-yO-g09">
+                                <rect key="frame" x="0.0" y="211" width="375" height="518"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3Rl-Pn-5a0">
+                                    <size key="itemSize" width="369" height="515"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="categoryCell" id="Zs4-GX-oHf" customClass="CategoryCell" customModule="Kravel" customModuleProvider="target">
-                                        <rect key="frame" x="102" y="0.0" width="210" height="47"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Nr2-0N-pex">
+                                        <rect key="frame" x="3" y="0.0" width="369" height="515"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="e5T-eH-Ty3">
-                                            <rect key="frame" x="0.0" y="0.0" width="210" height="47"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="N6f-FF-GV5">
+                                            <rect key="frame" x="0.0" y="0.0" width="369" height="515"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="210" height="47"/>
+                                        <size key="customSize" width="369" height="515"/>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="pER-WV-xdR" firstAttribute="top" secondItem="Ndi-93-yU6" secondAttribute="bottom" constant="16" id="GG6-yR-aGN"/>
+                            <constraint firstItem="MZO-yO-g09" firstAttribute="top" secondItem="l5o-Dx-8aH" secondAttribute="bottom" id="DOM-vV-CL9"/>
+                            <constraint firstItem="GGY-sd-nJc" firstAttribute="bottom" secondItem="MZO-yO-g09" secondAttribute="bottom" id="Lrf-eC-gdT"/>
                             <constraint firstItem="Ndi-93-yU6" firstAttribute="leading" secondItem="GGY-sd-nJc" secondAttribute="leading" constant="16" id="M1f-nx-Fxd"/>
-                            <constraint firstItem="pER-WV-xdR" firstAttribute="leading" secondItem="GGY-sd-nJc" secondAttribute="leading" id="QRE-Lg-z4p"/>
+                            <constraint firstItem="l5o-Dx-8aH" firstAttribute="leading" secondItem="GGY-sd-nJc" secondAttribute="leading" id="ORU-lC-Wew"/>
+                            <constraint firstItem="l5o-Dx-8aH" firstAttribute="top" secondItem="Ndi-93-yU6" secondAttribute="bottom" constant="16" id="QGS-kY-HnI"/>
                             <constraint firstItem="Ndi-93-yU6" firstAttribute="top" secondItem="GGY-sd-nJc" secondAttribute="top" constant="16" id="TIU-Oj-UxR"/>
                             <constraint firstItem="GGY-sd-nJc" firstAttribute="trailing" secondItem="Ndi-93-yU6" secondAttribute="trailing" constant="16" id="hIb-ZR-hqc"/>
-                            <constraint firstItem="GGY-sd-nJc" firstAttribute="trailing" secondItem="pER-WV-xdR" secondAttribute="trailing" id="meC-M9-zqZ"/>
+                            <constraint firstItem="MZO-yO-g09" firstAttribute="leading" secondItem="GGY-sd-nJc" secondAttribute="leading" id="hV0-Mw-fLm"/>
+                            <constraint firstItem="GGY-sd-nJc" firstAttribute="trailing" secondItem="MZO-yO-g09" secondAttribute="trailing" id="qm4-VS-thg"/>
+                            <constraint firstItem="GGY-sd-nJc" firstAttribute="trailing" secondItem="l5o-Dx-8aH" secondAttribute="trailing" id="veh-Hi-qb5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GGY-sd-nJc"/>
                     </view>
                     <navigationItem key="navigationItem" id="BiL-xQ-H0B"/>
                     <connections>
-                        <outlet property="categoryTabCollectionView" destination="pER-WV-xdR" id="gdn-6J-d0l"/>
+                        <outlet property="categoryTabbarView" destination="l5o-Dx-8aH" id="FHW-Gd-yZd"/>
+                        <outlet property="pageCollectionView" destination="MZO-yO-g09" id="KaN-gw-ogt"/>
                         <outlet property="searchBarView" destination="Ndi-93-yU6" id="Dk9-J1-JIy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6h8-p2-ff9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-172.46376811594203" y="1471.875"/>
+            <point key="canvasLocation" x="-173.59999999999999" y="1471.1822660098524"/>
         </scene>
         <!--지도-->
         <scene sceneID="hgt-B2-ERe">
             <objects>
                 <viewController id="J3n-8X-r2I" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="F7a-cv-JjN">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="XKx-xM-vn7"/>
@@ -116,7 +125,7 @@
             <objects>
                 <viewController id="wyv-am-cNI" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h0f-Ve-djT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="ebU-sp-8Of"/>
@@ -155,7 +164,7 @@
                     <tabBarItem key="tabBarItem" title="검색" image="magnifyingglass" catalog="system" id="V7f-Z5-eyV"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kqt-IS-cao">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

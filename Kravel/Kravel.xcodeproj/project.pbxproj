@@ -28,6 +28,10 @@
 		9DA80457248E9200003826B9 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA80456248E9200003826B9 /* String+Extensions.swift */; };
 		9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */; };
 		9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */; };
+		9DEDA6A924BCB70600E978F5 /* CategoryTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */; };
+		9DEDA6AC24BCB76E00E978F5 /* CategoryTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6AB24BCB76E00E978F5 /* CategoryTabbar.swift */; };
+		9DEDA6B024BCC74300E978F5 /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEDA6AE24BCC74300E978F5 /* CategoryCell.xib */; };
+		9DEDA6B224BCD09400E978F5 /* KCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6B124BCD09300E978F5 /* KCategory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +58,10 @@
 		9DA80456248E9200003826B9 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTabbar.xib; sourceTree = "<group>"; };
+		9DEDA6AB24BCB76E00E978F5 /* CategoryTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTabbar.swift; sourceTree = "<group>"; };
+		9DEDA6AE24BCC74300E978F5 /* CategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCell.xib; sourceTree = "<group>"; };
+		9DEDA6B124BCD09300E978F5 /* KCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KCategory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				9D13C810248796900058A7BF /* LoginTextView.swift */,
+				9DEDA6AA24BCB72300E978F5 /* Tabbar */,
 				9DEDA6A524BCA86000E978F5 /* CollectionViewCell */,
 				9D13C809248788280058A7BF /* Button */,
 			);
@@ -144,6 +153,7 @@
 		9D13C804248784AE0058A7BF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9DEDA6B124BCD09300E978F5 /* KCategory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -173,6 +183,8 @@
 			children = (
 				9D13C80E248795E40058A7BF /* LoginTextView.xib */,
 				9D5DBB44248D5BAD00D82D40 /* SexButton.xib */,
+				9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */,
+				9DEDA6AE24BCC74300E978F5 /* CategoryCell.xib */,
 			);
 			path = Xib;
 			sourceTree = "<group>";
@@ -206,6 +218,14 @@
 				9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */,
 			);
 			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		9DEDA6AA24BCB72300E978F5 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				9DEDA6AB24BCB76E00E978F5 /* CategoryTabbar.swift */,
+			);
+			path = Tabbar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,8 +290,10 @@
 				9D13C7F9248784330058A7BF /* LaunchScreen.storyboard in Resources */,
 				9D13C7F6248784330058A7BF /* Assets.xcassets in Resources */,
 				9D5DBB45248D5BAD00D82D40 /* SexButton.xib in Resources */,
+				9DEDA6A924BCB70600E978F5 /* CategoryTabbar.xib in Resources */,
 				9D13C7F42487842E0058A7BF /* Main.storyboard in Resources */,
 				9D13C80F248795E40058A7BF /* LoginTextView.xib in Resources */,
+				9DEDA6B024BCC74300E978F5 /* CategoryCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,7 +313,9 @@
 				9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */,
 				9DA80457248E9200003826B9 /* String+Extensions.swift in Sources */,
 				9D13C811248796900058A7BF /* LoginTextView.swift in Sources */,
+				9DEDA6AC24BCB76E00E978F5 /* CategoryTabbar.swift in Sources */,
 				9D014C40248C4C3600758FCC /* UIViewController+Extensions.swift in Sources */,
+				9DEDA6B224BCD09400E978F5 /* KCategory.swift in Sources */,
 				9D13C7F12487842E0058A7BF /* ViewController.swift in Sources */,
 				9D13C7ED2487842E0058A7BF /* AppDelegate.swift in Sources */,
 				9D13C7EF2487842E0058A7BF /* SceneDelegate.swift in Sources */,

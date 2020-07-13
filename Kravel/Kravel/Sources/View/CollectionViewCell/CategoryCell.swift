@@ -10,26 +10,37 @@ import UIKit
 
 class CategoryCell: UICollectionViewCell {
     static let identifier = "categoryCell"
+    static let nibName = "CategoryCell"
     
     private var textLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .veryLightPink
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     var category: String? {
         didSet {
             textLabel.text = category
+            textLabel.sizeToFit()
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            textLabel.font = isSelected ? UIFont.boldSystemFont(ofSize: 14) : UIFont.systemFont(ofSize: 14)
+            textLabel.textColor = isSelected ? .grapefruit : .veryLightPink
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.addSubview(textLabel)
         setAutoLayout()
     }
     
     private func setAutoLayout() {
-        textLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             textLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             textLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor)
