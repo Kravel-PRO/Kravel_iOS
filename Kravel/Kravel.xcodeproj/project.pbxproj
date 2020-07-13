@@ -24,6 +24,7 @@
 		9D5DBB45248D5BAD00D82D40 /* SexButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D5DBB44248D5BAD00D82D40 /* SexButton.xib */; };
 		9D5DBB47248D5BBF00D82D40 /* SexButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5DBB46248D5BBF00D82D40 /* SexButton.swift */; };
 		9D8C0A2524BC515A005C1F58 /* Tabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D8C0A2424BC515A005C1F58 /* Tabbar.storyboard */; };
+		9D8C0A2724BC525C005C1F58 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8C0A2624BC525C005C1F58 /* HomeVC.swift */; };
 		9DA80457248E9200003826B9 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA80456248E9200003826B9 /* String+Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		9D5DBB44248D5BAD00D82D40 /* SexButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SexButton.xib; sourceTree = "<group>"; };
 		9D5DBB46248D5BBF00D82D40 /* SexButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SexButton.swift; sourceTree = "<group>"; };
 		9D8C0A2424BC515A005C1F58 /* Tabbar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tabbar.storyboard; sourceTree = "<group>"; };
+		9D8C0A2624BC525C005C1F58 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		9DA80456248E9200003826B9 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +130,7 @@
 				9D3D162A2488DA7200AE1B4C /* SetLanguageVC.swift */,
 				9D014C3D248C4A5E00758FCC /* SignupVC.swift */,
 				9D16A44A24909798005E691E /* WelcomeVC.swift */,
+				9D8C0A2624BC525C005C1F58 /* HomeVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				9D014C3E248C4A5E00758FCC /* SignupVC.swift in Sources */,
 				9D13C80B248788390058A7BF /* CustomButton.swift in Sources */,
 				9D16A44B24909798005E691E /* WelcomeVC.swift in Sources */,
+				9D8C0A2724BC525C005C1F58 /* HomeVC.swift in Sources */,
 				9D3D162B2488DA7200AE1B4C /* SetLanguageVC.swift in Sources */,
 				9DA80457248E9200003826B9 /* String+Extensions.swift in Sources */,
 				9D13C811248796900058A7BF /* LoginTextView.swift in Sources */,

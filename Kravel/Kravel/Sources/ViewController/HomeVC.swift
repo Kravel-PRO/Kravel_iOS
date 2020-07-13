@@ -14,17 +14,18 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        exaa()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func exaa() {
+        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        
+        var popUpView: UIView = {
+            let backView = UIView(frame: CGRect(x: 0, y: self.view.frame.height - 300, width: self.view.frame.width, height: 300))
+            backView.backgroundColor = .black
+            return backView
+        }()
+        
+        window?.addSubview(popUpView)
     }
-    */
-
 }
