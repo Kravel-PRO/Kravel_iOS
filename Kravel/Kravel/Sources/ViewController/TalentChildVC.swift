@@ -8,24 +8,59 @@
 
 import UIKit
 
+
 class TalentChildVC: UIViewController {
     static let identifier = "TalentChildVC"
+    
+    private lazy var itemSpacing: CGFloat = self.view.frame.width / 21
+    private lazy var horizonInset: CGFloat = self.view.frame.width / 23
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    @IBOutlet weak var talentCollectionView: UICollectionView! {
+        didSet {
+            talentCollectionView.delegate = self
+            talentCollectionView.dataSource = self
+            talentCollectionView.showsVerticalScrollIndicator = false
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private let talent: [String] = ["BTS", "세븐틴", "아이유", "EXO", "레드벨벳", "트와이스", "태연", "오마이걸", "XIA(준수)", "소녀시대", "카라", "이효리"]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
     }
-    */
+}
 
+extension TalentChildVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return talent.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let searchCell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCell.identifier, for: indexPath) as? SearchCell else { return UICollectionViewCell() }
+        searchCell.profile = talent[indexPath.row]
+        return searchCell
+    }
+}
+
+extension TalentChildVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (collectionView.frame.width-2*itemSpacing-2*horizonInset)/3, height: collectionView.frame.height / 3.5)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: horizonInset, bottom: 0, right: horizonInset)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 30
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return itemSpacing
+    }
+}
+
+extension TalentChildVC: UICollectionViewDelegate {
+    
 }

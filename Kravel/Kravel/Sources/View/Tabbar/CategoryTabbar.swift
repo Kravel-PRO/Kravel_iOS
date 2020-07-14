@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol PagingTabbarDelegate {
+    func scrollToIndex(to index: Int)
+}
+
 class CategoryTabbar: UIView {
     static let nibName = "CategoryTabbar"
     private var view: UIView!
@@ -32,17 +36,22 @@ class CategoryTabbar: UIView {
     
     var indicatorLeadingConstaraint: NSLayoutConstraint!
     
+    var delegate: PagingTabbarDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadXib()
         view.addSubview(indicatorView)
+        setConstraint()
+        categoryCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: [])
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadXib()
         view.addSubview(indicatorView)
-        categoryCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+        setConstraint()
+        categoryCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: [])
     }
     
     private func loadXib() {
@@ -52,14 +61,18 @@ class CategoryTabbar: UIView {
         self.addSubview(view)
     }
     
-    func setConstraint() {
-        indicatorLeadingConstaraint = indicatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0)
+    private func setConstraint() {
+        indicatorLeadingConstaraint = indicatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         NSLayoutConstraint.activate([
             indicatorView.topAnchor.constraint(equalTo: categoryCollectionView.bottomAnchor),
             indicatorView.widthAnchor.constraint(equalToConstant: categoryCollectionView.frame.width/2),
             indicatorView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             indicatorLeadingConstaraint
         ])
+    }
+    
+    func scroll(to index: Int) {
+        categoryCollectionView.selectItem(at: IndexPath(row: index, section: 0), animated: true, scrollPosition: [])
     }
 }
 
@@ -77,7 +90,13 @@ extension CategoryTabbar: UICollectionViewDataSource {
 }
 
 extension CategoryTabbar: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.scrollToIndex(to: indexPath.row)
+//        indicatorLeadingConstaraint.constant = CGFloat(indexPath.row) * collectionView.frame.width/2
+//        UIView.animate(withDuration: 0.2) {
+//            self.layoutIfNeeded()
+//        }
+    }
 }
 
 extension CategoryTabbar: UICollectionViewDelegateFlowLayout {

@@ -26,7 +26,11 @@ class SearchVC: UIViewController {
         }
     }
     
-    @IBOutlet weak var categoryTabbarView: CategoryTabbar!
+    @IBOutlet weak var categoryTabbarView: CategoryTabbar! {
+        didSet {
+            categoryTabbarView.delegate = self
+        }
+    }
     
     @IBOutlet weak var pageCollectionView: UICollectionView! {
         didSet {
@@ -59,11 +63,11 @@ class SearchVC: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         initChildVCs()
+        pageCollectionView.reloadData()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        categoryTabbarView.setConstraint()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -88,10 +92,20 @@ extension SearchVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let pagingCell = collectionView.dequeueReusableCell(withReuseIdentifier: PagingViewCell.identifier, for: indexPath) as? PagingViewCell else { return UICollectionViewCell() }
-        
         // 새로운 셀에 view을 등록
         pagingCell.childView = childVCs[indexPath.row].view
         return pagingCell
+    }
+}
+
+extension SearchVC: UICollectionViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        categoryTabbarView.indicatorLeadingConstaraint.constant = scrollView.contentOffset.x / 2
+    }
+
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let page = Int(targetContentOffset.pointee.x / scrollView.frame.width)
+        categoryTabbarView.scroll(to: page)
     }
 }
 
@@ -110,5 +124,11 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+}
+
+extension SearchVC: PagingTabbarDelegate {
+    func scrollToIndex(to index: Int) {
+        pageCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: true)
     }
 }

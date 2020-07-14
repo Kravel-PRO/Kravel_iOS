@@ -1,0 +1,27 @@
+//
+//  SearchCell.swift
+//  Kravel
+//
+//  Created by 윤동민 on 2020/07/14.
+//  Copyright © 2020 윤동민. All rights reserved.
+//
+
+import UIKit
+
+class SearchCell: UICollectionViewCell {
+    static let identifier = "SearchCell"
+    
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var profileLabel: UILabel!
+    @IBOutlet weak var yearLabel: UILabel!
+    
+    var profile: String? {
+        didSet {
+            profileLabel.text = profile
+        }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+}
