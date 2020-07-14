@@ -45,15 +45,17 @@ extension TalentChildVC: UICollectionViewDataSource {
 
 extension TalentChildVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.frame.width-2*itemSpacing-2*horizonInset)/3, height: collectionView.frame.height / 3.5)
+        let eachWidth = (collectionView.frame.width-2*itemSpacing-2*horizonInset)/3
+        let eachHeight = eachWidth * 1.3
+        return CGSize(width: eachWidth, height: eachHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: horizonInset, bottom: 0, right: horizonInset)
+        return UIEdgeInsets(top: 25, left: horizonInset, bottom: 0, right: horizonInset)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 30
+        return 23
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -62,5 +64,11 @@ extension TalentChildVC: UICollectionViewDelegateFlowLayout {
 }
 
 extension TalentChildVC: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let searchVC_parent = self.parent as? SearchVC else { return }
+        guard let detail_contentVC = self.storyboard?.instantiateViewController(identifier: ContentDetailVC.identifier) as? ContentDetailVC else { return }
+        detail_contentVC.name = talent[indexPath.row]
+        detail_contentVC.category = .talent
+        searchVC_parent.navigationController?.pushViewController(detail_contentVC, animated: true)
+    }
 }
