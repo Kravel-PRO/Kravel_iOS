@@ -67,6 +67,8 @@ extension MovieChildVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let searchVC_parent = self.parent as? SearchVC else { return }
         guard let detail_contentVC = self.storyboard?.instantiateViewController(identifier: ContentDetailVC.identifier) as? ContentDetailVC else { return }
+        detail_contentVC.name = "호텔 델루나"
+        detail_contentVC.category = .move
         searchVC_parent.navigationController?.pushViewController(detail_contentVC, animated: true)
     }
 }
