@@ -320,11 +320,34 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iM5-VS-RQc">
+                                                <rect key="frame" x="0.0" y="354" width="375" height="128"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MVQ-us-YRH">
+                                                    <size key="itemSize" width="128" height="128"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="lTn-aQ-Rba">
+                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EbS-Z5-HVG">
+                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </collectionViewCellContentView>
+                                                    </collectionViewCell>
+                                                </cells>
+                                            </collectionView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
+                                            <constraint firstItem="iM5-VS-RQc" firstAttribute="leading" secondItem="YEf-0c-ftQ" secondAttribute="leading" id="FKp-yE-L7d"/>
+                                            <constraint firstAttribute="trailing" secondItem="iM5-VS-RQc" secondAttribute="trailing" id="ICl-8r-SDT"/>
                                             <constraint firstItem="0pt-Lc-aoZ" firstAttribute="leading" secondItem="YEf-0c-ftQ" secondAttribute="leading" id="V6c-vI-JGq"/>
                                             <constraint firstItem="cLg-Nf-syc" firstAttribute="leading" secondItem="YEf-0c-ftQ" secondAttribute="leading" constant="17" id="bVS-kv-XaJ"/>
+                                            <constraint firstItem="iM5-VS-RQc" firstAttribute="top" secondItem="cLg-Nf-syc" secondAttribute="bottom" constant="22" id="cGd-fe-Goc"/>
                                             <constraint firstItem="cLg-Nf-syc" firstAttribute="top" secondItem="0pt-Lc-aoZ" secondAttribute="bottom" constant="24" id="fsN-Te-fPw"/>
                                             <constraint firstAttribute="trailing" secondItem="0pt-Lc-aoZ" secondAttribute="trailing" id="hCS-3j-RYS"/>
                                             <constraint firstItem="0pt-Lc-aoZ" firstAttribute="top" secondItem="YEf-0c-ftQ" secondAttribute="top" id="vOa-f5-zBt"/>

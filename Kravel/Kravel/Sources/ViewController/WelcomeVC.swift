@@ -9,7 +9,6 @@
 import UIKit
 
 class WelcomeVC: UIViewController {
-
     @IBOutlet weak var goTripButton: UIButton! {
         willSet {
             guard let goTripButton = newValue as? CustomButton else { return }
@@ -17,13 +16,12 @@ class WelcomeVC: UIViewController {
         }
     }
     
+    
     @IBOutlet weak var illustrateTopConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-        print("")
     }
     
     override func viewWillLayoutSubviews() {

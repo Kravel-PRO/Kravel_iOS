@@ -18,6 +18,7 @@ class ContentDetailVC: UIViewController {
             guard let informStr = self.informStr, let name = self.name else { return }
             newValue.attributedText = createAttributeString(of: informStr, highlightPart: name)
             newValue.sizeToFit()
+            newValue.translatesAutoresizingMaskIntoConstraints = false
         }
     }
     
@@ -47,6 +48,12 @@ class ContentDetailVC: UIViewController {
         setNav()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        introduceLabel.heightAnchor.constraint(equalToConstant: introduceLabel.frame.height).isActive = true
+    }
+    
+    // MARK: - Set Navigation
     private func setNav() {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.topItem?.title = ""
