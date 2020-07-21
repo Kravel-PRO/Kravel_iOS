@@ -11,13 +11,19 @@ import UIKit
 class SearchCell: UICollectionViewCell {
     static let identifier = "SearchCell"
     
-    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView! {
+        didSet {
+            profileImageView.layer.cornerRadius = profileImageView.frame.width/2
+        }
+    }
+    
     @IBOutlet weak var profileLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
     
     var profile: String? {
         didSet {
             profileLabel.text = profile
+            profileLabel.sizeToFit()
         }
     }
     

@@ -137,7 +137,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="515"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Mmi-7z-fcy">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Mmi-7z-fcy">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="515"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GjO-a8-Jea">
@@ -154,8 +154,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="102" height="136"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="0KC-2A-GVm">
-                                                    <rect key="frame" x="0.0" y="1" width="102" height="100.66666666666667"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bitmap_0" translatesAutoresizingMaskIntoConstraints="NO" id="0KC-2A-GVm">
+                                                    <rect key="frame" x="0.0" y="0.0" width="102" height="102"/>
                                                     <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="0KC-2A-GVm" secondAttribute="height" multiplier="1:1" id="R5i-WU-dPW"/>
@@ -176,12 +176,12 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="0KC-2A-GVm" firstAttribute="top" secondItem="P1j-W5-9aZ" secondAttribute="top" id="Aqm-Dm-kYQ"/>
-                                                <constraint firstItem="TvF-NI-4Ur" firstAttribute="top" secondItem="hbh-Py-gZl" secondAttribute="bottom" id="GrH-Zv-obW"/>
                                                 <constraint firstItem="hbh-Py-gZl" firstAttribute="top" secondItem="0KC-2A-GVm" secondAttribute="bottom" constant="4" id="Gtp-4o-NB1"/>
                                                 <constraint firstItem="0KC-2A-GVm" firstAttribute="width" secondItem="P1j-W5-9aZ" secondAttribute="width" id="HLv-Ao-Qg2"/>
                                                 <constraint firstItem="hbh-Py-gZl" firstAttribute="centerX" secondItem="P1j-W5-9aZ" secondAttribute="centerX" id="NjC-j8-nem"/>
                                                 <constraint firstItem="0KC-2A-GVm" firstAttribute="centerX" secondItem="P1j-W5-9aZ" secondAttribute="centerX" id="ckh-jt-3eg"/>
-                                                <constraint firstItem="TvF-NI-4Ur" firstAttribute="centerX" secondItem="P1j-W5-9aZ" secondAttribute="centerX" id="yO4-Mz-LVk"/>
+                                                <constraint firstItem="TvF-NI-4Ur" firstAttribute="top" secondItem="hbh-Py-gZl" secondAttribute="bottom" id="h3X-dr-jDI"/>
+                                                <constraint firstItem="TvF-NI-4Ur" firstAttribute="centerX" secondItem="P1j-W5-9aZ" secondAttribute="centerX" id="xgy-HJ-bvB"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="102" height="136"/>
@@ -210,7 +210,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ntB-22-rx0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-562.39999999999998" y="2088.5467980295566"/>
+            <point key="canvasLocation" x="-570" y="2089"/>
         </scene>
         <!--Movie ChildVC-->
         <scene sceneID="Q8n-Sp-Csf">
@@ -220,7 +220,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="515"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hpY-Uo-hnG">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hpY-Uo-hnG">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="515"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lMr-gx-oOW">
@@ -237,8 +237,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="102" height="136"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder.fill.badge.plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="9jo-Vm-853">
-                                                    <rect key="frame" x="0.0" y="1.3333333333333357" width="102" height="99.333333333333329"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bitmap_1" translatesAutoresizingMaskIntoConstraints="NO" id="9jo-Vm-853">
+                                                    <rect key="frame" x="0.0" y="0.0" width="102" height="102"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="9jo-Vm-853" secondAttribute="height" multiplier="1:1" id="s3N-3a-vjz"/>
                                                     </constraints>
@@ -292,7 +292,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JpR-Hc-6dF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="165.59999999999999" y="2088.5467980295566"/>
+            <point key="canvasLocation" x="239" y="2089"/>
         </scene>
         <!--Content DetailVC-->
         <scene sceneID="SGX-Ck-Rvs">
@@ -512,7 +512,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fkN-OS-C8c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-209" y="2849"/>
+            <point key="canvasLocation" x="-210" y="2960"/>
         </scene>
         <!--지도-->
         <scene sceneID="hgt-B2-ERe">
@@ -589,10 +589,9 @@
     </scenes>
     <resources>
         <image name="bitmap_0" width="375" height="280"/>
-        <image name="folder.fill.badge.plus" catalog="system" width="128" height="86"/>
+        <image name="bitmap_1" width="168" height="112"/>
         <image name="house" catalog="system" width="128" height="110"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="map" catalog="system" width="128" height="113"/>
-        <image name="person.circle.fill" catalog="system" width="128" height="121"/>
     </resources>
 </document>
