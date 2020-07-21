@@ -517,14 +517,29 @@
         <!--지도-->
         <scene sceneID="hgt-B2-ERe">
             <objects>
-                <viewController id="J3n-8X-r2I" sceneMemberID="viewController">
+                <viewController id="J3n-8X-r2I" customClass="MapVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="F7a-cv-JjN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9k3-TR-6L9">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="XKx-xM-vn7" firstAttribute="bottom" secondItem="9k3-TR-6L9" secondAttribute="bottom" id="3BQ-pn-vEV"/>
+                            <constraint firstItem="9k3-TR-6L9" firstAttribute="leading" secondItem="XKx-xM-vn7" secondAttribute="leading" id="j2Q-x8-5XD"/>
+                            <constraint firstItem="9k3-TR-6L9" firstAttribute="top" secondItem="F7a-cv-JjN" secondAttribute="top" id="yWX-c9-b4I"/>
+                            <constraint firstItem="XKx-xM-vn7" firstAttribute="trailing" secondItem="9k3-TR-6L9" secondAttribute="trailing" id="zfu-gq-Hv8"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="XKx-xM-vn7"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="지도" image="map" catalog="system" id="uis-aZ-xDL"/>
+                    <connections>
+                        <outlet property="containerMapView" destination="9k3-TR-6L9" id="tmj-oj-dcQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wKj-mo-0qe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
