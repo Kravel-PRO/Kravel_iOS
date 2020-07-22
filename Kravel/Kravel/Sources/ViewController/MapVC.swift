@@ -11,6 +11,7 @@ import TMapSDK
 
 class MapVC: UIViewController {
     
+    // MARK: - MapView 설정
     @IBOutlet weak var containerMapView: UIView!
     
     lazy var mapView: TMapView = {
@@ -20,14 +21,14 @@ class MapVC: UIViewController {
         return map
     }()
     
+    private func setMapView() {
+        containerMapView.addSubview(mapView)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setMapView()
-    }
-    
-    private func setMapView() {
-        containerMapView.addSubview(mapView)
     }
 }
 

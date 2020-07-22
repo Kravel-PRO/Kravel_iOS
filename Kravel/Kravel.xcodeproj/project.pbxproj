@@ -24,6 +24,9 @@
 		9D49E8B124C6D908007CD948 /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D49E8B024C6D908007CD948 /* TMapSDK.framework */; };
 		9D49E8B224C6D909007CD948 /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D49E8B024C6D908007CD948 /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D49E8B424C6DCBE007CD948 /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D49E8B324C6DCBE007CD948 /* PrivateKey.swift */; };
+		9D49E8B624C6F857007CD948 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D49E8B524C6F857007CD948 /* MyPageVC.swift */; };
+		9D49E8BB24C83378007CD948 /* MyPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D49E8BA24C83378007CD948 /* MyPageCell.swift */; };
+		9D49E8BD24C83545007CD948 /* MyPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D49E8BC24C83545007CD948 /* MyPageMenu.swift */; };
 		9D5DBB45248D5BAD00D82D40 /* SexButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D5DBB44248D5BAD00D82D40 /* SexButton.xib */; };
 		9D5DBB47248D5BBF00D82D40 /* SexButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5DBB46248D5BBF00D82D40 /* SexButton.swift */; };
 		9D5E3EB724BD952200BA4E5F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5E3EB624BD952200BA4E5F /* SearchCell.swift */; };
@@ -78,6 +81,9 @@
 		9D3D162E2488E2C700AE1B4C /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		9D49E8B024C6D908007CD948 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		9D49E8B324C6DCBE007CD948 /* PrivateKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKey.swift; sourceTree = "<group>"; };
+		9D49E8B524C6F857007CD948 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
+		9D49E8BA24C83378007CD948 /* MyPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCell.swift; sourceTree = "<group>"; };
+		9D49E8BC24C83545007CD948 /* MyPageMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageMenu.swift; sourceTree = "<group>"; };
 		9D5DBB44248D5BAD00D82D40 /* SexButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SexButton.xib; sourceTree = "<group>"; };
 		9D5DBB46248D5BBF00D82D40 /* SexButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SexButton.swift; sourceTree = "<group>"; };
 		9D5E3EB624BD952200BA4E5F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
@@ -168,6 +174,7 @@
 			children = (
 				9D13C810248796900058A7BF /* LoginTextView.swift */,
 				9DEDA6AA24BCB72300E978F5 /* Tabbar */,
+				9D49E8B724C8332B007CD948 /* TableViewCell */,
 				9DEDA6A524BCA86000E978F5 /* CollectionViewCell */,
 				9D13C809248788280058A7BF /* Button */,
 			);
@@ -187,6 +194,7 @@
 				9DEDA6BF24BCEEFC00E978F5 /* MovieChildVC.swift */,
 				9D94BDF124BE2C710027B9BF /* ContentDetailVC.swift */,
 				9D9694D524C6D4800046CB85 /* MapVC.swift */,
+				9D49E8B524C6F857007CD948 /* MyPageVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -196,6 +204,7 @@
 			children = (
 				9DEDA6B124BCD09300E978F5 /* KCategory.swift */,
 				9D49E8B324C6DCBE007CD948 /* PrivateKey.swift */,
+				9D49E8BC24C83545007CD948 /* MyPageMenu.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -253,6 +262,14 @@
 				9D49E8B024C6D908007CD948 /* TMapSDK.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9D49E8B724C8332B007CD948 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				9D49E8BA24C83378007CD948 /* MyPageCell.swift */,
+			);
+			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 		9DA80453248E5962003826B9 /* Util */ = {
@@ -363,15 +380,18 @@
 				9D014C3E248C4A5E00758FCC /* SignupVC.swift in Sources */,
 				9D13C80B248788390058A7BF /* CustomButton.swift in Sources */,
 				9D16A44B24909798005E691E /* WelcomeVC.swift in Sources */,
+				9D49E8B624C6F857007CD948 /* MyPageVC.swift in Sources */,
 				9DEDA6BE24BCEEF000E978F5 /* TalentChildVC.swift in Sources */,
 				9D8C0A2724BC525C005C1F58 /* HomeVC.swift in Sources */,
 				9D3D162B2488DA7200AE1B4C /* SetLanguageVC.swift in Sources */,
+				9D49E8BD24C83545007CD948 /* MyPageMenu.swift in Sources */,
 				9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */,
 				9DA80457248E9200003826B9 /* String+Extensions.swift in Sources */,
 				9D9694CD24C5E7570046CB85 /* PlaceCell.swift in Sources */,
 				9D94BDF224BE2C710027B9BF /* ContentDetailVC.swift in Sources */,
 				9D13C811248796900058A7BF /* LoginTextView.swift in Sources */,
 				9D9694CF24C623F00046CB85 /* PhotoReviewCell.swift in Sources */,
+				9D49E8BB24C83378007CD948 /* MyPageCell.swift in Sources */,
 				9D5E3EB724BD952200BA4E5F /* SearchCell.swift in Sources */,
 				9DEDA6AC24BCB76E00E978F5 /* CategoryTabbar.swift in Sources */,
 				9D9694D624C6D4810046CB85 /* MapVC.swift in Sources */,
