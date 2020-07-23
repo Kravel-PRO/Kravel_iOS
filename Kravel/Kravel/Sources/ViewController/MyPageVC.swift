@@ -55,6 +55,7 @@ class MyPageVC: UIViewController {
 
 extension MyPageVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(MyPageMenu.allCases.count)
         return MyPageMenu.allCases.count
     }
     
