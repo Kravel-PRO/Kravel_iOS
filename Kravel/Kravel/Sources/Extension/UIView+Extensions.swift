@@ -13,6 +13,8 @@ extension UIView {
         self.layer.shadowColor = color.cgColor
         self.layer.shadowRadius = blur
         self.layer.shadowOffset = CGSize(width: x, height: y)
+        self.layer.shadowOpacity = 0.5
+        self.layer.masksToBounds = false
     }
     
     func loadXib(from name: String) -> UIView {

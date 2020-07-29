@@ -40,25 +40,63 @@ class MapVC: UIViewController {
     // MARK: - Floating Panel View
     lazy var placePopupView: PlacePopupView = {
         // PopupView 초기 위치 설정
+        let tempPopupView = PlacePopupView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        tempPopupView.translatesAutoresizingMaskIntoConstraints = false
+        return tempPopupView
+    }()
+    
+    // Shadow을 표현하기 위해 바깥 View
+    lazy var placeShodowView: UIView = {
+        let estimateY = calculatePanelViewY()
+        let shadowView = UIView(frame: CGRect(x: 0, y: estimateY, width: view.frame.width, height: view.frame.height))
+        shadowView.makeShadow(color: UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1), blur: 4, x: 0, y: -2)
+        shadowView.translatesAutoresizingMaskIntoConstraints = false
+        return shadowView
+    }()
+    
+    private func calculatePanelViewY() -> CGFloat {
+        let tabbarHeight = self.tabBarController!.tabBar.frame.height
+        return self.view.frame.height - calculateInitPanelViewHeight() - tabbarHeight
+    }
+    
+    private func calculateInitPanelViewHeight() -> CGFloat {
         let indicatorViewHeight = self.view.frame.width * 8 / 125
         let imageHeight = self.view.frame.width * 0.22
         let spacing: CGFloat = 18
         let tabbarHeight = self.tabBarController!.tabBar.frame.height
-        
-        let estimateY = self.view.frame.height - indicatorViewHeight - imageHeight - spacing - tabbarHeight
-        let tempPopupView = PlacePopupView(frame: CGRect(x: 0, y: estimateY, width: view.frame.width, height: view.frame.height))
-        return tempPopupView
-    }()
-    
-    private func setPlacePopupView() {
-        self.view.addSubview(placePopupView)
+        return indicatorViewHeight + imageHeight + spacing + tabbarHeight
     }
     
+    private func setPlacePopupView() {
+        self.view.addSubview(placeShodowView)
+        placeShodowView.addSubview(placePopupView)
+    }
+    
+    // POPUp View AutoLayout 지정
+    private func setPopupViewLayout() {
+        NSLayoutConstraint.activate([
+            placeShodowView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            placeShodowView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
+            placeShodowView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            placeShodowView.topAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -calculateInitPanelViewHeight()),
+            placePopupView.topAnchor.constraint(equalTo: placeShodowView.topAnchor),
+            placePopupView.leadingAnchor.constraint(equalTo: placeShodowView.leadingAnchor),
+            placePopupView.trailingAnchor.constraint(equalTo: placeShodowView.trailingAnchor),
+            placePopupView.bottomAnchor.constraint(equalTo: placeShodowView.bottomAnchor)
+        ])
+    }
+    
+    // MARK: - ViewController Override 부분
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setMapView()
         setPlacePopupView()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        setPopupViewLayout()
     }
 }
 
