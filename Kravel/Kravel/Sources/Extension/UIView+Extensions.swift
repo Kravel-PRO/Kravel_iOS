@@ -14,4 +14,9 @@ extension UIView {
         self.layer.shadowRadius = blur
         self.layer.shadowOffset = CGSize(width: x, height: y)
     }
+    
+    func loadXib(from name: String) -> UIView {
+        guard let view = Bundle.main.loadNibNamed(name, owner: self, options: nil)?.first as? UIView else { return UIView() }
+        return view
+    }
 }

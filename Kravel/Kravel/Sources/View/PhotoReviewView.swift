@@ -9,6 +9,7 @@
 import UIKit
 
 class PhotoReviewView: UIView {
+    static let nibName = "PhotoReviewView"
     var view: UIView!
     
     // MARK: - Photo Review 보여주는 CollectionView 설정
@@ -41,9 +42,13 @@ class PhotoReviewView: UIView {
     }
 
     private func loadXib() {
-        guard let view = Bundle.main.loadNibNamed(SubLocationView.nibName, owner: self, options: nil)?.first as? UIView else { return }
-        view.frame = self.bounds
-        self.view = view
+//        guard let view = Bundle.main.loadNibNamed(SubLocationView.nibName, owner: self, options: nil)?.first as? UIView else { return }
+//        view.frame = self.bounds
+//        self.view = view
+//        self.addSubview(view)
+        
+        self.view = loadXib(from: PhotoReviewView.nibName)
+        self.view.frame = self.bounds
         self.addSubview(view)
     }
 }
