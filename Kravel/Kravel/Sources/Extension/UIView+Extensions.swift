@@ -19,4 +19,9 @@ extension UIView {
         guard let view = Bundle.main.loadNibNamed(name, owner: self, options: nil)?.first as? UIView else { return UIView() }
         return view
     }
+    
+    func setCornerRadius(_ value: CGFloat) {
+        self.layer.cornerRadius = value
+        self.layer.masksToBounds = true
+    }
 }

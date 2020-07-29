@@ -31,15 +31,34 @@ class MapVC: UIViewController {
             nearPlaceCollectionView.dataSource = self
             nearPlaceCollectionView.delegate = self
             nearPlaceCollectionView.showsHorizontalScrollIndicator = false
+            nearPlaceCollectionView.isHidden = true
         }
     }
     
     private var nearPlaces: [String] = ["정재네 집", "호준이네 집", "유나네 집", "혜선이네 집", "경선이네 집", "수연이네 집", "세림이네 집"]
     
+    // MARK: - Floating Panel View
+    lazy var placePopupView: PlacePopupView = {
+        // PopupView 초기 위치 설정
+        let indicatorViewHeight = self.view.frame.width * 8 / 125
+        let imageHeight = self.view.frame.width * 0.22
+        let spacing: CGFloat = 18
+        let tabbarHeight = self.tabBarController!.tabBar.frame.height
+        
+        let estimateY = self.view.frame.height - indicatorViewHeight - imageHeight - spacing - tabbarHeight
+        let tempPopupView = PlacePopupView(frame: CGRect(x: 0, y: estimateY, width: view.frame.width, height: view.frame.height))
+        return tempPopupView
+    }()
+    
+    private func setPlacePopupView() {
+        self.view.addSubview(placePopupView)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setMapView()
+        setPlacePopupView()
     }
 }
 

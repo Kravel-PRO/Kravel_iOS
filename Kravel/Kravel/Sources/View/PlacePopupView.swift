@@ -11,7 +11,11 @@ import UIKit
 class PlacePopupView: UIView {
     static let nibName = "PlacePopupView"
     
-    var view: UIView!
+    var view: UIView! {
+        didSet {
+            view.setCornerRadius(self.frame.width / 25)
+        }
+    }
     
     // MARK: - 팝업 뷰 Indicator 부분 설정
     @IBOutlet weak var indicatorView: UIView! {
@@ -50,14 +54,16 @@ class PlacePopupView: UIView {
     }
     
     // MARK: - 카메라 버튼, 하트 버튼 StackView 설정
-    @IBOutlet weak var buttonStackView: UIStackView! {
+    @IBOutlet weak var buttonStackContainerView: UIView! {
         didSet {
-            buttonStackView.layer.cornerRadius = buttonStackView.frame.width / 20
-            buttonStackView.clipsToBounds = false
-            buttonStackView.layer.borderWidth = 1
-            buttonStackView.layer.borderColor = UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0).cgColor
+            buttonStackContainerView.layer.cornerRadius = buttonStackContainerView.frame.width / 20
+            buttonStackContainerView.clipsToBounds = false
+            buttonStackContainerView.layer.borderWidth = 1
+            buttonStackContainerView.layer.borderColor = UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0).cgColor
         }
     }
+    
+    @IBOutlet weak var buttonStackView: UIStackView!
     
     // MARK: - 사진 리뷰 View을 담는 Container View 설정
     @IBOutlet weak var photoReviewContainerView: PhotoReviewView!
