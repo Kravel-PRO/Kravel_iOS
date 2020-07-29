@@ -25,9 +25,6 @@ class MapVC: UIViewController {
         containerMapView.addSubview(mapView)
     }
     
-    
-    var nearPlaces: [String] = ["정재네 집", "호준이네 집", "유나네 집", "혜선이네 집", "경선이네 집", "수연이네 집", "세림이네 집"]
-    
     // MARK: - 가까운 곳 나타내는 CollectionView 초기화
     @IBOutlet weak var nearPlaceCollectionView: UICollectionView! {
         didSet {
@@ -36,6 +33,8 @@ class MapVC: UIViewController {
             nearPlaceCollectionView.showsHorizontalScrollIndicator = false
         }
     }
+    
+    private var nearPlaces: [String] = ["정재네 집", "호준이네 집", "유나네 집", "혜선이네 집", "경선이네 집", "수연이네 집", "세림이네 집"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +57,7 @@ extension MapVC: UICollectionViewDataSource {
         
         nearPlaceCell.backgroundColor = .white
         nearPlaceCell.layer.cornerRadius = nearPlaceCell.frame.width / 49.6
-        nearPlaceCell.clipsToBounds = false
+        nearPlaceCell.makeShadow(color: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 0.14), blur: 3, x: 3, y: 2)
         
         // 여기 Image Name 데이터로 받아오면 설정해야함
         nearPlaceCell.placeImage = UIImage(named: "bitmap_1")

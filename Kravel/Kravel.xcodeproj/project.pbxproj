@@ -31,6 +31,13 @@
 		9D5DBB47248D5BBF00D82D40 /* SexButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5DBB46248D5BBF00D82D40 /* SexButton.swift */; };
 		9D5E3EB724BD952200BA4E5F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5E3EB624BD952200BA4E5F /* SearchCell.swift */; };
 		9D7FB1EE24D00D13009A9C0A /* NearPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FB1ED24D00D13009A9C0A /* NearPlaceCell.swift */; };
+		9D7FB1F024D01489009A9C0A /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FB1EF24D01489009A9C0A /* UIView+Extensions.swift */; };
+		9D7FB1F424D15DE7009A9C0A /* SubLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D7FB1F324D15DE7009A9C0A /* SubLocationView.xib */; };
+		9D7FB1F624D15E60009A9C0A /* SubLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FB1F524D15E5F009A9C0A /* SubLocationView.swift */; };
+		9D7FB1F824D164AF009A9C0A /* PhotoReviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D7FB1F724D164AF009A9C0A /* PhotoReviewView.xib */; };
+		9D7FB1FA24D16505009A9C0A /* PhotoReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FB1F924D16505009A9C0A /* PhotoReviewView.swift */; };
+		9D7FB1FC24D16A15009A9C0A /* PlacePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D7FB1FB24D16A15009A9C0A /* PlacePopupView.xib */; };
+		9D7FB1FE24D16A29009A9C0A /* LocationPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FB1FD24D16A29009A9C0A /* LocationPopupView.swift */; };
 		9D8C0A2524BC515A005C1F58 /* Tabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D8C0A2424BC515A005C1F58 /* Tabbar.storyboard */; };
 		9D8C0A2724BC525C005C1F58 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8C0A2624BC525C005C1F58 /* HomeVC.swift */; };
 		9D94BDF224BE2C710027B9BF /* ContentDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D94BDF124BE2C710027B9BF /* ContentDetailVC.swift */; };
@@ -89,6 +96,13 @@
 		9D5DBB46248D5BBF00D82D40 /* SexButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SexButton.swift; sourceTree = "<group>"; };
 		9D5E3EB624BD952200BA4E5F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		9D7FB1ED24D00D13009A9C0A /* NearPlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearPlaceCell.swift; sourceTree = "<group>"; };
+		9D7FB1EF24D01489009A9C0A /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		9D7FB1F324D15DE7009A9C0A /* SubLocationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubLocationView.xib; sourceTree = "<group>"; };
+		9D7FB1F524D15E5F009A9C0A /* SubLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubLocationView.swift; sourceTree = "<group>"; };
+		9D7FB1F724D164AF009A9C0A /* PhotoReviewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoReviewView.xib; sourceTree = "<group>"; };
+		9D7FB1F924D16505009A9C0A /* PhotoReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoReviewView.swift; sourceTree = "<group>"; };
+		9D7FB1FB24D16A15009A9C0A /* PlacePopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlacePopupView.xib; sourceTree = "<group>"; };
+		9D7FB1FD24D16A29009A9C0A /* LocationPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPopupView.swift; sourceTree = "<group>"; };
 		9D8C0A2424BC515A005C1F58 /* Tabbar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tabbar.storyboard; sourceTree = "<group>"; };
 		9D8C0A2624BC525C005C1F58 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		9D94BDF124BE2C710027B9BF /* ContentDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailVC.swift; sourceTree = "<group>"; };
@@ -175,10 +189,13 @@
 			isa = PBXGroup;
 			children = (
 				9D13C810248796900058A7BF /* LoginTextView.swift */,
+				9D7FB1F524D15E5F009A9C0A /* SubLocationView.swift */,
+				9D7FB1F924D16505009A9C0A /* PhotoReviewView.swift */,
 				9DEDA6AA24BCB72300E978F5 /* Tabbar */,
 				9D49E8B724C8332B007CD948 /* TableViewCell */,
 				9DEDA6A524BCA86000E978F5 /* CollectionViewCell */,
 				9D13C809248788280058A7BF /* Button */,
+				9D7FB1FD24D16A29009A9C0A /* LocationPopupView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -217,6 +234,7 @@
 				9D3D162E2488E2C700AE1B4C /* UIColor+Additions.swift */,
 				9D014C3F248C4C3600758FCC /* UIViewController+Extensions.swift */,
 				9DA80456248E9200003826B9 /* String+Extensions.swift */,
+				9D7FB1EF24D01489009A9C0A /* UIView+Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -238,6 +256,9 @@
 				9D5DBB44248D5BAD00D82D40 /* SexButton.xib */,
 				9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */,
 				9DEDA6AE24BCC74300E978F5 /* CategoryCell.xib */,
+				9D7FB1F324D15DE7009A9C0A /* SubLocationView.xib */,
+				9D7FB1F724D164AF009A9C0A /* PhotoReviewView.xib */,
+				9D7FB1FB24D16A15009A9C0A /* PlacePopupView.xib */,
 			);
 			path = Xib;
 			sourceTree = "<group>";
@@ -363,10 +384,13 @@
 			files = (
 				9D8C0A2524BC515A005C1F58 /* Tabbar.storyboard in Resources */,
 				9D13C7F9248784330058A7BF /* LaunchScreen.storyboard in Resources */,
+				9D7FB1FC24D16A15009A9C0A /* PlacePopupView.xib in Resources */,
 				9D13C7F6248784330058A7BF /* Assets.xcassets in Resources */,
 				9D5DBB45248D5BAD00D82D40 /* SexButton.xib in Resources */,
 				9DEDA6A924BCB70600E978F5 /* CategoryTabbar.xib in Resources */,
+				9D7FB1F824D164AF009A9C0A /* PhotoReviewView.xib in Resources */,
 				9D13C7F42487842E0058A7BF /* Main.storyboard in Resources */,
+				9D7FB1F424D15DE7009A9C0A /* SubLocationView.xib in Resources */,
 				9D13C80F248795E40058A7BF /* LoginTextView.xib in Resources */,
 				9DEDA6B024BCC74300E978F5 /* CategoryCell.xib in Resources */,
 			);
@@ -393,11 +417,13 @@
 				9D9694CD24C5E7570046CB85 /* PlaceCell.swift in Sources */,
 				9D94BDF224BE2C710027B9BF /* ContentDetailVC.swift in Sources */,
 				9D13C811248796900058A7BF /* LoginTextView.swift in Sources */,
+				9D7FB1F624D15E60009A9C0A /* SubLocationView.swift in Sources */,
 				9D9694CF24C623F00046CB85 /* PhotoReviewCell.swift in Sources */,
 				9D7FB1EE24D00D13009A9C0A /* NearPlaceCell.swift in Sources */,
 				9D49E8BB24C83378007CD948 /* MyPageCell.swift in Sources */,
 				9D5E3EB724BD952200BA4E5F /* SearchCell.swift in Sources */,
 				9DEDA6AC24BCB76E00E978F5 /* CategoryTabbar.swift in Sources */,
+				9D7FB1FE24D16A29009A9C0A /* LocationPopupView.swift in Sources */,
 				9D9694D624C6D4810046CB85 /* MapVC.swift in Sources */,
 				9D014C40248C4C3600758FCC /* UIViewController+Extensions.swift in Sources */,
 				9DEDA6B224BCD09400E978F5 /* KCategory.swift in Sources */,
@@ -405,8 +431,10 @@
 				9DEDA6C024BCEEFC00E978F5 /* MovieChildVC.swift in Sources */,
 				9D13C7ED2487842E0058A7BF /* AppDelegate.swift in Sources */,
 				9D13C7EF2487842E0058A7BF /* SceneDelegate.swift in Sources */,
+				9D7FB1FA24D16505009A9C0A /* PhotoReviewView.swift in Sources */,
 				9D3D162F2488E2C700AE1B4C /* UIColor+Additions.swift in Sources */,
 				9DEDA6BC24BCEE0400E978F5 /* PagingViewCell.swift in Sources */,
+				9D7FB1F024D01489009A9C0A /* UIView+Extensions.swift in Sources */,
 				9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */,
 				9D49E8B424C6DCBE007CD948 /* PrivateKey.swift in Sources */,
 			);

@@ -14,6 +14,7 @@ protocol PagingTabbarDelegate {
 
 class CategoryTabbar: UIView {
     static let nibName = "CategoryTabbar"
+    
     private var view: UIView!
     
     @IBOutlet weak var categoryCollectionView: UICollectionView! {
