@@ -155,7 +155,7 @@ extension ContentDetailVC: UICollectionViewDataSource {
     
     private func createPlaceCell(of collectionView: UICollectionView, at indexPath: IndexPath) -> UICollectionViewCell {
         guard let placeCell = collectionView.dequeueReusableCell(withReuseIdentifier: PlaceCell.identifier, for: indexPath) as? PlaceCell else { return UICollectionViewCell() }
-        placeCell.placeImage = UIImage(named: "bitmap_1")
+        placeCell.placeImage = UIImage(named: "IMG_1136")
         placeCell.tags = ["낭만적", "바람이부는", "상쾌한"]
         placeCell.placeName = "여기는 어디?"
         return placeCell

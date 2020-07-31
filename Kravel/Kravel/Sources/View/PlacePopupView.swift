@@ -17,6 +17,10 @@ class PlacePopupView: UIView {
         }
     }
     
+    func addGestureInXib(_ gesture: UIGestureRecognizer) {
+        view.addGestureRecognizer(gesture)
+    }
+    
     // MARK: - 팝업 뷰 Indicator 부분 설정
     @IBOutlet weak var indicatorView: UIView! {
         didSet {
@@ -71,6 +75,17 @@ class PlacePopupView: UIView {
     // MARK: - 장소 위치를 나타내는 View을 담는 Container View 설정
     @IBOutlet weak var SubLocationContainerView: SubLocationView!
     
+    // MARK: - Main ScrollView 설정
+    @IBOutlet weak var contentScrollView: UIScrollView! {
+        didSet {
+            contentScrollView.isUserInteractionEnabled = false
+        }
+    }
+    
+    func setEnableScroll(_ isScroll: Bool) {
+        contentScrollView.isScrollEnabled = isScroll
+    }
+        
     // MARK: - UIView Override 부분
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -86,5 +101,7 @@ class PlacePopupView: UIView {
         self.view = loadXib(from: PlacePopupView.nibName)
         self.view.frame = self.bounds
         self.addSubview(view)
+        self.bringSubviewToFront(view)
+        view.isUserInteractionEnabled = true
     }
 }

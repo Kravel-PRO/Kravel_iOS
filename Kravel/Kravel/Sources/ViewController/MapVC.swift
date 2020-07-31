@@ -41,16 +41,16 @@ class MapVC: UIViewController {
     lazy var placePopupView: PlacePopupView = {
         // PopupView 초기 위치 설정
         let tempPopupView = PlacePopupView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-        tempPopupView.translatesAutoresizingMaskIntoConstraints = false
+//        tempPopupView.translatesAutoresizingMaskIntoConstraints = false
         return tempPopupView
     }()
     
     // Shadow을 표현하기 위해 바깥 View
-    lazy var placeShodowView: UIView = {
+    lazy var placeShadowView: UIView = {
         let estimateY = calculatePanelViewY()
         let shadowView = UIView(frame: CGRect(x: 0, y: estimateY, width: view.frame.width, height: view.frame.height))
         shadowView.makeShadow(color: UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1), blur: 4, x: 0, y: -2)
-        shadowView.translatesAutoresizingMaskIntoConstraints = false
+//        shadowView.translatesAutoresizingMaskIntoConstraints = false
         return shadowView
     }()
     
@@ -68,22 +68,38 @@ class MapVC: UIViewController {
     }
     
     private func setPlacePopupView() {
-        self.view.addSubview(placeShodowView)
-        placeShodowView.addSubview(placePopupView)
+        addGesture()
+        self.view.addSubview(placeShadowView)
+        placeShadowView.addSubview(placePopupView)
     }
     
     // POPUp View AutoLayout 지정
     private func setPopupViewLayout() {
         NSLayoutConstraint.activate([
-            placeShodowView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            placeShodowView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
-            placeShodowView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            placeShodowView.topAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -calculateInitPanelViewHeight()),
-            placePopupView.topAnchor.constraint(equalTo: placeShodowView.topAnchor),
-            placePopupView.leadingAnchor.constraint(equalTo: placeShodowView.leadingAnchor),
-            placePopupView.trailingAnchor.constraint(equalTo: placeShodowView.trailingAnchor),
-            placePopupView.bottomAnchor.constraint(equalTo: placeShodowView.bottomAnchor)
+            placeShadowView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            placeShadowView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
+            placeShadowView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            placeShadowView.topAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -calculateInitPanelViewHeight()),
+            placePopupView.topAnchor.constraint(equalTo: placeShadowView.topAnchor),
+            placePopupView.leadingAnchor.constraint(equalTo: placeShadowView.leadingAnchor),
+            placePopupView.trailingAnchor.constraint(equalTo: placeShadowView.trailingAnchor),
+            placePopupView.bottomAnchor.constraint(equalTo: placeShadowView.bottomAnchor)
         ])
+    }
+    
+    // PopupView PanGesture 구현
+    var panGesuture: UIPanGestureRecognizer!
+    
+    private func addGesture() {
+        panGesuture = UIPanGestureRecognizer(target: self, action: #selector(movePanelView(_:)))
+        placeShadowView.addGestureRecognizer(panGesuture)
+    }
+    
+    @objc func movePanelView(_ sender: Any) {
+        let transition = panGesuture.translation(in: placeShadowView)
+        let changeY = transition.y + placeShadowView.transform.ty
+        placeShadowView.transform = CGAffineTransform(translationX: 0, y: changeY)
+        panGesuture.setTranslation(.zero, in: placeShadowView)
     }
     
     // MARK: - ViewController Override 부분

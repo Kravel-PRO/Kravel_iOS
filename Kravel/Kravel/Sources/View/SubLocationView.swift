@@ -58,13 +58,9 @@ class SubLocationView: UIView {
     }
     
     private func loadXib() {
-//        guard let view = Bundle.main.loadNibNamed(SubLocationView.nibName, owner: self, options: nil)?.first as? UIView else { return }
-//        view.frame = self.bounds
-//        self.view = view
-//        self.addSubview(view)
-        
         self.view = loadXib(from: SubLocationView.nibName)
         self.view.frame = self.bounds
         self.addSubview(view)
+        self.bringSubviewToFront(view)
     }
 }

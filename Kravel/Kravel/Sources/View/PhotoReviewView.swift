@@ -30,6 +30,15 @@ class PhotoReviewView: UIView {
         }
     }
     
+    // MARK: - Title Label 설정
+    @IBOutlet weak var titleLabel: UILabel! {
+        didSet {
+            let size = titleLabel.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
+            titleLabel.translatesAutoresizingMaskIntoConstraints = false
+            titleLabel.heightAnchor.constraint(equalToConstant: size.height).isActive = true
+        }
+    }
+     
     // MARK: - UIView Override 부분
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,13 +51,9 @@ class PhotoReviewView: UIView {
     }
 
     private func loadXib() {
-//        guard let view = Bundle.main.loadNibNamed(SubLocationView.nibName, owner: self, options: nil)?.first as? UIView else { return }
-//        view.frame = self.bounds
-//        self.view = view
-//        self.addSubview(view)
-        
         self.view = loadXib(from: PhotoReviewView.nibName)
         self.view.frame = self.bounds
         self.addSubview(view)
+        self.bringSubviewToFront(view)
     }
 }

@@ -256,8 +256,8 @@
 				9D5DBB44248D5BAD00D82D40 /* SexButton.xib */,
 				9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */,
 				9DEDA6AE24BCC74300E978F5 /* CategoryCell.xib */,
-				9D7FB1F324D15DE7009A9C0A /* SubLocationView.xib */,
 				9D7FB1F724D164AF009A9C0A /* PhotoReviewView.xib */,
+				9D7FB1F324D15DE7009A9C0A /* SubLocationView.xib */,
 				9D7FB1FB24D16A15009A9C0A /* PlacePopupView.xib */,
 			);
 			path = Xib;

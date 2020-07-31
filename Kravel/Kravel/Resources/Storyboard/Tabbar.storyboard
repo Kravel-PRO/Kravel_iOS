@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--홈-->
+        <!--HomeVC-->
         <scene sceneID="hqG-3f-RLX">
             <objects>
                 <viewController id="WDK-c7-4Vu" customClass="HomeVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
@@ -25,7 +25,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="V0L-7b-5ir"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="홈" image="house" catalog="system" id="u8h-tm-n0F"/>
+                    <tabBarItem key="tabBarItem" title="" image="homeInactive" selectedImage="homeActive" id="u8h-tm-n0F"/>
                     <connections>
                         <outlet property="backView" destination="eEr-cw-PnY" id="vFg-UL-bcF"/>
                     </connections>
@@ -154,7 +154,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="102" height="136"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bitmap_0" translatesAutoresizingMaskIntoConstraints="NO" id="0KC-2A-GVm">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_9633" translatesAutoresizingMaskIntoConstraints="NO" id="0KC-2A-GVm">
                                                     <rect key="frame" x="0.0" y="0.0" width="102" height="102"/>
                                                     <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                     <constraints>
@@ -237,7 +237,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="102" height="136"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bitmap_1" translatesAutoresizingMaskIntoConstraints="NO" id="9jo-Vm-853">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_9633" translatesAutoresizingMaskIntoConstraints="NO" id="9jo-Vm-853">
                                                     <rect key="frame" x="0.0" y="0.0" width="102" height="102"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="9jo-Vm-853" secondAttribute="height" multiplier="1:1" id="s3N-3a-vjz"/>
@@ -311,7 +311,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0pt-Lc-aoZ">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bitmap_0" translatesAutoresizingMaskIntoConstraints="NO" id="sfm-e8-384">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yuna" translatesAutoresizingMaskIntoConstraints="NO" id="sfm-e8-384">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
                                                     </imageView>
                                                 </subviews>
@@ -514,7 +514,7 @@
             </objects>
             <point key="canvasLocation" x="-210" y="2960"/>
         </scene>
-        <!--지도-->
+        <!--MapVC-->
         <scene sceneID="hgt-B2-ERe">
             <objects>
                 <viewController id="J3n-8X-r2I" customClass="MapVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
@@ -588,7 +588,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XKx-xM-vn7"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="지도" image="map" catalog="system" id="uis-aZ-xDL"/>
+                    <tabBarItem key="tabBarItem" title="" image="mapInactive" selectedImage="mapActive" id="uis-aZ-xDL"/>
                     <connections>
                         <outlet property="containerMapView" destination="9k3-TR-6L9" id="tmj-oj-dcQ"/>
                         <outlet property="nearPlaceCollectionView" destination="V98-sq-LNv" id="bGX-em-cVW"/>
@@ -726,6 +726,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" red="1" green="0.40392156862745099" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="WDK-c7-4Vu" kind="relationship" relationship="viewControllers" id="k39-Df-81C"/>
@@ -738,11 +739,11 @@
             </objects>
             <point key="canvasLocation" x="-59.420289855072468" y="47.544642857142854"/>
         </scene>
-        <!--검색-->
+        <!--Navigation Controller-->
         <scene sceneID="mUU-Cl-XqP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ovi-x7-4PJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="검색" image="magnifyingglass" catalog="system" id="V7f-Z5-eyV"/>
+                    <tabBarItem key="tabBarItem" title="" image="searchInactive" selectedImage="searchActive" id="V7f-Z5-eyV"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kqt-IS-cao">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -757,11 +758,11 @@
             </objects>
             <point key="canvasLocation" x="-172" y="775"/>
         </scene>
-        <!--마이-->
+        <!--Navigation Controller-->
         <scene sceneID="jmU-8f-H2X">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="n9E-lf-SY0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="마이" id="n2s-T5-tXe"/>
+                    <tabBarItem key="tabBarItem" title="" image="myInactive" selectedImage="myActive" id="n2s-T5-tXe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7xQ-g2-UOr">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -778,12 +779,17 @@
         </scene>
     </scenes>
     <resources>
+        <image name="IMG_9633" width="3024" height="3024"/>
         <image name="arrowtriangle.right" catalog="system" width="128" height="113"/>
-        <image name="bitmap_0" width="375" height="280"/>
-        <image name="bitmap_1" width="168" height="112"/>
-        <image name="house" catalog="system" width="128" height="110"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
-        <image name="map" catalog="system" width="128" height="113"/>
+        <image name="homeActive" width="28" height="28"/>
+        <image name="homeInactive" width="24" height="24"/>
+        <image name="mapActive" width="28" height="28"/>
+        <image name="mapInactive" width="24" height="24"/>
+        <image name="myActive" width="29" height="28"/>
+        <image name="myInactive" width="24" height="24"/>
         <image name="person.badge.minus" catalog="system" width="128" height="116"/>
+        <image name="searchActive" width="29" height="28"/>
+        <image name="searchInactive" width="24" height="24"/>
+        <image name="yuna" width="1080" height="720"/>
     </resources>
 </document>
