@@ -41,7 +41,7 @@ class MapVC: UIViewController {
     lazy var placePopupView: PlacePopupView = {
         // PopupView 초기 위치 설정
         let tempPopupView = PlacePopupView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-//        tempPopupView.translatesAutoresizingMaskIntoConstraints = false
+        tempPopupView.translatesAutoresizingMaskIntoConstraints = false
         return tempPopupView
     }()
     
@@ -50,7 +50,7 @@ class MapVC: UIViewController {
         let estimateY = calculatePanelViewY()
         let shadowView = UIView(frame: CGRect(x: 0, y: estimateY, width: view.frame.width, height: view.frame.height))
         shadowView.makeShadow(color: UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1), blur: 4, x: 0, y: -2)
-//        shadowView.translatesAutoresizingMaskIntoConstraints = false
+        shadowView.translatesAutoresizingMaskIntoConstraints = false
         return shadowView
     }()
     

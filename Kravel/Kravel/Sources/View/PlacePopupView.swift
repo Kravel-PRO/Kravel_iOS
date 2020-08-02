@@ -79,11 +79,16 @@ class PlacePopupView: UIView {
     @IBOutlet weak var contentScrollView: UIScrollView! {
         didSet {
             contentScrollView.isUserInteractionEnabled = false
+            contentScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         }
     }
     
     func setEnableScroll(_ isScroll: Bool) {
         contentScrollView.isScrollEnabled = isScroll
+    }
+    
+    private func calculateInset() {
+        
     }
         
     // MARK: - UIView Override 부분
