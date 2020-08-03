@@ -9,7 +9,6 @@
 import UIKit
 
 class HomeVC: UIViewController {
-    @IBOutlet weak var backView: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
