@@ -47,6 +47,7 @@
 		9DA80457248E9200003826B9 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA80456248E9200003826B9 /* String+Extensions.swift */; };
 		9DB03C8B24DAA6B800FF7E36 /* HomeNearPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB03C8A24DAA6B800FF7E36 /* HomeNearPlaceCell.swift */; };
 		9DB03C8D24DAB1CB00FF7E36 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB03C8C24DAB1CB00FF7E36 /* TagCell.swift */; };
+		9DB03C8F24DABF3D00FF7E36 /* HotPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB03C8E24DABF3D00FF7E36 /* HotPlaceCell.swift */; };
 		9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */; };
 		9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */; };
 		9DEDA6A924BCB70600E978F5 /* CategoryTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */; };
@@ -114,6 +115,7 @@
 		9DA80456248E9200003826B9 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		9DB03C8A24DAA6B800FF7E36 /* HomeNearPlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNearPlaceCell.swift; sourceTree = "<group>"; };
 		9DB03C8C24DAB1CB00FF7E36 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
+		9DB03C8E24DABF3D00FF7E36 /* HotPlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotPlaceCell.swift; sourceTree = "<group>"; };
 		9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTabbar.xib; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				9D7FB1ED24D00D13009A9C0A /* NearPlaceCell.swift */,
 				9DB03C8A24DAA6B800FF7E36 /* HomeNearPlaceCell.swift */,
 				9DB03C8C24DAB1CB00FF7E36 /* TagCell.swift */,
+				9DB03C8E24DABF3D00FF7E36 /* HotPlaceCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				9DEDA6AC24BCB76E00E978F5 /* CategoryTabbar.swift in Sources */,
 				9D9694D624C6D4810046CB85 /* MapVC.swift in Sources */,
 				9D014C40248C4C3600758FCC /* UIViewController+Extensions.swift in Sources */,
+				9DB03C8F24DABF3D00FF7E36 /* HotPlaceCell.swift in Sources */,
 				9DEDA6B224BCD09400E978F5 /* KCategory.swift in Sources */,
 				9D13C7F12487842E0058A7BF /* ViewController.swift in Sources */,
 				9DEDA6C024BCEEFC00E978F5 /* MovieChildVC.swift in Sources */,
