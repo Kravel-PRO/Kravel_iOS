@@ -87,18 +87,23 @@ class ContentDetailVC: UIViewController {
         }
     }
     
-    // MARK: - 포토리뷰 CollectionView 설정
-    @IBOutlet weak var photoReviewCollectionView: UICollectionView! {
+    // MARK: - 포토리뷰 뷰 설정
+    @IBOutlet weak var photoReviewView: PhotoReviewView! {
         didSet {
-            photoReviewCollectionView.dataSource = self
-            photoReviewCollectionView.delegate = self
+            setPhotoReviewLabel()
+            photoReviewView.photoReviewCollectionViewDataSource = self
+            photoReviewView.photoReviewCollectionViewDelegate = self
         }
     }
     
-    @IBOutlet weak var photoReviewCV_height_Constraint: NSLayoutConstraint!
+    private func setPhotoReviewLabel() {
+        let photoReviewAttributeText = "인기 많은 포토 리뷰".makeAttributedText([.font: UIFont.systemFont(ofSize: 18), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)])
+        photoReviewAttributeText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 18)], range: ("인기 많은 포토 리뷰" as NSString).range(of: "포토 리뷰"))
+        photoReviewView.attributeTitle = photoReviewAttributeText
+    }
     
-    lazy var photo_Item_Spacing: CGFloat = photoReviewCollectionView.frame.width / 75
-    lazy var photo_Cell_Width: CGFloat = (photoReviewCollectionView.frame.width-2*horizontal_inset-2*photo_Item_Spacing) / 3
+    lazy var photo_Item_Spacing: CGFloat = photoReviewView.frame.width / 75
+    lazy var photo_Cell_Width: CGFloat = (photoReviewView.frame.width-2*horizontal_inset-2*photo_Item_Spacing) / 3
     
     // MARK: - View 생명주기
     override func viewDidLoad() {
@@ -125,7 +130,6 @@ class ContentDetailVC: UIViewController {
     
     private func setCollectionViewHeight() {
         placeCV_height_Constarint.constant = place_Cell_Height * 3 + 16 * 2
-        photoReviewCV_height_Constraint.constant = photo_Cell_Width * 2 + 4
     }
     
     // MARK: - Set Navigation

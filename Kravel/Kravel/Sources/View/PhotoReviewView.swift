@@ -24,6 +24,7 @@ class PhotoReviewView: UIView {
             photoReviewCollectionView.delegate = photoReviewCollectionViewDelegate
         }
     }
+    
     var photoReviewCollectionViewDataSource: UICollectionViewDataSource? {
         didSet {
             photoReviewCollectionView.dataSource = photoReviewCollectionViewDataSource
@@ -35,6 +36,23 @@ class PhotoReviewView: UIView {
         didSet {
             let size = titleLabel.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    // 일반 설정
+    var title: String? {
+        didSet {
+            titleLabel.text = title
+            let size = titleLabel.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
+            titleLabel.heightAnchor.constraint(equalToConstant: size.height).isActive = true
+        }
+    }
+    
+    // Attribute에 맞춤 설정
+    var attributeTitle: NSMutableAttributedString? {
+        didSet {
+            titleLabel.attributedText = attributeTitle
+            let size = titleLabel.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
             titleLabel.heightAnchor.constraint(equalToConstant: size.height).isActive = true
         }
     }

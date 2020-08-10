@@ -11,7 +11,11 @@ import UIKit
 class PhotoReviewCell: UICollectionViewCell {
     static let identifier = "PhotoReviewCell"
     
-    @IBOutlet weak var photoImageView: UIImageView!
+    var photoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
     
     var photoImage: UIImage? {
         didSet {
@@ -21,6 +25,13 @@ class PhotoReviewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        photoImageView.frame = self.bounds
+        NSLayoutConstraint.activate([
+            photoImageView.topAnchor.constraint(equalTo: self.topAnchor),
+            photoImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            photoImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            photoImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        ])
     }
     
     override func prepareForReuse() {

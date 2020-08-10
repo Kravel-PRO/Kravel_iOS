@@ -59,16 +59,18 @@ class HomeVC: UIViewController {
             let attributeHotPlaceText = "요즘 여기가 인기 있어요!".makeAttributedText([.font: UIFont.boldSystemFont(ofSize: 18)])
             attributeHotPlaceText.addAttributes([.font: UIFont.systemFont(ofSize: 18)], range: ("요즘 여기가 인기 있어요!" as NSString).range(of: "요즘 여기가"))
             hotPlaceLabel.attributedText = attributeHotPlaceText
-            hotPlaceLabel.sizeToFit()
+            hotPlaceLabel.translatesAutoresizingMaskIntoConstraints = false
         }
     }
+    
+    @IBOutlet weak var hotPlaceLabelLeadingConstraint: NSLayoutConstraint!
     
     // 인기있는 장소 CollectionView 설정
     private var hotPlaces: [String] = ["세림픽 돼지고기 집", "세림픽 요거트 집", "세림픽 커피집", "세림픽 소고기 집"]
     
     @IBOutlet weak var hotPlaceCollectionViewHeightConstraint: NSLayoutConstraint!
     
-    func setHotPlaceCollectionViewHeight() {
+    private func setHotPlaceCollectionViewHeight() {
         let horizontalSpacing = view.frame.width / 23.44
         let lineSpacing: CGFloat = 12
         let cellWidth = hotPlaceCollectionView.frame.width - 2*horizontalSpacing
@@ -76,11 +78,34 @@ class HomeVC: UIViewController {
         hotPlaceCollectionViewHeightConstraint.constant = cellHeight * CGFloat(hotPlaces.count) + lineSpacing * CGFloat((hotPlaces.count-1))
     }
     
+    private func setHotPlaceLabelLayout() {
+        let hotPlaceSize = hotPlaceLabel.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
+        hotPlaceLabel.heightAnchor.constraint(equalToConstant: hotPlaceSize.height).isActive = true
+        hotPlaceLabelLeadingConstraint.constant = view.frame.width / 23.44
+    }
+    
     @IBOutlet weak var hotPlaceCollectionView: UICollectionView! {
         didSet {
             hotPlaceCollectionView.dataSource = self
             hotPlaceCollectionView.delegate = self
         }
+    }
+    
+    // MARK: - 포토 리뷰 뷰 설정
+    @IBOutlet weak var photoReviewView: PhotoReviewView! {
+        didSet {
+            setPhotoReviewLabel()
+            photoReviewView.photoReviewCollectionViewDelegate = self
+            photoReviewView.photoReviewCollectionViewDataSource = self
+        }
+    }
+    
+    private var photoReviewPlace: [String] = ["여기 맛집", "여기도", "요기도?", "저기도", "쩌어기도", "요오기도"]
+    
+    private func setPhotoReviewLabel() {
+        let photoReviewAttributeText = "인기 많은 포토 리뷰".makeAttributedText([.font: UIFont.systemFont(ofSize: 18), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)])
+        photoReviewAttributeText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 18)], range: ("인기 많은 포토 리뷰" as NSString).range(of: "포토 리뷰"))
+        photoReviewView.attributeTitle = photoReviewAttributeText
     }
     
     // MARK: - ViewController Override 부분
@@ -92,18 +117,21 @@ class HomeVC: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         setHotPlaceCollectionViewHeight()
+        setHotPlaceLabelLayout()
     }
 }
 
 extension HomeVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == nearPlaceCollectionView { return nearPlaces.count }
-        else { return hotPlaces.count }
+        else if collectionView == hotPlaceCollectionView { return hotPlaces.count }
+        else { return photoReviewPlace.count }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == nearPlaceCollectionView { return makeNearPlaceCell(collectionView, indexPath) }
-        else { return makeHotPlaceCell(collectionView, indexPath) }
+        else if collectionView == hotPlaceCollectionView { return makeHotPlaceCell(collectionView, indexPath) }
+        else { return makePhotoReviewCell(collectionView, indexPath) }
     }
     
     private func makeNearPlaceCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> HomeNearPlaceCell {
@@ -120,10 +148,14 @@ extension HomeVC: UICollectionViewDataSource {
         hotPlaceCell.clipsToBounds = true
         return hotPlaceCell
     }
+    
+    private func makePhotoReviewCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> PhotoReviewCell {
+        guard let photoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoReviewCell.identifier, for: indexPath) as? PhotoReviewCell else { return PhotoReviewCell() }
+        return photoReviewCell
+    }
 }
 
 extension HomeVC: UICollectionViewDelegate {
-    
 }
 
 extension HomeVC: UICollectionViewDelegateFlowLayout {
@@ -131,6 +163,11 @@ extension HomeVC: UICollectionViewDelegateFlowLayout {
         if collectionView == nearPlaceCollectionView {
             let width = collectionView.frame.height * 0.9
             return CGSize(width: width, height: collectionView.frame.height)
+        } else if collectionView == hotPlaceCollectionView {
+            let horizontalSpacing = view.frame.width / 23.44
+            let cellWidth = collectionView.frame.width - 2*horizontalSpacing
+            let cellHeight = cellWidth * 0.46
+            return CGSize(width: cellWidth, height: cellHeight)
         } else {
             let horizontalSpacing = view.frame.width / 23.44
             let cellWidth = collectionView.frame.width - 2*horizontalSpacing
