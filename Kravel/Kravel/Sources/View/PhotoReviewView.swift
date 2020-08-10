@@ -19,6 +19,8 @@ class PhotoReviewView: UIView {
         }
     }
     
+    @IBOutlet weak var photoReviewCollectionViewLeadingConstraint: NSLayoutConstraint!
+    
     var photoReviewCollectionViewDelegate: UICollectionViewDelegate? {
         didSet {
             photoReviewCollectionView.delegate = photoReviewCollectionViewDelegate
@@ -34,7 +36,6 @@ class PhotoReviewView: UIView {
     // MARK: - Title Label 설정
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {
-            let size = titleLabel.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
         }
     }

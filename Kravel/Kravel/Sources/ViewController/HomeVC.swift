@@ -9,7 +9,6 @@
 import UIKit
 
 class HomeVC: UIViewController {
-    
     // MARK: - 제일 위 Title View 설정
     @IBOutlet weak var titleStackView: UIStackView!
     
@@ -108,6 +107,11 @@ class HomeVC: UIViewController {
         photoReviewView.attributeTitle = photoReviewAttributeText
     }
     
+    private func setPhotoReviewLabelLayout() {
+        let horizontalSpacing = view.frame.width / 23.44
+        photoReviewView.photoReviewCollectionViewLeadingConstraint.constant = horizontalSpacing
+    }
+    
     // MARK: - ViewController Override 부분
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,6 +122,7 @@ class HomeVC: UIViewController {
         super.viewWillLayoutSubviews()
         setHotPlaceCollectionViewHeight()
         setHotPlaceLabelLayout()
+        setPhotoReviewLabelLayout()
     }
 }
 
@@ -151,6 +156,7 @@ extension HomeVC: UICollectionViewDataSource {
     
     private func makePhotoReviewCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> PhotoReviewCell {
         guard let photoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoReviewCell.identifier, for: indexPath) as? PhotoReviewCell else { return PhotoReviewCell() }
+        photoReviewCell.photoImage = UIImage(named: "yuna2")
         return photoReviewCell
     }
 }
@@ -170,23 +176,36 @@ extension HomeVC: UICollectionViewDelegateFlowLayout {
             return CGSize(width: cellWidth, height: cellHeight)
         } else {
             let horizontalSpacing = view.frame.width / 23.44
-            let cellWidth = collectionView.frame.width - 2*horizontalSpacing
-            let cellHeight = cellWidth * 0.46
-            return CGSize(width: cellWidth, height: cellHeight)
+            let cellWidth = (collectionView.frame.width - horizontalSpacing*2 - 5*2) / 3
+            return CGSize(width: cellWidth, height: cellWidth)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        if collectionView == nearPlaceCollectionView || collectionView == hotPlaceCollectionView {
+//            let horizontalSpacing = view.frame.width / 23.44
+//            return UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: horizontalSpacing)
+//        } else {
+//            return .zero
+//        }
         let horizontalSpacing = view.frame.width / 23.44
         return UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: horizontalSpacing)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        if collectionView == nearPlaceCollectionView || collectionView == hotPlaceCollectionView {
+            return 10
+        } else {
+            return 4
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        if collectionView == nearPlaceCollectionView || collectionView == hotPlaceCollectionView {
+            return 0
+        } else {
+            return 4
+        }
     }
 }
 

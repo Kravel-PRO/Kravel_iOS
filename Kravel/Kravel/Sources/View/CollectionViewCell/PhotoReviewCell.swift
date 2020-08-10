@@ -13,6 +13,7 @@ class PhotoReviewCell: UICollectionViewCell {
     
     var photoImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -23,19 +24,29 @@ class PhotoReviewCell: UICollectionViewCell {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setInitView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setInitView()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        photoImageView.image = nil
+    }
+    
+    private func setInitView() {
         photoImageView.frame = self.bounds
+        self.contentView.addSubview(photoImageView)
         NSLayoutConstraint.activate([
             photoImageView.topAnchor.constraint(equalTo: self.topAnchor),
             photoImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             photoImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             photoImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        photoImageView.image = nil
     }
 }
