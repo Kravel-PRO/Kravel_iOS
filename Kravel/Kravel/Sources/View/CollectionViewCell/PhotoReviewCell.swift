@@ -24,6 +24,10 @@ class PhotoReviewCell: UICollectionViewCell {
         }
     }
     
+    var indexPath: IndexPath?
+    
+    var moreView: UIView?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setInitView()
@@ -37,6 +41,8 @@ class PhotoReviewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         photoImageView.image = nil
+        moreView?.removeFromSuperview()
+        moreView = nil
     }
     
     private func setInitView() {
@@ -47,6 +53,32 @@ class PhotoReviewCell: UICollectionViewCell {
             photoImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             photoImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             photoImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        ])
+    }
+    
+    func addMoreView() {
+        moreView = UIView()
+        moreView?.translatesAutoresizingMaskIntoConstraints = false
+        moreView?.backgroundColor = UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 0.85)
+        guard let moreView = self.moreView else { return }
+        self.contentView.addSubview(moreView)
+        NSLayoutConstraint.activate([
+            moreView.topAnchor.constraint(equalTo: self.topAnchor),
+            moreView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            moreView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            moreView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        ])
+        
+        let moreLabel = UILabel()
+        moreLabel.translatesAutoresizingMaskIntoConstraints = false
+        moreLabel.textColor = .white
+        moreLabel.font = UIFont.systemFont(ofSize: 15)
+        moreLabel.text = "더 보기"
+        moreLabel.sizeToFit()
+        moreView.addSubview(moreLabel)
+        NSLayoutConstraint.activate([
+            moreLabel.centerXAnchor.constraint(equalTo: moreView.centerXAnchor),
+            moreLabel.centerYAnchor.constraint(equalTo: moreView.centerYAnchor)
         ])
     }
 }

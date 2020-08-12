@@ -157,6 +157,7 @@ extension HomeVC: UICollectionViewDataSource {
     private func makePhotoReviewCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> PhotoReviewCell {
         guard let photoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoReviewCell.identifier, for: indexPath) as? PhotoReviewCell else { return PhotoReviewCell() }
         photoReviewCell.photoImage = UIImage(named: "yuna2")
+        if indexPath.row == 5 { photoReviewCell.addMoreView() }
         return photoReviewCell
     }
 }
@@ -182,12 +183,6 @@ extension HomeVC: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        if collectionView == nearPlaceCollectionView || collectionView == hotPlaceCollectionView {
-//            let horizontalSpacing = view.frame.width / 23.44
-//            return UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: horizontalSpacing)
-//        } else {
-//            return .zero
-//        }
         let horizontalSpacing = view.frame.width / 23.44
         return UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: horizontalSpacing)
     }

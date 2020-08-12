@@ -69,6 +69,19 @@ class PlacePopupView: UIView {
     
     @IBOutlet weak var buttonStackView: UIStackView!
     
+    private var buttonDivideView: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .veryLightPink
+        return view
+    }()
+    
+    private func setDivideViewLayout() {
+        NSLayoutConstraint.activate([
+            
+        ])
+    }
+    
     // MARK: - 사진 리뷰 View을 담는 Container View 설정
     @IBOutlet weak var photoReviewContainerView: PhotoReviewView!
     
@@ -86,20 +99,18 @@ class PlacePopupView: UIView {
     func setEnableScroll(_ isScroll: Bool) {
         contentScrollView.isScrollEnabled = isScroll
     }
-    
-    private func calculateInset() {
-        
-    }
         
     // MARK: - UIView Override 부분
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadXib()
+        buttonStackContainerView.addSubview(buttonDivideView)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadXib()
+        buttonStackContainerView.addSubview(buttonDivideView)
     }
     
     private func loadXib() {
