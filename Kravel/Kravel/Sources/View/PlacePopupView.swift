@@ -71,8 +71,8 @@ class PlacePopupView: UIView {
     
     var placeLocation: String? {
         didSet {
-            placeNameLabel.text = placeLocation
-            placeNameLabel.sizeToFit()
+            placeLocationLabel.text = placeLocation
+            placeLocationLabel.sizeToFit()
         }
     }
     

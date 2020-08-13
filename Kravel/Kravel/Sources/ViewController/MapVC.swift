@@ -71,7 +71,11 @@ class MapVC: UIViewController {
         addGesture()
         self.view.addSubview(placeShadowView)
         placeShadowView.addSubview(placePopupView)
+        
+        // 임시로 설정 - 나중에 장소 눌렀을 때 설정될 수 있게 바꾸기
         placePopupView.placeImage = UIImage(named: "back")
+        placePopupView.placeName = "호텔 세느장"
+        placePopupView.placeLocation = "서울 종로구 돈화문로11길 28-5 (낙원동)"
     }
     
     // POPUp View AutoLayout 지정
@@ -91,6 +95,8 @@ class MapVC: UIViewController {
     // PopupView PanGesture 구현
     var panGesuture: UIPanGestureRecognizer!
     
+    private var isPanning: Bool = false
+    
     private func addGesture() {
         panGesuture = UIPanGestureRecognizer(target: self, action: #selector(movePanelView(_:)))
         placeShadowView.addGestureRecognizer(panGesuture)
@@ -101,6 +107,30 @@ class MapVC: UIViewController {
         let changeY = transition.y + placeShadowView.transform.ty
         placeShadowView.transform = CGAffineTransform(translationX: 0, y: changeY)
         panGesuture.setTranslation(.zero, in: placeShadowView)
+        
+        if panGesuture.state == .ended {
+            if !isPanning, changeY < -(self.view.frame.height / 16.9) {
+                isPanning = true
+                placePopupView.setEnableScroll(true)
+                UIView.animate(withDuration: 0.4) {
+                    self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -400)
+                }
+            } else if !isPanning, changeY >= -(self.view.frame.height / 16.9) {
+                UIView.animate(withDuration: 0.4) {
+                    self.placeShadowView.transform = .identity
+                }
+            } else if isPanning, 400 - changeY.magnitude > self.view.frame.height / 16.9 {
+                isPanning = false
+                placePopupView.setEnableScroll(false)
+                UIView.animate(withDuration: 0.4) {
+                    self.placeShadowView.transform = .identity
+                }
+            } else {
+                UIView.animate(withDuration: 0.4) {
+                    self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -400)
+                }
+            }
+        }
     }
     
     // MARK: - ViewController Override 부분
