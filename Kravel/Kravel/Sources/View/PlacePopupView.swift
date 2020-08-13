@@ -17,10 +17,6 @@ class PlacePopupView: UIView {
         }
     }
     
-    func addGestureInXib(_ gesture: UIGestureRecognizer) {
-        view.addGestureRecognizer(gesture)
-    }
-    
     // MARK: - 팝업 뷰 Indicator 부분 설정
     @IBOutlet weak var indicatorView: UIView! {
         didSet {
@@ -111,7 +107,6 @@ class PlacePopupView: UIView {
             setPhotoReviewLabel()
             photoReviewContainerView.photoReviewCollectionViewDelegate = self
             photoReviewContainerView.photoReviewCollectionViewDataSource = self
-            
         }
     }
     
@@ -128,8 +123,7 @@ class PlacePopupView: UIView {
     // MARK: - Main ScrollView 설정
     @IBOutlet weak var contentScrollView: UIScrollView! {
         didSet {
-            contentScrollView.isUserInteractionEnabled = false
-            contentScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
+            contentScrollView.isScrollEnabled = false
         }
     }
     

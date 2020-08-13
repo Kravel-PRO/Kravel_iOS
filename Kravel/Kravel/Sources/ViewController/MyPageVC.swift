@@ -12,7 +12,18 @@ class MyPageVC: UIViewController {
     
     // MARK: - Name Label 초기 설정
     @IBOutlet weak var backView: UIView!
-    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var nameLabel: UILabel! {
+        // 임시
+        didSet {
+            nameLabel.text =
+            """
+            뭔가 OOO님 어쩌구 하는
+            멘트가 하나 있으면 좋겠다.
+            """
+        }
+    }
+    
     @IBOutlet weak var nameBottomConstraint: NSLayoutConstraint!
     
     var name: String? = "펭수" {
@@ -32,6 +43,9 @@ class MyPageVC: UIViewController {
         nameBottomConstraint.constant = backView.frame.height / 5.41
     }
     
+    // MARK: - 내 포토 리뷰 / 스크랩 뷰 설정
+    
+    
     // MARK: - Menu 화면 설정
     @IBOutlet weak var menuTableView: UITableView! {
         didSet {
@@ -41,6 +55,13 @@ class MyPageVC: UIViewController {
         }
     }
     
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    
+    private func setTableViewHeightConstraint() {
+        tableViewHeightConstraint.constant = menuTableView.frame.width / 6.69 * CGFloat(MyPageMenu.allCases.count)
+    }
+    
+    // MARK: - ViewController Override 부분
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -51,23 +72,30 @@ class MyPageVC: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        setTableViewHeightConstraint()
+    }
 }
 
 extension MyPageVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(MyPageMenu.allCases.count)
         return MyPageMenu.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let myPageCell = tableView.dequeueReusableCell(withIdentifier: "MyPageCell") as? MyPageCell else { return UITableViewCell() }
-        myPageCell.menu = MyPageMenu(rawValue: indexPath.row)?.getMenuLabel()
+        myPageCell.menuName = MyPageMenu(rawValue: indexPath.row)?.getMenuLabel()
+        
+        guard let menuImageName = MyPageMenu(rawValue: indexPath.row)?.getImageName() else { return UITableViewCell() }
+        myPageCell.menuImage = UIImage(named: menuImageName)
         return myPageCell
     }
 }
 
 extension MyPageVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.width * 0.15
+        return tableView.frame.width / 6.69
     }
 }

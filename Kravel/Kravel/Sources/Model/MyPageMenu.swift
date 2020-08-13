@@ -24,4 +24,14 @@ enum MyPageMenu: Int, CaseIterable {
         case .logout: return "로그아웃"
         }
     }
+    
+    func getImageName() -> String {
+        switch self {
+        case .editMyInform: return "icModify"
+        case .editMyPW: return "icPassword"
+        case .setLanguage: return "icLang"
+        case .report: return "icReport"
+        case .logout: return "icLogout"
+        }
+    }
 }

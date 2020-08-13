@@ -67,10 +67,16 @@ class MapVC: UIViewController {
         return indicatorViewHeight + imageHeight + spacing + tabbarHeight
     }
     
+    private func calculateBottomInset() -> CGFloat {
+        let spacingHeight = self.view.frame.height - calculateInitPanelViewHeight() - 400
+        return spacingHeight
+    }
+    
     private func setPlacePopupView() {
         addGesture()
         self.view.addSubview(placeShadowView)
         placeShadowView.addSubview(placePopupView)
+        placePopupView.contentScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: calculateBottomInset(), right: 0)
         
         // 임시로 설정 - 나중에 장소 눌렀을 때 설정될 수 있게 바꾸기
         placePopupView.placeImage = UIImage(named: "back")
@@ -102,11 +108,14 @@ class MapVC: UIViewController {
         placeShadowView.addGestureRecognizer(panGesuture)
     }
     
+    // Pan Action에 따라 뷰 Interaction
     @objc func movePanelView(_ sender: Any) {
         let transition = panGesuture.translation(in: placeShadowView)
         let changeY = transition.y + placeShadowView.transform.ty
         placeShadowView.transform = CGAffineTransform(translationX: 0, y: changeY)
         panGesuture.setTranslation(.zero, in: placeShadowView)
+        
+        
         
         if panGesuture.state == .ended {
             if !isPanning, changeY < -(self.view.frame.height / 16.9) {
@@ -122,6 +131,7 @@ class MapVC: UIViewController {
             } else if isPanning, 400 - changeY.magnitude > self.view.frame.height / 16.9 {
                 isPanning = false
                 placePopupView.setEnableScroll(false)
+                placePopupView.contentScrollView.contentOffset = CGPoint(x: 0, y: 0)
                 UIView.animate(withDuration: 0.4) {
                     self.placeShadowView.transform = .identity
                 }

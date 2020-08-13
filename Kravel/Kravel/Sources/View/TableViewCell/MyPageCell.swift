@@ -10,15 +10,27 @@ import UIKit
 
 class MyPageCell: UITableViewCell {
     static let identifier = ""
-
-    @IBOutlet weak var menuLabel: UILabel!
     
-    var menu: String? {
+    // MARK: - 메뉴 이미지 설정
+    @IBOutlet weak var menuImageView: UIImageView!
+    
+    var menuImage: UIImage? {
         didSet {
-            menuLabel.text = menu
+            menuImageView.image = menuImage
         }
     }
     
+    // MARK: - 메뉴 라벨 설정
+    @IBOutlet weak var menuLabel: UILabel!
+    
+    var menuName: String? {
+        didSet {
+            menuLabel.text = menuName
+            menuLabel.sizeToFit()
+        }
+    }
+    
+    // MARK: - UITableViewCell Override 부분
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
