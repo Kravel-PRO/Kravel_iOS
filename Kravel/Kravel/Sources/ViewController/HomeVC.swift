@@ -177,7 +177,7 @@ extension HomeVC: UICollectionViewDelegateFlowLayout {
             return CGSize(width: cellWidth, height: cellHeight)
         } else {
             let horizontalSpacing = view.frame.width / 23.44
-            let cellWidth = (collectionView.frame.width - horizontalSpacing*2 - 5*2) / 3
+            let cellWidth = (collectionView.frame.width - horizontalSpacing*2 - 4*2) / 3
             return CGSize(width: cellWidth, height: cellWidth)
         }
     }

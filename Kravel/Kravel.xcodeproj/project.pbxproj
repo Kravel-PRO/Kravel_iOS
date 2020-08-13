@@ -41,6 +41,8 @@
 		9D8C0A2524BC515A005C1F58 /* Tabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D8C0A2424BC515A005C1F58 /* Tabbar.storyboard */; };
 		9D8C0A2724BC525C005C1F58 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8C0A2624BC525C005C1F58 /* HomeVC.swift */; };
 		9D94BDF224BE2C710027B9BF /* ContentDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D94BDF124BE2C710027B9BF /* ContentDetailVC.swift */; };
+		9D96005424E52484007995EE /* BackgroundTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D96005224E52484007995EE /* BackgroundTagCell.swift */; };
+		9D96005524E52484007995EE /* BackgroundTagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D96005324E52484007995EE /* BackgroundTagCell.xib */; };
 		9D9694CD24C5E7570046CB85 /* PlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9694CC24C5E7570046CB85 /* PlaceCell.swift */; };
 		9D9694CF24C623F00046CB85 /* PhotoReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9694CE24C623F00046CB85 /* PhotoReviewCell.swift */; };
 		9D9694D624C6D4810046CB85 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9694D524C6D4800046CB85 /* MapVC.swift */; };
@@ -109,6 +111,8 @@
 		9D8C0A2424BC515A005C1F58 /* Tabbar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tabbar.storyboard; sourceTree = "<group>"; };
 		9D8C0A2624BC525C005C1F58 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		9D94BDF124BE2C710027B9BF /* ContentDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailVC.swift; sourceTree = "<group>"; };
+		9D96005224E52484007995EE /* BackgroundTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTagCell.swift; sourceTree = "<group>"; };
+		9D96005324E52484007995EE /* BackgroundTagCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BackgroundTagCell.xib; sourceTree = "<group>"; };
 		9D9694CC24C5E7570046CB85 /* PlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCell.swift; sourceTree = "<group>"; };
 		9D9694CE24C623F00046CB85 /* PhotoReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoReviewCell.swift; sourceTree = "<group>"; };
 		9D9694D524C6D4800046CB85 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
@@ -265,6 +269,7 @@
 				9D7FB1F724D164AF009A9C0A /* PhotoReviewView.xib */,
 				9D7FB1F324D15DE7009A9C0A /* SubLocationView.xib */,
 				9D7FB1FB24D16A15009A9C0A /* PlacePopupView.xib */,
+				9D96005324E52484007995EE /* BackgroundTagCell.xib */,
 			);
 			path = Xib;
 			sourceTree = "<group>";
@@ -320,6 +325,7 @@
 				9DB03C8A24DAA6B800FF7E36 /* HomeNearPlaceCell.swift */,
 				9DB03C8C24DAB1CB00FF7E36 /* TagCell.swift */,
 				9DB03C8E24DABF3D00FF7E36 /* HotPlaceCell.swift */,
+				9D96005224E52484007995EE /* BackgroundTagCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -401,6 +407,7 @@
 				9D13C7F42487842E0058A7BF /* Main.storyboard in Resources */,
 				9D7FB1F424D15DE7009A9C0A /* SubLocationView.xib in Resources */,
 				9D13C80F248795E40058A7BF /* LoginTextView.xib in Resources */,
+				9D96005524E52484007995EE /* BackgroundTagCell.xib in Resources */,
 				9DEDA6B024BCC74300E978F5 /* CategoryCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,6 +439,7 @@
 				9D9694CF24C623F00046CB85 /* PhotoReviewCell.swift in Sources */,
 				9D7FB1EE24D00D13009A9C0A /* NearPlaceCell.swift in Sources */,
 				9D49E8BB24C83378007CD948 /* MyPageCell.swift in Sources */,
+				9D96005424E52484007995EE /* BackgroundTagCell.swift in Sources */,
 				9D5E3EB724BD952200BA4E5F /* SearchCell.swift in Sources */,
 				9DEDA6AC24BCB76E00E978F5 /* CategoryTabbar.swift in Sources */,
 				9D9694D624C6D4810046CB85 /* MapVC.swift in Sources */,

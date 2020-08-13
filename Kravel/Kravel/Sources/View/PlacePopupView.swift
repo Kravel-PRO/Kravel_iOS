@@ -29,7 +29,12 @@ class PlacePopupView: UIView {
     }
     
     // MARK: - 장소 Image View 설정
-    @IBOutlet weak var placeImageView: UIImageView!
+    @IBOutlet weak var placeImageView: UIImageView! {
+        didSet {
+            placeImageView.layer.cornerRadius = placeImageView.frame.width / 23
+            placeImageView.clipsToBounds = true
+        }
+    }
     
     var placeImage: UIImage? {
         didSet {
@@ -47,6 +52,15 @@ class PlacePopupView: UIView {
         }
     }
     
+    // MARK: - 장소별 태그 설정
+    @IBOutlet weak var placeTagCollectionView: UICollectionView! {
+        didSet {
+            
+        }
+    }
+    
+    var placeTags: [String] = ["호텔 델루나, 아이유, 여진구"]
+    
     // MARK: - 장소 위치 Label 설정
     @IBOutlet weak var placeLocationLabel: UILabel!
     
@@ -63,12 +77,13 @@ class PlacePopupView: UIView {
             buttonStackContainerView.layer.cornerRadius = buttonStackContainerView.frame.width / 20
             buttonStackContainerView.clipsToBounds = false
             buttonStackContainerView.layer.borderWidth = 1
-            buttonStackContainerView.layer.borderColor = UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0).cgColor
+            buttonStackContainerView.layer.borderColor = UIColor.veryLightPink.cgColor
         }
     }
     
     @IBOutlet weak var buttonStackView: UIStackView!
     
+    // StackView 사이 나누는 화면
     private var buttonDivideView: UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -78,12 +93,28 @@ class PlacePopupView: UIView {
     
     private func setDivideViewLayout() {
         NSLayoutConstraint.activate([
-            
+            buttonDivideView.centerXAnchor.constraint(equalTo: buttonStackContainerView.centerXAnchor),
+            buttonDivideView.centerYAnchor.constraint(equalTo: buttonStackContainerView.centerYAnchor),
+            buttonDivideView.widthAnchor.constraint(equalToConstant: 1),
+            buttonDivideView.heightAnchor.constraint(equalTo: buttonStackContainerView.heightAnchor, multiplier: 0.48)
         ])
     }
     
     // MARK: - 사진 리뷰 View을 담는 Container View 설정
-    @IBOutlet weak var photoReviewContainerView: PhotoReviewView!
+    @IBOutlet weak var photoReviewContainerView: PhotoReviewView! {
+        didSet {
+            setPhotoReviewLabel()
+            photoReviewContainerView.photoReviewCollectionViewDelegate = self
+            photoReviewContainerView.photoReviewCollectionViewDataSource = self
+        }
+    }
+    
+    var photoReviewData: [String] = ["아아", "여기 장소", "너무 좋다", "여기도 좋네?", "여기도 와봐", "오 여기도?"]
+    
+    private func setPhotoReviewLabel() {
+        let photoReviewAttributeText = "포토 리뷰".makeAttributedText([.font: UIFont.boldSystemFont(ofSize: 16), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)])
+        photoReviewContainerView.attributeTitle = photoReviewAttributeText
+    }
     
     // MARK: - 장소 위치를 나타내는 View을 담는 Container View 설정
     @IBOutlet weak var SubLocationContainerView: SubLocationView!
@@ -92,7 +123,7 @@ class PlacePopupView: UIView {
     @IBOutlet weak var contentScrollView: UIScrollView! {
         didSet {
             contentScrollView.isUserInteractionEnabled = false
-            contentScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
+            contentScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
         }
     }
     
@@ -105,12 +136,14 @@ class PlacePopupView: UIView {
         super.init(frame: frame)
         loadXib()
         buttonStackContainerView.addSubview(buttonDivideView)
+        setDivideViewLayout()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadXib()
         buttonStackContainerView.addSubview(buttonDivideView)
+        setDivideViewLayout()
     }
     
     private func loadXib() {
@@ -119,5 +152,54 @@ class PlacePopupView: UIView {
         self.addSubview(view)
         self.bringSubviewToFront(view)
         view.isUserInteractionEnabled = true
+    }
+}
+
+extension PlacePopupView: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photoReviewData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return makePhotoReviewCell(collectionView, indexPath)
+    }
+    
+    private func makeTagCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> BackgroundTagCell {
+        guard let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: BackgroundTagCell.identifier, for: indexPath) as? BackgroundTagCell else { return BackgroundTagCell() }
+        tagCell.tagTitle = "#\(placeTags[indexPath.row])"
+        return tagCell
+    }
+    
+    private func makePhotoReviewCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> PhotoReviewCell {
+        guard let photoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoReviewCell.identifier, for: indexPath) as? PhotoReviewCell else { return PhotoReviewCell() }
+        
+        photoReviewCell.photoImage = UIImage(named: "yuna2")
+        if indexPath.row == 5 { photoReviewCell.addMoreView() }
+        return photoReviewCell
+    }
+}
+
+extension PlacePopupView: UICollectionViewDelegate {
+    
+}
+
+extension PlacePopupView: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let horizontalSpacing = self.frame.width / 23.44
+        let cellWidth = (collectionView.frame.width - horizontalSpacing*2 - 4*2) / 3
+        return CGSize(width: cellWidth, height: cellWidth)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let horizontalSpacing = self.frame.width / 23.44
+        return UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: horizontalSpacing)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 4
     }
 }

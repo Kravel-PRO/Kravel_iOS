@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoReviewView" customModule="Kravel" customModuleProvider="target">
             <connections>
                 <outlet property="photoReviewCollectionView" destination="3ot-ET-TR5" id="twA-2Q-QUF"/>
+                <outlet property="photoReviewCollectionViewHeightConstraint" destination="X5z-7l-s4e" id="an2-Cl-gmS"/>
                 <outlet property="photoReviewCollectionViewLeadingConstraint" destination="Dmd-wC-MK4" id="wDA-iN-7d9"/>
                 <outlet property="titleLabel" destination="1Zg-0Z-RCk" id="6Uz-bv-xOw"/>
             </connections>
@@ -25,9 +26,12 @@
                     <color key="textColor" red="0.15294117647058825" green="0.15294117647058825" blue="0.15294117647058825" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="3ot-ET-TR5">
-                    <rect key="frame" x="0.0" y="47.333333333333329" width="375" height="217.66666666666669"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="3ot-ET-TR5">
+                    <rect key="frame" x="0.0" y="47.333333333333343" width="375" height="226.00000000000003"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="226" id="X5z-7l-s4e"/>
+                    </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YVD-QD-7Go">
                         <size key="itemSize" width="128" height="128"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -43,7 +47,6 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="3ot-ET-TR5" secondAttribute="trailing" id="Owo-dU-ehX"/>
                 <constraint firstItem="1Zg-0Z-RCk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="cGB-Bg-48e"/>
                 <constraint firstItem="3ot-ET-TR5" firstAttribute="top" secondItem="1Zg-0Z-RCk" secondAttribute="bottom" constant="12" id="ipS-eC-NB0"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="3ot-ET-TR5" secondAttribute="bottom" constant="24" id="tid-Df-Z3F"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

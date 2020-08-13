@@ -71,6 +71,7 @@ class MapVC: UIViewController {
         addGesture()
         self.view.addSubview(placeShadowView)
         placeShadowView.addSubview(placePopupView)
+        placePopupView.placeImage = UIImage(named: "back")
     }
     
     // POPUp View AutoLayout 지정

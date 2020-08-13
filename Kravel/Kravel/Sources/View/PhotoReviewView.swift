@@ -33,6 +33,15 @@ class PhotoReviewView: UIView {
         }
     }
     
+    // CollectionView Height 그림에 맞게 설정
+    @IBOutlet weak var photoReviewCollectionViewHeightConstraint: NSLayoutConstraint!
+    
+    private func calculateCollectionViewHeight() {
+        let horizontal_inset = photoReviewCollectionView.frame.width / 23.44
+        let cellWidth = (photoReviewCollectionView.frame.width - horizontal_inset*2 - 4*2) / 3
+        photoReviewCollectionViewHeightConstraint.constant = cellWidth * 2 + 4
+    }
+    
     // MARK: - Title Label 설정
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {
@@ -62,11 +71,13 @@ class PhotoReviewView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadXib()
+        calculateCollectionViewHeight()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadXib()
+        calculateCollectionViewHeight()
     }
 
     private func loadXib() {

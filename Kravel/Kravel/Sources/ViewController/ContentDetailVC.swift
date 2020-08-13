@@ -102,8 +102,7 @@ class ContentDetailVC: UIViewController {
         photoReviewView.attributeTitle = photoReviewAttributeText
     }
     
-    lazy var photo_Item_Spacing: CGFloat = photoReviewView.frame.width / 75
-    lazy var photo_Cell_Width: CGFloat = (photoReviewView.frame.width-2*horizontal_inset-2*photo_Item_Spacing) / 3
+    lazy var photo_Cell_Width: CGFloat = (photoReviewView.frame.width-2*horizontal_inset-2*4) / 3
     
     // MARK: - View 생명주기
     override func viewDidLoad() {
@@ -175,7 +174,10 @@ extension ContentDetailVC: UICollectionViewDataSource {
 extension ContentDetailVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == placeCollectionView { return CGSize(width: place_Cell_Width, height: place_Cell_Height) }
-        else { return CGSize(width: photo_Cell_Width, height: photo_Cell_Width) }
+        else {
+            let cellWidth = (self.view.frame.width - 2*horizontal_inset - 4*2) / 3
+            return CGSize(width: cellWidth, height: cellWidth)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -189,6 +191,6 @@ extension ContentDetailVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         if collectionView == placeCollectionView { return place_item_Spacing }
-        else { return photo_Item_Spacing }
+        else { return 4 }
     }
 }

@@ -93,10 +93,6 @@ extension CategoryTabbar: UICollectionViewDataSource {
 extension CategoryTabbar: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.scrollToIndex(to: indexPath.row)
-//        indicatorLeadingConstaraint.constant = CGFloat(indexPath.row) * collectionView.frame.width/2
-//        UIView.animate(withDuration: 0.2) {
-//            self.layoutIfNeeded()
-//        }
     }
 }
 

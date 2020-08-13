@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -28,7 +28,8 @@
                     <rect key="frame" x="16" y="47.333333333333343" width="343" height="186"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="2ff-2w-boJ" secondAttribute="height" multiplier="343:186" id="Jv8-NM-prY"/>
+                        <constraint firstAttribute="height" constant="186" id="Ewn-jH-Mcg"/>
+                        <constraint firstAttribute="width" secondItem="2ff-2w-boJ" secondAttribute="height" multiplier="343:186" id="NS5-vN-fr3"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UhN-Fh-iY5">
@@ -40,14 +41,12 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
+                <constraint firstItem="egh-4j-jmh" firstAttribute="leading" secondItem="2ff-2w-boJ" secondAttribute="leading" id="5Ng-La-Vbh"/>
                 <constraint firstItem="egh-4j-jmh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="Gqf-db-mQ9"/>
                 <constraint firstItem="2ff-2w-boJ" firstAttribute="top" secondItem="egh-4j-jmh" secondAttribute="bottom" constant="12" id="bHU-UQ-bRR"/>
-                <constraint firstItem="2ff-2w-boJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="dbp-Jv-scm"/>
-                <constraint firstItem="egh-4j-jmh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="hdp-9j-X2i"/>
                 <constraint firstItem="UhN-Fh-iY5" firstAttribute="top" secondItem="2ff-2w-boJ" secondAttribute="bottom" constant="12" id="qH5-6A-pCU"/>
                 <constraint firstItem="2ff-2w-boJ" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="qOg-WC-nqu"/>
                 <constraint firstItem="UhN-Fh-iY5" firstAttribute="leading" secondItem="2ff-2w-boJ" secondAttribute="leading" id="ttn-SI-Etp"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2ff-2w-boJ" secondAttribute="trailing" constant="16" id="y3T-U5-WTU"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
