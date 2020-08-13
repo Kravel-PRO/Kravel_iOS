@@ -55,11 +55,16 @@ class PlacePopupView: UIView {
     // MARK: - 장소별 태그 설정
     @IBOutlet weak var placeTagCollectionView: UICollectionView! {
         didSet {
-            
+            placeTagCollectionView.register(BackgroundTagCell.self, forCellWithReuseIdentifier: BackgroundTagCell.identifier)
+            placeTagCollectionView.dataSource = self
+            if let layout = placeTagCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+                layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+                layout.minimumLineSpacing = 4
+            }
         }
     }
     
-    var placeTags: [String] = ["호텔 델루나, 아이유, 여진구"]
+    var placeTags: [String] = ["호텔 델루나", "아이유", "여진구"]
     
     // MARK: - 장소 위치 Label 설정
     @IBOutlet weak var placeLocationLabel: UILabel!
@@ -106,6 +111,7 @@ class PlacePopupView: UIView {
             setPhotoReviewLabel()
             photoReviewContainerView.photoReviewCollectionViewDelegate = self
             photoReviewContainerView.photoReviewCollectionViewDataSource = self
+            
         }
     }
     
@@ -157,16 +163,20 @@ class PlacePopupView: UIView {
 
 extension PlacePopupView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photoReviewData.count
+        if collectionView == placeTagCollectionView { return placeTags.count }
+        else { return photoReviewData.count }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return makePhotoReviewCell(collectionView, indexPath)
+        if collectionView == placeTagCollectionView { return makeTagCell(collectionView, indexPath) }
+        else { return makePhotoReviewCell(collectionView, indexPath) }
     }
     
     private func makeTagCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> BackgroundTagCell {
         guard let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: BackgroundTagCell.identifier, for: indexPath) as? BackgroundTagCell else { return BackgroundTagCell() }
         tagCell.tagTitle = "#\(placeTags[indexPath.row])"
+        tagCell.layer.cornerRadius = tagCell.frame.width / 7.22
+        tagCell.clipsToBounds = true
         return tagCell
     }
     
@@ -185,14 +195,20 @@ extension PlacePopupView: UICollectionViewDelegate {
 
 extension PlacePopupView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let horizontalSpacing = self.frame.width / 23.44
-        let cellWidth = (collectionView.frame.width - horizontalSpacing*2 - 4*2) / 3
-        return CGSize(width: cellWidth, height: cellWidth)
+        if collectionView == placeTagCollectionView { return UICollectionViewFlowLayout.automaticSize }
+        else {
+            let horizontalSpacing = self.frame.width / 23.44
+            let cellWidth = (collectionView.frame.width - horizontalSpacing*2 - 4*2) / 3
+            return CGSize(width: cellWidth, height: cellWidth)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let horizontalSpacing = self.frame.width / 23.44
-        return UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: horizontalSpacing)
+        if collectionView == placeTagCollectionView { return .zero }
+        else {
+            let horizontalSpacing = self.frame.width / 23.44
+            return UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: horizontalSpacing)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

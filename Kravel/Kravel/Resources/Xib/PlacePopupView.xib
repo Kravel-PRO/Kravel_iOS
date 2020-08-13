@@ -132,7 +132,7 @@
                                         <constraint firstAttribute="height" constant="284" id="oHj-B4-7NE"/>
                                     </constraints>
                                 </view>
-                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="lxb-pN-6vI">
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="lxb-pN-6vI">
                                     <rect key="frame" x="114.66666666666667" y="23.333333333333336" width="244.33333333333331" height="22"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
