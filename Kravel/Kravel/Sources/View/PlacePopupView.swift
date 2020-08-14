@@ -76,7 +76,7 @@ class PlacePopupView: UIView {
     @IBOutlet weak var buttonStackContainerView: UIView! {
         didSet {
             buttonStackContainerView.layer.cornerRadius = buttonStackContainerView.frame.width / 20
-            buttonStackContainerView.clipsToBounds = false
+            buttonStackContainerView.clipsToBounds = true
             buttonStackContainerView.layer.borderWidth = 1
             buttonStackContainerView.layer.borderColor = UIColor.veryLightPink.cgColor
         }

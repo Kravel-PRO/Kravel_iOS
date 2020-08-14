@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Change InfoVC-->
+        <scene sceneID="32u-5I-hmW">
+            <objects>
+                <viewController storyboardIdentifier="ChangeInfoVC" id="VI2-5c-bLY" customClass="ChangeInfoVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Hsz-ce-hSn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2QC-Ky-a17">
+                                <rect key="frame" x="15.999999999999996" y="80" width="41.666666666666657" height="19.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.070588235294117646" green="0.070588235294117646" blue="0.070588235294117646" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z3N-op-JO9">
+                                <rect key="frame" x="16" y="107.33333333333331" width="343" height="52"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="닉네임을 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OmY-EI-Kw0">
+                                        <rect key="frame" x="16" y="15.666666666666671" width="311" height="21"/>
+                                        <color key="textColor" red="0.070588235294117646" green="0.070588235294117646" blue="0.070588235294117646" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="OmY-EI-Kw0" firstAttribute="centerX" secondItem="z3N-op-JO9" secondAttribute="centerX" id="55q-vo-KiB"/>
+                                    <constraint firstAttribute="width" secondItem="z3N-op-JO9" secondAttribute="height" multiplier="343:52" id="EL7-qj-HtF"/>
+                                    <constraint firstAttribute="trailing" secondItem="OmY-EI-Kw0" secondAttribute="trailing" constant="16" id="PzJ-mL-PFc"/>
+                                    <constraint firstItem="OmY-EI-Kw0" firstAttribute="centerY" secondItem="z3N-op-JO9" secondAttribute="centerY" id="ldI-7R-qkt"/>
+                                    <constraint firstItem="OmY-EI-Kw0" firstAttribute="leading" secondItem="z3N-op-JO9" secondAttribute="leading" constant="16" id="tib-A0-iQf"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="성별" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L0h-ni-hg4">
+                                <rect key="frame" x="16" y="183.33333333333334" width="28" height="19.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.070588235294117646" green="0.070588235294117646" blue="0.070588235294117646" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="k55-3z-BTZ">
+                                <rect key="frame" x="16" y="211.66666666666663" width="343" height="89"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j3F-vC-SM7" customClass="SexButton" customModule="Kravel" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="166" height="89"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jqH-vl-Uh3" customClass="SexButton" customModule="Kravel" customModuleProvider="target">
+                                        <rect key="frame" x="177" y="0.0" width="166" height="89"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="k55-3z-BTZ" secondAttribute="height" multiplier="343:89" id="4cw-P4-wXR"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzJ-5P-hyc">
+                                <rect key="frame" x="271" y="324.66666666666669" width="88" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="회원 탈퇴하기">
+                                    <color key="titleColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJf-Yx-HCi" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
+                                <rect key="frame" x="44" y="698" width="287" height="56"/>
+                                <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="mJf-Yx-HCi" secondAttribute="height" multiplier="41:8" id="q7c-Nl-0wr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="수정 완료">
+                                    <color key="titleColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <action selector="completeEdit:" destination="VI2-5c-bLY" eventType="touchUpInside" id="47o-7E-G0H"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="VVm-Fx-acz" firstAttribute="trailing" secondItem="k55-3z-BTZ" secondAttribute="trailing" constant="16" id="5G6-ZK-RH4"/>
+                            <constraint firstItem="2QC-Ky-a17" firstAttribute="top" secondItem="VVm-Fx-acz" secondAttribute="top" constant="36" id="91T-YB-VYd"/>
+                            <constraint firstItem="z3N-op-JO9" firstAttribute="top" secondItem="2QC-Ky-a17" secondAttribute="bottom" constant="8" id="92K-jS-q8E"/>
+                            <constraint firstItem="L0h-ni-hg4" firstAttribute="top" secondItem="z3N-op-JO9" secondAttribute="bottom" constant="24" id="G30-fh-Uwu"/>
+                            <constraint firstItem="z3N-op-JO9" firstAttribute="leading" secondItem="VVm-Fx-acz" secondAttribute="leading" constant="16" id="M8Y-ao-GDs"/>
+                            <constraint firstItem="mJf-Yx-HCi" firstAttribute="centerX" secondItem="VVm-Fx-acz" secondAttribute="centerX" id="NlM-Gj-SVK"/>
+                            <constraint firstItem="VVm-Fx-acz" firstAttribute="trailing" secondItem="z3N-op-JO9" secondAttribute="trailing" constant="16" id="UhA-vU-exT"/>
+                            <constraint firstItem="lzJ-5P-hyc" firstAttribute="top" secondItem="k55-3z-BTZ" secondAttribute="bottom" constant="24" id="akP-mi-u9i"/>
+                            <constraint firstItem="2QC-Ky-a17" firstAttribute="leading" secondItem="VVm-Fx-acz" secondAttribute="leading" constant="16" id="fQB-uQ-mMu"/>
+                            <constraint firstItem="lzJ-5P-hyc" firstAttribute="trailing" secondItem="k55-3z-BTZ" secondAttribute="trailing" id="g1g-Z4-Juq"/>
+                            <constraint firstItem="VVm-Fx-acz" firstAttribute="bottom" secondItem="mJf-Yx-HCi" secondAttribute="bottom" constant="24" id="l2b-TR-zhs"/>
+                            <constraint firstItem="L0h-ni-hg4" firstAttribute="leading" secondItem="z3N-op-JO9" secondAttribute="leading" id="sKQ-4d-bKM"/>
+                            <constraint firstItem="k55-3z-BTZ" firstAttribute="leading" secondItem="VVm-Fx-acz" secondAttribute="leading" constant="16" id="v7N-Jm-DwY"/>
+                            <constraint firstItem="k55-3z-BTZ" firstAttribute="top" secondItem="L0h-ni-hg4" secondAttribute="bottom" constant="9" id="xrN-iY-9Zv"/>
+                            <constraint firstItem="mJf-Yx-HCi" firstAttribute="width" secondItem="Hsz-ce-hSn" secondAttribute="width" multiplier="0.765333" id="yXq-Qe-lfv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="VVm-Fx-acz"/>
+                    </view>
+                    <connections>
+                        <outlet property="completeButton" destination="mJf-Yx-HCi" id="dqi-bk-y0G"/>
+                        <outlet property="nicknameBackView" destination="z3N-op-JO9" id="AiA-20-3AI"/>
+                        <outlet property="nicknameTextField" destination="OmY-EI-Kw0" id="PAV-5e-JjF"/>
+                        <outletCollection property="sexButtons" destination="j3F-vC-SM7" collectionClass="NSMutableArray" id="Gl6-8Z-NS4"/>
+                        <outletCollection property="sexButtons" destination="jqH-vl-Uh3" collectionClass="NSMutableArray" id="kzc-P7-LFv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ckt-LA-1IO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-141.59999999999999" y="-168.4729064039409"/>
+        </scene>
+    </scenes>
+</document>

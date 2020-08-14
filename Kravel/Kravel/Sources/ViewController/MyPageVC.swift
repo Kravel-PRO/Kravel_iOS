@@ -73,6 +73,10 @@ class MyPageVC: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         setTableViewHeightConstraint()
@@ -97,5 +101,24 @@ extension MyPageVC: UITableViewDataSource {
 extension MyPageVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return tableView.frame.width / 6.69
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let selectedMenu = MyPageMenu(rawValue: indexPath.row) else { return }
+        switch selectedMenu {
+        case .editMyInform:
+            guard let changeInfoVC = UIStoryboard(name: "ChangeInfo", bundle: nil).instantiateViewController(withIdentifier: ChangeInfoVC.identifier) as? ChangeInfoVC else { return }
+            changeInfoVC.naviTitle = selectedMenu.getMenuLabel()
+            self.navigationController?.pushViewController(changeInfoVC, animated: true)
+            menuTableView.deselectRow(at: indexPath, animated: false)
+        case .editMyPW:
+            print("edit")
+        case .setLanguage:
+            print("set")
+        case .report:
+            print("report")
+        case .logout:
+            print("logout")
+        }
     }
 }
