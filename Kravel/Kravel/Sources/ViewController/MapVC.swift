@@ -28,10 +28,28 @@ class MapVC: UIViewController {
     // MARK: - 현재 내위치 찾기 설정
     var currentLocationButton: UIButton = {
         let currentLocationButton = UIButton()
-        currentLocationButton.setImage(UIImage(named: "icGpsInactive"), for: .normal)
+        currentLocationButton.setImage(UIImage(named: ImageKey.icGPSInActive), for: .normal)
         currentLocationButton.translatesAutoresizingMaskIntoConstraints = false
         return currentLocationButton
     }()
+    
+    private func setCurrentLocationButton() {
+        self.view.addSubview(currentLocationButton)
+    }
+    
+    // 내 위치 찾기 버튼 바뀔 때마다 Bottom Constraint 바꾸어주기
+    var currentLocationButtonBottomConstraint: NSLayoutConstraint!
+    
+    // 내 위치 찾기 버튼 초기 화면 설정
+    private func setCurrentLocationButtonLayout() {
+        currentLocationButtonBottomConstraint = currentLocationButton.bottomAnchor.constraint(equalTo: nearPlaceCollectionView.topAnchor, constant: -16)
+        NSLayoutConstraint.activate([
+            currentLocationButtonBottomConstraint,
+            currentLocationButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
+            currentLocationButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.12),
+            currentLocationButton.heightAnchor.constraint(equalTo: currentLocationButton.widthAnchor, multiplier: 1)
+        ])
+    }
     
     // MARK: - 가까운 곳 나타내는 CollectionView 초기화
     @IBOutlet weak var nearPlaceCollectionView: UICollectionView! {
@@ -177,11 +195,12 @@ class MapVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setMapView()
+        setCurrentLocationButton()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-//        setPopupViewLayout()
+        setCurrentLocationButtonLayout()
     }
 }
 
