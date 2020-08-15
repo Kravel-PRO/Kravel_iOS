@@ -41,6 +41,8 @@
 		9D8C0A2524BC515A005C1F58 /* Tabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D8C0A2424BC515A005C1F58 /* Tabbar.storyboard */; };
 		9D8C0A2724BC525C005C1F58 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8C0A2624BC525C005C1F58 /* HomeVC.swift */; };
 		9D8EA91124E7BE4B00FD5059 /* ImageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA91024E7BE4B00FD5059 /* ImageKey.swift */; };
+		9D8EA91324E85D3600FD5059 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA91224E85D3600FD5059 /* LocationManager.swift */; };
+		9D8EA91624E8911900FD5059 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D8EA91524E8911900FD5059 /* loading.json */; };
 		9D94BDF224BE2C710027B9BF /* ContentDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D94BDF124BE2C710027B9BF /* ContentDetailVC.swift */; };
 		9D96005424E52484007995EE /* BackgroundTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D96005224E52484007995EE /* BackgroundTagCell.swift */; };
 		9D96007924E5B6FE007995EE /* ChangeInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D96007824E5B6FE007995EE /* ChangeInfo.storyboard */; };
@@ -115,6 +117,8 @@
 		9D8C0A2424BC515A005C1F58 /* Tabbar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tabbar.storyboard; sourceTree = "<group>"; };
 		9D8C0A2624BC525C005C1F58 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		9D8EA91024E7BE4B00FD5059 /* ImageKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageKey.swift; sourceTree = "<group>"; };
+		9D8EA91224E85D3600FD5059 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		9D8EA91524E8911900FD5059 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = loading.json; path = ../../../../../../Downloads/loading.json; sourceTree = "<group>"; };
 		9D94BDF124BE2C710027B9BF /* ContentDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailVC.swift; sourceTree = "<group>"; };
 		9D96005224E52484007995EE /* BackgroundTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTagCell.swift; sourceTree = "<group>"; };
 		9D96007824E5B6FE007995EE /* ChangeInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChangeInfo.storyboard; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				9D13C7F5248784330058A7BF /* Assets.xcassets */,
+				9D8EA91424E890CB00FD5059 /* Lottie */,
 				9D8EA90F24E7BE0B00FD5059 /* Keys */,
 				9D13C808248784E20058A7BF /* APIService */,
 				9D13C807248784DA0058A7BF /* Xib */,
@@ -326,9 +331,18 @@
 			path = Keys;
 			sourceTree = "<group>";
 		};
+		9D8EA91424E890CB00FD5059 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				9D8EA91524E8911900FD5059 /* loading.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		9DA80453248E5962003826B9 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				9D8EA91224E85D3600FD5059 /* LocationManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -421,6 +435,7 @@
 				9D13C7F9248784330058A7BF /* LaunchScreen.storyboard in Resources */,
 				9D96007924E5B6FE007995EE /* ChangeInfo.storyboard in Resources */,
 				9D7FB1FC24D16A15009A9C0A /* PlacePopupView.xib in Resources */,
+				9D8EA91624E8911900FD5059 /* loading.json in Resources */,
 				9D13C7F6248784330058A7BF /* Assets.xcassets in Resources */,
 				9D5DBB45248D5BAD00D82D40 /* SexButton.xib in Resources */,
 				9DEDA6A924BCB70600E978F5 /* CategoryTabbar.xib in Resources */,
@@ -478,6 +493,7 @@
 				9DEDA6BC24BCEE0400E978F5 /* PagingViewCell.swift in Sources */,
 				9DB03C8D24DAB1CB00FF7E36 /* TagCell.swift in Sources */,
 				9D7FB1F024D01489009A9C0A /* UIView+Extensions.swift in Sources */,
+				9D8EA91324E85D3600FD5059 /* LocationManager.swift in Sources */,
 				9D96007B24E5B72B007995EE /* ChangeInfoVC.swift in Sources */,
 				9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */,
 				9D49E8B424C6DCBE007CD948 /* PrivateKey.swift in Sources */,

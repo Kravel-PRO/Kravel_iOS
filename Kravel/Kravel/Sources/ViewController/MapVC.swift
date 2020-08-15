@@ -9,7 +9,9 @@
 import UIKit
 import TMapSDK
 
+
 class MapVC: UIViewController {
+    // FIXME: - Naver MAP으로 바꾸어야 할듯..
     
     // MARK: - MapView 설정
     @IBOutlet weak var containerMapView: UIView!
@@ -34,7 +36,39 @@ class MapVC: UIViewController {
     }()
     
     private func setCurrentLocationButton() {
+        currentLocationButton.addTarget(self, action: #selector(searchLocation(_:)), for: .touchUpInside)
         self.view.addSubview(currentLocationButton)
+    }
+    
+    // 현재 위치
+    private var currentLocation: CLLocationCoordinate2D?
+    private var isTrackingLocation: Bool = false
+    
+    // 내 위치 찾아오기 Core Location 설정
+    private func setLocationManager() {
+        LocationManager.shared.requestAuthorization()
+        LocationManager.shared.setManager(delegate: self, accuracy: kCLLocationAccuracyBest)
+        LocationManager.shared.startTracking()
+    }
+    
+    // 내 위치 찾기 버튼 눌렀을 때
+    @objc func searchLocation(_ sender: Any) {
+        isTrackingLocation = isTrackingLocation ? false : true
+        if isTrackingLocation {
+            if let currentLocation = self.currentLocation { mapView.setCenter(currentLocation) }
+            currentLocationButton.setImage(UIImage(named: ImageKey.icGPS), for: .normal)
+        } else {
+            currentLocationButton.setImage(UIImage(named: ImageKey.icGPSInActive), for: .normal)
+        }
+    }
+    
+    private var currentLocationMarker: TMapMarker?
+    
+    private func makeMarker(location: CLLocationCoordinate2D) {
+        currentLocationMarker = TMapMarker()
+        currentLocationMarker?.position = location
+        currentLocationMarker?.title = "제목없음"
+        currentLocationMarker?.map = self.mapView
     }
     
     // 내 위치 찾기 버튼 바뀔 때마다 Bottom Constraint 바꾸어주기
@@ -42,7 +76,7 @@ class MapVC: UIViewController {
     
     // 내 위치 찾기 버튼 초기 화면 설정
     private func setCurrentLocationButtonLayout() {
-        currentLocationButtonBottomConstraint = currentLocationButton.bottomAnchor.constraint(equalTo: nearPlaceCollectionView.topAnchor, constant: -16)
+        currentLocationButtonBottomConstraint = currentLocationButton.bottomAnchor.constraint(equalTo: placeShadowView.topAnchor, constant: -16)
         NSLayoutConstraint.activate([
             currentLocationButtonBottomConstraint,
             currentLocationButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
@@ -58,6 +92,8 @@ class MapVC: UIViewController {
             nearPlaceCollectionView.delegate = self
             nearPlaceCollectionView.showsHorizontalScrollIndicator = false
             nearPlaceCollectionView.showsVerticalScrollIndicator = false
+            
+            nearPlaceCollectionView.isHidden = true
         }
     }
     
@@ -194,8 +230,10 @@ class MapVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setLocationManager()
         setMapView()
         setCurrentLocationButton()
+        showPlacePopupView()
     }
     
     override func viewWillLayoutSubviews() {
@@ -246,4 +284,22 @@ extension MapVC: UICollectionViewDelegateFlowLayout {
 }
 
 extension MapVC: UICollectionViewDelegate {
+}
+
+extension MapVC: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let currentLocation = locations.last?.coordinate else { return }
+        self.currentLocation = currentLocation
+        
+//        if self.currentLocationMarker == nil { makeMarker(location: currentLocation) }
+//        else { currentLocationMarker?.position = currentLocation }
+        
+        if isTrackingLocation {
+            mapView.setCenter(currentLocation)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
+    }
 }
