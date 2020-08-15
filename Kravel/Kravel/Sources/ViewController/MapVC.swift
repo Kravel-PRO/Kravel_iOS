@@ -25,13 +25,21 @@ class MapVC: UIViewController {
         containerMapView.addSubview(mapView)
     }
     
+    // MARK: - 현재 내위치 찾기 설정
+    var currentLocationButton: UIButton = {
+        let currentLocationButton = UIButton()
+        currentLocationButton.setImage(UIImage(named: "icGpsInactive"), for: .normal)
+        currentLocationButton.translatesAutoresizingMaskIntoConstraints = false
+        return currentLocationButton
+    }()
+    
     // MARK: - 가까운 곳 나타내는 CollectionView 초기화
     @IBOutlet weak var nearPlaceCollectionView: UICollectionView! {
         didSet {
             nearPlaceCollectionView.dataSource = self
             nearPlaceCollectionView.delegate = self
             nearPlaceCollectionView.showsHorizontalScrollIndicator = false
-            nearPlaceCollectionView.isHidden = true
+            nearPlaceCollectionView.showsVerticalScrollIndicator = false
         }
     }
     
@@ -72,16 +80,25 @@ class MapVC: UIViewController {
         return spacingHeight
     }
     
-    private func setPlacePopupView() {
+    // 새로운 장소 클릭했을 때, 뜨는 화면
+    private func showPlacePopupView() {
         addGesture()
         self.view.addSubview(placeShadowView)
         placeShadowView.addSubview(placePopupView)
+        setPopupViewLayout()
         placePopupView.contentScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: calculateBottomInset(), right: 0)
         
         // 임시로 설정 - 나중에 장소 눌렀을 때 설정될 수 있게 바꾸기
         placePopupView.placeImage = UIImage(named: "back")
         placePopupView.placeName = "호텔 세느장"
         placePopupView.placeLocation = "서울 종로구 돈화문로11길 28-5 (낙원동)"
+    }
+    
+    // 새로운 장소 클릭했을 때, PopupView 지우기
+    private func hidePlacePopupView() {
+        placeShadowView.removeGestureRecognizer(panGesuture)
+        placeShadowView.removeFromSuperview()
+        placePopupView.removeFromSuperview()
     }
     
     // POPUp View AutoLayout 지정
@@ -115,10 +132,7 @@ class MapVC: UIViewController {
         placeShadowView.transform = CGAffineTransform(translationX: 0, y: changeY)
         panGesuture.setTranslation(.zero, in: placeShadowView)
         
-        
-        
         if panGesuture.state == .ended {
-            print(changeY)
             if !isPanning, changeY < -(self.view.frame.height / 16.9) {
                 isPanning = true
                 placePopupView.setEnableScroll(true)
@@ -163,12 +177,11 @@ class MapVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setMapView()
-        setPlacePopupView()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        setPopupViewLayout()
+//        setPopupViewLayout()
     }
 }
 

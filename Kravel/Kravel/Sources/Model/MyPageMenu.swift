@@ -27,11 +27,11 @@ enum MyPageMenu: Int, CaseIterable {
     
     func getImageName() -> String {
         switch self {
-        case .editMyInform: return "icModify"
-        case .editMyPW: return "icPassword"
-        case .setLanguage: return "icLang"
-        case .report: return "icReport"
-        case .logout: return "icLogout"
+        case .editMyInform: return ImageKey.icModify
+        case .editMyPW: return ImageKey.icPassword
+        case .setLanguage: return ImageKey.icLanguage
+        case .report: return ImageKey.icReport
+        case .logout: return ImageKey.icLogout
         }
     }
 }

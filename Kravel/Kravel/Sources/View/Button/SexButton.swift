@@ -14,8 +14,8 @@ enum Sex {
     
     func getInform() -> (description: String, imageName: String) {
         switch self {
-        case .man: return ("남자", "icMaleUnclick")
-        case .woman: return ("여자", "icFemaleUnclick")
+        case .man: return ("남자", ImageKey.icMale)
+        case .woman: return ("여자", ImageKey.icFemale)
         }
     }
 }
