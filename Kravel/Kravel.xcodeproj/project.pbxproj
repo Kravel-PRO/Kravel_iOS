@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		827C4F7AD2D34AD9607ABF9D /* Pods_Kravel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82A251414545BEFDE18999AA /* Pods_Kravel.framework */; };
 		9D014C3E248C4A5E00758FCC /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D014C3D248C4A5E00758FCC /* SignupVC.swift */; };
 		9D014C40248C4C3600758FCC /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D014C3F248C4C3600758FCC /* UIViewController+Extensions.swift */; };
 		9D13C7ED2487842E0058A7BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D13C7EC2487842E0058A7BF /* AppDelegate.swift */; };
@@ -82,6 +83,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		55111D254ED68BBF46300654 /* Pods-Kravel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kravel.debug.xcconfig"; path = "Target Support Files/Pods-Kravel/Pods-Kravel.debug.xcconfig"; sourceTree = "<group>"; };
+		710B730902396220800270E2 /* Pods-Kravel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kravel.release.xcconfig"; path = "Target Support Files/Pods-Kravel/Pods-Kravel.release.xcconfig"; sourceTree = "<group>"; };
+		82A251414545BEFDE18999AA /* Pods_Kravel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kravel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D014C3D248C4A5E00758FCC /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		9D014C3F248C4C3600758FCC /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		9D13C7E92487842E0058A7BF /* Kravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,18 +153,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D49E8B124C6D908007CD948 /* TMapSDK.framework in Frameworks */,
+				827C4F7AD2D34AD9607ABF9D /* Pods_Kravel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4EEED4442E8963885B801502 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				55111D254ED68BBF46300654 /* Pods-Kravel.debug.xcconfig */,
+				710B730902396220800270E2 /* Pods-Kravel.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		9D13C7E02487842E0058A7BF = {
 			isa = PBXGroup;
 			children = (
 				9D13C7EB2487842E0058A7BF /* Kravel */,
 				9D13C7EA2487842E0058A7BF /* Products */,
 				9D49E8AF24C6D908007CD948 /* Frameworks */,
+				4EEED4442E8963885B801502 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -310,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				9D49E8B024C6D908007CD948 /* TMapSDK.framework */,
+				82A251414545BEFDE18999AA /* Pods_Kravel.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -379,10 +396,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9D13C7FD248784330058A7BF /* Build configuration list for PBXNativeTarget "Kravel" */;
 			buildPhases = (
+				17D7C77B6F0C032027101C1B /* [CP] Check Pods Manifest.lock */,
 				9D13C7E52487842E0058A7BF /* Sources */,
 				9D13C7E62487842E0058A7BF /* Frameworks */,
 				9D13C7E72487842E0058A7BF /* Resources */,
 				9D49E8AC24C6D783007CD948 /* Embed Frameworks */,
+				8D703FCC508BD72F7744B38A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -449,6 +468,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		17D7C77B6F0C032027101C1B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Kravel-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8D703FCC508BD72F7744B38A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kravel/Pods-Kravel-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kravel/Pods-Kravel-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kravel/Pods-Kravel-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9D13C7E52487842E0058A7BF /* Sources */ = {
@@ -638,6 +699,7 @@
 		};
 		9D13C7FE248784330058A7BF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55111D254ED68BBF46300654 /* Pods-Kravel.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -661,6 +723,7 @@
 		};
 		9D13C7FF248784330058A7BF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 710B730902396220800270E2 /* Pods-Kravel.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
