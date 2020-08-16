@@ -111,7 +111,7 @@ extension MyPageVC: UITableViewDelegate {
         case .editMyPW:
             print("edit")
         case .setLanguage:
-            print("set")
+            goSetLanguageVC(navTitle: selectedMenu.getMenuLabel())
         case .report:
             print("report")
         case .logout:
@@ -125,7 +125,18 @@ extension MyPageVC: UITableViewDelegate {
     private func goEditMyInformVC(navTitle: String) {
          guard let changeInfoVC = UIStoryboard(name: "ChangeInfo", bundle: nil).instantiateViewController(withIdentifier: ChangeInfoVC.identifier) as? ChangeInfoVC else { return }
         changeInfoVC.naviTitle = navTitle
+        changeInfoVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(changeInfoVC, animated: true)
+    }
+    
+    private func goSetLanguageVC(navTitle: String) {
+        guard let setLanguageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: SetLanguageVC.identifier) as? SetLanguageVC else { return }
+        setLanguageVC.completeButtonText = "Complete"
+        setLanguageVC.complete = { [weak self] language in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        setLanguageVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(setLanguageVC, animated: true)
     }
     
     // 로그아웃 선택

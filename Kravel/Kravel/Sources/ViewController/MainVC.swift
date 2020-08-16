@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainVC: UIViewController {
     @IBOutlet weak var signinButton: UIButton! {
         willSet {
             guard let signinButton = newValue as? CustomButton else { return }
@@ -104,13 +104,13 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITextFieldDelegate {
+extension MainVC: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         loginTextView.setBorderColor(of: textField)
     }
 }
 
-extension ViewController: LoginTextViewDelegate {
+extension MainVC: LoginTextViewDelegate {
     func clickLoginButton(id: String, pw: String) {
         print(id, pw)
         guard let mainTabVC = UIStoryboard(name: "Tabbar", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as? UITabBarController else { return }

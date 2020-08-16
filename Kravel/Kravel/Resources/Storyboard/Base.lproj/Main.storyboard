@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--MainVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -408,7 +408,7 @@
         <!--Set LanguageVC-->
         <scene sceneID="bgK-PX-Djh">
             <objects>
-                <viewController id="Nt2-MV-1tu" customClass="SetLanguageVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SetLanguageVC" id="Nt2-MV-1tu" customClass="SetLanguageVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n9L-fI-XKI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -428,13 +428,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please set the language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyX-3c-eGU">
-                                <rect key="frame" x="65" y="233" width="245" height="26.333333333333314"/>
+                                <rect key="frame" x="65" y="259.33333333333331" width="245" height="26.333333333333314"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <color key="textColor" red="0.15294117647058825" green="0.15294117647058825" blue="0.15294117647058825" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="9qL-qU-nMi">
-                                <rect key="frame" x="44" y="318.33333333333331" width="287" height="209.99999999999994"/>
+                                <rect key="frame" x="44" y="344.66666666666669" width="287" height="133"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OCk-Jk-vTl" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="287" height="56"/>
@@ -442,25 +442,15 @@
                                             <constraint firstAttribute="width" secondItem="OCk-Jk-vTl" secondAttribute="height" multiplier="41:8" id="zrS-cT-KSE"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title="한국어">
+                                        <state key="normal" title="안녕">
                                             <color key="titleColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="selectLanguage:" destination="Nt2-MV-1tu" eventType="touchUpInside" id="ZVP-xg-3rm"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmz-Mt-vDe" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="77" width="287" height="56"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title="你好吗">
-                                            <color key="titleColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="selectLanguage:" destination="Nt2-MV-1tu" eventType="touchUpInside" id="0AO-vU-Tfr"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wQd-7o-lWd" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="154" width="287" height="56"/>
+                                        <rect key="frame" x="0.0" y="77" width="287" height="56"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Hello">
                                             <color key="titleColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
@@ -479,16 +469,15 @@
                             <constraint firstItem="i7a-XW-5IN" firstAttribute="width" secondItem="n9L-fI-XKI" secondAttribute="width" multiplier="0.765333" id="LLm-FS-bZx"/>
                             <constraint firstItem="9qL-qU-nMi" firstAttribute="width" secondItem="n9L-fI-XKI" secondAttribute="width" multiplier="0.765333" id="SoO-MJ-kDg"/>
                             <constraint firstItem="9qL-qU-nMi" firstAttribute="top" secondItem="LyX-3c-eGU" secondAttribute="bottom" constant="59" id="b1n-Hn-0VY"/>
+                            <constraint firstItem="9qL-qU-nMi" firstAttribute="centerY" secondItem="Opj-PJ-OoJ" secondAttribute="centerY" id="gYf-dY-Apv"/>
                             <constraint firstItem="Opj-PJ-OoJ" firstAttribute="bottom" secondItem="i7a-XW-5IN" secondAttribute="bottom" constant="24" id="jAF-Jc-J4t"/>
                             <constraint firstItem="i7a-XW-5IN" firstAttribute="centerX" secondItem="Opj-PJ-OoJ" secondAttribute="centerX" id="vdv-hz-DRY"/>
-                            <constraint firstItem="LyX-3c-eGU" firstAttribute="top" secondItem="Opj-PJ-OoJ" secondAttribute="top" constant="189" id="yFy-56-4xA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Opj-PJ-OoJ"/>
                     </view>
                     <connections>
                         <outlet property="startButton" destination="i7a-XW-5IN" id="Apb-mO-X8G"/>
                         <outletCollection property="languageButtons" destination="OCk-Jk-vTl" collectionClass="NSMutableArray" id="4IL-oz-MUp"/>
-                        <outletCollection property="languageButtons" destination="qmz-Mt-vDe" collectionClass="NSMutableArray" id="7ow-GP-iHv"/>
                         <outletCollection property="languageButtons" destination="wQd-7o-lWd" collectionClass="NSMutableArray" id="138-zf-4JZ"/>
                     </connections>
                 </viewController>
