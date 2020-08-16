@@ -107,10 +107,7 @@ extension MyPageVC: UITableViewDelegate {
         guard let selectedMenu = MyPageMenu(rawValue: indexPath.row) else { return }
         switch selectedMenu {
         case .editMyInform:
-            guard let changeInfoVC = UIStoryboard(name: "ChangeInfo", bundle: nil).instantiateViewController(withIdentifier: ChangeInfoVC.identifier) as? ChangeInfoVC else { return }
-            changeInfoVC.naviTitle = selectedMenu.getMenuLabel()
-            self.navigationController?.pushViewController(changeInfoVC, animated: true)
-            menuTableView.deselectRow(at: indexPath, animated: false)
+            goEditMyInformVC(navTitle: selectedMenu.getMenuLabel())
         case .editMyPW:
             print("edit")
         case .setLanguage:
@@ -118,7 +115,34 @@ extension MyPageVC: UITableViewDelegate {
         case .report:
             print("report")
         case .logout:
-            print("logout")
+            presentLogoutAlertView()
         }
+        
+        menuTableView.deselectRow(at: indexPath, animated: false)
+    }
+    
+    // 내 정보 수정 화면으로 이동
+    private func goEditMyInformVC(navTitle: String) {
+         guard let changeInfoVC = UIStoryboard(name: "ChangeInfo", bundle: nil).instantiateViewController(withIdentifier: ChangeInfoVC.identifier) as? ChangeInfoVC else { return }
+        changeInfoVC.naviTitle = navTitle
+        self.navigationController?.pushViewController(changeInfoVC, animated: true)
+    }
+    
+    // 로그아웃 선택
+    private func presentLogoutAlertView() {
+        let alertVC = UIAlertController(title: "로그아웃 하시겠어요?", message: nil, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "확인", style: .default) { action in
+            guard let startRootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "StartRoot") as? UINavigationController else { return }
+            
+            guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
+            window.rootViewController = startRootVC
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .default)
+        
+        alertVC.addAction(cancelAction)
+        alertVC.addAction(okAction)
+        
+        self.present(alertVC, animated: true, completion: nil)
     }
 }
