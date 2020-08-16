@@ -1,16 +1,20 @@
 PODS:
   - lottie-ios (3.1.8)
+  - NMapsMap (3.8.0)
 
 DEPENDENCIES:
   - lottie-ios
+  - NMapsMap
 
 SPEC REPOS:
   trunk:
     - lottie-ios
+    - NMapsMap
 
 SPEC CHECKSUMS:
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
+  NMapsMap: b3633ad688483a318be9293aeddd323a714fb08b
 
-PODFILE CHECKSUM: d07665e83cfd9236296e9cf4830a4ce8262b374a
+PODFILE CHECKSUM: 190847a7efe14845cf7f9c9b3f1ff978e32c1d57
 
 COCOAPODS: 1.9.3

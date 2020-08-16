@@ -7,4 +7,5 @@ target 'Kravel' do
 
   # Pods for Kravel
   pod 'lottie-ios'
+  pod 'NMapsMap'
 end

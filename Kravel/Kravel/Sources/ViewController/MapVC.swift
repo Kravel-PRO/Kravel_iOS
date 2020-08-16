@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import TMapSDK
-
+import NMapsMap
 
 class MapVC: UIViewController {
     // FIXME: - Naver MAP으로 바꾸어야 할듯..
@@ -16,15 +15,18 @@ class MapVC: UIViewController {
     // MARK: - MapView 설정
     @IBOutlet weak var containerMapView: UIView!
     
-    lazy var mapView: TMapView = {
-        let map = TMapView(frame: containerMapView.frame)
-        map.delegate = self
-        map.setApiKey(PrivateKey.tmapAPIKey)
+    lazy var mapView: NMFMapView = {
+        let map = NMFMapView(frame: containerMapView.frame)
         return map
     }()
     
     private func setMapView() {
         containerMapView.addSubview(mapView)
+    }
+    
+    private func setMapViewCamera(lat: Double, long: Double) {
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: long))
+        mapView.moveCamera(cameraUpdate)
     }
     
     // MARK: - 현재 내위치 찾기 설정
@@ -40,8 +42,8 @@ class MapVC: UIViewController {
         self.view.addSubview(currentLocationButton)
     }
     
-    // 현재 위치
-    private var currentLocation: CLLocationCoordinate2D?
+    // FIXME: - 현재 위치 일단은 임시로 아주대학교 값 입력 나중에 바꾸어 주기
+    private var currentLocation: CLLocationCoordinate2D? = CLLocationCoordinate2D(latitude: 37.283457, longitude: 127.046543)
     private var isTrackingLocation: Bool = false
     
     // 내 위치 찾아오기 Core Location 설정
@@ -55,20 +57,14 @@ class MapVC: UIViewController {
     @objc func searchLocation(_ sender: Any) {
         isTrackingLocation = isTrackingLocation ? false : true
         if isTrackingLocation {
-            if let currentLocation = self.currentLocation { mapView.setCenter(currentLocation) }
+            if let currentLocation = self.currentLocation {
+                // FIXME: - 현재 위치 카메로 중심으로 이동하는 코드 추가하기
+                setMapViewCamera(lat: currentLocation.latitude, long: currentLocation.longitude)
+            }
             currentLocationButton.setImage(UIImage(named: ImageKey.icGPS), for: .normal)
         } else {
             currentLocationButton.setImage(UIImage(named: ImageKey.icGPSInActive), for: .normal)
         }
-    }
-    
-    private var currentLocationMarker: TMapMarker?
-    
-    private func makeMarker(location: CLLocationCoordinate2D) {
-        currentLocationMarker = TMapMarker()
-        currentLocationMarker?.position = location
-        currentLocationMarker?.title = "제목없음"
-        currentLocationMarker?.map = self.mapView
     }
     
     // 내 위치 찾기 버튼 바뀔 때마다 Bottom Constraint 바꾸어주기
@@ -155,7 +151,7 @@ class MapVC: UIViewController {
         placePopupView.removeFromSuperview()
     }
     
-    // POPUp View AutoLayout 지정
+    // Popup View AutoLayout 지정
     private func setPopupViewLayout() {
         NSLayoutConstraint.activate([
             placeShadowView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
@@ -242,10 +238,6 @@ class MapVC: UIViewController {
     }
 }
 
-extension MapVC: TMapViewDelegate {
-    
-}
-
 extension MapVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return nearPlaces.count
@@ -287,15 +279,14 @@ extension MapVC: UICollectionViewDelegate {
 }
 
 extension MapVC: CLLocationManagerDelegate {
+    // FIXME: - 위치 기반 정보 제공될 때, 핸드폰에서 허용해줄 때 추가하기
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let currentLocation = locations.last?.coordinate else { return }
         self.currentLocation = currentLocation
         
-//        if self.currentLocationMarker == nil { makeMarker(location: currentLocation) }
-//        else { currentLocationMarker?.position = currentLocation }
-        
         if isTrackingLocation {
-            mapView.setCenter(currentLocation)
+            // FIXME: - Naver Map 현재 위치로 카메로 이동하기 추가
+            setMapViewCamera(lat: currentLocation.latitude, long: currentLocation.longitude)
         }
     }
     

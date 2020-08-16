@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import TMapSDK
+import NMapsMap
 
 class SubLocationView: UIView {
     static let nibName = "SubLocationView"
@@ -17,15 +17,8 @@ class SubLocationView: UIView {
     // MARK: - Map View 설정
     @IBOutlet weak var containerMapView: UIView!
     
-    var mapViewDelegate: TMapViewDelegate? {
-        didSet {
-            mapView.delegate = mapViewDelegate
-        }
-    }
-    
-    lazy var mapView: TMapView = {
-        let map = TMapView(frame: containerMapView.frame)
-        map.setApiKey(PrivateKey.tmapAPIKey)
+    lazy var mapView: NMFMapView = {
+        let map = NMFMapView(frame: containerMapView.bounds)
         return map
     }()
     
