@@ -59,13 +59,17 @@ class SetLanguageVC: UIViewController {
         setNav()
     }
     
+    // MARK: NavigationController 설정
+    var navTitle: String?
+    
     private func setNav() {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.topItem?.title = ""
         self.navigationController?.navigationBar.tintColor = .black
-        self.navigationItem.title = "언어 설정"
+        self.navigationItem.title = navTitle
     }
     
+    // MARK: - 언어 버튼 클릭했을 때, 하나만 선택되는 알고리즘
     @IBAction func selectLanguage(_ sender: Any) {
         guard let languageButton = sender as? CustomButton else { return }
         switch languageButton.locationButton {
@@ -95,6 +99,7 @@ class SetLanguageVC: UIViewController {
         }
     }
     
+    // MARK: - 언어 설정 완료
     @IBAction func start(_ sender: Any) {
         if let selectedButton = self.selectedLanguageButton { complete(selectedButton) }
     }

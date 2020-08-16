@@ -839,6 +839,7 @@
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="5en-1J-kDJ">
                                                                 <rect key="frame" x="82.333333333333329" y="0.0" width="23" height="23"/>
+                                                                <color key="tintColor" red="0.070588235294117646" green="0.070588235294117646" blue="0.070588235294117646" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="5en-1J-kDJ" secondAttribute="height" multiplier="1:1" id="o70-MK-yI9"/>
                                                                 </constraints>

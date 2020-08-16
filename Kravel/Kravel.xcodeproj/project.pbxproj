@@ -21,6 +21,8 @@
 		9D13C811248796900058A7BF /* LoginTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D13C810248796900058A7BF /* LoginTextView.swift */; };
 		9D16A44B24909798005E691E /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D16A44A24909798005E691E /* WelcomeVC.swift */; };
 		9D2E26A124E935020091643E /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26A024E935020091643E /* Language.swift */; };
+		9D2E26A324E960100091643E /* Report.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D2E26A224E960100091643E /* Report.storyboard */; };
+		9D2E26A524E960290091643E /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26A424E960290091643E /* ReportVC.swift */; };
 		9D3D162B2488DA7200AE1B4C /* SetLanguageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3D162A2488DA7200AE1B4C /* SetLanguageVC.swift */; };
 		9D3D162F2488E2C700AE1B4C /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3D162E2488E2C700AE1B4C /* UIColor+Additions.swift */; };
 		9D49E8B424C6DCBE007CD948 /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D49E8B324C6DCBE007CD948 /* PrivateKey.swift */; };
@@ -86,6 +88,8 @@
 		9D13C810248796900058A7BF /* LoginTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextView.swift; sourceTree = "<group>"; };
 		9D16A44A24909798005E691E /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		9D2E26A024E935020091643E /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		9D2E26A224E960100091643E /* Report.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Report.storyboard; sourceTree = "<group>"; };
+		9D2E26A424E960290091643E /* ReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
 		9D3D162A2488DA7200AE1B4C /* SetLanguageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLanguageVC.swift; sourceTree = "<group>"; };
 		9D3D162E2488E2C700AE1B4C /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		9D49E8B324C6DCBE007CD948 /* PrivateKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrivateKey.swift; path = ../../Sources/Model/PrivateKey.swift; sourceTree = "<group>"; };
@@ -239,6 +243,7 @@
 				9D49E8B524C6F857007CD948 /* MyPageVC.swift */,
 				9D96007A24E5B72B007995EE /* ChangeInfoVC.swift */,
 				9D96009E24E6A2F9007995EE /* LocationDetailVC.swift */,
+				9D2E26A424E960290091643E /* ReportVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -272,6 +277,7 @@
 				9D8C0A2424BC515A005C1F58 /* Tabbar.storyboard */,
 				9D96007824E5B6FE007995EE /* ChangeInfo.storyboard */,
 				9D96009C24E67B5D007995EE /* LocationDetail.storyboard */,
+				9D2E26A224E960100091643E /* Report.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -446,6 +452,7 @@
 				9D7FB1F424D15DE7009A9C0A /* SubLocationView.xib in Resources */,
 				9D13C80F248795E40058A7BF /* LoginTextView.xib in Resources */,
 				9DEDA6B024BCC74300E978F5 /* CategoryCell.xib in Resources */,
+				9D2E26A324E960100091643E /* Report.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,6 +543,7 @@
 				9D3D162F2488E2C700AE1B4C /* UIColor+Additions.swift in Sources */,
 				9DEDA6BC24BCEE0400E978F5 /* PagingViewCell.swift in Sources */,
 				9DB03C8D24DAB1CB00FF7E36 /* TagCell.swift in Sources */,
+				9D2E26A524E960290091643E /* ReportVC.swift in Sources */,
 				9D7FB1F024D01489009A9C0A /* UIView+Extensions.swift in Sources */,
 				9D8EA91324E85D3600FD5059 /* LocationManager.swift in Sources */,
 				9D96007B24E5B72B007995EE /* ChangeInfoVC.swift in Sources */,

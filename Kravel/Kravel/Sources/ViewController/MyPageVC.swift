@@ -113,7 +113,7 @@ extension MyPageVC: UITableViewDelegate {
         case .setLanguage:
             goSetLanguageVC(navTitle: selectedMenu.getMenuLabel())
         case .report:
-            print("report")
+            goReportVC(navTitle: selectedMenu.getMenuLabel())
         case .logout:
             presentLogoutAlertView()
         }
@@ -129,14 +129,24 @@ extension MyPageVC: UITableViewDelegate {
         self.navigationController?.pushViewController(changeInfoVC, animated: true)
     }
     
+    // 언어 설정 화면으로 이동
     private func goSetLanguageVC(navTitle: String) {
         guard let setLanguageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: SetLanguageVC.identifier) as? SetLanguageVC else { return }
+        setLanguageVC.navTitle = navTitle
         setLanguageVC.completeButtonText = "Complete"
         setLanguageVC.complete = { [weak self] language in
             self?.navigationController?.popViewController(animated: true)
         }
         setLanguageVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(setLanguageVC, animated: true)
+    }
+    
+    // 제보하기 화면으로 이동
+    private func goReportVC(navTitle: String) {
+        guard let reportVC = UIStoryboard(name: "Report", bundle: nil).instantiateViewController(identifier: ReportVC.identifier) as? ReportVC else { return }
+        reportVC.hidesBottomBarWhenPushed = true
+        reportVC.navTitle = navTitle
+        self.navigationController?.pushViewController(reportVC, animated: true)
     }
     
     // 로그아웃 선택
