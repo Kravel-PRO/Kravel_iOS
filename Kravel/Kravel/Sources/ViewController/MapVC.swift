@@ -22,12 +22,26 @@ class MapVC: UIViewController {
     
     private func setMapView() {
         containerMapView.addSubview(mapView)
+        
+        // FIXME: - 임시로 현재 위치 받아왔다 가정하고 내 위치 중심으로 생성
+        if let currentLocation = self.currentLocation {
+            setMapViewCamera(lat: currentLocation.latitude, long: currentLocation.longitude)
+        }
+        
+        // FIXME: - 임시로 설정 일단 아주대로 내 마커 나타나게 설정
+        let overlay = mapView.locationOverlay
+        overlay.hidden = false
+        if let currentLocation = self.currentLocation { overlay.location = NMGLatLng(lat: currentLocation.latitude, lng: currentLocation.longitude) }
     }
     
     private func setMapViewCamera(lat: Double, long: Double) {
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: long))
+        cameraUpdate.animation = .fly
         mapView.moveCamera(cameraUpdate)
     }
+    
+    // MARK: - 현재 내위치 오버레이 설정
+    lazy var locationOverlay = mapView.locationOverlay
     
     // MARK: - 현재 내위치 찾기 설정
     var currentLocationButton: UIButton = {

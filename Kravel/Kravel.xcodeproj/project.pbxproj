@@ -22,8 +22,6 @@
 		9D16A44B24909798005E691E /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D16A44A24909798005E691E /* WelcomeVC.swift */; };
 		9D3D162B2488DA7200AE1B4C /* SetLanguageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3D162A2488DA7200AE1B4C /* SetLanguageVC.swift */; };
 		9D3D162F2488E2C700AE1B4C /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3D162E2488E2C700AE1B4C /* UIColor+Additions.swift */; };
-		9D49E8B124C6D908007CD948 /* TMapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D49E8B024C6D908007CD948 /* TMapSDK.framework */; };
-		9D49E8B224C6D909007CD948 /* TMapSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D49E8B024C6D908007CD948 /* TMapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D49E8B424C6DCBE007CD948 /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D49E8B324C6DCBE007CD948 /* PrivateKey.swift */; };
 		9D49E8B624C6F857007CD948 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D49E8B524C6F857007CD948 /* MyPageVC.swift */; };
 		9D49E8BB24C83378007CD948 /* MyPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D49E8BA24C83378007CD948 /* MyPageCell.swift */; };
@@ -68,20 +66,6 @@
 		9DEDA6C024BCEEFC00E978F5 /* MovieChildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6BF24BCEEFC00E978F5 /* MovieChildVC.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		9D49E8AC24C6D783007CD948 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				9D49E8B224C6D909007CD948 /* TMapSDK.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		55111D254ED68BBF46300654 /* Pods-Kravel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kravel.debug.xcconfig"; path = "Target Support Files/Pods-Kravel/Pods-Kravel.debug.xcconfig"; sourceTree = "<group>"; };
 		710B730902396220800270E2 /* Pods-Kravel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kravel.release.xcconfig"; path = "Target Support Files/Pods-Kravel/Pods-Kravel.release.xcconfig"; sourceTree = "<group>"; };
@@ -102,7 +86,6 @@
 		9D16A44A24909798005E691E /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		9D3D162A2488DA7200AE1B4C /* SetLanguageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLanguageVC.swift; sourceTree = "<group>"; };
 		9D3D162E2488E2C700AE1B4C /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
-		9D49E8B024C6D908007CD948 /* TMapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TMapSDK.framework; sourceTree = "<group>"; };
 		9D49E8B324C6DCBE007CD948 /* PrivateKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrivateKey.swift; path = ../../Sources/Model/PrivateKey.swift; sourceTree = "<group>"; };
 		9D49E8B524C6F857007CD948 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		9D49E8BA24C83378007CD948 /* MyPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCell.swift; sourceTree = "<group>"; };
@@ -152,7 +135,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D49E8B124C6D908007CD948 /* TMapSDK.framework in Frameworks */,
 				827C4F7AD2D34AD9607ABF9D /* Pods_Kravel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,7 +306,6 @@
 		9D49E8AF24C6D908007CD948 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9D49E8B024C6D908007CD948 /* TMapSDK.framework */,
 				82A251414545BEFDE18999AA /* Pods_Kravel.framework */,
 			);
 			name = Frameworks;
@@ -399,7 +380,6 @@
 				9D13C7E52487842E0058A7BF /* Sources */,
 				9D13C7E62487842E0058A7BF /* Frameworks */,
 				9D13C7E72487842E0058A7BF /* Resources */,
-				9D49E8AC24C6D783007CD948 /* Embed Frameworks */,
 				8D703FCC508BD72F7744B38A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
