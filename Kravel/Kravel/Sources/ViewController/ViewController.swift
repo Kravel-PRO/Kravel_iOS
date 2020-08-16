@@ -39,6 +39,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var loginTextViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var loginTextView: LoginTextView! {
         didSet {
+            loginTextView.textViewDelegate = self
             loginTextView.delegate = self
         }
     }
@@ -106,6 +107,15 @@ class ViewController: UIViewController {
 extension ViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         loginTextView.setBorderColor(of: textField)
+    }
+}
+
+extension ViewController: LoginTextViewDelegate {
+    func clickLoginButton(id: String, pw: String) {
+        print(id, pw)
+        guard let mainTabVC = UIStoryboard(name: "Tabbar", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as? UITabBarController else { return }
+        mainTabVC.modalPresentationStyle = .fullScreen
+        self.present(mainTabVC, animated: true, completion: nil)
     }
 }
 

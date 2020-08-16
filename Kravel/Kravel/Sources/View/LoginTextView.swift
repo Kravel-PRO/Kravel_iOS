@@ -8,17 +8,23 @@
 
 import UIKit
 
+protocol LoginTextViewDelegate {
+    func clickLoginButton(id: String, pw: String)
+}
+
 class LoginTextView: UIView {
     static let identifier = "LoginTextView"
     
-    var delegate: UITextFieldDelegate? {
+    var textViewDelegate: UITextFieldDelegate? {
         didSet {
-            if let delegate = delegate {
+            if let delegate = textViewDelegate {
                 emailTextField.delegate = delegate
                 pwTextField.delegate = delegate
             }
         }
     }
+    
+    var delegate: LoginTextViewDelegate?
     
     @IBOutlet var marginViews: [UIView]! {
         didSet {
@@ -35,6 +41,10 @@ class LoginTextView: UIView {
             guard let loginButton = newValue as? CustomButton else { return }
             loginButton.locationButton = .textView
         }
+    }
+    
+    @IBAction func login(_ sender: Any) {
+        delegate?.clickLoginButton(id: "ww", pw: "ww")
     }
     
     @IBOutlet weak var emailTextField: UITextField!

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lottie
 
 class LocationDetailVC: UIViewController {
     static let identifier = "LocationDetailVC"
@@ -102,6 +103,31 @@ class LocationDetailVC: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         setBackButtonConstraint()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // FIXME: ViewDidLoad로 네트워크 요청 작업 시, 부르게 수정
+        showLoadingLottie()
+    }
+    
+    private var animationView: AnimationView?
+    
+    private func showLoadingLottie() {
+        animationView = AnimationView(name: "loading")
+        animationView?.backgroundColor = .white
+        animationView?.contentMode = .scaleAspectFit
+        animationView?.frame = self.view.bounds
+        animationView?.play()
+    
+        self.view.addSubview(animationView!)
+        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(removeView), userInfo: nil, repeats: false)
+    }
+    
+    @objc func removeView() {
+        animationView?.removeFromSuperview()
+        animationView = nil
     }
 }
 

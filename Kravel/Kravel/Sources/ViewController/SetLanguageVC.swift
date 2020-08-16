@@ -64,7 +64,7 @@ class SetLanguageVC: UIViewController {
             switch button.locationButton {
             case .languageView(let isSelected):
                 if isSelected {
-                    guard let startVC = self.storyboard?.instantiateViewController(identifier: "StartRoot") as? UINavigationController else { return }
+                    guard let startVC = self.storyboard?.instantiateViewController(identifier: "WelcomeVC") as? WelcomeVC else { return }
                     startVC.modalPresentationStyle = .fullScreen
                     self.present(startVC, animated: true, completion: nil)
                     return
