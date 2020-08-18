@@ -26,6 +26,7 @@ class LoginTextView: UIView {
     
     var delegate: LoginTextViewDelegate?
     
+    // MARK: - TextField의 Margin View들 설정
     @IBOutlet var marginViews: [UIView]! {
         didSet {
             marginViews.forEach { view in
@@ -36,6 +37,7 @@ class LoginTextView: UIView {
         }
     }
     
+    // MARK: - 로그인 버튼 관련
     @IBOutlet weak var loginButton: UIButton! {
         willSet {
             guard let loginButton = newValue as? CustomButton else { return }
@@ -47,9 +49,11 @@ class LoginTextView: UIView {
         delegate?.clickLoginButton(id: "ww", pw: "ww")
     }
     
+    // MARK: - TextField 변수
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var pwTextField: UITextField!
     
+    // MARK: - UIView Override 함수
     override init(frame: CGRect) {
         super.init(frame: frame)
         initView()
@@ -73,18 +77,24 @@ class LoginTextView: UIView {
         layer.masksToBounds = true
     }
     
+    // TextField안의 입력 상태에 따라 Border Color 지정
     func setBorderColor(of textField: UITextField) {
         let layerColor: UIColor = textField.text == "" ? .veryLightPink : .grapefruit
         if textField == emailTextField { marginViews[0].layer.borderColor = layerColor.cgColor }
         else { marginViews[1].layer.borderColor = layerColor.cgColor }
     }
     
+    // TextField 내용 초기화
     func clear() {
         emailTextField.text = ""
         pwTextField.text = ""
-        self.endEditing(true)
         marginViews.forEach { view in
             view.layer.borderColor = UIColor.veryLightPink.cgColor
         }
+    }
+    
+    func isKeyboardShow() -> Bool {
+        if emailTextField.isFirstResponder || pwTextField.isFirstResponder { return true }
+        else { return false }
     }
 }

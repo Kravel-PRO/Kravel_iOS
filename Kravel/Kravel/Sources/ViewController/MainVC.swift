@@ -60,6 +60,7 @@ class MainVC: UIViewController {
             } else {
                 backViewBottomConstraint.constant = 0
                 loginTextViewTopConstraint.constant = 0
+                self.view.endEditing(true)
                 UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
                     self.titleLabel.alpha = 0
                     self.view.layoutIfNeeded()
@@ -83,6 +84,7 @@ class MainVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         addGesture()
+        addKeyboardObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,6 +98,12 @@ class MainVC: UIViewController {
     }
     
     @objc func tapView() {
+        // Toggle이 되어 있을 때, Keyboard가 나와 있는 경우
+        if isToggle && loginTextView.isKeyboardShow() {
+            self.view.endEditing(true)
+            return
+        }
+        
         if isToggle { isToggle = false }
     }
     
@@ -105,14 +113,41 @@ class MainVC: UIViewController {
 }
 
 extension MainVC: UITextFieldDelegate {
+    private func addKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(downKeyboard(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(upKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    // KeyBoard가 내려갈 때, 호출
+    @objc func downKeyboard(_ notification: NSNotification) {
+        UIView.animate(withDuration: 0.4) {
+            self.loginTextView.transform = .identity
+        }
+    }
+    
+    // Keyboard가 올라올 때, 호출
+    @objc func upKeyboard(_ notification: NSNotification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRect = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRect.height
+            UIView.animate(withDuration: 0.4) {
+                self.loginTextView.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight+20)
+            }
+        }
+    }
+    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         loginTextView.setBorderColor(of: textField)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 
 extension MainVC: LoginTextViewDelegate {
     func clickLoginButton(id: String, pw: String) {
-        print(id, pw)
         guard let mainTabVC = UIStoryboard(name: "Tabbar", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as? UITabBarController else { return }
         mainTabVC.modalPresentationStyle = .fullScreen
         self.present(mainTabVC, animated: true, completion: nil)
