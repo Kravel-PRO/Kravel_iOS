@@ -52,6 +52,12 @@ class HomeVC: UIViewController {
         }
     }
     
+    // 더 보기 버튼 클릭했을 시, 더 많은 장소 요청
+    @IBAction func requstMorePlace(_ sender: Any) {
+        guard let detailNearPlaceVC = UIStoryboard(name: "NearPlace", bundle: nil).instantiateViewController(withIdentifier: NearPlaceVC.identifier) as? NearPlaceVC else { return }
+        self.navigationController?.pushViewController(detailNearPlaceVC, animated: true)
+    }
+    
     // MARK: - 인기 있는 장소 설정
     @IBOutlet weak var hotPlaceLabel: UILabel! {
         didSet {
@@ -118,11 +124,20 @@ class HomeVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNav()
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         setHotPlaceCollectionViewHeight()
         setHotPlaceLabelLayout()
         setPhotoReviewLabelLayout()
+    }
+    
+    private func setNav() {
+        self.navigationController?.navigationBar.isHidden = true
     }
 }
 

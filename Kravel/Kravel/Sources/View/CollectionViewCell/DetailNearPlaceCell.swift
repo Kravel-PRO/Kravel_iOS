@@ -1,15 +1,15 @@
 //
-//  HomeNearPlaceCell.swift
+//  DetailNearPlaceCell.swift
 //  Kravel
 //
-//  Created by 윤동민 on 2020/08/05.
+//  Created by 윤동민 on 2020/08/19.
 //  Copyright © 2020 윤동민. All rights reserved.
 //
 
 import UIKit
 
-class HomeNearPlaceCell: UICollectionViewCell {
-    static let identifier = "HomeNearPlaceCell"
+class DetailNearPlaceCell: UICollectionViewCell {
+    static let identifier = "DetailNearPlaceCell"
     
     // MARK: - 장소 이미지 설정
     @IBOutlet weak var placeImageView: UIImageView!
@@ -20,6 +20,7 @@ class HomeNearPlaceCell: UICollectionViewCell {
         }
     }
     
+    // MARK: - 장소 이름 설정
     @IBOutlet weak var placeNameLabel: UILabel!
     
     var placeName: String? {
@@ -29,36 +30,42 @@ class HomeNearPlaceCell: UICollectionViewCell {
         }
     }
     
-    // MARK: - Tag CollectionView 설정
+    @IBOutlet weak var placeNameLabelTopConstraint: NSLayoutConstraint!
+    
+    private func setNameLabelTopConstraint() {
+        placeNameLabelTopConstraint.constant = self.frame.height / 19.76
+    }
+    
+    // MARK: - 태그 CollectionView 설정
     @IBOutlet weak var tagCollectionView: UICollectionView! {
         didSet {
             tagCollectionView.dataSource = self
             if let layout = tagCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-                layout.minimumInteritemSpacing = 0
-                layout.minimumLineSpacing = 3
-                layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+                layout.minimumInteritemSpacing = 5
+                layout.minimumLineSpacing = 5
             }
         }
     }
     
-    var tags: [String] = ["호텔 델루나", "아이유", "여진구"] {
+    var tags: [String] = ["아이유", "호텔 델루나", "여진구"] {
         didSet {
             tagCollectionView.reloadData()
         }
     }
     
-    // MARK: - UICollectionViewCell Override 설정
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
+    // MARK: - UICollectionViewCell Override
     override func prepareForReuse() {
         super.prepareForReuse()
     }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setNameLabelTopConstraint()
+    }
 }
 
-extension HomeNearPlaceCell: UICollectionViewDataSource {
+extension DetailNearPlaceCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tags.count
     }
@@ -69,3 +76,4 @@ extension HomeNearPlaceCell: UICollectionViewDataSource {
         return tagCell
     }
 }
+

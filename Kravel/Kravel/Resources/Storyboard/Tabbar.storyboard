@@ -145,6 +145,9 @@
                                                                 <state key="normal" title="더 보기 " image="btnMore">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="requstMorePlace:" destination="WDK-c7-4Vu" eventType="touchUpInside" id="LWN-Hf-MWx"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" red="1" green="0.38823529411764707" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
@@ -257,7 +260,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="V0L-7b-5ir"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="homeInactive" selectedImage="homeActive" id="u8h-tm-n0F"/>
+                    <navigationItem key="navigationItem" id="tvE-X6-QOV"/>
                     <size key="freeformSize" width="375" height="1300"/>
                     <connections>
                         <outlet property="closerLabel" destination="Zv2-zR-KiR" id="gJ5-K0-nR8"/>
@@ -274,7 +277,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aKE-sM-fRz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-946.39999999999998" y="774.38423645320199"/>
+            <point key="canvasLocation" x="-1012" y="974"/>
         </scene>
         <!--SearchVC-->
         <scene sceneID="PuY-aX-xVM">
@@ -369,7 +372,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6h8-p2-ff9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-170" y="1508"/>
+            <point key="canvasLocation" x="772" y="1507.3891625615763"/>
         </scene>
         <!--Talent ChildVC-->
         <scene sceneID="PdQ-nL-TOl">
@@ -795,7 +798,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wKj-mo-0qe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="616.79999999999995" y="774.38423645320199"/>
+            <point key="canvasLocation" x="1559.2" y="774.38423645320199"/>
         </scene>
         <!--My PageVC-->
         <scene sceneID="qEN-F3-p00">
@@ -1012,7 +1015,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1BJ-la-sXC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1413.5999999999999" y="1489.6551724137933"/>
+            <point key="canvasLocation" x="2356" y="1489.6551724137933"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="vKW-hS-2Ix">
@@ -1026,7 +1029,7 @@
                         <color key="selectedImageTintColor" red="1" green="0.40392156862745099" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="WDK-c7-4Vu" kind="relationship" relationship="viewControllers" id="k39-Df-81C"/>
+                        <segue destination="dxt-N2-cT8" kind="relationship" relationship="viewControllers" id="k39-Df-81C"/>
                         <segue destination="Ovi-x7-4PJ" kind="relationship" relationship="viewControllers" id="X36-zb-4zz"/>
                         <segue destination="J3n-8X-r2I" kind="relationship" relationship="viewControllers" id="SZl-oD-LHW"/>
                         <segue destination="n9E-lf-SY0" kind="relationship" relationship="viewControllers" id="zXv-S3-c90"/>
@@ -1053,7 +1056,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="STO-7Y-yse" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-172" y="775"/>
+            <point key="canvasLocation" x="770.39999999999998" y="774.38423645320199"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jmU-8f-H2X">
@@ -1077,7 +1080,26 @@
                     <state key="normal" title="Button"/>
                 </button>
             </objects>
-            <point key="canvasLocation" x="1413.5999999999999" y="774.38423645320199"/>
+            <point key="canvasLocation" x="2356" y="774.38423645320199"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="tZ9-uL-Ifv">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dxt-N2-cT8" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="homeInactive" selectedImage="homeActive" id="u8h-tm-n0F"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="BTp-xF-2Cc">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="WDK-c7-4Vu" kind="relationship" relationship="rootViewController" id="4ij-uB-2Qu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kYi-mk-1fF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-60" y="795"/>
         </scene>
     </scenes>
     <resources>

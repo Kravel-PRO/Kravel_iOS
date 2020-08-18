@@ -120,17 +120,21 @@ extension MainVC: UITextFieldDelegate {
     
     // KeyBoard가 내려갈 때, 호출
     @objc func downKeyboard(_ notification: NSNotification) {
-        UIView.animate(withDuration: 0.4) {
-            self.loginTextView.transform = .identity
+        if let keyboardDuration: NSNumber = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber {
+            UIView.animate(withDuration: TimeInterval(truncating: keyboardDuration)) {
+                self.loginTextView.transform = .identity
+            }
         }
     }
     
     // Keyboard가 올라올 때, 호출
     @objc func upKeyboard(_ notification: NSNotification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
+            let keyboardDuraction: NSNumber = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber {
             let keyboardRect = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRect.height
-            UIView.animate(withDuration: 0.4) {
+            print(keyboardDuraction)
+            UIView.animate(withDuration: TimeInterval(truncating: keyboardDuraction)) {
                 self.loginTextView.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight+20)
             }
         }
