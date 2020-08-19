@@ -10,43 +10,28 @@ import UIKit
 import NMapsMap
 
 class MapVC: UIViewController {
-    // FIXME: - Naver MAP으로 바꾸어야 할듯..
-    
     // MARK: - MapView 설정
     @IBOutlet weak var containerMapView: UIView!
     
     lazy var mapView: NMFMapView = {
         let map = NMFMapView(frame: containerMapView.frame)
+        map.positionMode = .direction
         return map
     }()
     
     private func setMapView() {
         containerMapView.addSubview(mapView)
-        
-        // FIXME: - 임시로 현재 위치 받아왔다 가정하고 내 위치 중심으로 생성
-        if let currentLocation = self.currentLocation {
-            setMapViewCamera(lat: currentLocation.latitude, long: currentLocation.longitude)
-        }
-        
-        // FIXME: - 임시로 설정 일단 아주대로 내 마커 나타나게 설정
-        let overlay = mapView.locationOverlay
-        overlay.hidden = false
-        if let currentLocation = self.currentLocation { overlay.location = NMGLatLng(lat: currentLocation.latitude, lng: currentLocation.longitude) }
+        mapView.addCameraDelegate(delegate: self)
+        overlay = mapView.locationOverlay
+        overlay?.hidden = false
     }
-    
-    private func setMapViewCamera(lat: Double, long: Double) {
-        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: long))
-        cameraUpdate.animation = .fly
-        mapView.moveCamera(cameraUpdate)
-    }
-    
-    // MARK: - 현재 내위치 오버레이 설정
-    lazy var locationOverlay = mapView.locationOverlay
     
     // MARK: - 현재 내위치 찾기 설정
+    var overlay: NMFLocationOverlay?
+    
     var currentLocationButton: UIButton = {
         let currentLocationButton = UIButton()
-        currentLocationButton.setImage(UIImage(named: ImageKey.icGPSInActive), for: .normal)
+        currentLocationButton.setImage(UIImage(named: ImageKey.icGPS), for: .normal)
         currentLocationButton.translatesAutoresizingMaskIntoConstraints = false
         return currentLocationButton
     }()
@@ -55,29 +40,30 @@ class MapVC: UIViewController {
         currentLocationButton.addTarget(self, action: #selector(searchLocation(_:)), for: .touchUpInside)
         self.view.addSubview(currentLocationButton)
     }
-    
-    // FIXME: - 현재 위치 일단은 임시로 아주대학교 값 입력 나중에 바꾸어 주기
-    private var currentLocation: CLLocationCoordinate2D? = CLLocationCoordinate2D(latitude: 37.283457, longitude: 127.046543)
-    private var isTrackingLocation: Bool = false
-    
+
     // 내 위치 찾아오기 Core Location 설정
     private func setLocationManager() {
         LocationManager.shared.requestAuthorization()
-        LocationManager.shared.setManager(delegate: self, accuracy: kCLLocationAccuracyBest)
-        LocationManager.shared.startTracking()
+    }
+    
+    // 카메라를 현재 Overlay 위치로 옮겨주는 코드
+    private func setMapCameraMyLocation() {
+        guard let overlay = self.overlay else { return }
+        let cameraUpdate = NMFCameraUpdate(scrollTo: overlay.location)
+        cameraUpdate.animation = .easeIn
+        mapView.moveCamera(cameraUpdate) { isCompletion in
+            self.mapView.positionMode = .direction
+        }
     }
     
     // 내 위치 찾기 버튼 눌렀을 때
     @objc func searchLocation(_ sender: Any) {
-        isTrackingLocation = isTrackingLocation ? false : true
-        if isTrackingLocation {
-            if let currentLocation = self.currentLocation {
-                // FIXME: - 현재 위치 카메로 중심으로 이동하는 코드 추가하기
-                setMapViewCamera(lat: currentLocation.latitude, long: currentLocation.longitude)
-            }
-            currentLocationButton.setImage(UIImage(named: ImageKey.icGPS), for: .normal)
-        } else {
+        if mapView.positionMode == .direction {
+            mapView.positionMode = .normal
             currentLocationButton.setImage(UIImage(named: ImageKey.icGPSInActive), for: .normal)
+        } else {
+            setMapCameraMyLocation()
+            currentLocationButton.setImage(UIImage(named: ImageKey.icGPS), for: .normal)
         }
     }
     
@@ -240,12 +226,12 @@ class MapVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        setLocationManager()
+//        setLocationManager()
         setMapView()
         setCurrentLocationButton()
         showPlacePopupView()
     }
-    
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         setCurrentLocationButtonLayout()
@@ -292,19 +278,11 @@ extension MapVC: UICollectionViewDelegateFlowLayout {
 extension MapVC: UICollectionViewDelegate {
 }
 
-extension MapVC: CLLocationManagerDelegate {
-    // FIXME: - 위치 기반 정보 제공될 때, 핸드폰에서 허용해줄 때 추가하기
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let currentLocation = locations.last?.coordinate else { return }
-        self.currentLocation = currentLocation
-        
-        if isTrackingLocation {
-            // FIXME: - Naver Map 현재 위치로 카메로 이동하기 추가
-            setMapViewCamera(lat: currentLocation.latitude, long: currentLocation.longitude)
+extension MapVC: NMFMapViewCameraDelegate {
+    func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
+        if reason == -1 {
+            currentLocationButton.setImage(UIImage(named: ImageKey.icGPSInActive), for: .normal)
         }
     }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error.localizedDescription)
-    }
 }
+

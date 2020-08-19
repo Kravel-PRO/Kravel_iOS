@@ -49,6 +49,7 @@ extension NearPlaceVC: UICollectionViewDataSource {
         guard let nearPlaceCell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailNearPlaceCell.identifier, for: indexPath) as? DetailNearPlaceCell else { return UICollectionViewCell() }
         nearPlaceCell.layer.borderWidth = 1
         nearPlaceCell.layer.borderColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0).cgColor
+        nearPlaceCell.layer.cornerRadius = nearPlaceCell.frame.width / 68.6
         nearPlaceCell.clipsToBounds = true
         nearPlaceCell.placeImage = UIImage(named: "yuna")
         nearPlaceCell.placeName = nearPlaces[indexPath.row]
