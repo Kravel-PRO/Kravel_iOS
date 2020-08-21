@@ -378,6 +378,7 @@
                         <outlet property="categoryTabbarView" destination="l5o-Dx-8aH" id="FHW-Gd-yZd"/>
                         <outlet property="pageCollectionView" destination="MZO-yO-g09" id="KaN-gw-ogt"/>
                         <outlet property="searchBarView" destination="Ndi-93-yU6" id="Dk9-J1-JIy"/>
+                        <outlet property="searchTextField" destination="9ep-8a-AQm" id="kLS-mj-Wys"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6h8-p2-ff9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -465,7 +466,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ntB-22-rx0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-570" y="2089"/>
+            <point key="canvasLocation" x="372" y="2089"/>
         </scene>
         <!--Movie ChildVC-->
         <scene sceneID="Q8n-Sp-Csf">
@@ -547,7 +548,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JpR-Hc-6dF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="239" y="2089"/>
+            <point key="canvasLocation" x="1137" y="2089"/>
         </scene>
         <!--Content DetailVC-->
         <scene sceneID="SGX-Ck-Rvs">
@@ -724,7 +725,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fkN-OS-C8c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-210" y="2960"/>
+            <point key="canvasLocation" x="769" y="2866"/>
         </scene>
         <!--MapVC-->
         <scene sceneID="hgt-B2-ERe">

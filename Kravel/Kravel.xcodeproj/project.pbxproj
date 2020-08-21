@@ -64,6 +64,10 @@
 		9DB03C8B24DAA6B800FF7E36 /* HomeNearPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB03C8A24DAA6B800FF7E36 /* HomeNearPlaceCell.swift */; };
 		9DB03C8D24DAB1CB00FF7E36 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB03C8C24DAB1CB00FF7E36 /* TagCell.swift */; };
 		9DB03C8F24DABF3D00FF7E36 /* HotPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB03C8E24DABF3D00FF7E36 /* HotPlaceCell.swift */; };
+		9DBA641E24EFB1DE00E12FA4 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBA641D24EFB1DE00E12FA4 /* CoreDataManager.swift */; };
+		9DBA642224EFB35A00E12FA4 /* RecentSearchModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9DBA642024EFB35A00E12FA4 /* RecentSearchModel.xcdatamodeld */; };
+		9DBA642D24F0414C00E12FA4 /* RecentResearchTerm+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBA642B24F0414C00E12FA4 /* RecentResearchTerm+CoreDataClass.swift */; };
+		9DBA642E24F0414C00E12FA4 /* RecentResearchTerm+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBA642C24F0414C00E12FA4 /* RecentResearchTerm+CoreDataProperties.swift */; };
 		9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */; };
 		9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */; };
 		9DEDA6A924BCB70600E978F5 /* CategoryTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */; };
@@ -137,6 +141,10 @@
 		9DB03C8A24DAA6B800FF7E36 /* HomeNearPlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNearPlaceCell.swift; sourceTree = "<group>"; };
 		9DB03C8C24DAB1CB00FF7E36 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		9DB03C8E24DABF3D00FF7E36 /* HotPlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotPlaceCell.swift; sourceTree = "<group>"; };
+		9DBA641D24EFB1DE00E12FA4 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		9DBA642124EFB35A00E12FA4 /* RecentSearchModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RecentSearchModel.xcdatamodel; sourceTree = "<group>"; };
+		9DBA642B24F0414C00E12FA4 /* RecentResearchTerm+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecentResearchTerm+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		9DBA642C24F0414C00E12FA4 /* RecentResearchTerm+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecentResearchTerm+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTabbar.xib; sourceTree = "<group>"; };
@@ -217,6 +225,7 @@
 				9D13C7EE2487842E0058A7BF /* SceneDelegate.swift */,
 				9D13C805248784B40058A7BF /* Extension */,
 				9DA80453248E5962003826B9 /* Util */,
+				9DBA641F24EFB31D00E12FA4 /* CoreDataModel */,
 				9D13C804248784AE0058A7BF /* Model */,
 				9D13C803248784A50058A7BF /* ViewController */,
 				9D13C8022487849E0058A7BF /* View */,
@@ -265,6 +274,8 @@
 		9D13C804248784AE0058A7BF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9DBA642B24F0414C00E12FA4 /* RecentResearchTerm+CoreDataClass.swift */,
+				9DBA642C24F0414C00E12FA4 /* RecentResearchTerm+CoreDataProperties.swift */,
 				9DEDA6B124BCD09300E978F5 /* KCategory.swift */,
 				9D49E8BC24C83545007CD948 /* MyPageMenu.swift */,
 				9D2E26A024E935020091643E /* Language.swift */,
@@ -365,8 +376,17 @@
 			isa = PBXGroup;
 			children = (
 				9D8EA91224E85D3600FD5059 /* LocationManager.swift */,
+				9DBA641D24EFB1DE00E12FA4 /* CoreDataManager.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		9DBA641F24EFB31D00E12FA4 /* CoreDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				9DBA642024EFB35A00E12FA4 /* RecentSearchModel.xcdatamodeld */,
+			);
+			path = CoreDataModel;
 			sourceTree = "<group>";
 		};
 		9DEDA6A524BCA86000E978F5 /* CollectionViewCell */ = {
@@ -529,6 +549,7 @@
 				9D7FB20024D16AA9009A9C0A /* PlacePopupView.swift in Sources */,
 				9D014C3E248C4A5E00758FCC /* SignupVC.swift in Sources */,
 				9D2E26A124E935020091643E /* Language.swift in Sources */,
+				9DBA642224EFB35A00E12FA4 /* RecentSearchModel.xcdatamodeld in Sources */,
 				9D13C80B248788390058A7BF /* CustomButton.swift in Sources */,
 				9D16A44B24909798005E691E /* WelcomeVC.swift in Sources */,
 				9D49E8B624C6F857007CD948 /* MyPageVC.swift in Sources */,
@@ -544,6 +565,7 @@
 				9D8EA91124E7BE4B00FD5059 /* ImageKey.swift in Sources */,
 				9D9694CD24C5E7570046CB85 /* PlaceCell.swift in Sources */,
 				9D94BDF224BE2C710027B9BF /* ContentDetailVC.swift in Sources */,
+				9DBA641E24EFB1DE00E12FA4 /* CoreDataManager.swift in Sources */,
 				9D79E2A924ED045F006310A2 /* MorePhotoReviewCell.swift in Sources */,
 				9D13C811248796900058A7BF /* LoginTextView.swift in Sources */,
 				9D7FB1F624D15E60009A9C0A /* SubLocationView.swift in Sources */,
@@ -570,9 +592,11 @@
 				9D2E26A524E960290091643E /* ReportVC.swift in Sources */,
 				9D7FB1F024D01489009A9C0A /* UIView+Extensions.swift in Sources */,
 				9D8EA91324E85D3600FD5059 /* LocationManager.swift in Sources */,
+				9DBA642D24F0414C00E12FA4 /* RecentResearchTerm+CoreDataClass.swift in Sources */,
 				9D96007B24E5B72B007995EE /* ChangeInfoVC.swift in Sources */,
 				9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */,
 				9D49E8B424C6DCBE007CD948 /* PrivateKey.swift in Sources */,
+				9DBA642E24F0414C00E12FA4 /* RecentResearchTerm+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -782,6 +806,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9DBA642024EFB35A00E12FA4 /* RecentSearchModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9DBA642124EFB35A00E12FA4 /* RecentSearchModel.xcdatamodel */,
+			);
+			currentVersion = 9DBA642124EFB35A00E12FA4 /* RecentSearchModel.xcdatamodel */;
+			path = RecentSearchModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9D13C7E12487842E0058A7BF /* Project object */;
 }

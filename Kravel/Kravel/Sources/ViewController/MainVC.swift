@@ -9,6 +9,7 @@
 import UIKit
 
 class MainVC: UIViewController {
+    // MARK: - 초기 화면 로그인 버튼 설정
     @IBOutlet weak var signinButton: UIButton! {
         willSet {
             guard let signinButton = newValue as? CustomButton else { return }
@@ -16,6 +17,7 @@ class MainVC: UIViewController {
         }
     }
     
+    // MARK: - 초기 화면 회원가입 버튼 설정
     @IBOutlet weak var signupButton: UIButton! {
         willSet {
             guard let signupButton = newValue as? CustomButton else { return }
@@ -23,6 +25,7 @@ class MainVC: UIViewController {
         }
     }
     
+    // MARK: - 초기 화면 Title Label 설정
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {
             let paragraphStyle = NSMutableParagraphStyle()
@@ -34,8 +37,11 @@ class MainVC: UIViewController {
         }
     }
     
+    
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var backViewBottomConstraint: NSLayoutConstraint!
+    
+    // MARK: - 로그인 버튼 클릭 시 나오는 창 설정
     @IBOutlet weak var loginTextViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var loginTextView: LoginTextView! {
         didSet {
@@ -44,6 +50,7 @@ class MainVC: UIViewController {
         }
     }
     
+    // 로그인 Text View 상태에 따라 Animation 설정
     private var isToggle: Bool = false {
         didSet {
             if isToggle {
@@ -80,16 +87,22 @@ class MainVC: UIViewController {
         }
     }
     
+    // MARK: - UIViewController Override 설정
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         addGesture()
-        addKeyboardObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        addKeyboardObserver()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        removeKeyboardObserver()
     }
     
     private func addGesture() {
@@ -118,6 +131,10 @@ extension MainVC: UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(upKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
+    private func removeKeyboardObserver() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // KeyBoard가 내려갈 때, 호출
     @objc func downKeyboard(_ notification: NSNotification) {
         if let keyboardDuration: NSNumber = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber {
@@ -133,7 +150,6 @@ extension MainVC: UITextFieldDelegate {
             let keyboardDuraction: NSNumber = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber {
             let keyboardRect = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRect.height
-            print(keyboardDuraction)
             UIView.animate(withDuration: TimeInterval(truncating: keyboardDuraction)) {
                 self.loginTextView.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight+20)
             }

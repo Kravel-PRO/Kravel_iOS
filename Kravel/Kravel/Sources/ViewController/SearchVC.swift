@@ -16,6 +16,11 @@ class SearchVC: UIViewController {
         }
     }
     
+    @IBOutlet weak var searchTextField: UITextField! {
+        didSet {
+            searchTextField.delegate = self
+        }
+    }
     
     // MARK: - 밑의 Tabbar 부속 뷰 생성
     var childVCs: [UIViewController] = [] {
@@ -46,6 +51,7 @@ class SearchVC: UIViewController {
         }
     }
     
+    // MARK: - UIViewController Override 설정
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -87,6 +93,16 @@ class SearchVC: UIViewController {
             childVC.removeFromParent()
         }
         childVCs.removeAll()
+    }
+}
+
+extension SearchVC: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.text == "" { textField.resignFirstResponder() }
+        return true
     }
 }
 
