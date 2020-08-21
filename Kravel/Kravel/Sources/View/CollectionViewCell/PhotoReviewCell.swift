@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol PhotoReviewDelegate {
+    func clickMoreView()
+}
+
 class PhotoReviewCell: UICollectionViewCell {
     static let identifier = "PhotoReviewCell"
     
+    // MARK: - 포토 리뷰 이미지 설정
     var photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
@@ -26,8 +31,12 @@ class PhotoReviewCell: UICollectionViewCell {
     
     var indexPath: IndexPath?
     
+    // MARK: - 더보기 뷰 설정
     var moreView: UIView?
     
+    var delegate: PhotoReviewDelegate?
+    
+    // MARK: - UICollectionViewCell Override 설정
     override init(frame: CGRect) {
         super.init(frame: frame)
         setInitView()
@@ -58,6 +67,7 @@ class PhotoReviewCell: UICollectionViewCell {
     
     func addMoreView() {
         moreView = UIView()
+        addMoreViewTapGesture()
         moreView?.translatesAutoresizingMaskIntoConstraints = false
         moreView?.backgroundColor = UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 0.85)
         guard let moreView = self.moreView else { return }
@@ -80,5 +90,14 @@ class PhotoReviewCell: UICollectionViewCell {
             moreLabel.centerXAnchor.constraint(equalTo: moreView.centerXAnchor),
             moreLabel.centerYAnchor.constraint(equalTo: moreView.centerYAnchor)
         ])
+    }
+    
+    private func addMoreViewTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: delegate, action: #selector(goMorePhotoReviewView(_:)))
+        moreView?.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func goMorePhotoReviewView(_ sender: Any) {
+        delegate?.clickMoreView()
     }
 }

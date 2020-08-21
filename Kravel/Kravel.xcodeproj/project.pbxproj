@@ -35,6 +35,9 @@
 		9D79E29F24EC279E006310A2 /* NearPlace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D79E29E24EC279E006310A2 /* NearPlace.storyboard */; };
 		9D79E2A124EC27B7006310A2 /* NearPlaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D79E2A024EC27B7006310A2 /* NearPlaceVC.swift */; };
 		9D79E2A324EC2993006310A2 /* DetailNearPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D79E2A224EC2993006310A2 /* DetailNearPlaceCell.swift */; };
+		9D79E2A524ED02D1006310A2 /* MorePhotoReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D79E2A424ED02D1006310A2 /* MorePhotoReviewVC.swift */; };
+		9D79E2A724ED02FA006310A2 /* MorePhotoReview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D79E2A624ED02FA006310A2 /* MorePhotoReview.storyboard */; };
+		9D79E2A924ED045F006310A2 /* MorePhotoReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D79E2A824ED045F006310A2 /* MorePhotoReviewCell.swift */; };
 		9D7FB1EE24D00D13009A9C0A /* NearPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FB1ED24D00D13009A9C0A /* NearPlaceCell.swift */; };
 		9D7FB1F024D01489009A9C0A /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FB1EF24D01489009A9C0A /* UIView+Extensions.swift */; };
 		9D7FB1F424D15DE7009A9C0A /* SubLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D7FB1F324D15DE7009A9C0A /* SubLocationView.xib */; };
@@ -105,6 +108,9 @@
 		9D79E29E24EC279E006310A2 /* NearPlace.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NearPlace.storyboard; sourceTree = "<group>"; };
 		9D79E2A024EC27B7006310A2 /* NearPlaceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearPlaceVC.swift; sourceTree = "<group>"; };
 		9D79E2A224EC2993006310A2 /* DetailNearPlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNearPlaceCell.swift; sourceTree = "<group>"; };
+		9D79E2A424ED02D1006310A2 /* MorePhotoReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorePhotoReviewVC.swift; sourceTree = "<group>"; };
+		9D79E2A624ED02FA006310A2 /* MorePhotoReview.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MorePhotoReview.storyboard; sourceTree = "<group>"; };
+		9D79E2A824ED045F006310A2 /* MorePhotoReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorePhotoReviewCell.swift; sourceTree = "<group>"; };
 		9D7FB1ED24D00D13009A9C0A /* NearPlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearPlaceCell.swift; sourceTree = "<group>"; };
 		9D7FB1EF24D01489009A9C0A /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		9D7FB1F324D15DE7009A9C0A /* SubLocationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubLocationView.xib; sourceTree = "<group>"; };
@@ -251,6 +257,7 @@
 				9D96009E24E6A2F9007995EE /* LocationDetailVC.swift */,
 				9D2E26A424E960290091643E /* ReportVC.swift */,
 				9D79E2A024EC27B7006310A2 /* NearPlaceVC.swift */,
+				9D79E2A424ED02D1006310A2 /* MorePhotoReviewVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -286,6 +293,7 @@
 				9D96009C24E67B5D007995EE /* LocationDetail.storyboard */,
 				9D2E26A224E960100091643E /* Report.storyboard */,
 				9D79E29E24EC279E006310A2 /* NearPlace.storyboard */,
+				9D79E2A624ED02FA006310A2 /* MorePhotoReview.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -375,6 +383,7 @@
 				9DB03C8E24DABF3D00FF7E36 /* HotPlaceCell.swift */,
 				9D96005224E52484007995EE /* BackgroundTagCell.swift */,
 				9D79E2A224EC2993006310A2 /* DetailNearPlaceCell.swift */,
+				9D79E2A824ED045F006310A2 /* MorePhotoReviewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -450,6 +459,7 @@
 				9D8C0A2524BC515A005C1F58 /* Tabbar.storyboard in Resources */,
 				9D13C7F9248784330058A7BF /* LaunchScreen.storyboard in Resources */,
 				9D96007924E5B6FE007995EE /* ChangeInfo.storyboard in Resources */,
+				9D79E2A724ED02FA006310A2 /* MorePhotoReview.storyboard in Resources */,
 				9D7FB1FC24D16A15009A9C0A /* PlacePopupView.xib in Resources */,
 				9D8EA91624E8911900FD5059 /* loading.json in Resources */,
 				9D13C7F6248784330058A7BF /* Assets.xcassets in Resources */,
@@ -534,6 +544,7 @@
 				9D8EA91124E7BE4B00FD5059 /* ImageKey.swift in Sources */,
 				9D9694CD24C5E7570046CB85 /* PlaceCell.swift in Sources */,
 				9D94BDF224BE2C710027B9BF /* ContentDetailVC.swift in Sources */,
+				9D79E2A924ED045F006310A2 /* MorePhotoReviewCell.swift in Sources */,
 				9D13C811248796900058A7BF /* LoginTextView.swift in Sources */,
 				9D7FB1F624D15E60009A9C0A /* SubLocationView.swift in Sources */,
 				9D9694CF24C623F00046CB85 /* PhotoReviewCell.swift in Sources */,
@@ -550,6 +561,7 @@
 				9D13C7F12487842E0058A7BF /* MainVC.swift in Sources */,
 				9DEDA6C024BCEEFC00E978F5 /* MovieChildVC.swift in Sources */,
 				9D13C7ED2487842E0058A7BF /* AppDelegate.swift in Sources */,
+				9D79E2A524ED02D1006310A2 /* MorePhotoReviewVC.swift in Sources */,
 				9D13C7EF2487842E0058A7BF /* SceneDelegate.swift in Sources */,
 				9D7FB1FA24D16505009A9C0A /* PhotoReviewView.swift in Sources */,
 				9D3D162F2488E2C700AE1B4C /* UIColor+Additions.swift in Sources */,

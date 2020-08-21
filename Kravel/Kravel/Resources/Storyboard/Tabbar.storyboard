@@ -291,17 +291,27 @@
                                 <rect key="frame" x="16" y="104" width="343" height="46.666666666666657"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="연예인, 드라마 등을 검색해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9ep-8a-AQm">
-                                        <rect key="frame" x="16" y="14.000000000000002" width="311" height="18.666666666666671"/>
+                                        <rect key="frame" x="16" y="14.000000000000002" width="271" height="18.666666666666671"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="webSearch"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p7G-Tb-h5c">
+                                        <rect key="frame" x="303" y="11.333333333333329" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="p7G-Tb-h5c" secondAttribute="height" multiplier="1:1" id="Ifd-wb-lC8"/>
+                                        </constraints>
+                                        <state key="normal" image="btnSearch"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="9ep-8a-AQm" secondAttribute="trailing" constant="16" id="6lQ-RF-c0v"/>
+                                    <constraint firstItem="p7G-Tb-h5c" firstAttribute="centerY" secondItem="Ndi-93-yU6" secondAttribute="centerY" id="116-yA-NXl"/>
                                     <constraint firstItem="9ep-8a-AQm" firstAttribute="centerY" secondItem="Ndi-93-yU6" secondAttribute="centerY" id="Grh-46-zDB"/>
                                     <constraint firstAttribute="width" secondItem="Ndi-93-yU6" secondAttribute="height" multiplier="191:26" id="K2G-iQ-L6c"/>
+                                    <constraint firstAttribute="trailing" secondItem="p7G-Tb-h5c" secondAttribute="trailing" constant="16" id="P4N-Zi-GbB"/>
                                     <constraint firstItem="9ep-8a-AQm" firstAttribute="leading" secondItem="Ndi-93-yU6" secondAttribute="leading" constant="16" id="Von-gf-p8e"/>
+                                    <constraint firstItem="p7G-Tb-h5c" firstAttribute="height" secondItem="Ndi-93-yU6" secondAttribute="height" multiplier="0.514286" id="njG-U0-2s9"/>
+                                    <constraint firstItem="p7G-Tb-h5c" firstAttribute="leading" secondItem="9ep-8a-AQm" secondAttribute="trailing" constant="16" id="pdh-ys-w0p"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l5o-Dx-8aH" customClass="CategoryTabbar" customModule="Kravel" customModuleProvider="target">
@@ -372,7 +382,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6h8-p2-ff9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="772" y="1507.3891625615763"/>
+            <point key="canvasLocation" x="772" y="1506.6502463054187"/>
         </scene>
         <!--Talent ChildVC-->
         <scene sceneID="PdQ-nL-TOl">
@@ -1105,6 +1115,7 @@
     <resources>
         <image name="IMG_9633" width="3024" height="3024"/>
         <image name="btnMore" width="16" height="16"/>
+        <image name="btnSearch" width="24" height="24"/>
         <image name="homeActive" width="28" height="28"/>
         <image name="homeInactive" width="24" height="24"/>
         <image name="icPhoto" width="24" height="24"/>

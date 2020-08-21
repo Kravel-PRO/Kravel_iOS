@@ -9,12 +9,15 @@
 import UIKit
 
 class SearchVC: UIViewController {
+    // MARK: - Search Bar 부분 설정
     @IBOutlet weak var searchBarView: UIView! {
         didSet {
             searchBarView.layer.cornerRadius = searchBarView.frame.width / 15
         }
     }
     
+    
+    // MARK: - 밑의 Tabbar 부속 뷰 생성
     var childVCs: [UIViewController] = [] {
         didSet {
             childVCs.forEach { vc in
@@ -26,12 +29,14 @@ class SearchVC: UIViewController {
         }
     }
     
+    // MARK: - Category 탭바 설정
     @IBOutlet weak var categoryTabbarView: CategoryTabbar! {
         didSet {
             categoryTabbarView.delegate = self
         }
     }
     
+    // MARK: - Category 별 내용 나타내는 CollectionView 설정
     @IBOutlet weak var pageCollectionView: UICollectionView! {
         didSet {
             pageCollectionView.dataSource = self

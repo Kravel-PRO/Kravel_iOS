@@ -138,7 +138,7 @@ class MapVC: UIViewController {
         setPopupViewLayout()
         placePopupView.contentScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: calculateBottomInset(), right: 0)
         
-        // 임시로 설정 - 나중에 장소 눌렀을 때 설정될 수 있게 바꾸기
+        // FIXME: - 임시로 설정 - 나중에 장소 눌렀을 때 설정될 수 있게 바꾸기
         placePopupView.placeImage = UIImage(named: "back")
         placePopupView.placeName = "호텔 세느장"
         placePopupView.placeLocation = "서울 종로구 돈화문로11길 28-5 (낙원동)"
@@ -226,7 +226,7 @@ class MapVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-//        setLocationManager()
+        setLocationManager()
         setMapView()
         setCurrentLocationButton()
         showPlacePopupView()
@@ -285,4 +285,3 @@ extension MapVC: NMFMapViewCameraDelegate {
         }
     }
 }
-
