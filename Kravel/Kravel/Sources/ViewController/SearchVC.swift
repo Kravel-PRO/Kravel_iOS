@@ -56,8 +56,8 @@ class SearchVC: UIViewController {
     }
     
     // MARK: - 최근 검색어 View 설정
-    var recentResearchView: RecentResearchView! = {
-        let view = RecentResearchView()
+    lazy var recentResearchView: RecentResearchView = {
+        let view = RecentResearchView(frame: pageCollectionView.frame)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isHidden = true
         return view
@@ -83,7 +83,7 @@ class SearchVC: UIViewController {
     // 마지막 Index 번호 설정
     private func getRecentResearchTerms() {
         let recentResearhTerms = CoreDataManager.shared.loadFromCoreData(request: RecentResearchTerm.fetchRequest())
-        recentResearchView.recentResearchs = recentResearhTerms
+        recentResearchView.reloadRecentResearchs(recentResearhTerms)
 
         if let lastIndex = recentResearhTerms.last?.index {
             researchLastIndex = lastIndex

@@ -17,17 +17,18 @@ class RecentResearchView: UIView {
     @IBOutlet weak var topMarginView: UIView!
     
     // MARK: - 최근 검색어 모델
-    var recentResearchs: [RecentResearchTerm] = [] {
-        didSet {
-            // FIXME: - 나중에 CoreData에서 마지막 데이터만 가져올 수 있게 설정
-            // 새롭게 데이터가 추가될 때, 마지막 Index만 추가될 수 있게 설정
-            print("set RecentResearch")
-            recentResearchTableView.reloadData()
-            animateTablewViewHeight()
-        }
+    var recentResearchs: [RecentResearchTerm] = []
+
+    // 최근 검색어에 새로운 데이터 추가
+    // 뷰 업데이트
+    func reloadRecentResearchs(_ recentResearchs: [RecentResearchTerm]) {
+        self.recentResearchs = recentResearchs
+        animateTablewViewHeight()
+        recentResearchTableView.reloadData()
     }
     
-    // 최근 검색어에 추가
+    // 최근 검색어에 Model 추가
+    // 최근 검색어 TableView Animation
     func add(recentResearch: RecentResearchTerm) {
         recentResearchs.append(recentResearch)
         recentResearchTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
