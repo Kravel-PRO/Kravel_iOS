@@ -51,10 +51,31 @@ class SearchVC: UIViewController {
         }
     }
     
+    // MARK: - 최근 검색어 View 설정
+    var recentResearchView: RecentResearchView! = {
+        let view = RecentResearchView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private func setRecentResearchView() {
+        self.view.addSubview(recentResearchView)
+    }
+    
+    private func setRecentViewConstraint() {
+        NSLayoutConstraint.activate([
+            recentResearchView.topAnchor.constraint(equalTo: searchBarView.bottomAnchor),
+            recentResearchView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            recentResearchView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            recentResearchView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
     // MARK: - UIViewController Override 설정
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setRecentResearchView()
     }
     
     private func createChildVC(by identifier: String) -> UIViewController? {
@@ -79,6 +100,7 @@ class SearchVC: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        setRecentViewConstraint()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -98,6 +120,7 @@ class SearchVC: UIViewController {
 
 extension SearchVC: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

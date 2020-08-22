@@ -23,4 +23,10 @@ struct ImageKey {
     // 현재 위치 표시 이미지
     static let icGPS = "icGps"
     static let icGPSInActive = "icGpsInactive"
+    
+    // 삭제 이미지
+    static let icbtnDelete = "btnDelete"
+    
+    // 검색 돋보기 이미지
+    static let icSearch = "btnSearch"
 }

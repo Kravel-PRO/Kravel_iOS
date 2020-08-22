@@ -68,6 +68,9 @@
 		9DBA642224EFB35A00E12FA4 /* RecentSearchModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9DBA642024EFB35A00E12FA4 /* RecentSearchModel.xcdatamodeld */; };
 		9DBA642D24F0414C00E12FA4 /* RecentResearchTerm+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBA642B24F0414C00E12FA4 /* RecentResearchTerm+CoreDataClass.swift */; };
 		9DBA642E24F0414C00E12FA4 /* RecentResearchTerm+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBA642C24F0414C00E12FA4 /* RecentResearchTerm+CoreDataProperties.swift */; };
+		9DBA643024F0437E00E12FA4 /* RecentResearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DBA642F24F0437E00E12FA4 /* RecentResearchView.xib */; };
+		9DBA643224F0439600E12FA4 /* RecentResearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBA643124F0439600E12FA4 /* RecentResearchView.swift */; };
+		9DBA643424F046A100E12FA4 /* RecentResearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBA643324F046A100E12FA4 /* RecentResearchCell.swift */; };
 		9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */; };
 		9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */; };
 		9DEDA6A924BCB70600E978F5 /* CategoryTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */; };
@@ -145,6 +148,9 @@
 		9DBA642124EFB35A00E12FA4 /* RecentSearchModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RecentSearchModel.xcdatamodel; sourceTree = "<group>"; };
 		9DBA642B24F0414C00E12FA4 /* RecentResearchTerm+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecentResearchTerm+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		9DBA642C24F0414C00E12FA4 /* RecentResearchTerm+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecentResearchTerm+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		9DBA642F24F0437E00E12FA4 /* RecentResearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentResearchView.xib; sourceTree = "<group>"; };
+		9DBA643124F0439600E12FA4 /* RecentResearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentResearchView.swift; sourceTree = "<group>"; };
+		9DBA643324F046A100E12FA4 /* RecentResearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentResearchCell.swift; sourceTree = "<group>"; };
 		9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTabbar.xib; sourceTree = "<group>"; };
@@ -240,6 +246,7 @@
 				9D7FB1F524D15E5F009A9C0A /* SubLocationView.swift */,
 				9D7FB1F924D16505009A9C0A /* PhotoReviewView.swift */,
 				9D7FB1FF24D16AA9009A9C0A /* PlacePopupView.swift */,
+				9DBA643124F0439600E12FA4 /* RecentResearchView.swift */,
 				9DEDA6AA24BCB72300E978F5 /* Tabbar */,
 				9D49E8B724C8332B007CD948 /* TableViewCell */,
 				9DEDA6A524BCA86000E978F5 /* CollectionViewCell */,
@@ -319,6 +326,7 @@
 				9D7FB1F724D164AF009A9C0A /* PhotoReviewView.xib */,
 				9D7FB1F324D15DE7009A9C0A /* SubLocationView.xib */,
 				9D7FB1FB24D16A15009A9C0A /* PlacePopupView.xib */,
+				9DBA642F24F0437E00E12FA4 /* RecentResearchView.xib */,
 			);
 			path = Xib;
 			sourceTree = "<group>";
@@ -351,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				9D49E8BA24C83378007CD948 /* MyPageCell.swift */,
+				9DBA643324F046A100E12FA4 /* RecentResearchCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -492,6 +501,7 @@
 				9D7FB1F424D15DE7009A9C0A /* SubLocationView.xib in Resources */,
 				9D13C80F248795E40058A7BF /* LoginTextView.xib in Resources */,
 				9DEDA6B024BCC74300E978F5 /* CategoryCell.xib in Resources */,
+				9DBA643024F0437E00E12FA4 /* RecentResearchView.xib in Resources */,
 				9D2E26A324E960100091643E /* Report.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -558,6 +568,7 @@
 				9DB03C8B24DAA6B800FF7E36 /* HomeNearPlaceCell.swift in Sources */,
 				9D79E2A324EC2993006310A2 /* DetailNearPlaceCell.swift in Sources */,
 				9D8C0A2724BC525C005C1F58 /* HomeVC.swift in Sources */,
+				9DBA643424F046A100E12FA4 /* RecentResearchCell.swift in Sources */,
 				9D3D162B2488DA7200AE1B4C /* SetLanguageVC.swift in Sources */,
 				9D49E8BD24C83545007CD948 /* MyPageMenu.swift in Sources */,
 				9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */,
@@ -595,6 +606,7 @@
 				9DBA642D24F0414C00E12FA4 /* RecentResearchTerm+CoreDataClass.swift in Sources */,
 				9D96007B24E5B72B007995EE /* ChangeInfoVC.swift in Sources */,
 				9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */,
+				9DBA643224F0439600E12FA4 /* RecentResearchView.swift in Sources */,
 				9D49E8B424C6DCBE007CD948 /* PrivateKey.swift in Sources */,
 				9DBA642E24F0414C00E12FA4 /* RecentResearchTerm+CoreDataProperties.swift in Sources */,
 			);
