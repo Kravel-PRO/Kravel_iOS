@@ -28,6 +28,7 @@ class CoreDataManager {
         guard let recentTerms = NSManagedObject(entity: entity, insertInto: context) as? RecentResearchTerm else { return }
         recentTerms.term = term
         recentTerms.date = date
+        recentTerms.index = index
         
         do {
             try context.save()
@@ -50,8 +51,24 @@ class CoreDataManager {
         }
     }
     
+    // MARK: - 해당 index 모델 가져온다
+    func loadFromCoreData<T: NSManagedObject>(at index: Int32, request: NSFetchRequest<T>) -> T? {
+        request.predicate = NSPredicate(format: "index = %@", NSNumber(value: index))
+        do {
+            if let recentTermAtIndex = try context?.fetch(request) {
+                if recentTermAtIndex.count == 0 { return nil }
+                return recentTermAtIndex[0]
+            }
+        } catch {
+            print(error)
+            return nil
+        }
+        return nil
+    }
+    
+    // MARK: - 특정 index 번호 삭제
     func delete<T: NSManagedObject>(at index: Int, request: NSFetchRequest<T>) -> Bool {
-        request.predicate = NSPredicate(format: "term = %@", NSNumber(value: index))
+        request.predicate = NSPredicate(format: "index = %@", NSNumber(value: index))
         
         do {
             if let recentTerms = try context?.fetch(request) {
@@ -66,9 +83,8 @@ class CoreDataManager {
         return true
     }
     
+    // MARK: - 해당 타입 전체 삭제
     func removeAll<T: NSManagedObject>(request: NSFetchRequest<T>) -> Bool {
-//        let fetchReqeust = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataName.recentResearch.rawValue)
-        
         do {
             if let recentTerms = try context?.fetch(request) {
                 recentTerms.forEach { element in
@@ -79,7 +95,6 @@ class CoreDataManager {
             print(error.localizedDescription)
             return false
         }
-        
         return true
     }
 }

@@ -21,11 +21,34 @@ class RecentResearchView: UIView {
         didSet {
             // FIXME: - 나중에 CoreData에서 마지막 데이터만 가져올 수 있게 설정
             // 새롭게 데이터가 추가될 때, 마지막 Index만 추가될 수 있게 설정
-            recentResearchTableView.insertRows(at: [IndexPath(row: recentResearchs.count-1, section: 0)], with: .automatic)
+            print("set RecentResearch")
+            recentResearchTableView.reloadData()
+            animateTablewViewHeight()
+        }
+    }
+    
+    // 최근 검색어에 추가
+    func add(recentResearch: RecentResearchTerm) {
+        recentResearchs.append(recentResearch)
+        recentResearchTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+        animateTablewViewHeight()
+    }
+    
+    private func isOverTableViewHeight() -> Bool {
+        if CGFloat(recentResearchs.count) * tableViewEachRowHeight > self.frame.height - topMarginView.frame.height { return true }
+        return false
+    }
+    
+    // TableView Row의 수에 따라 Height 조절
+    private func animateTablewViewHeight() {
+        if isOverTableViewHeight() {
+            recentResearchTableViewHeight.constant = self.frame.height - topMarginView.frame.height
+        } else {
             recentResearchTableViewHeight.constant = CGFloat(recentResearchs.count) * tableViewEachRowHeight
-            UIView.animate(withDuration: 0.2) {
-                self.layoutIfNeeded()
-            }
+        }
+        
+        UIView.animate(withDuration: 0.2) {
+            self.layoutIfNeeded()
         }
     }
     
@@ -91,7 +114,7 @@ extension RecentResearchView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let recentResearchCell = tableView.dequeueReusableCell(withIdentifier: RecentResearchCell.identifier) as? RecentResearchCell else { return UITableViewCell() }
-        recentResearchCell.researchText = recentResearchs[indexPath.row].term
+        recentResearchCell.researchText = recentResearchs[recentResearchs.count - indexPath.row - 1].term
         return recentResearchCell
     }
 }

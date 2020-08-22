@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol RecentResearchCoreDataUsable {
+    func saveRecentResearch(term: String, date: Date, index: Int32)
+}
+
 class SearchVC: UIViewController {
     // MARK: - Search Bar 부분 설정
     @IBOutlet weak var searchBarView: UIView! {
@@ -80,6 +84,7 @@ class SearchVC: UIViewController {
     private func getRecentResearchTerms() {
         let recentResearhTerms = CoreDataManager.shared.loadFromCoreData(request: RecentResearchTerm.fetchRequest())
         recentResearchView.recentResearchs = recentResearhTerms
+
         if let lastIndex = recentResearhTerms.last?.index {
             researchLastIndex = lastIndex
         } else {
@@ -142,31 +147,48 @@ extension SearchVC: UITextFieldDelegate {
     
     // 검색 버튼을 눌렀을 때,
     // 1. 키보드 내려가는 액션
-    // 2. 최근 검색어 보여주는 화면 없어지기
+    // 2. 검색한 화면으로 API 요청하고 이동하기
     // 3. CoreData에 검색어 저장하기
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        var curLastIndex: Int32
         if let text = textField.text, text != "" {
             if let lastIndex = self.researchLastIndex {
-                self.researchLastIndex = lastIndex + 1
-                CoreDataManager.shared.saveRecentSearch(term: text, date: Date(), index: lastIndex+1) { isCompletion in
-                    if isCompletion {
-                        self.recentResearchView.recentResearchs = CoreDataManager.shared.loadFromCoreData(request: RecentResearchTerm.fetchRequest())
-                    }
-                }
+                // 최근 검색어에 데이터가 있는 경우
+                // *** 마지막 인덱스 + 1의 값에 데이터 저장
+                curLastIndex = lastIndex + 1
             } else {
-                self.researchLastIndex = 0
-                CoreDataManager.shared.saveRecentSearch(term: text, date: Date(), index: 0) { isCompletion in
-                    if isCompletion {
-                        self.recentResearchView.recentResearchs = CoreDataManager.shared.loadFromCoreData(request: RecentResearchTerm.fetchRequest())
-                    }
-                }
+                // 최근 검색어에 데이터가 0개인 경우
+                // *** 0으로 Index 초기화 최초 데이터 생성 ***
+                curLastIndex = 0
             }
+            
+            // 1. 마지막 Index 저장
+            // 2. 해당 text, index로 최근 검색어 생성하고 Core Data에 저장
+            // 3. 저장 성공하면 저장된 데이터 불러와서 뷰에 업데이트
+            self.researchLastIndex = curLastIndex
+            saveRecentResearch(term: text, date: Date(), index: curLastIndex)
         }
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
+    }
+}
+
+extension SearchVC: RecentResearchCoreDataUsable {
+    func saveRecentResearch(term: String, date: Date, index: Int32) {
+        CoreDataManager.shared.saveRecentSearch(term: term, date: date, index: index) { isCompletion in
+            if isCompletion {
+                guard let lastTerm = CoreDataManager.shared.loadFromCoreData(at: index, request: RecentResearchTerm.fetchRequest()) else {
+                    print("가져오기 실패")
+                    return
+                }
+                
+                self.recentResearchView.add(recentResearch: lastTerm)
+            }
+        }
         
     }
 }
