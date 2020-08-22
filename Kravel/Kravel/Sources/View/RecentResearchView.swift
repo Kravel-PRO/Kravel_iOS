@@ -19,7 +19,13 @@ class RecentResearchView: UIView {
     // MARK: - 최근 검색어 모델
     var recentResearchs: [RecentResearchTerm] = [] {
         didSet {
-            recentResearchTableView.reloadData()
+            // FIXME: - 나중에 CoreData에서 마지막 데이터만 가져올 수 있게 설정
+            // 새롭게 데이터가 추가될 때, 마지막 Index만 추가될 수 있게 설정
+            recentResearchTableView.insertRows(at: [IndexPath(row: recentResearchs.count-1, section: 0)], with: .automatic)
+            recentResearchTableViewHeight.constant = CGFloat(recentResearchs.count) * tableViewEachRowHeight
+            UIView.animate(withDuration: 0.2) {
+                self.layoutIfNeeded()
+            }
         }
     }
     
@@ -27,9 +33,17 @@ class RecentResearchView: UIView {
     var recentResearchTableView: UITableView = {
         let recentResearchTableView = UITableView()
         recentResearchTableView.translatesAutoresizingMaskIntoConstraints = false
+        recentResearchTableView.separatorInset = .zero
+        recentResearchTableView.contentInsetAdjustmentBehavior = .automatic
         recentResearchTableView.register(RecentResearchCell.self, forCellReuseIdentifier: RecentResearchCell.identifier)
         return recentResearchTableView
     }()
+    
+    // Tablew View 한 Row당 높이
+    private let tableViewEachRowHeight: CGFloat = 52
+    
+    // RecentTableView Height Constraint
+    var recentResearchTableViewHeight: NSLayoutConstraint!
     
     private func setRecentResearchTableView() {
         recentResearchTableView.dataSource = self
@@ -38,11 +52,12 @@ class RecentResearchView: UIView {
     }
     
     private func setTableViewConstraint() {
+        recentResearchTableViewHeight = recentResearchTableView.heightAnchor.constraint(equalToConstant: CGFloat(recentResearchs.count)*tableViewEachRowHeight)
         NSLayoutConstraint.activate([
             recentResearchTableView.topAnchor.constraint(equalTo: topMarginView.bottomAnchor),
             recentResearchTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             recentResearchTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            recentResearchTableView.heightAnchor.constraint(equalToConstant: 200)
+            recentResearchTableViewHeight
         ])
     }
     
@@ -83,6 +98,6 @@ extension RecentResearchView: UITableViewDataSource {
 
 extension RecentResearchView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 52
+        return tableViewEachRowHeight
     }
 }

@@ -55,6 +55,7 @@ class SearchVC: UIViewController {
     var recentResearchView: RecentResearchView! = {
         let view = RecentResearchView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
         return view
     }()
     
@@ -71,11 +72,27 @@ class SearchVC: UIViewController {
         ])
     }
     
+    // MARK: - Core Data에서 최근 검색어 가져오기
+    private var researchLastIndex: Int32?
+    
+    // 최근 검색어 Core Data로부터 불러오기
+    // 마지막 Index 번호 설정
+    private func getRecentResearchTerms() {
+        let recentResearhTerms = CoreDataManager.shared.loadFromCoreData(request: RecentResearchTerm.fetchRequest())
+        recentResearchView.recentResearchs = recentResearhTerms
+        if let lastIndex = recentResearhTerms.last?.index {
+            researchLastIndex = lastIndex
+        } else {
+            researchLastIndex = nil
+        }
+    }
+    
     // MARK: - UIViewController Override 설정
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setRecentResearchView()
+        getRecentResearchTerms()
     }
     
     private func createChildVC(by identifier: String) -> UIViewController? {
@@ -120,12 +137,37 @@ class SearchVC: UIViewController {
 
 extension SearchVC: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
+        recentResearchView.isHidden = false
     }
     
+    // 검색 버튼을 눌렀을 때,
+    // 1. 키보드 내려가는 액션
+    // 2. 최근 검색어 보여주는 화면 없어지기
+    // 3. CoreData에 검색어 저장하기
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField.text == "" { textField.resignFirstResponder() }
+        textField.resignFirstResponder()
+        if let text = textField.text, text != "" {
+            if let lastIndex = self.researchLastIndex {
+                self.researchLastIndex = lastIndex + 1
+                CoreDataManager.shared.saveRecentSearch(term: text, date: Date(), index: lastIndex+1) { isCompletion in
+                    if isCompletion {
+                        self.recentResearchView.recentResearchs = CoreDataManager.shared.loadFromCoreData(request: RecentResearchTerm.fetchRequest())
+                    }
+                }
+            } else {
+                self.researchLastIndex = 0
+                CoreDataManager.shared.saveRecentSearch(term: text, date: Date(), index: 0) { isCompletion in
+                    if isCompletion {
+                        self.recentResearchView.recentResearchs = CoreDataManager.shared.loadFromCoreData(request: RecentResearchTerm.fetchRequest())
+                    }
+                }
+            }
+        }
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
     }
 }
 

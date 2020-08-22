@@ -410,7 +410,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="102" height="136"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_9633" translatesAutoresizingMaskIntoConstraints="NO" id="0KC-2A-GVm">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bitmap_1" translatesAutoresizingMaskIntoConstraints="NO" id="0KC-2A-GVm">
                                                     <rect key="frame" x="0.0" y="0.0" width="102" height="102"/>
                                                     <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                     <constraints>
@@ -493,7 +493,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="102" height="136"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_9633" translatesAutoresizingMaskIntoConstraints="NO" id="9jo-Vm-853">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bitmap_0" translatesAutoresizingMaskIntoConstraints="NO" id="9jo-Vm-853">
                                                     <rect key="frame" x="0.0" y="0.0" width="102" height="102"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="9jo-Vm-853" secondAttribute="height" multiplier="1:1" id="s3N-3a-vjz"/>
@@ -1114,7 +1114,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="IMG_9633" width="3024" height="3024"/>
+        <image name="bitmap_0" width="375" height="280"/>
+        <image name="bitmap_1" width="168" height="112"/>
         <image name="btnMore" width="16" height="16"/>
         <image name="btnSearch" width="24" height="24"/>
         <image name="homeActive" width="28" height="28"/>

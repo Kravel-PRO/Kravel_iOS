@@ -20,7 +20,7 @@ class CoreDataManager {
     private lazy var context = appDelegate?.persistentContainer.viewContext
     
     // MARK: - 해당 정보를 저장한다
-    func saveRecentSearch(term: String, date: Date, index: Int32, completion: ((Bool) -> Void)? = nil) {
+    func saveRecentSearch(term: String, date: Date, index: Int32, completion: @escaping (Bool) -> Void) {
         guard let context = self.context,
             let entity = NSEntityDescription.entity(forEntityName: CoreDataName.recentResearch.rawValue, in: context)
             else { return }
@@ -31,10 +31,10 @@ class CoreDataManager {
         
         do {
             try context.save()
-            completion?(true)
+            completion(true)
         } catch {
             print(error.localizedDescription)
-            completion?(false)
+            completion(false)
         }
     }
     
@@ -51,10 +51,6 @@ class CoreDataManager {
     }
     
     func delete<T: NSManagedObject>(at index: Int, request: NSFetchRequest<T>) -> Bool {
-//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CoreDataName.recentResearch.rawValue)
-//        fetchRequest.predicate = NSPredicate(format: "term = %@", NSString(string: term))
-//        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = RecentResearchTerm.fetchRequest()
-        
         request.predicate = NSPredicate(format: "term = %@", NSNumber(value: index))
         
         do {
