@@ -52,12 +52,17 @@ class SearchVC: UIViewController {
             pageCollectionView.delegate = self
             pageCollectionView.showsHorizontalScrollIndicator = false
             pageCollectionView.isPagingEnabled = true
+            pageCollectionView.isHidden = true
         }
     }
     
     // MARK: - 최근 검색어 View 설정
     lazy var recentResearchView: RecentResearchView = {
-        let view = RecentResearchView(frame: pageCollectionView.frame)
+        let view = RecentResearchView(frame: CGRect(x: 0, y: searchBarView.frame.maxY, width: self.view.frame.width, height: categoryTabbarView.frame.height + pageCollectionView.frame.height + 16))
+        if let tabbar = self.tabBarController?.tabBar {
+            view.originalHeight = self.view.frame.height-tabbar.frame.height-searchBarView.frame.height
+        }
+        
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isHidden = true
         return view
@@ -72,7 +77,7 @@ class SearchVC: UIViewController {
             recentResearchView.topAnchor.constraint(equalTo: searchBarView.bottomAnchor),
             recentResearchView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             recentResearchView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            recentResearchView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+            recentResearchView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
     }
     
@@ -84,7 +89,7 @@ class SearchVC: UIViewController {
     private func getRecentResearchTerms() {
         let recentResearhTerms = CoreDataManager.shared.loadFromCoreData(request: RecentResearchTerm.fetchRequest())
         recentResearchView.reloadRecentResearchs(recentResearhTerms)
-
+        
         if let lastIndex = recentResearhTerms.last?.index {
             researchLastIndex = lastIndex
         } else {
@@ -98,6 +103,7 @@ class SearchVC: UIViewController {
         // Do any additional setup after loading the view.
         setRecentResearchView()
         getRecentResearchTerms()
+        addObserver()
     }
     
     private func createChildVC(by identifier: String) -> UIViewController? {
@@ -239,5 +245,17 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
 extension SearchVC: PagingTabbarDelegate {
     func scrollToIndex(to index: Int) {
         pageCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: true)
+    }
+}
+
+extension SearchVC {
+    private func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(setLastIndex(_:)), name: .deleteResearchTerm, object: nil)
+    }
+    
+    @objc func setLastIndex(_ notification: NSNotification) {
+        guard let lastIndex = notification.userInfo?["index"] as? Int else { return }
+        researchLastIndex = Int32(lastIndex)
+        
     }
 }

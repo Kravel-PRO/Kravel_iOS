@@ -295,11 +295,12 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="webSearch"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p7G-Tb-h5c">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p7G-Tb-h5c">
                                         <rect key="frame" x="303" y="11.333333333333329" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="p7G-Tb-h5c" secondAttribute="height" multiplier="1:1" id="Ifd-wb-lC8"/>
                                         </constraints>
+                                        <color key="tintColor" red="0.070588235294117646" green="0.070588235294117646" blue="0.070588235294117646" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="btnSearch"/>
                                     </button>
                                 </subviews>

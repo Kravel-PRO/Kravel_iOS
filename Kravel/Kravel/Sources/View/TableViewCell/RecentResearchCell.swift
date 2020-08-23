@@ -11,6 +11,9 @@ import UIKit
 class RecentResearchCell: UITableViewCell {
     static let identifier = "RecentResearchCell"
     
+    var indexPath: IndexPath?
+    var cellButtonDelegate: CellButtonDelegate?
+    
     // MARK: - 돋보기 이미지 설정
     var searchImageView: UIImageView = {
         let searchImageView = UIImageView()
@@ -44,6 +47,16 @@ class RecentResearchCell: UITableViewCell {
         return deleteButton
     }()
     
+    // Delete 버튼 클릭했을 때, Delegate에 이벤트 전달
+    @objc func deleteRecentResearch(_ sender: Any) {
+        guard let indexPath = self.indexPath else { return }
+        cellButtonDelegate?.click(at: indexPath)
+    }
+    
+    private func addDeleteButtonAction() {
+        deleteButton.addTarget(self, action: #selector(deleteRecentResearch(_:)), for: .touchUpInside)
+    }
+    
     // MARK: - Constraint 초기 설정
     private func addSubViews() {
         self.addSubview(searchImageView)
@@ -73,12 +86,18 @@ class RecentResearchCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubViews()
         setConstraint()
+        addDeleteButtonAction()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         addSubViews()
         setConstraint()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        indexPath = nil
     }
     
     override func awakeFromNib() {
@@ -90,7 +109,4 @@ class RecentResearchCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
-
-    
-    
 }

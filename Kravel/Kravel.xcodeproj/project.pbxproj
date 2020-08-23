@@ -71,6 +71,8 @@
 		9DBA643024F0437E00E12FA4 /* RecentResearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DBA642F24F0437E00E12FA4 /* RecentResearchView.xib */; };
 		9DBA643224F0439600E12FA4 /* RecentResearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBA643124F0439600E12FA4 /* RecentResearchView.swift */; };
 		9DBA643424F046A100E12FA4 /* RecentResearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBA643324F046A100E12FA4 /* RecentResearchCell.swift */; };
+		9DBA643724F11E6700E12FA4 /* CellButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBA643624F11E6700E12FA4 /* CellButtonDelegate.swift */; };
+		9DBA643924F2738600E12FA4 /* NSNotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBA643824F2738600E12FA4 /* NSNotificationName+Extensions.swift */; };
 		9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */; };
 		9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */; };
 		9DEDA6A924BCB70600E978F5 /* CategoryTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */; };
@@ -151,6 +153,8 @@
 		9DBA642F24F0437E00E12FA4 /* RecentResearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentResearchView.xib; sourceTree = "<group>"; };
 		9DBA643124F0439600E12FA4 /* RecentResearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentResearchView.swift; sourceTree = "<group>"; };
 		9DBA643324F046A100E12FA4 /* RecentResearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentResearchCell.swift; sourceTree = "<group>"; };
+		9DBA643624F11E6700E12FA4 /* CellButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellButtonDelegate.swift; sourceTree = "<group>"; };
+		9DBA643824F2738600E12FA4 /* NSNotificationName+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotificationName+Extensions.swift"; sourceTree = "<group>"; };
 		9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTabbar.xib; sourceTree = "<group>"; };
@@ -229,6 +233,7 @@
 			children = (
 				9D13C7EC2487842E0058A7BF /* AppDelegate.swift */,
 				9D13C7EE2487842E0058A7BF /* SceneDelegate.swift */,
+				9DBA643524F11E5400E12FA4 /* Protocols */,
 				9D13C805248784B40058A7BF /* Extension */,
 				9DA80453248E5962003826B9 /* Util */,
 				9DBA641F24EFB31D00E12FA4 /* CoreDataModel */,
@@ -297,6 +302,7 @@
 				9D014C3F248C4C3600758FCC /* UIViewController+Extensions.swift */,
 				9DA80456248E9200003826B9 /* String+Extensions.swift */,
 				9D7FB1EF24D01489009A9C0A /* UIView+Extensions.swift */,
+				9DBA643824F2738600E12FA4 /* NSNotificationName+Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -396,6 +402,14 @@
 				9DBA642024EFB35A00E12FA4 /* RecentSearchModel.xcdatamodeld */,
 			);
 			path = CoreDataModel;
+			sourceTree = "<group>";
+		};
+		9DBA643524F11E5400E12FA4 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9DBA643624F11E6700E12FA4 /* CellButtonDelegate.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		9DEDA6A524BCA86000E978F5 /* CollectionViewCell */ = {
@@ -557,6 +571,7 @@
 			files = (
 				9D5DBB47248D5BBF00D82D40 /* SexButton.swift in Sources */,
 				9D7FB20024D16AA9009A9C0A /* PlacePopupView.swift in Sources */,
+				9DBA643924F2738600E12FA4 /* NSNotificationName+Extensions.swift in Sources */,
 				9D014C3E248C4A5E00758FCC /* SignupVC.swift in Sources */,
 				9D2E26A124E935020091643E /* Language.swift in Sources */,
 				9DBA642224EFB35A00E12FA4 /* RecentSearchModel.xcdatamodeld in Sources */,
@@ -602,6 +617,7 @@
 				9DB03C8D24DAB1CB00FF7E36 /* TagCell.swift in Sources */,
 				9D2E26A524E960290091643E /* ReportVC.swift in Sources */,
 				9D7FB1F024D01489009A9C0A /* UIView+Extensions.swift in Sources */,
+				9DBA643724F11E6700E12FA4 /* CellButtonDelegate.swift in Sources */,
 				9D8EA91324E85D3600FD5059 /* LocationManager.swift in Sources */,
 				9DBA642D24F0414C00E12FA4 /* RecentResearchTerm+CoreDataClass.swift in Sources */,
 				9D96007B24E5B72B007995EE /* ChangeInfoVC.swift in Sources */,

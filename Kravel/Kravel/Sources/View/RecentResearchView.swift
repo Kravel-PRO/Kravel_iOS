@@ -13,6 +13,8 @@ class RecentResearchView: UIView {
     
     var view: UIView!
     
+    var originalHeight: CGFloat?
+    
     // MARK: - Label 표시를 위한 View
     @IBOutlet weak var topMarginView: UIView!
     
@@ -31,21 +33,25 @@ class RecentResearchView: UIView {
     // 최근 검색어 TableView Animation
     func add(recentResearch: RecentResearchTerm) {
         recentResearchs.append(recentResearch)
-        recentResearchTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+        recentResearchTableView.reloadData()
         animateTablewViewHeight()
     }
     
     private func isOverTableViewHeight() -> Bool {
-        if CGFloat(recentResearchs.count) * tableViewEachRowHeight > self.frame.height - topMarginView.frame.height { return true }
+        guard let originalHeight = self.originalHeight else { return false }
+        if CGFloat(recentResearchs.count) * tableViewEachRowHeight > originalHeight - topMarginView.frame.height { return true }
         return false
     }
     
     // TableView Row의 수에 따라 Height 조절
     private func animateTablewViewHeight() {
+        guard let originalHeight = self.originalHeight else { return }
         if isOverTableViewHeight() {
-            recentResearchTableViewHeight.constant = self.frame.height - topMarginView.frame.height
+            recentResearchTableViewHeight.constant = originalHeight - topMarginView.frame.height
+            recentResearchTableView.isScrollEnabled = true
         } else {
             recentResearchTableViewHeight.constant = CGFloat(recentResearchs.count) * tableViewEachRowHeight
+            recentResearchTableView.isScrollEnabled = false
         }
         
         UIView.animate(withDuration: 0.2) {
@@ -76,7 +82,9 @@ class RecentResearchView: UIView {
     }
     
     private func setTableViewConstraint() {
-        recentResearchTableViewHeight = recentResearchTableView.heightAnchor.constraint(equalToConstant: CGFloat(recentResearchs.count)*tableViewEachRowHeight)
+//        recentResearchTableViewHeight = recentResearchTableView.heightAnchor.constraint(equalToConstant: CGFloat(recentResearchs.count)*tableViewEachRowHeight)
+//
+        recentResearchTableViewHeight = recentResearchTableView.heightAnchor.constraint(equalToConstant: 0)
         NSLayoutConstraint.activate([
             recentResearchTableView.topAnchor.constraint(equalTo: topMarginView.bottomAnchor),
             recentResearchTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -91,6 +99,7 @@ class RecentResearchView: UIView {
         loadXib()
         setRecentResearchTableView()
         setTableViewConstraint()
+        animateTablewViewHeight()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -98,6 +107,7 @@ class RecentResearchView: UIView {
         loadXib()
         setRecentResearchTableView()
         setTableViewConstraint()
+        animateTablewViewHeight()
     }
     
     private func loadXib() {
@@ -116,6 +126,8 @@ extension RecentResearchView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let recentResearchCell = tableView.dequeueReusableCell(withIdentifier: RecentResearchCell.identifier) as? RecentResearchCell else { return UITableViewCell() }
         recentResearchCell.researchText = recentResearchs[recentResearchs.count - indexPath.row - 1].term
+        recentResearchCell.cellButtonDelegate = self
+        recentResearchCell.indexPath = indexPath
         return recentResearchCell
     }
 }
@@ -123,5 +135,37 @@ extension RecentResearchView: UITableViewDataSource {
 extension RecentResearchView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return tableViewEachRowHeight
+    }
+}
+
+extension RecentResearchView: CellButtonDelegate {
+    // TableView 안의 삭제 버튼 클릭했을 때,
+    // 1. 해당 모델 삭제
+    // 2. 해당 Row 뒤의 Models index 전부 수정해주기
+    // 3. 해당 TableView Row 삭제
+    func click(at indexPath: IndexPath) {
+        if CoreDataManager.shared.delete(at: recentResearchs.count - indexPath.row - 1, request: RecentResearchTerm.fetchRequest()) {
+            recentResearchs.remove(at: recentResearchs.count - indexPath.row - 1)
+            
+            // 최근 검색어 index 재정렬시켜주기
+            for index in recentResearchs.count - indexPath.row..<recentResearchs.count {
+                let curIndex = recentResearchs[index].index
+                recentResearchs[index].index = curIndex-1
+            }
+        
+            recentResearchTableView.beginUpdates()
+            recentResearchTableView.deleteRows(at: [indexPath], with: .automatic)
+            recentResearchTableView.endUpdates()
+            animateTablewViewHeight()
+            
+            // 삭제된 Cell의 뒷 순서 셀 가져와서 indexPath 설정
+            for index in indexPath.row..<recentResearchs.count {
+                guard let cell = recentResearchTableView.cellForRow(at: IndexPath(row: index, section: 0)) as? RecentResearchCell else { return }
+                cell.indexPath = IndexPath(row: index, section: 0)
+            }
+            
+            // SearchVC에 삭제되고 마지막 Index 알려주기
+            NotificationCenter.default.post(name: .deleteResearchTerm, object: nil, userInfo: ["index": recentResearchs.count-1])
+        }
     }
 }

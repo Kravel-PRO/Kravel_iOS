@@ -74,13 +74,14 @@ class CoreDataManager {
             if let recentTerms = try context?.fetch(request) {
                 if recentTerms.count == 0 { return false }
                 context?.delete(recentTerms[0])
+                return true
             }
         } catch {
             print(error.localizedDescription)
             return false
         }
         
-        return true
+        return false
     }
     
     // MARK: - 해당 타입 전체 삭제
@@ -96,5 +97,25 @@ class CoreDataManager {
             return false
         }
         return true
+    }
+    
+    // MARK: - 어떤 index을 가진 객체 index 번호를 바꿔주기
+    func updateIndex<T: NSManagedObject>(at index: Int32, to updateIndex: Int32, request: NSFetchRequest<T>) -> Bool {
+        request.predicate = NSPredicate(format: "index = %@", NSNumber(value: index))
+        
+        do {
+            if let updatingTerm = try context?.fetch(request) {
+                if updatingTerm.count == 0 { return false }
+                else { print("매치되는 것이 없음") }
+                updatingTerm[0].setValue(updateIndex, forKey: "index")
+                try context?.save()
+                return true
+            }
+        } catch {
+            print(error.localizedDescription)
+            return false
+        }
+        
+        return false
     }
 }
