@@ -74,6 +74,7 @@ class CoreDataManager {
             if let recentTerms = try context?.fetch(request) {
                 if recentTerms.count == 0 { return false }
                 context?.delete(recentTerms[0])
+                try context?.save()
                 return true
             }
         } catch {
@@ -91,6 +92,7 @@ class CoreDataManager {
                 recentTerms.forEach { element in
                     context?.delete(element)
                 }
+                try context?.save()
             }
         } catch {
             print(error.localizedDescription)
@@ -106,7 +108,6 @@ class CoreDataManager {
         do {
             if let updatingTerm = try context?.fetch(request) {
                 if updatingTerm.count == 0 { return false }
-                else { print("매치되는 것이 없음") }
                 updatingTerm[0].setValue(updateIndex, forKey: "index")
                 try context?.save()
                 return true

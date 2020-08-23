@@ -26,6 +26,53 @@ class SearchVC: UIViewController {
         }
     }
     
+    // MARK: - 뒤로가기 버튼
+    @IBOutlet weak var backButton: UIButton! {
+        didSet {
+            backButton.isHidden = true
+        }
+    }
+    
+    // 최근 검색 뷰 없앰
+    @IBAction func clickBackButton(_ sender: Any) {
+        backButton.isHidden = true
+        recentResearchView.isHidden = true
+        UIView.animate(withDuration: 0.2) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    // 검색어 내용 검색
+    @IBAction func search(_ sender: Any) {
+        searchText(searchTextField)
+    }
+    
+    // textField 내용 바탕으로 검색 실행
+    // 1. Core Data에 해당 검색어 저장
+    // 2. 검색 내용 화면에 띄우기
+    private func searchText(_ textField: UITextField) {
+        textField.resignFirstResponder()
+        var curLastIndex: Int32
+        if let text = textField.text, text != "" {
+            textField.text = ""
+            if let lastIndex = self.researchLastIndex {
+                // 최근 검색어에 데이터가 있는 경우
+                // *** 마지막 인덱스 + 1의 값에 데이터 저장
+                curLastIndex = lastIndex + 1
+            } else {
+                // 최근 검색어에 데이터가 0개인 경우
+                // *** 0으로 Index 초기화 최초 데이터 생성 ***
+                curLastIndex = 0
+            }
+            
+            // 1. 마지막 Index 저장
+            // 2. 해당 text, index로 최근 검색어 생성하고 Core Data에 저장
+            // 3. 저장 성공하면 저장된 데이터 불러와서 뷰에 업데이트
+            self.researchLastIndex = curLastIndex
+            saveRecentResearch(term: text, date: Date(), index: curLastIndex)
+        }
+    }
+    
     // MARK: - 밑의 Tabbar 부속 뷰 생성
     var childVCs: [UIViewController] = [] {
         didSet {
@@ -52,7 +99,6 @@ class SearchVC: UIViewController {
             pageCollectionView.delegate = self
             pageCollectionView.showsHorizontalScrollIndicator = false
             pageCollectionView.isPagingEnabled = true
-            pageCollectionView.isHidden = true
         }
     }
     
@@ -149,6 +195,10 @@ class SearchVC: UIViewController {
 extension SearchVC: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         recentResearchView.isHidden = false
+        backButton.isHidden = false
+        UIView.animate(withDuration: 0.2) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     // 검색 버튼을 눌렀을 때,
@@ -156,25 +206,7 @@ extension SearchVC: UITextFieldDelegate {
     // 2. 검색한 화면으로 API 요청하고 이동하기
     // 3. CoreData에 검색어 저장하기
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        var curLastIndex: Int32
-        if let text = textField.text, text != "" {
-            if let lastIndex = self.researchLastIndex {
-                // 최근 검색어에 데이터가 있는 경우
-                // *** 마지막 인덱스 + 1의 값에 데이터 저장
-                curLastIndex = lastIndex + 1
-            } else {
-                // 최근 검색어에 데이터가 0개인 경우
-                // *** 0으로 Index 초기화 최초 데이터 생성 ***
-                curLastIndex = 0
-            }
-            
-            // 1. 마지막 Index 저장
-            // 2. 해당 text, index로 최근 검색어 생성하고 Core Data에 저장
-            // 3. 저장 성공하면 저장된 데이터 불러와서 뷰에 업데이트
-            self.researchLastIndex = curLastIndex
-            saveRecentResearch(term: text, date: Date(), index: curLastIndex)
-        }
+        searchText(textField)
         return true
     }
     
@@ -195,7 +227,6 @@ extension SearchVC: RecentResearchCoreDataUsable {
                 self.recentResearchView.add(recentResearch: lastTerm)
             }
         }
-        
     }
 }
 

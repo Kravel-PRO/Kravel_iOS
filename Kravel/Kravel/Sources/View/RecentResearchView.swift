@@ -53,10 +53,6 @@ class RecentResearchView: UIView {
             recentResearchTableViewHeight.constant = CGFloat(recentResearchs.count) * tableViewEachRowHeight
             recentResearchTableView.isScrollEnabled = false
         }
-        
-        UIView.animate(withDuration: 0.2) {
-            self.layoutIfNeeded()
-        }
     }
     
     // MARK: - 최근 검색어 TableView 설정
@@ -82,8 +78,6 @@ class RecentResearchView: UIView {
     }
     
     private func setTableViewConstraint() {
-//        recentResearchTableViewHeight = recentResearchTableView.heightAnchor.constraint(equalToConstant: CGFloat(recentResearchs.count)*tableViewEachRowHeight)
-//
         recentResearchTableViewHeight = recentResearchTableView.heightAnchor.constraint(equalToConstant: 0)
         NSLayoutConstraint.activate([
             recentResearchTableView.topAnchor.constraint(equalTo: topMarginView.bottomAnchor),
@@ -150,11 +144,13 @@ extension RecentResearchView: CellButtonDelegate {
             // 최근 검색어 index 재정렬시켜주기
             for index in recentResearchs.count - indexPath.row..<recentResearchs.count {
                 let curIndex = recentResearchs[index].index
-                recentResearchs[index].index = curIndex-1
+                if CoreDataManager.shared.updateIndex(at: curIndex, to: curIndex-1, request: RecentResearchTerm.fetchRequest()) {
+                    print("Success Update")
+                }
             }
-        
+            
             recentResearchTableView.beginUpdates()
-            recentResearchTableView.deleteRows(at: [indexPath], with: .automatic)
+            recentResearchTableView.deleteRows(at: [indexPath], with: .fade)
             recentResearchTableView.endUpdates()
             animateTablewViewHeight()
             
