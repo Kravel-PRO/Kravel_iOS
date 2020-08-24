@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecentResearchView" customModule="Kravel" customModuleProvider="target">
             <connections>
+                <outlet property="labelView" destination="Js1-LT-Atw" id="lcm-f8-dD3"/>
                 <outlet property="topMarginView" destination="53T-t7-wGD" id="7L1-7e-eX5"/>
             </connections>
         </placeholder>
@@ -34,16 +35,36 @@
                         <constraint firstItem="6i5-fX-Jdc" firstAttribute="centerY" secondItem="53T-t7-wGD" secondAttribute="centerY" id="rhj-KO-LD7"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Js1-LT-Atw">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="242"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="최근 검색어 내역이 없습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmK-62-yXz">
+                            <rect key="frame" x="101.66666666666669" y="112" width="172" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="kmK-62-yXz" firstAttribute="centerX" secondItem="Js1-LT-Atw" secondAttribute="centerX" id="ALO-u2-azD"/>
+                        <constraint firstAttribute="width" secondItem="Js1-LT-Atw" secondAttribute="height" multiplier="375:242" id="PEI-oT-jZC"/>
+                        <constraint firstItem="kmK-62-yXz" firstAttribute="centerY" secondItem="Js1-LT-Atw" secondAttribute="centerY" id="cn8-D1-udq"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="53T-t7-wGD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8nk-CM-C81"/>
                 <constraint firstItem="53T-t7-wGD" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Krf-Wt-Tto"/>
+                <constraint firstItem="Js1-LT-Atw" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="OVf-qo-03w"/>
+                <constraint firstItem="Js1-LT-Atw" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="n4H-nU-qur"/>
+                <constraint firstItem="Js1-LT-Atw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="rA4-XD-KRw"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="53T-t7-wGD" secondAttribute="trailing" id="zMA-Vw-nFW"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="139" y="121"/>
+            <point key="canvasLocation" x="138.40000000000001" y="120.44334975369459"/>
         </view>
     </objects>
 </document>

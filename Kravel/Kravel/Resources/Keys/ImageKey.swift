@@ -24,6 +24,9 @@ struct ImageKey {
     static let icGPS = "icGps"
     static let icGPSInActive = "icGpsInactive"
     
+    // 장소 정보 새로고침 이미지
+    static let icRefresh = "btnRefresh"
+    
     // 삭제 이미지
     static let icbtnDelete = "btnDelete"
     

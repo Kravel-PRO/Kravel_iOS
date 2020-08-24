@@ -26,6 +26,35 @@ class MapVC: UIViewController {
         overlay?.hidden = false
     }
     
+    // MARK: - 내 위치 기준 새로고침 설정
+    var refreshButton: UIButton = {
+        let refreshButton = UIButton()
+        refreshButton.setImage(UIImage(named: ImageKey.icRefresh), for: .normal)
+        refreshButton.translatesAutoresizingMaskIntoConstraints = false
+       return refreshButton
+    }()
+    
+    // 1. 리프레쉬 버튼에 타겟 추가
+    // 2. 리프레쉬 버튼 화면에 추가
+    private func setRefreshButton() {
+        refreshButton.addTarget(self, action: #selector(refresh(_:)), for: .touchUpInside)
+        self.view.addSubview(refreshButton)
+    }
+    
+    @objc func refresh(_ sender: Any) {
+        print("Refresh")
+    }
+    
+    private func setRefreshButtonLayout() {
+        NSLayoutConstraint.activate([
+            refreshButton.leadingAnchor.constraint(equalTo: currentLocationButton.leadingAnchor),
+            refreshButton.trailingAnchor.constraint(equalTo: currentLocationButton.trailingAnchor),
+            refreshButton.bottomAnchor.constraint(equalTo: currentLocationButton.topAnchor, constant: -16),
+            refreshButton.widthAnchor.constraint(equalTo: currentLocationButton.widthAnchor),
+            refreshButton.heightAnchor.constraint(equalTo: currentLocationButton.heightAnchor)
+        ])
+    }
+    
     // MARK: - 현재 내위치 찾기 설정
     var overlay: NMFLocationOverlay?
     
@@ -89,6 +118,7 @@ class MapVC: UIViewController {
             nearPlaceCollectionView.showsHorizontalScrollIndicator = false
             nearPlaceCollectionView.showsVerticalScrollIndicator = false
             
+            // FIXME: Test 때문에 Hidden 옵션
             nearPlaceCollectionView.isHidden = true
         }
     }
@@ -229,12 +259,14 @@ class MapVC: UIViewController {
         setLocationManager()
         setMapView()
         setCurrentLocationButton()
+        setRefreshButton()
         showPlacePopupView()
     }
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         setCurrentLocationButtonLayout()
+        setRefreshButtonLayout()
     }
 }
 

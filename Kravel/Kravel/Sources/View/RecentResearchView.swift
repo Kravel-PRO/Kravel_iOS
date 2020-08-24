@@ -18,8 +18,27 @@ class RecentResearchView: UIView {
     // MARK: - Label 표시를 위한 View
     @IBOutlet weak var topMarginView: UIView!
     
+    // MARK: - Data가 없는 경우 표시하는 화면
+    @IBOutlet weak var labelView: UIView!
+    
     // MARK: - 최근 검색어 모델
     var recentResearchs: [RecentResearchTerm] = []
+    
+    private func isEmptyResearch() -> Bool {
+        if recentResearchs.count == 0 {
+            topMarginView.isHidden = true
+            recentResearchTableView.isHidden = true
+            labelView.isHidden = false
+            self.view.backgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1)
+            return true
+        } else {
+            topMarginView.isHidden = false
+            recentResearchTableView.isHidden = false
+            labelView.isHidden = true
+            self.view.backgroundColor = .white
+            return false
+        }
+    }
 
     // 최근 검색어에 새로운 데이터 추가
     // 뷰 업데이트
@@ -27,6 +46,8 @@ class RecentResearchView: UIView {
         self.recentResearchs = recentResearchs
         animateTablewViewHeight()
         recentResearchTableView.reloadData()
+        if isEmptyResearch() { print("Empty") }
+        else { print("notEmpty") }
     }
     
     // 최근 검색어에 Model 추가
@@ -35,6 +56,8 @@ class RecentResearchView: UIView {
         recentResearchs.append(recentResearch)
         recentResearchTableView.reloadData()
         animateTablewViewHeight()
+        if isEmptyResearch() { print("Empty") }
+        else { print("notEmpty") }
     }
     
     private func isOverTableViewHeight() -> Bool {
@@ -140,6 +163,8 @@ extension RecentResearchView: CellButtonDelegate {
     func click(at indexPath: IndexPath) {
         if CoreDataManager.shared.delete(at: recentResearchs.count - indexPath.row - 1, request: RecentResearchTerm.fetchRequest()) {
             recentResearchs.remove(at: recentResearchs.count - indexPath.row - 1)
+            if isEmptyResearch() { print("empty") }
+            else { print("notEmpty") }
             
             // 최근 검색어 index 재정렬시켜주기
             for index in recentResearchs.count - indexPath.row..<recentResearchs.count {
