@@ -41,8 +41,8 @@ class MyScrapCell: UICollectionViewCell {
             tagCollectionView.dataSource = self
             if let layout = tagCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-                layout.minimumInteritemSpacing = 5
-                layout.minimumLineSpacing = 5
+                layout.minimumInteritemSpacing = 1
+                layout.minimumLineSpacing = 1
             }
         }
     }

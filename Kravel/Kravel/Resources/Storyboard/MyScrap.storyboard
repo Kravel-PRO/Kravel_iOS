@@ -56,14 +56,14 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TagCell" id="5MV-rO-oWY" customClass="TagCell" customModule="Kravel" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="3" width="69" height="13"/>
+                                                            <rect key="frame" x="0.0" y="2" width="69" height="15"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="CEA-Rm-G1l">
-                                                                <rect key="frame" x="0.0" y="0.0" width="69" height="13"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="69" height="15"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nE-zN-v4V">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="69" height="13"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="69" height="15"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                         <color key="textColor" red="0.50980392156862742" green="0.55686274509803924" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -76,7 +76,7 @@
                                                                     <constraint firstItem="2nE-zN-v4V" firstAttribute="leading" secondItem="CEA-Rm-G1l" secondAttribute="leading" id="mGT-6G-Kon"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
-                                                            <size key="customSize" width="69" height="13"/>
+                                                            <size key="customSize" width="69" height="15"/>
                                                             <connections>
                                                                 <outlet property="tagLabel" destination="2nE-zN-v4V" id="BBx-w3-P2L"/>
                                                             </connections>

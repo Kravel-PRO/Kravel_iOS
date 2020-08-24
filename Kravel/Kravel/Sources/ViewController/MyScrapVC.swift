@@ -19,17 +19,85 @@ class MyScrapVC: UIViewController {
         }
     }
     
-    var scrapDatas: [String] = ["여기", "스크랩", "정보에욤", "받아가세요", "알겠죠?"]
+//    var scrapDatas: [String] = ["여기", "스크랩", "정보에욤", "받아가세요", "알겠죠?"]
+    var scrapDatas: [String] = []
     
     var tags: [[String]] = [["태그", "했나?"], ["여기", "아이유"], ["저긴", "유명한"], ["안녕", "좋네"], ["제주도", "청정"]]
     
-    // MARK: - UIViewController Override 부분
+    // MARK: - 스크랩 데이터 없을 때 뷰
+    var noScrapView: UIView = {
+        let tempView = UIView()
+        tempView.translatesAutoresizingMaskIntoConstraints = false
+        tempView.isHidden = true
+        return tempView
+    }()
+    
+    var noScrapStackView: UIStackView = {
+        let tempView = UIStackView()
+        tempView.alignment = .center
+        tempView.distribution = .fill
+        tempView.axis = .vertical
+        tempView.spacing = 16
+        tempView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let noScrapImage = UIImageView(image: UIImage(named: ImageKey.icNoScrap))
+        noScrapImage.contentMode = .scaleAspectFill
+        noScrapImage.translatesAutoresizingMaskIntoConstraints = false
+        
+        let noScrapLabel = UILabel()
+        noScrapLabel.numberOfLines = 0
+        noScrapLabel.font = UIFont.systemFont(ofSize: 16)
+        noScrapLabel.textColor = .veryLightPink
+        noScrapLabel.textAlignment = .center
+        noScrapLabel.text = "아직 스크랩 한 장소가 없어요.\n가고 싶은 장소를 스크랩해보세요!"
+        noScrapLabel.sizeToFit()
+        
+        tempView.addArrangedSubview(noScrapImage)
+        tempView.addArrangedSubview(noScrapLabel)
+        return tempView
+    }()
+    
+    // 스크랩 된 데이터가 없을 때, 표시하는 View 초기화
+    private func setNoScrapView() {
+        self.view.addSubview(noScrapView)
+        noScrapView.addSubview(noScrapStackView)
+    }
+    
+    // 스크랩 된 데이터 없을 때, View Layout 초기화
+    private func setNoScrapViewLayout() {
+        NSLayoutConstraint.activate([
+            noScrapView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            noScrapView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            noScrapView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            noScrapView.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.86),
+            noScrapStackView.centerXAnchor.constraint(equalTo: noScrapView.centerXAnchor),
+            noScrapStackView.centerYAnchor.constraint(equalTo: noScrapView.centerYAnchor),
+            noScrapStackView.arrangedSubviews[0].widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2),
+            noScrapStackView.arrangedSubviews[0].heightAnchor.constraint(equalTo: noScrapStackView.arrangedSubviews[0].widthAnchor, multiplier: 0.8)
+        ])
+    }
+    
+    // MARK: - UIViewController viewDidLoad() 부분
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        setNoScrapView()
+        if isEmptyScrap() { print("EmptyView") }
     }
     
+    private func isEmptyScrap() -> Bool {
+        if scrapDatas.count == 0 {
+            noScrapView.isHidden = false
+            scrapCollectionView.isHidden = true
+            return true
+        } else {
+            noScrapView.isHidden = true
+            scrapCollectionView.isHidden = false
+            return false
+        }
+    }
+    
+    // MARK: - UIViewController viewWillAppear() 부분
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNav()
@@ -40,6 +108,12 @@ class MyScrapVC: UIViewController {
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationItem.title = "스크랩"
         self.navigationController?.navigationBar.topItem?.title = ""
+    }
+    
+    // MARK: - UIViewController viewWillLayoutSubviews() 부분
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        setNoScrapViewLayout()
     }
 }
 
@@ -63,7 +137,7 @@ extension MyScrapVC: UICollectionViewDelegate {
 
 extension MyScrapVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.frame.width - 9 - 16*2) / 2
+        let width = (collectionView.frame.width - 8 - 16*2) / 2
         let height = width * 0.92
         return CGSize(width: width, height: height)
     }
@@ -77,6 +151,6 @@ extension MyScrapVC: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 9
+        return 8
     }
 }
