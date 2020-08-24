@@ -139,6 +139,7 @@ class MapVC: UIViewController {
         let shadowView = UIView(frame: CGRect(x: 0, y: estimateY, width: view.frame.width, height: view.frame.height))
         shadowView.makeShadow(color: UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1), blur: 4, x: 0, y: -2)
         shadowView.translatesAutoresizingMaskIntoConstraints = false
+        shadowView.isHidden = true
         return shadowView
     }()
     
