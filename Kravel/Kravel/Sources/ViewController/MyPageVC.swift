@@ -45,14 +45,14 @@ class MyPageVC: UIViewController {
     
     // MARK: - 내 포토 리뷰 / 스크랩 뷰 설정
     @IBAction func goMyPhotoReview(_ sender: Any) {
-        print("Photo Review")
+        guard let myPhotoReviewVC = UIStoryboard(name: "MyPhotoReview", bundle: nil).instantiateViewController(withIdentifier: MyPhotoReviewVC.identifier) as? MyPhotoReviewVC else { return }
+        self.navigationController?.pushViewController(myPhotoReviewVC, animated: true)
     }
     
     @IBAction func goMyScrap(_ sender: Any) {
         guard let myScrapVC = UIStoryboard(name: "MyScrap", bundle: nil).instantiateViewController(withIdentifier: MyScrapVC.identifier) as? MyScrapVC else { return }
         self.navigationController?.pushViewController(myScrapVC, animated: true)
     }
-    
     
     // MARK: - Menu 화면 설정
     @IBOutlet weak var menuTableView: UITableView! {

@@ -19,8 +19,7 @@ class MyScrapVC: UIViewController {
         }
     }
     
-//    var scrapDatas: [String] = ["여기", "스크랩", "정보에욤", "받아가세요", "알겠죠?"]
-    var scrapDatas: [String] = []
+    var scrapDatas: [String] = ["여기", "스크랩", "정보에욤", "받아가세요", "알겠죠?"]
     
     var tags: [[String]] = [["태그", "했나?"], ["여기", "아이유"], ["저긴", "유명한"], ["안녕", "좋네"], ["제주도", "청정"]]
     
@@ -28,7 +27,6 @@ class MyScrapVC: UIViewController {
     var noScrapView: UIView = {
         let tempView = UIView()
         tempView.translatesAutoresizingMaskIntoConstraints = false
-        tempView.isHidden = true
         return tempView
     }()
     
