@@ -36,4 +36,8 @@ struct ImageKey {
     // 스크랩/포토리뷰 없을 때 이미지
     static let icNoPhotoEmpty = "icNoPhotoEmpty"
     static let icNoScrap = "icNoScrap"
+    
+    // 맵 마커 표시 이미지
+    static let icMarkDefault = "icMarkDefault"
+    static let icMarkFocus = "icMarkFocus"
 }
