@@ -868,9 +868,6 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lap-BE-0uG">
                                                 <rect key="frame" x="0.0" y="0.0" width="187.66666666666666" height="101"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSN-N4-Qx6">
-                                                        <rect key="frame" x="0.0" y="0.0" width="187.66666666666666" height="101"/>
-                                                    </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="TQm-CM-95O">
                                                         <rect key="frame" x="0.0" y="24" width="187.66666666666666" height="53"/>
                                                         <subviews>
@@ -889,6 +886,12 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSN-N4-Qx6">
+                                                        <rect key="frame" x="0.0" y="0.0" width="187.66666666666666" height="101"/>
+                                                        <connections>
+                                                            <action selector="goMyPhotoReview:" destination="wyv-am-cNI" eventType="touchUpInside" id="YpS-eL-4aD"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
@@ -905,9 +908,6 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pen-2B-H3i">
                                                 <rect key="frame" x="187.66666666666663" y="0.0" width="187.33333333333337" height="101"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUq-MC-G4k">
-                                                        <rect key="frame" x="0.0" y="0.0" width="187.33333333333334" height="101"/>
-                                                    </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="2KZ-qi-Tds">
                                                         <rect key="frame" x="0.0" y="24" width="187.33333333333334" height="53"/>
                                                         <subviews>
@@ -925,6 +925,12 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUq-MC-G4k">
+                                                        <rect key="frame" x="0.0" y="0.0" width="187.33333333333334" height="101"/>
+                                                        <connections>
+                                                            <action selector="goMyScrap:" destination="wyv-am-cNI" eventType="touchUpInside" id="0nb-Xe-Iqi"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>

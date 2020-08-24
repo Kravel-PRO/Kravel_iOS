@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--My ScrapVC-->
+        <scene sceneID="4i5-Q6-h6P">
+            <objects>
+                <viewController storyboardIdentifier="MyScrapVC" id="C6C-t2-7w1" customClass="MyScrapVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="urH-NZ-Ybz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BfU-f2-cY6">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eum-qj-ygB">
+                                    <size key="itemSize" width="168" height="155"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="16" minY="24" maxX="16" maxY="24"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyScrapCell" id="BbT-MD-uN3" customClass="MyScrapCell" customModule="Kravel" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="24" width="168" height="155"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="46o-og-gH3">
+                                            <rect key="frame" x="0.0" y="0.0" width="168" height="155"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="35f-zn-clX">
+                                                    <rect key="frame" x="0.0" y="0.0" width="168" height="110"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="35f-zn-clX" secondAttribute="height" multiplier="84:55" id="iYr-El-xGf"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYu-cU-bzJ">
+                                                    <rect key="frame" x="0.0" y="115" width="40" height="18"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <color key="textColor" red="0.15294117647058825" green="0.15294117647058825" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="i6q-Nu-asm">
+                                                    <rect key="frame" x="0.0" y="136" width="168" height="19"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="9ba-yz-Ib5">
+                                                        <size key="itemSize" width="69" height="13"/>
+                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    </collectionViewFlowLayout>
+                                                    <cells>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TagCell" id="5MV-rO-oWY" customClass="TagCell" customModule="Kravel" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="3" width="69" height="13"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="CEA-Rm-G1l">
+                                                                <rect key="frame" x="0.0" y="0.0" width="69" height="13"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nE-zN-v4V">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="69" height="13"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                        <color key="textColor" red="0.50980392156862742" green="0.55686274509803924" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="bottom" secondItem="2nE-zN-v4V" secondAttribute="bottom" id="GA1-rl-jZO"/>
+                                                                    <constraint firstItem="2nE-zN-v4V" firstAttribute="top" secondItem="CEA-Rm-G1l" secondAttribute="top" id="I4X-ku-cqF"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="2nE-zN-v4V" secondAttribute="trailing" id="Xwl-7B-UIf"/>
+                                                                    <constraint firstItem="2nE-zN-v4V" firstAttribute="leading" secondItem="CEA-Rm-G1l" secondAttribute="leading" id="mGT-6G-Kon"/>
+                                                                </constraints>
+                                                            </collectionViewCellContentView>
+                                                            <size key="customSize" width="69" height="13"/>
+                                                            <connections>
+                                                                <outlet property="tagLabel" destination="2nE-zN-v4V" id="BBx-w3-P2L"/>
+                                                            </connections>
+                                                        </collectionViewCell>
+                                                    </cells>
+                                                </collectionView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="35f-zn-clX" firstAttribute="top" secondItem="46o-og-gH3" secondAttribute="top" id="2h9-vb-owZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="i6q-Nu-asm" secondAttribute="trailing" id="9XN-iL-0Ad"/>
+                                                <constraint firstItem="fYu-cU-bzJ" firstAttribute="leading" secondItem="46o-og-gH3" secondAttribute="leading" id="GNa-U7-nmT"/>
+                                                <constraint firstAttribute="trailing" secondItem="35f-zn-clX" secondAttribute="trailing" id="Hi1-cw-18p"/>
+                                                <constraint firstItem="i6q-Nu-asm" firstAttribute="leading" secondItem="46o-og-gH3" secondAttribute="leading" id="PhT-yy-7Un"/>
+                                                <constraint firstAttribute="bottom" secondItem="i6q-Nu-asm" secondAttribute="bottom" id="Tvk-Xf-Fl3"/>
+                                                <constraint firstItem="i6q-Nu-asm" firstAttribute="top" secondItem="fYu-cU-bzJ" secondAttribute="bottom" constant="3" id="dQi-gg-nxr"/>
+                                                <constraint firstItem="35f-zn-clX" firstAttribute="leading" secondItem="46o-og-gH3" secondAttribute="leading" id="jaw-DK-Mu1"/>
+                                                <constraint firstItem="fYu-cU-bzJ" firstAttribute="top" secondItem="35f-zn-clX" secondAttribute="bottom" constant="5" id="nln-6k-zIk"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="scrapImageView" destination="35f-zn-clX" id="Nla-yd-6oJ"/>
+                                            <outlet property="scrapLabel" destination="fYu-cU-bzJ" id="ZNs-Xz-drd"/>
+                                            <outlet property="tagCollectionView" destination="i6q-Nu-asm" id="SdB-DG-4Fb"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="BfU-f2-cY6" firstAttribute="leading" secondItem="cqU-EM-3OC" secondAttribute="leading" id="0tb-aJ-58j"/>
+                            <constraint firstItem="BfU-f2-cY6" firstAttribute="top" secondItem="cqU-EM-3OC" secondAttribute="top" id="4uX-nk-VoW"/>
+                            <constraint firstItem="cqU-EM-3OC" firstAttribute="bottom" secondItem="BfU-f2-cY6" secondAttribute="bottom" id="ZwI-LJ-vCm"/>
+                            <constraint firstItem="cqU-EM-3OC" firstAttribute="trailing" secondItem="BfU-f2-cY6" secondAttribute="trailing" id="t74-0D-zmL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="cqU-EM-3OC"/>
+                    </view>
+                    <connections>
+                        <outlet property="scrapCollectionView" destination="BfU-f2-cY6" id="4x0-MG-sIa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oYi-d3-7RM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="121.73913043478262" y="51.5625"/>
+        </scene>
+    </scenes>
+</document>
