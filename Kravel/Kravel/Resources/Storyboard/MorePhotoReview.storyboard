@@ -72,11 +72,14 @@
                                                                 <constraints>
                                                                     <constraint firstItem="qQM-VJ-c7b" firstAttribute="leading" secondItem="TQ5-Yu-NAe" secondAttribute="leading" id="Zpy-xc-Gtk"/>
                                                                     <constraint firstAttribute="trailing" secondItem="qQM-VJ-c7b" secondAttribute="trailing" id="aAd-mD-FDA"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="qQM-VJ-c7b" secondAttribute="bottom" id="rIv-3G-f8Q"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="qQM-VJ-c7b" secondAttribute="bottom" id="uQb-MG-gh4"/>
                                                                     <constraint firstItem="qQM-VJ-c7b" firstAttribute="top" secondItem="TQ5-Yu-NAe" secondAttribute="top" id="yEn-gy-NcE"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
                                                             <size key="customSize" width="64" height="16"/>
+                                                            <connections>
+                                                                <outlet property="tagLabel" destination="qQM-VJ-c7b" id="X0I-kw-OYg"/>
+                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>

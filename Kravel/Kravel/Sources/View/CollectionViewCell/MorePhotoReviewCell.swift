@@ -12,7 +12,12 @@ class MorePhotoReviewCell: UICollectionViewCell {
     static let identifier = "MorePhotoReviewCell"
     
     // MARK: - 포토 리뷰 이미지 설정
-    @IBOutlet weak var photoReviewImageView: UIImageView!
+    @IBOutlet weak var photoReviewImageView: UIImageView! {
+        didSet {
+            photoReviewImageView.layer.cornerRadius = photoReviewImageView.frame.width / 20
+            photoReviewImageView.clipsToBounds = true
+        }
+    }
     
     var photoReviewImage: UIImage? {
         didSet {
@@ -61,7 +66,7 @@ class MorePhotoReviewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setNameLabelTopConstraint()
+//        setNameLabelTopConstraint()
     }
 }
 

@@ -178,6 +178,17 @@ extension HomeVC: UICollectionViewDataSource {
 }
 
 extension HomeVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == nearPlaceCollectionView {
+            
+        } else if collectionView == hotPlaceCollectionView {
+            
+        } else {
+            if indexPath.row != 5 { return }
+            guard let morePhotoVC = UIStoryboard(name: "MorePhotoReview", bundle: nil).instantiateViewController(withIdentifier: MorePhotoReviewVC.identifier) as? MorePhotoReviewVC else { return }
+            self.navigationController?.pushViewController(morePhotoVC, animated: true)
+        }
+    }
 }
 
 extension HomeVC: UICollectionViewDelegateFlowLayout {

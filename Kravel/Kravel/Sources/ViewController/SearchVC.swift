@@ -37,6 +37,7 @@ class SearchVC: UIViewController {
     @IBAction func clickBackButton(_ sender: Any) {
         backButton.isHidden = true
         recentResearchView.isHidden = true
+        self.view.endEditing(true)
         UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
         }
