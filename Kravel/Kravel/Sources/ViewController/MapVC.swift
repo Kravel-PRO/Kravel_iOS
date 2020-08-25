@@ -101,7 +101,7 @@ class MapVC: UIViewController {
     
     // 내 위치 찾기 버튼 초기 화면 설정
     private func setCurrentLocationButtonLayout() {
-        currentLocationButtonBottomConstraint = currentLocationButton.bottomAnchor.constraint(equalTo: placeShadowView.topAnchor, constant: -16)
+        currentLocationButtonBottomConstraint = currentLocationButton.bottomAnchor.constraint(equalTo: nearPlaceCollectionView.topAnchor, constant: -16)
         NSLayoutConstraint.activate([
             currentLocationButtonBottomConstraint,
             currentLocationButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
@@ -271,8 +271,6 @@ class MapVC: UIViewController {
         setCurrentLocationButton()
         setRefreshButton()
         showPlacePopupView()
-        
-        setBtn()
     }
 
     override func viewWillLayoutSubviews() {

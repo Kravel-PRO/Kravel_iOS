@@ -9,21 +9,22 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlacePopupView" customModule="Kravel" customModuleProvider="target">
             <connections>
-                <outlet property="SubLocationContainerView" destination="o84-mq-GVa" id="kYw-cq-OD9"/>
                 <outlet property="buttonStackContainerView" destination="LVb-B8-jeq" id="U8L-zg-Dw8"/>
                 <outlet property="buttonStackView" destination="MdP-Dj-Taq" id="OS8-9f-Pj1"/>
                 <outlet property="contentScrollView" destination="ddV-DN-gQe" id="rL6-7b-OiA"/>
                 <outlet property="indicatorView" destination="vdN-g2-pTe" id="Xy2-SB-f7c"/>
+                <outlet property="nearByAttractionContainerView" destination="luT-1F-gFa" id="ghU-jC-5Nf"/>
                 <outlet property="photoReviewContainerView" destination="696-u5-RMh" id="aiZ-I4-EXq"/>
                 <outlet property="placeImageView" destination="yTp-c0-Ke3" id="pAB-Oj-iiU"/>
                 <outlet property="placeLocationLabel" destination="DsO-z2-p1y" id="7hO-Z1-OLt"/>
                 <outlet property="placeNameLabel" destination="w8F-TL-ANA" id="hXH-7D-fch"/>
                 <outlet property="placeTagCollectionView" destination="lxb-pN-6vI" id="dnH-Nz-UDH"/>
+                <outlet property="subLocationContainerView" destination="o84-mq-GVa" id="uNA-Zh-Xqa"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="774"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="1025"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CEj-rP-dLx" userLabel="IndicatorView">
@@ -46,10 +47,10 @@
                     </constraints>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddV-DN-gQe">
-                    <rect key="frame" x="0.0" y="24" width="375" height="750"/>
+                    <rect key="frame" x="0.0" y="24" width="375" height="967"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNY-gP-Jlf">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="739.66666666666663"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="1006.6666666666666"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BQu-Dm-eoU">
                                     <rect key="frame" x="16" y="0.0" width="82.666666666666671" height="82.666666666666671"/>
@@ -128,9 +129,9 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o84-mq-GVa" customClass="SubLocationView" customModule="Kravel" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="455.66666666666674" width="375" height="284"/>
+                                    <rect key="frame" x="0.0" y="455.66666666666674" width="375" height="360"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="284" id="oHj-B4-7NE"/>
+                                        <constraint firstAttribute="height" constant="360" id="oHj-B4-7NE"/>
                                     </constraints>
                                 </view>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="lxb-pN-6vI">
@@ -146,34 +147,54 @@
                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </collectionViewFlowLayout>
                                 </collectionView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dae-2E-yrU">
+                                    <rect key="frame" x="0.0" y="815.66666666666663" width="375" height="1"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="JaG-9r-vDJ"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="luT-1F-gFa" customClass="NearByAttractionView" customModule="Kravel" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="816.66666666666663" width="375" height="190"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="190" id="LdM-uF-rfu"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
+                                <constraint firstItem="dae-2E-yrU" firstAttribute="top" secondItem="o84-mq-GVa" secondAttribute="bottom" id="1vH-nf-Apw"/>
                                 <constraint firstItem="lxb-pN-6vI" firstAttribute="top" secondItem="w8F-TL-ANA" secondAttribute="bottom" constant="4" id="55g-xP-fpf"/>
                                 <constraint firstItem="LVb-B8-jeq" firstAttribute="top" secondItem="BQu-Dm-eoU" secondAttribute="bottom" constant="18" id="7Nd-NE-kJl"/>
                                 <constraint firstItem="DsO-z2-p1y" firstAttribute="bottom" secondItem="BQu-Dm-eoU" secondAttribute="bottom" id="9Lh-oU-zNx"/>
-                                <constraint firstAttribute="bottom" secondItem="o84-mq-GVa" secondAttribute="bottom" id="C4A-Em-pXx"/>
                                 <constraint firstItem="o84-mq-GVa" firstAttribute="leading" secondItem="aNY-gP-Jlf" secondAttribute="leading" id="C7e-qc-VKw"/>
                                 <constraint firstItem="BQu-Dm-eoU" firstAttribute="leading" secondItem="aNY-gP-Jlf" secondAttribute="leading" constant="16" id="Fdr-wI-PS7"/>
                                 <constraint firstItem="w8F-TL-ANA" firstAttribute="leading" secondItem="BQu-Dm-eoU" secondAttribute="trailing" constant="16" id="GJn-np-7sf"/>
                                 <constraint firstAttribute="trailing" secondItem="696-u5-RMh" secondAttribute="trailing" id="KAd-mD-o4T"/>
                                 <constraint firstAttribute="trailing" secondItem="enJ-Oi-Ykk" secondAttribute="trailing" id="KUM-Hz-FSi"/>
                                 <constraint firstItem="enJ-Oi-Ykk" firstAttribute="leading" secondItem="aNY-gP-Jlf" secondAttribute="leading" id="LEC-WQ-WiI"/>
+                                <constraint firstItem="luT-1F-gFa" firstAttribute="top" secondItem="dae-2E-yrU" secondAttribute="bottom" id="QYm-Av-9kY"/>
                                 <constraint firstAttribute="trailing" secondItem="o84-mq-GVa" secondAttribute="trailing" id="SD7-dQ-0kb"/>
                                 <constraint firstItem="696-u5-RMh" firstAttribute="top" secondItem="enJ-Oi-Ykk" secondAttribute="bottom" id="T4B-KS-NHN"/>
+                                <constraint firstAttribute="trailing" secondItem="dae-2E-yrU" secondAttribute="trailing" id="VFG-Ce-2eE"/>
                                 <constraint firstItem="Wde-VG-ulU" firstAttribute="leading" secondItem="aNY-gP-Jlf" secondAttribute="leading" id="ZlK-lY-Pzb"/>
                                 <constraint firstAttribute="trailing" secondItem="Wde-VG-ulU" secondAttribute="trailing" id="Zp7-K6-mwj"/>
+                                <constraint firstAttribute="trailing" secondItem="luT-1F-gFa" secondAttribute="trailing" id="bb0-7w-wJf"/>
                                 <constraint firstItem="lxb-pN-6vI" firstAttribute="leading" secondItem="w8F-TL-ANA" secondAttribute="leading" id="cLp-q5-GGz"/>
                                 <constraint firstItem="DsO-z2-p1y" firstAttribute="leading" secondItem="w8F-TL-ANA" secondAttribute="leading" id="dXK-1U-zzN"/>
                                 <constraint firstItem="Wde-VG-ulU" firstAttribute="top" secondItem="696-u5-RMh" secondAttribute="bottom" id="deo-qv-BI5"/>
                                 <constraint firstAttribute="trailing" secondItem="LVb-B8-jeq" secondAttribute="trailing" constant="16" id="kBT-Un-gQQ"/>
                                 <constraint firstItem="LVb-B8-jeq" firstAttribute="leading" secondItem="aNY-gP-Jlf" secondAttribute="leading" constant="16" id="nKQ-R7-uWj"/>
                                 <constraint firstItem="enJ-Oi-Ykk" firstAttribute="top" secondItem="LVb-B8-jeq" secondAttribute="bottom" constant="16" id="qig-aM-Yy0"/>
+                                <constraint firstItem="dae-2E-yrU" firstAttribute="leading" secondItem="aNY-gP-Jlf" secondAttribute="leading" id="sO6-a1-FJu"/>
                                 <constraint firstItem="696-u5-RMh" firstAttribute="leading" secondItem="aNY-gP-Jlf" secondAttribute="leading" id="sWq-aD-3pq"/>
                                 <constraint firstAttribute="trailing" secondItem="lxb-pN-6vI" secondAttribute="trailing" constant="16" id="vhx-5t-8oW"/>
                                 <constraint firstItem="w8F-TL-ANA" firstAttribute="top" secondItem="aNY-gP-Jlf" secondAttribute="top" id="vmh-SD-dTr"/>
                                 <constraint firstItem="BQu-Dm-eoU" firstAttribute="top" secondItem="aNY-gP-Jlf" secondAttribute="top" id="wHb-aD-aG3"/>
                                 <constraint firstItem="o84-mq-GVa" firstAttribute="top" secondItem="Wde-VG-ulU" secondAttribute="bottom" id="wOZ-xf-C3v"/>
+                                <constraint firstAttribute="bottom" secondItem="luT-1F-gFa" secondAttribute="bottom" id="yFH-Ws-rdA"/>
+                                <constraint firstItem="luT-1F-gFa" firstAttribute="leading" secondItem="aNY-gP-Jlf" secondAttribute="leading" id="z4g-Hg-e2t"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -200,7 +221,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="277.60000000000002" y="98.275862068965523"/>
+            <point key="canvasLocation" x="277.60000000000002" y="107.51231527093597"/>
         </view>
     </objects>
     <resources>

@@ -128,7 +128,10 @@ class PlacePopupView: UIView {
     }
     
     // MARK: - 장소 위치를 나타내는 View을 담는 Container View 설정
-    @IBOutlet weak var SubLocationContainerView: SubLocationView!
+    @IBOutlet weak var subLocationContainerView: SubLocationView!
+    
+    // MARK: - 주변 관광지 나타내는 View을 담는 Container View 설정
+    @IBOutlet weak var nearByAttractionContainerView: NearByAttractionView!
     
     // MARK: - Main ScrollView 설정
     @IBOutlet weak var contentScrollView: UIScrollView! {
