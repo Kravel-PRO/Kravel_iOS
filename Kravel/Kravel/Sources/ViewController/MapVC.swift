@@ -119,7 +119,7 @@ class MapVC: UIViewController {
             nearPlaceCollectionView.showsVerticalScrollIndicator = false
             
             // FIXME: Test 때문에 Hidden 옵션
-            nearPlaceCollectionView.isHidden = true
+            nearPlaceCollectionView.isHidden = false
         }
     }
     
@@ -129,6 +129,7 @@ class MapVC: UIViewController {
     lazy var placePopupView: PlacePopupView = {
         // PopupView 초기 위치 설정
         let tempPopupView = PlacePopupView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        tempPopupView.showingState = .notShow
         tempPopupView.translatesAutoresizingMaskIntoConstraints = false
         return tempPopupView
     }()
@@ -188,7 +189,7 @@ class MapVC: UIViewController {
             placeShadowView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
             placeShadowView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
             placeShadowView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            placeShadowView.topAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -calculateInitPanelViewHeight()),
+            placeShadowView.topAnchor.constraint(equalTo: self.view.bottomAnchor),
             placePopupView.topAnchor.constraint(equalTo: placeShadowView.topAnchor),
             placePopupView.leadingAnchor.constraint(equalTo: placeShadowView.leadingAnchor),
             placePopupView.trailingAnchor.constraint(equalTo: placeShadowView.trailingAnchor),
@@ -214,41 +215,49 @@ class MapVC: UIViewController {
         panGesuture.setTranslation(.zero, in: placeShadowView)
         
         if panGesuture.state == .ended {
-            if !isPanning, changeY < -(self.view.frame.height / 16.9) {
-                isPanning = true
-                placePopupView.setEnableScroll(true)
-                UIView.animate(withDuration: 0.3) {
-                    self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -400)
+            guard let showingState = placePopupView.showingState else { return }
+            switch showingState {
+            case .notShow: return
+            case .halfShow:
+                if changeY < -(self.view.frame.height / 16.9) {
+                    placePopupView.showingState = .almostShow
+                    placePopupView.setEnableScroll(true)
+                    UIView.animate(withDuration: 0.3) {
+                        self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -400-self.calculateInitPanelViewHeight())
+                    }
+                } else {
+                    UIView.animate(withDuration: 0.3) {
+                        self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -self.calculateInitPanelViewHeight())
+                    }
                 }
-            } else if !isPanning, changeY >= -(self.view.frame.height / 16.9) {
-                UIView.animate(withDuration: 0.3) {
-                    self.placeShadowView.transform = .identity
-                }
-            } else if isPanning, -400 - changeY <= -(self.view.frame.height / 16.9) {
-                isPanning = false
-                placePopupView.setEnableScroll(false)
-                placePopupView.contentScrollView.contentOffset = .zero
-                UIView.animate(withDuration: 0.3) {
-                    self.placeShadowView.transform = .identity
-                }
-            } else if isPanning, -400 - changeY > -(self.view.frame.height / 16.9) &&
-                -400 - changeY < (self.view.frame.height / 16.9) {
-                UIView.animate(withDuration: 0.3) {
-                    self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -400)
-                }
-            } else {
-                let restHeight = self.view.frame.height - calculateInitPanelViewHeight() - 400
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -400-restHeight)
-                }, completion: { isComplete in
-                    guard let locationDetailVC = UIStoryboard(name: "LocationDetail", bundle: nil).instantiateViewController(withIdentifier: "LocationDetailVC") as? LocationDetailVC else { return }
-                    locationDetailVC.modalPresentationStyle = .fullScreen
-                    self.present(locationDetailVC, animated: false
-                        , completion: {
-                            self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -400)
-                            self.placePopupView.contentScrollView.contentOffset = .zero
+            case .almostShow:
+                if -400 - calculateInitPanelViewHeight() - changeY <= -(self.view.frame.height / 16.9) {
+                    placePopupView.showingState = .halfShow
+                    placePopupView.setEnableScroll(false)
+                    placePopupView.contentScrollView.contentInset = .zero
+                    UIView.animate(withDuration: 0.3) {
+                        self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -self.calculateInitPanelViewHeight())
+                    }
+                } else if  -400 - calculateInitPanelViewHeight() - changeY > -(self.view.frame.height / 16.9) && -400 - calculateInitPanelViewHeight() - changeY < (self.view.frame.height / 16.9) {
+                    UIView.animate(withDuration: 0.3) {
+                        self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -400-self.calculateInitPanelViewHeight())
+                    }
+                } else {
+                    placePopupView.showingState = .allShow
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
+                    }, completion: { isComplete in
+                        guard let locationDetailVC = UIStoryboard(name: "LocationDetail", bundle: nil).instantiateViewController(withIdentifier: "LocationDetailVC") as? LocationDetailVC else { return }
+                        locationDetailVC.modalPresentationStyle = .fullScreen
+                        self.present(locationDetailVC, animated: false
+                            , completion: {
+                                self.placePopupView.showingState = .almostShow
+                                self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -400-self.calculateInitPanelViewHeight())
+                                self.placePopupView.contentScrollView.contentOffset = .zero
+                        })
                     })
-                })
+                }
+            case .allShow: return
             }
         }
     }
@@ -262,6 +271,8 @@ class MapVC: UIViewController {
         setCurrentLocationButton()
         setRefreshButton()
         showPlacePopupView()
+        
+        setBtn()
     }
 
     override func viewWillLayoutSubviews() {

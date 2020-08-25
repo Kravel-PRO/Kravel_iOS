@@ -11,6 +11,16 @@ import UIKit
 class PlacePopupView: UIView {
     static let nibName = "PlacePopupView"
     
+    enum PopupViewState {
+        case notShow
+        case halfShow
+        case almostShow
+        case allShow
+    }
+    
+    var showingState: PopupViewState?
+    
+    // MARK: - 전체 뷰 관리
     var view: UIView! {
         didSet {
             view.setCornerRadius(self.frame.width / 25)
