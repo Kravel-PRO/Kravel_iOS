@@ -94,6 +94,9 @@ class LocationDetailVC: UIViewController {
     // MARK: - 위치 정보 나타내는 뷰 설정
     @IBOutlet weak var subLocationView: SubLocationView!
     
+    // MARK: - 내 주변 관광지 뷰 설정
+    @IBOutlet weak var nearByAttractionView: NearByAttractionView!
+    
     // MARK: - ViewController Override 부분
     override func viewDidLoad() {
         super.viewDidLoad()
