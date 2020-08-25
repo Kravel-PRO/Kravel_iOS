@@ -39,6 +39,7 @@ class NearByAttractionCell: UICollectionViewCell {
         nearByAttractionNameLabel.font = UIFont.systemFont(ofSize: 14)
         nearByAttractionNameLabel.textColor = .white
         nearByAttractionNameLabel.textAlignment = .center
+        nearByAttractionNameLabel.translatesAutoresizingMaskIntoConstraints = false
         return nearByAttractionNameLabel
     }()
     

@@ -23,8 +23,8 @@
                     <color key="textColor" red="0.15294117647058825" green="0.15294117647058825" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="uTX-nP-P9x">
-                    <rect key="frame" x="0.0" y="60" width="375" height="130"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="uTX-nP-P9x">
+                    <rect key="frame" x="0.0" y="51.333333333333329" width="375" height="138.66666666666669"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BXa-Gc-nPh">
                         <size key="itemSize" width="128" height="128"/>
@@ -36,12 +36,12 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="uTX-nP-P9x" secondAttribute="bottom" id="78Y-OS-vZg"/>
                 <constraint firstItem="obl-th-fAl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="8G8-iT-m1C"/>
                 <constraint firstItem="obl-th-fAl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="Fil-RK-m2Y"/>
+                <constraint firstItem="uTX-nP-P9x" firstAttribute="top" secondItem="obl-th-fAl" secondAttribute="bottom" constant="16" id="SI9-TY-rFf"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="uTX-nP-P9x" secondAttribute="trailing" id="YkT-N8-wDv"/>
                 <constraint firstItem="uTX-nP-P9x" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="iyd-lS-sJZ"/>
-                <constraint firstItem="uTX-nP-P9x" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="lTv-fw-Gnz"/>
+                <constraint firstAttribute="bottom" secondItem="uTX-nP-P9x" secondAttribute="bottom" id="tGQ-jD-fJz"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

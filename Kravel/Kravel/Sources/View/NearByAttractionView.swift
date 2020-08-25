@@ -57,6 +57,8 @@ extension NearByAttractionView: UICollectionViewDataSource {
         guard let nearByAttractionCell = collectionView.dequeueReusableCell(withReuseIdentifier: NearByAttractionCell.identifier, for: indexPath) as? NearByAttractionCell else { return UICollectionViewCell() }
         nearByAttractionCell.nearByAttractionImage = UIImage(named: "bitmap_0")
         nearByAttractionCell.nearByAttractionName = nearByAttractions[indexPath.row]
+        nearByAttractionCell.layer.cornerRadius = nearByAttractionCell.frame.width / 2
+        nearByAttractionCell.clipsToBounds = true
         return nearByAttractionCell
     }
 }

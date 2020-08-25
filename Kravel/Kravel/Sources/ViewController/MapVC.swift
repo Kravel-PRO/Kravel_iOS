@@ -26,6 +26,41 @@ class MapVC: UIViewController {
         overlay?.hidden = false
     }
     
+    // FIXME: - 임시 마커
+    private var markers: [NMFMarker] = []
+    
+    private func setMarkers() {
+        let marker = NMFMarker(position: NMGLatLng(lat: 37.560800, lng: 126.993854), iconImage: NMFOverlayImage(image: UIImage(named: ImageKey.icMarkDefault)!))
+        marker.mapView = mapView
+        marker.userInfo = ["isTouch": false]
+        
+        marker.touchHandler = { (tempMarker) -> Bool in
+            guard let isTouch = tempMarker.userInfo["isTouch"] as? Bool else { return false }
+            guard let clickedMarker = tempMarker as? NMFMarker else { return false }
+            
+            clickedMarker.iconImage = isTouch ? NMFOverlayImage(image: UIImage(named: ImageKey.icMarkDefault)!) : NMFOverlayImage(image: UIImage(named: ImageKey.icMarkFocus)!)
+            
+            if !isTouch {
+                self.placeShadowView.isHidden = false
+                self.nearPlaceCollectionView.isHidden = true
+                self.placePopupView.showingState = .halfShow
+                
+                UIView.animate(withDuration: 0.3) {
+                    self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -self.calculateInitPanelViewHeight())
+                }
+            } else {
+                self.placeShadowView.isHidden = true
+                self.nearPlaceCollectionView.isHidden = false
+                self.placePopupView.showingState = .notShow
+                self.placeShadowView.transform = .identity
+            }
+            
+            tempMarker.userInfo["isTouch"] = !isTouch
+            
+            return false
+        }
+    }
+    
     // MARK: - 내 위치 기준 새로고침 설정
     var refreshButton: UIButton = {
         let refreshButton = UIButton()
@@ -42,6 +77,7 @@ class MapVC: UIViewController {
     }
     
     @objc func refresh(_ sender: Any) {
+        // 근처 관광지 받아오는 API 통신
         print("Refresh")
     }
     
@@ -271,6 +307,7 @@ class MapVC: UIViewController {
         setCurrentLocationButton()
         setRefreshButton()
         showPlacePopupView()
+        setMarkers()
     }
 
     override func viewWillLayoutSubviews() {
