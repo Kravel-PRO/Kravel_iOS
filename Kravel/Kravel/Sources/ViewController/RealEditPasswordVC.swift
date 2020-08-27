@@ -52,6 +52,7 @@ class RealEditPasswordVC: UIViewController {
     // MARK: - UIViewController viewWillAppear() Override
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setNav()
     }
     
     private func setNav() {
@@ -62,6 +63,13 @@ class RealEditPasswordVC: UIViewController {
 
 extension RealEditPasswordVC: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        print("")
+        guard let text = textField.text else { return }
+        let layerColor: UIColor = text != "" ? UIColor(red: 253/255, green: 9/255, blue: 9/255, alpha: 1.0) : .veryLightPink
+        
+        if textField == pwTextField {
+            marginViews[0].layer.borderColor = layerColor.cgColor
+        } else {
+            marginViews[1].layer.borderColor = layerColor.cgColor
+        }
     }
 }

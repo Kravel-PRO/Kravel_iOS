@@ -123,7 +123,6 @@ extension SignupVC: UITextFieldDelegate {
             marginViews[2].layer.borderColor = layerColor.cgColor
             if textFields[1].text == text || text == "" { setValid(marginView: marginViews[2], validLabel: validLabels[2]) }
             else { setInvalid(marginView: marginViews[2], validLabel: validLabels[2]) }
-            
         } else {
             marginViews[3].layer.borderColor = layerColor.cgColor
         }
