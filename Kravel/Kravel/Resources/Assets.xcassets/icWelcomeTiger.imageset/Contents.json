@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icNoAreaPanda.png",
+      "filename" : "icWelcomeTiger.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icNoAreaPanda@2x.png",
+      "filename" : "icWelcomeTiger@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icNoAreaPanda@3x.png",
+      "filename" : "icWelcomeTiger@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

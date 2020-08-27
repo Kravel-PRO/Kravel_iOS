@@ -13,6 +13,9 @@ struct ImageKey {
     static let icMale = "icMaleUnclick"
     static let icFemale = "icFemaleUnclick"
     
+    // 환영화면 이미지
+    static let icWelcom = "icWelcomeTiger"
+    
     // 마이 페이지 메뉴 이미지
     static let icModify = "icModify"
     static let icPassword = "icPassword"
@@ -35,7 +38,7 @@ struct ImageKey {
     
     // 스크랩/포토리뷰 없을 때 이미지
     static let icNoPhotoEmpty = "icNoPhotoEmpty"
-    static let icNoScrap = "icNoScrap"
+    static let icNoScrap = "icNoScrapTiger"
     
     // 맵 마커 표시 이미지
     static let icMarkDefault = "icMarkDefault"

@@ -11,6 +11,18 @@ import UIKit
 class SetLanguageVC: UIViewController {
     static let identifier = "SetLanguageVC"
     
+    // MARK: NavigationController 설정
+   var navTitle: String?
+   
+   private func setNav() {
+       self.navigationController?.navigationBar.isHidden = false
+       self.navigationController?.navigationBar.topItem?.title = ""
+       self.navigationController?.navigationBar.tintColor = .black
+       self.navigationItem.title = navTitle
+       self.navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18), .foregroundColor: UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1.0)]
+       self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+   }
+    
     // MARK: - 언어 버튼들 설정
     @IBOutlet var languageButtons: [UIButton]! {
         willSet {
@@ -57,16 +69,6 @@ class SetLanguageVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNav()
-    }
-    
-    // MARK: NavigationController 설정
-    var navTitle: String?
-    
-    private func setNav() {
-        self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.topItem?.title = ""
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationItem.title = navTitle
     }
     
     // MARK: - 언어 버튼 클릭했을 때, 하나만 선택되는 알고리즘

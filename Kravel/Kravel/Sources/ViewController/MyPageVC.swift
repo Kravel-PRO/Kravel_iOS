@@ -46,11 +46,13 @@ class MyPageVC: UIViewController {
     // MARK: - 내 포토 리뷰 / 스크랩 뷰 설정
     @IBAction func goMyPhotoReview(_ sender: Any) {
         guard let myPhotoReviewVC = UIStoryboard(name: "MyPhotoReview", bundle: nil).instantiateViewController(withIdentifier: MyPhotoReviewVC.identifier) as? MyPhotoReviewVC else { return }
+        myPhotoReviewVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(myPhotoReviewVC, animated: true)
     }
     
     @IBAction func goMyScrap(_ sender: Any) {
         guard let myScrapVC = UIStoryboard(name: "MyScrap", bundle: nil).instantiateViewController(withIdentifier: MyScrapVC.identifier) as? MyScrapVC else { return }
+        myScrapVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(myScrapVC, animated: true)
     }
     
@@ -117,7 +119,7 @@ extension MyPageVC: UITableViewDelegate {
         case .editMyInform:
             goEditMyInformVC(navTitle: selectedMenu.getMenuLabel())
         case .editMyPW:
-            print("edit")
+            goEditPasswordVC(navTitle: selectedMenu.getMenuLabel())
         case .setLanguage:
             goSetLanguageVC(navTitle: selectedMenu.getMenuLabel())
         case .report:
@@ -135,6 +137,14 @@ extension MyPageVC: UITableViewDelegate {
         changeInfoVC.naviTitle = navTitle
         changeInfoVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(changeInfoVC, animated: true)
+    }
+    
+    // 비밀번호 변경 화면으로 이동
+    private func goEditPasswordVC(navTitle: String) {
+        guard let editPasswordVC = UIStoryboard(name: "EditPassword", bundle: nil).instantiateViewController(withIdentifier: EditPasswordVC.identifier) as? EditPasswordVC else { return }
+        editPasswordVC.naviTitle = navTitle
+        editPasswordVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(editPasswordVC, animated: true)
     }
     
     // 언어 설정 화면으로 이동

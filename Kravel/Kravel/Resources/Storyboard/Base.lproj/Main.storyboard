@@ -514,7 +514,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PxX-7r-5XW">
                                 <rect key="frame" x="97.666666666666686" y="226" width="180" height="180"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icWelcomePanda" translatesAutoresizingMaskIntoConstraints="NO" id="seQ-dt-bu1">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icWelcomeTiger" translatesAutoresizingMaskIntoConstraints="NO" id="seQ-dt-bu1">
                                         <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                                         <color key="tintColor" red="0.93333333333333335" green="0.40392156862745099" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
@@ -589,6 +589,6 @@ Kravel입니다.
     </scenes>
     <resources>
         <image name="bgSign" width="375" height="812"/>
-        <image name="icWelcomePanda" width="132" height="136"/>
+        <image name="icWelcomeTiger" width="141" height="142"/>
     </resources>
 </document>

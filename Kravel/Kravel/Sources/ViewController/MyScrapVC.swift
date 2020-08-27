@@ -106,6 +106,8 @@ class MyScrapVC: UIViewController {
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationItem.title = "스크랩"
         self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18), .foregroundColor: UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1.0)]
     }
     
     // MARK: - UIViewController viewWillLayoutSubviews() 부분

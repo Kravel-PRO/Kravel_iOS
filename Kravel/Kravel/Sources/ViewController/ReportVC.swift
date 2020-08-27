@@ -11,6 +11,18 @@ import UIKit
 class ReportVC: UIViewController {
     static let identifier = "ReportVC"
     
+    // MARK: - NavigationController 설정
+    var navTitle: String?
+    
+    private func setNav() {
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationItem.title = navTitle
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18), .foregroundColor: UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1.0)]
+    }
+    
     // MARK: - TextField들 설정
     @IBOutlet var textFields: [UITextField]! {
         didSet {
@@ -74,16 +86,6 @@ class ReportVC: UIViewController {
         labelsSpacingConstraint.forEach { constraint in
             constraint.constant = self.view.frame.height / 33.83
         }
-    }
-    
-    // MARK: - NavigationController 설정
-    var navTitle: String?
-    
-    private func setNav() {
-        self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationController?.navigationBar.topItem?.title = ""
-        self.navigationItem.title = navTitle
     }
 }
 

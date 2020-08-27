@@ -32,6 +32,8 @@
 		9D5DBB45248D5BAD00D82D40 /* SexButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D5DBB44248D5BAD00D82D40 /* SexButton.xib */; };
 		9D5DBB47248D5BBF00D82D40 /* SexButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5DBB46248D5BBF00D82D40 /* SexButton.swift */; };
 		9D5E3EB724BD952200BA4E5F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5E3EB624BD952200BA4E5F /* SearchCell.swift */; };
+		9D61F6DE24F7AAAF00EF13FB /* EditPassword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D61F6DD24F7AAAF00EF13FB /* EditPassword.storyboard */; };
+		9D61F6E024F7AAE000EF13FB /* EditPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D61F6DF24F7AAE000EF13FB /* EditPasswordVC.swift */; };
 		9D79E29F24EC279E006310A2 /* NearPlace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D79E29E24EC279E006310A2 /* NearPlace.storyboard */; };
 		9D79E2A124EC27B7006310A2 /* NearPlaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D79E2A024EC27B7006310A2 /* NearPlaceVC.swift */; };
 		9D79E2A324EC2993006310A2 /* DetailNearPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D79E2A224EC2993006310A2 /* DetailNearPlaceCell.swift */; };
@@ -122,6 +124,8 @@
 		9D5DBB44248D5BAD00D82D40 /* SexButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SexButton.xib; sourceTree = "<group>"; };
 		9D5DBB46248D5BBF00D82D40 /* SexButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SexButton.swift; sourceTree = "<group>"; };
 		9D5E3EB624BD952200BA4E5F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		9D61F6DD24F7AAAF00EF13FB /* EditPassword.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditPassword.storyboard; sourceTree = "<group>"; };
+		9D61F6DF24F7AAE000EF13FB /* EditPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPasswordVC.swift; sourceTree = "<group>"; };
 		9D79E29E24EC279E006310A2 /* NearPlace.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NearPlace.storyboard; sourceTree = "<group>"; };
 		9D79E2A024EC27B7006310A2 /* NearPlaceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearPlaceVC.swift; sourceTree = "<group>"; };
 		9D79E2A224EC2993006310A2 /* DetailNearPlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNearPlaceCell.swift; sourceTree = "<group>"; };
@@ -292,6 +296,7 @@
 				9D9694D524C6D4800046CB85 /* MapVC.swift */,
 				9D49E8B524C6F857007CD948 /* MyPageVC.swift */,
 				9D96007A24E5B72B007995EE /* ChangeInfoVC.swift */,
+				9D61F6DF24F7AAE000EF13FB /* EditPasswordVC.swift */,
 				9D96009E24E6A2F9007995EE /* LocationDetailVC.swift */,
 				9D2E26A424E960290091643E /* ReportVC.swift */,
 				9D79E2A024EC27B7006310A2 /* NearPlaceVC.swift */,
@@ -333,8 +338,9 @@
 				9D13C7F7248784330058A7BF /* LaunchScreen.storyboard */,
 				9D8C0A2424BC515A005C1F58 /* Tabbar.storyboard */,
 				9D96007824E5B6FE007995EE /* ChangeInfo.storyboard */,
-				9D96009C24E67B5D007995EE /* LocationDetail.storyboard */,
+				9D61F6DD24F7AAAF00EF13FB /* EditPassword.storyboard */,
 				9D2E26A224E960100091643E /* Report.storyboard */,
+				9D96009C24E67B5D007995EE /* LocationDetail.storyboard */,
 				9D79E29E24EC279E006310A2 /* NearPlace.storyboard */,
 				9D79E2A624ED02FA006310A2 /* MorePhotoReview.storyboard */,
 				9DBA643A24F392CC00E12FA4 /* MyScrap.storyboard */,
@@ -540,6 +546,7 @@
 				9D13C7F42487842E0058A7BF /* Main.storyboard in Resources */,
 				9D7FB1F424D15DE7009A9C0A /* SubLocationView.xib in Resources */,
 				9D13C80F248795E40058A7BF /* LoginTextView.xib in Resources */,
+				9D61F6DE24F7AAAF00EF13FB /* EditPassword.storyboard in Resources */,
 				9DEDA6B024BCC74300E978F5 /* CategoryCell.xib in Resources */,
 				9DBA643024F0437E00E12FA4 /* RecentResearchView.xib in Resources */,
 				9D2E26A324E960100091643E /* Report.storyboard in Resources */,
@@ -619,6 +626,7 @@
 				9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */,
 				9DA80457248E9200003826B9 /* String+Extensions.swift in Sources */,
 				9D8EA91124E7BE4B00FD5059 /* ImageKey.swift in Sources */,
+				9D61F6E024F7AAE000EF13FB /* EditPasswordVC.swift in Sources */,
 				9D9694CD24C5E7570046CB85 /* PlaceCell.swift in Sources */,
 				9D94BDF224BE2C710027B9BF /* ContentDetailVC.swift in Sources */,
 				9DBA641E24EFB1DE00E12FA4 /* CoreDataManager.swift in Sources */,
