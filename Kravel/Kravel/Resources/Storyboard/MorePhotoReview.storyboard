@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JJB-Eh-Lz1">
-                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="768"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="yiL-Rl-b4U">
                                     <size key="itemSize" width="168" height="214"/>
@@ -110,7 +110,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="f1j-OB-7bj" firstAttribute="trailing" secondItem="JJB-Eh-Lz1" secondAttribute="trailing" id="3rQ-tO-Rso"/>
-                            <constraint firstItem="f1j-OB-7bj" firstAttribute="bottom" secondItem="JJB-Eh-Lz1" secondAttribute="bottom" id="JJ9-Si-Q3m"/>
+                            <constraint firstAttribute="bottom" secondItem="JJB-Eh-Lz1" secondAttribute="bottom" id="JJ9-Si-Q3m"/>
                             <constraint firstItem="JJB-Eh-Lz1" firstAttribute="top" secondItem="f1j-OB-7bj" secondAttribute="top" id="RAD-22-OYv"/>
                             <constraint firstItem="JJB-Eh-Lz1" firstAttribute="leading" secondItem="f1j-OB-7bj" secondAttribute="leading" id="oVs-ge-kif"/>
                         </constraints>

@@ -12,6 +12,14 @@ class PhotoReviewView: UIView {
     static let nibName = "PhotoReviewView"
     var view: UIView!
     
+    // MARK: - 포토 리뷰 Delegate
+    var delegate: PhotoReviewViewDelegate?
+    
+    // 포토리뷰 작성하기
+    @IBAction func writePhotoReview(_ sender: Any) {
+        delegate?.clickWriteButton()
+    }
+    
     // MARK: - Photo Review 보여주는 CollectionView 설정
     @IBOutlet weak var photoReviewCollectionView: UICollectionView! {
         didSet {

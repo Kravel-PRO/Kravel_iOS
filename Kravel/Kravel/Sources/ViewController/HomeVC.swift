@@ -55,6 +55,7 @@ class HomeVC: UIViewController {
     // 더 보기 버튼 클릭했을 시, 더 많은 장소 요청
     @IBAction func requstMorePlace(_ sender: Any) {
         guard let detailNearPlaceVC = UIStoryboard(name: "NearPlace", bundle: nil).instantiateViewController(withIdentifier: NearPlaceVC.identifier) as? NearPlaceVC else { return }
+        detailNearPlaceVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(detailNearPlaceVC, animated: true)
     }
     
@@ -100,6 +101,7 @@ class HomeVC: UIViewController {
     @IBOutlet weak var photoReviewView: PhotoReviewView! {
         didSet {
             setPhotoReviewLabel()
+            photoReviewView.delegate = self
             photoReviewView.photoReviewCollectionViewDelegate = self
             photoReviewView.photoReviewCollectionViewDataSource = self
         }
@@ -186,6 +188,7 @@ extension HomeVC: UICollectionViewDelegate {
         } else {
             if indexPath.row != 5 { return }
             guard let morePhotoVC = UIStoryboard(name: "MorePhotoReview", bundle: nil).instantiateViewController(withIdentifier: MorePhotoReviewVC.identifier) as? MorePhotoReviewVC else { return }
+            morePhotoVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(morePhotoVC, animated: true)
         }
     }
@@ -227,6 +230,12 @@ extension HomeVC: UICollectionViewDelegateFlowLayout {
         } else {
             return 4
         }
+    }
+}
+
+extension HomeVC: PhotoReviewViewDelegate {
+    func clickWriteButton() {
+        print("Write Photo Review")
     }
 }
 

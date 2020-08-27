@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol LoginTextViewDelegate {
-    func clickLoginButton(id: String, pw: String)
-}
-
 class LoginTextView: UIView {
     static let identifier = "LoginTextView"
     

@@ -69,6 +69,7 @@ extension MovieChildVC: UICollectionViewDelegate {
         guard let detail_contentVC = self.storyboard?.instantiateViewController(identifier: ContentDetailVC.identifier) as? ContentDetailVC else { return }
         detail_contentVC.name = "호텔 델루나"
         detail_contentVC.category = .move
+        detail_contentVC.hidesBottomBarWhenPushed = true
         searchVC_parent.navigationController?.pushViewController(detail_contentVC, animated: true)
     }
 }

@@ -43,4 +43,7 @@ struct ImageKey {
     // 맵 마커 표시 이미지
     static let icMarkDefault = "icMarkDefault"
     static let icMarkFocus = "icMarkFocus"
+    
+    // 포토리뷰 쓰기 이미지
+    static let icWrite = "icWrite"
 }
