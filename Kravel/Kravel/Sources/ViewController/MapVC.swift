@@ -284,11 +284,11 @@ class MapVC: UIViewController {
                         self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
                     }, completion: { isComplete in
                         guard let locationDetailVC = UIStoryboard(name: "LocationDetail", bundle: nil).instantiateViewController(withIdentifier: "LocationDetailVC") as? LocationDetailVC else { return }
-                        locationDetailVC.modalPresentationStyle = .fullScreen
+                        locationDetailVC.modalPresentationStyle = .overFullScreen
                         self.present(locationDetailVC, animated: false
                             , completion: {
-                                self.placePopupView.showingState = .almostShow
-                                self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -400-self.calculateInitPanelViewHeight())
+                                self.placeShadowView.isHidden = true
+                                self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
                                 self.placePopupView.contentScrollView.contentOffset = .zero
                         })
                     })
@@ -308,6 +308,16 @@ class MapVC: UIViewController {
         setRefreshButton()
         showPlacePopupView()
         setMarkers()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(aaaa(_:)), name: .dismissDetailView, object: nil)
+    }
+    
+    @objc func aaaa(_ notification: NSNotification) {
+        placeShadowView.isHidden = false
+        placePopupView.showingState = .halfShow
+        UIView.animate(withDuration: 0.2) {
+            self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -self.calculateInitPanelViewHeight())
+        }
     }
 
     override func viewWillLayoutSubviews() {

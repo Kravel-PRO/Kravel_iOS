@@ -6,6 +6,6 @@
         <attribute name="term" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="RecentResearchTerm" positionX="-63" positionY="-18" width="128" height="88"/>
+        <element name="RecentResearchTerm" positionX="-1036.265625" positionY="-80.078125" width="128" height="88"/>
     </elements>
 </model>

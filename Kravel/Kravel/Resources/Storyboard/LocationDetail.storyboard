@@ -234,6 +234,7 @@
                     <connections>
                         <outlet property="backButtonTopConstraint" destination="MXs-in-UEw" id="xpf-VQ-Y5p"/>
                         <outlet property="buttonStackContainerView" destination="7Ni-ef-Vh2" id="cA2-ab-Tzh"/>
+                        <outlet property="contentScrollView" destination="h70-xP-WHO" id="R4L-4D-unW"/>
                         <outlet property="nearByAttractionView" destination="QgE-mE-ZfT" id="Alw-y3-E5b"/>
                         <outlet property="photoReviewView" destination="gy6-Z3-9yy" id="KEo-pS-BB7"/>
                         <outlet property="placeImageView" destination="bN3-Fn-yME" id="n0q-JK-eUZ"/>
@@ -245,7 +246,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WrI-Sp-cds" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="236.80000000000001" y="-245.68965517241381"/>
+            <point key="canvasLocation" x="245" y="-269"/>
         </scene>
     </scenes>
     <resources>

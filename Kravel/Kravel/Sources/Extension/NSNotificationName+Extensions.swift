@@ -10,4 +10,5 @@ import Foundation
 
 extension NSNotification.Name {
     static let deleteResearchTerm = NSNotification.Name("deleteResearchTerm")
+    static let dismissDetailView = NSNotification.Name("dismissDetailView")
 }
