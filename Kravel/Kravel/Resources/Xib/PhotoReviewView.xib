@@ -10,7 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoReviewView" customModule="Kravel" customModuleProvider="target">
             <connections>
                 <outlet property="photoReviewCollectionView" destination="3ot-ET-TR5" id="twA-2Q-QUF"/>
-                <outlet property="photoReviewCollectionViewHeightConstraint" destination="X5z-7l-s4e" id="an2-Cl-gmS"/>
+                <outlet property="photoReviewCollectionViewHeightConstraint" destination="X5z-7l-s4e" id="SR0-O5-cSi"/>
                 <outlet property="photoReviewCollectionViewLeadingConstraint" destination="Dmd-wC-MK4" id="wDA-iN-7d9"/>
                 <outlet property="titleLabel" destination="1Zg-0Z-RCk" id="6Uz-bv-xOw"/>
             </connections>
@@ -61,7 +61,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="138.40000000000001" y="101.60098522167488"/>
+            <point key="canvasLocation" x="95" y="59"/>
         </view>
     </objects>
     <resources>

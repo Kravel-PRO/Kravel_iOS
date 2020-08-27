@@ -36,7 +36,6 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="186" id="Ewn-jH-Mcg"/>
-                        <constraint firstAttribute="width" secondItem="2ff-2w-boJ" secondAttribute="height" multiplier="343:186" id="NS5-vN-fr3"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UhN-Fh-iY5">
@@ -104,6 +103,8 @@
                 <constraint firstItem="mmS-75-ndO" firstAttribute="leading" secondItem="UhN-Fh-iY5" secondAttribute="leading" id="Cap-gU-1ho"/>
                 <constraint firstItem="egh-4j-jmh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="Gqf-db-mQ9"/>
                 <constraint firstItem="mmS-75-ndO" firstAttribute="top" secondItem="UhN-Fh-iY5" secondAttribute="bottom" constant="17" id="Lnf-H7-bcI"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2ff-2w-boJ" secondAttribute="trailing" constant="16" id="Qud-2a-utC"/>
+                <constraint firstItem="2ff-2w-boJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="axt-ht-gUT"/>
                 <constraint firstItem="2ff-2w-boJ" firstAttribute="top" secondItem="egh-4j-jmh" secondAttribute="bottom" constant="12" id="bHU-UQ-bRR"/>
                 <constraint firstItem="JtS-Vu-LN9" firstAttribute="top" secondItem="mmS-75-ndO" secondAttribute="bottom" constant="8" id="lD3-rA-eZH"/>
                 <constraint firstItem="UhN-Fh-iY5" firstAttribute="top" secondItem="2ff-2w-boJ" secondAttribute="bottom" constant="12" id="qH5-6A-pCU"/>
@@ -113,7 +114,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="140" y="372.78325123152712"/>
+            <point key="canvasLocation" x="252" y="374"/>
         </view>
     </objects>
 </document>

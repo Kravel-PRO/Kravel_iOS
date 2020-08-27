@@ -9,10 +9,59 @@
 import UIKit
 
 class RealEditPasswordVC: UIViewController {
+    static let identifier = "RealEditPasswordVC"
 
+    // MARK: - TextView 바탕 Layer 설정
+    @IBOutlet var marginViews: [UIView]! {
+        didSet {
+            marginViews.forEach { view in
+                view.layer.borderColor = UIColor.veryLightPink.cgColor
+                view.layer.borderWidth = 1
+                view.layer.cornerRadius = view.frame.width / 15
+            }
+        }
+    }
+    
+    // MARK: - PW 입력하는 TextField
+    @IBOutlet weak var pwTextField: UITextField! {
+        didSet {
+            pwTextField.delegate = self
+        }
+    }
+    
+    // MARK: - PW 한번 더 입력하는 TextField
+    @IBOutlet weak var oneMoreTextField: UITextField! {
+        didSet {
+            oneMoreTextField.delegate = self
+        }
+    }
+    
+    // MARK: - 수정 완료 버튼 설정
+    @IBOutlet weak var completeButton: CustomButton! {
+        didSet {
+            completeButton.locationButton = .editPasswordView
+        }
+    }
+    
+    // MARK: - UIViewController viewDidLoad() Override
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+    }
+    
+    // MARK: - UIViewController viewWillAppear() Override
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    private func setNav() {
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationItem.title = "비밀번호 수정"
+    }
+}
+
+extension RealEditPasswordVC: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        print("")
     }
 }

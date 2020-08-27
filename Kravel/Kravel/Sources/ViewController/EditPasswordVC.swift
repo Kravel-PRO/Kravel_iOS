@@ -39,6 +39,12 @@ class EditPasswordVC: UIViewController {
         }
     }
     
+    // 수정 완료
+    @IBAction func certify(_ sender: Any) {
+        guard let realEditPasswordVC = self.storyboard?.instantiateViewController(withIdentifier: RealEditPasswordVC.identifier) as? RealEditPasswordVC else { return }
+        self.navigationController?.pushViewController(realEditPasswordVC, animated: true)
+    }
+    
     // MARK: - UIViewController override viewDidLoad() 부분
     override func viewDidLoad() {
         super.viewDidLoad()

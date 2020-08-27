@@ -122,21 +122,22 @@ class LocationDetailVC: UIViewController {
     // MARK: - 내 주변 관광지 뷰 설정
     @IBOutlet weak var nearByAttractionView: NearByAttractionView!
     
-    // MARK: - ViewController Override 부분
+    // MARK: - UIViewController viewDidLoad() Override 부분
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.addGesture()
     }
     
+    // MARK: - UIViewController viewWillLayoutSubviews() Override 부분
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         setBackButtonConstraint()
     }
     
+    // MARK: - UIViewController viewWillAppear() Override 부분
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         // FIXME: ViewDidLoad로 네트워크 요청 작업 시, 부르게 수정
         showLoadingLottie()
     }

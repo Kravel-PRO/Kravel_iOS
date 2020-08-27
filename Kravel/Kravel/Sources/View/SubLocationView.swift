@@ -11,7 +11,6 @@ import NMapsMap
 
 class SubLocationView: UIView {
     static let nibName = "SubLocationView"
-    
     var view: UIView!
     
     // MARK: - 위치를 설명해주는 Label

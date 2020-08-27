@@ -138,6 +138,11 @@ class HomeVC: UIViewController {
         setPhotoReviewLabelLayout()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        photoReviewView.calculateCollectionViewHeight()
+    }
+    
     private func setNav() {
         self.navigationController?.navigationBar.isHidden = true
     }

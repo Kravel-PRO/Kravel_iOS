@@ -843,10 +843,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nw6-79-IqI">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y7s-sb-Bdd">
-                                        <rect key="frame" x="14.999999999999996" y="145.66666666666666" width="56.666666666666657" height="26.333333333333343"/>
+                                        <rect key="frame" x="14.999999999999996" y="124.66666666666667" width="56.666666666666657" height="26.333333333333329"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -854,13 +854,13 @@
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.38823529411764707" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Nw6-79-IqI" secondAttribute="height" multiplier="375:211" id="ARE-0A-iZ6"/>
+                                    <constraint firstAttribute="width" secondItem="Nw6-79-IqI" secondAttribute="height" multiplier="375:190" id="ARE-0A-iZ6"/>
                                     <constraint firstAttribute="bottom" secondItem="Y7s-sb-Bdd" secondAttribute="bottom" constant="39" id="LMx-wb-hcH"/>
                                     <constraint firstItem="Y7s-sb-Bdd" firstAttribute="leading" secondItem="Nw6-79-IqI" secondAttribute="leading" constant="15" id="TyE-Hl-1rk"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GvN-wk-UqC">
-                                <rect key="frame" x="0.0" y="211" width="375" height="101"/>
+                                <rect key="frame" x="0.0" y="190" width="375" height="101"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="OQn-NP-2wU">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="101"/>
@@ -967,14 +967,14 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="np7-2y-g9I">
-                                <rect key="frame" x="0.0" y="312" width="375" height="12"/>
+                                <rect key="frame" x="0.0" y="291" width="375" height="12"/>
                                 <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="np7-2y-g9I" secondAttribute="height" multiplier="125:4" id="2n6-Lv-cQr"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XlD-7i-tOM">
-                                <rect key="frame" x="0.0" y="324" width="375" height="280"/>
+                                <rect key="frame" x="0.0" y="303" width="375" height="280"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="280" id="mQ7-0b-QDt"/>

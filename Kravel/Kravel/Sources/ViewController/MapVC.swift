@@ -241,6 +241,7 @@ class MapVC: UIViewController {
     private func addGesture() {
         panGesuture = UIPanGestureRecognizer(target: self, action: #selector(movePanelView(_:)))
         placeShadowView.addGestureRecognizer(panGesuture)
+
     }
     
     // Pan Action에 따라 뷰 Interaction
@@ -255,7 +256,7 @@ class MapVC: UIViewController {
             switch showingState {
             case .notShow: return
             case .halfShow:
-                if changeY < -(self.view.frame.height / 16.9) {
+                if -calculateInitPanelViewHeight() - changeY > (self.view.frame.height / 16.9) {
                     placePopupView.showingState = .almostShow
                     placePopupView.setEnableScroll(true)
                     UIView.animate(withDuration: 0.3) {
@@ -298,32 +299,38 @@ class MapVC: UIViewController {
         }
     }
     
-    // MARK: - ViewController Override 부분
+    // MARK: - UIViewController viewDidLoad() override 부분
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        addObserver()
         setLocationManager()
         setMapView()
         setCurrentLocationButton()
         setRefreshButton()
         showPlacePopupView()
         setMarkers()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(aaaa(_:)), name: .dismissDetailView, object: nil)
     }
     
-    @objc func aaaa(_ notification: NSNotification) {
+    // MARK: - UIViewController viewWillLayoutSubviews() override 부분
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        setCurrentLocationButtonLayout()
+        setRefreshButtonLayout()
+    }
+}
+
+extension MapVC {
+    private func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(scrollDownView(_:)), name: .dismissDetailView, object: nil)
+    }
+    
+    @objc func scrollDownView(_ notification: NSNotification) {
         placeShadowView.isHidden = false
         placePopupView.showingState = .halfShow
         UIView.animate(withDuration: 0.2) {
             self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -self.calculateInitPanelViewHeight())
         }
-    }
-
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        setCurrentLocationButtonLayout()
-        setRefreshButtonLayout()
     }
 }
 
