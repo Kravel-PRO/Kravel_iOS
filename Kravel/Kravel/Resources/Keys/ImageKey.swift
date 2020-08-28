@@ -47,6 +47,10 @@ struct ImageKey {
     // 포토리뷰 쓰기 이미지
     static let icWrite = "icWrite"
     
+    // 포토리뷰 좋아요 하트
+    static let btnLike = "btnLike"
+    static let btnLikeUnclick = "btnLikeUnclick"
+    
     // 팝업 뷰 이미지
     static let icLogoutPopup = "icLogoutPopup"
     

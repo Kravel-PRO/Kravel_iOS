@@ -140,6 +140,11 @@ class LocationDetailVC: UIViewController {
         super.viewWillAppear(animated)
         // FIXME: ViewDidLoad로 네트워크 요청 작업 시, 부르게 수정
         showLoadingLottie()
+        setNav()
+    }
+    
+    private func setNav() {
+        self.navigationController?.navigationBar.isHidden = true
     }
 }
 
@@ -193,6 +198,12 @@ extension LocationDetailVC: UICollectionViewDelegateFlowLayout {
 }
 
 extension LocationDetailVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == 5 {
+            guard let otherPhotoReviewVC = UIStoryboard(name: "OtherPhotoReview", bundle: nil).instantiateViewController(withIdentifier: OtherPhotoReviewVC.identifier) as? OtherPhotoReviewVC else { return }
+            self.navigationController?.pushViewController(otherPhotoReviewVC, animated: true)
+        }
+    }
 }
 
 extension LocationDetailVC: UIGestureRecognizerDelegate {

@@ -289,7 +289,7 @@ class MapVC: UIViewController {
                     UIView.animate(withDuration: 0.3, animations: {
                         self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
                     }, completion: { isComplete in
-                        guard let locationDetailVC = UIStoryboard(name: "LocationDetail", bundle: nil).instantiateViewController(withIdentifier: "LocationDetailVC") as? LocationDetailVC else { return }
+                        guard let locationDetailVC = UIStoryboard(name: "LocationDetail", bundle: nil).instantiateViewController(withIdentifier: "LocationDetailRoot") as? UINavigationController else { return }
                         locationDetailVC.modalPresentationStyle = .overFullScreen
                         self.present(locationDetailVC, animated: false
                             , completion: {
@@ -315,6 +315,12 @@ class MapVC: UIViewController {
         setRefreshButton()
         showPlacePopupView()
         setMarkers()
+    }
+    
+    // MARK: - UIViewController viewWillAppear() override 부분
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     // MARK: - UIViewController viewWillLayoutSubviews() override 부분

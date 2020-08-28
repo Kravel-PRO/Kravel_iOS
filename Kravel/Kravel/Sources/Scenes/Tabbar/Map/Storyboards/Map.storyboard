@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yyh-rS-vei">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cyN-Tg-lll">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -137,7 +137,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xUh-gB-nsr"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="mapInactive" selectedImage="mapActive" id="09z-rJ-Jqo"/>
+                    <navigationItem key="navigationItem" id="ZPI-ty-F7Q"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="containerMapView" destination="Hn1-lw-lA2" id="mWo-7G-9X1"/>
@@ -146,7 +146,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X9T-Uc-V6h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1415" y="775"/>
+            <point key="canvasLocation" x="2356" y="774.38423645320199"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dKo-dv-iFf">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cyN-Tg-lll" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="mapInactive" selectedImage="mapActive" id="09z-rJ-Jqo"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VoX-2K-s0X">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Yyh-rS-vei" kind="relationship" relationship="rootViewController" id="236-Kg-c6J"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="akM-1r-fKG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1413.5999999999999" y="774.38423645320199"/>
         </scene>
     </scenes>
     <resources>
