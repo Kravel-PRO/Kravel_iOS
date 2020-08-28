@@ -46,4 +46,7 @@ struct ImageKey {
     
     // 포토리뷰 쓰기 이미지
     static let icWrite = "icWrite"
+    
+    // 팝업 뷰 이미지
+    static let icLogoutPopup = "icLogoutPopup"
 }

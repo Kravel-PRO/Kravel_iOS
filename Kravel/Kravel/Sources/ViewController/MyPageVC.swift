@@ -71,24 +71,32 @@ class MyPageVC: UIViewController {
         tableViewHeightConstraint.constant = menuTableView.frame.width / 6.69 * CGFloat(MyPageMenu.allCases.count)
     }
     
-    // MARK: - ViewController Override 부분
+    // MARK: - UIViewController viewDidLoad() Override 설정
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setNameLayout()
     }
     
+    // MARK: - UIViewController viewWillAppear() Override 설정
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
     }
     
+    // MARK: - UIViewController viewDidDisappear() Override 설정
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
     
+    // MARK: - UIViewController viewWillLayoutSubviews() Override 설정
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+    }
+    
+    // MARK: - UIViewController viewDidLayoutSubviews() Override 설정
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         setTableViewHeightConstraint()
     }
 }
@@ -169,19 +177,8 @@ extension MyPageVC: UITableViewDelegate {
     
     // 로그아웃 선택
     private func presentLogoutAlertView() {
-        let alertVC = UIAlertController(title: "로그아웃 하시겠어요?", message: nil, preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: "확인", style: .default) { action in
-            guard let startRootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "StartRoot") as? UINavigationController else { return }
-            
-            guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
-            window.rootViewController = startRootVC
-        }
-        let cancelAction = UIAlertAction(title: "취소", style: .default)
-        
-        alertVC.addAction(cancelAction)
-        alertVC.addAction(okAction)
-        
-        self.present(alertVC, animated: true, completion: nil)
+        guard let logout = UIStoryboard(name: "LogoutPopup", bundle: nil).instantiateViewController(withIdentifier: LogoutPopupVC.identifier) as? LogoutPopupVC else { return }
+        logout.modalPresentationStyle = .overFullScreen
+        self.present(logout, animated: false, completion: nil)
     }
 }

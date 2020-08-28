@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Logout PopupVC-->
+        <scene sceneID="mDb-2X-6lF">
+            <objects>
+                <viewController storyboardIdentifier="LogoutPopupVC" id="0vl-5B-mRQ" customClass="LogoutPopupVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="enh-Ii-mrn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M4F-0r-xk5">
+                                <rect key="frame" x="30" y="326.66666666666669" width="315" height="169"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icLogoutPopup" translatesAutoresizingMaskIntoConstraints="NO" id="nXf-gN-38E">
+                                        <rect key="frame" x="107.66666666666666" y="-50" width="100" height="75"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="nXf-gN-38E" secondAttribute="height" multiplier="4:3" id="v3P-8R-zQI"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="0pu-jI-n3L">
+                                        <rect key="frame" x="16" y="102" width="283" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQK-6F-K8u" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="136" height="50"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <state key="normal" title="취소">
+                                                    <color key="titleColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="cancel:" destination="0vl-5B-mRQ" eventType="touchUpInside" id="deZ-nC-w0Z"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18G-Wi-iIv" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
+                                                <rect key="frame" x="147" y="0.0" width="136" height="50"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <state key="normal" title="로그아웃">
+                                                    <color key="titleColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="logout:" destination="0vl-5B-mRQ" eventType="touchUpInside" id="gic-Li-7Cj"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="0pu-jI-n3L" secondAttribute="height" multiplier="283:50" id="Yrq-Re-9mB"/>
+                                        </constraints>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="정말 로그아웃 하시겠습니까?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRm-JR-Rmy">
+                                        <rect key="frame" x="66.333333333333329" y="56.000000000000007" width="182.66666666666669" height="19.333333333333336"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="nXf-gN-38E" firstAttribute="centerX" secondItem="M4F-0r-xk5" secondAttribute="centerX" id="Fqg-MR-mfH"/>
+                                    <constraint firstItem="0pu-jI-n3L" firstAttribute="leading" secondItem="M4F-0r-xk5" secondAttribute="leading" constant="16" id="JwV-uj-gsb"/>
+                                    <constraint firstAttribute="bottom" secondItem="0pu-jI-n3L" secondAttribute="bottom" constant="17" id="MXm-7L-08i"/>
+                                    <constraint firstAttribute="trailing" secondItem="0pu-jI-n3L" secondAttribute="trailing" constant="16" id="g0o-Rg-0t0"/>
+                                    <constraint firstItem="nXf-gN-38E" firstAttribute="top" secondItem="M4F-0r-xk5" secondAttribute="top" constant="-50" id="hgK-VB-MlO"/>
+                                    <constraint firstItem="nXf-gN-38E" firstAttribute="width" secondItem="M4F-0r-xk5" secondAttribute="width" multiplier="0.31746" id="iQP-fR-kmR"/>
+                                    <constraint firstItem="kRm-JR-Rmy" firstAttribute="top" secondItem="M4F-0r-xk5" secondAttribute="top" constant="56" id="mpM-52-mS4"/>
+                                    <constraint firstAttribute="width" secondItem="M4F-0r-xk5" secondAttribute="height" multiplier="315:169" id="mtP-Lq-mBK"/>
+                                    <constraint firstItem="kRm-JR-Rmy" firstAttribute="centerX" secondItem="M4F-0r-xk5" secondAttribute="centerX" id="n3a-b7-sOS"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="0.73999999999999999" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="M4F-0r-xk5" firstAttribute="centerY" secondItem="shv-az-643" secondAttribute="centerY" id="5Mh-Ze-8gr"/>
+                            <constraint firstItem="M4F-0r-xk5" firstAttribute="centerX" secondItem="shv-az-643" secondAttribute="centerX" id="aUw-zV-OPd"/>
+                            <constraint firstItem="M4F-0r-xk5" firstAttribute="width" secondItem="enh-Ii-mrn" secondAttribute="width" multiplier="0.84" id="vth-bF-Aup"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="shv-az-643"/>
+                    </view>
+                    <connections>
+                        <outlet property="icTopConstraint" destination="hgK-VB-MlO" id="3OJ-pc-jaG"/>
+                        <outlet property="popupLabel" destination="kRm-JR-Rmy" id="y0V-9i-ouD"/>
+                        <outlet property="popupLabelTopConstraint" destination="mpM-52-mS4" id="V0g-9w-X5P"/>
+                        <outlet property="popupView" destination="M4F-0r-xk5" id="h96-9V-dUq"/>
+                        <outletCollection property="buttons" destination="gQK-6F-K8u" collectionClass="NSMutableArray" id="CqD-KG-mB9"/>
+                        <outletCollection property="buttons" destination="18G-Wi-iIv" collectionClass="NSMutableArray" id="6jK-15-DLv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zLi-vG-dz7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="56.799999999999997" y="73.891625615763544"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icLogoutPopup" width="100" height="75"/>
+    </resources>
+</document>
