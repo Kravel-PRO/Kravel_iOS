@@ -333,6 +333,7 @@ extension MapVC {
     @objc func scrollDownView(_ notification: NSNotification) {
         placeShadowView.isHidden = false
         placePopupView.showingState = .halfShow
+        placePopupView.setEnableScroll(false)
         UIView.animate(withDuration: 0.2) {
             self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -self.calculateInitPanelViewHeight())
         }

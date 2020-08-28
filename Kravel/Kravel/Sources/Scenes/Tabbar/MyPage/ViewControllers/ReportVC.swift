@@ -47,14 +47,32 @@ class ReportVC: UIViewController {
     @IBOutlet weak var pictureUploadMarginView: UIView! {
         didSet {
             pictureUploadMarginView.backgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
-            pictureUploadMarginView.layer.cornerRadius = pictureUploadMarginView.frame.width / 28.58
             pictureUploadMarginView.clipsToBounds = true
         }
     }
     
+    private func setPictureUploadMarginLayout() {
+        pictureUploadMarginView.layer.cornerRadius = pictureUploadMarginView.frame.width / 12.33
+    }
+    
+    // MARK: - 가져온 사진 ImageView 설정
+    @IBOutlet weak var photoImageView: UIImageView!
+    
+    // MARK: UIImagePickerController 설정
+    private let picker = UIImagePickerController()
+
+    private func setPickerController() {
+        picker.delegate = self
+    }
+    
     // MARK: - 사진 업로드 부분 설정
     @IBAction func clickPictureUpload(_ sender: Any) {
-        print("picture Upload")
+        openLibrary()
+    }
+    
+    private func openLibrary() {
+        picker.sourceType = .photoLibrary
+        present(picker, animated: true, completion: nil)
     }
     
     // MARK: - 완성 버튼 설정
@@ -64,12 +82,14 @@ class ReportVC: UIViewController {
         }
     }
     
-    // MARK: - UIViewController override 설정
+    // MARK: - UIViewController viewDidLoad() override 설정
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setPickerController()
     }
     
+    // MARK: - UIViewController viewWillAppear() override 설정
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNav()
@@ -77,6 +97,7 @@ class ReportVC: UIViewController {
     
     @IBOutlet var labelsSpacingConstraint: [NSLayoutConstraint]!
     
+    // MARK: - UIViewController viewWillLayoutSubviews() override 설정
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         setLabelsTopConstraint()
@@ -86,6 +107,11 @@ class ReportVC: UIViewController {
         labelsSpacingConstraint.forEach { constraint in
             constraint.constant = self.view.frame.height / 33.83
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setPictureUploadMarginLayout()
     }
 }
 
@@ -100,6 +126,15 @@ extension ReportVC: UITextFieldDelegate {
             marginViews[1].layer.borderColor = layerColor.cgColor
         } else {
             marginViews[2].layer.borderColor = layerColor.cgColor
+        }
+    }
+}
+
+extension ReportVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            photoImageView.image = image
+            self.dismiss(animated: true, completion: nil)
         }
     }
 }

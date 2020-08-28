@@ -65,8 +65,7 @@ class PlacePopupView: UIView {
             placeTagCollectionView.dataSource = self
             if let layout = placeTagCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-                layout.minimumInteritemSpacing = 0
-                layout.minimumLineSpacing = 3
+                layout.minimumLineSpacing = 4
             }
         }
     }
