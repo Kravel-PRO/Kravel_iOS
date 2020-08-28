@@ -107,7 +107,7 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KZL-5J-IVw">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KZL-5J-IVw">
                                         <rect key="frame" x="0.0" y="0.0" width="148" height="148"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ulW-zM-lGg">
@@ -116,9 +116,20 @@
                                             <action selector="clickPictureUpload:" destination="o8Z-c3-aAl" eventType="touchUpInside" id="j32-KE-NVc"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEJ-Eh-PoL">
+                                        <rect key="frame" x="122" y="10" width="16" height="16"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="wEJ-Eh-PoL" secondAttribute="height" multiplier="1:1" id="zLz-ex-tkj"/>
+                                        </constraints>
+                                        <state key="normal" image="btnDeleteWhite"/>
+                                        <connections>
+                                            <action selector="deletePicture:" destination="o8Z-c3-aAl" eventType="touchUpInside" id="BEM-a9-Ve7"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
+                                    <constraint firstItem="wEJ-Eh-PoL" firstAttribute="width" secondItem="s8l-kc-Gwk" secondAttribute="width" multiplier="0.108108" id="1mj-ES-rqY"/>
                                     <constraint firstAttribute="trailing" secondItem="ulW-zM-lGg" secondAttribute="trailing" id="3hM-Kr-9wW"/>
                                     <constraint firstItem="KZL-5J-IVw" firstAttribute="top" secondItem="s8l-kc-Gwk" secondAttribute="top" id="4Pg-m9-2Ef"/>
                                     <constraint firstItem="Uno-IZ-agu" firstAttribute="width" secondItem="s8l-kc-Gwk" secondAttribute="width" multiplier="0.197441" id="95D-zX-v7J"/>
@@ -128,8 +139,10 @@
                                     <constraint firstItem="93H-TO-TtF" firstAttribute="centerX" secondItem="s8l-kc-Gwk" secondAttribute="centerX" id="UNn-eq-OLa"/>
                                     <constraint firstAttribute="bottom" secondItem="KZL-5J-IVw" secondAttribute="bottom" id="UOu-2X-7FI"/>
                                     <constraint firstItem="KZL-5J-IVw" firstAttribute="leading" secondItem="s8l-kc-Gwk" secondAttribute="leading" id="XLz-Zy-6Gf"/>
+                                    <constraint firstAttribute="trailing" secondItem="wEJ-Eh-PoL" secondAttribute="trailing" constant="10" id="eTN-H9-UOj"/>
                                     <constraint firstItem="93H-TO-TtF" firstAttribute="centerY" secondItem="s8l-kc-Gwk" secondAttribute="centerY" id="hzJ-DY-nAZ"/>
                                     <constraint firstItem="ulW-zM-lGg" firstAttribute="leading" secondItem="s8l-kc-Gwk" secondAttribute="leading" id="mj0-JH-zVg"/>
+                                    <constraint firstItem="wEJ-Eh-PoL" firstAttribute="top" secondItem="s8l-kc-Gwk" secondAttribute="top" constant="10" id="nZn-1q-9iY"/>
                                     <constraint firstItem="ulW-zM-lGg" firstAttribute="top" secondItem="s8l-kc-Gwk" secondAttribute="top" id="zVo-4v-9VH"/>
                                 </constraints>
                             </view>
@@ -182,6 +195,7 @@
                     <connections>
                         <outlet property="compleButton" destination="1gK-f2-mOh" id="g0P-c8-LvC"/>
                         <outlet property="photoImageView" destination="KZL-5J-IVw" id="dj8-ae-igw"/>
+                        <outlet property="pictureDeleteButton" destination="wEJ-Eh-PoL" id="H2D-5I-Vna"/>
                         <outlet property="pictureUploadMarginView" destination="s8l-kc-Gwk" id="hgS-tq-dua"/>
                         <outletCollection property="textFields" destination="hTB-4e-uQT" collectionClass="NSMutableArray" id="xBN-fC-Zpr"/>
                         <outletCollection property="textFields" destination="NVr-vQ-sxD" collectionClass="NSMutableArray" id="hJ9-jd-f7D"/>
@@ -201,6 +215,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="btnDeleteWhite" width="16" height="16"/>
         <image name="icPhoto" width="24" height="24"/>
     </resources>
 </document>

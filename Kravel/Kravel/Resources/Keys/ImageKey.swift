@@ -49,4 +49,7 @@ struct ImageKey {
     
     // 팝업 뷰 이미지
     static let icLogoutPopup = "icLogoutPopup"
+    
+    // 제보하기 화면 업로드 사진 삭제
+    static let icDeleteWhite = "icDeleteWhite"
 }

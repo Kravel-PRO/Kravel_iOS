@@ -75,6 +75,18 @@ class ReportVC: UIViewController {
         present(picker, animated: true, completion: nil)
     }
     
+    // MARK: - 업로드 사진 삭제 버튼 설정
+    @IBOutlet weak var pictureDeleteButton: UIButton! {
+        didSet {
+            pictureDeleteButton.isHidden = true
+        }
+    }
+    
+    @IBAction func deletePicture(_ sender: Any) {
+        photoImageView.image = nil
+        pictureDeleteButton.isHidden = true
+    }
+    
     // MARK: - 완성 버튼 설정
     @IBOutlet weak var compleButton: CustomButton! {
         didSet {
@@ -134,6 +146,7 @@ extension ReportVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             photoImageView.image = image
+            pictureDeleteButton.isHidden = false
             self.dismiss(animated: true, completion: nil)
         }
     }
