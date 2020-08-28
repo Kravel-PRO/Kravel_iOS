@@ -346,14 +346,18 @@ extension MapVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let nearPlaceCell = collectionView.dequeueReusableCell(withReuseIdentifier: NearPlaceCell.identifier, for: indexPath) as? NearPlaceCell else { return UICollectionViewCell() }
+        nearPlaceCell.backgroundColor = .clear
         
-        nearPlaceCell.backgroundColor = .white
-        nearPlaceCell.layer.cornerRadius = nearPlaceCell.frame.width / 49.6
-        nearPlaceCell.makeShadow(color: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 0.14), blur: 3, x: 3, y: 2)
+        nearPlaceCell.contentView.layer.cornerRadius = nearPlaceCell.contentView.frame.width / 49.6
+        nearPlaceCell.contentView.clipsToBounds = true
+        
+        nearPlaceCell.makeShadow(color: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 0.13), blur: 10, x: 3, y: 2)
+        nearPlaceCell.clipsToBounds = false
         
         // 여기 Image Name 데이터로 받아오면 설정해야함
         nearPlaceCell.placeImage = UIImage(named: "bitmap_1")
         nearPlaceCell.placeName = nearPlaces[indexPath.row]
+        nearPlaceCell.location = "서울 종로구 돈화문로11길 28-5 (낙원동)"
         return nearPlaceCell
     }
 }

@@ -65,7 +65,8 @@ class PlacePopupView: UIView {
             placeTagCollectionView.dataSource = self
             if let layout = placeTagCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-                layout.minimumLineSpacing = 4
+                layout.minimumInteritemSpacing = 0
+                layout.minimumLineSpacing = 3
             }
         }
     }
@@ -182,7 +183,7 @@ extension PlacePopupView: UICollectionViewDataSource {
     private func makeTagCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> BackgroundTagCell {
         guard let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: BackgroundTagCell.identifier, for: indexPath) as? BackgroundTagCell else { return BackgroundTagCell() }
         tagCell.tagTitle = "#\(placeTags[indexPath.row])"
-        tagCell.layer.cornerRadius = tagCell.frame.width / 7.22
+        tagCell.layer.cornerRadius = tagCell.frame.width / 7.27
         tagCell.clipsToBounds = true
         return tagCell
     }

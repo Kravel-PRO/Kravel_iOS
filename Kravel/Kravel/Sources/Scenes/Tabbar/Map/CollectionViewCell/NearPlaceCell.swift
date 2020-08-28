@@ -30,15 +30,43 @@ class NearPlaceCell: UICollectionViewCell {
         }
     }
     
-    @IBOutlet weak var nameLabelLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var nameLabelTopConstraint: NSLayoutConstraint!
     
     // Name Label AutoLayout 초기 설정 ==> 화면에 맞게
     private func setNameLabelLayout() {
-        nameLabelLeadingConstraint.constant = self.frame.width / 15.5
         nameLabelTopConstraint.constant = self.frame.height / 14.6
     }
     
+    // MARK: - 태그 CollectionView 설정
+    @IBOutlet weak var tagCollectionView: UICollectionView! {
+        didSet {
+            tagCollectionView.dataSource = self
+            if let layout = tagCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+                layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+                layout.minimumInteritemSpacing = 0
+                layout.minimumLineSpacing = 3
+                layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+            }
+        }
+    }
+    
+    var tags: [String] = ["아이유", "호텔델루나", "김유나"] {
+        didSet {
+            tagCollectionView.reloadData()
+        }
+    }
+    
+    // MARK: - 장소 라벨
+    @IBOutlet weak var locationLabel: UILabel!
+    
+    var location: String? {
+        didSet {
+            locationLabel.text = location
+            locationLabel.sizeToFit()
+        }
+    }
+    
+    // MARK: - UICollectionViewCell Override 설정
     override func awakeFromNib() {
         super.awakeFromNib()
         setNameLabelLayout()
@@ -47,5 +75,19 @@ class NearPlaceCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         placeImageView.image = nil
+    }
+}
+
+extension NearPlaceCell: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return tags.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath) as? TagCell else { return UICollectionViewCell() }
+        tagCell.layer.cornerRadius = tagCell.frame.width / 7.27
+        tagCell.clipsToBounds = true
+        tagCell.tagTitle = "#\(tags[indexPath.row])"
+        return tagCell
     }
 }

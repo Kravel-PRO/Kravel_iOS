@@ -15,7 +15,7 @@ class BackgroundTagCell: UICollectionViewCell {
     var tagLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = UIColor(red: 253/255, green: 9/255, blue: 0, alpha: 1.0)
+        label.textColor = UIColor(red: 255/255, green: 99/255, blue: 89/255, alpha: 1.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -29,14 +29,14 @@ class BackgroundTagCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor(red: 252/255, green: 239/255, blue: 238/255, alpha: 1.0)
+        self.backgroundColor = UIColor(red: 255/255, green: 99/255, blue: 89/255, alpha: 0.1)
         self.contentView.addSubview(tagLabel)
         setLabelLayout()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.backgroundColor = UIColor(red: 252/255, green: 239/255, blue: 238/255, alpha: 1.0)
+        self.backgroundColor = UIColor(red: 255/255, green: 99/255, blue: 89/255, alpha: 0.1)
         self.contentView.addSubview(tagLabel)
         setLabelLayout()
     }

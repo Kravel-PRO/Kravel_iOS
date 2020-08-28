@@ -49,22 +49,77 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4ad-jJ-kmC">
+                                                    <rect key="frame" x="0.0" y="128.66666666666666" width="248" height="22"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="22" id="7tX-Lz-1Td"/>
+                                                    </constraints>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fy4-Jy-2dg">
+                                                        <size key="itemSize" width="80" height="22"/>
+                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                        <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                                                    </collectionViewFlowLayout>
+                                                    <cells>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TagCell" id="jvs-7E-3Ic" customClass="TagCell" customModule="Kravel" customModuleProvider="target">
+                                                            <rect key="frame" x="16" y="0.0" width="80" height="22"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="kD5-PK-gfi">
+                                                                <rect key="frame" x="0.0" y="0.0" width="80" height="22"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUq-Lw-NRO">
+                                                                        <rect key="frame" x="8" y="4" width="64" height="14"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                        <color key="textColor" red="1" green="0.38823529411764707" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                                <color key="backgroundColor" red="1" green="0.38823529411764707" blue="0.34901960784313724" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="fUq-Lw-NRO" secondAttribute="trailing" constant="8" id="GbZ-DI-btI"/>
+                                                                    <constraint firstItem="fUq-Lw-NRO" firstAttribute="top" secondItem="kD5-PK-gfi" secondAttribute="top" constant="4" id="Mrc-PY-cWm"/>
+                                                                    <constraint firstItem="fUq-Lw-NRO" firstAttribute="leading" secondItem="kD5-PK-gfi" secondAttribute="leading" constant="8" id="euu-VX-hKJ"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="fUq-Lw-NRO" secondAttribute="bottom" constant="4" id="iX2-Dw-XkL"/>
+                                                                </constraints>
+                                                            </collectionViewCellContentView>
+                                                            <size key="customSize" width="80" height="22"/>
+                                                            <connections>
+                                                                <outlet property="tagLabel" destination="fUq-Lw-NRO" id="ah5-EU-nSb"/>
+                                                            </connections>
+                                                        </collectionViewCell>
+                                                    </cells>
+                                                </collectionView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J4g-L3-t4i">
+                                                    <rect key="frame" x="16" y="161.66666666666666" width="28.666666666666671" height="13.333333333333343"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" red="0.15294117647058825" green="0.15294117647058825" blue="0.15294117647058825" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="Lpz-QH-0XX" firstAttribute="top" secondItem="zPo-kA-ZrR" secondAttribute="bottom" constant="13" id="9ak-DP-iRg"/>
                                                 <constraint firstItem="Lpz-QH-0XX" firstAttribute="leading" secondItem="ifs-QC-GkS" secondAttribute="leading" constant="16" id="Foo-5E-Kfe"/>
                                                 <constraint firstItem="zPo-kA-ZrR" firstAttribute="top" secondItem="ifs-QC-GkS" secondAttribute="top" id="JwG-9I-c4O"/>
+                                                <constraint firstItem="J4g-L3-t4i" firstAttribute="top" secondItem="4ad-jJ-kmC" secondAttribute="bottom" constant="11" id="X9d-3y-Mmy"/>
+                                                <constraint firstItem="4ad-jJ-kmC" firstAttribute="top" secondItem="Lpz-QH-0XX" secondAttribute="bottom" constant="4" id="foy-lO-wZd"/>
                                                 <constraint firstItem="zPo-kA-ZrR" firstAttribute="leading" secondItem="ifs-QC-GkS" secondAttribute="leading" id="jCg-o8-r2d"/>
                                                 <constraint firstAttribute="trailing" secondItem="zPo-kA-ZrR" secondAttribute="trailing" id="jls-Es-02H"/>
                                                 <constraint firstItem="zPo-kA-ZrR" firstAttribute="height" secondItem="ifs-QC-GkS" secondAttribute="height" multiplier="0.484211" id="ljS-hD-iIV"/>
+                                                <constraint firstItem="4ad-jJ-kmC" firstAttribute="leading" secondItem="ifs-QC-GkS" secondAttribute="leading" id="oHD-OK-b5y"/>
+                                                <constraint firstAttribute="trailing" secondItem="4ad-jJ-kmC" secondAttribute="trailing" id="wcs-2c-YUI"/>
+                                                <constraint firstItem="J4g-L3-t4i" firstAttribute="leading" secondItem="Lpz-QH-0XX" secondAttribute="leading" id="yGZ-tJ-Y6x"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="248" height="190"/>
                                         <connections>
-                                            <outlet property="nameLabelLeadingConstraint" destination="Foo-5E-Kfe" id="Ifl-Mv-0AU"/>
+                                            <outlet property="locationLabel" destination="J4g-L3-t4i" id="lDe-8w-AxO"/>
                                             <outlet property="nameLabelTopConstraint" destination="9ak-DP-iRg" id="DL5-mp-uBL"/>
                                             <outlet property="placeImageView" destination="zPo-kA-ZrR" id="G4y-74-bp5"/>
                                             <outlet property="placeNameLabel" destination="Lpz-QH-0XX" id="rD0-XL-mBY"/>
+                                            <outlet property="tagCollectionView" destination="4ad-jJ-kmC" id="0vZ-mz-6CP"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
