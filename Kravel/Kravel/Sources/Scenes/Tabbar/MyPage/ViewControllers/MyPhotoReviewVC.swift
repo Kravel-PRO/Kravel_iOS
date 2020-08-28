@@ -11,9 +11,16 @@ import UIKit
 class MyPhotoReviewVC: UIViewController {
     static let identifier = "MyPhotoReviewVC"
     
-    // 포토리뷰 데이터
+    // MARK: - 포토리뷰 CollectionView 설정
+    @IBOutlet weak var photoReviewCollectionView: UICollectionView! {
+        didSet {
+            photoReviewCollectionView.dataSource = self
+            photoReviewCollectionView.delegate = self
+        }
+    }
+    
     // MARK: - 포토리뷰 데이터 설정
-    var photoReviewDatas: [String] = []
+    var photoReviewDatas: [String] = ["호텔 세느장", "그 밖에 더 있다", "여긴 어딜까?"]
     
     // MARK: - 포토리뷰 없을 때, 화면 설정
     var noPhotoReviewView: UIView = {
@@ -78,9 +85,11 @@ class MyPhotoReviewVC: UIViewController {
     private func isEmptyPhotoReview() -> Bool {
         if photoReviewDatas.count == 0 {
             noPhotoReviewView.isHidden = false
+            photoReviewCollectionView.isHidden = true
             return true
         } else {
             noPhotoReviewView.isHidden = true
+            photoReviewCollectionView.isHidden = false
             return false
         }
     }
@@ -104,5 +113,41 @@ class MyPhotoReviewVC: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         setNoPhotoReviewViewLayout()
+    }
+}
+
+extension MyPhotoReviewVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photoReviewDatas.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let myPhotoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPhotoReviewCell.identifier, for: indexPath) as? MyPhotoReviewCell else { return UICollectionViewCell() }
+        myPhotoReviewCell.locationName = photoReviewDatas[indexPath.row]
+        myPhotoReviewCell.likeCount = 99
+        return myPhotoReviewCell
+    }
+}
+
+extension MyPhotoReviewVC: UICollectionViewDelegate {
+    
+}
+
+extension MyPhotoReviewVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = collectionView.frame.width + 59
+        return CGSize(width: collectionView.frame.width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
     }
 }
