@@ -52,11 +52,11 @@ class MapVC: UIViewController {
                 self.placeShadowView.isHidden = true
                 self.nearPlaceCollectionView.isHidden = false
                 self.placePopupView.showingState = .notShow
+                
                 self.placeShadowView.transform = .identity
             }
             
             tempMarker.userInfo["isTouch"] = !isTouch
-            
             return false
         }
     }
@@ -66,6 +66,7 @@ class MapVC: UIViewController {
         let refreshButton = UIButton()
         refreshButton.setImage(UIImage(named: ImageKey.icRefresh), for: .normal)
         refreshButton.translatesAutoresizingMaskIntoConstraints = false
+        refreshButton.makeShadow(color: UIColor.black.withAlphaComponent(0.3), blur: 4, x: 0, y: 2)
        return refreshButton
     }()
     
@@ -97,6 +98,7 @@ class MapVC: UIViewController {
     var currentLocationButton: UIButton = {
         let currentLocationButton = UIButton()
         currentLocationButton.setImage(UIImage(named: ImageKey.icGPS), for: .normal)
+        currentLocationButton.makeShadow(color: UIColor.black.withAlphaComponent(0.3), blur: 4, x: 0, y: 2)
         currentLocationButton.translatesAutoresizingMaskIntoConstraints = false
         return currentLocationButton
     }()
@@ -134,10 +136,13 @@ class MapVC: UIViewController {
     
     // 내 위치 찾기 버튼 바뀔 때마다 Bottom Constraint 바꾸어주기
     var currentLocationButtonBottomConstraint: NSLayoutConstraint!
+    var anotherConstraint: NSLayoutConstraint!
     
     // 내 위치 찾기 버튼 초기 화면 설정
     private func setCurrentLocationButtonLayout() {
         currentLocationButtonBottomConstraint = currentLocationButton.bottomAnchor.constraint(equalTo: nearPlaceCollectionView.topAnchor, constant: -16)
+        anotherConstraint = self.currentLocationButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -16-self.calculateInitPanelViewHeight()+self.tabBarController!.tabBar.frame.height)
+        
         NSLayoutConstraint.activate([
             currentLocationButtonBottomConstraint,
             currentLocationButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
