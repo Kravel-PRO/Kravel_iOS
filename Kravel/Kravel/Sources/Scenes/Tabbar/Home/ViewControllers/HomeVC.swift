@@ -172,6 +172,8 @@ extension HomeVC: UICollectionViewDataSource {
     private func makeHotPlaceCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> HotPlaceCell {
         guard let hotPlaceCell = collectionView.dequeueReusableCell(withReuseIdentifier: HotPlaceCell.identifier, for: indexPath) as? HotPlaceCell else { return HotPlaceCell() }
         hotPlaceCell.layer.cornerRadius = hotPlaceCell.frame.width / 17.15
+        hotPlaceCell.location = "성북 빌리지"
+        hotPlaceCell.photoCount = 96
         hotPlaceCell.clipsToBounds = true
         return hotPlaceCell
     }
