@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WQ0-PR-aAJ">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--WelcomeVC-->
+        <scene sceneID="nS2-HZ-esb">
+            <objects>
+                <viewController storyboardIdentifier="WelcomeVC" id="WQ0-PR-aAJ" customClass="WelcomeVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="A1c-nX-gTb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zqL-hE-Waw">
+                                <rect key="frame" x="97.666666666666686" y="226" width="180" height="180"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icWelcomeTiger" translatesAutoresizingMaskIntoConstraints="NO" id="oKB-D2-LZe">
+                                        <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
+                                        <color key="tintColor" red="0.93333333330000001" green="0.4039215686" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="oKB-D2-LZe" firstAttribute="leading" secondItem="zqL-hE-Waw" secondAttribute="leading" id="E5d-rN-XSS"/>
+                                    <constraint firstAttribute="width" secondItem="zqL-hE-Waw" secondAttribute="height" multiplier="1:1" id="ErP-oO-66s"/>
+                                    <constraint firstAttribute="trailing" secondItem="oKB-D2-LZe" secondAttribute="trailing" id="ZAK-in-3YI"/>
+                                    <constraint firstAttribute="bottom" secondItem="oKB-D2-LZe" secondAttribute="bottom" id="hHw-XQ-sPY"/>
+                                    <constraint firstItem="oKB-D2-LZe" firstAttribute="top" secondItem="zqL-hE-Waw" secondAttribute="top" id="jSP-vR-RCv"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uoo-qz-w5i" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
+                                <rect key="frame" x="44" y="698" width="287" height="56"/>
+                                <color key="backgroundColor" red="1" green="0.4039215686" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="uoo-qz-w5i" secondAttribute="height" multiplier="41:8" id="d1x-e3-n48"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <state key="normal" title="여행 떠나기">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="goNext:" destination="WQ0-PR-aAJ" eventType="touchUpInside" id="eJt-1G-Qmh"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="환영합니다!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfI-8d-vR5">
+                                <rect key="frame" x="131.66666666666666" y="442" width="112" height="29"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <color key="textColor" red="0.070588235289999995" green="0.070588235289999995" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1FZ-uq-fgs">
+                                <rect key="frame" x="55" y="484.99999999999994" width="265" height="100.33333333333331"/>
+                                <string key="text">K-culture과 함께 색다른 여행을 떠나는 서비스,
+Kravel입니다.
+내가 좋아하는 아이돌이 다녀간 곳부터
+요즘 인기 많은 드라마 촬영지까지!
+예쁜 인증샷과 함께 소중한 추억을
+만들어 보아요!</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="u2h-dV-eW5" firstAttribute="bottom" secondItem="uoo-qz-w5i" secondAttribute="bottom" constant="24" id="7a7-nh-GHk"/>
+                            <constraint firstItem="zqL-hE-Waw" firstAttribute="width" secondItem="A1c-nX-gTb" secondAttribute="width" multiplier="0.48" id="BhR-DL-FpS"/>
+                            <constraint firstItem="1FZ-uq-fgs" firstAttribute="top" secondItem="AfI-8d-vR5" secondAttribute="bottom" constant="14" id="Luj-6N-y66"/>
+                            <constraint firstItem="1FZ-uq-fgs" firstAttribute="width" secondItem="A1c-nX-gTb" secondAttribute="width" multiplier="0.70667" id="MF2-EA-jpz"/>
+                            <constraint firstItem="uoo-qz-w5i" firstAttribute="width" secondItem="A1c-nX-gTb" secondAttribute="width" multiplier="0.765333" id="aY6-al-Q6l"/>
+                            <constraint firstItem="AfI-8d-vR5" firstAttribute="centerX" secondItem="u2h-dV-eW5" secondAttribute="centerX" id="mP3-CF-oew"/>
+                            <constraint firstItem="uoo-qz-w5i" firstAttribute="centerX" secondItem="u2h-dV-eW5" secondAttribute="centerX" id="rpu-J3-NfC"/>
+                            <constraint firstItem="AfI-8d-vR5" firstAttribute="top" secondItem="zqL-hE-Waw" secondAttribute="bottom" constant="36" id="u7u-D1-CYe"/>
+                            <constraint firstItem="zqL-hE-Waw" firstAttribute="centerX" secondItem="u2h-dV-eW5" secondAttribute="centerX" id="vTR-ge-XFO"/>
+                            <constraint firstItem="1FZ-uq-fgs" firstAttribute="centerX" secondItem="u2h-dV-eW5" secondAttribute="centerX" id="w4a-1k-km8"/>
+                            <constraint firstItem="zqL-hE-Waw" firstAttribute="top" secondItem="u2h-dV-eW5" secondAttribute="top" constant="182" id="yXO-LM-qRR"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="u2h-dV-eW5"/>
+                    </view>
+                    <connections>
+                        <outlet property="goTripButton" destination="uoo-qz-w5i" id="ohM-RS-kNX"/>
+                        <outlet property="illustrateTopConstraint" destination="yXO-LM-qRR" id="gkv-ht-j6U"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="trq-rv-w6t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="461.60000000000002" y="838.66995073891633"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icWelcomeTiger" width="141" height="142"/>
+    </resources>
+</document>

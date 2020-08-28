@@ -19,7 +19,7 @@ class WelcomeVC: UIViewController {
     @IBOutlet weak var illustrateTopConstraint: NSLayoutConstraint!
     
     @IBAction func goNext(_ sender: Any) {
-        guard let rootNav = self.storyboard?.instantiateViewController(withIdentifier: "StartRoot") as? UINavigationController else { return }
+        guard let rootNav = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StartRoot") as? UINavigationController else { return }
         guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
         window.rootViewController = rootNav
     }

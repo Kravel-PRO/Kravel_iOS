@@ -54,7 +54,7 @@ class SetLanguageVC: UIViewController {
     
     // 완료 버튼 Call Back
     lazy var complete: ((Language) -> Void) = { [weak self] language in
-        guard let startVC = self?.storyboard?.instantiateViewController(identifier: "WelcomeVC") as? WelcomeVC else { return }
+        guard let startVC = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewController(identifier: "WelcomeVC") as? WelcomeVC else { return }
         startVC.modalPresentationStyle = .fullScreen
         self?.present(startVC, animated: true, completion: nil)
     }

@@ -14,7 +14,6 @@ class LogoutPopupVC: UIViewController {
     // MARK: - 팝업 배경 뷰 설정
     @IBOutlet weak var popupView: UIView! {
         didSet {
-            popupView.layer.cornerRadius = popupView.frame.width / 17
             popupView.makeShadow(color: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 0.7), blur: 20, x: 3, y: 3)
         }
     }
@@ -27,6 +26,7 @@ class LogoutPopupVC: UIViewController {
         let icImageViewHeight = icImageViewWidth * (3/4)
         let topConstant = icImageViewHeight * 0.67
         icTopConstraint.constant = -topConstant
+        popupView.layer.cornerRadius = popupView.frame.width / 17
     }
     
     // MARK: - 팝업 뷰 라벨 설정
@@ -52,6 +52,15 @@ class LogoutPopupVC: UIViewController {
         didSet {
             buttons.forEach { element in
                 element.locationButton = .logoutPopupView
+            }
+        }
+    }
+    
+    // 버튼에 들어갈 Text 설정
+    var buttonTexts: [String] = [] {
+        didSet {
+            for index in 0..<buttonTexts.count {
+                buttons[index].setTitle(buttonTexts[index], for: .normal)
             }
         }
     }

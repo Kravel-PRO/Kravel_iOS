@@ -9,6 +9,9 @@
 import UIKit
 
 class SignupVC: UIViewController {
+    static let identifier = "SignupVC"
+    
+    // MARK: - 메인 ScrollView 설정
     @IBOutlet weak var signupScrollView: UIScrollView! {
         didSet {
             let gesture = UITapGestureRecognizer(target: self, action: #selector(viewTouched))

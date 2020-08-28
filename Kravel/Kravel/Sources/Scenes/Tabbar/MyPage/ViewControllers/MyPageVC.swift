@@ -157,7 +157,7 @@ extension MyPageVC: UITableViewDelegate {
     
     // 언어 설정 화면으로 이동
     private func goSetLanguageVC(navTitle: String) {
-        guard let setLanguageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: SetLanguageVC.identifier) as? SetLanguageVC else { return }
+        guard let setLanguageVC = UIStoryboard(name: "SetLanguage", bundle: nil).instantiateViewController(identifier: SetLanguageVC.identifier) as? SetLanguageVC else { return }
         setLanguageVC.navTitle = navTitle
         setLanguageVC.completeButtonText = "Complete"
         setLanguageVC.complete = { [weak self] language in

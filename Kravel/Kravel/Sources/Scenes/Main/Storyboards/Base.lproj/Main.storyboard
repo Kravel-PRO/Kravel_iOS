@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--MainVC-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MainVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6yi-JZ-OF4">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgSign" translatesAutoresizingMaskIntoConstraints="NO" id="Xfj-qW-ukN">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tXi-2Z-Ntg" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
+                                        <rect key="frame" x="44" y="690" width="287" height="56"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="tXi-2Z-Ntg" secondAttribute="height" multiplier="41:8" id="AHm-RX-GL4"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <state key="normal" title="회원가입 하기">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goSignupView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qf9-EW-1wJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgF-fF-zpJ" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
+                                        <rect key="frame" x="44" y="618" width="287" height="56"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <state key="normal" title="로그인 하기"/>
+                                        <connections>
+                                            <action selector="clickLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dlL-01-Fc5"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Xf-q2-WmO">
+                                        <rect key="frame" x="16" y="174" width="57" height="28.666666666666657"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottomMargin" secondItem="tXi-2Z-Ntg" secondAttribute="bottom" constant="24" id="Adg-wE-uol"/>
+                                    <constraint firstItem="Xfj-qW-ukN" firstAttribute="top" secondItem="6yi-JZ-OF4" secondAttribute="top" id="Hsu-W8-44R"/>
+                                    <constraint firstItem="NgF-fF-zpJ" firstAttribute="width" secondItem="tXi-2Z-Ntg" secondAttribute="width" id="RTk-Me-lWu"/>
+                                    <constraint firstItem="NgF-fF-zpJ" firstAttribute="height" secondItem="tXi-2Z-Ntg" secondAttribute="height" id="Rp6-ko-PgW"/>
+                                    <constraint firstItem="tXi-2Z-Ntg" firstAttribute="top" secondItem="NgF-fF-zpJ" secondAttribute="bottom" constant="16" id="T2z-II-RMd"/>
+                                    <constraint firstAttribute="trailing" secondItem="Xfj-qW-ukN" secondAttribute="trailing" id="e35-jw-jfr"/>
+                                    <constraint firstAttribute="bottom" secondItem="Xfj-qW-ukN" secondAttribute="bottom" id="fp4-RE-dGe"/>
+                                    <constraint firstItem="tXi-2Z-Ntg" firstAttribute="centerX" secondItem="Xfj-qW-ukN" secondAttribute="centerX" id="fs1-tw-yjA"/>
+                                    <constraint firstItem="Xfj-qW-ukN" firstAttribute="leading" secondItem="6yi-JZ-OF4" secondAttribute="leading" id="hIO-HZ-Ftv"/>
+                                    <constraint firstItem="NgF-fF-zpJ" firstAttribute="centerX" secondItem="Xfj-qW-ukN" secondAttribute="centerX" id="rCB-W9-5Zv"/>
+                                    <constraint firstItem="5Xf-q2-WmO" firstAttribute="leading" secondItem="6yi-JZ-OF4" secondAttribute="leading" constant="16" id="t68-8N-Rue"/>
+                                    <constraint firstItem="tXi-2Z-Ntg" firstAttribute="width" secondItem="Xfj-qW-ukN" secondAttribute="width" multiplier="0.765333" id="wT9-Cb-RsN"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ybR-bJ-5Ql" customClass="LoginTextView" customModule="Kravel" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="812" width="375" height="370"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6yi-JZ-OF4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="CKH-Ja-vkG"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6yi-JZ-OF4" secondAttribute="trailing" id="F08-gX-5Xq"/>
+                            <constraint firstItem="ybR-bJ-5Ql" firstAttribute="height" secondItem="6yi-JZ-OF4" secondAttribute="height" multiplier="0.455665" id="Uub-1O-m2N"/>
+                            <constraint firstItem="5Xf-q2-WmO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="86" id="WKr-G9-br1"/>
+                            <constraint firstItem="ybR-bJ-5Ql" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="gPu-tb-oXL"/>
+                            <constraint firstItem="ybR-bJ-5Ql" firstAttribute="top" secondItem="6yi-JZ-OF4" secondAttribute="bottom" id="hGN-bD-n6g"/>
+                            <constraint firstItem="6yi-JZ-OF4" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="hZS-Sq-h3Q"/>
+                            <constraint firstAttribute="bottom" secondItem="6yi-JZ-OF4" secondAttribute="bottom" id="quc-e9-vmM"/>
+                            <constraint firstItem="ybR-bJ-5Ql" firstAttribute="width" secondItem="6yi-JZ-OF4" secondAttribute="width" id="toF-cy-wUa"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Ted-rG-VhO"/>
+                    <connections>
+                        <outlet property="backViewBottomConstraint" destination="quc-e9-vmM" id="aDX-jd-FPI"/>
+                        <outlet property="backgroundView" destination="6yi-JZ-OF4" id="z9p-FZ-lRS"/>
+                        <outlet property="loginTextView" destination="ybR-bJ-5Ql" id="dbk-tu-fKV"/>
+                        <outlet property="loginTextViewTopConstraint" destination="hGN-bD-n6g" id="tvI-T7-Fgs"/>
+                        <outlet property="signinButton" destination="NgF-fF-zpJ" id="KeX-DA-8QM"/>
+                        <outlet property="signupButton" destination="tXi-2Z-Ntg" id="SMf-4k-bDW"/>
+                        <outlet property="titleLabel" destination="5Xf-q2-WmO" id="gSp-Ay-5jx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1258" y="129"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Seg-xK-O0e">
+            <objects>
+                <navigationController storyboardIdentifier="StartRoot" automaticallyAdjustsScrollViewInsets="NO" id="lQV-gJ-zCl" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Gu5-Qe-iQH">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="vek-Fu-jgr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="feo-gB-tAa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="461.60000000000002" y="128.57142857142858"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="bgSign" width="375" height="812"/>
+    </resources>
+</document>

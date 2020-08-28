@@ -25,6 +25,12 @@ class MainVC: UIViewController {
         }
     }
     
+    // 회원가입 화면으로 가기
+    @IBAction func goSignupView(_ sender: Any) {
+        guard let signupVC = UIStoryboard(name: "Signup", bundle: nil).instantiateViewController(withIdentifier: SignupVC.identifier) as? SignupVC else { return }
+        self.navigationController?.pushViewController(signupVC, animated: true)
+    }
+    
     // MARK: - 초기 화면 Title Label 설정
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {
@@ -168,6 +174,15 @@ extension MainVC: UITextFieldDelegate {
 
 extension MainVC: LoginTextViewDelegate {
     func clickLoginButton(id: String, pw: String) {
+        // FIXME: 로그인 실패하는 로직에 추가하면 됨
+//        guard let loginPopupVC = UIStoryboard(name: "LoginPopup", bundle: nil).instantiateViewController(withIdentifier: LoginPopupVC.identifier) as? LoginPopupVC else { return }
+//        loginPopupVC.modalPresentationStyle = .overFullScreen
+//        loginPopupVC.titleMessage = "로그인을 실패했습니다."
+//        loginPopupVC.message = "존재하지 않는 계정\n또는 비밀번호가 잘못되었습니다."
+//        
+//        self.present(loginPopupVC, animated: false, completion: nil)
+        
+        // FIXME: 다으화면으로 넘어가기 위한 로직
         guard let mainTabVC = UIStoryboard(name: "Tabbar", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as? UITabBarController else { return }
         mainTabVC.modalPresentationStyle = .fullScreen
         self.present(mainTabVC, animated: true, completion: nil)

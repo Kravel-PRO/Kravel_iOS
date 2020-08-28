@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="K0W-hC-dbI">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Set LanguageVC-->
+        <scene sceneID="4Fi-6Q-jNW">
+            <objects>
+                <viewController storyboardIdentifier="SetLanguageVC" id="K0W-hC-dbI" customClass="SetLanguageVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7sv-Qr-pox">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4gO-iZ-qrF" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
+                                <rect key="frame" x="44" y="698" width="287" height="56"/>
+                                <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="4gO-iZ-qrF" secondAttribute="height" multiplier="41:8" id="UYc-wq-7pd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Start Kravel">
+                                    <color key="titleColor" red="0.72549019609999998" green="0.72549019609999998" blue="0.72549019609999998" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="start:" destination="K0W-hC-dbI" eventType="touchUpInside" id="Blj-2N-66T"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please set the language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J04-oj-4wG">
+                                <rect key="frame" x="65" y="259.33333333333331" width="245" height="26.333333333333314"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.1529411765" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="kjh-pk-nPP">
+                                <rect key="frame" x="44" y="344.66666666666669" width="287" height="133"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ov7-ie-7B4" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="287" height="56"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="ov7-ie-7B4" secondAttribute="height" multiplier="41:8" id="1NN-oe-N2o"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="안녕">
+                                            <color key="titleColor" red="0.72549019609999998" green="0.72549019609999998" blue="0.72549019609999998" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectLanguage:" destination="K0W-hC-dbI" eventType="touchUpInside" id="jRM-Z1-8Kt"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6xv-zu-7GN" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="77" width="287" height="56"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Hello">
+                                            <color key="titleColor" red="0.72549019609999998" green="0.72549019609999998" blue="0.72549019609999998" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectLanguage:" destination="K0W-hC-dbI" eventType="touchUpInside" id="BVt-6Q-kqz"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="4gO-iZ-qrF" firstAttribute="width" secondItem="7sv-Qr-pox" secondAttribute="width" multiplier="0.765333" id="4gq-h2-aab"/>
+                            <constraint firstItem="kjh-pk-nPP" firstAttribute="centerY" secondItem="EnH-gc-uUa" secondAttribute="centerY" id="633-nU-E9v"/>
+                            <constraint firstItem="4gO-iZ-qrF" firstAttribute="centerX" secondItem="EnH-gc-uUa" secondAttribute="centerX" id="NAn-s2-FyH"/>
+                            <constraint firstItem="J04-oj-4wG" firstAttribute="centerX" secondItem="EnH-gc-uUa" secondAttribute="centerX" id="Qgp-yi-4r4"/>
+                            <constraint firstItem="kjh-pk-nPP" firstAttribute="centerX" secondItem="EnH-gc-uUa" secondAttribute="centerX" id="THj-AQ-uJ2"/>
+                            <constraint firstItem="kjh-pk-nPP" firstAttribute="width" secondItem="7sv-Qr-pox" secondAttribute="width" multiplier="0.765333" id="ee6-zx-ej4"/>
+                            <constraint firstItem="kjh-pk-nPP" firstAttribute="top" secondItem="J04-oj-4wG" secondAttribute="bottom" constant="59" id="jjG-FM-hDZ"/>
+                            <constraint firstItem="EnH-gc-uUa" firstAttribute="bottom" secondItem="4gO-iZ-qrF" secondAttribute="bottom" constant="24" id="sV6-Qc-bPb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EnH-gc-uUa"/>
+                    </view>
+                    <connections>
+                        <outlet property="startButton" destination="4gO-iZ-qrF" id="g8F-MD-aNP"/>
+                        <outletCollection property="languageButtons" destination="ov7-ie-7B4" collectionClass="NSMutableArray" id="SnL-hK-tRF"/>
+                        <outletCollection property="languageButtons" destination="6xv-zu-7GN" collectionClass="NSMutableArray" id="G2Z-E5-UbM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="75P-vM-tHR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-313" y="129"/>
+        </scene>
+    </scenes>
+</document>
