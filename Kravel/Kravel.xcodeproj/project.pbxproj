@@ -49,6 +49,8 @@
 		9D6FF35E24F984BC00E6A8B9 /* OtherPhotoReview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D6FF35D24F984BC00E6A8B9 /* OtherPhotoReview.storyboard */; };
 		9D6FF36024F9851200E6A8B9 /* OtherPhotoReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6FF35F24F9851200E6A8B9 /* OtherPhotoReviewVC.swift */; };
 		9D6FF36324F9873200E6A8B9 /* OtherPhotoReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6FF36224F9873200E6A8B9 /* OtherPhotoReviewCell.swift */; };
+		9D6FF36524F9FF0900E6A8B9 /* PhotoReviewUpload.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D6FF36424F9FF0900E6A8B9 /* PhotoReviewUpload.storyboard */; };
+		9D6FF36724F9FF3400E6A8B9 /* PhotoReviewUploadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6FF36624F9FF3400E6A8B9 /* PhotoReviewUploadVC.swift */; };
 		9D79E29F24EC279E006310A2 /* NearPlace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D79E29E24EC279E006310A2 /* NearPlace.storyboard */; };
 		9D79E2A124EC27B7006310A2 /* NearPlaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D79E2A024EC27B7006310A2 /* NearPlaceVC.swift */; };
 		9D79E2A324EC2993006310A2 /* DetailNearPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D79E2A224EC2993006310A2 /* DetailNearPlaceCell.swift */; };
@@ -159,6 +161,8 @@
 		9D6FF35D24F984BC00E6A8B9 /* OtherPhotoReview.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OtherPhotoReview.storyboard; sourceTree = "<group>"; };
 		9D6FF35F24F9851200E6A8B9 /* OtherPhotoReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherPhotoReviewVC.swift; sourceTree = "<group>"; };
 		9D6FF36224F9873200E6A8B9 /* OtherPhotoReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherPhotoReviewCell.swift; sourceTree = "<group>"; };
+		9D6FF36424F9FF0900E6A8B9 /* PhotoReviewUpload.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PhotoReviewUpload.storyboard; sourceTree = "<group>"; };
+		9D6FF36624F9FF3400E6A8B9 /* PhotoReviewUploadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoReviewUploadVC.swift; sourceTree = "<group>"; };
 		9D79E29E24EC279E006310A2 /* NearPlace.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NearPlace.storyboard; sourceTree = "<group>"; };
 		9D79E2A024EC27B7006310A2 /* NearPlaceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearPlaceVC.swift; sourceTree = "<group>"; };
 		9D79E2A224EC2993006310A2 /* DetailNearPlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNearPlaceCell.swift; sourceTree = "<group>"; };
@@ -562,6 +566,7 @@
 			isa = PBXGroup;
 			children = (
 				9D6FF35D24F984BC00E6A8B9 /* OtherPhotoReview.storyboard */,
+				9D6FF36424F9FF0900E6A8B9 /* PhotoReviewUpload.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -570,6 +575,7 @@
 			isa = PBXGroup;
 			children = (
 				9D6FF35F24F9851200E6A8B9 /* OtherPhotoReviewVC.swift */,
+				9D6FF36624F9FF3400E6A8B9 /* PhotoReviewUploadVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -988,6 +994,7 @@
 				9DBA643024F0437E00E12FA4 /* RecentResearchView.xib in Resources */,
 				9D43C02624F8FFB000184619 /* SetLanguage.storyboard in Resources */,
 				9DC8447224F8EF0A00EC1D68 /* Map.storyboard in Resources */,
+				9D6FF36524F9FF0900E6A8B9 /* PhotoReviewUpload.storyboard in Resources */,
 				9D2E26A324E960100091643E /* Report.storyboard in Resources */,
 				9D43C02E24F9023500184619 /* Signup.storyboard in Resources */,
 				9DBA644524F507C100E12FA4 /* NearbyAttractionView.xib in Resources */,
@@ -1046,6 +1053,7 @@
 				9D5DBB47248D5BBF00D82D40 /* SexButton.swift in Sources */,
 				9D7FB20024D16AA9009A9C0A /* PlacePopupView.swift in Sources */,
 				9DBA643924F2738600E12FA4 /* NSNotificationName+Extensions.swift in Sources */,
+				9D6FF36724F9FF3400E6A8B9 /* PhotoReviewUploadVC.swift in Sources */,
 				9D014C3E248C4A5E00758FCC /* SignupVC.swift in Sources */,
 				9D2E26A124E935020091643E /* Language.swift in Sources */,
 				9D61F6E624F7F2A900EF13FB /* RealEditPasswordVC.swift in Sources */,

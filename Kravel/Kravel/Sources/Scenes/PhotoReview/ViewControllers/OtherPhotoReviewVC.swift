@@ -45,7 +45,8 @@ class OtherPhotoReviewVC: UIViewController {
     }
     
     @objc func writePhotoReview(_ sender: Any) {
-        print("aaa")
+        guard let photoReviewUploadVC = UIStoryboard(name: "PhotoReviewUpload", bundle: nil).instantiateViewController(withIdentifier: PhotoReviewUploadVC.identifier) as? PhotoReviewUploadVC else { return }
+        self.navigationController?.pushViewController(photoReviewUploadVC, animated: true)
     }
 }
 

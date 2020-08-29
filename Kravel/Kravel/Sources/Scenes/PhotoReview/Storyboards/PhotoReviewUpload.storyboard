@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Photo Review UploadVC-->
+        <scene sceneID="Oqw-XU-rA1">
+            <objects>
+                <viewController storyboardIdentifier="PhotoReviewUploadVC" id="OA1-5y-wVq" customClass="PhotoReviewUploadVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Za1-bk-8nn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3b8-Ch-rwX" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
+                                <rect key="frame" x="44" y="698" width="287" height="56"/>
+                                <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="3b8-Ch-rwX" secondAttribute="height" multiplier="41:8" id="ZUq-hq-eqh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <state key="normal" title="업로드 하기">
+                                    <color key="titleColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TiZ-Zs-Gwt">
+                                <rect key="frame" x="0.0" y="44" width="375" height="375"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="cVq-2H-ndJ">
+                                        <rect key="frame" x="112.00000000000001" y="132.66666666666666" width="151.33333333333337" height="109.66666666666666"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="Svu-Vo-1ic">
+                                                <rect key="frame" x="38.333333333333336" y="0.0" width="74.333333333333314" height="74.333333333333329"/>
+                                                <color key="tintColor" red="0.72549019609999998" green="0.72549019609999998" blue="0.72549019609999998" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Svu-Vo-1ic" secondAttribute="height" multiplier="1:1" id="mft-28-Ndg"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사진을 업로드 해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2d4-el-JlW">
+                                                <rect key="frame" x="0.0" y="90.333333333333343" width="151.33333333333334" height="19.333333333333329"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" red="0.1058823529" green="0.1058823529" blue="0.1058823529" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DeN-Vv-9zu">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRc-2q-zMd">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                        <connections>
+                                            <action selector="clickPictureUpload:" destination="OA1-5y-wVq" eventType="touchUpInside" id="NKv-rY-h1F"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YqY-u5-Zzh">
+                                        <rect key="frame" x="324.33333333333331" y="10" width="40.666666666666686" height="40.666666666666664"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="YqY-u5-Zzh" secondAttribute="height" multiplier="1:1" id="vDk-F8-nyo"/>
+                                        </constraints>
+                                        <state key="normal" image="btnDeleteWhite"/>
+                                        <connections>
+                                            <action selector="deletePicture:" destination="OA1-5y-wVq" eventType="touchUpInside" id="9cJ-kd-htL"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="DeN-Vv-9zu" firstAttribute="top" secondItem="TiZ-Zs-Gwt" secondAttribute="top" id="5GG-Fa-ePb"/>
+                                    <constraint firstItem="eRc-2q-zMd" firstAttribute="top" secondItem="TiZ-Zs-Gwt" secondAttribute="top" id="FTX-7H-B8Z"/>
+                                    <constraint firstAttribute="width" secondItem="TiZ-Zs-Gwt" secondAttribute="height" multiplier="1:1" id="GBO-rV-fgt"/>
+                                    <constraint firstItem="eRc-2q-zMd" firstAttribute="leading" secondItem="TiZ-Zs-Gwt" secondAttribute="leading" id="UDf-Rk-fLZ"/>
+                                    <constraint firstItem="YqY-u5-Zzh" firstAttribute="top" secondItem="TiZ-Zs-Gwt" secondAttribute="top" constant="10" id="Vld-kP-DhQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="eRc-2q-zMd" secondAttribute="trailing" id="Vox-I5-gA0"/>
+                                    <constraint firstItem="cVq-2H-ndJ" firstAttribute="centerY" secondItem="TiZ-Zs-Gwt" secondAttribute="centerY" id="Vvq-ZY-w52"/>
+                                    <constraint firstAttribute="trailing" secondItem="YqY-u5-Zzh" secondAttribute="trailing" constant="10" id="Wie-d2-xeC"/>
+                                    <constraint firstAttribute="bottom" secondItem="eRc-2q-zMd" secondAttribute="bottom" id="b4q-N5-MDU"/>
+                                    <constraint firstAttribute="trailing" secondItem="DeN-Vv-9zu" secondAttribute="trailing" id="btv-Fo-baS"/>
+                                    <constraint firstAttribute="bottom" secondItem="DeN-Vv-9zu" secondAttribute="bottom" id="og3-JS-dvf"/>
+                                    <constraint firstItem="DeN-Vv-9zu" firstAttribute="leading" secondItem="TiZ-Zs-Gwt" secondAttribute="leading" id="tgV-ca-5OI"/>
+                                    <constraint firstItem="cVq-2H-ndJ" firstAttribute="centerX" secondItem="TiZ-Zs-Gwt" secondAttribute="centerX" id="zLa-TP-uNQ"/>
+                                    <constraint firstItem="Svu-Vo-1ic" firstAttribute="width" secondItem="TiZ-Zs-Gwt" secondAttribute="width" multiplier="0.197441" id="zWC-fp-OFS"/>
+                                    <constraint firstItem="YqY-u5-Zzh" firstAttribute="width" secondItem="TiZ-Zs-Gwt" secondAttribute="width" multiplier="0.108108" id="zak-eM-YVF"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="shk-Md-us0" firstAttribute="trailing" secondItem="TiZ-Zs-Gwt" secondAttribute="trailing" id="7dA-eX-SmN"/>
+                            <constraint firstItem="3b8-Ch-rwX" firstAttribute="width" secondItem="Za1-bk-8nn" secondAttribute="width" multiplier="0.765333" id="Es0-7C-qJM"/>
+                            <constraint firstItem="3b8-Ch-rwX" firstAttribute="centerX" secondItem="shk-Md-us0" secondAttribute="centerX" id="MwX-WO-dmg"/>
+                            <constraint firstItem="shk-Md-us0" firstAttribute="bottom" secondItem="3b8-Ch-rwX" secondAttribute="bottom" constant="24" id="VQr-fF-cYI"/>
+                            <constraint firstItem="TiZ-Zs-Gwt" firstAttribute="leading" secondItem="shk-Md-us0" secondAttribute="leading" id="fFh-SC-Ciy"/>
+                            <constraint firstItem="TiZ-Zs-Gwt" firstAttribute="top" secondItem="shk-Md-us0" secondAttribute="top" id="h2v-PP-TGa"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="shk-Md-us0"/>
+                    </view>
+                    <connections>
+                        <outlet property="completeButton" destination="3b8-Ch-rwX" id="sTn-6G-g52"/>
+                        <outlet property="photoImageView" destination="DeN-Vv-9zu" id="PhJ-Xj-AJZ"/>
+                        <outlet property="pictureDeleteButton" destination="YqY-u5-Zzh" id="Eck-7t-co9"/>
+                        <outlet property="pictureUploadMarginView" destination="TiZ-Zs-Gwt" id="qyO-6X-nDc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Aww-y3-b0e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="39" y="126"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="btnDeleteWhite" width="16" height="16"/>
+        <image name="icPhoto" width="24" height="24"/>
+    </resources>
+</document>
