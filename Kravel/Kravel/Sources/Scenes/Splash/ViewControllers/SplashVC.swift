@@ -21,7 +21,7 @@ class SplashVC: UIViewController {
         animationView?.play()
         
         self.view.addSubview(animationView!)
-        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(overSplash), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(overSplash), userInfo: nil, repeats: false)
     }
     
     // 스플래쉬 화면 끝나고 다음화면으로 넘어가기
