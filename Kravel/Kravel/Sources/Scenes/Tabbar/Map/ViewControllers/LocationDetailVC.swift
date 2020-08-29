@@ -100,6 +100,13 @@ class LocationDetailVC: UIViewController {
         }
     }
     
+    // 사진 화면으로 이동
+    @IBAction func takePicture(_ sender: Any) {
+        guard let cameraVC = UIStoryboard(name: "Camera", bundle: nil).instantiateViewController(withIdentifier: CameraVC.identifier) as? CameraVC else { return }
+        cameraVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(cameraVC, animated: true)
+    }
+    
     // MARK: - 포토 리뷰 뷰 설정
     @IBOutlet weak var photoReviewView: PhotoReviewView! {
         didSet {

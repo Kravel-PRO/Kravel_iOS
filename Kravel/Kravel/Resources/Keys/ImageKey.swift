@@ -56,4 +56,8 @@ struct ImageKey {
     
     // 제보하기 화면 업로드 사진 삭제
     static let icDeleteWhite = "icDeleteWhite"
+    
+    // 사진 찍기 이미지
+    static let btnPickInline = "btnPickInline"
+    static let btnPickOutline = "btnPickOutline"
 }
