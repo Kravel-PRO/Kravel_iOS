@@ -110,6 +110,9 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNQ-2R-fyN">
                                                                 <rect key="frame" x="191" y="0.0" width="191" height="53.333333333333336"/>
                                                                 <state key="normal" image="icScrap"/>
+                                                                <connections>
+                                                                    <action selector="scrap:" destination="yXX-7V-xvt" eventType="touchUpInside" id="9Fl-9b-JFp"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>

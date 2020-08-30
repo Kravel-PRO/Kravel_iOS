@@ -32,3 +32,50 @@ Kravel iOS💻
 * `test` : UI Test, Unit Test하는 경우
 
 > 👉 test: 체크 버튼 로직 Unit Test
+
+<br>
+
+---
+
+### 📕 새롭게 알게 된 것
+
+<br>
+
+1️⃣ Cell에 Shadow + CornerRadius 같이 적용하기
+
+```swift
+
+```
+
+<br>
+
+2️⃣ `Alamofire` 4.8 Version만 사용하다가 `Alamofire` 5.2 Version의 사용법
+
+```swift
+
+```
+
+<br>
+
+3️⃣ `Core Data` 사용해서 데이터 저장하기
+
+```swift
+
+```
+
+<br>
+
+4️⃣ `AVFoundation` 이용 Custom Camera 구현
+
+```swift
+
+```
+
+<br>
+
+5️⃣ API 요청 GET 메소드 사용시 Query문 사용하기
+
+```swift
+
+```
+

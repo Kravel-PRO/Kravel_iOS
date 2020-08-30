@@ -8,4 +8,5 @@ target 'Kravel' do
   # Pods for Kravel
   pod 'lottie-ios'
   pod 'NMapsMap'
+  pod 'Alamofire', '~> 5.2'
 end

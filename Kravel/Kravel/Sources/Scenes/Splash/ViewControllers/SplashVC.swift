@@ -42,6 +42,7 @@ class SplashVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         showLoadingLottie()
+        NetworkHandler.shared.getMapAPI()
     }
     
     // MARK: - UIViewController viewDidLayoutSubviews Override 설정

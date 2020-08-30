@@ -19,14 +19,14 @@ class LocationDetailVC: UIViewController {
     private var animationView: AnimationView?
     
     private func showLoadingLottie() {
-        animationView = AnimationView(name: "loading")
+        animationView = AnimationView(name: "loading_map")
         animationView?.backgroundColor = .white
         animationView?.contentMode = .scaleAspectFit
         animationView?.frame = self.view.bounds
         animationView?.play()
         
         self.view.addSubview(animationView!)
-        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(removeView), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(removeView), userInfo: nil, repeats: false)
     }
     
     @objc func removeView() {
@@ -105,6 +105,17 @@ class LocationDetailVC: UIViewController {
         guard let cameraVC = UIStoryboard(name: "Camera", bundle: nil).instantiateViewController(withIdentifier: CameraVC.identifier) as? CameraVC else { return }
         cameraVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(cameraVC, animated: true)
+    }
+    
+    private var isScrap: Bool = false
+    
+    // 스크랩하기 버튼
+    @IBAction func scrap(_ sender: Any) {
+        guard let scrapButton = sender as? UIButton else { return }
+        
+        isScrap = !isScrap
+        let scrapButtonImage = isScrap ? UIImage(named: ImageKey.icScrapFill) : UIImage(named: ImageKey.icScrap)
+        scrapButton.setImage(scrapButtonImage, for: .normal)
     }
     
     // MARK: - 포토 리뷰 뷰 설정

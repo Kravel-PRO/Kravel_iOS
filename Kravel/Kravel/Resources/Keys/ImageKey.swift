@@ -60,4 +60,8 @@ struct ImageKey {
     // 사진 찍기 이미지
     static let btnPickInline = "btnPickInline"
     static let btnPickOutline = "btnPickOutline"
+    
+    // 스크랩 버튼 이미지
+    static let icScrap = "icScrap"
+    static let icScrapFill = "icScrapFill"
 }
