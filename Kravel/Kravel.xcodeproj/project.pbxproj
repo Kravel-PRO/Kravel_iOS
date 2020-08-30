@@ -62,6 +62,7 @@
 		9D6FF38A24FAFC6300E6A8B9 /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6FF38924FAFC6300E6A8B9 /* NetworkHandler.swift */; };
 		9D6FF38E24FB024700E6A8B9 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6FF38D24FB024700E6A8B9 /* SampleData.swift */; };
 		9D6FF39224FB096600E6A8B9 /* loading_map.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D6FF39124FB096600E6A8B9 /* loading_map.json */; };
+		9D76CD7D24FC29CD004D7333 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD7C24FC29CD004D7333 /* ImageManager.swift */; };
 		9D79E29F24EC279E006310A2 /* NearPlace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D79E29E24EC279E006310A2 /* NearPlace.storyboard */; };
 		9D79E2A124EC27B7006310A2 /* NearPlaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D79E2A024EC27B7006310A2 /* NearPlaceVC.swift */; };
 		9D79E2A324EC2993006310A2 /* DetailNearPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D79E2A224EC2993006310A2 /* DetailNearPlaceCell.swift */; };
@@ -184,6 +185,7 @@
 		9D6FF38924FAFC6300E6A8B9 /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 		9D6FF38D24FB024700E6A8B9 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		9D6FF39124FB096600E6A8B9 /* loading_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_map.json; sourceTree = "<group>"; };
+		9D76CD7C24FC29CD004D7333 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		9D79E29E24EC279E006310A2 /* NearPlace.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NearPlace.storyboard; sourceTree = "<group>"; };
 		9D79E2A024EC27B7006310A2 /* NearPlaceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearPlaceVC.swift; sourceTree = "<group>"; };
 		9D79E2A224EC2993006310A2 /* DetailNearPlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNearPlaceCell.swift; sourceTree = "<group>"; };
@@ -746,6 +748,7 @@
 			children = (
 				9D8EA91224E85D3600FD5059 /* LocationManager.swift */,
 				9DBA641D24EFB1DE00E12FA4 /* CoreDataManager.swift */,
+				9D76CD7C24FC29CD004D7333 /* ImageManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1183,6 +1186,7 @@
 				9D61F6EA24F81D7200EF13FB /* LogoutPopupVC.swift in Sources */,
 				9D9694D624C6D4810046CB85 /* MapVC.swift in Sources */,
 				9D014C40248C4C3600758FCC /* UIViewController+Extensions.swift in Sources */,
+				9D76CD7D24FC29CD004D7333 /* ImageManager.swift in Sources */,
 				9DBA644B24F509CD00E12FA4 /* NearByAttractionCell.swift in Sources */,
 				9DB03C8F24DABF3D00FF7E36 /* HotPlaceCell.swift in Sources */,
 				9D61F6E424F7E99F00EF13FB /* PhotoReviewViewDelegate.swift in Sources */,

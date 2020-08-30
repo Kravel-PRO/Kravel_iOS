@@ -8,11 +8,7 @@
 
 import UIKit
 import AVFoundation
-
-enum CameraPosition {
-    case front
-    case rear
-}
+import Photos
 
 class CameraVC: UIViewController {
     static let identifier = "CameraVC"
@@ -22,6 +18,39 @@ class CameraVC: UIViewController {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var cameraDevice: AVCaptureDevice?
     var cameraOutput: AVCapturePhotoOutput?
+    
+    // 카메라 권한 허용하는 작업
+    private func requestCameraAuthor() {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            initCameraDevice()
+            initCameraInputData()
+            initCameraOutputData()
+            displayPreview()
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                if granted {
+                    self.initCameraDevice()
+                    self.initCameraInputData()
+                    self.initCameraOutputData()
+                    self.displayPreview()
+                } else {
+                    // FIXME: 카메라 설정창으로 가서 카메라 허용할 수 있게 설정하는 화면 뜨게 하기
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        case .restricted:
+            // FIXME: 카메라 설정창으로 가서 카메라 허용할 수 있게 설정하는 화면 뜨게 하기
+            print("제한된 경우")
+            self.navigationController?.popViewController(animated: true)
+        case .denied:
+            // FIXME: 카메라 설정창으로 가서 카메라 허용할 수 있게 설장하는 화면 뜨게 하기
+            print("거부")
+            self.navigationController?.popViewController(animated: true)
+        @unknown default:
+            fatalError()
+        }
+    }
     
     // 카메라 장치 설정 - 뒷면으로 설정
     private func initCameraDevice() {
@@ -129,7 +158,7 @@ class CameraVC: UIViewController {
             }
         })
         
-        let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
+        let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
         cameraOutput?.capturePhoto(with: settings, delegate: self)
     }
     
@@ -151,6 +180,40 @@ class CameraVC: UIViewController {
             galleryImageView.heightAnchor.constraint(equalTo: galleryImageView.widthAnchor)
         ])
         galleryImageView.layer.cornerRadius = galleryImageView.frame.width / 20
+    }
+    
+    private func requestPhotoLibraryAuthor() {
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .authorized:
+            // FIXME: 첫번째 Photo Library 사진 가져오도록 수정
+            setPhotoLibraryImage()
+            PHPhotoLibrary.shared().register(self)
+        case .notDetermined:
+            print("아직 결정안된 경우")
+        case .restricted:
+            print("거부된 경우")
+        case .denied:
+            print("denied인 경우")
+        @unknown default:
+            fatalError()
+        }
+    }
+    
+    private func setPhotoLibraryImage() {
+        let fetchOption = PHFetchOptions()
+        fetchOption.fetchLimit = 1
+        fetchOption.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        let fetchPhotos = PHAsset.fetchAssets(with: fetchOption)
+        if let photo = fetchPhotos.firstObject {
+            ImageManager.shared.requestImage(from: photo, thumnailSize: galleryImageView.frame.size) { image in
+                DispatchQueue.main.async {
+                    self.galleryImageView.image = image
+                }
+            }
+        } else {
+            // FIXME: 만약 사진 앨범 빈 경우 빈 이미지 넣게 설정
+            self.galleryImageView.image = UIImage(named: ImageKey.btnLike)
+        }
     }
     
     // MARK: - 갤러리 사진 알려주는 설명 Label 설정
@@ -217,13 +280,11 @@ class CameraVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        initCameraDevice()
-        initCameraInputData()
-        initCameraOutputData()
-        displayPreview()
+        requestCameraAuthor()
         addCaptureButton()
         addButtonAction()
         addImageView()
+        requestPhotoLibraryAuthor()
     }
     
     // MARK: - UIViewController viewWillAppear 설정
@@ -255,7 +316,32 @@ class CameraVC: UIViewController {
 
 extension CameraVC: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-        guard let imageData = photo.fileDataRepresentation() else { return }
-        galleryImageView.image = UIImage(data: imageData)
+        guard error == nil else { return }
+        
+        PHPhotoLibrary.requestAuthorization { status in
+            guard status == .authorized else { return }
+            
+            PHPhotoLibrary.shared().performChanges({
+                let creationRequest = PHAssetCreationRequest.forAsset()
+                guard let photoData = photo.fileDataRepresentation() else { return }
+                creationRequest.addResource(with: .photo, data: photoData, options: nil)
+            }, completionHandler: { isCompletion, error in
+                guard error == nil else { return }
+                if isCompletion {
+                    guard let imageData = photo.fileDataRepresentation() else { return }
+                    DispatchQueue.main.async {
+                        self.galleryImageView.image = UIImage(data: imageData)
+                    }
+                }
+            })
+        }
+    }
+}
+
+extension CameraVC: PHPhotoLibraryChangeObserver {
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
+        DispatchQueue.main.async {
+            self.setPhotoLibraryImage()
+        }
     }
 }
