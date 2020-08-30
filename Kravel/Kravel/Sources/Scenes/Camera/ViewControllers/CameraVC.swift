@@ -133,7 +133,44 @@ class CameraVC: UIViewController {
         cameraOutput?.capturePhoto(with: settings, delegate: self)
     }
     
-    // MARK: - 찍은 사진 보여주는 ImageView 설정
+    // MARK: - 갤러리 사진 보여주는 ImageView 설정
+    let galleryImageView: UIImageView = {
+        // FIXME: 여기 갤러리 제일 마지막 사진 보이게 수정
+        let galleryImageView = UIImageView(image: UIImage(named: "yuna"))
+        galleryImageView.translatesAutoresizingMaskIntoConstraints = false
+        galleryImageView.contentMode = .scaleAspectFill
+        galleryImageView.clipsToBounds = true
+        return galleryImageView
+    }()
+    
+    private func setGalleryImageViewLayout() {
+        NSLayoutConstraint.activate([
+            galleryImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24),
+            galleryImageView.bottomAnchor.constraint(equalTo: galleryDescriptionLabel.topAnchor, constant: -4),
+            galleryImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.112),
+            galleryImageView.heightAnchor.constraint(equalTo: galleryImageView.widthAnchor)
+        ])
+        galleryImageView.layer.cornerRadius = galleryImageView.frame.width / 20
+    }
+    
+    // MARK: - 갤러리 사진 알려주는 설명 Label 설정
+    let galleryDescriptionLabel: UILabel = {
+        let galleryDescriptionLabel = UILabel()
+        galleryDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        galleryDescriptionLabel.font = UIFont.systemFont(ofSize: 12)
+        galleryDescriptionLabel.textColor = .white
+        galleryDescriptionLabel.text = "갤러리"
+        return galleryDescriptionLabel
+    }()
+    
+    private func setGalleryDescriptionLabelLayout() {
+        NSLayoutConstraint.activate([
+            galleryDescriptionLabel.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            galleryDescriptionLabel.centerXAnchor.constraint(equalTo: galleryImageView.centerXAnchor)
+        ])
+    }
+    
+    // MARK: - 샘플 사진 보여주는 ImageView 설정
     let sampleImageView: UIImageView = {
         let sampleImageView = UIImageView(image: UIImage(named: "yuna"))
         sampleImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -142,17 +179,38 @@ class CameraVC: UIViewController {
         return sampleImageView
     }()
     
-    private func setTakePictureImageViewLayout() {
+    private func setSampleImageViewLayout() {
         NSLayoutConstraint.activate([
-            sampleImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
-            sampleImageView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -24),
-            sampleImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.17),
+            sampleImageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -24),
+            sampleImageView.bottomAnchor.constraint(equalTo: sampleDescriptionLabel.topAnchor, constant: -4),
+            sampleImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.112),
             sampleImageView.heightAnchor.constraint(equalTo: sampleImageView.widthAnchor)
+        ])
+        sampleImageView.layer.cornerRadius = sampleImageView.frame.width / 20
+    }
+    
+    // MARK: - 샘플 사진 알려주는 설명 Label 설정
+    let sampleDescriptionLabel: UILabel = {
+        let sampleDescriptionLabel = UILabel()
+        sampleDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        sampleDescriptionLabel.font = UIFont.systemFont(ofSize: 12)
+        sampleDescriptionLabel.textColor = .white
+        sampleDescriptionLabel.text = "예시"
+        return sampleDescriptionLabel
+    }()
+    
+    private func setSampleDesctiptionLabelLayout() {
+        NSLayoutConstraint.activate([
+            sampleDescriptionLabel.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            sampleDescriptionLabel.centerXAnchor.constraint(equalTo: sampleImageView.centerXAnchor)
         ])
     }
     
-    private func addSampleImageView() {
+    private func addImageView() {
+        self.view.addSubview(galleryImageView)
+        self.view.addSubview(galleryDescriptionLabel)
         self.view.addSubview(sampleImageView)
+        self.view.addSubview(sampleDescriptionLabel)
     }
     
     // MARK: - UIViewController viewDidLoad 설정
@@ -165,7 +223,7 @@ class CameraVC: UIViewController {
         displayPreview()
         addCaptureButton()
         addButtonAction()
-        addSampleImageView()
+        addImageView()
     }
     
     // MARK: - UIViewController viewWillAppear 설정
@@ -188,13 +246,16 @@ class CameraVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setCaptureButtonLayout()
-        setTakePictureImageViewLayout()
+        setGalleryImageViewLayout()
+        setGalleryDescriptionLabelLayout()
+        setSampleImageViewLayout()
+        setSampleDesctiptionLabelLayout()
     }
 }
 
 extension CameraVC: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         guard let imageData = photo.fileDataRepresentation() else { return }
-        sampleImageView.image = UIImage(data: imageData)
+        galleryImageView.image = UIImage(data: imageData)
     }
 }
