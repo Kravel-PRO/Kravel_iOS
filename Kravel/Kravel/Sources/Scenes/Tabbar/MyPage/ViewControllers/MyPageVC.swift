@@ -9,7 +9,6 @@
 import UIKit
 
 class MyPageVC: UIViewController {
-    
     // MARK: - Name Label 초기 설정
     @IBOutlet weak var backView: UIView!
     

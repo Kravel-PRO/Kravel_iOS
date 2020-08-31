@@ -77,8 +77,9 @@ class LogoutPopupVC: UIViewController {
         self.dismiss(animated: false, completion: nil)
     }
     
-    // 로그 아웃
+    // 로그 아웃 - Token 값 삭제, 초기 화면으로 돌아가기
     @IBAction func logout(_ sender: Any) {
+        UserDefaults.standard.removeObject(forKey: UserDefaultKey.token)
         guard let startRootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "StartRoot") as? UINavigationController else { return }
         guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
         window.rootViewController = startRootVC
