@@ -54,7 +54,7 @@ class SetLanguageVC: UIViewController {
     
     // 완료 버튼 Call Back
     lazy var complete: ((Language) -> Void) = { [weak self] language in
-        guard let startVC = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewController(identifier: "WelcomeVC") as? WelcomeVC else { return }
+        guard let startVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "StartRoot") as? UINavigationController else { return }
         startVC.modalPresentationStyle = .fullScreen
         self?.present(startVC, animated: true, completion: nil)
     }
@@ -103,6 +103,12 @@ class SetLanguageVC: UIViewController {
     
     // MARK: - 언어 설정 완료
     @IBAction func start(_ sender: Any) {
+        // 선택한 언어 핸드폰에 저장
+        switch selectedLanguageButton {
+        case .korean: UserDefaults.standard.set("KOR", forKey: "Language")
+        case .english: UserDefaults.standard.set("ENG", forKey: "Language")
+        case .none: return
+        }
         if let selectedButton = self.selectedLanguageButton { complete(selectedButton) }
     }
 }

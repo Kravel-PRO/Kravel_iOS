@@ -191,6 +191,12 @@
                                                                     <constraint firstItem="QGm-Iy-rlX" firstAttribute="centerY" secondItem="6kN-ih-pPo" secondAttribute="centerY" id="Omj-Ds-72y"/>
                                                                 </constraints>
                                                             </view>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임을 7자 이하로 입력해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="un6-zG-x7i">
+                                                                <rect key="frame" x="177" y="0.0" width="166" height="14.333333333333334"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <color key="textColor" red="0.99215686270000003" green="0.035294117649999998" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
@@ -198,6 +204,8 @@
                                                             <constraint firstAttribute="width" secondItem="zUD-R6-NPH" secondAttribute="height" multiplier="343:79" id="fQT-qw-OJa"/>
                                                             <constraint firstAttribute="trailing" secondItem="6kN-ih-pPo" secondAttribute="trailing" id="fay-GL-Tc5"/>
                                                             <constraint firstItem="Wpz-2b-hmc" firstAttribute="leading" secondItem="zUD-R6-NPH" secondAttribute="leading" id="gJw-rD-SLZ"/>
+                                                            <constraint firstAttribute="trailing" secondItem="un6-zG-x7i" secondAttribute="trailing" id="kPf-Gf-bvp"/>
+                                                            <constraint firstItem="un6-zG-x7i" firstAttribute="top" secondItem="zUD-R6-NPH" secondAttribute="top" id="m2R-f4-mwC"/>
                                                             <constraint firstItem="6kN-ih-pPo" firstAttribute="leading" secondItem="zUD-R6-NPH" secondAttribute="leading" id="qM2-rG-1I6"/>
                                                             <constraint firstAttribute="bottom" secondItem="6kN-ih-pPo" secondAttribute="bottom" id="sCH-4V-mAN"/>
                                                         </constraints>
@@ -240,18 +248,21 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTu-Um-OW4" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVV-lX-x9u" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
                                                 <rect key="frame" x="44" y="1220" width="287" height="56"/>
-                                                <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="eTu-Um-OW4" secondAttribute="height" multiplier="41:8" id="Fez-DE-Rri"/>
+                                                    <constraint firstAttribute="width" secondItem="wVV-lX-x9u" secondAttribute="height" multiplier="41:8" id="sgC-kr-5Vf"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                 <state key="normal" title="회원가입 하기">
-                                                    <color key="titleColor" red="0.72549019609999998" green="0.72549019609999998" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="clickSignup:" destination="VUk-tS-kOt" eventType="touchUpInside" id="sdJ-u1-0Ys"/>
+                                                    <action selector="signup:" destination="VUk-tS-kOt" eventType="touchUpInside" id="5gk-EB-woK"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -259,11 +270,13 @@
                                         <constraints>
                                             <constraint firstItem="rOA-Fu-HeU" firstAttribute="top" secondItem="iuq-fe-aYe" secondAttribute="top" constant="42" id="3cJ-MY-hg4"/>
                                             <constraint firstAttribute="trailing" secondItem="vVC-53-SLR" secondAttribute="trailing" constant="16" id="4aP-hV-NvI"/>
+                                            <constraint firstItem="wVV-lX-x9u" firstAttribute="centerX" secondItem="iuq-fe-aYe" secondAttribute="centerX" id="8gW-y4-np8"/>
                                             <constraint firstItem="vVC-53-SLR" firstAttribute="leading" secondItem="iuq-fe-aYe" secondAttribute="leading" constant="16" id="EUH-9O-DQQ"/>
-                                            <constraint firstItem="eTu-Um-OW4" firstAttribute="top" secondItem="vVC-53-SLR" secondAttribute="bottom" constant="42" id="JMk-ba-YYd"/>
+                                            <constraint firstItem="wVV-lX-x9u" firstAttribute="top" secondItem="vVC-53-SLR" secondAttribute="bottom" constant="42" id="Sm4-Gf-lb4"/>
                                             <constraint firstItem="rOA-Fu-HeU" firstAttribute="leading" secondItem="iuq-fe-aYe" secondAttribute="leading" constant="22" id="W5W-gk-BPr"/>
                                             <constraint firstItem="vVC-53-SLR" firstAttribute="top" secondItem="rOA-Fu-HeU" secondAttribute="bottom" constant="52" id="W8h-61-t1C"/>
-                                            <constraint firstAttribute="bottom" secondItem="eTu-Um-OW4" secondAttribute="bottom" constant="24" id="ait-Bp-3RP"/>
+                                            <constraint firstAttribute="bottom" secondItem="wVV-lX-x9u" secondAttribute="bottom" constant="24" id="faN-mI-b5d"/>
+                                            <constraint firstItem="wVV-lX-x9u" firstAttribute="width" secondItem="iuq-fe-aYe" secondAttribute="width" multiplier="0.765333" id="smq-pD-3nO"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -280,8 +293,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="KV7-gu-WvW" firstAttribute="top" secondItem="GZ1-2s-cCx" secondAttribute="top" id="4QJ-uT-Y5Q"/>
-                            <constraint firstItem="eTu-Um-OW4" firstAttribute="centerX" secondItem="0is-R6-sdS" secondAttribute="centerX" id="MXV-Jk-o3u"/>
-                            <constraint firstItem="eTu-Um-OW4" firstAttribute="width" secondItem="GZ1-2s-cCx" secondAttribute="width" multiplier="0.765333" id="ZdO-wR-Ufr"/>
                             <constraint firstItem="0is-R6-sdS" firstAttribute="trailing" secondItem="KV7-gu-WvW" secondAttribute="trailing" id="cRG-xS-H4g"/>
                             <constraint firstAttribute="bottom" secondItem="KV7-gu-WvW" secondAttribute="bottom" id="gid-QB-OpO"/>
                             <constraint firstItem="KV7-gu-WvW" firstAttribute="leading" secondItem="0is-R6-sdS" secondAttribute="leading" id="oy4-pO-Wub"/>
@@ -291,7 +302,7 @@
                     <navigationItem key="navigationItem" id="LS3-BF-O3t"/>
                     <size key="freeformSize" width="375" height="1300"/>
                     <connections>
-                        <outlet property="signupButton" destination="eTu-Um-OW4" id="lSq-DT-HEG"/>
+                        <outlet property="signupButton" destination="wVV-lX-x9u" id="WEH-qE-rBM"/>
                         <outlet property="signupScrollView" destination="KV7-gu-WvW" id="aVZ-xb-jVV"/>
                         <outlet property="titleLabel" destination="rOA-Fu-HeU" id="WMT-QN-zQS"/>
                         <outletCollection property="marginViews" destination="Ba4-Qh-FaO" collectionClass="NSMutableArray" id="WHP-sm-flU"/>
@@ -307,6 +318,7 @@
                         <outletCollection property="validLabels" destination="iEy-6r-1yg" collectionClass="NSMutableArray" id="cB6-UR-0yr"/>
                         <outletCollection property="validLabels" destination="vdO-mh-MpU" collectionClass="NSMutableArray" id="u59-UH-ouE"/>
                         <outletCollection property="validLabels" destination="ENj-2V-Z1A" collectionClass="NSMutableArray" id="WrR-Hn-15H"/>
+                        <outletCollection property="validLabels" destination="un6-zG-x7i" collectionClass="NSMutableArray" id="3Xs-fC-52Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="peE-Iy-KY6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

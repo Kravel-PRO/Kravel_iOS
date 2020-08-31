@@ -45,8 +45,14 @@ class CameraVC: UIViewController {
             self.navigationController?.popViewController(animated: true)
         case .denied:
             // FIXME: 카메라 설정창으로 가서 카메라 허용할 수 있게 설장하는 화면 뜨게 하기
-            print("거부")
-            self.navigationController?.popViewController(animated: true)
+            let alertVC = UIAlertController(title: "사진 권한 설정을 허용해주세요", message: "사진 권한 설정을 허용해라", preferredStyle: .alert)
+            let action = UIAlertAction(title: "확인", style: .cancel) { action in
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:]) { isComplection in
+                    
+                }
+            }
+            alertVC.addAction(action)
+            self.present(alertVC, animated: true, completion: nil)
         @unknown default:
             fatalError()
         }

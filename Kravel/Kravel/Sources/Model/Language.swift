@@ -11,4 +11,11 @@ import Foundation
 enum Language {
     case korean
     case english
+    
+    func getLanguage() -> String {
+        switch self {
+        case .korean: return "KOR"
+        case .english: return "ENG"
+        }
+    }
 }

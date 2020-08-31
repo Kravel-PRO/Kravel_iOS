@@ -60,9 +60,13 @@
 		9D6FF38624FAFBD100E6A8B9 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6FF38524FAFBD100E6A8B9 /* APIConstants.swift */; };
 		9D6FF38824FAFC3F00E6A8B9 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6FF38724FAFC3F00E6A8B9 /* NetworkResult.swift */; };
 		9D6FF38A24FAFC6300E6A8B9 /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6FF38924FAFC6300E6A8B9 /* NetworkHandler.swift */; };
-		9D6FF38E24FB024700E6A8B9 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6FF38D24FB024700E6A8B9 /* SampleData.swift */; };
 		9D6FF39224FB096600E6A8B9 /* loading_map.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D6FF39124FB096600E6A8B9 /* loading_map.json */; };
 		9D76CD7D24FC29CD004D7333 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD7C24FC29CD004D7333 /* ImageManager.swift */; };
+		9D76CD7F24FD3641004D7333 /* APIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD7E24FD3641004D7333 /* APIResponseData.swift */; };
+		9D76CD8124FD3864004D7333 /* SignupResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD8024FD3864004D7333 /* SignupResponseData.swift */; };
+		9D76CD8424FD6D1D004D7333 /* SignupParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD8324FD6D1D004D7333 /* SignupParameter.swift */; };
+		9D76CD8624FD7025004D7333 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD8524FD7025004D7333 /* APIError.swift */; };
+		9D76CD8924FD7463004D7333 /* APICategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD8824FD7463004D7333 /* APICategory.swift */; };
 		9D79E29F24EC279E006310A2 /* NearPlace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D79E29E24EC279E006310A2 /* NearPlace.storyboard */; };
 		9D79E2A124EC27B7006310A2 /* NearPlaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D79E2A024EC27B7006310A2 /* NearPlaceVC.swift */; };
 		9D79E2A324EC2993006310A2 /* DetailNearPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D79E2A224EC2993006310A2 /* DetailNearPlaceCell.swift */; };
@@ -183,9 +187,13 @@
 		9D6FF38524FAFBD100E6A8B9 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		9D6FF38724FAFC3F00E6A8B9 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		9D6FF38924FAFC6300E6A8B9 /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
-		9D6FF38D24FB024700E6A8B9 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		9D6FF39124FB096600E6A8B9 /* loading_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_map.json; sourceTree = "<group>"; };
 		9D76CD7C24FC29CD004D7333 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		9D76CD7E24FD3641004D7333 /* APIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponseData.swift; sourceTree = "<group>"; };
+		9D76CD8024FD3864004D7333 /* SignupResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupResponseData.swift; sourceTree = "<group>"; };
+		9D76CD8324FD6D1D004D7333 /* SignupParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupParameter.swift; sourceTree = "<group>"; };
+		9D76CD8524FD7025004D7333 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		9D76CD8824FD7463004D7333 /* APICategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICategory.swift; sourceTree = "<group>"; };
 		9D79E29E24EC279E006310A2 /* NearPlace.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NearPlace.storyboard; sourceTree = "<group>"; };
 		9D79E2A024EC27B7006310A2 /* NearPlaceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearPlaceVC.swift; sourceTree = "<group>"; };
 		9D79E2A224EC2993006310A2 /* DetailNearPlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNearPlaceCell.swift; sourceTree = "<group>"; };
@@ -660,9 +668,29 @@
 		9D6FF38C24FAFE0400E6A8B9 /* APIModel */ = {
 			isa = PBXGroup;
 			children = (
-				9D6FF38D24FB024700E6A8B9 /* SampleData.swift */,
+				9D76CD8724FD73F9004D7333 /* General */,
+				9D76CD8224FD6D0F004D7333 /* Signup */,
 			);
 			path = APIModel;
+			sourceTree = "<group>";
+		};
+		9D76CD8224FD6D0F004D7333 /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				9D76CD8324FD6D1D004D7333 /* SignupParameter.swift */,
+				9D76CD8024FD3864004D7333 /* SignupResponseData.swift */,
+			);
+			path = Signup;
+			sourceTree = "<group>";
+		};
+		9D76CD8724FD73F9004D7333 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				9D76CD8824FD7463004D7333 /* APICategory.swift */,
+				9D76CD7E24FD3641004D7333 /* APIResponseData.swift */,
+				9D76CD8524FD7025004D7333 /* APIError.swift */,
+			);
+			path = General;
 			sourceTree = "<group>";
 		};
 		9D7CCFFD24F8F61F003C21F4 /* General */ = {
@@ -1143,7 +1171,6 @@
 				9D2E26A124E935020091643E /* Language.swift in Sources */,
 				9D61F6E624F7F2A900EF13FB /* RealEditPasswordVC.swift in Sources */,
 				9DBA642224EFB35A00E12FA4 /* RecentSearchModel.xcdatamodeld in Sources */,
-				9D6FF38E24FB024700E6A8B9 /* SampleData.swift in Sources */,
 				9D13C80B248788390058A7BF /* CustomButton.swift in Sources */,
 				9D6FF35724F9773200E6A8B9 /* MyPhotoReviewCell.swift in Sources */,
 				9D6FF35524F91B4400E6A8B9 /* LoginPopupVC.swift in Sources */,
@@ -1178,6 +1205,7 @@
 				9D9694CF24C623F00046CB85 /* PhotoReviewCell.swift in Sources */,
 				9D7FB1EE24D00D13009A9C0A /* NearPlaceCell.swift in Sources */,
 				9D49E8BB24C83378007CD948 /* MyPageCell.swift in Sources */,
+				9D76CD8124FD3864004D7333 /* SignupResponseData.swift in Sources */,
 				9D79E2A124EC27B7006310A2 /* NearPlaceVC.swift in Sources */,
 				9D96005424E52484007995EE /* BackgroundTagCell.swift in Sources */,
 				9D5E3EB724BD952200BA4E5F /* SearchCell.swift in Sources */,
@@ -1187,6 +1215,7 @@
 				9D9694D624C6D4810046CB85 /* MapVC.swift in Sources */,
 				9D014C40248C4C3600758FCC /* UIViewController+Extensions.swift in Sources */,
 				9D76CD7D24FC29CD004D7333 /* ImageManager.swift in Sources */,
+				9D76CD8424FD6D1D004D7333 /* SignupParameter.swift in Sources */,
 				9DBA644B24F509CD00E12FA4 /* NearByAttractionCell.swift in Sources */,
 				9DB03C8F24DABF3D00FF7E36 /* HotPlaceCell.swift in Sources */,
 				9D61F6E424F7E99F00EF13FB /* PhotoReviewViewDelegate.swift in Sources */,
@@ -1204,15 +1233,18 @@
 				9D2E26A524E960290091643E /* ReportVC.swift in Sources */,
 				9D7FB1F024D01489009A9C0A /* UIView+Extensions.swift in Sources */,
 				9DBA643724F11E6700E12FA4 /* CellButtonDelegate.swift in Sources */,
+				9D76CD8924FD7463004D7333 /* APICategory.swift in Sources */,
 				9D8EA91324E85D3600FD5059 /* LocationManager.swift in Sources */,
 				9DBA642D24F0414C00E12FA4 /* RecentResearchTerm+CoreDataClass.swift in Sources */,
 				9D96007B24E5B72B007995EE /* ChangeInfoVC.swift in Sources */,
 				9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */,
 				9DBA643224F0439600E12FA4 /* RecentResearchView.swift in Sources */,
 				9D49E8B424C6DCBE007CD948 /* PrivateKey.swift in Sources */,
+				9D76CD8624FD7025004D7333 /* APIError.swift in Sources */,
 				9DBA644924F507EF00E12FA4 /* NearByAttractionView.swift in Sources */,
 				9DBA642E24F0414C00E12FA4 /* RecentResearchTerm+CoreDataProperties.swift in Sources */,
 				9D6FF38A24FAFC6300E6A8B9 /* NetworkHandler.swift in Sources */,
+				9D76CD7F24FD3641004D7333 /* APIResponseData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

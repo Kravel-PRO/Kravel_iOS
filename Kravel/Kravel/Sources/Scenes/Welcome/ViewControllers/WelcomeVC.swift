@@ -9,6 +9,8 @@
 import UIKit
 
 class WelcomeVC: UIViewController {
+    static let identifier = "WelcomeVC"
+    
     @IBOutlet weak var goTripButton: UIButton! {
         willSet {
             guard let goTripButton = newValue as? CustomButton else { return }
