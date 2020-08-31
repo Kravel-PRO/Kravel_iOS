@@ -21,6 +21,7 @@ class SignupVC: UIViewController {
             let gesture = UITapGestureRecognizer(target: self, action: #selector(viewTouched))
             gesture.numberOfTouchesRequired = 1
             signupScrollView.addGestureRecognizer(gesture)
+            signupScrollView.delaysContentTouches = false
         }
     }
     

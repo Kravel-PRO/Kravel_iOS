@@ -21,7 +21,6 @@
 		9D16A44B24909798005E691E /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D16A44A24909798005E691E /* WelcomeVC.swift */; };
 		9D2E26A124E935020091643E /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26A024E935020091643E /* Language.swift */; };
 		9D2E26A324E960100091643E /* Report.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D2E26A224E960100091643E /* Report.storyboard */; };
-		9D2E26A524E960290091643E /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26A424E960290091643E /* ReportVC.swift */; };
 		9D35749224F8F13B000103E7 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D35749124F8F13B000103E7 /* MyPage.storyboard */; };
 		9D3D162B2488DA7200AE1B4C /* SetLanguageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3D162A2488DA7200AE1B4C /* SetLanguageVC.swift */; };
 		9D3D162F2488E2C700AE1B4C /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3D162E2488E2C700AE1B4C /* UIColor+Additions.swift */; };
@@ -70,6 +69,7 @@
 		9D76CD8C24FD8144004D7333 /* SigninParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD8B24FD8144004D7333 /* SigninParameter.swift */; };
 		9D76CD8E24FD8193004D7333 /* SigninResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD8D24FD8193004D7333 /* SigninResponseData.swift */; };
 		9D76CD9024FD8D90004D7333 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD8F24FD8D90004D7333 /* UserDefaultKey.swift */; };
+		9D76CD9224FDA268004D7333 /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD9124FDA268004D7333 /* ReportVC.swift */; };
 		9D79E29F24EC279E006310A2 /* NearPlace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D79E29E24EC279E006310A2 /* NearPlace.storyboard */; };
 		9D79E2A124EC27B7006310A2 /* NearPlaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D79E2A024EC27B7006310A2 /* NearPlaceVC.swift */; };
 		9D79E2A324EC2993006310A2 /* DetailNearPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D79E2A224EC2993006310A2 /* DetailNearPlaceCell.swift */; };
@@ -151,7 +151,6 @@
 		9D16A44A24909798005E691E /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		9D2E26A024E935020091643E /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		9D2E26A224E960100091643E /* Report.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Report.storyboard; sourceTree = "<group>"; };
-		9D2E26A424E960290091643E /* ReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
 		9D35749124F8F13B000103E7 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		9D3D162A2488DA7200AE1B4C /* SetLanguageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLanguageVC.swift; sourceTree = "<group>"; };
 		9D3D162E2488E2C700AE1B4C /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
@@ -200,6 +199,7 @@
 		9D76CD8B24FD8144004D7333 /* SigninParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninParameter.swift; sourceTree = "<group>"; };
 		9D76CD8D24FD8193004D7333 /* SigninResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninResponseData.swift; sourceTree = "<group>"; };
 		9D76CD8F24FD8D90004D7333 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
+		9D76CD9124FDA268004D7333 /* ReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
 		9D79E29E24EC279E006310A2 /* NearPlace.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NearPlace.storyboard; sourceTree = "<group>"; };
 		9D79E2A024EC27B7006310A2 /* NearPlaceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearPlaceVC.swift; sourceTree = "<group>"; };
 		9D79E2A224EC2993006310A2 /* DetailNearPlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNearPlaceCell.swift; sourceTree = "<group>"; };
@@ -1004,7 +1004,7 @@
 				9D96007A24E5B72B007995EE /* ChangeInfoVC.swift */,
 				9D61F6DF24F7AAE000EF13FB /* EditPasswordVC.swift */,
 				9D61F6E524F7F2A900EF13FB /* RealEditPasswordVC.swift */,
-				9D2E26A424E960290091643E /* ReportVC.swift */,
+				9D76CD9124FDA268004D7333 /* ReportVC.swift */,
 				9D61F6E924F81D7200EF13FB /* LogoutPopupVC.swift */,
 			);
 			path = ViewControllers;
@@ -1181,6 +1181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D5DBB47248D5BBF00D82D40 /* SexButton.swift in Sources */,
+				9D76CD9224FDA268004D7333 /* ReportVC.swift in Sources */,
 				9D7FB20024D16AA9009A9C0A /* PlacePopupView.swift in Sources */,
 				9DBA643924F2738600E12FA4 /* NSNotificationName+Extensions.swift in Sources */,
 				9D6FF36724F9FF3400E6A8B9 /* PhotoReviewUploadVC.swift in Sources */,
@@ -1250,7 +1251,6 @@
 				9D3D162F2488E2C700AE1B4C /* UIColor+Additions.swift in Sources */,
 				9DEDA6BC24BCEE0400E978F5 /* PagingViewCell.swift in Sources */,
 				9DB03C8D24DAB1CB00FF7E36 /* TagCell.swift in Sources */,
-				9D2E26A524E960290091643E /* ReportVC.swift in Sources */,
 				9D7FB1F024D01489009A9C0A /* UIView+Extensions.swift in Sources */,
 				9DBA643724F11E6700E12FA4 /* CellButtonDelegate.swift in Sources */,
 				9D76CD8924FD7463004D7333 /* APICategory.swift in Sources */,
