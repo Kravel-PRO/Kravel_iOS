@@ -51,8 +51,6 @@ class SignupVC: UIViewController {
         
         guard let selectedLanguage = UserDefaults.standard.object(forKey: "Language") as? String else { return }
         
-        print(selectedLanguage)
-        
         let signupParameter = SignupParmeter(loginEmail: loginEmail, loginPw: loginPw, nickName: nickName, gender: gender, speech: selectedLanguage)
         NetworkHandler.shared.requestAPI(apiCategory: .signup(signupParameter)) { result in
             switch result {

@@ -105,8 +105,8 @@ class SetLanguageVC: UIViewController {
     @IBAction func start(_ sender: Any) {
         // 선택한 언어 핸드폰에 저장
         switch selectedLanguageButton {
-        case .korean: UserDefaults.standard.set("KOR", forKey: "Language")
-        case .english: UserDefaults.standard.set("ENG", forKey: "Language")
+        case .korean: UserDefaults.standard.set("KOR", forKey: UserDefaultKey.language)
+        case .english: UserDefaults.standard.set("ENG", forKey: UserDefaultKey.language)
         case .none: return
         }
         if let selectedButton = self.selectedLanguageButton { complete(selectedButton) }

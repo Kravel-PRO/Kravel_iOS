@@ -42,7 +42,9 @@ class LoginTextView: UIView {
     }
     
     @IBAction func login(_ sender: Any) {
-        delegate?.clickLoginButton(id: "ww", pw: "ww")
+        guard let emailText = emailTextField.text,
+            let pwText = pwTextField.text else { return }
+        delegate?.clickLoginButton(id: emailText, pw: pwText)
     }
     
     // MARK: - TextField 변수

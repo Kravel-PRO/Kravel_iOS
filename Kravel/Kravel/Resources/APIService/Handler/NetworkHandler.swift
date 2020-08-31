@@ -20,7 +20,7 @@ struct NetworkHandler {
         
         switch apiCategory {
         case .signup: requestSignup(apiURL, headers, parameters, completion)
-        case .signin: print("")
+        case .signin: requestSignin(apiURL, headers, parameters, completion)
         }
     }
     
@@ -39,6 +39,24 @@ struct NetworkHandler {
                     completion(.networkFail)
                 }
         }
+    }
+    
+    private func requestSignin(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
+        guard let url = try? url.asURL() else { return }
         
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .validate(statusCode: 200...500)
+            .responseDecodable(of: APIResponseData<SigninResponseData, APIError>.self) { response in
+                switch response.result {
+                case .success:
+                    guard let statusCode = response.response?.statusCode else { return }
+                    if statusCode == 200 {
+                        guard let token = response.response?.headers["Authorization"] else { return }
+                        completion(.success(token))
+                    } else { completion(.requestErr("실패")) }
+                case .failure:
+                    completion(.networkFail)
+                }
+        }
     }
 }

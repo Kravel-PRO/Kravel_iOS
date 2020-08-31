@@ -41,7 +41,12 @@ enum APICategory<P: ParameterAble> {
                 "gender": signup.gender,
                 "speech": signup.speech
             ]
-        case .signin: return nil
+        case .signin(let signin):
+            guard let signin = signin as? SigninParameter else { return nil }
+            return [
+                "loginEmail": signin.loginEmail,
+                "loginPw": signin.loginPw
+            ]
         }
     }
 }

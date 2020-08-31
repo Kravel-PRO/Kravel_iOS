@@ -43,7 +43,6 @@ class MainVC: UIViewController {
         }
     }
     
-    
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var backViewBottomConstraint: NSLayoutConstraint!
     
@@ -173,19 +172,43 @@ extension MainVC: UITextFieldDelegate {
 }
 
 extension MainVC: LoginTextViewDelegate {
+    // FIXME: ID, PW 입력안한 경우 팝업창 뜨게 고치기
     func clickLoginButton(id: String, pw: String) {
-        // FIXME: 로그인 실패하는 로직에 추가하면 됨
-//        guard let loginPopupVC = UIStoryboard(name: "LoginPopup", bundle: nil).instantiateViewController(withIdentifier: LoginPopupVC.identifier) as? LoginPopupVC else { return }
-//        loginPopupVC.modalPresentationStyle = .overFullScreen
-//        loginPopupVC.titleMessage = "로그인을 실패했습니다."
-//        loginPopupVC.message = "존재하지 않는 계정\n또는 비밀번호가 잘못되었습니다."
-//        
-//        self.present(loginPopupVC, animated: false, completion: nil)
+        loginTextView.emailTextField.resignFirstResponder()
+        loginTextView.pwTextField.resignFirstResponder()
         
-        // FIXME: 다으화면으로 넘어가기 위한 로직
-        guard let mainTabVC = UIStoryboard(name: "Tabbar", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as? UITabBarController else { return }
-        mainTabVC.modalPresentationStyle = .fullScreen
-        self.present(mainTabVC, animated: true, completion: nil)
+        let signinParameter = SigninParameter(loginEmail: id, loginPw: pw)
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .signin(signinParameter)) { result in
+            switch result {
+            // 성공한 경우 Token 값 저장 -> 다음 화면으로 넘어가기
+            case .success(let token):
+                // 받은 Token 값 저장
+                guard let token = (token as? String)?.split(separator: " ").map(String.init) else { return }
+                UserDefaults.standard.set(token[1], forKey: UserDefaultKey.token)
+                
+                // 메인 화면으로 이동
+                guard let mainTabVC = UIStoryboard(name: "Tabbar", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as? UITabBarController else { return }
+                mainTabVC.modalPresentationStyle = .fullScreen
+                self.present(mainTabVC, animated: true, completion: nil)
+                
+            // ID, PW 다른 경우 Error 처리
+            case .requestErr(let message):
+                print(message)
+                guard let loginPopupVC = UIStoryboard(name: "LoginPopup", bundle: nil).instantiateViewController(withIdentifier: LoginPopupVC.identifier) as? LoginPopupVC else { return }
+                loginPopupVC.modalPresentationStyle = .overFullScreen
+                loginPopupVC.titleMessage = "로그인을 실패했습니다."
+                loginPopupVC.message = "존재하지 않는 계정\n또는 비밀번호가 잘못되었습니다."
+                self.present(loginPopupVC, animated: false, completion: nil)
+                
+            // 네트워크 연결 안 된 경우 Error 처리
+            case .networkFail:
+                let alertVC = UIAlertController(title: "인터넷 연결이 필요합니다.", message: "인터넷 연결을 해주세요.", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertVC.addAction(action)
+                self.present(alertVC, animated: true, completion: nil)
+            }
+        }
     }
 }
 
