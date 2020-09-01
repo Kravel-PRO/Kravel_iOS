@@ -1,5 +1,5 @@
 //
-//  NaverMapSearchParameter.swift
+//  SearchPlaceParameter.swift
 //  Kravel
 //
 //  Created by 윤동민 on 2020/09/02.
@@ -8,9 +8,7 @@
 
 import Foundation
 
-struct NaverSearchParameter: ParameterAble {
+struct SearchPlaceParameter: ParameterAble {
     let query: String
-    let display: Int?
-    let start: Int?
-    let sort: String?
+    let page: Int
 }

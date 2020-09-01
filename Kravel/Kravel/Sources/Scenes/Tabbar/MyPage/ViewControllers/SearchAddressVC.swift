@@ -11,13 +11,29 @@ import UIKit
 class SearchAddressVC: UIViewController {
     static let identifier = "SearchAddressVC"
 
+    // MARK: - Text Field Margin View 설정
+    @IBOutlet weak var marginView: UIView! {
+        didSet {
+            marginView.layer.borderColor = UIColor.veryLightPink.cgColor
+            marginView.layer.borderWidth = 1
+            marginView.layer.cornerRadius = marginView.frame.width / 15
+        }
+    }
+    
+    // MARK: - 주소 검색 TextField
+    @IBOutlet weak var searchTextField: UITextField! {
+        didSet {
+            searchTextField.delegate = self
+        }
+    }
+    
     // MARK: - UIViewController viewDidLoad 설정
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let mapSearch = NaverSearchParameter(query: "수지", display: 5, start: nil, sort: nil)
-        NetworkHandler.shared.requestAPI(apiCategory: .searchAddressNaver(mapSearch)) { result in
-            print("Hi")
+        let kakaoParameter = SearchPlaceParameter(query: "아주대", page: 1)
+        NetworkHandler.shared.requestAPI(apiCategory: .searchPlaceKakao(kakaoParameter)) { result in
+            print("aa")
         }
     }
     
@@ -30,5 +46,13 @@ class SearchAddressVC: UIViewController {
     private func setNav() {
         self.navigationItem.title = "주소 찾기"
         self.navigationController?.navigationBar.topItem?.title = ""
+    }
+}
+
+extension SearchAddressVC: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        let layerColor: UIColor = text != "" ? .grapefruit : .veryLightPink
+        marginView.layer.borderColor = layerColor.cgColor
     }
 }

@@ -15,13 +15,13 @@ enum APICategory<P: ParameterAble> {
     // P에 파라메터 변수 넣어 보내기
     case signup(P)
     case signin(P)
-    case searchAddressNaver(P)
+    case searchPlaceKakao(P)
     
     func makeURL() -> String {
         switch self {
         case .signin: return APICostants.signin
         case .signup: return APICostants.signup
-        case .searchAddressNaver: return APICostants.mapSearchBaseURL
+        case .searchPlaceKakao: return APICostants.mapSearchURL
         }
     }
     
@@ -35,11 +35,10 @@ enum APICategory<P: ParameterAble> {
             return [
                 "Content-Type": "application/json"
             ]
-        case .searchAddressNaver:
+        case .searchPlaceKakao:
             return [
-                "Content-Type": "apllication/json",
-                "X-Naver-Client-Id": PrivateKey.naverClientID,
-                "X-Naver-Client-Secret": PrivateKey.naverClientSecret
+                "Content-Type": "application/json",
+                "Authorization": "KakaoAK \(PrivateKey.kakaoRESTAPIKey)"
             ]
         }
     }
@@ -61,11 +60,11 @@ enum APICategory<P: ParameterAble> {
                 "loginEmail": signin.loginEmail,
                 "loginPw": signin.loginPw
             ]
-        case .searchAddressNaver(let searchInform):
-            guard let searchInform = searchInform as? NaverSearchParameter else { return nil }
+        case .searchPlaceKakao(let kakaoParameter):
+            guard let kakaoParameter = kakaoParameter as? SearchPlaceParameter else { return nil }
             return [
-                "query": searchInform.query,
-                "display": searchInform.display!
+                "query": kakaoParameter.query,
+                "page": kakaoParameter.page
             ]
         }
     }

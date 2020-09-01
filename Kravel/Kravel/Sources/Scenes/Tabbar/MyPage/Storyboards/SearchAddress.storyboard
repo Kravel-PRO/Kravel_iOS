@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fwa-e7-x56">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,15 +12,65 @@
             <objects>
                 <viewController storyboardIdentifier="SearchAddressVC" id="fwa-e7-x56" customClass="SearchAddressVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NF7-IC-9SR">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HKj-9A-Zwa">
+                                <rect key="frame" x="0.0" y="68" width="375" height="81"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="주소" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6CF-7G-e6D">
+                                        <rect key="frame" x="16" y="0.0" width="29.666666666666671" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.15294117647058825" green="0.15294117647058825" blue="0.15294117647058825" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ia3-LA-G9C">
+                                        <rect key="frame" x="16" y="29" width="343" height="52"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="예) 녹사평대로 195 6호선 녹사평역" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="izm-HJ-Onc">
+                                                <rect key="frame" x="16" y="15.666666666666673" width="311" height="20.666666666666671"/>
+                                                <color key="textColor" red="0.094117647058823528" green="0.094117647058823528" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="izm-HJ-Onc" firstAttribute="centerY" secondItem="ia3-LA-G9C" secondAttribute="centerY" id="43f-Iu-Xbu"/>
+                                            <constraint firstAttribute="width" secondItem="ia3-LA-G9C" secondAttribute="height" multiplier="343:52" id="bR4-h4-tQY"/>
+                                            <constraint firstItem="izm-HJ-Onc" firstAttribute="leading" secondItem="ia3-LA-G9C" secondAttribute="leading" constant="16" id="fuy-Ou-OyZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="izm-HJ-Onc" secondAttribute="trailing" constant="16" id="kxa-ZH-ajN"/>
+                                            <constraint firstItem="izm-HJ-Onc" firstAttribute="centerX" secondItem="ia3-LA-G9C" secondAttribute="centerX" id="mKI-d2-OcN"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="6CF-7G-e6D" firstAttribute="top" secondItem="HKj-9A-Zwa" secondAttribute="top" id="0hh-Mb-rSK"/>
+                                    <constraint firstItem="6CF-7G-e6D" firstAttribute="leading" secondItem="HKj-9A-Zwa" secondAttribute="leading" constant="16" id="3PW-Pm-hDA"/>
+                                    <constraint firstAttribute="trailing" secondItem="ia3-LA-G9C" secondAttribute="trailing" constant="16" id="6hY-nZ-W5V"/>
+                                    <constraint firstItem="ia3-LA-G9C" firstAttribute="top" secondItem="6CF-7G-e6D" secondAttribute="bottom" constant="8" id="PJe-GR-nb2"/>
+                                    <constraint firstItem="ia3-LA-G9C" firstAttribute="leading" secondItem="HKj-9A-Zwa" secondAttribute="leading" constant="16" id="VUV-xJ-ZYg"/>
+                                    <constraint firstAttribute="bottom" secondItem="ia3-LA-G9C" secondAttribute="bottom" id="eLq-eL-U5r"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="HKj-9A-Zwa" firstAttribute="top" secondItem="bsq-K2-KhB" secondAttribute="top" constant="24" id="7bw-Xl-hmw"/>
+                            <constraint firstItem="bsq-K2-KhB" firstAttribute="trailing" secondItem="HKj-9A-Zwa" secondAttribute="trailing" id="KKx-UI-6BJ"/>
+                            <constraint firstItem="HKj-9A-Zwa" firstAttribute="leading" secondItem="bsq-K2-KhB" secondAttribute="leading" id="Tm5-g7-1Ih"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="bsq-K2-KhB"/>
                     </view>
+                    <connections>
+                        <outlet property="marginView" destination="ia3-LA-G9C" id="heh-HR-qyW"/>
+                        <outlet property="searchTextField" destination="izm-HJ-Onc" id="ZKY-6V-uAl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R2y-nD-iLl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3" y="83"/>
+            <point key="canvasLocation" x="2.8985507246376816" y="82.366071428571431"/>
         </scene>
     </scenes>
 </document>
