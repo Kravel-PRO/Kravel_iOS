@@ -28,16 +28,12 @@ class SearchAddressVC: UIViewController {
     }
     
     // MARK: - 검색 예시 보여주는 View
-    @IBOutlet weak var exampleView: UIView! {
-        didSet {
-            exampleView.isHidden = true
-        }
-    }
+    @IBOutlet weak var exampleView: UIView!
     
     // MARK: - 검색 결과 보여주는 View
     @IBOutlet weak var resultView: UIView! {
         didSet {
-            resultView.isHidden = false
+            resultView.isHidden = true
         }
     }
     
@@ -108,14 +104,20 @@ extension SearchAddressVC: UITextFieldDelegate {
                 }
                 
                 self.searchResult = locationInform.documents
+                // FIXME: 검색 결과 없는 경우 검색 결과 없다는 화면 떠야함
+                self.exampleView.isHidden = true
+                self.resultView.isHidden = false
                 DispatchQueue.main.async {
                     self.searchResultTableView.reloadData()
                 }
             case .requestErr(let errorMessage):
+                // FIXME: 여기 에러 처리 추가
                 print(errorMessage)
             case .serverErr:
+                // FIXME: 서버 오류 있을 시 에러 처리 추가
                 print("Server Error")
             case .networkFail:
+                // FIXME: 네트워크 연결 안됐을 시 에러 처리 추가
                 print("networkFail")
             }
         }
@@ -165,7 +167,6 @@ extension SearchAddressVC: UITableViewDelegate {
                 self.searchResultTableView.tableFooterView = nil
             }
             self.isRequestMoreData = false
-            print(self.isRequestMoreData)
             
             switch result {
             case .success(let locationInform):
