@@ -79,3 +79,19 @@ Kravel iOS💻
 
 ```
 
+<br>
+
+6️⃣ ScrollView 사용시 또 다른 Pan Gesture 사용하고 싶을 때 설정하기
+
+```swift
+
+```
+
+<br>
+
+7️⃣ TableView Pagination 구현
+
+```swift
+
+```
+

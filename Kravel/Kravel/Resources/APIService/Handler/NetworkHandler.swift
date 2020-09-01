@@ -65,14 +65,17 @@ struct NetworkHandler {
         guard let url = try? url.asURL() else { return }
         
         AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
-            .validate(statusCode: 200...500)
+            .validate(statusCode: 200...503)
             .responseDecodable(of: SearchPlaceResponseData.self) { response in
                 switch response.result {
                 case .success(let placeResult):
-                    print(placeResult)
-                    print(response.response?.statusCode)
+                    guard let statusCode = response.response?.statusCode else { return }
+                    if statusCode == 200 { completion(.success(placeResult)) }
+                    else if statusCode == 400 { completion(.requestErr("실패")) }
+                    else { completion(.serverErr) }
                 case .failure(let error):
                     print(error)
+                    completion(.networkFail)
                 }
         }
     }

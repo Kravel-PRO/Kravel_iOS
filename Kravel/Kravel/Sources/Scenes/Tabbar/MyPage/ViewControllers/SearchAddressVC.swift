@@ -27,14 +27,43 @@ class SearchAddressVC: UIViewController {
         }
     }
     
+    // MARK: - 검색 예시 보여주는 View
+    @IBOutlet weak var exampleView: UIView! {
+        didSet {
+            exampleView.isHidden = true
+        }
+    }
+    
+    // MARK: - 검색 결과 보여주는 View
+    @IBOutlet weak var resultView: UIView! {
+        didSet {
+            resultView.isHidden = false
+        }
+    }
+    
+    // MARK: - 검색 결과 보여주는 TableView
+    @IBOutlet weak var searchResultTableView: UITableView! {
+        didSet {
+            searchResultTableView.dataSource = self
+            searchResultTableView.delegate = self
+            searchResultTableView.separatorInset = .zero
+            searchResultTableView.rowHeight = UITableView.automaticDimension
+            searchResultTableView.estimatedRowHeight = 74
+        }
+    }
+    
+    var searchResult: [DetailPlaceInform] = []
+    
+    // API 요청을 위한 page
+    private var page: Int = 1
+    private var isEnd = true
+    private var searchQuery: String = ""
+    private var isRequestMoreData: Bool = false
+    
     // MARK: - UIViewController viewDidLoad 설정
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let kakaoParameter = SearchPlaceParameter(query: "아주대", page: 1)
-        NetworkHandler.shared.requestAPI(apiCategory: .searchPlaceKakao(kakaoParameter)) { result in
-            print("aa")
-        }
     }
     
     // MARK: - UIViewController viewWillAppear Override 설정
@@ -49,10 +78,129 @@ class SearchAddressVC: UIViewController {
     }
 }
 
+extension SearchAddressVC {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+}
+
 extension SearchAddressVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let text = textField.text, text != "" else { return false }
+        page = 1
+        isEnd = true
+        searchQuery = ""
+        isRequestMoreData = false
+        
+        let kakaoAPIParameter = SearchPlaceParameter(query: text, page: page)
+        NetworkHandler.shared.requestAPI(apiCategory: .searchPlaceKakao(kakaoAPIParameter)) { result in
+            switch result {
+            case .success(let locationInform):
+                guard let locationInform = locationInform as? SearchPlaceResponseData else { return }
+                if !locationInform.meta.is_end {
+                    self.page += 1
+                    self.isEnd = false
+                    self.searchQuery = text
+                } else {
+                    self.page = 1
+                    self.isEnd = true
+                    self.searchQuery = ""
+                }
+                
+                self.searchResult = locationInform.documents
+                DispatchQueue.main.async {
+                    self.searchResultTableView.reloadData()
+                }
+            case .requestErr(let errorMessage):
+                print(errorMessage)
+            case .serverErr:
+                print("Server Error")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+        return true
+    }
+    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let text = textField.text else { return }
         let layerColor: UIColor = text != "" ? .grapefruit : .veryLightPink
         marginView.layer.borderColor = layerColor.cgColor
+    }
+}
+
+extension SearchAddressVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searchResult.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let searchResultCell = tableView.dequeueReusableCell(withIdentifier: SearchResultCell.identifier) as? SearchResultCell else { return UITableViewCell() }
+        searchResultCell.placeName = searchResult[indexPath.row].place_name
+        searchResultCell.address = searchResult[indexPath.row].address_name
+        return searchResultCell
+    }
+}
+
+extension SearchAddressVC: UITableViewDelegate {
+    // TableView 무한 페이지를 위한 코드
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let frameHeight = scrollView.frame.height
+        let contentOffsetY = scrollView.contentOffset.y
+        let scrollViewContentSizeHeight = scrollView.contentSize.height
+        
+        if scrollViewContentSizeHeight - contentOffsetY < frameHeight { requestNextPage() }
+    }
+    
+    private func requestNextPage() {
+        guard !isRequestMoreData, !isEnd else { return }
+        isRequestMoreData = true
+        
+        let searchParameter = SearchPlaceParameter(query: searchQuery, page: page)
+        let spinnerView = createSpinnerView()
+        self.searchResultTableView.tableFooterView = spinnerView
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .searchPlaceKakao(searchParameter)) { result in
+            DispatchQueue.main.async {
+                self.searchResultTableView.tableFooterView = nil
+            }
+            self.isRequestMoreData = false
+            print(self.isRequestMoreData)
+            
+            switch result {
+            case .success(let locationInform):
+                guard let locationInform = locationInform as? SearchPlaceResponseData else { return }
+                
+                if !locationInform.meta.is_end {
+                    self.page += 1
+                    self.isEnd = false
+                } else {
+                    self.page = 1
+                    self.isEnd = true
+                    self.searchQuery = ""
+                }
+                
+                self.searchResult.append(contentsOf: locationInform.documents)
+                DispatchQueue.main.async {
+                    self.searchResultTableView.reloadData()
+                }
+            case .requestErr(let errorMessage):
+                print(errorMessage)
+            case .serverErr:
+                print("ServerError")
+            case .networkFail:
+                print("netWorkFail")
+            }
+            
+        }
+    }
+    
+    private func createSpinnerView() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 52))
+        let spinner = UIActivityIndicatorView()
+        footerView.addSubview(spinner)
+        spinner.center = footerView.center
+        spinner.startAnimating()
+        return footerView
     }
 }

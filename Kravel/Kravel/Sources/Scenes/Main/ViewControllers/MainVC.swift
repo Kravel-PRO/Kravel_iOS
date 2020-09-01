@@ -201,6 +201,9 @@ extension MainVC: LoginTextViewDelegate {
                 loginPopupVC.message = "존재하지 않는 계정\n또는 비밀번호가 잘못되었습니다."
                 self.present(loginPopupVC, animated: false, completion: nil)
                 
+            case .serverErr:
+                print("ServrError")
+                
             // 네트워크 연결 안 된 경우 Error 처리
             case .networkFail:
                 let alertVC = UIAlertController(title: "인터넷 연결이 필요합니다.", message: "인터넷 연결을 해주세요.", preferredStyle: .alert)

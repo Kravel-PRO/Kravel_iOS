@@ -66,6 +66,8 @@ class SignupVC: UIViewController {
                 let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
                 alertVC.addAction(action)
                 self.present(alertVC, animated: true, completion: nil)
+            case .serverErr:
+                print("serverError")
             case .networkFail:
                 // FIXME: 네트워크 연결 팝업창 필요
                 let alertVC = UIAlertController(title: "인터넷 연결이 필요합니다.", message: "인터넷 연결을 해주세요.", preferredStyle: .alert)
