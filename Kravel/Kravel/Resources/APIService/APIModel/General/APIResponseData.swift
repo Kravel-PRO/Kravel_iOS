@@ -10,7 +10,7 @@ import Foundation
 
 protocol Errorable: Codable {}
 
-struct APIResponseData<T: Codable, E: Codable>: Codable {
+struct APIResponseData<T: Codable, E: Errorable>: Codable {
     let message: String
     let timestamp: String
     let data: T?

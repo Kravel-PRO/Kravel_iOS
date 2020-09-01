@@ -192,6 +192,13 @@ extension ReportVC: UITextFieldDelegate {
             marginViews[3].layer.borderColor = layerColor.cgColor
         }
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == textFields[1] {
+            guard let searchAddressVC = UIStoryboard(name: "SearchAddress", bundle: nil).instantiateViewController(withIdentifier: SearchAddressVC.identifier) as? SearchAddressVC else { return }
+            self.navigationController?.pushViewController(searchAddressVC, animated: true)
+        }
+    }
 }
 
 extension ReportVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

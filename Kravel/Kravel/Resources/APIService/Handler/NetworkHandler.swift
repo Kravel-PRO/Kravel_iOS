@@ -21,6 +21,7 @@ struct NetworkHandler {
         switch apiCategory {
         case .signup: requestSignup(apiURL, headers, parameters, completion)
         case .signin: requestSignin(apiURL, headers, parameters, completion)
+        case .searchAddressNaver: requestMapSearchResult(apiURL, headers, parameters, completion)
         }
     }
     
@@ -57,6 +58,16 @@ struct NetworkHandler {
                 case .failure:
                     completion(.networkFail)
                 }
+        }
+    }
+    
+    private func requestMapSearchResult(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
+        guard let url = try? url.asURL() else { return }
+        
+        AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
+            .validate(statusCode: 200...500)
+            .responseDecodable(of: NaverSearchResponseData.self) { response in
+                print(response.value?.items?.count)
         }
     }
 }

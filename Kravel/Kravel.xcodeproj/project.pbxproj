@@ -70,6 +70,10 @@
 		9D76CD8E24FD8193004D7333 /* SigninResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD8D24FD8193004D7333 /* SigninResponseData.swift */; };
 		9D76CD9024FD8D90004D7333 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD8F24FD8D90004D7333 /* UserDefaultKey.swift */; };
 		9D76CD9224FDA268004D7333 /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD9124FDA268004D7333 /* ReportVC.swift */; };
+		9D76CD9424FE992F004D7333 /* SearchAddress.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D76CD9324FE992F004D7333 /* SearchAddress.storyboard */; };
+		9D76CD9624FE9945004D7333 /* SearchAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD9524FE9945004D7333 /* SearchAddressVC.swift */; };
+		9D76CD9A24FE9D36004D7333 /* NaverSearchParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD9924FE9D36004D7333 /* NaverSearchParameter.swift */; };
+		9D76CD9C24FEA1D1004D7333 /* NaverSearchResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD9B24FEA1D1004D7333 /* NaverSearchResponseData.swift */; };
 		9D79E29F24EC279E006310A2 /* NearPlace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D79E29E24EC279E006310A2 /* NearPlace.storyboard */; };
 		9D79E2A124EC27B7006310A2 /* NearPlaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D79E2A024EC27B7006310A2 /* NearPlaceVC.swift */; };
 		9D79E2A324EC2993006310A2 /* DetailNearPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D79E2A224EC2993006310A2 /* DetailNearPlaceCell.swift */; };
@@ -200,6 +204,10 @@
 		9D76CD8D24FD8193004D7333 /* SigninResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninResponseData.swift; sourceTree = "<group>"; };
 		9D76CD8F24FD8D90004D7333 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		9D76CD9124FDA268004D7333 /* ReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
+		9D76CD9324FE992F004D7333 /* SearchAddress.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchAddress.storyboard; sourceTree = "<group>"; };
+		9D76CD9524FE9945004D7333 /* SearchAddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddressVC.swift; sourceTree = "<group>"; };
+		9D76CD9924FE9D36004D7333 /* NaverSearchParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSearchParameter.swift; sourceTree = "<group>"; };
+		9D76CD9B24FEA1D1004D7333 /* NaverSearchResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSearchResponseData.swift; sourceTree = "<group>"; };
 		9D79E29E24EC279E006310A2 /* NearPlace.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NearPlace.storyboard; sourceTree = "<group>"; };
 		9D79E2A024EC27B7006310A2 /* NearPlaceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearPlaceVC.swift; sourceTree = "<group>"; };
 		9D79E2A224EC2993006310A2 /* DetailNearPlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNearPlaceCell.swift; sourceTree = "<group>"; };
@@ -677,6 +685,7 @@
 				9D76CD8724FD73F9004D7333 /* General */,
 				9D76CD8224FD6D0F004D7333 /* Signup */,
 				9D76CD8A24FD811C004D7333 /* Signin */,
+				9D76CD9724FE9D08004D7333 /* NaverMapSearch */,
 			);
 			path = APIModel;
 			sourceTree = "<group>";
@@ -707,6 +716,15 @@
 				9D76CD8D24FD8193004D7333 /* SigninResponseData.swift */,
 			);
 			path = Signin;
+			sourceTree = "<group>";
+		};
+		9D76CD9724FE9D08004D7333 /* NaverMapSearch */ = {
+			isa = PBXGroup;
+			children = (
+				9D76CD9924FE9D36004D7333 /* NaverSearchParameter.swift */,
+				9D76CD9B24FEA1D1004D7333 /* NaverSearchResponseData.swift */,
+			);
+			path = NaverMapSearch;
 			sourceTree = "<group>";
 		};
 		9D7CCFFD24F8F61F003C21F4 /* General */ = {
@@ -1005,6 +1023,7 @@
 				9D61F6DF24F7AAE000EF13FB /* EditPasswordVC.swift */,
 				9D61F6E524F7F2A900EF13FB /* RealEditPasswordVC.swift */,
 				9D76CD9124FDA268004D7333 /* ReportVC.swift */,
+				9D76CD9524FE9945004D7333 /* SearchAddressVC.swift */,
 				9D61F6E924F81D7200EF13FB /* LogoutPopupVC.swift */,
 			);
 			path = ViewControllers;
@@ -1026,6 +1045,7 @@
 				9D96007824E5B6FE007995EE /* ChangeInfo.storyboard */,
 				9D61F6DD24F7AAAF00EF13FB /* EditPassword.storyboard */,
 				9D2E26A224E960100091643E /* Report.storyboard */,
+				9D76CD9324FE992F004D7333 /* SearchAddress.storyboard */,
 				9D61F6E724F81D5500EF13FB /* LogoutPopup.storyboard */,
 			);
 			path = Storyboards;
@@ -1114,6 +1134,7 @@
 				9DC8447024F8EE1F00EC1D68 /* Home.storyboard in Resources */,
 				9D13C7F42487842E0058A7BF /* Main.storyboard in Resources */,
 				9D7FB1F424D15DE7009A9C0A /* SubLocationView.xib in Resources */,
+				9D76CD9424FE992F004D7333 /* SearchAddress.storyboard in Resources */,
 				9D6FF37724FAAF0500E6A8B9 /* Splash.storyboard in Resources */,
 				9D6FF35324F91B3500E6A8B9 /* LoginPopup.storyboard in Resources */,
 				9D13C80F248795E40058A7BF /* LoginTextView.xib in Resources */,
@@ -1180,6 +1201,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D76CD9A24FE9D36004D7333 /* NaverSearchParameter.swift in Sources */,
 				9D5DBB47248D5BBF00D82D40 /* SexButton.swift in Sources */,
 				9D76CD9224FDA268004D7333 /* ReportVC.swift in Sources */,
 				9D7FB20024D16AA9009A9C0A /* PlacePopupView.swift in Sources */,
@@ -1195,6 +1217,7 @@
 				9D16A44B24909798005E691E /* WelcomeVC.swift in Sources */,
 				9D49E8B624C6F857007CD948 /* MyPageVC.swift in Sources */,
 				9D96009F24E6A2F9007995EE /* LocationDetailVC.swift in Sources */,
+				9D76CD9624FE9945004D7333 /* SearchAddressVC.swift in Sources */,
 				9DEDA6BE24BCEEF000E978F5 /* TalentChildVC.swift in Sources */,
 				9DB03C8B24DAA6B800FF7E36 /* HomeNearPlaceCell.swift in Sources */,
 				9D79E2A324EC2993006310A2 /* DetailNearPlaceCell.swift in Sources */,
@@ -1261,6 +1284,7 @@
 				9DBA643224F0439600E12FA4 /* RecentResearchView.swift in Sources */,
 				9D49E8B424C6DCBE007CD948 /* PrivateKey.swift in Sources */,
 				9D76CD8624FD7025004D7333 /* APIError.swift in Sources */,
+				9D76CD9C24FEA1D1004D7333 /* NaverSearchResponseData.swift in Sources */,
 				9DBA644924F507EF00E12FA4 /* NearByAttractionView.swift in Sources */,
 				9DBA642E24F0414C00E12FA4 /* RecentResearchTerm+CoreDataProperties.swift in Sources */,
 				9D6FF38A24FAFC6300E6A8B9 /* NetworkHandler.swift in Sources */,

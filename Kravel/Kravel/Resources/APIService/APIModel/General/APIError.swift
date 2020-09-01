@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct APIError: Codable {
+struct APIError: Errorable {
     let errorMessage: String?
     let path: String?
     
