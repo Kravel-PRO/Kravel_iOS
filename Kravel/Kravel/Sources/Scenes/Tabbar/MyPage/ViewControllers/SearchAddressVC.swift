@@ -82,6 +82,7 @@ extension SearchAddressVC {
 
 extension SearchAddressVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         guard let text = textField.text, text != "" else { return false }
         page = 1
         isEnd = true
