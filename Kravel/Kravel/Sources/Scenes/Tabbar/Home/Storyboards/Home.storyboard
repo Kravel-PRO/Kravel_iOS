@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Okd-sf-1s9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Okd-sf-1s9">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -166,13 +166,13 @@
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cxg-dg-XcE">
-                                                <rect key="frame" x="17" y="544" width="44" height="169"/>
+                                                <rect key="frame" x="17" y="544" width="44" height="21.666666666666629"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <color key="textColor" red="0.070588235289999995" green="0.070588235289999995" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wSj-uS-vxr">
-                                                <rect key="frame" x="0.0" y="725" width="375" height="158"/>
+                                                <rect key="frame" x="0.0" y="577.66666666666663" width="375" height="158"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="158" id="XLC-qh-fdm"/>
@@ -284,14 +284,14 @@
                                                 </cells>
                                             </collectionView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Kt-09-e2U">
-                                                <rect key="frame" x="0.0" y="907" width="375" height="1"/>
+                                                <rect key="frame" x="0.0" y="759.66666666666663" width="375" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="6gT-0G-fON"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SXu-MG-qel" customClass="PhotoReviewView" customModule="Kravel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="908" width="375" height="289"/>
+                                                <rect key="frame" x="0.0" y="760.66666666666663" width="375" height="288.99999999999989"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="SXu-MG-qel" secondAttribute="height" multiplier="375:289" id="WoB-0e-ieh"/>
@@ -305,7 +305,7 @@
                                             <constraint firstItem="Cxg-dg-XcE" firstAttribute="top" secondItem="hHf-gO-hWg" secondAttribute="bottom" constant="24" id="MAn-zd-0L9"/>
                                             <constraint firstItem="Cxg-dg-XcE" firstAttribute="leading" secondItem="fex-Hh-STn" secondAttribute="leading" constant="17" id="S9G-qV-5lx"/>
                                             <constraint firstItem="wSj-uS-vxr" firstAttribute="leading" secondItem="fex-Hh-STn" secondAttribute="leading" id="UUx-75-MUu"/>
-                                            <constraint firstAttribute="bottom" secondItem="SXu-MG-qel" secondAttribute="bottom" constant="20" id="Wve-KZ-nWq"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="SXu-MG-qel" secondAttribute="bottom" constant="20" id="Wve-KZ-nWq"/>
                                             <constraint firstAttribute="trailing" secondItem="SXu-MG-qel" secondAttribute="trailing" id="ZBr-VX-6AP"/>
                                             <constraint firstAttribute="trailing" secondItem="hHf-gO-hWg" secondAttribute="trailing" id="dRK-Cw-71w"/>
                                             <constraint firstItem="SXu-MG-qel" firstAttribute="top" secondItem="2Kt-09-e2U" secondAttribute="bottom" id="ei9-Zg-fmd"/>

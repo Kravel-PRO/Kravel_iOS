@@ -41,14 +41,22 @@ class HomeVC: UIViewController {
         }
     }
     
-    // 가까운 장소 CollectionView 설정
-    private let nearPlaces: [String] = ["유나네 집", "호준이네 집", "우리 집", "정재네 집", "수연이네 집"]
-    private let nearPlaceImage: [String] = []
+    // 가까운 장소 보여주는 데이터
+    private var nearPlaceData: [PlaceContentInform] = []
     
     @IBOutlet weak var nearPlaceCollectionView: UICollectionView! {
         didSet {
             nearPlaceCollectionView.dataSource = self
             nearPlaceCollectionView.delegate = self
+        }
+    }
+    
+    // 근처 지역 데이터 보여주는 화면 데이터 있을 시, 없을 시 세팅
+    private func setNearPlaceCollectionView() {
+        if nearPlaceData.isEmpty { titleStackView.arrangedSubviews[1].isHidden = true }
+        else {
+            titleStackView.arrangedSubviews[1].isHidden = false
+            nearPlaceCollectionView.reloadData()
         }
     }
     
@@ -120,37 +128,61 @@ class HomeVC: UIViewController {
         photoReviewView.photoReviewCollectionViewLeadingConstraint.constant = horizontalSpacing
     }
     
-    // MARK: - ViewController Override 부분
+    // MARK: - UIViewController viewDidLoad Override
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        requestPlaceData()
     }
     
+    // MARK: - 장소 데이터 API 요청
+    private func requestPlaceData() {
+        let getPlaceParameter = GetPlaceParameter(latitude: 1.0, longitude: 1.0, offset: nil, size: nil, review_count: nil, sort: nil)
+        NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
+            switch result {
+            case .success(let getPlaceResult):
+                guard let getPlaceResult = getPlaceResult as? GetPlaceResult else { return }
+                self.nearPlaceData = getPlaceResult.content
+                DispatchQueue.main.async {
+                    self.setNearPlaceCollectionView()
+                }
+            // FIXME: 요청 에러 있을 시 에러 처리 필요
+            case .requestErr(let errorMessage):
+                print(errorMessage)
+            // FIXME: 서버 에러 있을 시 에러 처리 필요
+            case .serverErr:
+                print("ServerError")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
+    }
+    
+    // MARK: - UIViewController viewWillAppear Override
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNav()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        setHotPlaceCollectionViewHeight()
-        setHotPlaceLabelLayout()
-        setPhotoReviewLabelLayout()
+    private func setNav() {
+        self.navigationController?.navigationBar.isHidden = true
     }
     
+    // MARK: - UIViewController viewDidLayoutSubviews Override
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         photoReviewView.calculateCollectionViewHeight()
-    }
-    
-    private func setNav() {
-        self.navigationController?.navigationBar.isHidden = true
+        setHotPlaceCollectionViewHeight()
+        setHotPlaceLabelLayout()
+        setPhotoReviewLabelLayout()
     }
 }
 
 extension HomeVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == nearPlaceCollectionView { return nearPlaces.count }
+        if collectionView == nearPlaceCollectionView { return nearPlaceData.count }
         else if collectionView == hotPlaceCollectionView { return hotPlaces.count }
         else { return photoReviewPlace.count }
     }
@@ -161,14 +193,21 @@ extension HomeVC: UICollectionViewDataSource {
         else { return makePhotoReviewCell(collectionView, indexPath) }
     }
     
+    // MARK: - 가까운 장소 보여주는 Cell 생성
     private func makeNearPlaceCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> HomeNearPlaceCell {
         guard let homeNearPlaceCell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeNearPlaceCell.identifier, for: indexPath) as? HomeNearPlaceCell else { return HomeNearPlaceCell() }
-        homeNearPlaceCell.placeName = nearPlaces[indexPath.row]
+
+        homeNearPlaceCell.placeName = nearPlaceData[indexPath.row].title
+        
+        if let tags = nearPlaceData[indexPath.row].tags { homeNearPlaceCell.tags = tags }
+        else { homeNearPlaceCell.tags = [] }
+        
         homeNearPlaceCell.layer.cornerRadius = homeNearPlaceCell.frame.width / 15.9
         homeNearPlaceCell.clipsToBounds = true
         return homeNearPlaceCell
     }
     
+    // MARK: - 인기있는 장소 보여주는 Cell 생성
     private func makeHotPlaceCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> HotPlaceCell {
         guard let hotPlaceCell = collectionView.dequeueReusableCell(withReuseIdentifier: HotPlaceCell.identifier, for: indexPath) as? HotPlaceCell else { return HotPlaceCell() }
         hotPlaceCell.layer.cornerRadius = hotPlaceCell.frame.width / 17.15
@@ -178,6 +217,7 @@ extension HomeVC: UICollectionViewDataSource {
         return hotPlaceCell
     }
     
+    // MARK: - 포토리뷰 보여주는 Cell 생성
     private func makePhotoReviewCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> PhotoReviewCell {
         guard let photoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoReviewCell.identifier, for: indexPath) as? PhotoReviewCell else { return PhotoReviewCell() }
         photoReviewCell.photoImage = UIImage(named: "yuna2")

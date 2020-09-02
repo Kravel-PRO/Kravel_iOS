@@ -23,13 +23,13 @@ class LoginTextView: UIView {
     var delegate: LoginTextViewDelegate?
     
     // MARK: - TextField의 Margin View들 설정
-    @IBOutlet var marginViews: [UIView]! {
-        didSet {
-            marginViews.forEach { view in
-                view.layer.borderColor = UIColor.veryLightPink.cgColor
-                view.layer.borderWidth = 1
-                view.layer.cornerRadius = view.frame.width / 15
-            }
+    @IBOutlet var marginViews: [UIView]!
+    
+    func setMarginViewsLayout() {
+        marginViews.forEach { view in
+            view.layer.borderColor = UIColor.veryLightPink.cgColor
+            view.layer.borderWidth = 1
+            view.layer.cornerRadius = view.frame.width / 15
         }
     }
     

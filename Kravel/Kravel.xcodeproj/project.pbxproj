@@ -33,6 +33,8 @@
 		9D49E8BD24C83545007CD948 /* MyPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D49E8BC24C83545007CD948 /* MyPageMenu.swift */; };
 		9D4CCF7124FFFD55003F73AF /* NetworkFailPopup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D4CCF7024FFFD55003F73AF /* NetworkFailPopup.storyboard */; };
 		9D4CCF7324FFFD6F003F73AF /* NetworkFailPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CCF7224FFFD6F003F73AF /* NetworkFailPopupVC.swift */; };
+		9D4CCF7625000CC1003F73AF /* GetPlaceParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CCF7525000CC1003F73AF /* GetPlaceParameter.swift */; };
+		9D4CCF7825000FF2003F73AF /* GetPlaceResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CCF7725000FF2003F73AF /* GetPlaceResponseData.swift */; };
 		9D5DBB45248D5BAD00D82D40 /* SexButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D5DBB44248D5BAD00D82D40 /* SexButton.xib */; };
 		9D5DBB47248D5BBF00D82D40 /* SexButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5DBB46248D5BBF00D82D40 /* SexButton.swift */; };
 		9D5E3EB724BD952200BA4E5F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5E3EB624BD952200BA4E5F /* SearchCell.swift */; };
@@ -170,6 +172,8 @@
 		9D49E8BC24C83545007CD948 /* MyPageMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageMenu.swift; sourceTree = "<group>"; };
 		9D4CCF7024FFFD55003F73AF /* NetworkFailPopup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NetworkFailPopup.storyboard; sourceTree = "<group>"; };
 		9D4CCF7224FFFD6F003F73AF /* NetworkFailPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFailPopupVC.swift; sourceTree = "<group>"; };
+		9D4CCF7525000CC1003F73AF /* GetPlaceParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPlaceParameter.swift; sourceTree = "<group>"; };
+		9D4CCF7725000FF2003F73AF /* GetPlaceResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPlaceResponseData.swift; sourceTree = "<group>"; };
 		9D5DBB44248D5BAD00D82D40 /* SexButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SexButton.xib; sourceTree = "<group>"; };
 		9D5DBB46248D5BBF00D82D40 /* SexButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SexButton.swift; sourceTree = "<group>"; };
 		9D5E3EB624BD952200BA4E5F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
@@ -609,6 +613,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9D4CCF7425000CA0003F73AF /* GetPlace */ = {
+			isa = PBXGroup;
+			children = (
+				9D4CCF7525000CC1003F73AF /* GetPlaceParameter.swift */,
+				9D4CCF7725000FF2003F73AF /* GetPlaceResponseData.swift */,
+			);
+			path = GetPlace;
+			sourceTree = "<group>";
+		};
 		9D6FF35824F9846900E6A8B9 /* PhotoReview */ = {
 			isa = PBXGroup;
 			children = (
@@ -693,6 +706,7 @@
 				9D76CD8224FD6D0F004D7333 /* Signup */,
 				9D76CD8A24FD811C004D7333 /* Signin */,
 				9D76CD9D24FEB8E3004D7333 /* SearchPlaceKakao */,
+				9D4CCF7425000CA0003F73AF /* GetPlace */,
 			);
 			path = APIModel;
 			sourceTree = "<group>";
@@ -1214,6 +1228,7 @@
 				9D5DBB47248D5BBF00D82D40 /* SexButton.swift in Sources */,
 				9D76CD9224FDA268004D7333 /* ReportVC.swift in Sources */,
 				9D7FB20024D16AA9009A9C0A /* PlacePopupView.swift in Sources */,
+				9D4CCF7625000CC1003F73AF /* GetPlaceParameter.swift in Sources */,
 				9DBA643924F2738600E12FA4 /* NSNotificationName+Extensions.swift in Sources */,
 				9D6FF36724F9FF3400E6A8B9 /* PhotoReviewUploadVC.swift in Sources */,
 				9D014C3E248C4A5E00758FCC /* SignupVC.swift in Sources */,
@@ -1233,6 +1248,7 @@
 				9DBA643F24F3965800E12FA4 /* MyScrapCell.swift in Sources */,
 				9D6FF38624FAFBD100E6A8B9 /* APIConstants.swift in Sources */,
 				9D8C0A2724BC525C005C1F58 /* HomeVC.swift in Sources */,
+				9D4CCF7825000FF2003F73AF /* GetPlaceResponseData.swift in Sources */,
 				9D6FF36E24FA099000E6A8B9 /* CameraVC.swift in Sources */,
 				9D6FF38824FAFC3F00E6A8B9 /* NetworkResult.swift in Sources */,
 				9DBA644324F3B58000E12FA4 /* MyPhotoReviewVC.swift in Sources */,

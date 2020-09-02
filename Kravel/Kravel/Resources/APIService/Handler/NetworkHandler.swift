@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-struct NetworkHandler {
+class NetworkHandler {
     static let shared = NetworkHandler()
     
     func requestAPI<P: ParameterAble>(apiCategory: APICategory<P>, completion: @escaping (NetworkResult<Codable>) -> Void) {
@@ -22,6 +22,7 @@ struct NetworkHandler {
         case .signup: requestSignup(apiURL, headers, parameters, completion)
         case .signin: requestSignin(apiURL, headers, parameters, completion)
         case .searchPlaceKakao: requestSearchPlace(apiURL, headers, parameters, completion)
+        case .getPlace: requestGetPlace(apiURL, headers, parameters, completion)
         }
     }
     
@@ -73,6 +74,31 @@ struct NetworkHandler {
                     if statusCode == 200 { completion(.success(placeResult)) }
                     else if statusCode == 400 { completion(.requestErr("실패")) }
                     else { completion(.serverErr) }
+                case .failure(let error):
+                    print(error)
+                    completion(.networkFail)
+                }
+        }
+    }
+    
+    private func requestGetPlace(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
+        guard let url = try? url.asURL() else { return }
+        
+        AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
+            .validate(statusCode: 200...500)
+            .responseDecodable(of: APIResponseData<GetPlaceResponseData, APIError>.self) { response in
+                switch response.result {
+                case .success(let getPlaceResponseData):
+                    guard let statusCode = response.response?.statusCode else { return }
+                    if statusCode == 200 {
+                        guard let getPlaceResult = getPlaceResponseData.data?.result else {
+                            completion(.serverErr)
+                            return
+                        }
+                        completion(.success(getPlaceResult))
+                    } else {
+                        completion(.requestErr("실패"))
+                    }
                 case .failure(let error):
                     print(error)
                     completion(.networkFail)

@@ -205,7 +205,9 @@ extension SearchAddressVC: UITableViewDelegate {
             case .serverErr:
                 print("ServerError")
             case .networkFail:
-                print("netWorkFail")
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
             }
             
         }

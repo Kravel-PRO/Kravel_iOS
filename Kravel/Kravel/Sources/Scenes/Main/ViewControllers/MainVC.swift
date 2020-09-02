@@ -92,22 +92,30 @@ class MainVC: UIViewController {
         }
     }
     
-    // MARK: - UIViewController Override 설정
+    // MARK: - UIViewController viewDidLoad Override
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         addGesture()
     }
     
+    // MARK: - UIViewController viewWillAppear Override
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         addKeyboardObserver()
     }
     
+    // MARK: - UIViewController viewDIdDisappear Override
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         removeKeyboardObserver()
+    }
+    
+    // MARK: - UIViewContollre viewDidLayoutSubviews Override
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        loginTextView.setMarginViewsLayout()
     }
     
     private func addGesture() {
@@ -184,8 +192,8 @@ extension MainVC: LoginTextViewDelegate {
             // 성공한 경우 Token 값 저장 -> 다음 화면으로 넘어가기
             case .success(let token):
                 // 받은 Token 값 저장
-                guard let token = (token as? String)?.split(separator: " ").map(String.init) else { return }
-                UserDefaults.standard.set(token[1], forKey: UserDefaultKey.token)
+                guard let token = token as? String else { return }
+                UserDefaults.standard.set(token, forKey: UserDefaultKey.token)
                 
                 // 메인 화면으로 이동
                 guard let mainTabVC = UIStoryboard(name: "Tabbar", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as? UITabBarController else { return }

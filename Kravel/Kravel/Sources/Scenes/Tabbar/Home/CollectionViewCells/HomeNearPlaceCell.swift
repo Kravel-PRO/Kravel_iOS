@@ -42,7 +42,7 @@ class HomeNearPlaceCell: UICollectionViewCell {
         }
     }
     
-    var tags: [String] = ["호텔 델루나", "아이유", "여진구"] {
+    var tags: [String] = [] {
         didSet {
             tagCollectionView.reloadData()
         }
@@ -55,6 +55,9 @@ class HomeNearPlaceCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        tags = []
+        placeImage = nil
+        placeName = nil
     }
 }
 

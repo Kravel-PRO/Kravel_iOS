@@ -18,4 +18,7 @@ struct APICostants {
     // 로그인, 로그아웃 URL
     static let signin = APICostants.baseURL + "/auth/sign-in"
     static let signup = APICostants.baseURL + "/auth/sign-up"
+    
+    // 장소 가져오는 API
+    static let getPlace = APICostants.baseURL + "/api/places"
 }
