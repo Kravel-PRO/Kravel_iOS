@@ -195,6 +195,7 @@ extension ReportVC: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == textFields[1] {
+            textField.resignFirstResponder()
             guard let searchAddressVC = UIStoryboard(name: "SearchAddress", bundle: nil).instantiateViewController(withIdentifier: SearchAddressVC.identifier) as? SearchAddressVC else { return }
             self.navigationController?.pushViewController(searchAddressVC, animated: true)
         }

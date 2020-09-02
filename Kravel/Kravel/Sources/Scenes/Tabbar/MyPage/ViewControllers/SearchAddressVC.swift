@@ -45,6 +45,7 @@ class SearchAddressVC: UIViewController {
             searchResultTableView.separatorInset = .zero
             searchResultTableView.rowHeight = UITableView.automaticDimension
             searchResultTableView.estimatedRowHeight = 74
+            searchResultTableView.separatorInset = UIEdgeInsets(top: 0, left: UIScreen.main.bounds.width, bottom: 0, right: 0)
         }
     }
     
@@ -86,7 +87,7 @@ extension SearchAddressVC: UITextFieldDelegate {
         guard let text = textField.text, text != "" else { return false }
         page = 1
         isEnd = true
-        searchQuery = ""
+        searchQuery = text
         isRequestMoreData = false
         
         let kakaoAPIParameter = SearchPlaceParameter(query: text, page: page)
@@ -97,11 +98,9 @@ extension SearchAddressVC: UITextFieldDelegate {
                 if !locationInform.meta.is_end {
                     self.page += 1
                     self.isEnd = false
-                    self.searchQuery = text
                 } else {
                     self.page = 1
                     self.isEnd = true
-                    self.searchQuery = ""
                 }
                 
                 self.searchResult = locationInform.documents
@@ -110,6 +109,7 @@ extension SearchAddressVC: UITextFieldDelegate {
                 self.resultView.isHidden = false
                 DispatchQueue.main.async {
                     self.searchResultTableView.reloadData()
+                    if !self.searchResult.isEmpty { self.searchResultTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false) }
                 }
             case .requestErr(let errorMessage):
                 // FIXME: 여기 에러 처리 추가
@@ -139,8 +139,16 @@ extension SearchAddressVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let searchResultCell = tableView.dequeueReusableCell(withIdentifier: SearchResultCell.identifier) as? SearchResultCell else { return UITableViewCell() }
-        searchResultCell.placeName = searchResult[indexPath.row].place_name
-        searchResultCell.address = searchResult[indexPath.row].address_name
+        
+        let placeNameAttributeText = searchResult[indexPath.row].place_name.makeAttributedText([.foregroundColor: UIColor(white: 39/255, alpha: 1.0), .font: UIFont.systemFont(ofSize: 16)])
+        placeNameAttributeText.addAttributes([.foregroundColor: UIColor(red: 74/255, green: 144/255, blue: 226/255, alpha: 1.0)], range: (searchResult[indexPath.row].place_name as NSString).range(of: searchQuery))
+        
+        let addressAttributeText = searchResult[indexPath.row].address_name.makeAttributedText([.foregroundColor: UIColor.veryLightPink, .font: UIFont.systemFont(ofSize: 14)])
+        addressAttributeText.addAttributes([.foregroundColor: UIColor(red: 74/255, green: 144/255, blue: 226/255, alpha: 1.0)], range: (searchResult[indexPath.row].address_name as NSString).range(of: searchQuery))
+        
+        searchResultCell.placeNameAttributeText = placeNameAttributeText
+        searchResultCell.addressAttributeText = addressAttributeText
+        searchResultCell.separatorInset = .zero
         return searchResultCell
     }
 }
@@ -179,7 +187,6 @@ extension SearchAddressVC: UITableViewDelegate {
                 } else {
                     self.page = 1
                     self.isEnd = true
-                    self.searchQuery = ""
                 }
                 
                 self.searchResult.append(contentsOf: locationInform.documents)

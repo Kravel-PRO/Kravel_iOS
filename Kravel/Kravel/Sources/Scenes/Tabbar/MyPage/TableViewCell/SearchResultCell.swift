@@ -14,9 +14,9 @@ class SearchResultCell: UITableViewCell {
     // MARK: - 장소 이름 설정 Label
     @IBOutlet weak var placeNameLabel: UILabel!
     
-    var placeName: String? {
+    var placeNameAttributeText: NSMutableAttributedString? {
         didSet {
-            placeNameLabel.text = placeName
+            placeNameLabel.attributedText = placeNameAttributeText
             placeNameLabel.sizeToFit()
         }
     }
@@ -24,9 +24,9 @@ class SearchResultCell: UITableViewCell {
     // MARK: - 장소 주소 설정 Label
     @IBOutlet weak var addressLabel: UILabel!
     
-    var address: String? {
+    var addressAttributeText: NSMutableAttributedString? {
         didSet {
-            addressLabel.text = address
+            addressLabel.attributedText = addressAttributeText
             addressLabel.sizeToFit()
         }
     }
