@@ -134,6 +134,7 @@ class ReportVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setPickerController()
+        addAddressUpdateObserver()
     }
     
     // MARK: - UIViewController viewWillAppear 설정
@@ -149,9 +150,22 @@ class ReportVC: UIViewController {
     }
 }
 
+// MARK: - 화면 선택된 경우 Keyboard 내리는 액션
 extension ReportVC {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+}
+
+// MARK: - 선택된 주소 화면에 업데이트
+extension ReportVC {
+    private func addAddressUpdateObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateAddress(_:)), name: .selectAddress, object: nil)
+    }
+    
+    @objc func updateAddress(_ notification: NSNotification) {
+        guard let selectAddress = notification.userInfo?["address"] as? String else { return }
+        textFields[1].text = selectAddress
     }
 }
 

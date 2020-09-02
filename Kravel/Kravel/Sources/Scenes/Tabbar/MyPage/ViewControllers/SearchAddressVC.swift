@@ -154,6 +154,12 @@ extension SearchAddressVC: UITableViewDataSource {
 }
 
 extension SearchAddressVC: UITableViewDelegate {
+    // 주소 선택된 경우 이전 뷰에 업데이트
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        NotificationCenter.default.post(name: .selectAddress, object: nil, userInfo: ["address": searchResult[indexPath.row].address_name])
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     // TableView 무한 페이지를 위한 코드
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let frameHeight = scrollView.frame.height
