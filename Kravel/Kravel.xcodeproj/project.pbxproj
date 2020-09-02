@@ -31,6 +31,8 @@
 		9D49E8B624C6F857007CD948 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D49E8B524C6F857007CD948 /* MyPageVC.swift */; };
 		9D49E8BB24C83378007CD948 /* MyPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D49E8BA24C83378007CD948 /* MyPageCell.swift */; };
 		9D49E8BD24C83545007CD948 /* MyPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D49E8BC24C83545007CD948 /* MyPageMenu.swift */; };
+		9D4CCF7124FFFD55003F73AF /* NetworkFailPopup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D4CCF7024FFFD55003F73AF /* NetworkFailPopup.storyboard */; };
+		9D4CCF7324FFFD6F003F73AF /* NetworkFailPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CCF7224FFFD6F003F73AF /* NetworkFailPopupVC.swift */; };
 		9D5DBB45248D5BAD00D82D40 /* SexButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D5DBB44248D5BAD00D82D40 /* SexButton.xib */; };
 		9D5DBB47248D5BBF00D82D40 /* SexButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5DBB46248D5BBF00D82D40 /* SexButton.swift */; };
 		9D5E3EB724BD952200BA4E5F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5E3EB624BD952200BA4E5F /* SearchCell.swift */; };
@@ -166,6 +168,8 @@
 		9D49E8B524C6F857007CD948 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		9D49E8BA24C83378007CD948 /* MyPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCell.swift; sourceTree = "<group>"; };
 		9D49E8BC24C83545007CD948 /* MyPageMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageMenu.swift; sourceTree = "<group>"; };
+		9D4CCF7024FFFD55003F73AF /* NetworkFailPopup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NetworkFailPopup.storyboard; sourceTree = "<group>"; };
+		9D4CCF7224FFFD6F003F73AF /* NetworkFailPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFailPopupVC.swift; sourceTree = "<group>"; };
 		9D5DBB44248D5BAD00D82D40 /* SexButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SexButton.xib; sourceTree = "<group>"; };
 		9D5DBB46248D5BBF00D82D40 /* SexButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SexButton.swift; sourceTree = "<group>"; };
 		9D5E3EB624BD952200BA4E5F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
@@ -444,6 +448,7 @@
 			isa = PBXGroup;
 			children = (
 				9D79E2A424ED02D1006310A2 /* MorePhotoReviewVC.swift */,
+				9D4CCF7224FFFD6F003F73AF /* NetworkFailPopupVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -776,6 +781,7 @@
 			children = (
 				9D8C0A2424BC515A005C1F58 /* Tabbar.storyboard */,
 				9D79E2A624ED02FA006310A2 /* MorePhotoReview.storyboard */,
+				9D4CCF7024FFFD55003F73AF /* NetworkFailPopup.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1122,6 +1128,7 @@
 				9D6FF38224FAC31C00E6A8B9 /* Assets.xcassets in Resources */,
 				9D35749224F8F13B000103E7 /* MyPage.storyboard in Resources */,
 				9D79E2A724ED02FA006310A2 /* MorePhotoReview.storyboard in Resources */,
+				9D4CCF7124FFFD55003F73AF /* NetworkFailPopup.storyboard in Resources */,
 				9D7FB1FC24D16A15009A9C0A /* PlacePopupView.xib in Resources */,
 				9D6FF35E24F984BC00E6A8B9 /* OtherPhotoReview.storyboard in Resources */,
 				9DBA643B24F392CC00E12FA4 /* MyScrap.storyboard in Resources */,
@@ -1268,6 +1275,7 @@
 				9D76CDA324FED827004D7333 /* SearchResultCell.swift in Sources */,
 				9D6FF37924FAAF2600E6A8B9 /* SplashVC.swift in Sources */,
 				9DEDA6B224BCD09400E978F5 /* KCategory.swift in Sources */,
+				9D4CCF7324FFFD6F003F73AF /* NetworkFailPopupVC.swift in Sources */,
 				9D13C7F12487842E0058A7BF /* MainVC.swift in Sources */,
 				9D76CD9F24FEB916004D7333 /* SearchPlaceParameter.swift in Sources */,
 				9D76CD8E24FD8193004D7333 /* SigninResponseData.swift in Sources */,

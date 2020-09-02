@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Network Fail PopupVC-->
+        <scene sceneID="9uL-cq-buZ">
+            <objects>
+                <viewController storyboardIdentifier="NetworkFailPopupVC" id="Zyd-dS-VFH" customClass="NetworkFailPopupVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vsN-55-6qs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5fj-3W-MpZ">
+                                <rect key="frame" x="30" y="312" width="315" height="198"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icNoAreaTiger" translatesAutoresizingMaskIntoConstraints="NO" id="7zW-6s-whI">
+                                        <rect key="frame" x="99.666666666666657" y="-52" width="116" height="92"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="7zW-6s-whI" secondAttribute="height" multiplier="29:23" id="Acf-qL-zqC"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKt-i1-UBo" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="132" width="283" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="uKt-i1-UBo" secondAttribute="height" multiplier="283:50" id="pjl-7f-hcr"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="확인">
+                                            <color key="titleColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="complete:" destination="Zyd-dS-VFH" eventType="touchUpInside" id="u2l-gn-MrA"/>
+                                        </connections>
+                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="KGG-Qd-3Zm">
+                                        <rect key="frame" x="16" y="59" width="283" height="57"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="네트워크 연결이 끊겼습니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ra-Hp-aKJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="283" height="19.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <color key="textColor" red="1" green="0.40392156862745099" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5a-08-Eml">
+                                                <rect key="frame" x="0.0" y="23.333333333333311" width="283" height="33.666666666666657"/>
+                                                <string key="text">네트워크 상태를 확인해주세요.
+문제가 계속되면 잠시 후 다시 시도해주세요.</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.15294117647058825" green="0.15294117647058825" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="uKt-i1-UBo" secondAttribute="bottom" constant="16" id="Juw-lb-ece"/>
+                                    <constraint firstItem="7zW-6s-whI" firstAttribute="top" secondItem="5fj-3W-MpZ" secondAttribute="top" constant="-52" id="K0P-XT-Qff"/>
+                                    <constraint firstAttribute="width" secondItem="5fj-3W-MpZ" secondAttribute="height" multiplier="35:22" id="Kc8-qx-gDm"/>
+                                    <constraint firstItem="7zW-6s-whI" firstAttribute="width" secondItem="5fj-3W-MpZ" secondAttribute="width" multiplier="0.368254" id="Xep-53-xvO"/>
+                                    <constraint firstAttribute="trailing" secondItem="KGG-Qd-3Zm" secondAttribute="trailing" constant="16" id="ja7-7w-FiQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="uKt-i1-UBo" secondAttribute="trailing" constant="16" id="kw8-dd-kve"/>
+                                    <constraint firstItem="7zW-6s-whI" firstAttribute="centerX" secondItem="5fj-3W-MpZ" secondAttribute="centerX" id="oVK-vS-jW7"/>
+                                    <constraint firstItem="KGG-Qd-3Zm" firstAttribute="leading" secondItem="5fj-3W-MpZ" secondAttribute="leading" constant="16" id="orB-1Q-cj3"/>
+                                    <constraint firstItem="uKt-i1-UBo" firstAttribute="leading" secondItem="5fj-3W-MpZ" secondAttribute="leading" constant="16" id="xA2-Bh-6ga"/>
+                                    <constraint firstItem="uKt-i1-UBo" firstAttribute="top" secondItem="KGG-Qd-3Zm" secondAttribute="bottom" constant="16" id="ywf-XW-pQ1"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="0.73999999999999999" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="5fj-3W-MpZ" firstAttribute="centerX" secondItem="eXh-01-3Pq" secondAttribute="centerX" id="GU3-N2-CvO"/>
+                            <constraint firstItem="5fj-3W-MpZ" firstAttribute="centerY" secondItem="eXh-01-3Pq" secondAttribute="centerY" id="SoU-Ty-hfa"/>
+                            <constraint firstItem="5fj-3W-MpZ" firstAttribute="width" secondItem="vsN-55-6qs" secondAttribute="width" multiplier="0.84" id="j64-V7-gqQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eXh-01-3Pq"/>
+                    </view>
+                    <connections>
+                        <outlet property="completeButton" destination="uKt-i1-UBo" id="0LS-88-EIH"/>
+                        <outlet property="icImageTopConstraint" destination="K0P-XT-Qff" id="T8a-Kw-yTO"/>
+                        <outlet property="popupMessageLabel" destination="E5a-08-Eml" id="N5b-rL-iXm"/>
+                        <outlet property="popupTitleLabel" destination="8Ra-Hp-aKJ" id="V5y-y7-wa6"/>
+                        <outlet property="popupView" destination="5fj-3W-MpZ" id="G5a-Yj-xOd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y3W-h0-b3h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="18.399999999999999" y="-33.251231527093594"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icNoAreaTiger" width="116" height="92"/>
+    </resources>
+</document>
