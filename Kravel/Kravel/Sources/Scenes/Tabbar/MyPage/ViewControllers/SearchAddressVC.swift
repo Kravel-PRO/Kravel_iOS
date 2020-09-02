@@ -118,8 +118,9 @@ extension SearchAddressVC: UITextFieldDelegate {
                 // FIXME: 서버 오류 있을 시 에러 처리 추가
                 print("Server Error")
             case .networkFail:
-                // FIXME: 네트워크 연결 안됐을 시 에러 처리 추가
-                print("networkFail")
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
             }
         }
         return true

@@ -55,25 +55,30 @@ class SignupVC: UIViewController {
         let signupParameter = SignupParmeter(loginEmail: loginEmail, loginPw: loginPw, nickName: nickName, gender: gender, speech: selectedLanguage)
         NetworkHandler.shared.requestAPI(apiCategory: .signup(signupParameter)) { result in
             switch result {
+            // 데이터 통신 Success
             case .success(let userIdx):
                 print(userIdx)
                 guard let welcomeVC = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewController(withIdentifier: WelcomeVC.identifier) as? WelcomeVC else { return }
                 welcomeVC.modalPresentationStyle = .fullScreen
                 self.present(welcomeVC, animated: true, completion: nil)
+                
+            // 사용자 실수 Error
             case .requestErr(let error):
                 print(error)
                 let alertVC = UIAlertController(title: "이미 존재하는 계정입니다.", message: "다른 계정으로 만들어주세요", preferredStyle: .alert)
                 let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
                 alertVC.addAction(action)
                 self.present(alertVC, animated: true, completion: nil)
+                
+            // 서버 연결 실패 Error
             case .serverErr:
                 print("serverError")
+                
+            // 네트워크 연결 실패 Error
             case .networkFail:
-                // FIXME: 네트워크 연결 팝업창 필요
-                let alertVC = UIAlertController(title: "인터넷 연결이 필요합니다.", message: "인터넷 연결을 해주세요.", preferredStyle: .alert)
-                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-                alertVC.addAction(action)
-                self.present(alertVC, animated: true, completion: nil)
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
             }
         }
     }

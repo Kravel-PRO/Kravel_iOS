@@ -206,10 +206,9 @@ extension MainVC: LoginTextViewDelegate {
                 
             // 네트워크 연결 안 된 경우 Error 처리
             case .networkFail:
-                let alertVC = UIAlertController(title: "인터넷 연결이 필요합니다.", message: "인터넷 연결을 해주세요.", preferredStyle: .alert)
-                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-                alertVC.addAction(action)
-                self.present(alertVC, animated: true, completion: nil)
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
             }
         }
     }
