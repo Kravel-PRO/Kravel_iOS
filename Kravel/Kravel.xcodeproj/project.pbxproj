@@ -35,6 +35,10 @@
 		9D4CCF7324FFFD6F003F73AF /* NetworkFailPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CCF7224FFFD6F003F73AF /* NetworkFailPopupVC.swift */; };
 		9D4CCF7625000CC1003F73AF /* GetPlaceParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CCF7525000CC1003F73AF /* GetPlaceParameter.swift */; };
 		9D4CCF7825000FF2003F73AF /* GetPlaceResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CCF7725000FF2003F73AF /* GetPlaceResponseData.swift */; };
+		9D4CCF7B250039F0003F73AF /* GetReviewParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CCF7A250039F0003F73AF /* GetReviewParameter.swift */; };
+		9D4CCF7D25003A95003F73AF /* GetReviewResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CCF7C25003A95003F73AF /* GetReviewResponseData.swift */; };
+		9D4CCF7F25003B9D003F73AF /* APISortableResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CCF7E25003B9D003F73AF /* APISortableResponseData.swift */; };
+		9D4CCF8125003E25003F73AF /* APIDataResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CCF8025003E25003F73AF /* APIDataResult.swift */; };
 		9D5DBB45248D5BAD00D82D40 /* SexButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D5DBB44248D5BAD00D82D40 /* SexButton.xib */; };
 		9D5DBB47248D5BBF00D82D40 /* SexButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5DBB46248D5BBF00D82D40 /* SexButton.swift */; };
 		9D5E3EB724BD952200BA4E5F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5E3EB624BD952200BA4E5F /* SearchCell.swift */; };
@@ -174,6 +178,10 @@
 		9D4CCF7224FFFD6F003F73AF /* NetworkFailPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFailPopupVC.swift; sourceTree = "<group>"; };
 		9D4CCF7525000CC1003F73AF /* GetPlaceParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPlaceParameter.swift; sourceTree = "<group>"; };
 		9D4CCF7725000FF2003F73AF /* GetPlaceResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPlaceResponseData.swift; sourceTree = "<group>"; };
+		9D4CCF7A250039F0003F73AF /* GetReviewParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReviewParameter.swift; sourceTree = "<group>"; };
+		9D4CCF7C25003A95003F73AF /* GetReviewResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReviewResponseData.swift; sourceTree = "<group>"; };
+		9D4CCF7E25003B9D003F73AF /* APISortableResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISortableResponseData.swift; sourceTree = "<group>"; };
+		9D4CCF8025003E25003F73AF /* APIDataResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDataResult.swift; sourceTree = "<group>"; };
 		9D5DBB44248D5BAD00D82D40 /* SexButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SexButton.xib; sourceTree = "<group>"; };
 		9D5DBB46248D5BBF00D82D40 /* SexButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SexButton.swift; sourceTree = "<group>"; };
 		9D5E3EB624BD952200BA4E5F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
@@ -622,6 +630,15 @@
 			path = GetPlace;
 			sourceTree = "<group>";
 		};
+		9D4CCF79250039D2003F73AF /* GetReview */ = {
+			isa = PBXGroup;
+			children = (
+				9D4CCF7A250039F0003F73AF /* GetReviewParameter.swift */,
+				9D4CCF7C25003A95003F73AF /* GetReviewResponseData.swift */,
+			);
+			path = GetReview;
+			sourceTree = "<group>";
+		};
 		9D6FF35824F9846900E6A8B9 /* PhotoReview */ = {
 			isa = PBXGroup;
 			children = (
@@ -707,6 +724,7 @@
 				9D76CD8A24FD811C004D7333 /* Signin */,
 				9D76CD9D24FEB8E3004D7333 /* SearchPlaceKakao */,
 				9D4CCF7425000CA0003F73AF /* GetPlace */,
+				9D4CCF79250039D2003F73AF /* GetReview */,
 			);
 			path = APIModel;
 			sourceTree = "<group>";
@@ -725,6 +743,8 @@
 			children = (
 				9D76CD8824FD7463004D7333 /* APICategory.swift */,
 				9D76CD7E24FD3641004D7333 /* APIResponseData.swift */,
+				9D4CCF8025003E25003F73AF /* APIDataResult.swift */,
+				9D4CCF7E25003B9D003F73AF /* APISortableResponseData.swift */,
 				9D76CD8524FD7025004D7333 /* APIError.swift */,
 			);
 			path = General;
@@ -1226,6 +1246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D5DBB47248D5BBF00D82D40 /* SexButton.swift in Sources */,
+				9D4CCF8125003E25003F73AF /* APIDataResult.swift in Sources */,
 				9D76CD9224FDA268004D7333 /* ReportVC.swift in Sources */,
 				9D7FB20024D16AA9009A9C0A /* PlacePopupView.swift in Sources */,
 				9D4CCF7625000CC1003F73AF /* GetPlaceParameter.swift in Sources */,
@@ -1246,6 +1267,7 @@
 				9DB03C8B24DAA6B800FF7E36 /* HomeNearPlaceCell.swift in Sources */,
 				9D79E2A324EC2993006310A2 /* DetailNearPlaceCell.swift in Sources */,
 				9DBA643F24F3965800E12FA4 /* MyScrapCell.swift in Sources */,
+				9D4CCF7B250039F0003F73AF /* GetReviewParameter.swift in Sources */,
 				9D6FF38624FAFBD100E6A8B9 /* APIConstants.swift in Sources */,
 				9D8C0A2724BC525C005C1F58 /* HomeVC.swift in Sources */,
 				9D4CCF7825000FF2003F73AF /* GetPlaceResponseData.swift in Sources */,
@@ -1299,7 +1321,9 @@
 				9D13C7ED2487842E0058A7BF /* AppDelegate.swift in Sources */,
 				9D79E2A524ED02D1006310A2 /* MorePhotoReviewVC.swift in Sources */,
 				9D13C7EF2487842E0058A7BF /* SceneDelegate.swift in Sources */,
+				9D4CCF7D25003A95003F73AF /* GetReviewResponseData.swift in Sources */,
 				9D7FB1FA24D16505009A9C0A /* PhotoReviewView.swift in Sources */,
+				9D4CCF7F25003B9D003F73AF /* APISortableResponseData.swift in Sources */,
 				9D3D162F2488E2C700AE1B4C /* UIColor+Additions.swift in Sources */,
 				9DEDA6BC24BCEE0400E978F5 /* PagingViewCell.swift in Sources */,
 				9DB03C8D24DAB1CB00FF7E36 /* TagCell.swift in Sources */,

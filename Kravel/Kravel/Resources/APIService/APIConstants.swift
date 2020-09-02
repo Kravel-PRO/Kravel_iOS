@@ -21,4 +21,7 @@ struct APICostants {
     
     // 장소 가져오는 API
     static let getPlace = APICostants.baseURL + "/api/places"
+    
+    // 새로운 리뷰 가져오는 API
+    static let getNewReview = APICostants.baseURL + "/api/reviews"
 }

@@ -8,33 +8,6 @@
 
 import Foundation
 
-struct GetPlaceResponseData: Codable {
-    let result: GetPlaceResult?
-
-    enum CodingKeys: String, CodingKey {
-        case result
-    }
-
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        result = (try? values.decode(GetPlaceResult.self, forKey: .result)) ?? nil
-    }
-}
-
-struct GetPlaceResult: Codable {
-    let content: [PlaceContentInform]
-    let pageable: Pageable
-    let totalPages: Int
-    let totalElements: Int
-    let last: Bool
-    let sort: Sort
-    let size: Int
-    let number: Int
-    let numberOfElements: Int
-    let first: Bool
-    let empty: Bool
-}
-
 struct PlaceContentInform: Codable {
     let placeId: Int
     let title: String
@@ -53,19 +26,3 @@ struct PlaceCelebrity: Codable {
     let celebrityName: String
     let imageUrl: String
 }
-
-struct Pageable: Codable {
-    let sort: Sort
-    let offset: Int
-    let pageNumber: Int
-    let pageSize: Int
-    let paged: Bool
-    let unpaged: Bool
-}
-
-struct Sort: Codable {
-    let sorted: Bool
-    let unsorted: Bool
-    let empty: Bool
-}
-

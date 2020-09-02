@@ -23,6 +23,7 @@ class NetworkHandler {
         case .signin: requestSignin(apiURL, headers, parameters, completion)
         case .searchPlaceKakao: requestSearchPlace(apiURL, headers, parameters, completion)
         case .getPlace: requestGetPlace(apiURL, headers, parameters, completion)
+        case .getNewReview: requestGetReview(apiURL, headers, parameters, completion)
         }
     }
     
@@ -86,7 +87,7 @@ class NetworkHandler {
         
         AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
             .validate(statusCode: 200...500)
-            .responseDecodable(of: APIResponseData<GetPlaceResponseData, APIError>.self) { response in
+            .responseDecodable(of: APIResponseData<APIDataResult<PlaceContentInform>, APIError>.self) { response in
                 switch response.result {
                 case .success(let getPlaceResponseData):
                     guard let statusCode = response.response?.statusCode else { return }
@@ -104,5 +105,23 @@ class NetworkHandler {
                     completion(.networkFail)
                 }
         }
+    }
+    
+    private func requestGetReview(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
+        guard let url = try? url.asURL() else { return }
+        
+        AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
+            .validate(statusCode: 200...500)
+            .responseDecodable(of: APIResponseData<APIDataResult<ReviewInform>, APIError>.self) { response in
+                switch response.result {
+                case .success(let getReviewResponseData):
+                    print("")
+                    print(getReviewResponseData)
+                case .failure(let error):
+                    print(error)
+                    completion(.networkFail)
+                }
+            }
+        
     }
 }

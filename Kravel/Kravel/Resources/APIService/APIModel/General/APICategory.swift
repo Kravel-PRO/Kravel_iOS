@@ -17,6 +17,7 @@ enum APICategory<P: ParameterAble> {
     case signin(P)
     case searchPlaceKakao(P)
     case getPlace(P)
+    case getNewReview(P)
     
     func makeURL() -> String {
         switch self {
@@ -24,6 +25,7 @@ enum APICategory<P: ParameterAble> {
         case .signup: return APICostants.signup
         case .searchPlaceKakao: return APICostants.mapSearchURL
         case .getPlace: return APICostants.getPlace
+        case .getNewReview: return APICostants.getNewReview
         }
     }
     
@@ -44,6 +46,12 @@ enum APICategory<P: ParameterAble> {
             ]
         case .getPlace:
             // FIXME: Header 설정하는거 나중에 Token 값 넣게 변경
+            guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
+            return [
+                "Content-Type": "application/json",
+                "Authorization": token
+            ]
+        case .getNewReview:
             guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
             return [
                 "Content-Type": "application/json",
@@ -100,8 +108,14 @@ enum APICategory<P: ParameterAble> {
             if let sort = getPlaceParameter.sort {
                 parameters.updateValue(sort, forKey: "sort")
             }
-            
             return parameters
+        case .getNewReview(let reviewParameter):
+            guard let reviewParameter = reviewParameter as? GetReviewParameter else { return nil }
+            return [
+                "offset": reviewParameter.offset,
+                "size": reviewParameter.size,
+                "sort": reviewParameter.sort
+            ]
         }
     }
 }

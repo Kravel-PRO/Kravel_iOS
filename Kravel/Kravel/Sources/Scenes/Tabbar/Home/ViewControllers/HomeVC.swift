@@ -133,6 +133,7 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         requestPlaceData()
+        requestReviewData()
     }
     
     // MARK: - 장소 데이터 API 요청
@@ -141,7 +142,7 @@ class HomeVC: UIViewController {
         NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
             switch result {
             case .success(let getPlaceResult):
-                guard let getPlaceResult = getPlaceResult as? GetPlaceResult else { return }
+                guard let getPlaceResult = getPlaceResult as? APISortableResponseData<PlaceContentInform> else { return }
                 self.nearPlaceData = getPlaceResult.content
                 DispatchQueue.main.async {
                     self.setNearPlaceCollectionView()
@@ -157,6 +158,13 @@ class HomeVC: UIViewController {
                 networkFailPopupVC.modalPresentationStyle = .overFullScreen
                 self.present(networkFailPopupVC, animated: false, completion: nil)
             }
+        }
+    }
+    
+    private func requestReviewData() {
+        let getReviewParameter = GetReviewParameter(offset: 0, size: 6, sort: "reviewLikes,desc")
+        NetworkHandler.shared.requestAPI(apiCategory: .getNewReview(getReviewParameter)) { result in
+            print("Success")
         }
     }
     
