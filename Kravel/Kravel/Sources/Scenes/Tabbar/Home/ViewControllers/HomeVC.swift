@@ -324,7 +324,9 @@ extension HomeVC: UICollectionViewDelegateFlowLayout {
 
 extension HomeVC: PhotoReviewViewDelegate {
     func clickWriteButton() {
-        print("Write Photo Review")
+        guard let photoReviewUploadVC = UIStoryboard(name: "PhotoReviewUpload", bundle: nil).instantiateViewController(withIdentifier: PhotoReviewUploadVC.identifier) as? PhotoReviewUploadVC else { return }
+        photoReviewUploadVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(photoReviewUploadVC, animated: true)
     }
 }
 

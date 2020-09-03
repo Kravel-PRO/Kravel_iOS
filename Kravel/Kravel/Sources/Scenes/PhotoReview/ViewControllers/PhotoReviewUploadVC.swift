@@ -12,10 +12,11 @@ class PhotoReviewUploadVC: UIViewController {
     static let identifier = "PhotoReviewUploadVC"
     
     // MARK: - UIImagePickerController 설정
-    private let picker = UIImagePickerController()
+    private var picker: UIImagePickerController?
     
     private func setPickerController() {
-        picker.delegate = self
+        picker = UIImagePickerController()
+        picker?.delegate = self
     }
     
     // MARK: - 사진 올리기 Margin View 설정
@@ -47,8 +48,10 @@ class PhotoReviewUploadVC: UIViewController {
     }
     
     private func openLibrary() {
-        picker.sourceType = .photoLibrary
-        present(picker, animated: true, completion: nil)
+        if let picker = self.picker {
+            picker.sourceType = .photoLibrary
+            present(picker, animated: true, completion: nil)
+        }
     }
     
     // MARK: - 완성 버튼 설정
@@ -74,6 +77,8 @@ class PhotoReviewUploadVC: UIViewController {
     private func setNav() {
         self.navigationController?.navigationBar.topItem?.title = ""
         self.navigationItem.title = "포토 리뷰 올리기"
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.tintColor = .black
     }
 }
 
