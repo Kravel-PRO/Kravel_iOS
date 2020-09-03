@@ -294,7 +294,7 @@
                                                 <rect key="frame" x="0.0" y="760.66666666666663" width="375" height="288.99999999999989"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="SXu-MG-qel" secondAttribute="height" multiplier="375:289" id="WoB-0e-ieh"/>
+                                                    <constraint firstAttribute="height" constant="289" id="oGv-d9-py2"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -348,6 +348,7 @@
                         <outlet property="moreButton" destination="sF5-4g-7xo" id="0rq-9l-rBP"/>
                         <outlet property="nearPlaceCollectionView" destination="jCc-ha-oeJ" id="8C1-NO-STf"/>
                         <outlet property="photoReviewView" destination="SXu-MG-qel" id="iS6-Tn-4cQ"/>
+                        <outlet property="photoReviewViewHeightConstraint" destination="oGv-d9-py2" id="fgD-3c-XdN"/>
                         <outlet property="titleLabel" destination="O9b-Nd-4li" id="s9S-vc-SyV"/>
                         <outlet property="titleStackView" destination="hHf-gO-hWg" id="rWf-x8-FIG"/>
                     </connections>

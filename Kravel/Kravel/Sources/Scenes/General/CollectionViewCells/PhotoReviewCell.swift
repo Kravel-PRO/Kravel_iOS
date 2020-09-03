@@ -25,8 +25,6 @@ class PhotoReviewCell: UICollectionViewCell {
         }
     }
     
-    var indexPath: IndexPath?
-    
     // MARK: - 더보기 뷰 설정
     var moreView: UIView?
     

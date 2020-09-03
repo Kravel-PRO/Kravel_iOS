@@ -115,8 +115,13 @@ class NetworkHandler {
             .responseDecodable(of: APIResponseData<APIDataResult<ReviewInform>, APIError>.self) { response in
                 switch response.result {
                 case .success(let getReviewResponseData):
-                    print("")
-                    print(getReviewResponseData)
+                    guard let statusCode = response.response?.statusCode else { return }
+                    if statusCode == 200 {
+                        guard let getReviewResult = getReviewResponseData.data?.result else { return }
+                        completion(.success(getReviewResult))
+                    } else {
+                        completion(.requestErr("실패"))
+                    }
                 case .failure(let error):
                     print(error)
                     completion(.networkFail)

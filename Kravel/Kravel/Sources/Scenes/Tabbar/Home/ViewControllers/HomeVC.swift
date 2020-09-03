@@ -115,7 +115,19 @@ class HomeVC: UIViewController {
         }
     }
     
-    private var photoReviewPlace: [String] = ["여기 맛집", "여기도", "요기도?", "저기도", "쩌어기도", "요오기도"]
+    @IBOutlet weak var photoReviewViewHeightConstraint: NSLayoutConstraint!
+    
+    private func setPhotoReviewViewLayout() {
+        let defaultHeight: CGFloat = 48
+        let horizontalSpacing = view.frame.width / 23.44
+        let cellHeight: CGFloat = (photoReviewView.photoReviewCollectionView.frame.width - horizontalSpacing*2 - 4*2) / 3
+        if photoReviewData.count == 0 { photoReviewViewHeightConstraint.constant = defaultHeight }
+        else if photoReviewData.count <= 3 { photoReviewViewHeightConstraint.constant = defaultHeight + cellHeight }
+        else { photoReviewViewHeightConstraint.constant = defaultHeight + 2 * cellHeight }
+    }
+    
+    // 포토리뷰 보여주는 데이터
+    private var photoReviewData: [ReviewInform] = []
     
     private func setPhotoReviewLabel() {
         let photoReviewAttributeText = "인기 많은 포토 리뷰".makeAttributedText([.font: UIFont.systemFont(ofSize: 18), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)])
@@ -161,10 +173,27 @@ class HomeVC: UIViewController {
         }
     }
     
+    // MARK: - 포토리뷰 데이터 API 요청
     private func requestReviewData() {
         let getReviewParameter = GetReviewParameter(offset: 0, size: 6, sort: "reviewLikes,desc")
         NetworkHandler.shared.requestAPI(apiCategory: .getNewReview(getReviewParameter)) { result in
-            print("Success")
+            switch result {
+            case .success(let getReviewResult):
+                guard let getReviewResult = getReviewResult as? APISortableResponseData<ReviewInform> else { return }
+                self.photoReviewData = getReviewResult.content
+                DispatchQueue.main.async {
+                    self.setPhotoReviewViewLayout()
+                    self.photoReviewView.photoReviewCollectionView.reloadData()
+                }
+            case .requestErr(let errorMessage):
+                print(errorMessage)
+            case .serverErr:
+                print("ServerError")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
         }
     }
     
@@ -185,6 +214,7 @@ class HomeVC: UIViewController {
         setHotPlaceCollectionViewHeight()
         setHotPlaceLabelLayout()
         setPhotoReviewLabelLayout()
+        setPhotoReviewViewLayout()
     }
 }
 
@@ -192,7 +222,7 @@ extension HomeVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == nearPlaceCollectionView { return nearPlaceData.count }
         else if collectionView == hotPlaceCollectionView { return hotPlaces.count }
-        else { return photoReviewPlace.count }
+        else { return photoReviewData.count }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -228,6 +258,10 @@ extension HomeVC: UICollectionViewDataSource {
     // MARK: - 포토리뷰 보여주는 Cell 생성
     private func makePhotoReviewCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> PhotoReviewCell {
         guard let photoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoReviewCell.identifier, for: indexPath) as? PhotoReviewCell else { return PhotoReviewCell() }
+        
+        // FIXME: - 포토리뷰 imageURL 들어오면 다운받는 로직 추가
+//        photoReviewCell.photoImage = photoReviewData[indexPath.row].imageURl
+        
         photoReviewCell.photoImage = UIImage(named: "yuna2")
         if indexPath.row == 5 { photoReviewCell.addMoreView() }
         return photoReviewCell
