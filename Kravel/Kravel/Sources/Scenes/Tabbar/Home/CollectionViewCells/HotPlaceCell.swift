@@ -34,7 +34,7 @@ class HotPlaceCell: UICollectionViewCell {
         }
     }
     
-    var tags: [String] = ["기생충", "박소담", "이선균"] {
+    var tags: [String] = [] {
         didSet {
             tagCollectionView.reloadData()
         }
@@ -57,6 +57,9 @@ class HotPlaceCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        tags = []
+        location = nil
+        photoCount = nil
     }
 }
 

@@ -79,17 +79,15 @@ class HomeVC: UIViewController {
     
     @IBOutlet weak var hotPlaceLabelLeadingConstraint: NSLayoutConstraint!
     
-    // 인기있는 장소 CollectionView 설정
-    private var hotPlaces: [String] = ["세림픽 돼지고기 집", "세림픽 요거트 집", "세림픽 커피집", "세림픽 소고기 집"]
-    
     @IBOutlet weak var hotPlaceCollectionViewHeightConstraint: NSLayoutConstraint!
     
+    // 인기있는 장소 CollectionView 설정
     private func setHotPlaceCollectionViewHeight() {
         let horizontalSpacing = view.frame.width / 23.44
         let lineSpacing: CGFloat = 12
         let cellWidth = hotPlaceCollectionView.frame.width - 2*horizontalSpacing
         let cellHeight = cellWidth * 0.46
-        hotPlaceCollectionViewHeightConstraint.constant = cellHeight * CGFloat(hotPlaces.count) + lineSpacing * CGFloat((hotPlaces.count-1))
+        hotPlaceCollectionViewHeightConstraint.constant = cellHeight * CGFloat(hotPlaceData.count) + lineSpacing * CGFloat((hotPlaceData.count-1))
     }
     
     private func setHotPlaceLabelLayout() {
@@ -97,6 +95,8 @@ class HomeVC: UIViewController {
         hotPlaceLabel.heightAnchor.constraint(equalToConstant: hotPlaceSize.height).isActive = true
         hotPlaceLabelLeadingConstraint.constant = view.frame.width / 23.44
     }
+    
+    private var hotPlaceData: [PlaceContentInform] = []
     
     @IBOutlet weak var hotPlaceCollectionView: UICollectionView! {
         didSet {
@@ -109,9 +109,9 @@ class HomeVC: UIViewController {
     @IBOutlet weak var photoReviewView: PhotoReviewView! {
         didSet {
             setPhotoReviewLabel()
-            photoReviewView.delegate = self
             photoReviewView.photoReviewCollectionViewDelegate = self
             photoReviewView.photoReviewCollectionViewDataSource = self
+            photoReviewView.writeButton.isHidden = true
         }
     }
     
@@ -144,12 +144,13 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        requestPlaceData()
+        requestClosePlaceData()
         requestReviewData()
+        requestHotPlaceData()
     }
     
     // MARK: - 장소 데이터 API 요청
-    private func requestPlaceData() {
+    private func requestClosePlaceData() {
         let getPlaceParameter = GetPlaceParameter(latitude: 1.0, longitude: 1.0, offset: nil, size: nil, review_count: nil, sort: nil)
         NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
             switch result {
@@ -163,6 +164,30 @@ class HomeVC: UIViewController {
             case .requestErr(let errorMessage):
                 print(errorMessage)
             // FIXME: 서버 에러 있을 시 에러 처리 필요
+            case .serverErr:
+                print("ServerError")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
+    }
+    
+    // MARK: - 인기 장소 데이터 API 요청
+    private func requestHotPlaceData() {
+        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, offset: nil, size: nil, review_count: nil, sort: nil)
+        NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
+            switch result {
+            case .success(let getPlaceResult):
+                guard let getPlaceResult = getPlaceResult as? APISortableResponseData<PlaceContentInform> else { return }
+                self.hotPlaceData = getPlaceResult.content
+                DispatchQueue.main.async {
+                    self.setHotPlaceCollectionViewHeight()
+                    self.hotPlaceCollectionView.reloadData()
+                }
+            case .requestErr(let errorMessage):
+                print(errorMessage)
             case .serverErr:
                 print("ServerError")
             case .networkFail:
@@ -221,7 +246,7 @@ class HomeVC: UIViewController {
 extension HomeVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == nearPlaceCollectionView { return nearPlaceData.count }
-        else if collectionView == hotPlaceCollectionView { return hotPlaces.count }
+        else if collectionView == hotPlaceCollectionView { return hotPlaceData.count }
         else { return photoReviewData.count }
     }
     
@@ -249,9 +274,13 @@ extension HomeVC: UICollectionViewDataSource {
     private func makeHotPlaceCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> HotPlaceCell {
         guard let hotPlaceCell = collectionView.dequeueReusableCell(withReuseIdentifier: HotPlaceCell.identifier, for: indexPath) as? HotPlaceCell else { return HotPlaceCell() }
         hotPlaceCell.layer.cornerRadius = hotPlaceCell.frame.width / 17.15
-        hotPlaceCell.location = "성북 빌리지"
-        hotPlaceCell.photoCount = 96
         hotPlaceCell.clipsToBounds = true
+        
+        hotPlaceCell.location = hotPlaceData[indexPath.row].title
+        if let tags = hotPlaceData[indexPath.row].tags { hotPlaceCell.tags = tags }
+        else { hotPlaceCell.tags = [] }
+        hotPlaceCell.photoCount = hotPlaceData[indexPath.row].reviewCount
+        
         return hotPlaceCell
     }
     
@@ -321,13 +350,3 @@ extension HomeVC: UICollectionViewDelegateFlowLayout {
         }
     }
 }
-
-extension HomeVC: PhotoReviewViewDelegate {
-    func clickWriteButton() {
-        guard let photoReviewUploadVC = UIStoryboard(name: "PhotoReviewUpload", bundle: nil).instantiateViewController(withIdentifier: PhotoReviewUploadVC.identifier) as? PhotoReviewUploadVC else { return }
-        photoReviewUploadVC.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(photoReviewUploadVC, animated: true)
-    }
-}
-
-

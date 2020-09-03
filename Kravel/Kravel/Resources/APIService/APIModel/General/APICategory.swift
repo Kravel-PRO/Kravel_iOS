@@ -102,7 +102,7 @@ enum APICategory<P: ParameterAble> {
             }
             
             if let review_count = getPlaceParameter.review_count {
-                parameters.updateValue(review_count, forKey: "review_count")
+                parameters.updateValue(review_count, forKey: "review-count")
             }
             
             if let sort = getPlaceParameter.sort {

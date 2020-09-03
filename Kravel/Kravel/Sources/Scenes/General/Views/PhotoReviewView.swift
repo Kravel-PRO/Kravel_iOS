@@ -15,6 +15,9 @@ class PhotoReviewView: UIView {
     // MARK: - 포토 리뷰 Delegate
     var delegate: PhotoReviewViewDelegate?
     
+    // MARK: - 포토리뷰 작성하기 버튼
+    @IBOutlet weak var writeButton: UIButton!
+    
     // 포토리뷰 작성하기
     @IBAction func writePhotoReview(_ sender: Any) {
         delegate?.clickWriteButton()
