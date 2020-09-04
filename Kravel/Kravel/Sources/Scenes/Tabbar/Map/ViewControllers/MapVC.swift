@@ -30,17 +30,21 @@ class MapVC: UIViewController {
     private var allPlaceData: [PlaceContentInform] = []
     private var markers: [NMFMarker] = []
     
-    private func setMarkers() {
-        let marker = NMFMarker(position: NMGLatLng(lat: 37.560800, lng: 126.993854), iconImage: NMFOverlayImage(image: UIImage(named: ImageKey.icMarkDefault)!))
-        marker.mapView = mapView
-        marker.userInfo = ["isTouch": false]
-        
-        marker.touchHandler = { (tempMarker) -> Bool in
-            guard let isTouch = tempMarker.userInfo["isTouch"] as? Bool else { return false }
-            guard let clickedMarker = tempMarker as? NMFMarker else { return false }
+    private let icMarkDefault = NMFOverlayImage(name: ImageKey.icMarkDefault)
+    private let icMarkFocus = NMFOverlayImage(name: ImageKey.icMarkFocus)
+    
+    // 선택된 마커 ID
+    private var selectedMarkerID: Int = -1
+    
+    lazy var markerTouchHandler: (NMFOverlay) -> Bool = { [weak self] marker in
+        guard let self = self else { return true }
+        if let isTouch = marker.userInfo["isTouch"] as? Bool,
+            let selectID = marker.userInfo["id"] as? Int,
+            let castingMarker = marker as? NMFMarker {
+            castingMarker.iconImage = isTouch ? self.icMarkDefault : self.icMarkFocus
+            marker.userInfo["isTouch"] = !isTouch
             
-            clickedMarker.iconImage = isTouch ? NMFOverlayImage(image: UIImage(named: ImageKey.icMarkDefault)!) : NMFOverlayImage(image: UIImage(named: ImageKey.icMarkFocus)!)
-            
+            // 선택된 Marker에 따라 현재 뷰의 상태 업데이트
             if !isTouch {
                 self.placeShadowView.isHidden = false
                 self.nearPlaceCollectionView.isHidden = true
@@ -53,13 +57,39 @@ class MapVC: UIViewController {
                 self.placeShadowView.isHidden = true
                 self.nearPlaceCollectionView.isHidden = false
                 self.placePopupView.showingState = .notShow
-                
                 self.placeShadowView.transform = .identity
             }
             
-            tempMarker.userInfo["isTouch"] = !isTouch
-            return false
+            // 초기 상태인 경우 선택된 값이 1도 없는 경우
+            if self.selectedMarkerID == -1 {
+                self.selectedMarkerID = selectID
+                return true
+            }
+            
+            // 선택된 아이디가 같은 경우는 터치 상태만 바꾸어주기
+            guard selectID != self.selectedMarkerID else { return true }
+            
+            let preMarkers = self.markers.filter { $0.userInfo["id"] as! Int == self.selectedMarkerID }
+            guard preMarkers.count == 1, let preMarker = preMarkers.first else {
+                print("Logic Error")
+                return true
+            }
+            
+            // 이전에 선택된 마커를 새로운게 선택되었기 때문에, 바꾸어주는 로직
+            preMarker.iconImage = self.icMarkDefault
+            preMarker.userInfo["isTouch"] = false
+        
+            self.selectedMarkerID = selectID
         }
+        return true
+    }
+    
+    private func makeMarker(placeID: Int, latitude: Double, longitude: Double) -> NMFMarker {
+        let marker = NMFMarker(position: NMGLatLng(lat: longitude, lng: latitude))
+        marker.iconImage = icMarkDefault
+        marker.userInfo = ["id": placeID, "isTouch": false]
+        marker.touchHandler = self.markerTouchHandler
+        return marker
     }
     
     // MARK: - 내 위치 기준 새로고침 설정
@@ -315,7 +345,6 @@ class MapVC: UIViewController {
         setCurrentLocationButton()
         setRefreshButton()
         showPlacePopupView()
-        setMarkers()
         requestAllPlaceData()
     }
     
@@ -327,9 +356,16 @@ class MapVC: UIViewController {
             case .success(let getPlaceResult):
                 guard let getPlaceResult = getPlaceResult as? APISortableResponseData<PlaceContentInform> else { return }
                 self.allPlaceData = getPlaceResult.content
-                
+                self.allPlaceData.forEach { placeData in
+                    let marker = self.makeMarker(placeID: placeData.placeId, latitude: placeData.latitude, longitude: placeData.longitude)
+                    self.markers.append(marker)
+                }
+            
                 DispatchQueue.main.async {
                     // FIXME: - 마커 찍는 코드 넣기
+                    self.markers.forEach { marker in
+                        marker.mapView = self.mapView
+                    }
                 }
             case .requestErr(let errorMessage):
                 print(errorMessage)
