@@ -10,14 +10,14 @@ import Foundation
 
 struct PlaceContentInform: Codable {
     let placeId: Int
-    let title: String
+    let title: String?
     let imageUrl: String?
     let subImageUrl: String?
-    let location: String
+    let location: String?
     let latitude: Double
     let longitude: Double
     let reviewCount: Int
-    let tags: [String]?
+    let tags: [String]
     let celebrities: [PlaceCelebrity]
 }
 

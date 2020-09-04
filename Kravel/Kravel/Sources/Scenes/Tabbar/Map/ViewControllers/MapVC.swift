@@ -27,6 +27,7 @@ class MapVC: UIViewController {
     }
     
     // FIXME: - 임시 마커
+    private var allPlaceData: [PlaceContentInform] = []
     private var markers: [NMFMarker] = []
     
     private func setMarkers() {
@@ -304,7 +305,7 @@ class MapVC: UIViewController {
         }
     }
     
-    // MARK: - UIViewController viewDidLoad() override 부분
+    // MARK: - UIViewController viewDidLoad override 부분
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -315,15 +316,40 @@ class MapVC: UIViewController {
         setRefreshButton()
         showPlacePopupView()
         setMarkers()
+        requestAllPlaceData()
     }
     
-    // MARK: - UIViewController viewWillAppear() override 부분
+    // MARK: - 지도 표시 위한 장소 가져오는 API 요청
+    private func requestAllPlaceData() {
+        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, offset: nil, size: 100, review_count: nil, sort: nil)
+        NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
+            switch result {
+            case .success(let getPlaceResult):
+                guard let getPlaceResult = getPlaceResult as? APISortableResponseData<PlaceContentInform> else { return }
+                self.allPlaceData = getPlaceResult.content
+                
+                DispatchQueue.main.async {
+                    // FIXME: - 마커 찍는 코드 넣기
+                }
+            case .requestErr(let errorMessage):
+                print(errorMessage)
+            case .serverErr:
+                print("ServerError")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
+    }
+    
+    // MARK: - UIViewController viewWillAppear override 부분
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
     }
     
-    // MARK: - UIViewController viewWillLayoutSubviews() override 부분
+    // MARK: - UIViewController viewWillLayoutSubviews override 부분
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         setCurrentLocationButtonLayout()

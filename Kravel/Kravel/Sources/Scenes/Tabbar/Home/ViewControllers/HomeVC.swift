@@ -165,6 +165,7 @@ class HomeVC: UIViewController {
                 print(errorMessage)
             // FIXME: 서버 에러 있을 시 에러 처리 필요
             case .serverErr:
+                print("여기지?")
                 print("ServerError")
             case .networkFail:
                 guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
@@ -261,9 +262,7 @@ extension HomeVC: UICollectionViewDataSource {
         guard let homeNearPlaceCell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeNearPlaceCell.identifier, for: indexPath) as? HomeNearPlaceCell else { return HomeNearPlaceCell() }
 
         homeNearPlaceCell.placeName = nearPlaceData[indexPath.row].title
-        
-        if let tags = nearPlaceData[indexPath.row].tags { homeNearPlaceCell.tags = tags }
-        else { homeNearPlaceCell.tags = [] }
+        homeNearPlaceCell.tags = nearPlaceData[indexPath.row].tags
         
         homeNearPlaceCell.layer.cornerRadius = homeNearPlaceCell.frame.width / 15.9
         homeNearPlaceCell.clipsToBounds = true
@@ -277,8 +276,7 @@ extension HomeVC: UICollectionViewDataSource {
         hotPlaceCell.clipsToBounds = true
         
         hotPlaceCell.location = hotPlaceData[indexPath.row].title
-        if let tags = hotPlaceData[indexPath.row].tags { hotPlaceCell.tags = tags }
-        else { hotPlaceCell.tags = [] }
+        hotPlaceCell.tags = hotPlaceData[indexPath.row].tags
         hotPlaceCell.photoCount = hotPlaceData[indexPath.row].reviewCount
         
         return hotPlaceCell
