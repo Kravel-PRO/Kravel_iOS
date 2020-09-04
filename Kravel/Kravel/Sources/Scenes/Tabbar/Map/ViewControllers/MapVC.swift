@@ -50,6 +50,9 @@ class MapVC: UIViewController {
                 self.nearPlaceCollectionView.isHidden = true
                 self.placePopupView.showingState = .halfShow
                 
+                NSLayoutConstraint.activate([self.anotherConstraint])
+                NSLayoutConstraint.deactivate([self.currentLocationButtonBottomConstraint])
+                
                 UIView.animate(withDuration: 0.3) {
                     self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -self.calculateInitPanelViewHeight())
                 }
@@ -57,6 +60,10 @@ class MapVC: UIViewController {
                 self.placeShadowView.isHidden = true
                 self.nearPlaceCollectionView.isHidden = false
                 self.placePopupView.showingState = .notShow
+                
+                NSLayoutConstraint.activate([self.currentLocationButtonBottomConstraint])
+                NSLayoutConstraint.deactivate([self.anotherConstraint])
+                
                 self.placeShadowView.transform = .identity
             }
             
@@ -172,8 +179,8 @@ class MapVC: UIViewController {
     // 내 위치 찾기 버튼 초기 화면 설정
     private func setCurrentLocationButtonLayout() {
         currentLocationButtonBottomConstraint = currentLocationButton.bottomAnchor.constraint(equalTo: nearPlaceCollectionView.topAnchor, constant: -16)
-        anotherConstraint = self.currentLocationButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -16-self.calculateInitPanelViewHeight()+self.tabBarController!.tabBar.frame.height)
-        
+        anotherConstraint = self.currentLocationButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -16-self.calculateInitPanelViewHeight())
+    
         NSLayoutConstraint.activate([
             currentLocationButtonBottomConstraint,
             currentLocationButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
@@ -346,6 +353,8 @@ class MapVC: UIViewController {
         setRefreshButton()
         showPlacePopupView()
         requestAllPlaceData()
+        
+        setCurrentLocationButtonLayout()
     }
     
     // MARK: - 지도 표시 위한 장소 가져오는 API 요청
@@ -388,7 +397,7 @@ class MapVC: UIViewController {
     // MARK: - UIViewController viewWillLayoutSubviews override 부분
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        setCurrentLocationButtonLayout()
+//        setCurrentLocationButtonLayout()
         setRefreshButtonLayout()
     }
 }
