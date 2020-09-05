@@ -49,9 +49,10 @@ class MapVC: UIViewController {
                 self.placeShadowView.isHidden = false
                 self.nearPlaceCollectionView.isHidden = true
                 self.placePopupView.showingState = .halfShow
+                self.placePopupView.setEnableScroll(false)
                 
-                self.setPlaceData(of: selectID)
                 self.requestPhotoReview(of: selectID)
+                self.requestDetailPlaceData(of: selectID)
                 
                 NSLayoutConstraint.activate([self.anotherConstraint])
                 NSLayoutConstraint.deactivate([self.currentLocationButtonBottomConstraint])
@@ -95,7 +96,7 @@ class MapVC: UIViewController {
     }
     
     private func makeMarker(placeID: Int, latitude: Double, longitude: Double) -> NMFMarker {
-        let marker = NMFMarker(position: NMGLatLng(lat: longitude, lng: latitude))
+        let marker = NMFMarker(position: NMGLatLng(lat: latitude, lng: longitude))
         marker.iconImage = icMarkDefault
         marker.userInfo = ["id": placeID, "isTouch": false]
         marker.touchHandler = self.markerTouchHandler
@@ -322,9 +323,12 @@ class MapVC: UIViewController {
                     UIView.animate(withDuration: 0.3, animations: {
                         self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
                     }, completion: { isComplete in
-                        guard let locationDetailVC = UIStoryboard(name: "LocationDetail", bundle: nil).instantiateViewController(withIdentifier: "LocationDetailRoot") as? UINavigationController else { return }
-                        locationDetailVC.modalPresentationStyle = .overFullScreen
-                        self.present(locationDetailVC, animated: false
+                        guard let locationDetailRootVC = UIStoryboard(name: "LocationDetail", bundle: nil).instantiateViewController(withIdentifier: "LocationDetailRoot") as? UINavigationController else { return }
+                        locationDetailRootVC.modalPresentationStyle = .overFullScreen
+                        guard let locationDetailVC = locationDetailRootVC.topViewController as? LocationDetailVC else { return }
+                        locationDetailVC.placeID = self.selectedMarkerID
+                        
+                        self.present(locationDetailRootVC, animated: false
                             , completion: {
                                 self.placeShadowView.isHidden = true
                                 self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
@@ -353,7 +357,7 @@ class MapVC: UIViewController {
     
     // MARK: - 지도 표시 위한 장소 가져오는 API 요청
     private func requestAllPlaceData() {
-        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, offset: nil, size: 100, review_count: nil, sort: nil)
+        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 100, review_count: nil, sort: nil)
         NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
             switch result {
             case .success(let getPlaceResult):
@@ -382,19 +386,43 @@ class MapVC: UIViewController {
         }
     }
     
-    // MARK: - 마커 눌렀을 시, 팝업 뷰에 데이터 설정
-    // Issue - 데이터를 내가 전부 가지고 있다가 Client에서 설정할 지 서버에서 id로 요청할지
-    private func setPlaceData(of placeID: Int) {
-        guard let placeDataFromID = allPlaceData.filter({ $0.placeId == placeID }).first else { return }
-        placePopupView.placeName = placeDataFromID.title
-        placePopupView.placeTags = placeDataFromID.tags
-        placePopupView.placeLocation = placeDataFromID.location
-        placePopupView.subLocationContainerView.setMarker(latitude: placeDataFromID.longitude, longitude: placeDataFromID.latitude, iconImage: self.icMarkDefault)
-        // FIXME: - 이미지 데이터 가져오게 바꾸기
-        placePopupView.placeImage = nil
+    // MARK: - 선택한 장소 ID Detail 정보 가져오기
+    private func requestDetailPlaceData(of placeID: Int) {
+        NetworkHandler.shared.requestAPI(apiCategory: .getPlaceOfID(placeID)) { result in
+            switch result {
+            case .success(let detailInform):
+                guard let detailInform = detailInform as? PlaceDetailInform else { return }
+                DispatchQueue.main.async {
+                    self.setDetailPlaceData(detailInform)
+                }
+            case .requestErr(let error):
+                print(error)
+            case .serverErr: print("Server Err")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
     }
     
-    // MARK: - MARK: - 선택한 장소 Photo Review 가져오기
+    // MARK: - 마커 눌렀을 시, 팝업 뷰에 데이터 설정
+    // Issue - 데이터를 내가 전부 가지고 있다가 Client에서 설정할 지 서버에서 id로 요청할지
+    private func setDetailPlaceData(_ detailInform: PlaceDetailInform) {
+        placePopupView.placeName = detailInform.title
+        placePopupView.placeTags = detailInform.tags
+        placePopupView.placeLocation = detailInform.location
+        placePopupView.subLocationContainerView.setMarker(latitude: detailInform.latitude, longitude: detailInform.longitude, iconImage: icMarkDefault)
+        placePopupView.subLocationContainerView.location = detailInform.location
+        placePopupView.subLocationContainerView.busDatas = detailInform.bus
+        placePopupView.subLocationContainerView.subwayDatas = detailInform.subway
+        placePopupView.subLocationContainerView.busDescription = "버스"
+        placePopupView.subLocationContainerView.subwayDescription = "지하철"
+        // FIXME: 이미지 받아오기 수정
+//        placePopupView.placeImage = detailInform.imageUrl
+    }
+    
+    // MARK: - 선택한 장소 Photo Review 가져오기
     private func requestPhotoReview(of placeID: Int) {
         let getPlaceReviewParameter = GetReviewOfPlaceParameter(latitude: nil, longitude: nil, like_count: nil)
         APICostants.placeID = "\(placeID)"
@@ -403,10 +431,15 @@ class MapVC: UIViewController {
             switch result {
             case .success(let placeReviewData):
                 guard let placeReviewData = placeReviewData as? APISortableResponseData<ReviewInform> else { return }
-                self.placePopupView.photoReviewData = placeReviewData.content
+                print("리뷰 데이터: \(placeReviewData)")
+                DispatchQueue.main.async {
+                    self.placePopupView.photoReviewData = placeReviewData.content
+                }
             case .requestErr(let error):
                 print(error)
-                self.placePopupView.photoReviewData = []
+                DispatchQueue.main.async {
+                    self.placePopupView.photoReviewData = []
+                }
             case .serverErr: print("Server Err")
             case .networkFail:
                 guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }

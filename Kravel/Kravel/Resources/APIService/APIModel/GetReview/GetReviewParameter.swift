@@ -11,7 +11,7 @@ import Foundation
 protocol ReviewParameterAble: ParameterAble {}
 
 struct GetReviewParameter: ReviewParameterAble {
-    let offset: Int?
+    let page: Int?
     let size: Int?
     let sort: String?
 }

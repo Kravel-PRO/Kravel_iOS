@@ -11,6 +11,5 @@ import Foundation
 struct ReviewInform: Codable {
     let reviewId: Int
     let imageURl: String
-    let grade: Double
     let likeCount: Int
 }

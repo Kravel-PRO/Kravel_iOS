@@ -8,6 +8,8 @@
 
 import Foundation
 
+protocol APICantSortableData: Codable {}
+
 struct APIDataResult<C: Codable>: Codable {
     let result: APISortableResponseData<C>?
     
@@ -18,5 +20,18 @@ struct APIDataResult<C: Codable>: Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         result = (try? values.decode(APISortableResponseData.self, forKey: .result)) ?? nil
+    }
+}
+
+struct APICantSortableDataResult<D: APICantSortableData>: Codable {
+    let result: D?
+    
+    enum CodingKeys: String, CodingKey {
+        case result
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        result = (try? values.decode(D.self, forKey: .result)) ?? nil
     }
 }

@@ -95,9 +95,9 @@ class SubLocationView: UIView {
     // MARK: - 버스로 가는 방법을 알려주는 Label
     @IBOutlet weak var busesLabel: UILabel!
     
-    var busDatas: [String] = [] {
+    var busDatas: String? {
         didSet {
-            busesLabel.text = busDatas.joined(separator: ", ")
+            busesLabel.text = busDatas
             busesLabel.sizeToFit()
         }
     }
@@ -105,9 +105,9 @@ class SubLocationView: UIView {
     // MARK: - 지하철로 가는 방법을 알려주는 Label
     @IBOutlet weak var subwaysLabel: UILabel!
     
-    var subwayDatas: [String] = [] {
+    var subwayDatas: String? {
         didSet {
-            subwaysLabel.text = subwayDatas.joined(separator: ", ")
+            subwaysLabel.text = subwayDatas
             subwaysLabel.sizeToFit()
         }
     }

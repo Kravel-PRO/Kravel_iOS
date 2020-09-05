@@ -151,7 +151,7 @@ class HomeVC: UIViewController {
     
     // MARK: - 장소 데이터 API 요청
     private func requestClosePlaceData() {
-        let getPlaceParameter = GetPlaceParameter(latitude: 1.0, longitude: 1.0, offset: nil, size: nil, review_count: nil, sort: nil)
+        let getPlaceParameter = GetPlaceParameter(latitude: 1.0, longitude: 1.0, page: nil, size: nil, review_count: nil, sort: nil)
         NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
             switch result {
             case .success(let getPlaceResult):
@@ -177,7 +177,7 @@ class HomeVC: UIViewController {
     
     // MARK: - 인기 장소 데이터 API 요청
     private func requestHotPlaceData() {
-        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, offset: nil, size: nil, review_count: nil, sort: nil)
+        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: nil, review_count: true, sort: nil)
         NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
             switch result {
             case .success(let getPlaceResult):
@@ -201,12 +201,13 @@ class HomeVC: UIViewController {
     
     // MARK: - 포토리뷰 데이터 API 요청
     private func requestReviewData() {
-        let getReviewParameter = GetReviewParameter(offset: 0, size: 6, sort: "reviewLikes,desc")
+        let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "reviewLikes,desc")
         NetworkHandler.shared.requestAPI(apiCategory: .getNewReview(getReviewParameter)) { result in
             switch result {
             case .success(let getReviewResult):
                 guard let getReviewResult = getReviewResult as? APISortableResponseData<ReviewInform> else { return }
                 self.photoReviewData = getReviewResult.content
+                print("홈 새로운 포토 리뷰 : \(getReviewResult.content)")
                 DispatchQueue.main.async {
                     self.setPhotoReviewViewLayout()
                     self.photoReviewView.photoReviewCollectionView.reloadData()
@@ -236,7 +237,6 @@ class HomeVC: UIViewController {
     // MARK: - UIViewController viewDidLayoutSubviews Override
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        photoReviewView.calculateCollectionViewHeight()
         setHotPlaceCollectionViewHeight()
         setHotPlaceLabelLayout()
         setPhotoReviewLabelLayout()

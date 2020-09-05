@@ -11,7 +11,7 @@ import Foundation
 struct GetPlaceParameter: ParameterAble {
     let latitude: Double?
     let longitude: Double?
-    let offset: Int?
+    let page: Int?
     let size: Int?
     let review_count: Bool?
     let sort: String?

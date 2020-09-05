@@ -124,10 +124,8 @@ class PlacePopupView: UIView {
     
     var photoReviewData: [ReviewInform] = [] {
         didSet {
-            DispatchQueue.main.async {
-                self.photoReviewContainerView.photoReviewCollectionView.reloadData()
-                self.setPhotoReviewViewLayout()
-            }
+            self.photoReviewContainerView.photoReviewCollectionView.reloadData()
+            self.setPhotoReviewViewLayout()
         }
     }
     
@@ -136,8 +134,8 @@ class PlacePopupView: UIView {
         let horizontalSpacing = view.frame.width / 23.44
         let cellHeight: CGFloat = (self.frame.width - horizontalSpacing*2 - 4*2) / 3
         if photoReviewData.count == 0 { photoReviewHeightConstraint.constant = defaultHeight }
-        else if photoReviewData.count <= 3 { photoReviewHeightConstraint.constant = defaultHeight + cellHeight }
-        else { photoReviewHeightConstraint.constant = defaultHeight + 2 * cellHeight }
+        else if photoReviewData.count <= 3 { photoReviewHeightConstraint.constant = defaultHeight + cellHeight + 16 }
+        else { photoReviewHeightConstraint.constant = defaultHeight + 2 * cellHeight + 16 }
     }
     
     private func setPhotoReviewLabel() {

@@ -26,3 +26,20 @@ struct PlaceCelebrity: Codable {
     let celebrityName: String
     let imageUrl: String
 }
+
+struct PlaceDetailInform: APICantSortableData, Codable {
+    let placeId: Int
+    let title: String
+    let contents: [String]?
+    let imageUrl: String?
+    let location: String
+    let latitude: Double
+    let longitude: Double
+    let bus: String?
+    let subway: String?
+    let tags: [String]
+    let mediaId: Int
+    let mediaTitle: String?
+    let reviewCount: Int
+    let celebrities: [PlaceCelebrity]
+}

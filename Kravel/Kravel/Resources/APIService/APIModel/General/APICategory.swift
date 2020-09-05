@@ -9,6 +9,8 @@
 import Foundation
 import Alamofire
 
+extension Int: ParameterAble {}
+
 protocol ParameterAble {}
 
 enum APICategory<P: ParameterAble> {
@@ -17,6 +19,7 @@ enum APICategory<P: ParameterAble> {
     case signin(P)
     case searchPlaceKakao(P)
     case getPlace(P)
+    case getPlaceOfID(P)
     case getNewReview(P)
     case getPlaceReview(P)
     
@@ -26,6 +29,10 @@ enum APICategory<P: ParameterAble> {
         case .signup: return APICostants.signup
         case .searchPlaceKakao: return APICostants.mapSearchURL
         case .getPlace: return APICostants.getPlace
+        case .getPlaceOfID(let id):
+            guard let id = id as? Int else { return "" }
+            APICostants.placeID = "\(id)"
+            return APICostants.getPlaceOfID
         case .getNewReview: return APICostants.getNewReview
         case .getPlaceReview: return APICostants.getReviewOfID
         }
@@ -47,6 +54,12 @@ enum APICategory<P: ParameterAble> {
                 "Authorization": "KakaoAK \(PrivateKey.kakaoRESTAPIKey)"
             ]
         case .getPlace:
+            guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
+            return [
+                "Content-Type": "application/json",
+                "Authorization": token
+            ]
+        case .getPlaceOfID:
             guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
             return [
                 "Content-Type": "application/json",
@@ -100,8 +113,8 @@ enum APICategory<P: ParameterAble> {
                 parameters.updateValue(longtitude, forKey: "longtitude")
             }
             
-            if let offset = getPlaceParameter.offset {
-                parameters.updateValue(offset, forKey: "offset")
+            if let offset = getPlaceParameter.page {
+                parameters.updateValue(offset, forKey: "page")
             }
             
             if let size = getPlaceParameter.size {
@@ -116,11 +129,12 @@ enum APICategory<P: ParameterAble> {
                 parameters.updateValue(sort, forKey: "sort")
             }
             return parameters
+        case .getPlaceOfID: return nil
         case .getNewReview(let reviewParameter):
             var parameters: [String: Any] = [:]
             guard let reviewParameter = reviewParameter as? GetReviewParameter else { return nil }
-            if let offset = reviewParameter.offset {
-                parameters.updateValue(offset, forKey: "offset")
+            if let offset = reviewParameter.page {
+                parameters.updateValue(offset, forKey: "page")
             }
             
             if let size = reviewParameter.size {

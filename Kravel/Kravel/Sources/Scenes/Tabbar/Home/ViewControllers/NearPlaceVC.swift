@@ -31,7 +31,7 @@ class NearPlaceVC: UIViewController {
     // MARK: - 장소 데이터 API 요청
     private func requestPlaceData() {
         // FIXME: - 현재 내 위치 기준으로 요청할 수 있게 해야함
-        let getPlaceParameter = GetPlaceParameter(latitude: 1.0, longitude: 1.0, offset: nil, size: nil, review_count: nil, sort: nil)
+        let getPlaceParameter = GetPlaceParameter(latitude: 1.0, longitude: 1.0, page: nil, size: nil, review_count: nil, sort: nil)
         NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
             switch result {
             case .success(let getPlaceResult):

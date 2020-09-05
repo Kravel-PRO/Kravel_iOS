@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="De7-U9-PzG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="De7-U9-PzG">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1400"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VAc-2F-GVg">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1307"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1400"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxz-aY-Bcc">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="266"/>
@@ -144,35 +144,35 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gy6-Z3-9yy" customClass="PhotoReviewView" customModule="Kravel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="435.66666666666674" width="414" height="319.33333333333326"/>
+                                                <rect key="frame" x="0.0" y="435.66666666666674" width="414" height="289"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="gy6-Z3-9yy" secondAttribute="height" multiplier="375:289" id="Fwq-e8-YTv"/>
+                                                    <constraint firstAttribute="height" constant="289" id="pfD-FS-KjH"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q93-kb-Tfy">
-                                                <rect key="frame" x="0.0" y="755" width="414" height="1"/>
+                                                <rect key="frame" x="0.0" y="724.66666666666663" width="414" height="1"/>
                                                 <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="Nhg-Zg-mHe"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2qT-Kh-WAK" customClass="SubLocationView" customModule="Kravel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="756" width="414" height="360"/>
+                                                <rect key="frame" x="0.0" y="725.66666666666663" width="414" height="359.99999999999989"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="360" id="y8Y-Xb-emK"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BYs-cn-XLo">
-                                                <rect key="frame" x="0.0" y="1116" width="414" height="1"/>
+                                                <rect key="frame" x="0.0" y="1085.6666666666667" width="414" height="1"/>
                                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="dSu-Ja-J4P"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QgE-mE-ZfT" customClass="NearByAttractionView" customModule="Kravel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1117" width="414" height="190"/>
+                                                <rect key="frame" x="0.0" y="1086.6666666666667" width="414" height="190"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="190" id="3Go-qr-Div"/>
@@ -197,7 +197,7 @@
                                             <constraint firstItem="7Ni-ef-Vh2" firstAttribute="width" secondItem="7Ni-ef-Vh2" secondAttribute="height" multiplier="343:48" id="MrI-RJ-CRi"/>
                                             <constraint firstItem="fI2-wj-W2V" firstAttribute="leading" secondItem="VAc-2F-GVg" secondAttribute="leading" constant="16" id="NHJ-Qr-hwv"/>
                                             <constraint firstItem="7Ni-ef-Vh2" firstAttribute="top" secondItem="fI2-wj-W2V" secondAttribute="bottom" constant="16" id="OUW-h5-hk2"/>
-                                            <constraint firstAttribute="bottom" secondItem="QgE-mE-ZfT" secondAttribute="bottom" id="Shp-oH-Lii"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="QgE-mE-ZfT" secondAttribute="bottom" id="Shp-oH-Lii"/>
                                             <constraint firstItem="QgE-mE-ZfT" firstAttribute="leading" secondItem="VAc-2F-GVg" secondAttribute="leading" id="W3R-Z5-rBl"/>
                                             <constraint firstItem="gy6-Z3-9yy" firstAttribute="top" secondItem="aU3-T3-CZt" secondAttribute="bottom" id="Wda-ht-67s"/>
                                             <constraint firstItem="aU3-T3-CZt" firstAttribute="top" secondItem="7Ni-ef-Vh2" secondAttribute="bottom" constant="16" id="X0t-8E-42s"/>
@@ -244,6 +244,7 @@
                         <outlet property="contentScrollView" destination="h70-xP-WHO" id="R4L-4D-unW"/>
                         <outlet property="nearByAttractionView" destination="QgE-mE-ZfT" id="Alw-y3-E5b"/>
                         <outlet property="photoReviewView" destination="gy6-Z3-9yy" id="KEo-pS-BB7"/>
+                        <outlet property="photoReviewViewHeightConstraint" destination="pfD-FS-KjH" id="R5T-MY-Xyu"/>
                         <outlet property="placeImageView" destination="bN3-Fn-yME" id="n0q-JK-eUZ"/>
                         <outlet property="placeLocationLabel" destination="fI2-wj-W2V" id="gis-UE-aoQ"/>
                         <outlet property="placeNameLabel" destination="TZG-Bf-OBu" id="Cq0-R1-ueW"/>

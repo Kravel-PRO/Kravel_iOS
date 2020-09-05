@@ -8,9 +8,13 @@
 
 import UIKit
 import Lottie
+import NMapsMap
 
 class LocationDetailVC: UIViewController {
     static let identifier = "LocationDetailVC"
+    
+    // 선택된 장소 ID
+    var placeID: Int?
     
     // MARK: - 화면 Dismiss 해주는 Pan Gesture
     var panGesture: UIPanGestureRecognizer!
@@ -26,10 +30,9 @@ class LocationDetailVC: UIViewController {
         animationView?.play()
         
         self.view.addSubview(animationView!)
-        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(removeView), userInfo: nil, repeats: false)
     }
     
-    @objc func removeView() {
+    func stopLottieAnimation() {
         animationView?.removeFromSuperview()
         animationView = nil
     }
@@ -78,7 +81,11 @@ class LocationDetailVC: UIViewController {
         }
     }
     
-    var placeTags: [String] = ["호텔 델루나", "아이유", "여진구"]
+    var placeTags: [String] = [] {
+        didSet {
+            tagCollectionView.reloadData()
+        }
+    }
     
     // MARK: - 장소 위치 Label 설정
     @IBOutlet weak var placeLocationLabel: UILabel!
@@ -122,16 +129,34 @@ class LocationDetailVC: UIViewController {
     @IBOutlet weak var photoReviewView: PhotoReviewView! {
         didSet {
             setPhotoReviewLabel()
+            photoReviewView.delegate = self
             photoReviewView.photoReviewCollectionViewDataSource = self
             photoReviewView.photoReviewCollectionViewDelegate = self
         }
     }
     
-    var photoReviewData: [String] = ["아아", "여기 장소", "너무 좋다", "여기도 좋네?", "여기도 와봐", "오 여기도?"]
+    @IBOutlet weak var photoReviewViewHeightConstraint: NSLayoutConstraint!
+    
+    // MARK: - 포토 리뷰 데이터
+    var photoReviewData: [ReviewInform] = [] {
+        didSet {
+            setPhotoReviewViewLayout()
+            photoReviewView.photoReviewCollectionView.reloadData()
+        }
+    }
     
     private func setPhotoReviewLabel() {
         let photoReviewAttributeText = "포토 리뷰".makeAttributedText([.font: UIFont.boldSystemFont(ofSize: 16), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)])
         photoReviewView.attributeTitle = photoReviewAttributeText
+    }
+    
+    private func setPhotoReviewViewLayout() {
+        let defaultHeight: CGFloat = 48
+        let horizontalSpacing = view.frame.width / 23.44
+        let cellHeight: CGFloat = (photoReviewView.frame.width - horizontalSpacing*2 - 4*2) / 3
+        if photoReviewData.count == 0 { photoReviewViewHeightConstraint.constant = defaultHeight }
+        else if photoReviewData.count <= 3 { photoReviewViewHeightConstraint.constant = defaultHeight + cellHeight + 16 }
+        else { photoReviewViewHeightConstraint.constant = defaultHeight + 2 * cellHeight + 16 }
     }
     
     // MARK: - 위치 정보 나타내는 뷰 설정
@@ -145,6 +170,73 @@ class LocationDetailVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.addGesture()
+        showLoadingLottie()
+        if let placeID = self.placeID {
+            requestDetailPlaceData(of: placeID)
+            requestPhotoReview(of: placeID)
+        }
+    }
+    
+    // MARK: - 장소 ID로부터 Detail 정보 가져오기
+    private func requestDetailPlaceData(of placeID: Int) {
+        NetworkHandler.shared.requestAPI(apiCategory: .getPlaceOfID(placeID)) { result in
+            switch result {
+            case .success(let detailInform):
+                guard let detailInform = detailInform as? PlaceDetailInform else { return }
+                DispatchQueue.main.async {
+                    self.setDetailPlaceData(detailInform)
+                    self.stopLottieAnimation()
+                }
+            case .requestErr(let error):
+                print(error)
+            case .serverErr: print("Server Err")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
+    }
+    
+    private func setDetailPlaceData(_ detailInform: PlaceDetailInform) {
+        placeName = detailInform.title
+        placeTags = detailInform.tags
+        location = detailInform.location
+        subLocationView.busDescription = "버스"
+        subLocationView.busDatas = detailInform.bus
+        subLocationView.subwayDescription = "지하철"
+        subLocationView.subwayDatas = detailInform.subway
+        subLocationView.location = detailInform.location
+        subLocationView.setMarker(latitude: detailInform.latitude, longitude: detailInform.longitude, iconImage: NMFOverlayImage(name: ImageKey.icMarkDefault))
+        
+        // FIXME: Image URL로부터 가져오기 수정
+//        placeImage = detailInform.imageUrl
+    }
+    
+    // MARK: - 장소 ID로부터 포토 리뷰 가져오기
+    private func requestPhotoReview(of placeID: Int) {
+        let getPlaceReviewParameter = GetReviewOfPlaceParameter(latitude: nil, longitude: nil, like_count: nil)
+        APICostants.placeID = "\(placeID)"
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .getPlaceReview(getPlaceReviewParameter)) { result in
+            switch result {
+            case .success(let placeReviewData):
+                guard let placeReviewData = placeReviewData as? APISortableResponseData<ReviewInform> else { return }
+                DispatchQueue.main.async {
+                    self.photoReviewData = placeReviewData.content
+                }
+            case .requestErr(let error):
+                print(error)
+                DispatchQueue.main.async {
+                    self.photoReviewData = []
+                }
+            case .serverErr: print("Server Err")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
     }
     
     // MARK: - UIViewController viewWillLayoutSubviews() Override 부분
@@ -156,13 +248,18 @@ class LocationDetailVC: UIViewController {
     // MARK: - UIViewController viewWillAppear() Override 부분
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // FIXME: ViewDidLoad로 네트워크 요청 작업 시, 부르게 수정
-        showLoadingLottie()
         setNav()
     }
     
     private func setNav() {
         self.navigationController?.navigationBar.isHidden = true
+    }
+}
+
+extension LocationDetailVC: PhotoReviewViewDelegate {
+    func clickWriteButton() {
+        guard let photoReviewUploadVC = UIStoryboard(name: "PhotoReviewUpload", bundle: nil).instantiateViewController(withIdentifier: PhotoReviewUploadVC.identifier) as? PhotoReviewUploadVC else { return }
+        self.navigationController?.pushViewController(photoReviewUploadVC, animated: true)
     }
 }
 

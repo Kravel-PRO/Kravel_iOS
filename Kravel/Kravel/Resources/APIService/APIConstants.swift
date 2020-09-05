@@ -23,16 +23,17 @@ struct APICostants {
     
     // 장소 가져오는 API
     static let getPlace = APICostants.baseURL + "/api/places"
+    static var getPlaceOfID: String {
+        get {
+            return APICostants.baseURL + "/api/places/\(placeID)"
+        }
+    }
     
     // 새로운 리뷰 가져오는 API
     static let getNewReview = APICostants.baseURL + "/api/reviews"
     static var getReviewOfID: String {
         get {
-            return APICostants.baseURL + "/api/\(placeID)/reviews"
-        }
-        
-        set (placeID) {
-            self.placeID = placeID
+            return APICostants.baseURL + "/api/places/\(placeID)/reviews"
         }
     }
 }
