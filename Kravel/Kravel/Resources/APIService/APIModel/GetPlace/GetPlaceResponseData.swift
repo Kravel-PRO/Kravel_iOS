@@ -27,7 +27,7 @@ struct PlaceCelebrity: Codable {
     let imageUrl: String
 }
 
-struct PlaceDetailInform: APICantSortableData, Codable {
+struct PlaceDetailInform: APICantSortable, Codable {
     let placeId: Int
     let title: String
     let contents: [String]?
@@ -37,6 +37,7 @@ struct PlaceDetailInform: APICantSortableData, Codable {
     let longitude: Double
     let bus: String?
     let subway: String?
+    var scrap: Bool
     let tags: [String]
     let mediaId: Int
     let mediaTitle: String?

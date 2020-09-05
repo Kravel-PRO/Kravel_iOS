@@ -36,4 +36,11 @@ struct APICostants {
             return APICostants.baseURL + "/api/places/\(placeID)/reviews"
         }
     }
+    
+    // 스크랩 내용 여부 전달 API
+    static var scrap: String {
+        get {
+            return APICostants.baseURL + "/api/places/\(placeID)/scrap"
+        }
+    }
 }

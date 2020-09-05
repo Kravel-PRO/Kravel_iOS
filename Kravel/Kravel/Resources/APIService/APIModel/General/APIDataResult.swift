@@ -8,8 +8,6 @@
 
 import Foundation
 
-protocol APICantSortableData: Codable {}
-
 struct APIDataResult<C: Codable>: Codable {
     let result: APISortableResponseData<C>?
     
@@ -23,7 +21,9 @@ struct APIDataResult<C: Codable>: Codable {
     }
 }
 
-struct APICantSortableDataResult<D: APICantSortableData>: Codable {
+protocol APICantSortable: Codable {}
+
+struct APICantSortableDataResult<D: APICantSortable>: Codable {
     let result: D?
     
     enum CodingKeys: String, CodingKey {

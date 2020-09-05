@@ -35,6 +35,7 @@ class MapVC: UIViewController {
     
     // 선택된 마커 ID
     private var selectedMarkerID: Int = -1
+    private var selectedPlace: PlaceDetailInform?
     
     lazy var markerTouchHandler: (NMFOverlay) -> Bool = { [weak self] marker in
         guard let self = self else { return true }
@@ -410,6 +411,8 @@ class MapVC: UIViewController {
     // MARK: - 마커 눌렀을 시, 팝업 뷰에 데이터 설정
     // Issue - 데이터를 내가 전부 가지고 있다가 Client에서 설정할 지 서버에서 id로 요청할지
     private func setDetailPlaceData(_ detailInform: PlaceDetailInform) {
+        self.selectedPlace = detailInform
+        print(detailInform.scrap)
         placePopupView.placeName = detailInform.title
         placePopupView.placeTags = detailInform.tags
         placePopupView.placeLocation = detailInform.location
@@ -419,6 +422,10 @@ class MapVC: UIViewController {
         placePopupView.subLocationContainerView.subwayDatas = detailInform.subway
         placePopupView.subLocationContainerView.busDescription = "버스"
         placePopupView.subLocationContainerView.subwayDescription = "지하철"
+        
+        guard let scrapButton = placePopupView.buttonStackView.arrangedSubviews[1] as? UIButton else { return }
+        let scrapImage = detailInform.scrap ? UIImage(named: ImageKey.icScrapFill) : UIImage(named: ImageKey.icScrap)
+        scrapButton.setImage(scrapImage, for: .normal)
         // FIXME: 이미지 받아오기 수정
 //        placePopupView.placeImage = detailInform.imageUrl
     }
@@ -475,6 +482,13 @@ extension MapVC {
         UIView.animate(withDuration: 0.2) {
             self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -self.calculateInitPanelViewHeight())
         }
+        
+        // 디테일 화면에서 스크랩이 지정된 경우 반영해주기
+        guard let scrap = notification.userInfo?["scrap"] as? Bool else { return }
+        selectedPlace?.scrap = scrap
+        guard let scrapButton = self.placePopupView.buttonStackView.arrangedSubviews[1] as? UIButton else { return }
+        let scrapImage = scrap ? UIImage(named: ImageKey.icScrapFill) : UIImage(named: ImageKey.icScrap)
+        scrapButton.setImage(scrapImage, for: .normal)
     }
 }
 
@@ -488,7 +502,36 @@ extension MapVC: PlacePopupViewDelegate {
     
     // MARK: - 스크랩 버튼 누른 경우
     func clickScrapButton() {
-        print("Scrap")
+        APICostants.placeID = "\(selectedMarkerID)"
+        
+        // 스크랩 데이터가 있는 경우 반대의 경우로 바꾸어 줌
+        guard let scrap = self.selectedPlace?.scrap else { return }
+        let scrapParameter = ScrapParameter(scrap: !scrap)
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .scrap(scrapParameter)) { result in
+            switch result {
+            case .success(let scrapData):
+                guard let scrapData = scrapData as? Int else { return }
+                
+                guard let scrapButton = self.placePopupView.buttonStackView.arrangedSubviews[1] as? UIButton else { return }
+    
+                if scrapData == -1 {
+                    self.selectedPlace?.scrap = false
+                    scrapButton.setImage(UIImage(named: ImageKey.icScrap), for: .normal)
+                } else {
+                    self.selectedPlace?.scrap = true
+                    scrapButton.setImage(UIImage(named: ImageKey.icScrapFill), for: .normal)
+                }
+            case .requestErr(let error):
+                print(error)
+            case .serverErr:
+                print("Server Err")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
     }
 }
 

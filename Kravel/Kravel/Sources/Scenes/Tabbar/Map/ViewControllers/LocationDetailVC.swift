@@ -13,8 +13,11 @@ import NMapsMap
 class LocationDetailVC: UIViewController {
     static let identifier = "LocationDetailVC"
     
-    // 선택된 장소 ID
+    // MARK: - 선택된 장소 ID
     var placeID: Int?
+    
+    // MARK: - 장소 데이터
+    var placeData: PlaceDetailInform?
     
     // MARK: - 화면 Dismiss 해주는 Pan Gesture
     var panGesture: UIPanGestureRecognizer!
@@ -107,6 +110,8 @@ class LocationDetailVC: UIViewController {
         }
     }
     
+    @IBOutlet weak var scrapButton: UIButton!
+    
     // 사진 화면으로 이동
     @IBAction func takePicture(_ sender: Any) {
         guard let cameraVC = UIStoryboard(name: "Camera", bundle: nil).instantiateViewController(withIdentifier: CameraVC.identifier) as? CameraVC else { return }
@@ -114,15 +119,11 @@ class LocationDetailVC: UIViewController {
         self.navigationController?.pushViewController(cameraVC, animated: true)
     }
     
-    private var isScrap: Bool = false
-    
     // 스크랩하기 버튼
     @IBAction func scrap(_ sender: Any) {
-        guard let scrapButton = sender as? UIButton else { return }
-        
-        isScrap = !isScrap
-        let scrapButtonImage = isScrap ? UIImage(named: ImageKey.icScrapFill) : UIImage(named: ImageKey.icScrap)
-        scrapButton.setImage(scrapButtonImage, for: .normal)
+        if let placeID = self.placeID {
+            requestScrap(of: placeID)
+        }
     }
     
     // MARK: - 포토 리뷰 뷰 설정
@@ -183,8 +184,9 @@ class LocationDetailVC: UIViewController {
             switch result {
             case .success(let detailInform):
                 guard let detailInform = detailInform as? PlaceDetailInform else { return }
+                self.placeData = detailInform
                 DispatchQueue.main.async {
-                    self.setDetailPlaceData(detailInform)
+                    self.setDetailPlaceData()
                     self.stopLottieAnimation()
                 }
             case .requestErr(let error):
@@ -198,19 +200,24 @@ class LocationDetailVC: UIViewController {
         }
     }
     
-    private func setDetailPlaceData(_ detailInform: PlaceDetailInform) {
-        placeName = detailInform.title
-        placeTags = detailInform.tags
-        location = detailInform.location
-        subLocationView.busDescription = "버스"
-        subLocationView.busDatas = detailInform.bus
-        subLocationView.subwayDescription = "지하철"
-        subLocationView.subwayDatas = detailInform.subway
-        subLocationView.location = detailInform.location
-        subLocationView.setMarker(latitude: detailInform.latitude, longitude: detailInform.longitude, iconImage: NMFOverlayImage(name: ImageKey.icMarkDefault))
-        
-        // FIXME: Image URL로부터 가져오기 수정
-//        placeImage = detailInform.imageUrl
+    private func setDetailPlaceData() {
+        if let placeData = self.placeData {
+            placeName = placeData.title
+            placeTags = placeData.tags
+            location = placeData.location
+            subLocationView.busDescription = "버스"
+            subLocationView.busDatas = placeData.bus
+            subLocationView.subwayDescription = "지하철"
+            subLocationView.subwayDatas = placeData.subway
+            subLocationView.location = placeData.location
+            subLocationView.setMarker(latitude: placeData.latitude, longitude: placeData.longitude, iconImage: NMFOverlayImage(name: ImageKey.icMarkDefault))
+            
+            let scrapImage = placeData.scrap ? UIImage(named: ImageKey.icScrapFill) : UIImage(named: ImageKey.icScrap)
+            scrapButton.setImage(scrapImage, for: .normal)
+            
+            // FIXME: Image URL로부터 가져오기 수정
+            //        placeImage = detailInform.imageUrl
+        }
     }
     
     // MARK: - 장소 ID로부터 포토 리뷰 가져오기
@@ -231,6 +238,35 @@ class LocationDetailVC: UIViewController {
                     self.photoReviewData = []
                 }
             case .serverErr: print("Server Err")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
+    }
+    
+    // MARK: - 스크랩 버튼 눌렀을 시, 서버에 반영
+    private func requestScrap(of placeID: Int) {
+        guard let placeData = self.placeData else { return }
+        let scrapParameter = ScrapParameter(scrap: !placeData.scrap)
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .scrap(scrapParameter)) { result in
+            switch result {
+            case .success(let scrapData):
+                guard let scrapData = scrapData as? Int else { return }
+                
+                if scrapData == -1 {
+                    self.placeData?.scrap = false
+                    self.scrapButton.setImage(UIImage(named: ImageKey.icScrap), for: .normal)
+                } else {
+                    self.placeData?.scrap = true
+                    self.scrapButton.setImage(UIImage(named: ImageKey.icScrapFill), for: .normal)
+                }
+            case .requestErr(let error):
+                print(error)
+            case .serverErr:
+                print("Server Error")
             case .networkFail:
                 guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
                 networkFailPopupVC.modalPresentationStyle = .overFullScreen
@@ -349,7 +385,9 @@ extension LocationDetailVC: UIGestureRecognizerDelegate {
         
         if panGesture.state == .ended && changeY > 100 {
             self.dismiss(animated: false, completion: nil)
-            NotificationCenter.default.post(name: .dismissDetailView, object: nil)
+            if let scrap = self.placeData?.scrap {
+                NotificationCenter.default.post(name: .dismissDetailView, object: nil, userInfo: ["scrap": self.placeData?.scrap])
+            }
         } else if panGesture.state == .ended && changeY <= 100 {
             UIView.animate(withDuration: 0.3) {
                 self.view.transform = .identity

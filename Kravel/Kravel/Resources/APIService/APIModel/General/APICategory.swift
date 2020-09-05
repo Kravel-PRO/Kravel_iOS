@@ -22,6 +22,7 @@ enum APICategory<P: ParameterAble> {
     case getPlaceOfID(P)
     case getNewReview(P)
     case getPlaceReview(P)
+    case scrap(P)
     
     func makeURL() -> String {
         switch self {
@@ -35,6 +36,7 @@ enum APICategory<P: ParameterAble> {
             return APICostants.getPlaceOfID
         case .getNewReview: return APICostants.getNewReview
         case .getPlaceReview: return APICostants.getReviewOfID
+        case .scrap: return APICostants.scrap
         }
     }
     
@@ -72,6 +74,12 @@ enum APICategory<P: ParameterAble> {
                 "Authorization": token
             ]
         case .getPlaceReview:
+            guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
+            return [
+                "Content-Type": "application/json",
+                "Authorization": token
+            ]
+        case .scrap:
             guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
             return [
                 "Content-Type": "application/json",
@@ -160,6 +168,11 @@ enum APICategory<P: ParameterAble> {
                 parameters.updateValue(like_count, forKey: "like-count")
             }
             return parameters
+        case .scrap(let scrapParameter):
+            guard let scrapParameter = scrapParameter as? ScrapParameter else { return nil }
+            return [
+                "scrap": scrapParameter.scrap
+            ]
         }
     }
 }

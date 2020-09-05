@@ -248,6 +248,7 @@
                         <outlet property="placeImageView" destination="bN3-Fn-yME" id="n0q-JK-eUZ"/>
                         <outlet property="placeLocationLabel" destination="fI2-wj-W2V" id="gis-UE-aoQ"/>
                         <outlet property="placeNameLabel" destination="TZG-Bf-OBu" id="Cq0-R1-ueW"/>
+                        <outlet property="scrapButton" destination="cNQ-2R-fyN" id="1oT-E9-GRq"/>
                         <outlet property="subLocationView" destination="2qT-Kh-WAK" id="Lr9-Hh-zW6"/>
                         <outlet property="tagCollectionView" destination="sNN-bY-g9G" id="YSg-wM-hTH"/>
                     </connections>

@@ -176,7 +176,7 @@ class CameraVC: UIViewController {
     
     private func setCancelButtonLayout() {
         NSLayoutConstraint.activate([
-            cancelButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: -16),
+            cancelButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 16),
             cancelButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
             cancelButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.1),
             cancelButton.heightAnchor.constraint(equalTo: cancelButton.widthAnchor, multiplier: 1.0)

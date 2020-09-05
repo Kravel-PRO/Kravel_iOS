@@ -135,6 +135,8 @@
 		9DC8447224F8EF0A00EC1D68 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DC8447124F8EF0A00EC1D68 /* Map.storyboard */; };
 		9DC8447424F8EF3700EC1D68 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DC8447324F8EF3700EC1D68 /* Search.storyboard */; };
 		9DD48BA92503BD710096DE08 /* PlacePopupViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BA82503BD710096DE08 /* PlacePopupViewDelegate.swift */; };
+		9DD48BAC2503F03C0096DE08 /* ScrapParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BAB2503F03C0096DE08 /* ScrapParameter.swift */; };
+		9DD48BAE2503F16E0096DE08 /* ScrapResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BAD2503F16E0096DE08 /* ScrapResponseData.swift */; };
 		9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */; };
 		9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */; };
 		9DEDA6A924BCB70600E978F5 /* CategoryTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */; };
@@ -279,6 +281,8 @@
 		9DC8447124F8EF0A00EC1D68 /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		9DC8447324F8EF3700EC1D68 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		9DD48BA82503BD710096DE08 /* PlacePopupViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePopupViewDelegate.swift; sourceTree = "<group>"; };
+		9DD48BAB2503F03C0096DE08 /* ScrapParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapParameter.swift; sourceTree = "<group>"; };
+		9DD48BAD2503F16E0096DE08 /* ScrapResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapResponseData.swift; sourceTree = "<group>"; };
 		9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTabbar.xib; sourceTree = "<group>"; };
@@ -727,6 +731,7 @@
 				9D76CD9D24FEB8E3004D7333 /* SearchPlaceKakao */,
 				9D4CCF7425000CA0003F73AF /* GetPlace */,
 				9D4CCF79250039D2003F73AF /* GetReview */,
+				9DD48BAA2503F01C0096DE08 /* Scrap */,
 			);
 			path = APIModel;
 			sourceTree = "<group>";
@@ -1097,6 +1102,15 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		9DD48BAA2503F01C0096DE08 /* Scrap */ = {
+			isa = PBXGroup;
+			children = (
+				9DD48BAB2503F03C0096DE08 /* ScrapParameter.swift */,
+				9DD48BAD2503F16E0096DE08 /* ScrapResponseData.swift */,
+			);
+			path = Scrap;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1282,6 +1296,7 @@
 				9D3D162B2488DA7200AE1B4C /* SetLanguageVC.swift in Sources */,
 				9D6FF36024F9851200E6A8B9 /* OtherPhotoReviewVC.swift in Sources */,
 				9DBA643D24F392E200E12FA4 /* MyScrapVC.swift in Sources */,
+				9DD48BAE2503F16E0096DE08 /* ScrapResponseData.swift in Sources */,
 				9D49E8BD24C83545007CD948 /* MyPageMenu.swift in Sources */,
 				9D61F6E224F7E97600EF13FB /* LoginTextViewDelegate.swift in Sources */,
 				9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */,
@@ -1303,6 +1318,7 @@
 				9D79E2A124EC27B7006310A2 /* NearPlaceVC.swift in Sources */,
 				9D96005424E52484007995EE /* BackgroundTagCell.swift in Sources */,
 				9D5E3EB724BD952200BA4E5F /* SearchCell.swift in Sources */,
+				9DD48BAC2503F03C0096DE08 /* ScrapParameter.swift in Sources */,
 				9D6FF36324F9873200E6A8B9 /* OtherPhotoReviewCell.swift in Sources */,
 				9D76CD9024FD8D90004D7333 /* UserDefaultKey.swift in Sources */,
 				9DEDA6AC24BCB76E00E978F5 /* CategoryTabbar.swift in Sources */,
