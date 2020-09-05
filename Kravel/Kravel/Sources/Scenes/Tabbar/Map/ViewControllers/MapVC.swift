@@ -210,6 +210,7 @@ class MapVC: UIViewController {
         // PopupView 초기 위치 설정
         let tempPopupView = PlacePopupView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         tempPopupView.showingState = .notShow
+        tempPopupView.delegate = self
         tempPopupView.translatesAutoresizingMaskIntoConstraints = false
         return tempPopupView
     }()
@@ -474,6 +475,20 @@ extension MapVC {
         UIView.animate(withDuration: 0.2) {
             self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -self.calculateInitPanelViewHeight())
         }
+    }
+}
+
+extension MapVC: PlacePopupViewDelegate {
+    // MARK: - 팝업 뷰에서 사진찍기 버튼을 누른 경우
+    func clickPhotoButton() {
+        guard let cameraVC = UIStoryboard(name: "Camera", bundle: nil).instantiateViewController(withIdentifier: CameraVC.identifier) as? CameraVC else { return }
+        cameraVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(cameraVC, animated: true)
+    }
+    
+    // MARK: - 스크랩 버튼 누른 경우
+    func clickScrapButton() {
+        print("Scrap")
     }
 }
 

@@ -144,13 +144,10 @@ class CameraVC: UIViewController {
     }
     
     // 버튼 화면에 추가해주기
-    private func addCaptureButton() {
+    private func setCaptureButton() {
         self.view.addSubview(captureOutlineImageView)
         self.view.addSubview(captureInlineImageView)
         self.view.addSubview(captureButton)
-    }
-    
-    private func addButtonAction() {
         captureButton.addTarget(self, action: #selector(takePicture(_:)), for: .touchUpInside)
     }
     
@@ -166,6 +163,33 @@ class CameraVC: UIViewController {
         
         let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
         cameraOutput?.capturePhoto(with: settings, delegate: self)
+    }
+    
+    // MARK: - 이전 뷰로 돌아가기 취소 버튼
+    var cancelButton: UIButton = {
+        let cancelButton = UIButton()
+        cancelButton.setTitle("", for: .normal)
+        cancelButton.setImage(UIImage(named: ImageKey.btnCancelWhite), for: .normal)
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        return cancelButton
+    }()
+    
+    private func setCancelButtonLayout() {
+        NSLayoutConstraint.activate([
+            cancelButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: -16),
+            cancelButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
+            cancelButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.1),
+            cancelButton.heightAnchor.constraint(equalTo: cancelButton.widthAnchor, multiplier: 1.0)
+        ])
+    }
+    
+    private func setCancelButton() {
+        self.view.addSubview(cancelButton)
+        cancelButton.addTarget(self, action: #selector(cancel(_:)), for: .touchUpInside)
+    }
+    
+    @objc func cancel(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - 갤러리 사진 보여주는 ImageView 설정
@@ -287,10 +311,10 @@ class CameraVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         requestCameraAuthor()
-        addCaptureButton()
-        addButtonAction()
-        addImageView()
         requestPhotoLibraryAuthor()
+        setCaptureButton()
+        setCancelButton()
+        addImageView()
     }
     
     // MARK: - UIViewController viewWillAppear 설정
@@ -313,6 +337,7 @@ class CameraVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setCaptureButtonLayout()
+        setCancelButtonLayout()
         setGalleryImageViewLayout()
         setGalleryDescriptionLabelLayout()
         setSampleImageViewLayout()

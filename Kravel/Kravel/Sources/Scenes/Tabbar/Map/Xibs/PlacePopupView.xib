@@ -92,10 +92,16 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="171.66666666666666" height="48"/>
                                                     <color key="tintColor" red="0.070588235294117646" green="0.070588235294117646" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
                                                     <state key="normal" image="icPhoto"/>
+                                                    <connections>
+                                                        <action selector="clickPhoto:" destination="-1" eventType="touchUpInside" id="pNg-ct-AqV"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXy-y0-hrM">
                                                     <rect key="frame" x="171.66666666666663" y="0.0" width="171.33333333333337" height="48"/>
                                                     <state key="normal" image="icScrap"/>
+                                                    <connections>
+                                                        <action selector="clickScrap:" destination="-1" eventType="touchUpInside" id="YFA-nn-65R"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>

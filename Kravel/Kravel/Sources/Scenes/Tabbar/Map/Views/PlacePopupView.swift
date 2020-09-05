@@ -20,6 +20,8 @@ class PlacePopupView: UIView {
     
     var showingState: PopupViewState?
     
+    var delegate: PlacePopupViewDelegate?
+    
     // MARK: - 전체 뷰 관리
     var view: UIView! {
         didSet {
@@ -93,6 +95,14 @@ class PlacePopupView: UIView {
     }
     
     @IBOutlet weak var buttonStackView: UIStackView!
+    
+    @IBAction func clickPhoto(_ sender: Any) {
+        delegate?.clickPhotoButton()
+    }
+    
+    @IBAction func clickScrap(_ sender: Any) {
+        delegate?.clickScrapButton()
+    }
     
     // StackView 사이 나누는 화면
     private var buttonDivideView: UIView = {

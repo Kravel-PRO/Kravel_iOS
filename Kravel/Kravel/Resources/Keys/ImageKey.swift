@@ -61,6 +61,9 @@ struct ImageKey {
     static let btnPickInline = "btnPickInline"
     static let btnPickOutline = "btnPickOutline"
     
+    // 카메라 뷰에서 뒤로 가기
+    static let btnCancelWhite = "btnCancelWhite"
+    
     // 스크랩 버튼 이미지
     static let icScrap = "icScrap"
     static let icScrapFill = "icScrapFill"
