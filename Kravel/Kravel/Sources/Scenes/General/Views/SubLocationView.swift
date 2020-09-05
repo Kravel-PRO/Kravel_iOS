@@ -36,6 +36,20 @@ class SubLocationView: UIView {
         containerMapView.addSubview(mapView)
     }
     
+    // MARK: - Marker 세팅
+    var marker: NMFMarker?
+    
+    func setMarker(latitude: Double, longitude: Double, iconImage: NMFOverlayImage) {
+        marker?.mapView = nil
+        let marker = NMFMarker(position: NMGLatLng(lat: latitude, lng: longitude), iconImage: iconImage)
+        self.marker = marker
+        marker.mapView = mapView
+        
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude, lng: longitude))
+        cameraUpdate.animation = .none
+        mapView.moveCamera(cameraUpdate)
+    }
+    
     // MARK: - 주소 표시하는 Label 설정
     @IBOutlet weak var locationLabel: UILabel!
     

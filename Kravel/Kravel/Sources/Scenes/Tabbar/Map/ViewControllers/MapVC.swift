@@ -26,7 +26,7 @@ class MapVC: UIViewController {
         overlay?.hidden = false
     }
     
-    // FIXME: - 임시 마커
+    // MARK: - 마커 데이터 설정
     private var allPlaceData: [PlaceContentInform] = []
     private var markers: [NMFMarker] = []
     
@@ -49,6 +49,9 @@ class MapVC: UIViewController {
                 self.placeShadowView.isHidden = false
                 self.nearPlaceCollectionView.isHidden = true
                 self.placePopupView.showingState = .halfShow
+                
+                self.setPlaceData(of: selectID)
+                self.requestPhotoReview(of: selectID)
                 
                 NSLayoutConstraint.activate([self.anotherConstraint])
                 NSLayoutConstraint.deactivate([self.currentLocationButtonBottomConstraint])
@@ -196,9 +199,6 @@ class MapVC: UIViewController {
             nearPlaceCollectionView.delegate = self
             nearPlaceCollectionView.showsHorizontalScrollIndicator = false
             nearPlaceCollectionView.showsVerticalScrollIndicator = false
-            
-            // FIXME: Test 때문에 Hidden 옵션
-            nearPlaceCollectionView.isHidden = false
         }
     }
     
@@ -248,11 +248,6 @@ class MapVC: UIViewController {
         placeShadowView.addSubview(placePopupView)
         setPopupViewLayout()
         placePopupView.contentScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: calculateBottomInset(), right: 0)
-        
-        // FIXME: - 임시로 설정 - 나중에 장소 눌렀을 때 설정될 수 있게 바꾸기
-        placePopupView.placeImage = UIImage(named: "back")
-        placePopupView.placeName = "호텔 세느장"
-        placePopupView.placeLocation = "서울 종로구 돈화문로11길 28-5 (낙원동)"
     }
     
     // 새로운 장소 클릭했을 때, PopupView 지우기
@@ -314,7 +309,7 @@ class MapVC: UIViewController {
                 if -400 - calculateInitPanelViewHeight() - changeY <= -(self.view.frame.height / 16.9) {
                     placePopupView.showingState = .halfShow
                     placePopupView.setEnableScroll(false)
-                    placePopupView.contentScrollView.contentInset = .zero
+                    placePopupView.contentScrollView.contentOffset = .zero
                     UIView.animate(withDuration: 0.3) {
                         self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -self.calculateInitPanelViewHeight())
                     }
@@ -353,7 +348,6 @@ class MapVC: UIViewController {
         setRefreshButton()
         showPlacePopupView()
         requestAllPlaceData()
-        
         setCurrentLocationButtonLayout()
     }
     
@@ -388,6 +382,40 @@ class MapVC: UIViewController {
         }
     }
     
+    // MARK: - 마커 눌렀을 시, 팝업 뷰에 데이터 설정
+    // Issue - 데이터를 내가 전부 가지고 있다가 Client에서 설정할 지 서버에서 id로 요청할지
+    private func setPlaceData(of placeID: Int) {
+        guard let placeDataFromID = allPlaceData.filter({ $0.placeId == placeID }).first else { return }
+        placePopupView.placeName = placeDataFromID.title
+        placePopupView.placeTags = placeDataFromID.tags
+        placePopupView.placeLocation = placeDataFromID.location
+        placePopupView.subLocationContainerView.setMarker(latitude: placeDataFromID.longitude, longitude: placeDataFromID.latitude, iconImage: self.icMarkDefault)
+        // FIXME: - 이미지 데이터 가져오게 바꾸기
+        placePopupView.placeImage = nil
+    }
+    
+    // MARK: - MARK: - 선택한 장소 Photo Review 가져오기
+    private func requestPhotoReview(of placeID: Int) {
+        let getPlaceReviewParameter = GetReviewOfPlaceParameter(latitude: nil, longitude: nil, like_count: nil)
+        APICostants.placeID = "\(placeID)"
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .getPlaceReview(getPlaceReviewParameter)) { result in
+            switch result {
+            case .success(let placeReviewData):
+                guard let placeReviewData = placeReviewData as? APISortableResponseData<ReviewInform> else { return }
+                self.placePopupView.photoReviewData = placeReviewData.content
+            case .requestErr(let error):
+                print(error)
+                self.placePopupView.photoReviewData = []
+            case .serverErr: print("Server Err")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
+    }
+    
     // MARK: - UIViewController viewWillAppear override 부분
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -397,7 +425,6 @@ class MapVC: UIViewController {
     // MARK: - UIViewController viewWillLayoutSubviews override 부분
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-//        setCurrentLocationButtonLayout()
         setRefreshButtonLayout()
     }
 }

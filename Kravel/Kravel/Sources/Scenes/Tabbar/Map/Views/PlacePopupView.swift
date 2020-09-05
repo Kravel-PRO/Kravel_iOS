@@ -70,7 +70,7 @@ class PlacePopupView: UIView {
         }
     }
     
-    var placeTags: [String] = ["호텔 델루나", "아이유", "여진구"]
+    var placeTags: [String] = []
     
     // MARK: - 장소 위치 Label 설정
     @IBOutlet weak var placeLocationLabel: UILabel!
@@ -120,7 +120,25 @@ class PlacePopupView: UIView {
         }
     }
     
-    var photoReviewData: [String] = ["아아", "여기 장소", "너무 좋다", "여기도 좋네?", "여기도 와봐", "오 여기도?"]
+    @IBOutlet weak var photoReviewHeightConstraint: NSLayoutConstraint!
+    
+    var photoReviewData: [ReviewInform] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.photoReviewContainerView.photoReviewCollectionView.reloadData()
+                self.setPhotoReviewViewLayout()
+            }
+        }
+    }
+    
+    private func setPhotoReviewViewLayout() {
+        let defaultHeight: CGFloat = 48
+        let horizontalSpacing = view.frame.width / 23.44
+        let cellHeight: CGFloat = (self.frame.width - horizontalSpacing*2 - 4*2) / 3
+        if photoReviewData.count == 0 { photoReviewHeightConstraint.constant = defaultHeight }
+        else if photoReviewData.count <= 3 { photoReviewHeightConstraint.constant = defaultHeight + cellHeight }
+        else { photoReviewHeightConstraint.constant = defaultHeight + 2 * cellHeight }
+    }
     
     private func setPhotoReviewLabel() {
         let photoReviewAttributeText = "포토 리뷰".makeAttributedText([.font: UIFont.boldSystemFont(ofSize: 16), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)])
@@ -150,6 +168,7 @@ class PlacePopupView: UIView {
         loadXib()
         buttonStackContainerView.addSubview(buttonDivideView)
         setDivideViewLayout()
+        photoReviewContainerView.calculateCollectionViewHeight()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -157,6 +176,7 @@ class PlacePopupView: UIView {
         loadXib()
         buttonStackContainerView.addSubview(buttonDivideView)
         setDivideViewLayout()
+        photoReviewContainerView.calculateCollectionViewHeight()
     }
     
     private func loadXib() {

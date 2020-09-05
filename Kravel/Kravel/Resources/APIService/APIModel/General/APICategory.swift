@@ -18,6 +18,7 @@ enum APICategory<P: ParameterAble> {
     case searchPlaceKakao(P)
     case getPlace(P)
     case getNewReview(P)
+    case getPlaceReview(P)
     
     func makeURL() -> String {
         switch self {
@@ -26,6 +27,7 @@ enum APICategory<P: ParameterAble> {
         case .searchPlaceKakao: return APICostants.mapSearchURL
         case .getPlace: return APICostants.getPlace
         case .getNewReview: return APICostants.getNewReview
+        case .getPlaceReview: return APICostants.getReviewOfID
         }
     }
     
@@ -45,13 +47,18 @@ enum APICategory<P: ParameterAble> {
                 "Authorization": "KakaoAK \(PrivateKey.kakaoRESTAPIKey)"
             ]
         case .getPlace:
-            // FIXME: Header 설정하는거 나중에 Token 값 넣게 변경
             guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
             return [
                 "Content-Type": "application/json",
                 "Authorization": token
             ]
         case .getNewReview:
+            guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
+            return [
+                "Content-Type": "application/json",
+                "Authorization": token
+            ]
+        case .getPlaceReview:
             guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
             return [
                 "Content-Type": "application/json",
@@ -110,12 +117,35 @@ enum APICategory<P: ParameterAble> {
             }
             return parameters
         case .getNewReview(let reviewParameter):
+            var parameters: [String: Any] = [:]
             guard let reviewParameter = reviewParameter as? GetReviewParameter else { return nil }
-            return [
-                "offset": reviewParameter.offset,
-                "size": reviewParameter.size,
-                "sort": reviewParameter.sort
-            ]
+            if let offset = reviewParameter.offset {
+                parameters.updateValue(offset, forKey: "offset")
+            }
+            
+            if let size = reviewParameter.size {
+                parameters.updateValue(size, forKey: "size")
+            }
+            
+            if let sort = reviewParameter.sort {
+                parameters.updateValue(sort, forKey: "sort")
+            }
+            return parameters
+        case .getPlaceReview(let reviewOfPlaceParameter):
+            var parameters: [String: Any] = [:]
+            guard let reviewOfPlaceParameter = reviewOfPlaceParameter as? GetReviewOfPlaceParameter else { return nil }
+            if let latitude = reviewOfPlaceParameter.latitude {
+                parameters.updateValue(latitude, forKey: "latitude")
+            }
+            
+            if let longitude = reviewOfPlaceParameter.longitude {
+                parameters.updateValue(longitude, forKey: "longitude")
+            }
+            
+            if let like_count = reviewOfPlaceParameter.like_count {
+                parameters.updateValue(like_count, forKey: "like-count")
+            }
+            return parameters
         }
     }
 }

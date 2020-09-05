@@ -9,6 +9,8 @@
 import Foundation
 
 struct APICostants {
+    static var placeID: String = ""
+    
     // 카카오 오픈 API 주소 검색 주소
     static let mapSearchURL = "https://dapi.kakao.com/v2/local/search/keyword.json"
     
@@ -24,4 +26,13 @@ struct APICostants {
     
     // 새로운 리뷰 가져오는 API
     static let getNewReview = APICostants.baseURL + "/api/reviews"
+    static var getReviewOfID: String {
+        get {
+            return APICostants.baseURL + "/api/\(placeID)/reviews"
+        }
+        
+        set (placeID) {
+            self.placeID = placeID
+        }
+    }
 }

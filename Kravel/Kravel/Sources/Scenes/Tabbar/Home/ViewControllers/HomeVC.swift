@@ -120,7 +120,7 @@ class HomeVC: UIViewController {
     private func setPhotoReviewViewLayout() {
         let defaultHeight: CGFloat = 48
         let horizontalSpacing = view.frame.width / 23.44
-        let cellHeight: CGFloat = (photoReviewView.photoReviewCollectionView.frame.width - horizontalSpacing*2 - 4*2) / 3
+        let cellHeight: CGFloat = (photoReviewView.frame.width - horizontalSpacing*2 - 4*2) / 3
         if photoReviewData.count == 0 { photoReviewViewHeightConstraint.constant = defaultHeight }
         else if photoReviewData.count <= 3 { photoReviewViewHeightConstraint.constant = defaultHeight + cellHeight }
         else { photoReviewViewHeightConstraint.constant = defaultHeight + 2 * cellHeight }
@@ -236,7 +236,7 @@ class HomeVC: UIViewController {
     // MARK: - UIViewController viewDidLayoutSubviews Override
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        photoReviewView.calculateCollectionViewHeight()
+//        photoReviewView.calculateCollectionViewHeight()
         setHotPlaceCollectionViewHeight()
         setHotPlaceLabelLayout()
         setPhotoReviewLabelLayout()

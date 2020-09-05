@@ -8,8 +8,16 @@
 
 import Foundation
 
-struct GetReviewParameter: ParameterAble {
-    let offset: Int
-    let size: Int
-    let sort: String
+protocol ReviewParameterAble: ParameterAble {}
+
+struct GetReviewParameter: ReviewParameterAble {
+    let offset: Int?
+    let size: Int?
+    let sort: String?
+}
+
+struct GetReviewOfPlaceParameter: ReviewParameterAble {
+    let latitude: Double?
+    let longitude: Double?
+    let like_count: Bool?
 }

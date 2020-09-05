@@ -24,6 +24,7 @@ class NetworkHandler {
         case .searchPlaceKakao: requestSearchPlace(apiURL, headers, parameters, completion)
         case .getPlace: requestGetPlace(apiURL, headers, parameters, completion)
         case .getNewReview: requestGetReview(apiURL, headers, parameters, completion)
+        case .getPlaceReview: requestGetReviewOfPlace(apiURL, headers, parameters, completion)
         }
     }
     
@@ -126,7 +127,28 @@ class NetworkHandler {
                     print(error)
                     completion(.networkFail)
                 }
-            }
+        }
+    }
+    
+    private func requestGetReviewOfPlace(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
+        guard let url = try? url.asURL() else { return }
         
+        AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
+            .validate(statusCode: 200...500)
+            .responseDecodable(of: APIResponseData<APIDataResult<ReviewInform>, APIError>.self) { response in
+                switch response.result {
+                case .success(let getReviewResponseData):
+                    guard let statusCode = response.response?.statusCode else { return }
+                    if statusCode == 200 {
+                        guard let getReviewResult = getReviewResponseData.data?.result else { return }
+                        completion(.success(getReviewResult))
+                    } else {
+                        completion(.requestErr("실패"))
+                    }
+                case .failure(let error):
+                    print(error)
+                    completion(.networkFail)
+                }
+        }
     }
 }
