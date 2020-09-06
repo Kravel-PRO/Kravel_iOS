@@ -38,7 +38,7 @@ struct PlaceDetailInform: Codable {
     let bus: String?
     let subway: String?
     var scrap: Bool
-    let tags: [String]
+    let tags: [String]?
     let mediaId: Int
     let mediaTitle: String?
     let reviewCount: Int

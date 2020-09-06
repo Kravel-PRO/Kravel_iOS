@@ -50,7 +50,7 @@ class NearPlaceCell: UICollectionViewCell {
         }
     }
     
-    var tags: [String] = ["아이유", "호텔델루나", "김유나"] {
+    var tags: [String] = [] {
         didSet {
             tagCollectionView.reloadData()
         }

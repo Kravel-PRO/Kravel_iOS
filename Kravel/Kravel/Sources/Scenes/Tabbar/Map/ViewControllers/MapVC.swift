@@ -27,7 +27,6 @@ class MapVC: UIViewController {
     }
     
     // MARK: - 마커 데이터 설정
-    private var allPlaceData: [PlaceContentInform] = []
     private var allSimplePlaceData: [SimplePlace] = []
     private var markers: [NMFMarker] = []
     
@@ -37,6 +36,55 @@ class MapVC: UIViewController {
     // 선택된 마커 ID
     private var selectedMarkerID: Int = -1
     private var selectedPlace: PlaceDetailInform?
+    
+    // MARK: - 팝업 뷰 보이게 설정
+    /*
+     1. 팝업 뷰 isHidden : false -> true
+     2. 근처 장소 보이는 뷰 isHidden : true -> false
+     3. AutoLayout 팝업 뷰로부터 현재 위치 버튼 밑에서 16pt 떨어지게 설정
+     4. 팝업뷰 밑에서부터 보이게 애니메이션 설정
+     */
+    private func setShowPopup() {
+        placeShadowView.isHidden = false
+        nearPlaceCollectionView.isHidden = true
+        placePopupView.showingState = .halfShow
+        placePopupView.setEnableScroll(false)
+        
+        NSLayoutConstraint.activate([anotherConstraint])
+        NSLayoutConstraint.deactivate([
+            currentLocationButtonBottomConstraint,
+            noneConstraint
+        ])
+        
+        UIView.animate(withDuration: 0.3) {
+            self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -self.calculateInitPanelViewHeight())
+        }
+    }
+    
+    // MARK: - 팝업 뷰 안보이게 설정
+    /*
+     1. 팝업 뷰 isHidden : true -> false
+     2. 근처 장소 보이는 뷰 isHidden : false -> true
+     3. AutoLayout 근처 위치 보이는 뷰 or Tabbar로부터 16pt 떨어지게 설정
+     */
+    private func hideShowPopup() {
+        placeShadowView.isHidden = true
+        nearPlaceCollectionView.isHidden = false
+        placePopupView.showingState = .notShow
+        
+        if nearPlaceData.isEmpty {
+            print("비었음")
+            NSLayoutConstraint.activate([noneConstraint])
+            NSLayoutConstraint.deactivate([anotherConstraint, currentLocationButtonBottomConstraint])
+        }
+        else {
+            NSLayoutConstraint.activate([currentLocationButtonBottomConstraint])
+            NSLayoutConstraint.deactivate([noneConstraint, anotherConstraint])
+            print("비지 않았음")
+        }
+        
+        self.placeShadowView.transform = .identity
+    }
     
     lazy var markerTouchHandler: (NMFOverlay) -> Bool = { [weak self] marker in
         guard let self = self else { return true }
@@ -48,29 +96,15 @@ class MapVC: UIViewController {
             
             // 선택된 Marker에 따라 현재 뷰의 상태 업데이트
             if !isTouch {
-                self.placeShadowView.isHidden = false
-                self.nearPlaceCollectionView.isHidden = true
-                self.placePopupView.showingState = .halfShow
-                self.placePopupView.setEnableScroll(false)
+                self.setShowPopup()
                 
                 self.requestPhotoReview(of: selectID)
                 self.requestDetailPlaceData(of: selectID)
-                
-                NSLayoutConstraint.activate([self.anotherConstraint])
-                NSLayoutConstraint.deactivate([self.currentLocationButtonBottomConstraint])
-                
-                UIView.animate(withDuration: 0.3) {
-                    self.placeShadowView.transform = CGAffineTransform(translationX: 0, y: -self.calculateInitPanelViewHeight())
-                }
             } else {
-                self.placeShadowView.isHidden = true
-                self.nearPlaceCollectionView.isHidden = false
-                self.placePopupView.showingState = .notShow
-                
-                NSLayoutConstraint.activate([self.currentLocationButtonBottomConstraint])
-                NSLayoutConstraint.deactivate([self.anotherConstraint])
-                
+                self.hideShowPopup()
+
                 self.placeShadowView.transform = .identity
+                self.selectedMarkerID = -1
             }
             
             // 초기 상태인 경우 선택된 값이 1도 없는 경우
@@ -122,8 +156,8 @@ class MapVC: UIViewController {
     }
     
     @objc func refresh(_ sender: Any) {
-        // 근처 관광지 받아오는 API 통신
-        print("Refresh")
+        let cameraPosition = mapView.cameraPosition.target
+        requestClosePlaceData(latitude: cameraPosition.lat, longitude: cameraPosition.lng)
     }
     
     private func setRefreshButtonLayout() {
@@ -181,14 +215,16 @@ class MapVC: UIViewController {
     // 내 위치 찾기 버튼 바뀔 때마다 Bottom Constraint 바꾸어주기
     var currentLocationButtonBottomConstraint: NSLayoutConstraint!
     var anotherConstraint: NSLayoutConstraint!
+    var noneConstraint: NSLayoutConstraint!
     
     // 내 위치 찾기 버튼 초기 화면 설정
     private func setCurrentLocationButtonLayout() {
         currentLocationButtonBottomConstraint = currentLocationButton.bottomAnchor.constraint(equalTo: nearPlaceCollectionView.topAnchor, constant: -16)
         anotherConstraint = self.currentLocationButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -16-self.calculateInitPanelViewHeight())
+        noneConstraint = currentLocationButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
     
         NSLayoutConstraint.activate([
-            currentLocationButtonBottomConstraint,
+            noneConstraint,
             currentLocationButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
             currentLocationButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.12),
             currentLocationButton.heightAnchor.constraint(equalTo: currentLocationButton.widthAnchor, multiplier: 1)
@@ -205,7 +241,7 @@ class MapVC: UIViewController {
         }
     }
     
-    private var nearPlaces: [String] = ["정재네 집", "호준이네 집", "유나네 집", "혜선이네 집", "경선이네 집", "수연이네 집", "세림이네 집"]
+    private var nearPlaceData: [PlaceContentInform] = []
     
     // MARK: - Floating Panel View
     lazy var placePopupView: PlacePopupView = {
@@ -283,7 +319,6 @@ class MapVC: UIViewController {
     private func addGesture() {
         panGesuture = UIPanGestureRecognizer(target: self, action: #selector(movePanelView(_:)))
         placeShadowView.addGestureRecognizer(panGesuture)
-
     }
     
     // Pan Action에 따라 뷰 Interaction
@@ -354,8 +389,16 @@ class MapVC: UIViewController {
         setCurrentLocationButton()
         setRefreshButton()
         showPlacePopupView()
-        requestSimplePlaceData()
         setCurrentLocationButtonLayout()
+        
+        // FIXME: - 이 부분 카메라 이동에 따라 데이터 받아올 수 있도록 수정해야함
+        requestSimplePlaceData()
+        
+        // FIXME: - 여기 가까운 장소 데이터 내 위치로 이동하고 난 후 받아올 수 있게 수정
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            let cameraPosition = self.mapView.cameraPosition.target
+            self.requestClosePlaceData(latitude: cameraPosition.lat, longitude: cameraPosition.lng)
+        }
     }
     
     // MARK: - 지도 표시를 위한 ID, 위도, 경도 간단한 값 API 요청
@@ -390,6 +433,53 @@ class MapVC: UIViewController {
         }
     }
     
+    // MARK: - 지도 표시 위한 장소 가져오는 API 요청
+    private func requestClosePlaceData(latitude: Double, longitude: Double) {
+        print("위도 \(latitude)")
+        print("경도 \(longitude)")
+        let getPlaceParameter = GetPlaceParameter(latitude: latitude, longitude: longitude, page: nil, size: 10, review_count: nil, sort: nil)
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
+            switch result {
+            case .success(let getPlaceResult):
+                guard let getPlaceResult = getPlaceResult as? APISortableResponseData<PlaceContentInform> else {
+                    self.nearPlaceData = []
+                    print("요기?")
+                    DispatchQueue.main.async {
+                        self.hideShowPopup()
+                        self.nearPlaceCollectionView.reloadData()
+                    }
+                    return
+                }
+                                
+                self.nearPlaceData = getPlaceResult.content
+                if self.selectedMarkerID != -1 {
+                    self.hideShowPopup()
+                    self.markers
+                        .filter({ $0.userInfo["id"] as! Int == self.selectedMarkerID })
+                        .first?.iconImage = self.icMarkDefault
+                    self.selectedMarkerID = -1
+                } else {
+                    self.hideShowPopup()
+                }
+                
+                print(getPlaceResult.content)
+                DispatchQueue.main.async {
+                    self.nearPlaceCollectionView.reloadData()
+                }
+            case .requestErr(let errorMessage):
+                print("이게 실패")
+                print(errorMessage)
+            case .serverErr:
+                print("ServerError")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
+    }
+    
     // MARK: - 선택한 장소 ID Detail 정보 가져오기
     private func requestDetailPlaceData(of placeID: Int) {
         NetworkHandler.shared.requestAPI(apiCategory: .getPlaceOfID(placeID)) { result in
@@ -401,7 +491,8 @@ class MapVC: UIViewController {
                 }
             case .requestErr(let error):
                 print(error)
-            case .serverErr: print("Server Err")
+            case .serverErr:
+                print("Server Err")
             case .networkFail:
                 guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
                 networkFailPopupVC.modalPresentationStyle = .overFullScreen
@@ -414,9 +505,8 @@ class MapVC: UIViewController {
     // Issue - 데이터를 내가 전부 가지고 있다가 Client에서 설정할 지 서버에서 id로 요청할지
     private func setDetailPlaceData(_ detailInform: PlaceDetailInform) {
         self.selectedPlace = detailInform
-        print(detailInform.scrap)
         placePopupView.placeName = detailInform.title
-        placePopupView.placeTags = detailInform.tags
+        placePopupView.placeTags = detailInform.tags ?? []
         placePopupView.placeLocation = detailInform.location
         placePopupView.subLocationContainerView.setMarker(latitude: detailInform.latitude, longitude: detailInform.longitude, iconImage: icMarkDefault)
         placePopupView.subLocationContainerView.location = detailInform.location
@@ -539,7 +629,7 @@ extension MapVC: PlacePopupViewDelegate {
 
 extension MapVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return nearPlaces.count
+        return nearPlaceData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -552,10 +642,12 @@ extension MapVC: UICollectionViewDataSource {
         nearPlaceCell.makeShadow(color: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 0.13), blur: 10, x: 3, y: 2)
         nearPlaceCell.clipsToBounds = false
         
-        // 여기 Image Name 데이터로 받아오면 설정해야함
+        nearPlaceCell.placeName = nearPlaceData[indexPath.row].title
+        nearPlaceCell.tags = nearPlaceData[indexPath.row].tags ?? []
+        nearPlaceCell.location = nearPlaceData[indexPath.row].location
+        
+        // FIXME: - 여기 Image Name 데이터로 받아오면 설정해야함
         nearPlaceCell.placeImage = UIImage(named: "bitmap_1")
-        nearPlaceCell.placeName = nearPlaces[indexPath.row]
-        nearPlaceCell.location = "서울 종로구 돈화문로11길 28-5 (낙원동)"
         return nearPlaceCell
     }
 }

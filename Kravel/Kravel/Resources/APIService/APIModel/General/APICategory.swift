@@ -126,7 +126,7 @@ enum APICategory<P: ParameterAble> {
             if let latitude = getPlaceParameter.latitude,
                 let longtitude = getPlaceParameter.longitude {
                 parameters.updateValue(latitude, forKey: "latitude")
-                parameters.updateValue(longtitude, forKey: "longtitude")
+                parameters.updateValue(longtitude, forKey: "longitude")
             }
             
             if let offset = getPlaceParameter.page {

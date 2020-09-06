@@ -173,6 +173,7 @@ class LocationDetailVC: UIViewController {
         self.addGesture()
         showLoadingLottie()
         if let placeID = self.placeID {
+            print(placeID)
             requestDetailPlaceData(of: placeID)
             requestPhotoReview(of: placeID)
         }
@@ -203,7 +204,7 @@ class LocationDetailVC: UIViewController {
     private func setDetailPlaceData() {
         if let placeData = self.placeData {
             placeName = placeData.title
-            placeTags = placeData.tags
+            placeTags = placeData.tags ?? []
             location = placeData.location
             subLocationView.busDescription = "버스"
             subLocationView.busDatas = placeData.bus

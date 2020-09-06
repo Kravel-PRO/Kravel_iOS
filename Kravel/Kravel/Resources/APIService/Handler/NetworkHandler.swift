@@ -95,14 +95,15 @@ class NetworkHandler {
                 switch response.result {
                 case .success(let getPlaceResponseData):
                     guard let statusCode = response.response?.statusCode else { return }
-                    print(getPlaceResponseData)
                     if statusCode == 200 {
                         guard let getPlaceResult = getPlaceResponseData.data?.result else {
                             completion(.serverErr)
                             return
                         }
+                        print("이거 요첨 \(getPlaceResult.content)")
                         completion(.success(getPlaceResult))
                     } else {
+                        print(statusCode)
                         completion(.requestErr("실패"))
                     }
                 case .failure(let error):
@@ -146,6 +147,7 @@ class NetworkHandler {
                 switch response.result {
                 case .success(let getPlaceResponseData):
                     guard let statusCode = response.response?.statusCode else { return }
+                    print(statusCode)
                     if statusCode == 200 {
                         guard let getPlaceResult = getPlaceResponseData.data?.result else {
                             completion(.serverErr)
@@ -197,8 +199,6 @@ class NetworkHandler {
                         guard let getReviewResult = getReviewResponseData.data?.result else { return }
                         completion(.success(getReviewResult))
                     } else {
-                        print(statusCode)
-                        print("여기로 오나?")
                         completion(.requestErr("실패"))
                     }
                 case .failure(let error):
