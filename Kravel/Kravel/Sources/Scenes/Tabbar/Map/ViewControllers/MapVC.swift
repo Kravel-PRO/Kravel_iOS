@@ -73,14 +73,14 @@ class MapVC: UIViewController {
         placePopupView.showingState = .notShow
         
         if nearPlaceData.isEmpty {
-            print("비었음")
+            nearPlaceCollectionView.isHidden = true
             NSLayoutConstraint.activate([noneConstraint])
             NSLayoutConstraint.deactivate([anotherConstraint, currentLocationButtonBottomConstraint])
         }
         else {
+            nearPlaceCollectionView.isHidden = false
             NSLayoutConstraint.activate([currentLocationButtonBottomConstraint])
             NSLayoutConstraint.deactivate([noneConstraint, anotherConstraint])
-            print("비지 않았음")
         }
         
         self.placeShadowView.transform = .identity
