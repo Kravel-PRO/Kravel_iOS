@@ -453,11 +453,15 @@ class MapVC: UIViewController {
                 }
                                 
                 self.nearPlaceData = getPlaceResult.content
+                
                 if self.selectedMarkerID != -1 {
                     self.hideShowPopup()
-                    self.markers
+                    guard let selectedMarker = self.markers
                         .filter({ $0.userInfo["id"] as! Int == self.selectedMarkerID })
-                        .first?.iconImage = self.icMarkDefault
+                        .first else { return }
+                    selectedMarker.userInfo["isTouch"] = false
+                    selectedMarker.iconImage = self.icMarkDefault
+                    
                     self.selectedMarkerID = -1
                 } else {
                     self.hideShowPopup()
