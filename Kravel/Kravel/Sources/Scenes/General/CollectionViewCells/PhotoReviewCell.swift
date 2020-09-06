@@ -14,17 +14,12 @@ class PhotoReviewCell: UICollectionViewCell {
     // MARK: - 포토 리뷰 이미지 설정
     var photoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
-    var photoImage: UIImage? {
-        didSet {
-            photoImageView.image = photoImage
-        }
-    }
-    
+
     // MARK: - 더보기 뷰 설정
     var moreView: UIView?
     

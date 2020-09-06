@@ -11,5 +11,5 @@ import Foundation
 struct CelebrityDTO: Codable {
     let celebrityId: Int
     let celebrityName: String?
-    let imageUrl: String
+    let imageUrl: String?
 }

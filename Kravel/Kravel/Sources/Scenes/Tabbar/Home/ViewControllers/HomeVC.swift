@@ -157,7 +157,6 @@ class HomeVC: UIViewController {
             case .success(let getPlaceResult):
                 guard let getPlaceResult = getPlaceResult as? APISortableResponseData<PlaceContentInform> else { return }
                 self.nearPlaceData = getPlaceResult.content
-                print(self.nearPlaceData)
                 DispatchQueue.main.async {
                     self.setNearPlaceCollectionView()
                 }
@@ -178,13 +177,12 @@ class HomeVC: UIViewController {
     
     // MARK: - 인기 장소 데이터 API 요청
     private func requestHotPlaceData() {
-        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: nil, review_count: true, sort: nil)
+        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 6, review_count: true, sort: nil)
         NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
             switch result {
             case .success(let getPlaceResult):
                 guard let getPlaceResult = getPlaceResult as? APISortableResponseData<PlaceContentInform> else { return }
                 self.hotPlaceData = getPlaceResult.content
-                print(self.hotPlaceData)
                 DispatchQueue.main.async {
                     self.setHotPlaceCollectionViewHeight()
                     self.hotPlaceCollectionView.reloadData()
@@ -209,7 +207,6 @@ class HomeVC: UIViewController {
             case .success(let getReviewResult):
                 guard let getReviewResult = getReviewResult as? APISortableResponseData<ReviewInform> else { return }
                 self.photoReviewData = getReviewResult.content
-                print("홈 새로운 포토 리뷰 : \(getReviewResult.content)")
                 DispatchQueue.main.async {
                     self.setPhotoReviewViewLayout()
                     self.photoReviewView.photoReviewCollectionView.reloadData()
@@ -265,6 +262,7 @@ extension HomeVC: UICollectionViewDataSource {
 
         homeNearPlaceCell.placeName = nearPlaceData[indexPath.row].title
         homeNearPlaceCell.tags = nearPlaceData[indexPath.row].tags ?? []
+        homeNearPlaceCell.placeImageView.setImage(with: nearPlaceData[indexPath.row].imageUrl ?? "")
         
         homeNearPlaceCell.layer.cornerRadius = homeNearPlaceCell.frame.width / 15.9
         homeNearPlaceCell.clipsToBounds = true
@@ -280,6 +278,7 @@ extension HomeVC: UICollectionViewDataSource {
         hotPlaceCell.location = hotPlaceData[indexPath.row].title
         hotPlaceCell.tags = hotPlaceData[indexPath.row].tags ?? []
         hotPlaceCell.photoCount = hotPlaceData[indexPath.row].reviewCount
+        hotPlaceCell.placeImageView.setImage(with: hotPlaceData[indexPath.row].imageUrl ?? "")
         
         return hotPlaceCell
     }
@@ -287,11 +286,8 @@ extension HomeVC: UICollectionViewDataSource {
     // MARK: - 포토리뷰 보여주는 Cell 생성
     private func makePhotoReviewCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> PhotoReviewCell {
         guard let photoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoReviewCell.identifier, for: indexPath) as? PhotoReviewCell else { return PhotoReviewCell() }
-        
-        // FIXME: - 포토리뷰 imageURL 들어오면 다운받는 로직 추가
-//        photoReviewCell.photoImage = photoReviewData[indexPath.row].imageURl
-        
-        photoReviewCell.photoImage = UIImage(named: "yuna2")
+
+        photoReviewCell.photoImageView.setImage(with: photoReviewData[indexPath.row].imageURl)
         if indexPath.row == 5 { photoReviewCell.addMoreView() }
         return photoReviewCell
     }

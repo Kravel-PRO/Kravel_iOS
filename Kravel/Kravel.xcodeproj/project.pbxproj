@@ -142,6 +142,7 @@
 		9DD48BB6250510810096DE08 /* SearchParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BB5250510810096DE08 /* SearchParameter.swift */; };
 		9DD48BBC250511FD0096DE08 /* MediaDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BBB250511FD0096DE08 /* MediaDTO.swift */; };
 		9DD48BBE250512AB0096DE08 /* CelebrityDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BBD250512AB0096DE08 /* CelebrityDTO.swift */; };
+		9DD48BC025056A570096DE08 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BBF25056A570096DE08 /* UIImageView+Extensions.swift */; };
 		9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */; };
 		9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */; };
 		9DEDA6A924BCB70600E978F5 /* CategoryTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */; };
@@ -293,6 +294,7 @@
 		9DD48BB5250510810096DE08 /* SearchParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParameter.swift; sourceTree = "<group>"; };
 		9DD48BBB250511FD0096DE08 /* MediaDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDTO.swift; sourceTree = "<group>"; };
 		9DD48BBD250512AB0096DE08 /* CelebrityDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrityDTO.swift; sourceTree = "<group>"; };
+		9DD48BBF25056A570096DE08 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTabbar.xib; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 				9DA80456248E9200003826B9 /* String+Extensions.swift */,
 				9D7FB1EF24D01489009A9C0A /* UIView+Extensions.swift */,
 				9DBA643824F2738600E12FA4 /* NSNotificationName+Extensions.swift */,
+				9DD48BBF25056A570096DE08 /* UIImageView+Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1324,6 +1327,7 @@
 				9D6FF35724F9773200E6A8B9 /* MyPhotoReviewCell.swift in Sources */,
 				9D6FF35524F91B4400E6A8B9 /* LoginPopupVC.swift in Sources */,
 				9D16A44B24909798005E691E /* WelcomeVC.swift in Sources */,
+				9DD48BC025056A570096DE08 /* UIImageView+Extensions.swift in Sources */,
 				9D49E8B624C6F857007CD948 /* MyPageVC.swift in Sources */,
 				9DD48BA92503BD710096DE08 /* PlacePopupViewDelegate.swift in Sources */,
 				9D96009F24E6A2F9007995EE /* LocationDetailVC.swift in Sources */,

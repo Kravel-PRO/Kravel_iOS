@@ -11,6 +11,12 @@ import UIKit
 class HotPlaceCell: UICollectionViewCell {
     static let identifier = "HotPlaceCell"
     
+    @IBOutlet weak var placeImageView: UIImageView! {
+        didSet {
+            placeImageView.clipsToBounds = true
+        }
+    }
+    
     // MARK: - 장소 이름 라벨 설정
     @IBOutlet weak var locationNameLabel: UILabel!
     

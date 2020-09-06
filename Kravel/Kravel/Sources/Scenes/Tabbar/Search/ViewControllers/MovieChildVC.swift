@@ -64,7 +64,7 @@ extension MovieChildVC: UICollectionViewDataSource {
         guard let searchCell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCell.identifier, for: indexPath) as? SearchCell else { return UICollectionViewCell() }
         searchCell.profile = mediaDTO[indexPath.row].title
         searchCell.year = "\(mediaDTO[indexPath.row].year)"
-        
+        searchCell.profileImageView.setImage(with: mediaDTO[indexPath.row].imageUrl ?? "")
         // FIXME: - 받아오는 이미지 설정하는 코드 넣기
         return searchCell
     }

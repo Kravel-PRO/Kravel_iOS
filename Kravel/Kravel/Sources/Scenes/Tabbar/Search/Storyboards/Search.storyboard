@@ -359,7 +359,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="102" height="136"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bitmap_1" translatesAutoresizingMaskIntoConstraints="NO" id="gug-6V-NDp">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gug-6V-NDp">
                                                     <rect key="frame" x="0.0" y="0.0" width="102" height="102"/>
                                                     <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                     <constraints>
@@ -442,7 +442,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="102" height="136"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bitmap_0" translatesAutoresizingMaskIntoConstraints="NO" id="3e4-4G-pQJ">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3e4-4G-pQJ">
                                                     <rect key="frame" x="0.0" y="0.0" width="102" height="102"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="3e4-4G-pQJ" secondAttribute="height" multiplier="1:1" id="ucc-Ep-bLa"/>
@@ -501,8 +501,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bitmap_0" width="375" height="280"/>
-        <image name="bitmap_1" width="168" height="112"/>
         <image name="btnBack" width="24" height="24"/>
         <image name="btnSearch" width="24" height="24"/>
         <image name="searchActive" width="29" height="28"/>

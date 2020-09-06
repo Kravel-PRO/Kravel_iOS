@@ -166,7 +166,7 @@ extension ContentDetailVC: UICollectionViewDataSource {
     
     private func createPhotoReviewCell(of collectionView: UICollectionView, at indexPath: IndexPath) -> UICollectionViewCell {
         guard let photoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoReviewCell.identifier, for: indexPath) as? PhotoReviewCell else { return UICollectionViewCell() }
-        photoReviewCell.photoImage = UIImage(named: "bitmap_0")
+//        photoReviewCell.photoImage = UIImage(named: "bitmap_0")
         if indexPath.row == 5 { photoReviewCell.addMoreView() }
         return photoReviewCell
     }

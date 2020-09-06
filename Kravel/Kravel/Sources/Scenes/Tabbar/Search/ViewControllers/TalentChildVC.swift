@@ -64,8 +64,8 @@ extension TalentChildVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let searchCell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCell.identifier, for: indexPath) as? SearchCell else { return UICollectionViewCell() }
         searchCell.profile = talentDTO[indexPath.row].celebrityName
+        searchCell.profileImageView.setImage(with: talentDTO[indexPath.row].imageUrl ?? "")
         searchCell.yearLabel.text = nil
-        
         // FIXME: - 이미지 받아오는 코드 추가
         return searchCell
     }

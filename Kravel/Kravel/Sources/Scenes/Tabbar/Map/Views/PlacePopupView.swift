@@ -218,7 +218,7 @@ extension PlacePopupView: UICollectionViewDataSource {
     private func makePhotoReviewCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> PhotoReviewCell {
         guard let photoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoReviewCell.identifier, for: indexPath) as? PhotoReviewCell else { return PhotoReviewCell() }
         
-        photoReviewCell.photoImage = UIImage(named: "yuna2")
+//        photoReviewCell.photoImage = UIImage(named: "yuna2")
         if indexPath.row == 5 { photoReviewCell.addMoreView() }
         return photoReviewCell
     }

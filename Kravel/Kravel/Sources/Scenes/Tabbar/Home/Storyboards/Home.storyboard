@@ -68,11 +68,11 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="191" height="211"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                             <subviews>
-                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yuna" translatesAutoresizingMaskIntoConstraints="NO" id="LIe-cb-Vxj">
+                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LIe-cb-Vxj">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="191" height="211"/>
                                                                                 </imageView>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14x-ze-n4R">
-                                                                                    <rect key="frame" x="15.999999999999996" y="156.66666666666666" width="39.666666666666657" height="19.333333333333343"/>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14x-ze-n4R">
+                                                                                    <rect key="frame" x="16" y="176" width="0.0" height="0.0"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
@@ -94,7 +94,7 @@
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="99" height="15"/>
                                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                                 <subviews>
-                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hcg-E7-zP6">
+                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hcg-E7-zP6">
                                                                                                         <rect key="frame" x="0.0" y="0.0" width="99" height="15"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                                                         <color key="textColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -191,20 +191,20 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="343" height="158"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yuna2" translatesAutoresizingMaskIntoConstraints="NO" id="obV-NS-42T">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="obV-NS-42T">
                                                                     <rect key="frame" x="0.0" y="0.0" width="343" height="158"/>
                                                                 </imageView>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Jk-44-W0G">
                                                                     <rect key="frame" x="0.0" y="0.0" width="343" height="158"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="90X-CK-vN7">
-                                                                            <rect key="frame" x="17" y="126.66666666666667" width="31" height="14.333333333333329"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="90X-CK-vN7">
+                                                                            <rect key="frame" x="17" y="141" width="0.0" height="0.0"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dVp-cc-Fm2">
-                                                                            <rect key="frame" x="17" y="102.66666666666667" width="309" height="15"/>
+                                                                            <rect key="frame" x="17" y="117" width="309" height="15"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="15" id="xBD-l6-hLp"/>
@@ -223,7 +223,7 @@
                                                                                         <rect key="frame" x="0.0" y="0.0" width="96" height="14"/>
                                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                                         <subviews>
-                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fs3-cC-gZJ">
+                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fs3-cC-gZJ">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="96" height="14"/>
                                                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -244,8 +244,8 @@
                                                                                 </collectionViewCell>
                                                                             </cells>
                                                                         </collectionView>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6FH-sX-H9j">
-                                                                            <rect key="frame" x="17.000000000000004" y="79.333333333333329" width="42.333333333333343" height="19.333333333333329"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6FH-sX-H9j">
+                                                                            <rect key="frame" x="17" y="113" width="0.0" height="0.0"/>
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                             <nil key="highlightedColor"/>
@@ -278,6 +278,7 @@
                                                         <connections>
                                                             <outlet property="locationNameLabel" destination="6FH-sX-H9j" id="5Jf-WY-Rvx"/>
                                                             <outlet property="photoReviewCountLabel" destination="90X-CK-vN7" id="2Fd-2g-cxH"/>
+                                                            <outlet property="placeImageView" destination="obV-NS-42T" id="dGH-lJ-dna"/>
                                                             <outlet property="tagCollectionView" destination="dVp-cc-Fm2" id="pXM-6B-BUZ"/>
                                                         </connections>
                                                     </collectionViewCell>
@@ -382,7 +383,5 @@
         <image name="btnMore" width="16" height="16"/>
         <image name="homeActive" width="28" height="28"/>
         <image name="homeInactive" width="24" height="24"/>
-        <image name="yuna" width="1080" height="720"/>
-        <image name="yuna2" width="3024" height="3024"/>
     </resources>
 </document>
