@@ -25,6 +25,7 @@ enum APICategory<P: ParameterAble> {
     case getPlaceReview(P)
     case scrap(P)
     case getCeleb(P)
+    case getMedia(P)
     
     func makeURL() -> String {
         switch self {
@@ -41,6 +42,7 @@ enum APICategory<P: ParameterAble> {
         case .getPlaceReview: return APICostants.getReviewOfID
         case .scrap: return APICostants.scrap
         case .getCeleb: return APICostants.getCelebList
+        case .getMedia: return APICostants.getMeidaList
         }
     }
     
@@ -59,43 +61,7 @@ enum APICategory<P: ParameterAble> {
                 "Content-Type": "application/json",
                 "Authorization": "KakaoAK \(PrivateKey.kakaoRESTAPIKey)"
             ]
-        case .getPlace:
-            guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
-            return [
-                "Content-Type": "application/json",
-                "Authorization": token
-            ]
-        case .getSimplePlace:
-            guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
-            return [
-                "Content-Type": "application/json",
-                "Authorization": token
-            ]
-        case .getPlaceOfID:
-            guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
-            return [
-                "Content-Type": "application/json",
-                "Authorization": token
-            ]
-        case .getNewReview:
-            guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
-            return [
-                "Content-Type": "application/json",
-                "Authorization": token
-            ]
-        case .getPlaceReview:
-            guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
-            return [
-                "Content-Type": "application/json",
-                "Authorization": token
-            ]
-        case .scrap:
-            guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
-            return [
-                "Content-Type": "application/json",
-                "Authorization": token
-            ]
-        case .getCeleb:
+        default:
             guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
             return [
                 "Content-Type": "application/json",
@@ -202,6 +168,22 @@ enum APICategory<P: ParameterAble> {
         case .getCeleb(let celebParameter):
             var parameters: [String: Any] = [:]
             guard let searchParameter = celebParameter as? SearchParameter else { return nil }
+            
+            if let size = searchParameter.size {
+                parameters.updateValue(size, forKey: "size")
+            }
+            
+            if let search = searchParameter.search {
+                parameters.updateValue(search, forKey: "search")
+            }
+            
+            if let page = searchParameter.page {
+                parameters.updateValue(page, forKey: "page")
+            }
+            return parameters
+        case .getMedia(let mediaParameter):
+            var parameters: [String: Any] = [:]
+            guard let searchParameter = mediaParameter as? SearchParameter else { return nil }
             
             if let size = searchParameter.size {
                 parameters.updateValue(size, forKey: "size")

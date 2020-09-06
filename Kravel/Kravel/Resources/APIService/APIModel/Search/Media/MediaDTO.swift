@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MediaDTO {
+struct MediaDTO: Codable {
     let mediaId: Int
     let title: String
     let imageUrl: String?

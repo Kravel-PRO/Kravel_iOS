@@ -14,7 +14,7 @@ class MovieChildVC: UIViewController {
     private lazy var itemSpacing: CGFloat = self.view.frame.width / 21
     private lazy var horizonInset: CGFloat = self.view.frame.width / 23
     
-    private let movie: [String] = ["호텔 델루나", "슬기로운 의사생활", "이태원 클라쓰", "기생충", "검색어를 입력해..", "도깨비", "킹덤", "응답하라 1997", "더킹(영원의 군주)"]
+    private var mediaDTO: [MediaDTO] = []
     
     @IBOutlet weak var movieCollectionView: UICollectionView! {
         didSet {
@@ -27,18 +27,45 @@ class MovieChildVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        print("MovieChildVC")
+        requestMedia()
+    }
+}
+
+extension MovieChildVC {
+    // MARK: - Media 요청 API
+    private func requestMedia() {
+        let mediaRequestParameter = SearchParameter(size: nil, search: nil, page: nil)
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .getMedia(mediaRequestParameter)) { result in
+            switch result {
+            case .success(let mediaResult):
+                guard let medias = mediaResult as? [MediaDTO] else { return }
+                self.mediaDTO = medias
+                DispatchQueue.main.async {
+                    self.movieCollectionView.reloadData()
+                }
+            case .requestErr: break
+            case .serverErr: print("ServerErr")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.parent?.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
     }
 }
 
 extension MovieChildVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movie.count
+        return mediaDTO.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let searchCell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCell.identifier, for: indexPath) as? SearchCell else { return UICollectionViewCell() }
-        searchCell.profile = movie[indexPath.row]
+        searchCell.profile = mediaDTO[indexPath.row].title
+        searchCell.year = "\(mediaDTO[indexPath.row].year)"
+        
+        // FIXME: - 받아오는 이미지 설정하는 코드 넣기
         return searchCell
     }
 }

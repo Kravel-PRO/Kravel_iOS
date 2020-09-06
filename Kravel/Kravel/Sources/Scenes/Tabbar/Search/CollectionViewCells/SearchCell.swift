@@ -27,6 +27,13 @@ class SearchCell: UICollectionViewCell {
         }
     }
     
+    var year: String? {
+        didSet {
+            yearLabel.text = year
+            yearLabel.sizeToFit()
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
