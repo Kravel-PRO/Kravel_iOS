@@ -157,6 +157,7 @@ class HomeVC: UIViewController {
             case .success(let getPlaceResult):
                 guard let getPlaceResult = getPlaceResult as? APISortableResponseData<PlaceContentInform> else { return }
                 self.nearPlaceData = getPlaceResult.content
+                print(self.nearPlaceData)
                 DispatchQueue.main.async {
                     self.setNearPlaceCollectionView()
                 }
@@ -183,6 +184,7 @@ class HomeVC: UIViewController {
             case .success(let getPlaceResult):
                 guard let getPlaceResult = getPlaceResult as? APISortableResponseData<PlaceContentInform> else { return }
                 self.hotPlaceData = getPlaceResult.content
+                print(self.hotPlaceData)
                 DispatchQueue.main.async {
                     self.setHotPlaceCollectionViewHeight()
                     self.hotPlaceCollectionView.reloadData()
@@ -262,7 +264,7 @@ extension HomeVC: UICollectionViewDataSource {
         guard let homeNearPlaceCell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeNearPlaceCell.identifier, for: indexPath) as? HomeNearPlaceCell else { return HomeNearPlaceCell() }
 
         homeNearPlaceCell.placeName = nearPlaceData[indexPath.row].title
-        homeNearPlaceCell.tags = nearPlaceData[indexPath.row].tags
+        homeNearPlaceCell.tags = nearPlaceData[indexPath.row].tags ?? []
         
         homeNearPlaceCell.layer.cornerRadius = homeNearPlaceCell.frame.width / 15.9
         homeNearPlaceCell.clipsToBounds = true
@@ -276,7 +278,7 @@ extension HomeVC: UICollectionViewDataSource {
         hotPlaceCell.clipsToBounds = true
         
         hotPlaceCell.location = hotPlaceData[indexPath.row].title
-        hotPlaceCell.tags = hotPlaceData[indexPath.row].tags
+        hotPlaceCell.tags = hotPlaceData[indexPath.row].tags ?? []
         hotPlaceCell.photoCount = hotPlaceData[indexPath.row].reviewCount
         
         return hotPlaceCell

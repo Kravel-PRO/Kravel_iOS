@@ -137,6 +137,8 @@
 		9DD48BA92503BD710096DE08 /* PlacePopupViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BA82503BD710096DE08 /* PlacePopupViewDelegate.swift */; };
 		9DD48BAC2503F03C0096DE08 /* ScrapParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BAB2503F03C0096DE08 /* ScrapParameter.swift */; };
 		9DD48BAE2503F16E0096DE08 /* ScrapResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BAD2503F16E0096DE08 /* ScrapResponseData.swift */; };
+		9DD48BB12504C4CD0096DE08 /* GetSimplePlaceParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BB02504C4CD0096DE08 /* GetSimplePlaceParameter.swift */; };
+		9DD48BB32504C5590096DE08 /* GetSimplePlaceResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BB22504C5590096DE08 /* GetSimplePlaceResponseData.swift */; };
 		9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */; };
 		9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */; };
 		9DEDA6A924BCB70600E978F5 /* CategoryTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */; };
@@ -283,6 +285,8 @@
 		9DD48BA82503BD710096DE08 /* PlacePopupViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePopupViewDelegate.swift; sourceTree = "<group>"; };
 		9DD48BAB2503F03C0096DE08 /* ScrapParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapParameter.swift; sourceTree = "<group>"; };
 		9DD48BAD2503F16E0096DE08 /* ScrapResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapResponseData.swift; sourceTree = "<group>"; };
+		9DD48BB02504C4CD0096DE08 /* GetSimplePlaceParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSimplePlaceParameter.swift; sourceTree = "<group>"; };
+		9DD48BB22504C5590096DE08 /* GetSimplePlaceResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSimplePlaceResponseData.swift; sourceTree = "<group>"; };
 		9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTabbar.xib; sourceTree = "<group>"; };
@@ -732,6 +736,7 @@
 				9D4CCF7425000CA0003F73AF /* GetPlace */,
 				9D4CCF79250039D2003F73AF /* GetReview */,
 				9DD48BAA2503F01C0096DE08 /* Scrap */,
+				9DD48BAF2504C2C50096DE08 /* Map */,
 			);
 			path = APIModel;
 			sourceTree = "<group>";
@@ -1111,6 +1116,15 @@
 			path = Scrap;
 			sourceTree = "<group>";
 		};
+		9DD48BAF2504C2C50096DE08 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				9DD48BB02504C4CD0096DE08 /* GetSimplePlaceParameter.swift */,
+				9DD48BB22504C5590096DE08 /* GetSimplePlaceResponseData.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1322,6 +1336,7 @@
 				9D6FF36324F9873200E6A8B9 /* OtherPhotoReviewCell.swift in Sources */,
 				9D76CD9024FD8D90004D7333 /* UserDefaultKey.swift in Sources */,
 				9DEDA6AC24BCB76E00E978F5 /* CategoryTabbar.swift in Sources */,
+				9DD48BB32504C5590096DE08 /* GetSimplePlaceResponseData.swift in Sources */,
 				9D61F6EA24F81D7200EF13FB /* LogoutPopupVC.swift in Sources */,
 				9D9694D624C6D4810046CB85 /* MapVC.swift in Sources */,
 				9D014C40248C4C3600758FCC /* UIViewController+Extensions.swift in Sources */,
@@ -1358,6 +1373,7 @@
 				9D49E8B424C6DCBE007CD948 /* PrivateKey.swift in Sources */,
 				9D76CD8624FD7025004D7333 /* APIError.swift in Sources */,
 				9DBA644924F507EF00E12FA4 /* NearByAttractionView.swift in Sources */,
+				9DD48BB12504C4CD0096DE08 /* GetSimplePlaceParameter.swift in Sources */,
 				9DBA642E24F0414C00E12FA4 /* RecentResearchTerm+CoreDataProperties.swift in Sources */,
 				9D6FF38A24FAFC6300E6A8B9 /* NetworkHandler.swift in Sources */,
 				9D76CD7F24FD3641004D7333 /* APIResponseData.swift in Sources */,

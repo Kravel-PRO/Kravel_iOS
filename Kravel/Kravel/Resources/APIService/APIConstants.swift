@@ -29,6 +29,9 @@ struct APICostants {
         }
     }
     
+    // 맵 뷰 ID, 위도, 경도 가져오는 APi
+    static let map = APICostants.baseURL + "/api/places/map"
+    
     // 새로운 리뷰 가져오는 API
     static let getNewReview = APICostants.baseURL + "/api/reviews"
     static var getReviewOfID: String {

@@ -1,5 +1,5 @@
 //
-//  ScrapResponseData.swift
+//  GetSimplePlaceParameter.swift
 //  Kravel
 //
 //  Created by 윤동민 on 2020/09/06.
@@ -8,6 +8,7 @@
 
 import Foundation
 
-extension Int {
-    
+struct GetSimplePlaceParameter: ParameterAble {
+    let longitude: Double?
+    let latitude: Double?
 }

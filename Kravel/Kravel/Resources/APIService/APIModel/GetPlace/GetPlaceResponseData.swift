@@ -17,17 +17,17 @@ struct PlaceContentInform: Codable {
     let latitude: Double
     let longitude: Double
     let reviewCount: Int
-    let tags: [String]
+    let tags: [String]?
     let celebrities: [PlaceCelebrity]
 }
 
 struct PlaceCelebrity: Codable {
     let celebrityId: Int
-    let celebrityName: String
+    let celebrityName: String?
     let imageUrl: String
 }
 
-struct PlaceDetailInform: APICantSortable, Codable {
+struct PlaceDetailInform: Codable {
     let placeId: Int
     let title: String
     let contents: [String]?

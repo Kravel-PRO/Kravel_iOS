@@ -21,9 +21,7 @@ struct APIDataResult<C: Codable>: Codable {
     }
 }
 
-protocol APICantSortable: Codable {}
-
-struct APICantSortableDataResult<D: APICantSortable>: Codable {
+struct APICantSortableDataResult<D: Codable>: Codable {
     let result: D?
     
     enum CodingKeys: String, CodingKey {

@@ -19,6 +19,7 @@ enum APICategory<P: ParameterAble> {
     case signin(P)
     case searchPlaceKakao(P)
     case getPlace(P)
+    case getSimplePlace(P)
     case getPlaceOfID(P)
     case getNewReview(P)
     case getPlaceReview(P)
@@ -30,6 +31,7 @@ enum APICategory<P: ParameterAble> {
         case .signup: return APICostants.signup
         case .searchPlaceKakao: return APICostants.mapSearchURL
         case .getPlace: return APICostants.getPlace
+        case .getSimplePlace: return APICostants.map
         case .getPlaceOfID(let id):
             guard let id = id as? Int else { return "" }
             APICostants.placeID = "\(id)"
@@ -56,6 +58,12 @@ enum APICategory<P: ParameterAble> {
                 "Authorization": "KakaoAK \(PrivateKey.kakaoRESTAPIKey)"
             ]
         case .getPlace:
+            guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
+            return [
+                "Content-Type": "application/json",
+                "Authorization": token
+            ]
+        case .getSimplePlace:
             guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
             return [
                 "Content-Type": "application/json",
@@ -135,6 +143,16 @@ enum APICategory<P: ParameterAble> {
             
             if let sort = getPlaceParameter.sort {
                 parameters.updateValue(sort, forKey: "sort")
+            }
+            return parameters
+        case .getSimplePlace(let simplePlaceParameter):
+            guard let simplePlaceParameter = simplePlaceParameter as? GetSimplePlaceParameter else { return nil }
+            var parameters: [String: Any] = [:]
+            
+            if let latitude = simplePlaceParameter.latitude,
+                let longitude = simplePlaceParameter.longitude {
+                parameters.updateValue(latitude, forKey: "latitude")
+                parameters.updateValue(longitude, forKey: "longitude")
             }
             return parameters
         case .getPlaceOfID: return nil

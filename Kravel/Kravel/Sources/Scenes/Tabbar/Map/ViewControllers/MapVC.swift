@@ -28,6 +28,7 @@ class MapVC: UIViewController {
     
     // MARK: - 마커 데이터 설정
     private var allPlaceData: [PlaceContentInform] = []
+    private var allSimplePlaceData: [SimplePlace] = []
     private var markers: [NMFMarker] = []
     
     private let icMarkDefault = NMFOverlayImage(name: ImageKey.icMarkDefault)
@@ -353,33 +354,34 @@ class MapVC: UIViewController {
         setCurrentLocationButton()
         setRefreshButton()
         showPlacePopupView()
-        requestAllPlaceData()
+        requestSimplePlaceData()
         setCurrentLocationButtonLayout()
     }
     
-    // MARK: - 지도 표시 위한 장소 가져오는 API 요청
-    private func requestAllPlaceData() {
-        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 100, review_count: nil, sort: nil)
-        NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
+    // MARK: - 지도 표시를 위한 ID, 위도, 경도 간단한 값 API 요청
+    private func requestSimplePlaceData() {
+        let simplePlaceParameter = GetSimplePlaceParameter(longitude: nil, latitude: nil)
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .getSimplePlace(simplePlaceParameter)) { result in
             switch result {
             case .success(let getPlaceResult):
-                guard let getPlaceResult = getPlaceResult as? APISortableResponseData<PlaceContentInform> else { return }
-                self.allPlaceData = getPlaceResult.content
-                self.allPlaceData.forEach { placeData in
-                    let marker = self.makeMarker(placeID: placeData.placeId, latitude: placeData.latitude, longitude: placeData.longitude)
+                guard let getPlaceResult = getPlaceResult as? [SimplePlace] else { return }
+                self.allSimplePlaceData = getPlaceResult
+                
+                self.allSimplePlaceData.forEach { placeSimpleData in
+                    let marker = self.makeMarker(placeID: placeSimpleData.placeId, latitude: placeSimpleData.latitude, longitude: placeSimpleData.longitude)
                     self.markers.append(marker)
                 }
-            
+                
                 DispatchQueue.main.async {
-                    // FIXME: - 마커 찍는 코드 넣기
                     self.markers.forEach { marker in
                         marker.mapView = self.mapView
                     }
                 }
-            case .requestErr(let errorMessage):
-                print(errorMessage)
+            case .requestErr(let error):
+                print(error)
             case .serverErr:
-                print("ServerError")
+                print("Server Err")
             case .networkFail:
                 guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
                 networkFailPopupVC.modalPresentationStyle = .overFullScreen
