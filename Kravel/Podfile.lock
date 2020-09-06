@@ -1,24 +1,30 @@
 PODS:
   - Alamofire (5.2.2)
+  - Kingfisher (5.14.1):
+    - Kingfisher/Core (= 5.14.1)
+  - Kingfisher/Core (5.14.1)
   - lottie-ios (3.1.8)
   - NMapsMap (3.8.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
+  - Kingfisher (~> 5.0)
   - lottie-ios
   - NMapsMap
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Kingfisher
     - lottie-ios
     - NMapsMap
 
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  Kingfisher: 8050bc6f7f68cbf3908bd04df7ccbac188f6d6d6
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   NMapsMap: b3633ad688483a318be9293aeddd323a714fb08b
 
-PODFILE CHECKSUM: c2aaf005d523b858650440d8d6add8f149184c2a
+PODFILE CHECKSUM: dd76ca90120230912057aa0a133468488e88d8ea
 
 COCOAPODS: 1.9.3
