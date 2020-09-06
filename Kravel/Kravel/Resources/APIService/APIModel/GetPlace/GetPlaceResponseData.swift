@@ -18,13 +18,7 @@ struct PlaceContentInform: Codable {
     let longitude: Double
     let reviewCount: Int
     let tags: [String]?
-    let celebrities: [PlaceCelebrity]
-}
-
-struct PlaceCelebrity: Codable {
-    let celebrityId: Int
-    let celebrityName: String?
-    let imageUrl: String
+    let celebrities: [CelebrityDTO]
 }
 
 struct PlaceDetailInform: Codable {
@@ -42,5 +36,5 @@ struct PlaceDetailInform: Codable {
     let mediaId: Int
     let mediaTitle: String?
     let reviewCount: Int
-    let celebrities: [PlaceCelebrity]
+    let celebrities: [CelebrityDTO]
 }

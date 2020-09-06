@@ -144,13 +144,14 @@ class SearchVC: UIViewController {
         }
     }
     
-    // MARK: - UIViewController Override 설정
+    // MARK: - UIViewController viewDidLoad Override 설정
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setRecentResearchView()
         getRecentResearchTerms()
         addObserver()
+        initChildVCs()
     }
     
     private func createChildVC(by identifier: String) -> UIViewController? {
@@ -166,21 +167,15 @@ class SearchVC: UIViewController {
         ]
     }
     
+    // MARK: - UIViewController viewWillAppear Override 설정
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
-        initChildVCs()
-        pageCollectionView.reloadData()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         setRecentViewConstraint()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        removeChildVC()
     }
     
     private func removeChildVC() {
@@ -190,6 +185,11 @@ class SearchVC: UIViewController {
             childVC.removeFromParent()
         }
         childVCs.removeAll()
+    }
+    
+    deinit {
+        print("SearchVC Deinit")
+        removeChildVC()
     }
 }
 
@@ -288,6 +288,5 @@ extension SearchVC {
     @objc func setLastIndex(_ notification: NSNotification) {
         guard let lastIndex = notification.userInfo?["index"] as? Int else { return }
         researchLastIndex = Int32(lastIndex)
-        
     }
 }

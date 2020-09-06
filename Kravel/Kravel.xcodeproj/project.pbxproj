@@ -139,6 +139,9 @@
 		9DD48BAE2503F16E0096DE08 /* ScrapResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BAD2503F16E0096DE08 /* ScrapResponseData.swift */; };
 		9DD48BB12504C4CD0096DE08 /* GetSimplePlaceParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BB02504C4CD0096DE08 /* GetSimplePlaceParameter.swift */; };
 		9DD48BB32504C5590096DE08 /* GetSimplePlaceResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BB22504C5590096DE08 /* GetSimplePlaceResponseData.swift */; };
+		9DD48BB6250510810096DE08 /* SearchParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BB5250510810096DE08 /* SearchParameter.swift */; };
+		9DD48BBC250511FD0096DE08 /* MediaDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BBB250511FD0096DE08 /* MediaDTO.swift */; };
+		9DD48BBE250512AB0096DE08 /* CelebrityDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BBD250512AB0096DE08 /* CelebrityDTO.swift */; };
 		9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */; };
 		9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */; };
 		9DEDA6A924BCB70600E978F5 /* CategoryTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */; };
@@ -287,6 +290,9 @@
 		9DD48BAD2503F16E0096DE08 /* ScrapResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapResponseData.swift; sourceTree = "<group>"; };
 		9DD48BB02504C4CD0096DE08 /* GetSimplePlaceParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSimplePlaceParameter.swift; sourceTree = "<group>"; };
 		9DD48BB22504C5590096DE08 /* GetSimplePlaceResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSimplePlaceResponseData.swift; sourceTree = "<group>"; };
+		9DD48BB5250510810096DE08 /* SearchParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParameter.swift; sourceTree = "<group>"; };
+		9DD48BBB250511FD0096DE08 /* MediaDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDTO.swift; sourceTree = "<group>"; };
+		9DD48BBD250512AB0096DE08 /* CelebrityDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrityDTO.swift; sourceTree = "<group>"; };
 		9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTabbar.xib; sourceTree = "<group>"; };
@@ -737,6 +743,7 @@
 				9D4CCF79250039D2003F73AF /* GetReview */,
 				9DD48BAA2503F01C0096DE08 /* Scrap */,
 				9DD48BAF2504C2C50096DE08 /* Map */,
+				9DD48BBA250511BD0096DE08 /* Search */,
 			);
 			path = APIModel;
 			sourceTree = "<group>";
@@ -1125,6 +1132,32 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
+		9DD48BB42505105B0096DE08 /* Celebrity */ = {
+			isa = PBXGroup;
+			children = (
+				9DD48BBD250512AB0096DE08 /* CelebrityDTO.swift */,
+			);
+			path = Celebrity;
+			sourceTree = "<group>";
+		};
+		9DD48BB7250511830096DE08 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				9DD48BBB250511FD0096DE08 /* MediaDTO.swift */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
+		9DD48BBA250511BD0096DE08 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				9DD48BB5250510810096DE08 /* SearchParameter.swift */,
+				9DD48BB42505105B0096DE08 /* Celebrity */,
+				9DD48BB7250511830096DE08 /* Media */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1296,6 +1329,7 @@
 				9D96009F24E6A2F9007995EE /* LocationDetailVC.swift in Sources */,
 				9D76CD9624FE9945004D7333 /* SearchAddressVC.swift in Sources */,
 				9DEDA6BE24BCEEF000E978F5 /* TalentChildVC.swift in Sources */,
+				9DD48BB6250510810096DE08 /* SearchParameter.swift in Sources */,
 				9DB03C8B24DAA6B800FF7E36 /* HomeNearPlaceCell.swift in Sources */,
 				9D79E2A324EC2993006310A2 /* DetailNearPlaceCell.swift in Sources */,
 				9DBA643F24F3965800E12FA4 /* MyScrapCell.swift in Sources */,
@@ -1338,6 +1372,7 @@
 				9DEDA6AC24BCB76E00E978F5 /* CategoryTabbar.swift in Sources */,
 				9DD48BB32504C5590096DE08 /* GetSimplePlaceResponseData.swift in Sources */,
 				9D61F6EA24F81D7200EF13FB /* LogoutPopupVC.swift in Sources */,
+				9DD48BBE250512AB0096DE08 /* CelebrityDTO.swift in Sources */,
 				9D9694D624C6D4810046CB85 /* MapVC.swift in Sources */,
 				9D014C40248C4C3600758FCC /* UIViewController+Extensions.swift in Sources */,
 				9D76CD7D24FC29CD004D7333 /* ImageManager.swift in Sources */,
@@ -1371,6 +1406,7 @@
 				9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */,
 				9DBA643224F0439600E12FA4 /* RecentResearchView.swift in Sources */,
 				9D49E8B424C6DCBE007CD948 /* PrivateKey.swift in Sources */,
+				9DD48BBC250511FD0096DE08 /* MediaDTO.swift in Sources */,
 				9D76CD8624FD7025004D7333 /* APIError.swift in Sources */,
 				9DBA644924F507EF00E12FA4 /* NearByAttractionView.swift in Sources */,
 				9DD48BB12504C4CD0096DE08 /* GetSimplePlaceParameter.swift in Sources */,

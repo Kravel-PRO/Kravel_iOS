@@ -23,22 +23,50 @@ class TalentChildVC: UIViewController {
         }
     }
     
-    private let talent: [String] = ["BTS", "세븐틴", "아이유", "EXO", "레드벨벳", "트와이스", "태연", "오마이걸", "XIA(준수)", "소녀시대", "카라", "이효리"]
+    private var talentDTO: [CelebrityDTO] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        requestCeleb()
+    }
+}
+
+extension TalentChildVC {
+    // MARK: - Celebrity 요청 API
+    private func requestCeleb() {
+        let celebRequestParameter = SearchParameter(size: nil, search: nil, page: nil)
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .getCeleb(celebRequestParameter)) { result in
+            switch result {
+            case .success(let celebResult):
+                guard let celebrities = celebResult as? [CelebrityDTO] else { return }
+                self.talentDTO = celebrities
+                DispatchQueue.main.async {
+                    self.talentCollectionView.reloadData()
+                }
+            case .requestErr: break
+            case .serverErr: print("Server Err")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.parent?.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
     }
 }
 
 extension TalentChildVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return talent.count
+        return talentDTO.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let searchCell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCell.identifier, for: indexPath) as? SearchCell else { return UICollectionViewCell() }
-        searchCell.profile = talent[indexPath.row]
+        searchCell.profile = talentDTO[indexPath.row].celebrityName
+        searchCell.yearLabel.text = nil
+        
+        // FIXME: - 이미지 받아오는 코드 추가
         return searchCell
     }
 }
@@ -67,7 +95,7 @@ extension TalentChildVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let searchVC_parent = self.parent as? SearchVC else { return }
         guard let detail_contentVC = self.storyboard?.instantiateViewController(identifier: ContentDetailVC.identifier) as? ContentDetailVC else { return }
-        detail_contentVC.name = talent[indexPath.row]
+        detail_contentVC.name = talentDTO[indexPath.row].celebrityName
         detail_contentVC.category = .talent
         detail_contentVC.hidesBottomBarWhenPushed = true
         searchVC_parent.navigationController?.pushViewController(detail_contentVC, animated: true)

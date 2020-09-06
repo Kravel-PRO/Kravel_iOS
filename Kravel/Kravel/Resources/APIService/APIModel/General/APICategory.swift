@@ -24,6 +24,7 @@ enum APICategory<P: ParameterAble> {
     case getNewReview(P)
     case getPlaceReview(P)
     case scrap(P)
+    case getCeleb(P)
     
     func makeURL() -> String {
         switch self {
@@ -39,6 +40,7 @@ enum APICategory<P: ParameterAble> {
         case .getNewReview: return APICostants.getNewReview
         case .getPlaceReview: return APICostants.getReviewOfID
         case .scrap: return APICostants.scrap
+        case .getCeleb: return APICostants.getCelebList
         }
     }
     
@@ -88,6 +90,12 @@ enum APICategory<P: ParameterAble> {
                 "Authorization": token
             ]
         case .scrap:
+            guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
+            return [
+                "Content-Type": "application/json",
+                "Authorization": token
+            ]
+        case .getCeleb:
             guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
             return [
                 "Content-Type": "application/json",
@@ -191,6 +199,22 @@ enum APICategory<P: ParameterAble> {
             return [
                 "scrap": scrapParameter.scrap
             ]
+        case .getCeleb(let celebParameter):
+            var parameters: [String: Any] = [:]
+            guard let searchParameter = celebParameter as? SearchParameter else { return nil }
+            
+            if let size = searchParameter.size {
+                parameters.updateValue(size, forKey: "size")
+            }
+            
+            if let search = searchParameter.search {
+                parameters.updateValue(search, forKey: "search")
+            }
+            
+            if let page = searchParameter.page {
+                parameters.updateValue(page, forKey: "page")
+            }
+            return parameters
         }
     }
 }

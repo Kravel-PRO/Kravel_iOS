@@ -28,6 +28,7 @@ class NetworkHandler {
         case .getNewReview: requestGetNewReview(apiURL, headers, parameters, completion)
         case .getPlaceReview: requestGetReviewOfPlace(apiURL, headers, parameters, completion)
         case .scrap: requestScrap(apiURL, headers, parameters, completion)
+        case .getCeleb: requestCeleb(apiURL, headers, parameters, completion)
         }
     }
     
@@ -221,6 +222,27 @@ class NetworkHandler {
                         completion(.success(scrapResult.data?.result))
                     } else {
                         completion(.requestErr(scrapResult.error))
+                    }
+                case .failure(let error):
+                    print(error)
+                    completion(.networkFail)
+                }
+        }
+    }
+    
+    private func requestCeleb(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
+        guard let url = try? url.asURL() else { return }
+        
+        AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
+            .validate(statusCode: 200...500)
+            .responseDecodable(of: APIResponseData<APICantSortableDataResult<[CelebrityDTO]>, APIError>.self) { response in
+                switch response.result {
+                case .success(let celebResult):
+                    guard let statusCode = response.response?.statusCode else { return }
+                    if statusCode == 200 {
+                        completion(.success(celebResult.data?.result))
+                    } else {
+                        completion(.serverErr)
                     }
                 case .failure(let error):
                     print(error)

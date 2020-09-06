@@ -29,7 +29,7 @@ struct APICostants {
         }
     }
     
-    // 맵 뷰 ID, 위도, 경도 가져오는 APi
+    // 맵 뷰 ID, 위도, 경도 가져오는 API
     static let map = APICostants.baseURL + "/api/places/map"
     
     // 새로운 리뷰 가져오는 API
@@ -46,4 +46,10 @@ struct APICostants {
             return APICostants.baseURL + "/api/places/\(placeID)/scrap"
         }
     }
+    
+    // 연예인 검색 API
+    static let getCelebList = APICostants.baseURL + "/api/celebrities"
+    
+    // 미디어 검색 API
+    static let getMeidaList = APICostants.baseURL + "/api/medias"
 }
