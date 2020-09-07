@@ -33,8 +33,7 @@ class MapVC: UIViewController {
     private let icMarkDefault = NMFOverlayImage(name: ImageKey.icMarkDefault)
     private let icMarkFocus = NMFOverlayImage(name: ImageKey.icMarkFocus)
     
-    // 선택된 마커 ID
-    private var selectedMarkerID: Int = -1
+    // 선택된 마커 PlaceID
     private var selectedPlace: PlaceDetailInform?
     
     // MARK: - 팝업 뷰 보이게 설정
@@ -91,42 +90,26 @@ class MapVC: UIViewController {
         if let isTouch = marker.userInfo["isTouch"] as? Bool,
             let selectID = marker.userInfo["id"] as? Int,
             let castingMarker = marker as? NMFMarker {
-            castingMarker.iconImage = isTouch ? self.icMarkDefault : self.icMarkFocus
-            marker.userInfo["isTouch"] = !isTouch
             
-            // 선택된 Marker에 따라 현재 뷰의 상태 업데이트
+            // 현재 아이디와 다르고 선택된 Marker가 있는 경우 취소하기
+            self.markers.filter({
+                $0.userInfo["id"] as! Int != selectID
+                && $0.userInfo["isTouch"] as! Bool
+            }).forEach {
+                ($0 as NMFMarker).iconImage = self.icMarkDefault
+                $0.userInfo["isTocuh"] = false
+                self.placeShadowView.isHidden = true
+            }
+            
+            castingMarker.userInfo["isTouch"] = !isTouch
+            castingMarker.iconImage = isTouch ? self.icMarkDefault : self.icMarkFocus
             if !isTouch {
-                self.setShowPopup()
-                
-                self.requestPhotoReview(of: selectID)
                 self.requestDetailPlaceData(of: selectID)
+                self.requestPhotoReview(of: selectID)
             } else {
                 self.hideShowPopup()
-
                 self.placeShadowView.transform = .identity
-                self.selectedMarkerID = -1
             }
-            
-            // 초기 상태인 경우 선택된 값이 1도 없는 경우
-            if self.selectedMarkerID == -1 {
-                self.selectedMarkerID = selectID
-                return true
-            }
-            
-            // 선택된 아이디가 같은 경우는 터치 상태만 바꾸어주기
-            guard selectID != self.selectedMarkerID else { return true }
-            
-            let preMarkers = self.markers.filter { $0.userInfo["id"] as! Int == self.selectedMarkerID }
-            guard preMarkers.count == 1, let preMarker = preMarkers.first else {
-                print("Logic Error")
-                return true
-            }
-            
-            // 이전에 선택된 마커를 새로운게 선택되었기 때문에, 바꾸어주는 로직
-            preMarker.iconImage = self.icMarkDefault
-            preMarker.userInfo["isTouch"] = false
-        
-            self.selectedMarkerID = selectID
         }
         return true
     }
@@ -364,7 +347,7 @@ class MapVC: UIViewController {
                         guard let locationDetailRootVC = UIStoryboard(name: "LocationDetail", bundle: nil).instantiateViewController(withIdentifier: "LocationDetailRoot") as? UINavigationController else { return }
                         locationDetailRootVC.modalPresentationStyle = .overFullScreen
                         guard let locationDetailVC = locationDetailRootVC.topViewController as? LocationDetailVC else { return }
-                        locationDetailVC.placeID = self.selectedMarkerID
+                        locationDetailVC.placeID = self.selectedPlace?.placeId
                         
                         self.present(locationDetailRootVC, animated: false
                             , completion: {
@@ -435,8 +418,6 @@ class MapVC: UIViewController {
     
     // MARK: - 지도 표시 위한 장소 가져오는 API 요청
     private func requestClosePlaceData(latitude: Double, longitude: Double) {
-        print("위도 \(latitude)")
-        print("경도 \(longitude)")
         let getPlaceParameter = GetPlaceParameter(latitude: latitude, longitude: longitude, page: nil, size: 10, review_count: nil, sort: nil)
         
         NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
@@ -444,7 +425,6 @@ class MapVC: UIViewController {
             case .success(let getPlaceResult):
                 guard let getPlaceResult = getPlaceResult as? APISortableResponseData<PlaceContentInform> else {
                     self.nearPlaceData = []
-                    print("요기?")
                     DispatchQueue.main.async {
                         self.hideShowPopup()
                         self.nearPlaceCollectionView.reloadData()
@@ -454,20 +434,18 @@ class MapVC: UIViewController {
                                 
                 self.nearPlaceData = getPlaceResult.content
                 
-                if self.selectedMarkerID != -1 {
+                let selectedMarkers = self.markers.filter({$0.userInfo["isTouch"] as! Bool})
+                
+                if selectedMarkers.count != 0 {
                     self.hideShowPopup()
-                    guard let selectedMarker = self.markers
-                        .filter({ $0.userInfo["id"] as! Int == self.selectedMarkerID })
-                        .first else { return }
-                    selectedMarker.userInfo["isTouch"] = false
-                    selectedMarker.iconImage = self.icMarkDefault
-                    
-                    self.selectedMarkerID = -1
+                    selectedMarkers.forEach {
+                        $0.userInfo["isTouch"] = false
+                        $0.iconImage = self.icMarkDefault
+                    }
                 } else {
                     self.hideShowPopup()
                 }
                 
-                print(getPlaceResult.content)
                 DispatchQueue.main.async {
                     self.nearPlaceCollectionView.reloadData()
                 }
@@ -492,6 +470,7 @@ class MapVC: UIViewController {
                 guard let detailInform = detailInform as? PlaceDetailInform else { return }
                 DispatchQueue.main.async {
                     self.setDetailPlaceData(detailInform)
+                    self.setShowPopup()
                 }
             case .requestErr(let error):
                 print(error)
@@ -518,12 +497,11 @@ class MapVC: UIViewController {
         placePopupView.subLocationContainerView.subwayDatas = detailInform.subway
         placePopupView.subLocationContainerView.busDescription = "버스"
         placePopupView.subLocationContainerView.subwayDescription = "지하철"
+        placePopupView.placeImageView.setImage(with: detailInform.imageUrl ?? "")
         
         guard let scrapButton = placePopupView.buttonStackView.arrangedSubviews[1] as? UIButton else { return }
         let scrapImage = detailInform.scrap ? UIImage(named: ImageKey.icScrapFill) : UIImage(named: ImageKey.icScrap)
         scrapButton.setImage(scrapImage, for: .normal)
-        // FIXME: 이미지 받아오기 수정
-//        placePopupView.placeImage = detailInform.imageUrl
     }
     
     // MARK: - 선택한 장소 Photo Review 가져오기
@@ -535,7 +513,6 @@ class MapVC: UIViewController {
             switch result {
             case .success(let placeReviewData):
                 guard let placeReviewData = placeReviewData as? APISortableResponseData<ReviewInform> else { return }
-                print("리뷰 데이터: \(placeReviewData)")
                 DispatchQueue.main.async {
                     self.placePopupView.photoReviewData = placeReviewData.content
                 }
@@ -598,11 +575,11 @@ extension MapVC: PlacePopupViewDelegate {
     
     // MARK: - 스크랩 버튼 누른 경우
     func clickScrapButton() {
-        APICostants.placeID = "\(selectedMarkerID)"
+        guard let selectedPlace = self.selectedPlace else { return }
+        APICostants.placeID = "\(selectedPlace.placeId)"
         
         // 스크랩 데이터가 있는 경우 반대의 경우로 바꾸어 줌
-        guard let scrap = self.selectedPlace?.scrap else { return }
-        let scrapParameter = ScrapParameter(scrap: !scrap)
+        let scrapParameter = ScrapParameter(scrap: !selectedPlace.scrap)
         
         NetworkHandler.shared.requestAPI(apiCategory: .scrap(scrapParameter)) { result in
             switch result {
@@ -649,9 +626,7 @@ extension MapVC: UICollectionViewDataSource {
         nearPlaceCell.placeName = nearPlaceData[indexPath.row].title
         nearPlaceCell.tags = nearPlaceData[indexPath.row].tags ?? []
         nearPlaceCell.location = nearPlaceData[indexPath.row].location
-        
-        // FIXME: - 여기 Image Name 데이터로 받아오면 설정해야함
-        nearPlaceCell.placeImage = UIImage(named: "bitmap_1")
+        nearPlaceCell.placeImageView.setImage(with: nearPlaceData[indexPath.row].imageUrl ?? "")
         return nearPlaceCell
     }
 }
