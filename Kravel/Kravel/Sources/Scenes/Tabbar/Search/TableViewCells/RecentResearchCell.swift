@@ -73,7 +73,7 @@ class RecentResearchCell: UITableViewCell {
             researchLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             researchLabel.leadingAnchor.constraint(equalTo: searchImageView.trailingAnchor, constant: 26),
             deleteButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            deleteButton.heightAnchor.constraint(equalTo: searchImageView.heightAnchor),
+            deleteButton.heightAnchor.constraint(equalTo: searchImageView.heightAnchor, multiplier: 1.3),
             deleteButton.widthAnchor.constraint(equalTo: deleteButton.heightAnchor),
             deleteButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18),
             researchLabel.trailingAnchor.constraint(equalTo: deleteButton.leadingAnchor, constant: 16)

@@ -52,16 +52,13 @@ class LocationDetailVC: UIViewController {
     
     @IBAction func dismissView(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
+        if let scrap = self.placeData?.scrap {
+            NotificationCenter.default.post(name: .dismissDetailView, object: nil, userInfo: ["scrap": scrap])
+        }
     }
     
     // MARK: - 장소 이미지 설정
     @IBOutlet weak var placeImageView: UIImageView!
-    
-    var placeImage: UIImage? {
-        didSet {
-            placeImageView.image = placeImage
-        }
-    }
     
     // MARK: - 장소 이름 Label 설정
     @IBOutlet weak var placeNameLabel: UILabel!
@@ -212,12 +209,10 @@ class LocationDetailVC: UIViewController {
             subLocationView.subwayDatas = placeData.subway
             subLocationView.location = placeData.location
             subLocationView.setMarker(latitude: placeData.latitude, longitude: placeData.longitude, iconImage: NMFOverlayImage(name: ImageKey.icMarkDefault))
+            placeImageView.setImage(with: placeData.imageUrl ?? "")
             
             let scrapImage = placeData.scrap ? UIImage(named: ImageKey.icScrapFill) : UIImage(named: ImageKey.icScrap)
             scrapButton.setImage(scrapImage, for: .normal)
-            
-            // FIXME: Image URL로부터 가져오기 수정
-            //        placeImage = detailInform.imageUrl
         }
     }
     
@@ -322,7 +317,7 @@ extension LocationDetailVC: UICollectionViewDataSource {
     private func makePhotoReviewCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> PhotoReviewCell {
         guard let photoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoReviewCell.identifier, for: indexPath) as? PhotoReviewCell else { return PhotoReviewCell() }
         
-//        photoReviewCell.photoImage = UIImage(named: "yuna2")
+        photoReviewCell.photoImageView.setImage(with: photoReviewData[indexPath.row].imageURl)
         if indexPath.row == 5 { photoReviewCell.addMoreView() }
         return photoReviewCell
     }
@@ -387,7 +382,7 @@ extension LocationDetailVC: UIGestureRecognizerDelegate {
         if panGesture.state == .ended && changeY > 100 {
             self.dismiss(animated: false, completion: nil)
             if let scrap = self.placeData?.scrap {
-                NotificationCenter.default.post(name: .dismissDetailView, object: nil, userInfo: ["scrap": self.placeData?.scrap])
+                NotificationCenter.default.post(name: .dismissDetailView, object: nil, userInfo: ["scrap": scrap])
             }
         } else if panGesture.state == .ended && changeY <= 100 {
             UIView.animate(withDuration: 0.3) {

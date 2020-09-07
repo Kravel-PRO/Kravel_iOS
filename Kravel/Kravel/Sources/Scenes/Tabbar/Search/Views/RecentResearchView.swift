@@ -8,6 +8,8 @@
 
 import UIKit
 
+protocol SearchAble {}
+
 class RecentResearchView: UIView {
     static let nibName = "RecentResearchView"
     

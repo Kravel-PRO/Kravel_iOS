@@ -47,9 +47,28 @@ struct APICostants {
         }
     }
     
+    // 연예인 미디어 검색 ID
+    static var mediaID: String = ""
+    static var celebID: String = ""
+    
+    static var getDetailMedia: String {
+        get {
+            return APICostants.getMeidaList + "/\(mediaID)"
+        }
+    }
+    
+    static var getDetailCeleb: String {
+        get {
+            return APICostants.getCelebList + "\(celebID)"
+        }
+    }
+    
     // 연예인 검색 API
     static let getCelebList = APICostants.baseURL + "/api/celebrities"
     
     // 미디어 검색 API
     static let getMeidaList = APICostants.baseURL + "/api/medias"
+    
+    // 연예인, 미디어 검색 API
+    static let search = APICostants.baseURL + "/api/search"
 }

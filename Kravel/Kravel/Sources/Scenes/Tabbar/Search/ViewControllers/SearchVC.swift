@@ -35,16 +35,23 @@ class SearchVC: UIViewController {
     
     // 최근 검색 뷰 없앰
     @IBAction func clickBackButton(_ sender: Any) {
-        backButton.isHidden = true
-        recentResearchView.isHidden = true
-        self.view.endEditing(true)
-        UIView.animate(withDuration: 0.2) {
-            self.view.layoutIfNeeded()
+        if searchResultView.superview != nil {
+            searchResultView.removeFromSuperview()
+        } else {
+            backButton.isHidden = true
+            recentResearchView.isHidden = true
+            self.view.endEditing(true)
+            UIView.animate(withDuration: 0.2) {
+                self.view.layoutIfNeeded()
+            }
         }
     }
     
     // 검색어 내용 검색
     @IBAction func search(_ sender: Any) {
+        guard let search = searchTextField.text, search != "" else { return }
+        request(searchText: search)
+        
         searchText(searchTextField)
     }
     
@@ -144,6 +151,22 @@ class SearchVC: UIViewController {
         }
     }
     
+    // MARK: - 검색 결과  View 설정
+    lazy var searchResultView: SearchResultView = {
+        let searchResultView = SearchResultView(frame: CGRect(x: 0, y: searchBarView.frame.maxY, width: self.view.frame.width, height: categoryTabbarView.frame.height + pageCollectionView.frame.height + 16))
+        searchResultView.translatesAutoresizingMaskIntoConstraints = false
+        return searchResultView
+    }()
+    
+    private func setSearchResultViewLayout() {
+        NSLayoutConstraint.activate([
+            searchResultView.topAnchor.constraint(equalTo: searchBarView.bottomAnchor),
+            searchResultView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            searchResultView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            searchResultView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
+    }
+    
     // MARK: - UIViewController viewDidLoad Override 설정
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -193,6 +216,33 @@ class SearchVC: UIViewController {
     }
 }
 
+extension SearchVC {
+    // MARK: - 검색 정보 요청하는 API
+    private func request(searchText: String) {
+        let searchParameter = SearchParameter(search: searchText)
+        NetworkHandler.shared.requestAPI(apiCategory: .search(searchParameter)) { result in
+            switch result {
+            case .success(let searchResult):
+                guard let searchResultDTO = searchResult as? SearchResultDTO else { return }
+                self.searchResultView.searchResultDTO = searchResultDTO
+                DispatchQueue.main.async {
+                    if self.searchResultView.superview == nil {
+                        self.view.addSubview(self.searchResultView)
+                        self.setSearchResultViewLayout()
+                    }
+                }
+            case .requestErr(let erorr):
+                print(erorr)
+            case .serverErr: print("Server Err")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
+    }
+}
+
 extension SearchVC: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         recentResearchView.isHidden = false
@@ -207,6 +257,8 @@ extension SearchVC: UITextFieldDelegate {
     // 2. 검색한 화면으로 API 요청하고 이동하기
     // 3. CoreData에 검색어 저장하기
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let search = searchTextField.text, search != "" else { return true }
+        request(searchText: search)
         searchText(textField)
         return true
     }

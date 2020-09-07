@@ -8,8 +8,28 @@
 
 import UIKit
 
+protocol CategoryAble { }
+
 class ContentDetailVC: UIViewController {
     static let identifier = "ContentDetailVC"
+    
+    var category: KCategory?
+    var id: Int?
+    var categoryDetailDTO: CategoryAble?
+    
+    private func appearDetailData() {
+        guard let category = self.category else { return }
+        switch category {
+        case .celeb:
+            guard let celebDetailDTO = categoryDetailDTO as? CelebrityDetailDTO else { return }
+        case .media:
+            guard let mediaDetailDTO = categoryDetailDTO as? MediaDetailDTO else { return }
+            let introduceText = "\(mediaDetailDTO.title)\n촬영지가 어딜까요?"
+            introduceLabel.attributedText = createAttributeString(of: introduceText, highlightPart: mediaDetailDTO.title)
+            setLabelHeight()
+            
+        }
+    }
     
     // MARK: - Thumnail Image 설정
     @IBOutlet weak var thumbnail_Back_View: UIView!
@@ -33,33 +53,8 @@ class ContentDetailVC: UIViewController {
     
     // MARK: - 연예인/드라마 별 Label 지정
     @IBOutlet weak var introduceLabel: UILabel! {
-        willSet {
-            guard let informStr = self.informStr, let name = self.name else { return }
-            newValue.attributedText = createAttributeString(of: informStr, highlightPart: name)
-            newValue.sizeToFit()
-            newValue.translatesAutoresizingMaskIntoConstraints = false
-        }
-    }
-    
-    var informStr: String?
-    var name: String?
-    var category: KCategory? {
         didSet {
-            guard let category = category else { return }
-            guard let name = self.name else { return }
-            switch category {
-            case .talent: informStr = "\(name)가\n다녀간 곳은 어딜까요?"
-            case .move: informStr = "\(name)\n촬영지가 어딜까요?"
-            }
-        }
-    }
-    
-    // MARK: - 포토리뷰 View 설정
-    @IBOutlet weak var photoReviewLabel: UILabel! {
-        didSet {
-            photoReviewLabel.attributedText = "인기 많은 포토 리뷰".makeAttributedText([.font: UIFont.boldSystemFont(ofSize: 18)], of: "포토 리뷰")
-            photoReviewLabel.sizeToFit()
-            photoReviewLabel.translatesAutoresizingMaskIntoConstraints = false
+            introduceLabel.translatesAutoresizingMaskIntoConstraints = false
         }
     }
     
@@ -104,27 +99,27 @@ class ContentDetailVC: UIViewController {
     
     lazy var photo_Cell_Width: CGFloat = (photoReviewView.frame.width-2*horizontal_inset-2*4) / 3
     
-    // MARK: - View 생명주기
+    // MARK: - UIViewController viewDidLoad 설정
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        requestData()
     }
     
+    // MARK: - UIViewController viewWillApeear 설정
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNav()
     }
     
-    // MARK: - View Auto Layout 설정
+    // MARK: - UIViewController viewWillLayoutSubviews 설정
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        setLabelHeight()
         setCollectionViewHeight()
     }
     
     private func setLabelHeight() {
-        let size = introduceLabel.sizeThatFits(CGSize(width: self.view.frame.width, height: 100))
-        introduceLabel.heightAnchor.constraint(equalToConstant: size.height).isActive = true
+        introduceLabel.heightAnchor.constraint(equalToConstant: introduceLabel.intrinsicContentSize.height).isActive = true
     }
     
     private func setCollectionViewHeight() {
@@ -143,6 +138,56 @@ class ContentDetailVC: UIViewController {
         let attributeString = NSMutableAttributedString(string: str, attributes: [.foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0), .font: UIFont.systemFont(ofSize: 24)])
         attributeString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 24), range: (str as NSString).range(of: highlightPart))
         return attributeString
+    }
+}
+
+extension ContentDetailVC {
+    // MARK: - ID에 따라 요청
+    private func requestData() {
+        guard let category = self.category
+            , let id = self.id else { return }
+        
+        switch category {
+        case .celeb: requestCeleb(id: id)
+        case .media: requestMedia(id: id)
+        }
+    }
+    
+    // MARK: - 유명인 API 요청
+    private func requestCeleb(id: Int) {
+        NetworkHandler.shared.requestAPI(apiCategory: .getCelebOfID(id)) { result in
+            switch result {
+            case .success(let celebResult):
+                guard let celebDetail = celebResult as? CelebrityDetailDTO else { return }
+                print(celebDetail)
+            case .requestErr(let error): print(error)
+            case .serverErr: print("Server Error")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
+    }
+    
+    // MARK: - 미디어 API 요청
+    private func requestMedia(id: Int) {
+        NetworkHandler.shared.requestAPI(apiCategory: .getMediaOfID(id)) { result in
+            switch result {
+            case .success(let mediaResult):
+                guard let mediaDetail = mediaResult as? MediaDetailDTO else { return }
+                self.categoryDetailDTO = mediaDetail
+                DispatchQueue.main.async {
+                    self.appearDetailData()
+                }
+            case .requestErr(let error): print(error)
+            case .serverErr: print("Server Error")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
     }
 }
 

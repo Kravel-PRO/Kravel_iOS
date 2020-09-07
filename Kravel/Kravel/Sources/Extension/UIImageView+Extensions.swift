@@ -16,7 +16,7 @@ extension UIImageView {
             with: url,
             placeholder: nil,
             options: [
-                .transition(.fade(0.6))
+                .transition(.fade(1))
             ])
         {
             result in

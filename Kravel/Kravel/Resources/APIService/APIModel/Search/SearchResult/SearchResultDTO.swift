@@ -1,5 +1,5 @@
 //
-//  SearchParameter.swift
+//  SearchResultDTO.swift
 //  Kravel
 //
 //  Created by 윤동민 on 2020/09/07.
@@ -8,6 +8,7 @@
 
 import Foundation
 
-struct SearchParameter: ParameterAble {
-    let search: String?
+struct SearchResultDTO: Codable {
+    let celebrities: [CelebrityDTO]
+    let medias: [MediaDTO]
 }

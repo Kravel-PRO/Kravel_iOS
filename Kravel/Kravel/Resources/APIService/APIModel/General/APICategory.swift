@@ -26,6 +26,9 @@ enum APICategory<P: ParameterAble> {
     case scrap(P)
     case getCeleb(P)
     case getMedia(P)
+    case search(P)
+    case getCelebOfID(P)
+    case getMediaOfID(P)
     
     func makeURL() -> String {
         switch self {
@@ -43,6 +46,15 @@ enum APICategory<P: ParameterAble> {
         case .scrap: return APICostants.scrap
         case .getCeleb: return APICostants.getCelebList
         case .getMedia: return APICostants.getMeidaList
+        case .search: return APICostants.search
+        case .getCelebOfID(let id):
+            guard let id = id as? Int else { return "" }
+            APICostants.celebID = "\(id)"
+            return APICostants.getDetailCeleb
+        case .getMediaOfID(let id):
+            guard let id = id as? Int else { return "" }
+            APICostants.mediaID = "\(id)"
+            return APICostants.getDetailMedia
         }
     }
     
@@ -167,7 +179,7 @@ enum APICategory<P: ParameterAble> {
             ]
         case .getCeleb(let celebParameter):
             var parameters: [String: Any] = [:]
-            guard let searchParameter = celebParameter as? SearchParameter else { return nil }
+            guard let searchParameter = celebParameter as? GetListParameter else { return nil }
             
             if let size = searchParameter.size {
                 parameters.updateValue(size, forKey: "size")
@@ -183,7 +195,7 @@ enum APICategory<P: ParameterAble> {
             return parameters
         case .getMedia(let mediaParameter):
             var parameters: [String: Any] = [:]
-            guard let searchParameter = mediaParameter as? SearchParameter else { return nil }
+            guard let searchParameter = mediaParameter as? GetListParameter else { return nil }
             
             if let size = searchParameter.size {
                 parameters.updateValue(size, forKey: "size")
@@ -197,6 +209,16 @@ enum APICategory<P: ParameterAble> {
                 parameters.updateValue(page, forKey: "page")
             }
             return parameters
+        case .search(let searchParameter):
+            var parameters: [String: Any] = [:]
+            guard let searchParameter = searchParameter as? SearchParameter else { return nil }
+            
+            if let search = searchParameter.search {
+                parameters.updateValue(search, forKey: "search")
+            }
+            return parameters
+        case .getCelebOfID: return nil
+        case .getMediaOfID: return nil
         }
     }
 }

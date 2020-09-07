@@ -35,7 +35,7 @@ class TalentChildVC: UIViewController {
 extension TalentChildVC {
     // MARK: - Celebrity 요청 API
     private func requestCeleb() {
-        let celebRequestParameter = SearchParameter(size: nil, search: nil, page: nil)
+        let celebRequestParameter = GetListParameter(size: nil, search: nil, page: nil)
         
         NetworkHandler.shared.requestAPI(apiCategory: .getCeleb(celebRequestParameter)) { result in
             switch result {
@@ -66,7 +66,6 @@ extension TalentChildVC: UICollectionViewDataSource {
         searchCell.profile = talentDTO[indexPath.row].celebrityName
         searchCell.profileImageView.setImage(with: talentDTO[indexPath.row].imageUrl ?? "")
         searchCell.yearLabel.text = nil
-        // FIXME: - 이미지 받아오는 코드 추가
         return searchCell
     }
 }
@@ -95,8 +94,8 @@ extension TalentChildVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let searchVC_parent = self.parent as? SearchVC else { return }
         guard let detail_contentVC = self.storyboard?.instantiateViewController(identifier: ContentDetailVC.identifier) as? ContentDetailVC else { return }
-        detail_contentVC.name = talentDTO[indexPath.row].celebrityName
-        detail_contentVC.category = .talent
+        detail_contentVC.category = .celeb
+        detail_contentVC.id = talentDTO[indexPath.row].celebrityId
         detail_contentVC.hidesBottomBarWhenPushed = true
         searchVC_parent.navigationController?.pushViewController(detail_contentVC, animated: true)
     }

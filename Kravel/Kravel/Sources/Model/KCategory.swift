@@ -9,13 +9,13 @@
 import Foundation
 
 enum KCategory: Int, CaseIterable {
-    case talent = 0
-    case move = 1
+    case celeb = 0
+    case media = 1
     
     func getCategoryString() -> String {
         switch self {
-        case .talent: return "연예인 별"
-        case .move: return "드라마/영화 별"
+        case .celeb: return "연예인 별"
+        case .media: return "드라마/영화 별"
         }
     }
 }

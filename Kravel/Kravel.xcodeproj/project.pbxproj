@@ -134,15 +134,22 @@
 		9DC8447024F8EE1F00EC1D68 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DC8446F24F8EE1F00EC1D68 /* Home.storyboard */; };
 		9DC8447224F8EF0A00EC1D68 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DC8447124F8EF0A00EC1D68 /* Map.storyboard */; };
 		9DC8447424F8EF3700EC1D68 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DC8447324F8EF3700EC1D68 /* Search.storyboard */; };
+		9DCF6D4C2506890B00AFDDD6 /* K_SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF6D4B2506890B00AFDDD6 /* K_SearchResultCell.swift */; };
+		9DCF6D4E250694A300AFDDD6 /* SearchResultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DCF6D4D250694A300AFDDD6 /* SearchResultView.xib */; };
+		9DCF6D512506950D00AFDDD6 /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF6D502506950D00AFDDD6 /* SearchResultView.swift */; };
 		9DD48BA92503BD710096DE08 /* PlacePopupViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BA82503BD710096DE08 /* PlacePopupViewDelegate.swift */; };
 		9DD48BAC2503F03C0096DE08 /* ScrapParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BAB2503F03C0096DE08 /* ScrapParameter.swift */; };
 		9DD48BAE2503F16E0096DE08 /* ScrapResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BAD2503F16E0096DE08 /* ScrapResponseData.swift */; };
 		9DD48BB12504C4CD0096DE08 /* GetSimplePlaceParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BB02504C4CD0096DE08 /* GetSimplePlaceParameter.swift */; };
 		9DD48BB32504C5590096DE08 /* GetSimplePlaceResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BB22504C5590096DE08 /* GetSimplePlaceResponseData.swift */; };
-		9DD48BB6250510810096DE08 /* SearchParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BB5250510810096DE08 /* SearchParameter.swift */; };
+		9DD48BB6250510810096DE08 /* GetListParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BB5250510810096DE08 /* GetListParameter.swift */; };
 		9DD48BBC250511FD0096DE08 /* MediaDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BBB250511FD0096DE08 /* MediaDTO.swift */; };
 		9DD48BBE250512AB0096DE08 /* CelebrityDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BBD250512AB0096DE08 /* CelebrityDTO.swift */; };
 		9DD48BC025056A570096DE08 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BBF25056A570096DE08 /* UIImageView+Extensions.swift */; };
+		9DD48BC2250672510096DE08 /* SearchParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BC1250672510096DE08 /* SearchParameter.swift */; };
+		9DD48BC5250679140096DE08 /* SearchResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BC4250679140096DE08 /* SearchResultDTO.swift */; };
+		9DD7AD0B2506BA5900742F25 /* MediaDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7AD0A2506BA5900742F25 /* MediaDetailDTO.swift */; };
+		9DD7AD0D2506BB3300742F25 /* CelebrityDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7AD0C2506BB3300742F25 /* CelebrityDetailDTO.swift */; };
 		9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */; };
 		9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */; };
 		9DEDA6A924BCB70600E978F5 /* CategoryTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */; };
@@ -286,15 +293,22 @@
 		9DC8446F24F8EE1F00EC1D68 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		9DC8447124F8EF0A00EC1D68 /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		9DC8447324F8EF3700EC1D68 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
+		9DCF6D4B2506890B00AFDDD6 /* K_SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K_SearchResultCell.swift; sourceTree = "<group>"; };
+		9DCF6D4D250694A300AFDDD6 /* SearchResultView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultView.xib; sourceTree = "<group>"; };
+		9DCF6D502506950D00AFDDD6 /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
 		9DD48BA82503BD710096DE08 /* PlacePopupViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePopupViewDelegate.swift; sourceTree = "<group>"; };
 		9DD48BAB2503F03C0096DE08 /* ScrapParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapParameter.swift; sourceTree = "<group>"; };
 		9DD48BAD2503F16E0096DE08 /* ScrapResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapResponseData.swift; sourceTree = "<group>"; };
 		9DD48BB02504C4CD0096DE08 /* GetSimplePlaceParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSimplePlaceParameter.swift; sourceTree = "<group>"; };
 		9DD48BB22504C5590096DE08 /* GetSimplePlaceResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSimplePlaceResponseData.swift; sourceTree = "<group>"; };
-		9DD48BB5250510810096DE08 /* SearchParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParameter.swift; sourceTree = "<group>"; };
+		9DD48BB5250510810096DE08 /* GetListParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetListParameter.swift; sourceTree = "<group>"; };
 		9DD48BBB250511FD0096DE08 /* MediaDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDTO.swift; sourceTree = "<group>"; };
 		9DD48BBD250512AB0096DE08 /* CelebrityDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrityDTO.swift; sourceTree = "<group>"; };
 		9DD48BBF25056A570096DE08 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		9DD48BC1250672510096DE08 /* SearchParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParameter.swift; sourceTree = "<group>"; };
+		9DD48BC4250679140096DE08 /* SearchResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDTO.swift; sourceTree = "<group>"; };
+		9DD7AD0A2506BA5900742F25 /* MediaDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailDTO.swift; sourceTree = "<group>"; };
+		9DD7AD0C2506BB3300742F25 /* CelebrityDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrityDetailDTO.swift; sourceTree = "<group>"; };
 		9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTabbar.xib; sourceTree = "<group>"; };
@@ -434,6 +448,7 @@
 				9DEDA6BB24BCEE0400E978F5 /* PagingViewCell.swift */,
 				9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */,
 				9D9694CC24C5E7570046CB85 /* PlaceCell.swift */,
+				9DCF6D4B2506890B00AFDDD6 /* K_SearchResultCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -1039,6 +1054,7 @@
 			children = (
 				9DEDA6AB24BCB76E00E978F5 /* CategoryTabbar.swift */,
 				9DBA643124F0439600E12FA4 /* RecentResearchView.swift */,
+				9DCF6D502506950D00AFDDD6 /* SearchResultView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1060,6 +1076,7 @@
 				9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */,
 				9DEDA6AE24BCC74300E978F5 /* CategoryCell.xib */,
 				9DBA642F24F0437E00E12FA4 /* RecentResearchView.xib */,
+				9DCF6D4D250694A300AFDDD6 /* SearchResultView.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -1139,6 +1156,7 @@
 			isa = PBXGroup;
 			children = (
 				9DD48BBD250512AB0096DE08 /* CelebrityDTO.swift */,
+				9DD7AD0C2506BB3300742F25 /* CelebrityDetailDTO.swift */,
 			);
 			path = Celebrity;
 			sourceTree = "<group>";
@@ -1147,6 +1165,7 @@
 			isa = PBXGroup;
 			children = (
 				9DD48BBB250511FD0096DE08 /* MediaDTO.swift */,
+				9DD7AD0A2506BA5900742F25 /* MediaDetailDTO.swift */,
 			);
 			path = Media;
 			sourceTree = "<group>";
@@ -1154,11 +1173,21 @@
 		9DD48BBA250511BD0096DE08 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				9DD48BB5250510810096DE08 /* SearchParameter.swift */,
+				9DD48BB5250510810096DE08 /* GetListParameter.swift */,
+				9DD48BC1250672510096DE08 /* SearchParameter.swift */,
 				9DD48BB42505105B0096DE08 /* Celebrity */,
 				9DD48BB7250511830096DE08 /* Media */,
+				9DD48BC3250678FB0096DE08 /* SearchResult */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		9DD48BC3250678FB0096DE08 /* SearchResult */ = {
+			isa = PBXGroup;
+			children = (
+				9DD48BC4250679140096DE08 /* SearchResultDTO.swift */,
+			);
+			path = SearchResult;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1234,6 +1263,7 @@
 				9D6FF35E24F984BC00E6A8B9 /* OtherPhotoReview.storyboard in Resources */,
 				9DBA643B24F392CC00E12FA4 /* MyScrap.storyboard in Resources */,
 				9D79E29F24EC279E006310A2 /* NearPlace.storyboard in Resources */,
+				9DCF6D4E250694A300AFDDD6 /* SearchResultView.xib in Resources */,
 				9D6FF37E24FAB26F00E6A8B9 /* splash_iOS.json in Resources */,
 				9DBA644124F3B55700E12FA4 /* MyPhotoReview.storyboard in Resources */,
 				9D5DBB45248D5BAD00D82D40 /* SexButton.xib in Resources */,
@@ -1333,7 +1363,7 @@
 				9D96009F24E6A2F9007995EE /* LocationDetailVC.swift in Sources */,
 				9D76CD9624FE9945004D7333 /* SearchAddressVC.swift in Sources */,
 				9DEDA6BE24BCEEF000E978F5 /* TalentChildVC.swift in Sources */,
-				9DD48BB6250510810096DE08 /* SearchParameter.swift in Sources */,
+				9DD48BB6250510810096DE08 /* GetListParameter.swift in Sources */,
 				9DB03C8B24DAA6B800FF7E36 /* HomeNearPlaceCell.swift in Sources */,
 				9D79E2A324EC2993006310A2 /* DetailNearPlaceCell.swift in Sources */,
 				9DBA643F24F3965800E12FA4 /* MyScrapCell.swift in Sources */,
@@ -1349,6 +1379,7 @@
 				9D6FF36024F9851200E6A8B9 /* OtherPhotoReviewVC.swift in Sources */,
 				9DBA643D24F392E200E12FA4 /* MyScrapVC.swift in Sources */,
 				9DD48BAE2503F16E0096DE08 /* ScrapResponseData.swift in Sources */,
+				9DD48BC5250679140096DE08 /* SearchResultDTO.swift in Sources */,
 				9D49E8BD24C83545007CD948 /* MyPageMenu.swift in Sources */,
 				9D61F6E224F7E97600EF13FB /* LoginTextViewDelegate.swift in Sources */,
 				9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */,
@@ -1363,6 +1394,7 @@
 				9D13C811248796900058A7BF /* LoginTextView.swift in Sources */,
 				9D7FB1F624D15E60009A9C0A /* SubLocationView.swift in Sources */,
 				9D9694CF24C623F00046CB85 /* PhotoReviewCell.swift in Sources */,
+				9DD48BC2250672510096DE08 /* SearchParameter.swift in Sources */,
 				9D7FB1EE24D00D13009A9C0A /* NearPlaceCell.swift in Sources */,
 				9D76CD8C24FD8144004D7333 /* SigninParameter.swift in Sources */,
 				9D49E8BB24C83378007CD948 /* MyPageCell.swift in Sources */,
@@ -1384,10 +1416,12 @@
 				9DBA644B24F509CD00E12FA4 /* NearByAttractionCell.swift in Sources */,
 				9DB03C8F24DABF3D00FF7E36 /* HotPlaceCell.swift in Sources */,
 				9D61F6E424F7E99F00EF13FB /* PhotoReviewViewDelegate.swift in Sources */,
+				9DCF6D4C2506890B00AFDDD6 /* K_SearchResultCell.swift in Sources */,
 				9D76CDA324FED827004D7333 /* SearchResultCell.swift in Sources */,
 				9D6FF37924FAAF2600E6A8B9 /* SplashVC.swift in Sources */,
 				9DEDA6B224BCD09400E978F5 /* KCategory.swift in Sources */,
 				9D4CCF7324FFFD6F003F73AF /* NetworkFailPopupVC.swift in Sources */,
+				9DD7AD0B2506BA5900742F25 /* MediaDetailDTO.swift in Sources */,
 				9D13C7F12487842E0058A7BF /* MainVC.swift in Sources */,
 				9D76CD9F24FEB916004D7333 /* SearchPlaceParameter.swift in Sources */,
 				9D76CD8E24FD8193004D7333 /* SigninResponseData.swift in Sources */,
@@ -1410,10 +1444,12 @@
 				9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */,
 				9DBA643224F0439600E12FA4 /* RecentResearchView.swift in Sources */,
 				9D49E8B424C6DCBE007CD948 /* PrivateKey.swift in Sources */,
+				9DCF6D512506950D00AFDDD6 /* SearchResultView.swift in Sources */,
 				9DD48BBC250511FD0096DE08 /* MediaDTO.swift in Sources */,
 				9D76CD8624FD7025004D7333 /* APIError.swift in Sources */,
 				9DBA644924F507EF00E12FA4 /* NearByAttractionView.swift in Sources */,
 				9DD48BB12504C4CD0096DE08 /* GetSimplePlaceParameter.swift in Sources */,
+				9DD7AD0D2506BB3300742F25 /* CelebrityDetailDTO.swift in Sources */,
 				9DBA642E24F0414C00E12FA4 /* RecentResearchTerm+CoreDataProperties.swift in Sources */,
 				9D6FF38A24FAFC6300E6A8B9 /* NetworkHandler.swift in Sources */,
 				9D76CD7F24FD3641004D7333 /* APIResponseData.swift in Sources */,

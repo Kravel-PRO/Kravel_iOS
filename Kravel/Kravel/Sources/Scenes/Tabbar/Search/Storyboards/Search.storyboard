@@ -188,13 +188,13 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9cB-Tc-Jne">
-                                                <rect key="frame" x="16.999999999999996" y="304" width="41.666666666666657" height="106"/>
+                                                <rect key="frame" x="16.999999999999996" y="304" width="41.666666666666657" height="20.333333333333314"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OeV-uE-7dv">
-                                                <rect key="frame" x="0.0" y="432" width="375" height="448"/>
+                                                <rect key="frame" x="0.0" y="346.33333333333326" width="375" height="448"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="448" id="ccO-c5-Umi"/>
@@ -252,7 +252,7 @@
                                                 </cells>
                                             </collectionView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69Z-Jp-Uh9">
-                                                <rect key="frame" x="16" y="896" width="343" height="44"/>
+                                                <rect key="frame" x="16" y="810.33333333333337" width="343" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="69Z-Jp-Uh9" secondAttribute="height" multiplier="343:44" id="TkG-Le-cNe"/>
                                                 </constraints>
@@ -261,14 +261,14 @@
                                                 </state>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBu-at-rIr">
-                                                <rect key="frame" x="0.0" y="956" width="375" height="1"/>
+                                                <rect key="frame" x="0.0" y="870.33333333333337" width="375" height="1"/>
                                                 <color key="backgroundColor" white="0.81345781520000005" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="ksX-Q9-WEH"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gEi-u8-pDf" customClass="PhotoReviewView" customModule="Kravel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="957" width="375" height="289"/>
+                                                <rect key="frame" x="0.0" y="871.33333333333337" width="375" height="289.00000000000011"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="gEi-u8-pDf" secondAttribute="height" multiplier="375:289" id="tUI-2r-SqU"/>
@@ -278,7 +278,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstItem="eBu-at-rIr" firstAttribute="top" secondItem="69Z-Jp-Uh9" secondAttribute="bottom" constant="16" id="0Ck-Ec-0hJ"/>
-                                            <constraint firstAttribute="bottom" secondItem="gEi-u8-pDf" secondAttribute="bottom" constant="20" id="0iL-AZ-BoU"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="gEi-u8-pDf" secondAttribute="bottom" constant="20" id="0iL-AZ-BoU"/>
                                             <constraint firstItem="eBu-at-rIr" firstAttribute="leading" secondItem="H8t-1X-UEF" secondAttribute="leading" id="76c-Sv-w4o"/>
                                             <constraint firstAttribute="trailing" secondItem="69Z-Jp-Uh9" secondAttribute="trailing" constant="16" id="9AT-0b-TLs"/>
                                             <constraint firstAttribute="trailing" secondItem="OeV-uE-7dv" secondAttribute="trailing" id="9GX-ZI-PYc"/>

@@ -165,7 +165,6 @@ class HomeVC: UIViewController {
                 print(errorMessage)
             // FIXME: 서버 에러 있을 시 에러 처리 필요
             case .serverErr:
-                print("여기지?")
                 print("ServerError")
             case .networkFail:
                 guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }

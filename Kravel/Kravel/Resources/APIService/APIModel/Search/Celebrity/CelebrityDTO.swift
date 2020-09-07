@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CelebrityDTO: Codable {
+struct CelebrityDTO: Codable, SearchAble {
     let celebrityId: Int
     let celebrityName: String?
     let imageUrl: String?

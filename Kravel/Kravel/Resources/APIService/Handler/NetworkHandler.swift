@@ -13,7 +13,6 @@ class NetworkHandler {
     static let shared = NetworkHandler()
     
     func requestAPI<P: ParameterAble>(apiCategory: APICategory<P>, completion: @escaping (NetworkResult<Codable>) -> Void) {
-        
         let apiURL = apiCategory.makeURL()
         let headers = apiCategory.makeHeader()
         let parameters = apiCategory.makeParameter()
@@ -30,6 +29,9 @@ class NetworkHandler {
         case .scrap: requestScrap(apiURL, headers, parameters, completion)
         case .getCeleb: requestCeleb(apiURL, headers, parameters, completion)
         case .getMedia: requestMedia(apiURL, headers, parameters, completion)
+        case .search: requestSearch(apiURL, headers, parameters, completion)
+        case .getCelebOfID: requestCelebOfID(apiURL, headers, parameters, completion)
+        case .getMediaOfID: requestMediaOfID(apiURL, headers, parameters, completion)
         }
     }
     
@@ -265,6 +267,67 @@ class NetworkHandler {
                         completion(.success(mediaResult.data?.result))
                     } else {
                         completion(.serverErr)
+                    }
+                case .failure(let error):
+                    print(error)
+                    completion(.networkFail)
+                }
+        }
+    }
+    
+    private func requestSearch(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
+        guard let url = try? url.asURL() else { return }
+        
+        AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
+            .validate(statusCode: 200...500)
+            .responseDecodable(of: APIResponseData<APICantSortableDataResult<SearchResultDTO>, APIError>.self) { response in
+                switch response.result {
+                case .success(let searchResult):
+                    guard let statusCode = response.response?.statusCode else { return }
+                    if statusCode == 200 {
+                        completion(.success(searchResult.data?.result))
+                    } else {
+                        completion(.serverErr)
+                    }
+                case .failure(let error):
+                    print(error)
+                    completion(.networkFail)
+                }
+        }
+    }
+    
+    private func requestCelebOfID(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
+        guard let url = try? url.asURL() else { return }
+        
+        AF.request(url, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .validate(statusCode: 200...500)
+            .responseDecodable(of: APIResponseData<APICantSortableDataResult<CelebrityDetailDTO>, APIError>.self) { response in
+                switch response.result {
+                case .success(let detailCelebResult):
+                    guard let statusCode = response.response?.statusCode else { return }
+                    if statusCode == 200 {
+                        completion(.success(detailCelebResult.data?.result))
+                    } else {
+                        completion(.serverErr)
+                    }
+                case .failure(let error):
+                    print(error)
+                    completion(.networkFail)
+                }
+        }
+    }
+    
+    private func requestMediaOfID(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
+        guard let url = try? url.asURL() else { return }
+        
+        AF.request(url, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .validate(statusCode: 200...500)
+            .responseDecodable(of: APIResponseData<APICantSortableDataResult<MediaDetailDTO>, APIError>.self) { response in
+                switch response.result {
+                case .success(let detailMediaResult):
+                    guard let statusCode = response.response?.statusCode else { return }
+                    if statusCode == 200 {
+                        completion(.success(detailMediaResult.data?.result))
                     }
                 case .failure(let error):
                     print(error)
