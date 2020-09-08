@@ -36,6 +36,9 @@ struct ImageKey {
     // 검색 돋보기 이미지
     static let icSearch = "btnSearch"
     
+    static let navBackWhtie = "navBackWhtie"
+    static let navDownbtn = "navDownbtn"
+    
     // 스크랩/포토리뷰 없을 때 이미지
     static let icNoPhotoEmpty = "icNoPhotoEmpty"
     static let icNoScrap = "icNoScrapTiger"

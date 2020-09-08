@@ -44,13 +44,34 @@ class LocationDetailVC: UIViewController {
     @IBOutlet weak var contentScrollView: UIScrollView!
     
     // MARK: - 뒤로 가기 버튼 설정
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var backButtonTopConstraint: NSLayoutConstraint!
     
-    private func setBackButtonConstraint() {
-        backButtonTopConstraint.constant = self.view.safeAreaInsets.top
+    /*
+     Navigation Bar 있을 때의 설정
+     1. 뒤로 가기 버튼
+     2. PopViewController로 구현
+     */
+    private func setBackButtonByNav() {
+        backButton.setImage(UIImage(named: ImageKey.navBackWhtie), for: .normal)
+        backButton.addTarget(self, action: #selector(pop), for: .touchUpInside)
     }
     
-    @IBAction func dismissView(_ sender: Any) {
+    @objc func pop() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    /*
+     Present로 화면을 띄운 경우 설정
+     1. 밑으로 내리는 버튼
+     2. dismiss로 화면 내리도록 변경
+     */
+    private func setBackButtonByPresent() {
+        backButton.setImage(UIImage(named: ImageKey.navDownbtn), for: .normal)
+        backButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+    }
+    
+    @objc func dismissView() {
         self.dismiss(animated: false, completion: nil)
         if let scrap = self.placeData?.scrap {
             NotificationCenter.default.post(name: .dismissDetailView, object: nil, userInfo: ["scrap": scrap])
@@ -155,6 +176,10 @@ class LocationDetailVC: UIViewController {
         if photoReviewData.count == 0 { photoReviewViewHeightConstraint.constant = defaultHeight }
         else if photoReviewData.count <= 3 { photoReviewViewHeightConstraint.constant = defaultHeight + cellHeight + 16 }
         else { photoReviewViewHeightConstraint.constant = defaultHeight + 2 * cellHeight + 16 }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     // MARK: - 위치 정보 나타내는 뷰 설정
@@ -167,10 +192,15 @@ class LocationDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.addGesture()
         showLoadingLottie()
+        if navigationController?.viewControllers[0] == self {
+            addGesture()
+            setBackButtonByPresent()
+        } else {
+            setBackButtonByNav()
+        }
+        
         if let placeID = self.placeID {
-            print(placeID)
             requestDetailPlaceData(of: placeID)
             requestPhotoReview(of: placeID)
         }
@@ -271,12 +301,6 @@ class LocationDetailVC: UIViewController {
         }
     }
     
-    // MARK: - UIViewController viewWillLayoutSubviews() Override 부분
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        setBackButtonConstraint()
-    }
-    
     // MARK: - UIViewController viewWillAppear() Override 부분
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -285,6 +309,9 @@ class LocationDetailVC: UIViewController {
     
     private func setNav() {
         self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.navigationBar.topItem?.title = ""
+        guard let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else { return }
+        backButtonTopConstraint.constant = window.safeAreaInsets.top
     }
 }
 

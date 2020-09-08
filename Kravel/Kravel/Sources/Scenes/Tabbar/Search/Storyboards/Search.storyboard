@@ -294,6 +294,13 @@
                                                     <constraint firstAttribute="height" constant="289" id="6aN-iI-HSz"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kin-xH-LNe">
+                                                <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="kin-xH-LNe" secondAttribute="height" multiplier="1:1" id="0b4-pa-rJ5"/>
+                                                </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -304,9 +311,11 @@
                                             <constraint firstItem="gEi-u8-pDf" firstAttribute="top" secondItem="q8i-c1-9Bc" secondAttribute="bottom" constant="16" id="Eb8-Vf-mIY"/>
                                             <constraint firstItem="eBu-at-rIr" firstAttribute="centerX" secondItem="H8t-1X-UEF" secondAttribute="centerX" id="Gc6-wd-c03"/>
                                             <constraint firstItem="9cB-Tc-Jne" firstAttribute="leading" secondItem="H8t-1X-UEF" secondAttribute="leading" constant="17" id="Iba-OQ-8Uv"/>
+                                            <constraint firstItem="kin-xH-LNe" firstAttribute="top" secondItem="H8t-1X-UEF" secondAttribute="top" id="Ik5-9s-5pA"/>
                                             <constraint firstAttribute="trailing" secondItem="eBu-at-rIr" secondAttribute="trailing" id="UDn-BE-mlQ"/>
                                             <constraint firstItem="gEi-u8-pDf" firstAttribute="leading" secondItem="H8t-1X-UEF" secondAttribute="leading" id="WQm-HW-522"/>
                                             <constraint firstItem="ITf-nc-oF7" firstAttribute="top" secondItem="H8t-1X-UEF" secondAttribute="top" id="brB-8l-Zkm"/>
+                                            <constraint firstItem="kin-xH-LNe" firstAttribute="leading" secondItem="H8t-1X-UEF" secondAttribute="leading" id="cWI-VC-Nh9"/>
                                             <constraint firstItem="9cB-Tc-Jne" firstAttribute="top" secondItem="ITf-nc-oF7" secondAttribute="bottom" constant="24" id="h0y-LD-jnN"/>
                                             <constraint firstItem="gEi-u8-pDf" firstAttribute="top" secondItem="eBu-at-rIr" secondAttribute="bottom" id="jTO-ug-Mmg"/>
                                             <constraint firstItem="q8i-c1-9Bc" firstAttribute="leading" secondItem="H8t-1X-UEF" secondAttribute="leading" id="mlf-w2-QEz"/>
@@ -329,6 +338,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="2PH-tH-6Yz" firstAttribute="leading" secondItem="vU3-Sd-Zs8" secondAttribute="leading" id="Czg-3c-ehe"/>
+                            <constraint firstItem="kin-xH-LNe" firstAttribute="width" secondItem="Qi1-oZ-sX9" secondAttribute="width" multiplier="0.112" id="ODl-5V-XqY"/>
                             <constraint firstItem="vU3-Sd-Zs8" firstAttribute="trailing" secondItem="2PH-tH-6Yz" secondAttribute="trailing" id="OQ7-Jb-tg7"/>
                             <constraint firstItem="2PH-tH-6Yz" firstAttribute="top" secondItem="Qi1-oZ-sX9" secondAttribute="top" id="XNl-eo-i3Q"/>
                             <constraint firstItem="vU3-Sd-Zs8" firstAttribute="bottom" secondItem="2PH-tH-6Yz" secondAttribute="bottom" id="cqj-1g-vS5"/>
@@ -337,6 +347,8 @@
                     </view>
                     <size key="freeformSize" width="375" height="1300"/>
                     <connections>
+                        <outlet property="backButton" destination="kin-xH-LNe" id="NhY-xb-Dal"/>
+                        <outlet property="backButtonTopConstraint" destination="Ik5-9s-5pA" id="KzH-kH-lTI"/>
                         <outlet property="introduceLabel" destination="9cB-Tc-Jne" id="vZn-CP-PyR"/>
                         <outlet property="introduceLabelHeightConstraint" destination="COo-L5-xCO" id="pPy-Yd-BSK"/>
                         <outlet property="moreButton" destination="69Z-Jp-Uh9" id="DS3-RJ-d7d"/>

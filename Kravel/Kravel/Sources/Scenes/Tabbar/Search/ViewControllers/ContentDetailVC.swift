@@ -41,6 +41,14 @@ class ContentDetailVC: UIViewController {
         }
     }
     
+    // MARK: - 뒤로가기 버튼 설정
+    @IBOutlet weak var backButton: UIButton! {
+        didSet {
+            backButton.setImage(UIImage(named: ImageKey.navBackWhtie), for: .normal)
+        }
+    }
+    @IBOutlet weak var backButtonTopConstraint: NSLayoutConstraint!
+    
     // MARK: - Thumnail Image 설정
     @IBOutlet weak var thumbnail_Back_View: UIView!
     @IBOutlet weak var thumbnail_imageView: UIImageView! {
@@ -192,10 +200,10 @@ class ContentDetailVC: UIViewController {
     
     // MARK: - Set Navigation
     private func setNav() {
-        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = true
         self.navigationController?.navigationBar.topItem?.title = ""
-        self.navigationController?.navigationBar.tintColor = .white
-        self.setTransparentNav()
+        guard let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else { return }
+        backButtonTopConstraint.constant = window.safeAreaInsets.top
     }
     
     private func createAttributeString(of str: String, highlightPart: String) -> NSMutableAttributedString {
@@ -295,6 +303,18 @@ extension ContentDetailVC: UICollectionViewDataSource {
         photoReviewCell.photoImageView.setImage(with: photoReviewData[indexPath.row].imageURl)
         if indexPath.row == 5 { photoReviewCell.addMoreView() }
         return photoReviewCell
+    }
+}
+
+extension ContentDetailVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == placeCollectionView {
+            guard let placeDetailVC = UIStoryboard(name: "LocationDetail", bundle: nil).instantiateViewController(withIdentifier: LocationDetailVC.identifier) as? LocationDetailVC else { return }
+            placeDetailVC.placeID = places[indexPath.row].placeId
+            self.navigationController?.pushViewController(placeDetailVC, animated: true)
+        } else {
+            print(indexPath.row)
+        }
     }
 }
 

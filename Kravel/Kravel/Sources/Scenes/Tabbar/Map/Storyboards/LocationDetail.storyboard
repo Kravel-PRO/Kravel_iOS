@@ -28,25 +28,12 @@
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bN3-Fn-yME">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="266"/>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Mb-Nh-kDi">
-                                                        <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="1Mb-Nh-kDi" secondAttribute="height" multiplier="1:1" id="7WS-gQ-eV3"/>
-                                                        </constraints>
-                                                        <state key="normal" image="navDownbtn"/>
-                                                        <connections>
-                                                            <action selector="dismissView:" destination="yXX-7V-xvt" eventType="touchUpInside" id="Mif-VZ-fe3"/>
-                                                        </connections>
-                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
-                                                    <constraint firstItem="1Mb-Nh-kDi" firstAttribute="top" secondItem="kxz-aY-Bcc" secondAttribute="top" id="MXs-in-UEw"/>
                                                     <constraint firstAttribute="bottom" secondItem="bN3-Fn-yME" secondAttribute="bottom" id="U14-0j-fyd"/>
                                                     <constraint firstItem="bN3-Fn-yME" firstAttribute="leading" secondItem="kxz-aY-Bcc" secondAttribute="leading" id="byR-A3-EhY"/>
-                                                    <constraint firstItem="1Mb-Nh-kDi" firstAttribute="width" secondItem="bN3-Fn-yME" secondAttribute="width" multiplier="0.101449" id="ckN-D6-RFp"/>
                                                     <constraint firstAttribute="width" secondItem="kxz-aY-Bcc" secondAttribute="height" multiplier="207:133" id="i8C-s9-m2I"/>
-                                                    <constraint firstItem="1Mb-Nh-kDi" firstAttribute="leading" secondItem="kxz-aY-Bcc" secondAttribute="leading" id="jI9-QF-sFt"/>
                                                     <constraint firstItem="bN3-Fn-yME" firstAttribute="top" secondItem="kxz-aY-Bcc" secondAttribute="top" id="lgZ-Eg-K2h"/>
                                                     <constraint firstAttribute="trailing" secondItem="bN3-Fn-yME" secondAttribute="trailing" id="yvp-HS-tPT"/>
                                                 </constraints>
@@ -178,6 +165,13 @@
                                                     <constraint firstAttribute="height" constant="190" id="3Go-qr-Div"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PLn-bZ-Edg">
+                                                <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="PLn-bZ-Edg" secondAttribute="height" multiplier="1:1" id="h4P-I2-cYu"/>
+                                                </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -187,10 +181,12 @@
                                             <constraint firstAttribute="trailing" secondItem="sNN-bY-g9G" secondAttribute="trailing" constant="16" id="6F3-fJ-Cwx"/>
                                             <constraint firstItem="2qT-Kh-WAK" firstAttribute="leading" secondItem="VAc-2F-GVg" secondAttribute="leading" id="6Kd-8J-Sp2"/>
                                             <constraint firstItem="7Ni-ef-Vh2" firstAttribute="leading" secondItem="VAc-2F-GVg" secondAttribute="leading" constant="16" id="9Wg-DI-rmc"/>
+                                            <constraint firstItem="PLn-bZ-Edg" firstAttribute="top" secondItem="VAc-2F-GVg" secondAttribute="top" id="9kp-hH-d9s"/>
                                             <constraint firstItem="sNN-bY-g9G" firstAttribute="leading" secondItem="TZG-Bf-OBu" secondAttribute="leading" id="BCi-Ad-p71"/>
                                             <constraint firstItem="gy6-Z3-9yy" firstAttribute="leading" secondItem="VAc-2F-GVg" secondAttribute="leading" id="BoC-Je-edU"/>
                                             <constraint firstItem="sNN-bY-g9G" firstAttribute="top" secondItem="TZG-Bf-OBu" secondAttribute="bottom" constant="4" id="EbM-VN-oQM"/>
                                             <constraint firstItem="aU3-T3-CZt" firstAttribute="leading" secondItem="VAc-2F-GVg" secondAttribute="leading" id="FnR-yI-5iS"/>
+                                            <constraint firstItem="PLn-bZ-Edg" firstAttribute="leading" secondItem="VAc-2F-GVg" secondAttribute="leading" id="InO-gA-F4I"/>
                                             <constraint firstAttribute="trailing" secondItem="7Ni-ef-Vh2" secondAttribute="trailing" constant="16" id="Jqn-Jv-t9Z"/>
                                             <constraint firstAttribute="trailing" secondItem="BYs-cn-XLo" secondAttribute="trailing" id="KSW-rN-kO8"/>
                                             <constraint firstAttribute="trailing" secondItem="kxz-aY-Bcc" secondAttribute="trailing" id="LWF-Hv-7lI"/>
@@ -231,6 +227,7 @@
                             <constraint firstItem="h70-xP-WHO" firstAttribute="top" secondItem="GhO-OB-mHg" secondAttribute="top" id="9a2-Sw-soI"/>
                             <constraint firstAttribute="bottom" secondItem="h70-xP-WHO" secondAttribute="bottom" id="Er5-3C-4Kc"/>
                             <constraint firstItem="VAc-2F-GVg" firstAttribute="height" secondItem="GhO-OB-mHg" secondAttribute="height" priority="750" id="UaQ-aw-EKw"/>
+                            <constraint firstItem="PLn-bZ-Edg" firstAttribute="width" secondItem="GhO-OB-mHg" secondAttribute="width" multiplier="0.101449" id="dOs-dK-rqY"/>
                             <constraint firstItem="dqO-tx-87Z" firstAttribute="trailing" secondItem="h70-xP-WHO" secondAttribute="trailing" id="lNm-XU-DcS"/>
                             <constraint firstItem="h70-xP-WHO" firstAttribute="leading" secondItem="dqO-tx-87Z" secondAttribute="leading" id="oxe-Al-Mpf"/>
                         </constraints>
@@ -239,7 +236,8 @@
                     <navigationItem key="navigationItem" id="3bx-B5-zpb"/>
                     <size key="freeformSize" width="414" height="1400"/>
                     <connections>
-                        <outlet property="backButtonTopConstraint" destination="MXs-in-UEw" id="xpf-VQ-Y5p"/>
+                        <outlet property="backButton" destination="PLn-bZ-Edg" id="eWa-iM-ejY"/>
+                        <outlet property="backButtonTopConstraint" destination="9kp-hH-d9s" id="Yd3-n3-zQe"/>
                         <outlet property="buttonStackContainerView" destination="7Ni-ef-Vh2" id="cA2-ab-Tzh"/>
                         <outlet property="contentScrollView" destination="h70-xP-WHO" id="R4L-4D-unW"/>
                         <outlet property="nearByAttractionView" destination="QgE-mE-ZfT" id="Alw-y3-E5b"/>
@@ -279,6 +277,5 @@
     <resources>
         <image name="icPhoto" width="24" height="24"/>
         <image name="icScrap" width="24" height="24"/>
-        <image name="navDownbtn" width="42" height="42"/>
     </resources>
 </document>
