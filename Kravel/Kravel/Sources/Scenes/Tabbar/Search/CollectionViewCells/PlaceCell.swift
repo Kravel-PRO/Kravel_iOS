@@ -15,12 +15,6 @@ class PlaceCell: UICollectionViewCell {
     @IBOutlet weak var placeLabel: UILabel!
     @IBOutlet weak var tagLabel: UILabel!
     
-    var placeImage: UIImage? {
-        didSet {
-            placeImageView.image = placeImage
-        }
-    }
-    
     var placeName: String? {
         didSet {
             placeLabel.text = placeName
@@ -43,7 +37,7 @@ class PlaceCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        placeImage = nil
+        placeImageView.image = nil
         placeName = nil
         tags = nil
     }

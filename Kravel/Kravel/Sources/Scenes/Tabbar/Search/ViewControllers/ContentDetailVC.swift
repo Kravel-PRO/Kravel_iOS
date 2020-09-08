@@ -16,6 +16,7 @@ class ContentDetailVC: UIViewController {
     var category: KCategory?
     var id: Int?
     var categoryDetailDTO: CategoryAble?
+    var places: [PlaceContentInform] = []
     
     private func appearDetailData() {
         guard let category = self.category else { return }
@@ -24,10 +25,18 @@ class ContentDetailVC: UIViewController {
             guard let celebDetailDTO = categoryDetailDTO as? CelebrityDetailDTO else { return }
         case .media:
             guard let mediaDetailDTO = categoryDetailDTO as? MediaDetailDTO else { return }
+            // 썸네일 이미지 설정
+            thumbnail_imageView.setImage(with: mediaDetailDTO.imageUrl ?? "")
+            
+            // Label 설정 -> 높이 Constraint 계산해서 적용
             let introduceText = "\(mediaDetailDTO.title)\n촬영지가 어딜까요?"
             introduceLabel.attributedText = createAttributeString(of: introduceText, highlightPart: mediaDetailDTO.title)
             setLabelHeight()
             
+            // 관련 장소 설정
+            self.places = mediaDetailDTO.places ?? []
+            placeCollectionView.reloadData()
+            setPlaceCVHeight()
         }
     }
     
@@ -73,6 +82,26 @@ class ContentDetailVC: UIViewController {
     lazy var place_Cell_Width: CGFloat = (placeCollectionView.frame.width-2*horizontal_inset-place_item_Spacing) / 2
     lazy var place_Cell_Height: CGFloat = place_Cell_Width * (159/169)
     
+    private func setPlaceCVHeight() {
+        if places.count <= 2 {
+            placeCV_height_Constarint.constant = place_Cell_Height
+            moreButtonConatinerView.isHidden = true
+        } else if places.count <= 4 {
+            placeCV_height_Constarint.constant = place_Cell_Height * 2
+            moreButtonConatinerView.isHidden = true
+        } else if places.count <= 6 {
+            placeCV_height_Constarint.constant = place_Cell_Height * 3
+            moreButtonConatinerView.isHidden = true
+        } else {
+            placeCV_height_Constarint.constant = place_Cell_Height * 3
+            moreButtonConatinerView.isHidden = false
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     // MARK: - Button 설정
     @IBOutlet weak var moreButton: UIButton! {
         didSet {
@@ -81,6 +110,8 @@ class ContentDetailVC: UIViewController {
             moreButton.layer.cornerRadius = moreButton.frame.width / 15
         }
     }
+    
+    @IBOutlet weak var moreButtonConatinerView: UIView!
     
     // MARK: - 포토리뷰 뷰 설정
     @IBOutlet weak var photoReviewView: PhotoReviewView! {
@@ -115,7 +146,6 @@ class ContentDetailVC: UIViewController {
     // MARK: - UIViewController viewWillLayoutSubviews 설정
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        setCollectionViewHeight()
     }
     
     private func setLabelHeight() {
@@ -193,7 +223,9 @@ extension ContentDetailVC {
 
 extension ContentDetailVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        if collectionView == placeCollectionView { return places.count }
+        // FIXME: 여기 포토리뷰 받아오게 설정
+        else { return 6 }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -203,9 +235,9 @@ extension ContentDetailVC: UICollectionViewDataSource {
     
     private func createPlaceCell(of collectionView: UICollectionView, at indexPath: IndexPath) -> UICollectionViewCell {
         guard let placeCell = collectionView.dequeueReusableCell(withReuseIdentifier: PlaceCell.identifier, for: indexPath) as? PlaceCell else { return UICollectionViewCell() }
-        placeCell.placeImage = UIImage(named: "IMG_1136")
-        placeCell.tags = ["낭만적", "바람이부는", "상쾌한"]
-        placeCell.placeName = "여기는 어디?"
+        placeCell.placeImageView.setImage(with: places[indexPath.row].imageUrl ?? "")
+        placeCell.tags = places[indexPath.row].tags
+        placeCell.placeName = places[indexPath.row].title
         return placeCell
     }
     
