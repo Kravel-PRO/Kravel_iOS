@@ -106,10 +106,8 @@ class NetworkHandler {
                             completion(.serverErr)
                             return
                         }
-                        print("이거 요첨 \(getPlaceResult.content)")
                         completion(.success(getPlaceResult))
                     } else {
-                        print(statusCode)
                         completion(.requestErr("실패"))
                     }
                 case .failure(let error):

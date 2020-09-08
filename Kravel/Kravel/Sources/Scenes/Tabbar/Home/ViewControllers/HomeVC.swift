@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class HomeVC: UIViewController {
     // MARK: - 제일 위 Title View 설정
@@ -144,11 +145,33 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        requestLocation()
         requestClosePlaceData()
         requestReviewData()
         requestHotPlaceData()
     }
     
+    // MARK: - UIViewController viewWillAppear Override
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNav()
+    }
+    
+    private func setNav() {
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    // MARK: - UIViewController viewDidLayoutSubviews Override
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setHotPlaceCollectionViewHeight()
+        setHotPlaceLabelLayout()
+        setPhotoReviewLabelLayout()
+        setPhotoReviewViewLayout()
+    }
+}
+
+extension HomeVC {
     // MARK: - 장소 데이터 API 요청
     private func requestClosePlaceData() {
         let getPlaceParameter = GetPlaceParameter(latitude: 1.0, longitude: 1.0, page: nil, size: nil, review_count: nil, sort: nil)
@@ -221,24 +244,24 @@ class HomeVC: UIViewController {
             }
         }
     }
-    
-    // MARK: - UIViewController viewWillAppear Override
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNav()
+}
+
+extension HomeVC: CLLocationManagerDelegate {
+    // MARK: - 위치 관련 설정
+    private func requestLocation() {
+        LocationManager.shared.setManager(delegate: self)
+        LocationManager.shared.requestAuthorization()
+        LocationManager.shared.requestLocation()
     }
     
-    private func setNav() {
-        self.navigationController?.navigationBar.isHidden = true
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else { return }
+        print("위도 \(location.coordinate.latitude)")
+        print("경도 \(location.coordinate.longitude)")
     }
     
-    // MARK: - UIViewController viewDidLayoutSubviews Override
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setHotPlaceCollectionViewHeight()
-        setHotPlaceLabelLayout()
-        setPhotoReviewLabelLayout()
-        setPhotoReviewViewLayout()
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed to find User Location \(error.localizedDescription)")
     }
 }
 

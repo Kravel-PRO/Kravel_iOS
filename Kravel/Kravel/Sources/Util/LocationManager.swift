@@ -18,7 +18,7 @@ class LocationManager {
         locationManager.requestWhenInUseAuthorization()
     }
     
-    func setManager(delegate: CLLocationManagerDelegate, accuracy: CLLocationAccuracy) {
+    func setManager(delegate: CLLocationManagerDelegate, accuracy: CLLocationAccuracy = kCLLocationAccuracyBest) {
         locationManager.delegate = delegate
         locationManager.desiredAccuracy = accuracy
     }
