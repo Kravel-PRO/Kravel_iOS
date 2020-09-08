@@ -45,6 +45,9 @@ struct ImageKey {
     static let icNoPhotoEmpty = "icNoPhotoEmpty"
     static let icNoScrap = "icNoScrapTiger"
     
+    // 권한 허용 이미지
+    static let icAccessTiger = "icAccessTiger"
+    
     // 맵 마커 표시 이미지
     static let icMarkDefault = "icMarkDefault"
     static let icMarkFocus = "icMarkFocus"
@@ -72,4 +75,9 @@ struct ImageKey {
     // 스크랩 버튼 이미지
     static let icScrap = "icScrap"
     static let icScrapFill = "icScrapFill"
+    
+    // 권한 없는 경우
+    static let noAccessLocation = "icLocation"
+    static let noAccessGallery = "icNoAccessGallery"
+    static let icPhoto = "icPhoto"
 }

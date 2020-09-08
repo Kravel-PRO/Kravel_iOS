@@ -150,6 +150,8 @@
 		9DD48BC5250679140096DE08 /* SearchResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD48BC4250679140096DE08 /* SearchResultDTO.swift */; };
 		9DD7AD0B2506BA5900742F25 /* MediaDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7AD0A2506BA5900742F25 /* MediaDetailDTO.swift */; };
 		9DD7AD0D2506BB3300742F25 /* CelebrityDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7AD0C2506BB3300742F25 /* CelebrityDetailDTO.swift */; };
+		9DD7AD0F2507BE6D00742F25 /* AuthorizationPopup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DD7AD0E2507BE6D00742F25 /* AuthorizationPopup.storyboard */; };
+		9DD7AD112507BE8700742F25 /* AuthorizationPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7AD102507BE8700742F25 /* AuthorizationPopupVC.swift */; };
 		9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */; };
 		9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */; };
 		9DEDA6A924BCB70600E978F5 /* CategoryTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */; };
@@ -309,6 +311,8 @@
 		9DD48BC4250679140096DE08 /* SearchResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDTO.swift; sourceTree = "<group>"; };
 		9DD7AD0A2506BA5900742F25 /* MediaDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailDTO.swift; sourceTree = "<group>"; };
 		9DD7AD0C2506BB3300742F25 /* CelebrityDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrityDetailDTO.swift; sourceTree = "<group>"; };
+		9DD7AD0E2507BE6D00742F25 /* AuthorizationPopup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthorizationPopup.storyboard; sourceTree = "<group>"; };
+		9DD7AD102507BE8700742F25 /* AuthorizationPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPopupVC.swift; sourceTree = "<group>"; };
 		9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTabbar.xib; sourceTree = "<group>"; };
@@ -495,6 +499,7 @@
 			children = (
 				9D79E2A424ED02D1006310A2 /* MorePhotoReviewVC.swift */,
 				9D4CCF7224FFFD6F003F73AF /* NetworkFailPopupVC.swift */,
+				9DD7AD102507BE8700742F25 /* AuthorizationPopupVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -853,6 +858,7 @@
 				9D8C0A2424BC515A005C1F58 /* Tabbar.storyboard */,
 				9D79E2A624ED02FA006310A2 /* MorePhotoReview.storyboard */,
 				9D4CCF7024FFFD55003F73AF /* NetworkFailPopup.storyboard */,
+				9DD7AD0E2507BE6D00742F25 /* AuthorizationPopup.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1277,6 +1283,7 @@
 				9D7FB1F424D15DE7009A9C0A /* SubLocationView.xib in Resources */,
 				9D76CD9424FE992F004D7333 /* SearchAddress.storyboard in Resources */,
 				9D6FF37724FAAF0500E6A8B9 /* Splash.storyboard in Resources */,
+				9DD7AD0F2507BE6D00742F25 /* AuthorizationPopup.storyboard in Resources */,
 				9D6FF35324F91B3500E6A8B9 /* LoginPopup.storyboard in Resources */,
 				9D13C80F248795E40058A7BF /* LoginTextView.xib in Resources */,
 				9D61F6DE24F7AAAF00EF13FB /* EditPassword.storyboard in Resources */,
@@ -1377,6 +1384,7 @@
 				9DBA643424F046A100E12FA4 /* RecentResearchCell.swift in Sources */,
 				9D3D162B2488DA7200AE1B4C /* SetLanguageVC.swift in Sources */,
 				9D6FF36024F9851200E6A8B9 /* OtherPhotoReviewVC.swift in Sources */,
+				9DD7AD112507BE8700742F25 /* AuthorizationPopupVC.swift in Sources */,
 				9DBA643D24F392E200E12FA4 /* MyScrapVC.swift in Sources */,
 				9DD48BAE2503F16E0096DE08 /* ScrapResponseData.swift in Sources */,
 				9DD48BC5250679140096DE08 /* SearchResultDTO.swift in Sources */,

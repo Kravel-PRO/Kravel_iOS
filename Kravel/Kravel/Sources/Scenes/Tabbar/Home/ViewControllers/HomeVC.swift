@@ -262,9 +262,29 @@ extension HomeVC {
 extension HomeVC: CLLocationManagerDelegate {
     // MARK: - 위치 관련 설정
     private func requestLocation() {
-        LocationManager.shared.setManager(delegate: self)
-        LocationManager.shared.requestAuthorization()
-        LocationManager.shared.requestLocation()
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            guard let authorizationVC = UIStoryboard(name: "AuthorizationPopup", bundle: nil).instantiateViewController(withIdentifier: AuthorizationPopupVC.identifier) as? AuthorizationPopupVC else { return }
+            authorizationVC.setAuthorType(author: .location)
+            authorizationVC.modalPresentationStyle = .overFullScreen
+            self.present(authorizationVC, animated: false, completion: nil)
+        case .restricted:
+            guard let authorizationVC = UIStoryboard(name: "AuthorizationPopup", bundle: nil).instantiateViewController(withIdentifier: AuthorizationPopupVC.identifier) as? AuthorizationPopupVC else { return }
+            authorizationVC.setAuthorType(author: .location)
+            authorizationVC.modalPresentationStyle = .overFullScreen
+            self.present(authorizationVC, animated: false, completion: nil)
+        case .denied:
+            guard let authorizationVC = UIStoryboard(name: "AuthorizationPopup", bundle: nil).instantiateViewController(withIdentifier: AuthorizationPopupVC.identifier) as? AuthorizationPopupVC else { return }
+            authorizationVC.setAuthorType(author: .location)
+            authorizationVC.modalPresentationStyle = .overFullScreen
+            self.present(authorizationVC, animated: false, completion: nil)
+        case .authorizedWhenInUse:
+            LocationManager.shared.setManager(delegate: self)
+            LocationManager.shared.requestLocation()
+        case .authorizedAlways: break
+        @unknown default:
+            break
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
