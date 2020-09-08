@@ -14,12 +14,6 @@ class DetailNearPlaceCell: UICollectionViewCell {
     // MARK: - 장소 이미지 설정
     @IBOutlet weak var placeImageView: UIImageView!
     
-    var placeImage: UIImage? {
-        didSet {
-            placeImageView.image = placeImage
-        }
-    }
-    
     // MARK: - 장소 이름 설정
     @IBOutlet weak var placeNameLabel: UILabel!
     
@@ -48,7 +42,7 @@ class DetailNearPlaceCell: UICollectionViewCell {
         }
     }
     
-    var tags: [String] = ["아이유", "호텔 델루나", "여진구"] {
+    var tags: [String] = [] {
         didSet {
             tagCollectionView.reloadData()
         }
@@ -57,6 +51,9 @@ class DetailNearPlaceCell: UICollectionViewCell {
     // MARK: - UICollectionViewCell Override
     override func prepareForReuse() {
         super.prepareForReuse()
+        placeImageView.image = nil
+        placeName = nil
+        tags = []
     }
     
     override func awakeFromNib() {

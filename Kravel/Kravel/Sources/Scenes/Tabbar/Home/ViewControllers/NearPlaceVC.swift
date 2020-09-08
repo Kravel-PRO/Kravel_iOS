@@ -63,14 +63,13 @@ class NearPlaceVC: UIViewController {
     private func setNav() {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationItem.title = "나와 가까운 Kravel"
-        self.navigationController?.navigationBar.backgroundColor = .white
-        self.navigationController?.navigationBar.tintColor = .white
+         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.topItem?.title = ""
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: ImageKey.navBackWhtie), style: .plain, target: self, action: #selector(pop))
-    }
-    
-    @objc func pop() {
-        self.navigationController?.popViewController(animated: true)
+        
+        let backImage = UIImage(named: ImageKey.back)
+        self.navigationController?.navigationBar.backIndicatorImage = backImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
     }
 }
 
@@ -86,8 +85,7 @@ extension NearPlaceVC: UICollectionViewDataSource {
         nearPlaceCell.layer.cornerRadius = nearPlaceCell.frame.width / 68.6
         nearPlaceCell.clipsToBounds = true
         
-        // FIXME: - 이미지 URL로 요청하게 수정해야함
-        nearPlaceCell.placeImage = UIImage(named: "yuna")
+        nearPlaceCell.placeImageView.setImage(with: nearPlaceData[indexPath.row].imageUrl ?? "")
         nearPlaceCell.placeName = nearPlaceData[indexPath.row].title
         return nearPlaceCell
     }
