@@ -57,9 +57,21 @@ struct APICostants {
         }
     }
     
+    static var getReviewOfMedia: String {
+        get {
+            return APICostants.getMeidaList + "/\(mediaID)" + "/reviews"
+        }
+    }
+    
     static var getDetailCeleb: String {
         get {
-            return APICostants.getCelebList + "\(celebID)"
+            return APICostants.getCelebList + "/\(celebID)"
+        }
+    }
+    
+    static var getReviewOfCeleb: String {
+        get {
+            APICostants.getCelebList + "/\(celebID)" + "/reviews"
         }
     }
     

@@ -24,7 +24,7 @@ class NetworkHandler {
         case .getPlace: requestGetPlace(apiURL, headers, parameters, completion)
         case .getSimplePlace: requestSimplePlace(apiURL, headers, parameters, completion)
         case .getPlaceOfID: requestGetPlaceOfID(apiURL, headers, parameters, completion)
-        case .getNewReview: requestGetNewReview(apiURL, headers, parameters, completion)
+        case .getNewReview: requestReview(apiURL, headers, parameters, completion)
         case .getPlaceReview: requestGetReviewOfPlace(apiURL, headers, parameters, completion)
         case .scrap: requestScrap(apiURL, headers, parameters, completion)
         case .getCeleb: requestCeleb(apiURL, headers, parameters, completion)
@@ -32,6 +32,8 @@ class NetworkHandler {
         case .search: requestSearch(apiURL, headers, parameters, completion)
         case .getCelebOfID: requestCelebOfID(apiURL, headers, parameters, completion)
         case .getMediaOfID: requestMediaOfID(apiURL, headers, parameters, completion)
+        case .getReviewOfCeleb: requestReview(apiURL, headers, parameters, completion)
+        case .getReviewOfMedia: requestReview(apiURL, headers, parameters, completion)
         }
     }
     
@@ -168,7 +170,7 @@ class NetworkHandler {
         }
     }
     
-    private func requestGetNewReview(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
+    private func requestReview(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
         guard let url = try? url.asURL() else { return }
 
         AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)

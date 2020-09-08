@@ -11,7 +11,13 @@ import UIKit
 class PlaceCell: UICollectionViewCell {
     static let identifier = "PlaceCell"
     
-    @IBOutlet weak var placeImageView: UIImageView!
+    @IBOutlet weak var placeImageView: UIImageView! {
+        didSet {
+            placeImageView.layer.cornerRadius = placeImageView.frame.width / 20
+            placeImageView.clipsToBounds = true
+        }
+    }
+    
     @IBOutlet weak var placeLabel: UILabel!
     @IBOutlet weak var tagLabel: UILabel!
     

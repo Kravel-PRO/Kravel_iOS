@@ -29,6 +29,8 @@ enum APICategory<P: ParameterAble> {
     case search(P)
     case getCelebOfID(P)
     case getMediaOfID(P)
+    case getReviewOfCeleb(P, id: Int)
+    case getReviewOfMedia(P, id: Int)
     
     func makeURL() -> String {
         switch self {
@@ -55,6 +57,12 @@ enum APICategory<P: ParameterAble> {
             guard let id = id as? Int else { return "" }
             APICostants.mediaID = "\(id)"
             return APICostants.getDetailMedia
+        case .getReviewOfCeleb(_, let id):
+            APICostants.celebID = "\(id)"
+            return APICostants.getReviewOfCeleb
+        case .getReviewOfMedia(_, let id):
+            APICostants.mediaID = "\(id)"
+            return APICostants.getReviewOfMedia
         }
     }
     
@@ -219,6 +227,36 @@ enum APICategory<P: ParameterAble> {
             return parameters
         case .getCelebOfID: return nil
         case .getMediaOfID: return nil
+        case .getReviewOfCeleb(let reviewParameter, _):
+            var parameters: [String: Any] = [:]
+            guard let reviewParameter = reviewParameter as? GetReviewParameter else { return nil }
+            if let page = reviewParameter.page {
+                parameters.updateValue(page, forKey: "page")
+            }
+            
+            if let size = reviewParameter.size {
+                parameters.updateValue(size, forKey: "size")
+            }
+            
+            if let sort = reviewParameter.sort {
+                parameters.updateValue(sort, forKey: "sort")
+            }
+            return parameters
+        case .getReviewOfMedia(let reviewParameter, _):
+            var parameters: [String: Any] = [:]
+            guard let reviewParameter = reviewParameter as? GetReviewParameter else { return nil }
+            if let page = reviewParameter.page {
+                parameters.updateValue(page, forKey: "page")
+            }
+            
+            if let size = reviewParameter.size {
+                parameters.updateValue(size, forKey: "size")
+            }
+            
+            if let sort = reviewParameter.sort {
+                parameters.updateValue(sort, forKey: "sort")
+            }
+            return parameters
         }
     }
 }

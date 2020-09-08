@@ -23,6 +23,7 @@ class ContentDetailVC: UIViewController {
         switch category {
         case .celeb:
             guard let celebDetailDTO = categoryDetailDTO as? CelebrityDetailDTO else { return }
+            print(celebDetailDTO)
         case .media:
             guard let mediaDetailDTO = categoryDetailDTO as? MediaDetailDTO else { return }
             // 썸네일 이미지 설정
@@ -61,10 +62,12 @@ class ContentDetailVC: UIViewController {
     }
     
     // MARK: - 연예인/드라마 별 Label 지정
-    @IBOutlet weak var introduceLabel: UILabel! {
-        didSet {
-            introduceLabel.translatesAutoresizingMaskIntoConstraints = false
-        }
+    @IBOutlet weak var introduceLabel: UILabel!
+    
+    @IBOutlet weak var introduceLabelHeightConstraint: NSLayoutConstraint!
+    
+    private func setLabelHeight() {
+        introduceLabelHeightConstraint.constant = introduceLabel.intrinsicContentSize.height
     }
     
     // MARK: - 장소 CollectionView 설정
@@ -83,7 +86,10 @@ class ContentDetailVC: UIViewController {
     lazy var place_Cell_Height: CGFloat = place_Cell_Width * (159/169)
     
     private func setPlaceCVHeight() {
-        if places.count <= 2 {
+        if places.count == 0 {
+            placeCV_height_Constarint.constant = 0
+            moreButtonConatinerView.isHidden = true
+        } else if places.count <= 2 {
             placeCV_height_Constarint.constant = place_Cell_Height
             moreButtonConatinerView.isHidden = true
         } else if places.count <= 4 {
@@ -122,10 +128,42 @@ class ContentDetailVC: UIViewController {
         }
     }
     
+    var photoReviewData: [ReviewInform] = []
+    
+    // 포토 리뷰 데이터 받았을 때 Handler
+    lazy var photoReviewHandler: ((NetworkResult<Codable>) -> Void) = { result in
+        switch result {
+        case .success(let getReviewResult):
+            guard let getReviewResult = getReviewResult as? APISortableResponseData<ReviewInform> else { return }
+            self.photoReviewData = getReviewResult.content
+            DispatchQueue.main.async {
+                self.photoReviewView.photoReviewCollectionView.reloadData()
+                self.setPhotoReviewViewLayout()
+            }
+        case .requestErr(let error): print(error)
+        case .serverErr: print("Server Err")
+        case .networkFail:
+            guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+            networkFailPopupVC.modalPresentationStyle = .overFullScreen
+            self.present(networkFailPopupVC, animated: false, completion: nil)
+        }
+    }
+    
+    @IBOutlet weak var photoReviewViewHeightConstraint: NSLayoutConstraint!
+    
     private func setPhotoReviewLabel() {
         let photoReviewAttributeText = "인기 많은 포토 리뷰".makeAttributedText([.font: UIFont.systemFont(ofSize: 18), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)])
         photoReviewAttributeText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 18)], range: ("인기 많은 포토 리뷰" as NSString).range(of: "포토 리뷰"))
         photoReviewView.attributeTitle = photoReviewAttributeText
+    }
+    
+    private func setPhotoReviewViewLayout() {
+        let defaultHeight: CGFloat = 48
+        let horizontalSpacing = view.frame.width / 23.44
+        let cellHeight: CGFloat = (photoReviewView.frame.width - horizontalSpacing*2 - 4*2) / 3
+        if photoReviewData.count == 0 { photoReviewViewHeightConstraint.constant = defaultHeight }
+        else if photoReviewData.count <= 3 { photoReviewViewHeightConstraint.constant = defaultHeight + cellHeight }
+        else { photoReviewViewHeightConstraint.constant = defaultHeight + 2 * cellHeight }
     }
     
     lazy var photo_Cell_Width: CGFloat = (photoReviewView.frame.width-2*horizontal_inset-2*4) / 3
@@ -146,10 +184,6 @@ class ContentDetailVC: UIViewController {
     // MARK: - UIViewController viewWillLayoutSubviews 설정
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-    }
-    
-    private func setLabelHeight() {
-        introduceLabel.heightAnchor.constraint(equalToConstant: introduceLabel.intrinsicContentSize.height).isActive = true
     }
     
     private func setCollectionViewHeight() {
@@ -178,8 +212,12 @@ extension ContentDetailVC {
             , let id = self.id else { return }
         
         switch category {
-        case .celeb: requestCeleb(id: id)
-        case .media: requestMedia(id: id)
+        case .celeb:
+            requestCeleb(id: id)
+            requestCelebPhotoReview(id: id)
+        case .media:
+            requestMedia(id: id)
+            requestMediaPhotoReview(id: id)
         }
     }
     
@@ -219,13 +257,24 @@ extension ContentDetailVC {
             }
         }
     }
+    
+    // MARK: - 유명인 관련 리뷰 데이터 API 요청
+    private func requestCelebPhotoReview(id: Int) {
+        let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "reviewLikes,desc")
+        NetworkHandler.shared.requestAPI(apiCategory: .getReviewOfCeleb(getReviewParameter, id: id), completion: photoReviewHandler)
+    }
+    
+    // MARK: - 미디어 관련 리뷰 데이터 API 요청
+    private func requestMediaPhotoReview(id: Int) {
+        let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "reviewLikes,desc")
+        NetworkHandler.shared.requestAPI(apiCategory: .getReviewOfMedia(getReviewParameter, id: id), completion: photoReviewHandler)
+    }
 }
 
 extension ContentDetailVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == placeCollectionView { return places.count }
-        // FIXME: 여기 포토리뷰 받아오게 설정
-        else { return 6 }
+        else { return photoReviewData.count }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -243,7 +292,7 @@ extension ContentDetailVC: UICollectionViewDataSource {
     
     private func createPhotoReviewCell(of collectionView: UICollectionView, at indexPath: IndexPath) -> UICollectionViewCell {
         guard let photoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoReviewCell.identifier, for: indexPath) as? PhotoReviewCell else { return UICollectionViewCell() }
-//        photoReviewCell.photoImage = UIImage(named: "bitmap_0")
+        photoReviewCell.photoImageView.setImage(with: photoReviewData[indexPath.row].imageURl)
         if indexPath.row == 5 { photoReviewCell.addMoreView() }
         return photoReviewCell
     }
