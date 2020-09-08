@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class NearPlaceVC: UIViewController {
     static let identifier = "NearPlaceVC"
@@ -19,19 +20,42 @@ class NearPlaceVC: UIViewController {
         }
     }
     
+    var currentLocation: CLLocationCoordinate2D?
     var nearPlaceData: [PlaceContentInform] = []
       
     // MARK: - UIViewController viewDidLoad Override
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        requestPlaceData()
+        if let currentLocation = self.currentLocation {
+            requestPlaceData(lat: currentLocation.latitude, lng: currentLocation.longitude)
+        }
+    }
+
+    // MARK: - UIViewController viewWillAppear Override 설정
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNav()
     }
     
+    private func setNav() {
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationItem.title = "나와 가까운 Kravel"
+         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.topItem?.title = ""
+        
+        let backImage = UIImage(named: ImageKey.back)
+        self.navigationController?.navigationBar.backIndicatorImage = backImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
+    }
+}
+
+extension NearPlaceVC {
     // MARK: - 장소 데이터 API 요청
-    private func requestPlaceData() {
+    private func requestPlaceData(lat: Double, lng: Double) {
         // FIXME: - 현재 내 위치 기준으로 요청할 수 있게 해야함
-        let getPlaceParameter = GetPlaceParameter(latitude: 1.0, longitude: 1.0, page: nil, size: nil, review_count: nil, sort: nil)
+        let getPlaceParameter = GetPlaceParameter(latitude: lat, longitude: lng, page: nil, size: nil, review_count: nil, sort: nil)
         NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
             switch result {
             case .success(let getPlaceResult):
@@ -52,24 +76,6 @@ class NearPlaceVC: UIViewController {
                 self.present(networkFailPopupVC, animated: false, completion: nil)
             }
         }
-    }
-
-    // MARK: - UIViewController viewWillAppear Override 설정
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNav()
-    }
-    
-    private func setNav() {
-        self.navigationController?.navigationBar.isHidden = false
-        self.navigationItem.title = "나와 가까운 Kravel"
-         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationController?.navigationBar.topItem?.title = ""
-        
-        let backImage = UIImage(named: ImageKey.back)
-        self.navigationController?.navigationBar.backIndicatorImage = backImage
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
     }
 }
 

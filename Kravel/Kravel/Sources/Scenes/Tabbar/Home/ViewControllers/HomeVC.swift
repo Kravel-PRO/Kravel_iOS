@@ -11,7 +11,11 @@ import CoreLocation
 
 class HomeVC: UIViewController {
     // MARK: - 제일 위 Title View 설정
-    @IBOutlet weak var titleStackView: UIStackView!
+    @IBOutlet weak var titleStackView: UIStackView! {
+        didSet {
+            titleStackView.arrangedSubviews[1].isHidden = true
+        }
+    }
     
     // Title Label 설정
     @IBOutlet weak var titleLabel: UILabel! {
@@ -42,13 +46,28 @@ class HomeVC: UIViewController {
         }
     }
     
-    // 가까운 장소 보여주는 데이터
+    // 더 보기 버튼 클릭했을 시, 더 많은 장소 요청
+    @IBAction func requstMorePlace(_ sender: Any) {
+        guard let detailNearPlaceVC = UIStoryboard(name: "NearPlace", bundle: nil).instantiateViewController(withIdentifier: NearPlaceVC.identifier) as? NearPlaceVC else { return }
+        detailNearPlaceVC.currentLocation = currentLocation
+        detailNearPlaceVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(detailNearPlaceVC, animated: true)
+    }
+    
+    // MARK: - 가까운 장소 CollectionView 설정
     private var nearPlaceData: [PlaceContentInform] = []
     
     @IBOutlet weak var nearPlaceCollectionView: UICollectionView! {
         didSet {
             nearPlaceCollectionView.dataSource = self
             nearPlaceCollectionView.delegate = self
+        }
+    }
+    
+    private var currentLocation: CLLocationCoordinate2D? {
+        didSet {
+            guard let currentLocation = currentLocation else { return }
+            requestClosePlaceData(lat: currentLocation.latitude, lng: currentLocation.longitude)
         }
     }
     
@@ -59,13 +78,10 @@ class HomeVC: UIViewController {
             titleStackView.arrangedSubviews[1].isHidden = false
             nearPlaceCollectionView.reloadData()
         }
-    }
-    
-    // 더 보기 버튼 클릭했을 시, 더 많은 장소 요청
-    @IBAction func requstMorePlace(_ sender: Any) {
-        guard let detailNearPlaceVC = UIStoryboard(name: "NearPlace", bundle: nil).instantiateViewController(withIdentifier: NearPlaceVC.identifier) as? NearPlaceVC else { return }
-        detailNearPlaceVC.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(detailNearPlaceVC, animated: true)
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     // MARK: - 인기 있는 장소 설정
@@ -146,7 +162,6 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         requestLocation()
-        requestClosePlaceData()
         requestReviewData()
         requestHotPlaceData()
     }
@@ -173,8 +188,8 @@ class HomeVC: UIViewController {
 
 extension HomeVC {
     // MARK: - 장소 데이터 API 요청
-    private func requestClosePlaceData() {
-        let getPlaceParameter = GetPlaceParameter(latitude: 1.0, longitude: 1.0, page: nil, size: nil, review_count: nil, sort: nil)
+    private func requestClosePlaceData(lat: Double, lng: Double) {
+        let getPlaceParameter = GetPlaceParameter(latitude: lat, longitude: lng, page: nil, size: nil, review_count: nil, sort: nil)
         NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
             switch result {
             case .success(let getPlaceResult):
@@ -183,10 +198,8 @@ extension HomeVC {
                 DispatchQueue.main.async {
                     self.setNearPlaceCollectionView()
                 }
-            // FIXME: 요청 에러 있을 시 에러 처리 필요
             case .requestErr(let errorMessage):
                 print(errorMessage)
-            // FIXME: 서버 에러 있을 시 에러 처리 필요
             case .serverErr:
                 print("ServerError")
             case .networkFail:
@@ -256,8 +269,8 @@ extension HomeVC: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else { return }
-        print("위도 \(location.coordinate.latitude)")
-        print("경도 \(location.coordinate.longitude)")
+        currentLocation = CLLocationCoordinate2D(latitude: 1.0, longitude: 1.0)
+//        currentLocation = location.coordinate
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
