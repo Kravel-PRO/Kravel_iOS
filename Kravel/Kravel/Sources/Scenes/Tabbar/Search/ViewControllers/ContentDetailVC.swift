@@ -42,12 +42,17 @@ class ContentDetailVC: UIViewController {
     }
     
     // MARK: - 뒤로가기 버튼 설정
-    @IBOutlet weak var backButton: UIButton! {
-        didSet {
-            backButton.setImage(UIImage(named: ImageKey.navBackWhtie), for: .normal)
-        }
-    }
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var backButtonTopConstraint: NSLayoutConstraint!
+    
+    private func setBackButton() {
+        backButton.setImage(UIImage(named: ImageKey.navBackWhtie), for: .normal)
+        backButton.addTarget(self, action: #selector(pop), for: .touchUpInside)
+    }
+    
+    @objc func pop() {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     // MARK: - Thumnail Image 설정
     @IBOutlet weak var thumbnail_Back_View: UIView!
@@ -180,6 +185,7 @@ class ContentDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setBackButton()
         requestData()
     }
     
