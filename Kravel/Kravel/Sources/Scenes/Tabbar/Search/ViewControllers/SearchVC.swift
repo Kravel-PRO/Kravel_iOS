@@ -6,6 +6,8 @@
 //  Copyright © 2020 윤동민. All rights reserved.
 //
 
+// FIXME: 이거 최근 검색어 저장하는 로직 지금 문제있음.
+
 import UIKit
 
 protocol RecentResearchCoreDataUsable {

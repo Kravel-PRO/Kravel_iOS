@@ -295,15 +295,34 @@ extension HomeVC: UICollectionViewDataSource {
 extension HomeVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == nearPlaceCollectionView {
-            
+            touchNearPlaceCell(at: indexPath)
         } else if collectionView == hotPlaceCollectionView {
-            
+            touchHotPlaceCell(at: indexPath)
         } else {
-            if indexPath.row != 5 { return }
-            guard let morePhotoVC = UIStoryboard(name: "MorePhotoReview", bundle: nil).instantiateViewController(withIdentifier: MorePhotoReviewVC.identifier) as? MorePhotoReviewVC else { return }
-            morePhotoVC.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(morePhotoVC, animated: true)
+            touchPhotoCell(at: indexPath)
         }
+    }
+    
+    private func touchNearPlaceCell(at indexPath: IndexPath) {
+        guard let locationDetailVC = UIStoryboard(name: "LocationDetail", bundle: nil).instantiateViewController(withIdentifier: LocationDetailVC.identifier) as? LocationDetailVC else { return }
+        print(nearPlaceData[indexPath.row].placeId)
+        locationDetailVC.placeID = nearPlaceData[indexPath.row].placeId
+        locationDetailVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(locationDetailVC, animated: true)
+    }
+    
+    private func touchHotPlaceCell(at indexPath: IndexPath) {
+        guard let locationDetailVC = UIStoryboard(name: "LocationDetail", bundle: nil).instantiateViewController(withIdentifier: LocationDetailVC.identifier) as? LocationDetailVC else { return }
+        locationDetailVC.placeID = hotPlaceData[indexPath.row].placeId
+        locationDetailVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(locationDetailVC, animated: true)
+    }
+    
+    private func touchPhotoCell(at indexPath: IndexPath) {
+        if indexPath.row != 5 { return }
+        guard let morePhotoVC = UIStoryboard(name: "MorePhotoReview", bundle: nil).instantiateViewController(withIdentifier: MorePhotoReviewVC.identifier) as? MorePhotoReviewVC else { return }
+        morePhotoVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(morePhotoVC, animated: true)
     }
 }
 

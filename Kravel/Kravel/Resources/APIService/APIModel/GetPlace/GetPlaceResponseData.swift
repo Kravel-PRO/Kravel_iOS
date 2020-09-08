@@ -23,10 +23,10 @@ struct PlaceContentInform: Codable {
 
 struct PlaceDetailInform: Codable {
     let placeId: Int
-    let title: String
+    let title: String?
     let contents: [String]?
     let imageUrl: String?
-    let location: String
+    let location: String?
     let latitude: Double
     let longitude: Double
     let bus: String?

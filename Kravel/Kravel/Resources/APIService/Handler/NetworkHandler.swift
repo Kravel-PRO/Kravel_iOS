@@ -153,7 +153,6 @@ class NetworkHandler {
                 switch response.result {
                 case .success(let getPlaceResponseData):
                     guard let statusCode = response.response?.statusCode else { return }
-                    print(statusCode)
                     if statusCode == 200 {
                         guard let getPlaceResult = getPlaceResponseData.data?.result else {
                             completion(.serverErr)

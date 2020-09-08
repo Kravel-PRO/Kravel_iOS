@@ -201,6 +201,7 @@ class LocationDetailVC: UIViewController {
         }
         
         if let placeID = self.placeID {
+            print(placeID)
             requestDetailPlaceData(of: placeID)
             requestPhotoReview(of: placeID)
         }
@@ -219,7 +220,9 @@ class LocationDetailVC: UIViewController {
                 }
             case .requestErr(let error):
                 print(error)
-            case .serverErr: print("Server Err")
+            case .serverErr:
+                print("여기야?")
+                print("Server Err")
             case .networkFail:
                 guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
                 networkFailPopupVC.modalPresentationStyle = .overFullScreen

@@ -63,8 +63,14 @@ class NearPlaceVC: UIViewController {
     private func setNav() {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationItem.title = "나와 가까운 Kravel"
-        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: ImageKey.navBackWhtie), style: .plain, target: self, action: #selector(pop))
+    }
+    
+    @objc func pop() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
