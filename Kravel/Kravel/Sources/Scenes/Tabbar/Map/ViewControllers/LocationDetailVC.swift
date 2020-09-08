@@ -17,7 +17,7 @@ class LocationDetailVC: UIViewController {
     var placeID: Int?
     
     // MARK: - 장소 데이터
-    var placeData: PlaceDetailInform?
+    private var placeData: PlaceDetailInform?
     
     // MARK: - 화면 Dismiss 해주는 Pan Gesture
     var panGesture: UIPanGestureRecognizer!
@@ -84,7 +84,7 @@ class LocationDetailVC: UIViewController {
     // MARK: - 장소 이름 Label 설정
     @IBOutlet weak var placeNameLabel: UILabel!
     
-    var placeName: String? {
+    private var placeName: String? {
         didSet {
             placeNameLabel.text = placeName
             placeNameLabel.sizeToFit()
@@ -102,7 +102,7 @@ class LocationDetailVC: UIViewController {
         }
     }
     
-    var placeTags: [String] = [] {
+    private var placeTags: [String] = [] {
         didSet {
             tagCollectionView.reloadData()
         }
@@ -111,7 +111,7 @@ class LocationDetailVC: UIViewController {
     // MARK: - 장소 위치 Label 설정
     @IBOutlet weak var placeLocationLabel: UILabel!
     
-    var location: String? {
+    private var location: String? {
         didSet {
             placeLocationLabel.text = location
             placeLocationLabel.sizeToFit()

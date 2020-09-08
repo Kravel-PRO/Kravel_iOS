@@ -91,6 +91,14 @@ extension NearPlaceVC: UICollectionViewDataSource {
     }
 }
 
+extension NearPlaceVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let locationDetailVC = UIStoryboard(name: "LocationDetail", bundle: nil).instantiateViewController(withIdentifier: LocationDetailVC.identifier) as? LocationDetailVC else { return }
+        locationDetailVC.placeID = nearPlaceData[indexPath.row].placeId
+        self.navigationController?.pushViewController(locationDetailVC, animated: true)
+    }
+}
+
 extension NearPlaceVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width - 16*2
