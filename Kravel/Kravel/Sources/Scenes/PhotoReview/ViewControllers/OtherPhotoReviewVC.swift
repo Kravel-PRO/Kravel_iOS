@@ -11,7 +11,12 @@ import UIKit
 class OtherPhotoReviewVC: UIViewController {
     static let identifier = "OtherPhotoReviewVC"
     
-    var placeID: Int?
+    enum RequestType {
+        case hot
+        case place(id: Int)
+    }
+    
+    var requestType: RequestType?
     var selectedPhotoReviewID: Int?
 
     // MARK: - 포토리뷰 CollectionView 설정
@@ -34,7 +39,7 @@ class OtherPhotoReviewVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNav()
-        if let placeID = self.placeID { requestPhotoReview(of: placeID) }
+        requestByAPI()
     }
     
     private func setNav() {
@@ -53,8 +58,18 @@ class OtherPhotoReviewVC: UIViewController {
 }
 
 extension OtherPhotoReviewVC {
-    // MARK: - 포토리뷰 가져오기 API 요청
-    private func requestPhotoReview(of placeID: Int) {
+    // MARK: - API 요청 분기 처리
+    private func requestByAPI() {
+        switch requestType {
+        case .hot: break
+        case .place(let id):
+            requestPlacePhotoReview(of: id)
+        case .none: break
+        }
+    }
+    
+    // MARK: - 장소의 포토리뷰 가져오기 API 요청
+    private func requestPlacePhotoReview(of placeID: Int) {
         let getPlaceReviewParameter = GetReviewOfPlaceParameter(latitude: nil, longitude: nil, like_count: nil)
         APICostants.placeID = "\(placeID)"
         

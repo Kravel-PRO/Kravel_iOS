@@ -377,7 +377,7 @@ extension LocationDetailVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let otherPhotoReviewVC = UIStoryboard(name: "OtherPhotoReview", bundle: nil).instantiateViewController(withIdentifier: OtherPhotoReviewVC.identifier) as? OtherPhotoReviewVC else { return }
         
-        otherPhotoReviewVC.placeID = self.placeData?.placeId
+        if let placeId = self.placeID { otherPhotoReviewVC.requestType = .place(id: placeId) }
         if indexPath.row != 5 { otherPhotoReviewVC.selectedPhotoReviewID = self.photoReviewData[indexPath.row].reviewId }
         
         self.navigationController?.pushViewController(otherPhotoReviewVC, animated: true)

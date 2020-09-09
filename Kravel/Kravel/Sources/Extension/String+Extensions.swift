@@ -34,11 +34,43 @@ extension String {
 
 struct CustomLocalize {
     enum LocalKey: String {
+        // MARK: - 로그인 화면
+        case login = "로그인 하기"
+        case signup = "회원가입 하기"
+        case mainDescription = "오늘도\nKravel과 함께\n여행을 떠나볼까요?"
+        case mainDescriptionPart = "오늘도"
+        
+        case email = "이메일 계정"
+        case pw = "비밀번호"
+        case emailTextFeild = "이메일을 입력해주세요."
+        case pwTextField = "비밀번호를 입력해주세요."
+        
+        // MARK: - 회원가입 화면
+        case signupDescription = "Kravel과 함께\n색다른\n여행을 떠나볼까요?"
+        case pwConfirm = "비밀번호 확인"
+        case pwConfirmTextField = "다시 한 번 비밀번호를 입력해주세요."
+        case nickname = "닉네임"
+        case nicknameTextField = "사용할 닉네임을 7자 이하로 적어주세요."
+        case gender = "성별"
+        
+        case emailValid = "이메일 형식이 옳지 않습니다."
+        case pwValid = "6자리 이상 입력해주세요."
+        case pwConfirmValid = "비밀번호가 같지 않습니다."
+        case nicknameValid = "7자 이하로 입력해주세요."
+        
+        // MARK: - 성별
+        case man = "남자"
+        case woman = "여자"
+        
+        // MARK: - 카메라 POP UP 관련
         case authorCamera = "카메라"
         case authorPhotography = "사진 촬영"
+        
+        // MARK: - 위치 POP UP 관련
         case authorLocation = "위치 정보"
         case authorLocationMessage = "GPS 이용 및 지도 검색"
         
+        // MARK: - 권한 허용 POP UP 관련
         case authorCameraTitle = "앱 접근 권한 허용"
         case authorCameraMessage = "서비스를 이용하기 위해\n아래와 같은 권한을 허용해주세요."
         case allowed = "허용"
@@ -47,6 +79,66 @@ struct CustomLocalize {
         func localize() -> String {
             guard let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return self.rawValue }
             switch self {
+            case .login:
+                if language == "KOR" { return "로그인 하기" }
+                else { return "Log In" }
+            case .signup:
+                if language == "KOR" { return "회원가입 하기" }
+                else { return "Sign Up" }
+            case .mainDescription:
+                if language == "KOR" { return "오늘도\nKravel과 함께\n여행을 떠나볼까요?" }
+                else { return "Shall we go on a trip\nwith Kavel\ntoday?" }
+            case .mainDescriptionPart:
+                if language == "KOR" { return "오늘도" }
+                else { return "Shall we go on a trip" }
+            case .email:
+                if language == "KOR" { return "이메일 계정" }
+                else { return "E-mail" }
+            case .pw:
+                if language == "KOR" { return "비밀번호" }
+                else { return "Password" }
+            case .emailTextFeild:
+                if language == "KOR" { return "이메일을 입력해주세요." }
+                else { return "Please enter your e-mail." }
+            case .pwTextField:
+                if language == "KOR" { return "비밀번호를 입력해주세요." }
+                else { return "Please enter your password." }
+            case .signupDescription:
+                if language == "KOR" { return "Kravel과 함께\n색다른\n여행을 떠나볼까요?" }
+                else { return "Shall we go\non a special trip\nwith Kravel?" }
+            case .pwConfirm:
+                if language == "KOR" { return "비밀번호 확인" }
+                else { return "Confirm Password" }
+            case .pwConfirmTextField:
+                if language == "KOR" { return "다시 한 번 비밀번호를 입력해주세요." }
+                else { return "Please enter the same password again." }
+            case .nickname:
+                if language == "KOR" { return "닉네임" }
+                else { return "Nickname" }
+            case .nicknameTextField:
+                if language == "KOR" { return "사용할 닉네임을 7자 이하로 적어주세요." }
+                else { return "Please enter your nickname." }
+            case .gender:
+                if language == "KOR" { return "성별" }
+                else { return "Gender" }
+            case .man:
+                if language == "KOR" { return "남자" }
+                else { return "Male" }
+            case .woman:
+                if language == "KOR" { return "여자" }
+                else { return "Female" }
+            case .emailValid:
+                if language == "KOR" { return "이메일 형식이 옳지 않습니다." }
+                else { return "Email format is incorrect." }
+            case .pwValid:
+                if language == "KOR" { return "6자리 이상 입력해주세요." }
+                else { return "Please enter at least 6 characters." }
+            case .pwConfirmValid:
+                if language == "KOR" { return "비밀번호가 같지 않습니다." }
+                else { return "Password is not the same." }
+            case .nicknameValid:
+                if language == "KOR" { return "7자 이하로 입력해주세요." }
+                else { return "Please enter no more than 7 characters." }
             case .authorCamera:
                 if language == "KOR" { return "카메라" }
                 else { return "Camera" }
@@ -77,7 +169,6 @@ struct CustomLocalize {
     
     static func localize(key: String) -> String {
         guard let localKey = LocalKey(rawValue: key) else {
-            print("이넘으로 안바뀜")
             return key }
         return localKey.localize()
     }

@@ -33,7 +33,7 @@ class SexButton: UIView {
         didSet {
             let sexInform = sex!.getInform()
             sexImage.image = UIImage(named: sexInform.imageName)
-            sexLabel.text = sexInform.description
+            sexLabel.text = sexInform.description.localized
         }
     }
 

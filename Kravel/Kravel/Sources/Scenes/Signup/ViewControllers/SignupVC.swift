@@ -29,13 +29,19 @@ class SignupVC: UIViewController {
         self.view.endEditing(true)
     }
     
+    // MARK: - 환영 Label 설정
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.text = "Kravel과 함께\n색다른\n여행을 떠나볼까요?"
             titleLabel.textColor = UIColor(red: 18/255, green: 18/255, blue: 18/255, alpha: 1.0)
             titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         }
     }
+    
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var pwLabel: UILabel!
+    @IBOutlet weak var pwConfirmLabel: UILabel!
+    @IBOutlet weak var nicknameLabel: UILabel!
+    @IBOutlet weak var genderLabel: UILabel!
     
     // MARK: - 회원가입 버튼 설정
     @IBOutlet weak var signupButton: CustomButton! {
@@ -124,6 +130,27 @@ class SignupVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setByLanguage()
+    }
+    
+    private func setByLanguage() {
+        titleLabel.text = "Kravel과 함께\n색다른\n여행을 떠나볼까요?".localized
+        emailLabel.text = "이메일 계정".localized
+        textFields[0].placeholder = "이메일을 입력해주세요.".localized
+        pwLabel.text = "비밀번호".localized
+        textFields[1].placeholder = "비밀번호를 입력해주세요.".localized
+        pwConfirmLabel.text = "비밀번호 확인".localized
+        textFields[2].placeholder = "다시 한 번 비밀번호를 입력해주세요.".localized
+        nicknameLabel.text = "닉네임".localized
+        textFields[3].placeholder = "사용할 닉네임을 7자 이하로 적어주세요.".localized
+        genderLabel.text = "성별".localized
+        
+        validLabels[0].text = "이메일 형식이 옳지 않습니다.".localized
+        validLabels[1].text = "6자리 이상 입력해주세요.".localized
+        validLabels[2].text = "비밀번호가 같지 않습니다.".localized
+        validLabels[3].text = "7자 이하로 입력해주세요.".localized
+        
+        signupButton.setTitle("회원가입 하기".localized, for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -200,7 +227,7 @@ extension SignupVC: UITextFieldDelegate {
                 if text == "" { enables[3] = false }
                 else { enables[3] = true }
             } else {
-                setValid(marginView: marginViews[3], validLabel: validLabels[3])
+                setInvalid(marginView: marginViews[3], validLabel: validLabels[3])
                 enables[3] = false
             }
         }

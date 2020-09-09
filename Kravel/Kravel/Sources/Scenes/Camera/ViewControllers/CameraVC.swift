@@ -41,18 +41,20 @@ class CameraVC: UIViewController {
             }
         case .restricted:
             // FIXME: 카메라 설정창으로 가서 카메라 허용할 수 있게 설정하는 화면 뜨게 하기
-            print("제한된 경우")
-            self.navigationController?.popViewController(animated: true)
+            guard let authorizationVC = UIStoryboard(name: "AuthorizationPopup", bundle: nil).instantiateViewController(withIdentifier: AuthorizationPopupVC.identifier) as? AuthorizationPopupVC else { return }
+            authorizationVC.setAuthorType(author: .camera)
+            authorizationVC.modalPresentationStyle = .overFullScreen
+            self.present(authorizationVC, animated: false) {
+                self.dismiss(animated: false, completion: nil)
+            }
         case .denied:
             // FIXME: 카메라 설정창으로 가서 카메라 허용할 수 있게 설장하는 화면 뜨게 하기
-            let alertVC = UIAlertController(title: "사진 권한 설정을 허용해주세요", message: "사진 권한 설정을 허용해라", preferredStyle: .alert)
-            let action = UIAlertAction(title: "확인", style: .cancel) { action in
-                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:]) { isComplection in
-                    
-                }
+            guard let authorizationVC = UIStoryboard(name: "AuthorizationPopup", bundle: nil).instantiateViewController(withIdentifier: AuthorizationPopupVC.identifier) as? AuthorizationPopupVC else { return }
+            authorizationVC.setAuthorType(author: .camera)
+            authorizationVC.modalPresentationStyle = .overFullScreen
+            self.present(authorizationVC, animated: false) {
+                self.dismiss(animated: false, completion: nil)
             }
-            alertVC.addAction(action)
-            self.present(alertVC, animated: true, completion: nil)
         @unknown default:
             fatalError()
         }

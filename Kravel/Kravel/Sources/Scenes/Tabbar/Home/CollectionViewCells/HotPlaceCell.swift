@@ -51,7 +51,8 @@ class HotPlaceCell: UICollectionViewCell {
     
     var photoCount: Int? {
         didSet {
-            photoReviewCountLabel.text = "포토리뷰 \(photoCount!)개"
+            if let photoCount = self.photoCount { photoReviewCountLabel.text = "포토리뷰".localized + " \(photoCount)" + "개".localized }
+            else { photoReviewCountLabel.text = "포토리뷰".localized + " 0" + "개".localized }
             photoReviewCountLabel.sizeToFit()
         }
     }

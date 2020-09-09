@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -22,13 +22,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1300"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOA-Fu-HeU">
-                                                <rect key="frame" x="21.999999999999996" y="42" width="41.666666666666657" height="555"/>
+                                                <rect key="frame" x="21.999999999999996" y="42" width="41.666666666666657" height="20.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="vVC-53-SLR">
-                                                <rect key="frame" x="16" y="649" width="343" height="529"/>
+                                                <rect key="frame" x="16" y="114.33333333333331" width="343" height="529"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EyU-fm-vhg">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="79"/>
@@ -40,10 +40,10 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ba4-Qh-FaO">
-                                                                <rect key="frame" x="0.0" y="27" width="343" height="52"/>
+                                                                <rect key="frame" x="0.0" y="27.000000000000014" width="343" height="52"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="이메일을 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Utw-Qa-wFZ">
-                                                                        <rect key="frame" x="16" y="15.666666666666629" width="311" height="21"/>
+                                                                        <rect key="frame" x="16" y="15.666666666666657" width="311" height="21"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
@@ -88,7 +88,7 @@
                                                                 <rect key="frame" x="0.0" y="27" width="343" height="52"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="6자리 이상으로 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mqH-9c-5fj">
-                                                                        <rect key="frame" x="16" y="16" width="311" height="20"/>
+                                                                        <rect key="frame" x="16" y="15.999999999999972" width="311" height="20"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                                     </textField>
@@ -177,8 +177,8 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6kN-ih-pPo">
                                                                 <rect key="frame" x="0.0" y="27" width="343" height="52"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="사용할 닉네임을 7자 이하로 적어주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QGm-Iy-rlX">
-                                                                        <rect key="frame" x="16" y="15.666666666666629" width="311" height="21"/>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="사용할 닉네임을 7자 이하로 적어주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QGm-Iy-rlX">
+                                                                        <rect key="frame" x="16" y="15.666666666666686" width="311" height="21"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
@@ -191,8 +191,8 @@
                                                                     <constraint firstItem="QGm-Iy-rlX" firstAttribute="centerY" secondItem="6kN-ih-pPo" secondAttribute="centerY" id="Omj-Ds-72y"/>
                                                                 </constraints>
                                                             </view>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임을 7자 이하로 입력해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="un6-zG-x7i">
-                                                                <rect key="frame" x="177" y="0.0" width="166" height="14.333333333333334"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7자 이하로 입력해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="un6-zG-x7i">
+                                                                <rect key="frame" x="222" y="0.0" width="121" height="14.333333333333334"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                 <color key="textColor" red="0.99215686270000003" green="0.035294117649999998" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -211,7 +211,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TEK-el-czr">
-                                                        <rect key="frame" x="0.0" y="412" width="343" height="117"/>
+                                                        <rect key="frame" x="0.0" y="412.00000000000006" width="343" height="116.99999999999994"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="성별" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCn-h5-onj">
                                                                 <rect key="frame" x="0.0" y="0.0" width="28" height="19.333333333333332"/>
@@ -249,7 +249,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVV-lX-x9u" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
-                                                <rect key="frame" x="44" y="1220" width="287" height="56"/>
+                                                <rect key="frame" x="44" y="685.33333333333337" width="287" height="56"/>
                                                 <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="wVV-lX-x9u" secondAttribute="height" multiplier="41:8" id="sgC-kr-5Vf"/>
@@ -275,7 +275,7 @@
                                             <constraint firstItem="wVV-lX-x9u" firstAttribute="top" secondItem="vVC-53-SLR" secondAttribute="bottom" constant="42" id="Sm4-Gf-lb4"/>
                                             <constraint firstItem="rOA-Fu-HeU" firstAttribute="leading" secondItem="iuq-fe-aYe" secondAttribute="leading" constant="22" id="W5W-gk-BPr"/>
                                             <constraint firstItem="vVC-53-SLR" firstAttribute="top" secondItem="rOA-Fu-HeU" secondAttribute="bottom" constant="52" id="W8h-61-t1C"/>
-                                            <constraint firstAttribute="bottom" secondItem="wVV-lX-x9u" secondAttribute="bottom" constant="24" id="faN-mI-b5d"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="wVV-lX-x9u" secondAttribute="bottom" constant="24" id="faN-mI-b5d"/>
                                             <constraint firstItem="wVV-lX-x9u" firstAttribute="width" secondItem="iuq-fe-aYe" secondAttribute="width" multiplier="0.765333" id="smq-pD-3nO"/>
                                         </constraints>
                                     </view>
@@ -302,6 +302,11 @@
                     <navigationItem key="navigationItem" id="LS3-BF-O3t"/>
                     <size key="freeformSize" width="375" height="1300"/>
                     <connections>
+                        <outlet property="emailLabel" destination="qhS-TX-U1k" id="tez-Nx-1cj"/>
+                        <outlet property="genderLabel" destination="iCn-h5-onj" id="mem-jQ-yV1"/>
+                        <outlet property="nicknameLabel" destination="Wpz-2b-hmc" id="Ifq-AV-gu5"/>
+                        <outlet property="pwConfirmLabel" destination="Nkb-of-qHs" id="MiH-Py-OWb"/>
+                        <outlet property="pwLabel" destination="D8D-Ti-haj" id="dmK-i9-FNX"/>
                         <outlet property="signupButton" destination="wVV-lX-x9u" id="WEH-qE-rBM"/>
                         <outlet property="signupScrollView" destination="KV7-gu-WvW" id="aVZ-xb-jVV"/>
                         <outlet property="titleLabel" destination="rOA-Fu-HeU" id="WMT-QN-zQS"/>

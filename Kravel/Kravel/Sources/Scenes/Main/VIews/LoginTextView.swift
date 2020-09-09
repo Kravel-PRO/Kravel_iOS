@@ -33,6 +33,10 @@ class LoginTextView: UIView {
         }
     }
     
+    // MARK: - 각 설명 Label
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var pwLabel: UILabel!
+    
     // MARK: - 로그인 버튼 관련
     @IBOutlet weak var loginButton: UIButton! {
         willSet {
@@ -56,18 +60,28 @@ class LoginTextView: UIView {
         super.init(frame: frame)
         initView()
         setCorner()
+        setTextByLanguage()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initView()
         setCorner()
+        setTextByLanguage()
     }
     
     private func initView() {
         guard let view = Bundle.main.loadNibNamed(LoginTextView.identifier, owner: self, options: nil)?.first as? UIView else { return }
         view.frame = self.bounds
         self.addSubview(view)
+    }
+    
+    private func setTextByLanguage() {
+        emailLabel.text = "이메일 계정".localized
+        pwLabel.text = "비밀번호".localized
+        emailTextField.placeholder = "이메일을 입력해주세요.".localized
+        pwTextField.placeholder = "비밀번호를 입력해주세요.".localized
+        loginButton.setTitle("로그인 하기".localized, for: .normal)
     }
     
     private func setCorner() {

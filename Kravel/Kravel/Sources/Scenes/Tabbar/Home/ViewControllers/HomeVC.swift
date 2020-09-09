@@ -161,15 +161,15 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        requestLocation()
-        requestReviewData()
-        requestHotPlaceData()
     }
     
     // MARK: - UIViewController viewWillAppear Override
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNav()
+        requestLocation()
+        requestReviewData()
+        requestHotPlaceData()
     }
     
     private func setNav() {
@@ -289,8 +289,7 @@ extension HomeVC: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else { return }
-        currentLocation = CLLocationCoordinate2D(latitude: 1.0, longitude: 1.0)
-//        currentLocation = location.coordinate
+        currentLocation = location.coordinate
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -375,7 +374,8 @@ extension HomeVC: UICollectionViewDelegate {
     }
     
     private func touchPhotoCell(at indexPath: IndexPath) {
-        if indexPath.row != 5 { return }
+        // FIXME: 여기 클릭된 ID 넘겨주고 하는 코드 추가해야할 듯.
+//        if indexPath.row != 5 { return }
         guard let morePhotoVC = UIStoryboard(name: "MorePhotoReview", bundle: nil).instantiateViewController(withIdentifier: MorePhotoReviewVC.identifier) as? MorePhotoReviewVC else { return }
         morePhotoVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(morePhotoVC, animated: true)

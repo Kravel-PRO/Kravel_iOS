@@ -32,16 +32,7 @@ class MainVC: UIViewController {
     }
     
     // MARK: - 초기 화면 Title Label 설정
-    @IBOutlet weak var titleLabel: UILabel! {
-        didSet {
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineSpacing = 10
-            let attributedString = NSMutableAttributedString(string: "오늘도\nKravel과 함께\n여행을 떠나볼까요?", attributes: [.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 24), .paragraphStyle: paragraphStyle])
-            attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 24), range: ("오늘도\nKravel과 함께\n여행을 떠나볼까요?" as NSString).range(of: "오늘도"))
-            titleLabel.attributedText = attributedString
-            titleLabel.alpha = 0
-        }
-    }
+    @IBOutlet weak var titleLabel: UILabel! 
     
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var backViewBottomConstraint: NSLayoutConstraint!
@@ -97,6 +88,19 @@ class MainVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         addGesture()
+        setTextByLanguage()
+    }
+    
+    private func setTextByLanguage() {
+        signinButton.setTitle("로그인 하기".localized, for: .normal)
+        signupButton.setTitle("회원가입 하기".localized, for: .normal)
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 10
+        let attributedString = NSMutableAttributedString(string: "오늘도\nKravel과 함께\n여행을 떠나볼까요?".localized, attributes: [.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 24), .paragraphStyle: paragraphStyle])
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 24), range: (("오늘도\nKravel과 함께\n여행을 떠나볼까요?").localized as NSString).range(of: ("오늘도").localized))
+        titleLabel.attributedText = attributedString
+        titleLabel.alpha = 0
     }
     
     // MARK: - UIViewController viewWillAppear Override
