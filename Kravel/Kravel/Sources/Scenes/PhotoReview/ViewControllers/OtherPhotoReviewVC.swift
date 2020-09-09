@@ -10,6 +10,9 @@ import UIKit
 
 class OtherPhotoReviewVC: UIViewController {
     static let identifier = "OtherPhotoReviewVC"
+    
+    var placeID: Int?
+    var selectedPhotoReviewID: Int?
 
     // MARK: - 포토리뷰 CollectionView 설정
     @IBOutlet weak var photoReviewCollectionView: UICollectionView! {
@@ -19,9 +22,7 @@ class OtherPhotoReviewVC: UIViewController {
         }
     }
     
-    var photoReviewDatas: [String] = ["호텔 세느장", "윤재 집", "윤재네 국밥"]
-    
-    var photoReviewIsLike: [Bool] = [false, false, false]
+    var photoReviewData: [ReviewInform] = []
     
     // MARK: - UIViewController viewDidLoad() Override 설정
     override func viewDidLoad() {
@@ -33,6 +34,7 @@ class OtherPhotoReviewVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNav()
+        if let placeID = self.placeID { requestPhotoReview(of: placeID) }
     }
     
     private func setNav() {
@@ -50,17 +52,56 @@ class OtherPhotoReviewVC: UIViewController {
     }
 }
 
+extension OtherPhotoReviewVC {
+    // MARK: - 포토리뷰 가져오기 API 요청
+    private func requestPhotoReview(of placeID: Int) {
+        let getPlaceReviewParameter = GetReviewOfPlaceParameter(latitude: nil, longitude: nil, like_count: nil)
+        APICostants.placeID = "\(placeID)"
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .getPlaceReview(getPlaceReviewParameter)) { result in
+            switch result {
+            case .success(let placeReviewData):
+                guard let placeReviewData = placeReviewData as? APISortableResponseData<ReviewInform> else { return }
+                DispatchQueue.main.async {
+                    self.photoReviewData = placeReviewData.content
+                    self.photoReviewCollectionView.reloadData()
+                    
+                    guard let selectedPhotoReviewID = self.selectedPhotoReviewID else { return }
+                    for index in 0..<self.photoReviewData.count {
+                        if selectedPhotoReviewID == self.photoReviewData[index].reviewId {
+                            self.photoReviewCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredVertically, animated: false)
+                            break
+                        }
+                    }
+                }
+            case .requestErr(let error):
+                print(error)
+                DispatchQueue.main.async {
+                    self.photoReviewData = []
+                }
+            case .serverErr: print("Server Err")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
+    }
+}
+
 extension OtherPhotoReviewVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photoReviewDatas.count
+        return photoReviewData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let otherPhotoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: OtherPhotoReviewCell.identifier, for: indexPath) as? OtherPhotoReviewCell else { return UICollectionViewCell() }
         
         otherPhotoReviewCell.indexPath = indexPath
-        otherPhotoReviewCell.likeCount = 99
-        otherPhotoReviewCell.indexPath = indexPath
+        
+        otherPhotoReviewCell.likeCount = photoReviewData[indexPath.row].likeCount
+        otherPhotoReviewCell.photoReviewImageView.setImage(with: photoReviewData[indexPath.row].imageURl)
+        otherPhotoReviewCell.date = "2020.08.24"
         otherPhotoReviewCell.delegate = self
         return otherPhotoReviewCell
     }
@@ -88,9 +129,10 @@ extension OtherPhotoReviewVC: UICollectionViewDelegateFlowLayout {
 extension OtherPhotoReviewVC: CellButtonDelegate {
     func click(at indexPath: IndexPath) {
         guard let otherCell = photoReviewCollectionView.cellForItem(at: indexPath) as? OtherPhotoReviewCell else { return }
-        photoReviewIsLike[indexPath.row] = !photoReviewIsLike[indexPath.row]
+        print(otherCell)
+//        photoReviewIsLike[indexPath.row] = !photoReviewIsLike[indexPath.row]
         
-        let btnImage = photoReviewIsLike[indexPath.row] ? UIImage(named: ImageKey.btnLike) : UIImage(named: ImageKey.btnLikeUnclick)
-        otherCell.likeButton.setImage(btnImage, for: .normal)
+//        let btnImage = photoReviewIsLike[indexPath.row] ? UIImage(named: ImageKey.btnLike) : UIImage(named: ImageKey.btnLikeUnclick)
+//        otherCell.likeButton.setImage(btnImage, for: .normal)
     }
 }

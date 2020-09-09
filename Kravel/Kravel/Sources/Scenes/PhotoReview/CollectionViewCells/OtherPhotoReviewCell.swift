@@ -17,18 +17,12 @@ class OtherPhotoReviewCell: UICollectionViewCell {
     // MARK: - 포토리뷰 이미지 설정
     @IBOutlet weak var photoReviewImageView: UIImageView!
     
-    var photoReivewImage: UIImage? {
-        didSet {
-            photoReviewImageView.image = photoReivewImage
-        }
-    }
-    
     // MARK: - 포토리뷰 날짜 설정
     @IBOutlet weak var dateLabel: UILabel!
     
-    var date: Date? {
+    var date: String? {
         didSet {
-            dateLabel.text = "\(date!)"
+            dateLabel.text = date
         }
     }
     

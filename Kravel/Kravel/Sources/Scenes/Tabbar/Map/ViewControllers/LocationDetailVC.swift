@@ -201,7 +201,6 @@ class LocationDetailVC: UIViewController {
         }
         
         if let placeID = self.placeID {
-            print(placeID)
             requestDetailPlaceData(of: placeID)
             requestPhotoReview(of: placeID)
         }
@@ -376,10 +375,13 @@ extension LocationDetailVC: UICollectionViewDelegateFlowLayout {
 
 extension LocationDetailVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == 5 {
-            guard let otherPhotoReviewVC = UIStoryboard(name: "OtherPhotoReview", bundle: nil).instantiateViewController(withIdentifier: OtherPhotoReviewVC.identifier) as? OtherPhotoReviewVC else { return }
-            self.navigationController?.pushViewController(otherPhotoReviewVC, animated: true)
-        }
+        guard let otherPhotoReviewVC = UIStoryboard(name: "OtherPhotoReview", bundle: nil).instantiateViewController(withIdentifier: OtherPhotoReviewVC.identifier) as? OtherPhotoReviewVC else { return }
+        
+        otherPhotoReviewVC.placeID = self.placeData?.placeId
+        if indexPath.row != 5 { otherPhotoReviewVC.selectedPhotoReviewID = self.photoReviewData[indexPath.row].reviewId }
+        
+        self.navigationController?.pushViewController(otherPhotoReviewVC, animated: true)
+        
     }
 }
 
