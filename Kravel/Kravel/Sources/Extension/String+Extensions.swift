@@ -62,6 +62,25 @@ struct CustomLocalize {
         case man = "남자"
         case woman = "여자"
         
+        // MARK: - 홈 환영
+        case homeWelcom = "당신의 한국 여행을\n더 특별하게,\nKravel만의 장소를 둘러보세요."
+        case homeWelcomPart = "Kravel만의 장소를 둘러보세요."
+        
+        // MARK: - 가까운 곳
+        case close = "나와 가까운 Kravel"
+        case closepart = "나와 가까운"
+        
+        // MARK: - 더보기
+        case more = "더 보기"
+        
+        // MARK: - 포토리뷰
+        case newPhotoReview = "새로운 포토리뷰"
+        case photoReview = "포토리뷰"
+        
+        // MARK: - 인기 있어요
+        case nowadaysPopular = "요즘 여기가 인기 있어요!"
+        case popular = "인기 있어요!"
+        
         // MARK: - 카메라 POP UP 관련
         case authorCamera = "카메라"
         case authorPhotography = "사진 촬영"
@@ -127,6 +146,33 @@ struct CustomLocalize {
             case .woman:
                 if language == "KOR" { return "여자" }
                 else { return "Female" }
+            case .homeWelcom:
+                if language == "KOR" { return "당신의 한국 여행을\n더 특별하게,\nKravel만의 장소를 둘러보세요." }
+                else { return "Places that will make your trip\nto Korea more special.\nThe popular place these days." }
+            case .homeWelcomPart:
+                if language == "KOR" { return "Kravel만의 장소를 둘러보세요." }
+                else { return "The popular place these days" }
+            case .close:
+                if language == "KOR" { return "나와 가까운 Kravel" }
+                else { return "a Kravel close to me" }
+            case .closepart:
+                if language == "KOR" { return "나와 가까운" }
+                else { return "close to me" }
+            case .more:
+                if language == "KOR" { return "더 보기" }
+                else { return "more" }
+            case .newPhotoReview:
+                if language == "KOR" { return "새로운 포토리뷰" }
+                else { return "New PhotoReview" }
+            case .photoReview:
+                if language == "KOR" { return "포토리뷰" }
+                else { return "PhotoReview" }
+            case .nowadaysPopular:
+                if language == "KOR" { return "요즘 여기가 인기 있어요!" }
+                else { return "This place is popular these days!" }
+            case .popular:
+                if language == "KOR" { return "인기 있어요!" }
+                else { return "popular these days!" }
             case .emailValid:
                 if language == "KOR" { return "이메일 형식이 옳지 않습니다." }
                 else { return "Email format is incorrect." }

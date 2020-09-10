@@ -139,7 +139,7 @@ extension OtherPhotoReviewVC: UICollectionViewDataSource {
         otherPhotoReviewCell.indexPath = indexPath
         
         otherPhotoReviewCell.likeCount = photoReviewData[indexPath.row].likeCount
-        otherPhotoReviewCell.photoReviewImageView.setImage(with: photoReviewData[indexPath.row].imageUrl)
+        otherPhotoReviewCell.photoReviewImageView.setImage(with: photoReviewData[indexPath.row].imageUrl ?? "")
         otherPhotoReviewCell.date = "2020.08.24"
         otherPhotoReviewCell.delegate = self
         return otherPhotoReviewCell

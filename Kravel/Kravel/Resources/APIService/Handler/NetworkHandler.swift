@@ -221,8 +221,6 @@ class NetworkHandler {
                 , let fileName = imgDic[ImageDictionaryKey.fileName.rawValue] as? String
                 else { return }
             
-            print("\(imgData) Hi")
-            
             multipartFormData.append(imgData, withName: "file",
                                      fileName: fileName,
                                      mimeType: "image/jpeg") },

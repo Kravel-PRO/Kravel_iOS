@@ -345,7 +345,6 @@
                         <outlet property="hotPlaceCollectionView" destination="wSj-uS-vxr" id="QAJ-eO-AL5"/>
                         <outlet property="hotPlaceCollectionViewHeightConstraint" destination="XLC-qh-fdm" id="kAf-41-YhT"/>
                         <outlet property="hotPlaceLabel" destination="Cxg-dg-XcE" id="M7l-Dc-x8a"/>
-                        <outlet property="hotPlaceLabelLeadingConstraint" destination="S9G-qV-5lx" id="UvH-HR-ROc"/>
                         <outlet property="moreButton" destination="sF5-4g-7xo" id="0rq-9l-rBP"/>
                         <outlet property="nearPlaceCollectionView" destination="jCc-ha-oeJ" id="8C1-NO-STf"/>
                         <outlet property="photoReviewView" destination="SXu-MG-qel" id="iS6-Tn-4cQ"/>
@@ -356,7 +355,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kZh-Bs-YXn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-66.400000000000006" y="1443.8423645320197"/>
+            <point key="canvasLocation" x="121" y="1423"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="CWk-k6-tXy">

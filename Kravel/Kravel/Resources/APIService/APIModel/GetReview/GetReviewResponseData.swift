@@ -9,12 +9,12 @@
 import Foundation
 
 struct ReviewInform: Codable {
-    let reviewId: Int
-    let imageUrl: String
-    let likeCount: Int
+    let reviewId: Int?
+    let imageUrl: String?
+    let likeCount: Int?
     let like: Bool?
-    let createdDate: String
-    let placeTitle: String
+    let createdDate: String?
+    let placeTitle: String?
     let tags: String?
     
     enum CodingKeys: String, CodingKey {
@@ -23,12 +23,12 @@ struct ReviewInform: Codable {
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        reviewId = (try? values.decode(Int.self, forKey: .reviewId)) ?? -1
-        imageUrl = (try? values.decode(String.self, forKey: .imageUrl)) ?? ""
-        likeCount = (try? values.decode(Int.self, forKey: .likeCount)) ?? -1
+        reviewId = (try? values.decode(Int.self, forKey: .reviewId)) ?? nil
+        imageUrl = (try? values.decode(String.self, forKey: .imageUrl)) ?? nil
+        likeCount = (try? values.decode(Int.self, forKey: .likeCount)) ?? nil
         like = (try? values.decode(Bool.self, forKey: .like)) ?? nil
-        createdDate = (try? values.decode(String.self, forKey: .createdDate)) ?? ""
-        placeTitle = (try? values.decode(String.self, forKey: .placeTitle)) ?? ""
+        createdDate = (try? values.decode(String.self, forKey: .createdDate)) ?? nil
+        placeTitle = (try? values.decode(String.self, forKey: .placeTitle)) ?? nil
         tags = (try? values.decode(String.self, forKey: .tags)) ?? nil
     }
 }

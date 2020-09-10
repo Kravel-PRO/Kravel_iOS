@@ -18,24 +18,10 @@ class HomeVC: UIViewController {
     }
     
     // Title Label 설정
-    @IBOutlet weak var titleLabel: UILabel! {
-        didSet {
-            let attributeTitle = "색다른 여행을 만들어 줄\nKravel 장소가\n준비되어 있어요!".makeAttributedText([.font: UIFont.boldSystemFont(ofSize: 24), .foregroundColor: UIColor.white])
-            attributeTitle.addAttributes([.font: UIFont(name: "AppleSDGothicNeo-Light", size: 24.0)!], range: ("색다른 여행을 만들어 줄\nKravel 장소가\n준비되어 있어요!" as NSString).range(of: "색다른 여행을 만들어 줄"))
-            titleLabel.attributedText = attributeTitle
-            titleLabel.sizeToFit()
-        }
-    }
+    @IBOutlet weak var titleLabel: UILabel!
     
     // 나와 가까운 Kravel 소개 Label
-    @IBOutlet weak var closerLabel: UILabel! {
-        didSet {
-            let attributeTitle = "나와 가까운 Kravel".makeAttributedText([.font: UIFont.boldSystemFont(ofSize: 18), .foregroundColor: UIColor.white])
-            attributeTitle.addAttributes([.font: UIFont.systemFont(ofSize: 18)], range: ("나와 가까운 Kravel" as NSString).range(of: "Kravel"))
-            closerLabel.attributedText = attributeTitle
-            closerLabel.sizeToFit()
-        }
-    }
+    @IBOutlet weak var closerLabel: UILabel!
     
     // 더 보기 버튼 이미지, Label 위치 변경
     @IBOutlet weak var moreButton: UIButton! {
@@ -85,16 +71,7 @@ class HomeVC: UIViewController {
     }
     
     // MARK: - 인기 있는 장소 설정
-    @IBOutlet weak var hotPlaceLabel: UILabel! {
-        didSet {
-            let attributeHotPlaceText = "요즘 여기가 인기 있어요!".makeAttributedText([.font: UIFont.boldSystemFont(ofSize: 18)])
-            attributeHotPlaceText.addAttributes([.font: UIFont.systemFont(ofSize: 18)], range: ("요즘 여기가 인기 있어요!" as NSString).range(of: "요즘 여기가"))
-            hotPlaceLabel.attributedText = attributeHotPlaceText
-            hotPlaceLabel.translatesAutoresizingMaskIntoConstraints = false
-        }
-    }
-    
-    @IBOutlet weak var hotPlaceLabelLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var hotPlaceLabel: UILabel!
     
     @IBOutlet weak var hotPlaceCollectionViewHeightConstraint: NSLayoutConstraint!
     
@@ -105,12 +82,6 @@ class HomeVC: UIViewController {
         let cellWidth = hotPlaceCollectionView.frame.width - 2*horizontalSpacing
         let cellHeight = cellWidth * 0.46
         hotPlaceCollectionViewHeightConstraint.constant = cellHeight * CGFloat(hotPlaceData.count) + lineSpacing * CGFloat((hotPlaceData.count-1))
-    }
-    
-    private func setHotPlaceLabelLayout() {
-        let hotPlaceSize = hotPlaceLabel.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
-        hotPlaceLabel.heightAnchor.constraint(equalToConstant: hotPlaceSize.height).isActive = true
-        hotPlaceLabelLeadingConstraint.constant = view.frame.width / 23.44
     }
     
     private var hotPlaceData: [PlaceContentInform] = []
@@ -125,7 +96,6 @@ class HomeVC: UIViewController {
     // MARK: - 포토 리뷰 뷰 설정
     @IBOutlet weak var photoReviewView: PhotoReviewView! {
         didSet {
-            setPhotoReviewLabel()
             photoReviewView.photoReviewCollectionViewDelegate = self
             photoReviewView.photoReviewCollectionViewDataSource = self
             photoReviewView.writeButton.isHidden = true
@@ -146,12 +116,6 @@ class HomeVC: UIViewController {
     // 포토리뷰 보여주는 데이터
     private var photoReviewData: [ReviewInform] = []
     
-    private func setPhotoReviewLabel() {
-        let photoReviewAttributeText = "인기 많은 포토 리뷰".makeAttributedText([.font: UIFont.systemFont(ofSize: 18), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)])
-        photoReviewAttributeText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 18)], range: ("인기 많은 포토 리뷰" as NSString).range(of: "포토 리뷰"))
-        photoReviewView.attributeTitle = photoReviewAttributeText
-    }
-    
     private func setPhotoReviewLabelLayout() {
         let horizontalSpacing = view.frame.width / 23.44
         photoReviewView.photoReviewCollectionViewLeadingConstraint.constant = horizontalSpacing
@@ -161,6 +125,27 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setLabelByLanguage()
+    }
+    
+    private func setLabelByLanguage() {
+        let attributeTitle = "당신의 한국 여행을\n더 특별하게,\nKravel만의 장소를 둘러보세요.".localized.makeAttributedText([.font: UIFont.boldSystemFont(ofSize: 24), .foregroundColor: UIColor.white])
+        attributeTitle.addAttributes([.font: UIFont(name: "AppleSDGothicNeo-Light", size: 24.0)!], range: ("당신의 한국 여행을\n더 특별하게,\nKravel만의 장소를 둘러보세요.".localized as NSString).range(of: "Kravel만의 장소를 둘러보세요.".localized))
+        titleLabel.attributedText = attributeTitle
+        
+        let attributeClose = "나와 가까운 Kravel".localized.makeAttributedText([.font: UIFont.boldSystemFont(ofSize: 18), .foregroundColor: UIColor.white])
+        attributeClose.addAttributes([.font: UIFont.systemFont(ofSize: 18)], range: ("나와 가까운 Kravel".localized as NSString).range(of: "나와 가까운".localized))
+        closerLabel.attributedText = attributeClose
+        
+        moreButton.setTitle("더 보기".localized, for: .normal)
+        
+        let attributePhotoReview = "새로운 포토리뷰".localized.makeAttributedText([.font: UIFont.systemFont(ofSize: 18), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)])
+        attributePhotoReview.addAttributes([.font: UIFont.boldSystemFont(ofSize: 18)], range: ("새로운 포토리뷰".localized as NSString).range(of: "포토리뷰".localized))
+        photoReviewView.attributeTitle = attributePhotoReview
+        
+        let attributeHotPlace = "요즘 여기가 인기 있어요!".localized.makeAttributedText([.font: UIFont.boldSystemFont(ofSize: 18)])
+        attributeHotPlace.addAttributes([.font: UIFont.systemFont(ofSize: 18)], range: ("요즘 여기가 인기 있어요!".localized as NSString).range(of: "인기 있어요!".localized))
+        hotPlaceLabel.attributedText = attributeHotPlace
     }
     
     // MARK: - UIViewController viewWillAppear Override
@@ -180,8 +165,6 @@ class HomeVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setHotPlaceCollectionViewHeight()
-        setHotPlaceLabelLayout()
-        setPhotoReviewLabelLayout()
         setPhotoReviewViewLayout()
     }
 }
@@ -345,7 +328,7 @@ extension HomeVC: UICollectionViewDataSource {
     private func makePhotoReviewCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> PhotoReviewCell {
         guard let photoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoReviewCell.identifier, for: indexPath) as? PhotoReviewCell else { return PhotoReviewCell() }
         
-        photoReviewCell.photoImageView.setImage(with: photoReviewData[indexPath.row].imageUrl)
+        photoReviewCell.photoImageView.setImage(with: photoReviewData[indexPath.row].imageUrl ?? "")
         if indexPath.row == 5 { photoReviewCell.addMoreView() }
         return photoReviewCell
     }

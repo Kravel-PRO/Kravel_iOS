@@ -323,7 +323,7 @@ extension ContentDetailVC: UICollectionViewDataSource {
     private func createPhotoReviewCell(of collectionView: UICollectionView, at indexPath: IndexPath) -> UICollectionViewCell {
         guard let photoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoReviewCell.identifier, for: indexPath) as? PhotoReviewCell else { return UICollectionViewCell() }
         print(photoReviewData)
-        photoReviewCell.photoImageView.setImage(with: photoReviewData[indexPath.row].imageUrl)
+        photoReviewCell.photoImageView.setImage(with: photoReviewData[indexPath.row].imageUrl ?? "")
         if indexPath.row == 5 { photoReviewCell.addMoreView() }
         return photoReviewCell
     }

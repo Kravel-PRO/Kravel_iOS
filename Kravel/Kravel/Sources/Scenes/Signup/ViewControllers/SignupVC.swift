@@ -130,10 +130,10 @@ class SignupVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        setByLanguage()
+        setLabelByLanguage()
     }
     
-    private func setByLanguage() {
+    private func setLabelByLanguage() {
         titleLabel.text = "Kravel과 함께\n색다른\n여행을 떠나볼까요?".localized
         emailLabel.text = "이메일 계정".localized
         textFields[0].placeholder = "이메일을 입력해주세요.".localized
