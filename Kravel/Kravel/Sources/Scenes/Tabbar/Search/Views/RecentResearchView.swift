@@ -17,6 +17,9 @@ class RecentResearchView: UIView {
     
     var originalHeight: CGFloat?
     
+    // MARK: - 현재 뷰 Delegate 이벤트 전달
+    var delegate: RecentResearchViewDelegate?
+    
     // MARK: - Label 표시를 위한 View
     @IBOutlet weak var topMarginView: UIView!
     
@@ -152,6 +155,11 @@ extension RecentResearchView: UITableViewDataSource {
 }
 
 extension RecentResearchView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        delegate?.click(searchTerm: recentResearchs[recentResearchs.count - indexPath.row - 1].term)
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return tableViewEachRowHeight
     }

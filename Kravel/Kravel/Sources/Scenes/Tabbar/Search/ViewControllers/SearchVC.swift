@@ -125,6 +125,7 @@ class SearchVC: UIViewController {
     }()
     
     private func setRecentResearchView() {
+        recentResearchView.delegate = self
         self.view.addSubview(recentResearchView)
     }
     
@@ -241,6 +242,14 @@ extension SearchVC {
                 networkFailPopupVC.modalPresentationStyle = .overFullScreen
                 self.present(networkFailPopupVC, animated: false, completion: nil)
             }
+        }
+    }
+}
+
+extension SearchVC: RecentResearchViewDelegate {
+    func click(searchTerm: String?) {
+        if let searchTerm = searchTerm {
+            request(searchText: searchTerm)
         }
     }
 }

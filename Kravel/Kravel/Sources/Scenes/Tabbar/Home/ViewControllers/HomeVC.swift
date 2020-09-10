@@ -212,7 +212,7 @@ extension HomeVC {
     
     // MARK: - 인기 장소 데이터 API 요청
     private func requestHotPlaceData() {
-        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 5, review_count: true, sort: nil)
+        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 5, review_count: nil, sort: "review-count,asc")
         NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
             switch result {
             case .success(let getPlaceResult):
