@@ -154,6 +154,7 @@
 		9DD7AD112507BE8700742F25 /* AuthorizationPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7AD102507BE8700742F25 /* AuthorizationPopupVC.swift */; };
 		9DD7AD13250A4EC000742F25 /* RecentResearchViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7AD12250A4EC000742F25 /* RecentResearchViewDelegate.swift */; };
 		9DD7AD16250A7AF400742F25 /* PostReviewParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7AD15250A7AF400742F25 /* PostReviewParameter.swift */; };
+		9DD7AD1A250ACD7400742F25 /* LikeParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7AD19250ACD7400742F25 /* LikeParameter.swift */; };
 		9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */; };
 		9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */; };
 		9DEDA6A924BCB70600E978F5 /* CategoryTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */; };
@@ -317,6 +318,7 @@
 		9DD7AD102507BE8700742F25 /* AuthorizationPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPopupVC.swift; sourceTree = "<group>"; };
 		9DD7AD12250A4EC000742F25 /* RecentResearchViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentResearchViewDelegate.swift; sourceTree = "<group>"; };
 		9DD7AD15250A7AF400742F25 /* PostReviewParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReviewParameter.swift; sourceTree = "<group>"; };
+		9DD7AD19250ACD7400742F25 /* LikeParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeParameter.swift; sourceTree = "<group>"; };
 		9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTabbar.xib; sourceTree = "<group>"; };
@@ -770,6 +772,7 @@
 				9D4CCF79250039D2003F73AF /* GetReview */,
 				9DD7AD14250A7AE200742F25 /* PostReview */,
 				9DD48BAA2503F01C0096DE08 /* Scrap */,
+				9DD7AD17250ACD3B00742F25 /* Like */,
 				9DD48BAF2504C2C50096DE08 /* Map */,
 				9DD48BBA250511BD0096DE08 /* Search */,
 			);
@@ -1210,6 +1213,14 @@
 			path = PostReview;
 			sourceTree = "<group>";
 		};
+		9DD7AD17250ACD3B00742F25 /* Like */ = {
+			isa = PBXGroup;
+			children = (
+				9DD7AD19250ACD7400742F25 /* LikeParameter.swift */,
+			);
+			path = Like;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1368,6 +1379,7 @@
 				9D76CD9224FDA268004D7333 /* ReportVC.swift in Sources */,
 				9D7FB20024D16AA9009A9C0A /* PlacePopupView.swift in Sources */,
 				9D4CCF7625000CC1003F73AF /* GetPlaceParameter.swift in Sources */,
+				9DD7AD1A250ACD7400742F25 /* LikeParameter.swift in Sources */,
 				9DBA643924F2738600E12FA4 /* NSNotificationName+Extensions.swift in Sources */,
 				9D6FF36724F9FF3400E6A8B9 /* PhotoReviewUploadVC.swift in Sources */,
 				9D014C3E248C4A5E00758FCC /* SignupVC.swift in Sources */,

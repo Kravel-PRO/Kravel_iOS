@@ -25,6 +25,7 @@ enum APICategory<P: ParameterAble> {
     case getPlaceReview(P)
     case postPlaceReview(P)
     case scrap(P)
+    case like(P, placeId: Int, reviewId: Int)
     case getCeleb(P)
     case getMedia(P)
     case search(P)
@@ -47,6 +48,10 @@ enum APICategory<P: ParameterAble> {
         case .getReview: return APICostants.getReview
         case .getPlaceReview: return APICostants.reviewOfId
         case .postPlaceReview: return APICostants.reviewOfId
+        case .like(_, let placeId, let reviewId):
+            APICostants.placeID = "\(placeId)"
+            APICostants.reviewID = "\(reviewId)"
+            return APICostants.like
         case .scrap: return APICostants.scrap
         case .getCeleb: return APICostants.getCelebList
         case .getMedia: return APICostants.getMeidaList
@@ -195,6 +200,11 @@ enum APICategory<P: ParameterAble> {
             guard let scrapParameter = scrapParameter as? ScrapParameter else { return nil }
             return [
                 "scrap": scrapParameter.scrap
+            ]
+        case .like(let likeParameter, _, _):
+            guard let likeParameter = likeParameter as? LikeParameter else { return nil }
+            return [
+                "like": likeParameter.like
             ]
         case .getCeleb(let celebParameter):
             var parameters: [String: Any] = [:]

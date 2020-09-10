@@ -30,6 +30,7 @@ class OtherPhotoReviewVC: UIViewController {
     
     var photoReviewData: [ReviewInform] = []
     
+    // 포토리뷰 데이터 가져온 후, Completion Handler
     lazy var photoReviewHandler: ((NetworkResult<Codable>) -> Void) = { result in
         switch result {
         case .success(let placeReviewData):
@@ -126,6 +127,12 @@ extension OtherPhotoReviewVC {
         let getReviewParameter = GetReviewParameter(page: nil, size: nil, sort: nil)
         NetworkHandler.shared.requestAPI(apiCategory: .getReviewOfMedia(getReviewParameter, id: id), completion: photoReviewHandler)
     }
+    
+    private func requestLike(currentLike: Bool, placeId: Int, reviewId: Int, completion: @escaping (NetworkResult<Codable>) -> Void) {
+        let likeParameter = LikeParameter(like: currentLike)
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .like(likeParameter, placeId: placeId, reviewId: reviewId), completion: completion)
+    }
 }
 
 extension OtherPhotoReviewVC: UICollectionViewDataSource {
@@ -167,11 +174,37 @@ extension OtherPhotoReviewVC: UICollectionViewDelegateFlowLayout {
 
 extension OtherPhotoReviewVC: CellButtonDelegate {
     func clickHeart(at indexPath: IndexPath) {
-        guard let otherCell = photoReviewCollectionView.cellForItem(at: indexPath) as? OtherPhotoReviewCell else { return }
-        // FIXME: - 좋아요 데이터로 통신할 수 있게 해야함
-//        photoReviewIsLike[indexPath.row] = !photoReviewIsLike[indexPath.row]
+        guard let like = photoReviewData[indexPath.row].like,
+            let reviewId = photoReviewData[indexPath.row].reviewId,
+            let otherCell = photoReviewCollectionView.cellForItem(at: indexPath) as? OtherPhotoReviewCell
+            else { return }
         
-//        let btnImage = photoReviewIsLike[indexPath.row] ? UIImage(named: ImageKey.btnLike) : UIImage(named: ImageKey.btnLikeUnclick)
-//        otherCell.likeButton.setImage(btnImage, for: .normal)
+        // FIXME: 현재 임의의 Place ID 이거 데이터 들어오면 수정하기
+        requestLike(currentLike: like, placeId: 1, reviewId: reviewId) { result in
+            switch result {
+            case .success(let likeResult):
+                guard let likeResult = likeResult as? Int,
+                    let likeCount = self.photoReviewData[indexPath.row].likeCount
+                    else { return }
+                // 좋아요 결과 반영됨 false -> true 반영
+                if likeResult != -1 {
+                    otherCell.isLike = true
+                    otherCell.likeCount = likeCount + 1
+                }
+                // 좋아요 결과 반영됨 true -> false 반영
+                else {
+                    otherCell.isLike = false
+                    otherCell.likeCount = likeCount - 1
+                }
+            case .requestErr(let error):
+                print(error)
+            case .serverErr:
+                print("Server Err")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
     }
 }

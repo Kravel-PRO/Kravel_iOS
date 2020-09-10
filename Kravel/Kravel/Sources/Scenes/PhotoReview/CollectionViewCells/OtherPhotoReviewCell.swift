@@ -29,6 +29,14 @@ class OtherPhotoReviewCell: UICollectionViewCell {
     // MARK: - 좋아요 버튼
     @IBOutlet weak var likeButton: UIButton!
     
+    var isLike: Bool? {
+        didSet {
+            guard let isLike = self.isLike else { return }
+            let heartImage = isLike ? UIImage(named: ImageKey.btnLike) : UIImage(named: ImageKey.btnLikeUnclick)
+            likeButton.setImage(heartImage, for: .normal)
+        }
+    }
+    
     // Delegate에 전달
     @IBAction func like(_ sender: Any) {
         guard let indexPath = self.indexPath else { return }

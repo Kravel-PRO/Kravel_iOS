@@ -28,6 +28,7 @@ class NetworkHandler {
         case .getPlaceReview: requestGetReviewOfPlace(apiURL, headers, parameters, completion)
         case .postPlaceReview: requestPostReviewOfPlace(apiURL, headers, parameters, completion)
         case .scrap: requestScrap(apiURL, headers, parameters, completion)
+        case .like: print("Like")
         case .getCeleb: requestCeleb(apiURL, headers, parameters, completion)
         case .getMedia: requestMedia(apiURL, headers, parameters, completion)
         case .search: requestSearch(apiURL, headers, parameters, completion)
@@ -255,6 +256,27 @@ class NetworkHandler {
                         completion(.success(scrapResult.data?.result))
                     } else {
                         completion(.requestErr(scrapResult.error))
+                    }
+                case .failure(let error):
+                    print(error)
+                    completion(.networkFail)
+                }
+        }
+    }
+    
+    private func requestLike(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
+        guard let url = try? url.asURL() else { return }
+        
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .validate(statusCode: 200...500)
+            .responseDecodable(of: APIResponseData<APICantSortableDataResult<Int>, APIError>.self) { response in
+                switch response.result {
+                case .success(let likeResult):
+                    guard let statusCode = response.response?.statusCode else { return }
+                    if statusCode == 200 {
+                        completion(.success(likeResult.data?.result))
+                    } else {
+                        completion(.requestErr(likeResult.error))
                     }
                 case .failure(let error):
                     print(error)
