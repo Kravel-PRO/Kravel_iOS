@@ -239,7 +239,7 @@ extension HomeVC {
     // MARK: - 포토리뷰 데이터 API 요청
     private func requestReviewData() {
         let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "reviewLikes-count,desc")
-        NetworkHandler.shared.requestAPI(apiCategory: .getNewReview(getReviewParameter)) { result in
+        NetworkHandler.shared.requestAPI(apiCategory: .getReview(getReviewParameter)) { result in
             switch result {
             case .success(let getReviewResult):
                 guard let getReviewResult = getReviewResult as? APISortableResponseData<ReviewInform> else { return }
@@ -344,8 +344,8 @@ extension HomeVC: UICollectionViewDataSource {
     // MARK: - 포토리뷰 보여주는 Cell 생성
     private func makePhotoReviewCell(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> PhotoReviewCell {
         guard let photoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoReviewCell.identifier, for: indexPath) as? PhotoReviewCell else { return PhotoReviewCell() }
-
-        photoReviewCell.photoImageView.setImage(with: photoReviewData[indexPath.row].imageURl)
+        
+        photoReviewCell.photoImageView.setImage(with: photoReviewData[indexPath.row].imageUrl)
         if indexPath.row == 5 { photoReviewCell.addMoreView() }
         return photoReviewCell
     }

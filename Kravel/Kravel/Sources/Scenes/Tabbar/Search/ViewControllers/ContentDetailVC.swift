@@ -138,6 +138,7 @@ class ContentDetailVC: UIViewController {
             moreButton.layer.borderColor = UIColor.veryLightPink.cgColor
             moreButton.layer.borderWidth = 1
             moreButton.layer.cornerRadius = moreButton.frame.width / 15
+            moreButton.isHidden = true
         }
     }
     
@@ -320,7 +321,8 @@ extension ContentDetailVC: UICollectionViewDataSource {
     
     private func createPhotoReviewCell(of collectionView: UICollectionView, at indexPath: IndexPath) -> UICollectionViewCell {
         guard let photoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoReviewCell.identifier, for: indexPath) as? PhotoReviewCell else { return UICollectionViewCell() }
-        photoReviewCell.photoImageView.setImage(with: photoReviewData[indexPath.row].imageURl)
+        print(photoReviewData)
+        photoReviewCell.photoImageView.setImage(with: photoReviewData[indexPath.row].imageUrl)
         if indexPath.row == 5 { photoReviewCell.addMoreView() }
         return photoReviewCell
     }

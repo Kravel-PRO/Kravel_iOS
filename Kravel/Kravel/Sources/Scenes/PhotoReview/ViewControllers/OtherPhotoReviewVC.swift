@@ -114,7 +114,6 @@ extension OtherPhotoReviewVC {
     private func requestPlacePhotoReview(of placeID: Int) {
         let getPlaceReviewParameter = GetReviewOfPlaceParameter(latitude: nil, longitude: nil, like_count: nil)
         APICostants.placeID = "\(placeID)"
-        
         NetworkHandler.shared.requestAPI(apiCategory: .getPlaceReview(getPlaceReviewParameter), completion: photoReviewHandler)
     }
     
@@ -140,7 +139,7 @@ extension OtherPhotoReviewVC: UICollectionViewDataSource {
         otherPhotoReviewCell.indexPath = indexPath
         
         otherPhotoReviewCell.likeCount = photoReviewData[indexPath.row].likeCount
-        otherPhotoReviewCell.photoReviewImageView.setImage(with: photoReviewData[indexPath.row].imageURl)
+        otherPhotoReviewCell.photoReviewImageView.setImage(with: photoReviewData[indexPath.row].imageUrl)
         otherPhotoReviewCell.date = "2020.08.24"
         otherPhotoReviewCell.delegate = self
         return otherPhotoReviewCell
@@ -167,9 +166,9 @@ extension OtherPhotoReviewVC: UICollectionViewDelegateFlowLayout {
 }
 
 extension OtherPhotoReviewVC: CellButtonDelegate {
-    func click(at indexPath: IndexPath) {
+    func clickHeart(at indexPath: IndexPath) {
         guard let otherCell = photoReviewCollectionView.cellForItem(at: indexPath) as? OtherPhotoReviewCell else { return }
-        print(otherCell)
+        // FIXME: - 좋아요 데이터로 통신할 수 있게 해야함
 //        photoReviewIsLike[indexPath.row] = !photoReviewIsLike[indexPath.row]
         
 //        let btnImage = photoReviewIsLike[indexPath.row] ? UIImage(named: ImageKey.btnLike) : UIImage(named: ImageKey.btnLikeUnclick)

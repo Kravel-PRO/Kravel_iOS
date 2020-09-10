@@ -288,10 +288,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gEi-u8-pDf" customClass="PhotoReviewView" customModule="Kravel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="422.33333333333326" width="375" height="289"/>
+                                                <rect key="frame" x="0.0" y="422.33333333333331" width="375" height="48"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="289" id="6aN-iI-HSz"/>
+                                                    <constraint firstAttribute="height" constant="48" id="6aN-iI-HSz"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kin-xH-LNe">

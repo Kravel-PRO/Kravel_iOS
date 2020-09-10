@@ -50,7 +50,7 @@ class RecentResearchCell: UITableViewCell {
     // Delete 버튼 클릭했을 때, Delegate에 이벤트 전달
     @objc func deleteRecentResearch(_ sender: Any) {
         guard let indexPath = self.indexPath else { return }
-        cellButtonDelegate?.click(at: indexPath)
+        cellButtonDelegate?.clickHeart(at: indexPath)
     }
     
     private func addDeleteButtonAction() {

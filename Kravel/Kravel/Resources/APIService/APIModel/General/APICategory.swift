@@ -21,8 +21,9 @@ enum APICategory<P: ParameterAble> {
     case getPlace(P)
     case getSimplePlace(P)
     case getPlaceOfID(P)
-    case getNewReview(P)
+    case getReview(P)
     case getPlaceReview(P)
+    case postPlaceReview(P)
     case scrap(P)
     case getCeleb(P)
     case getMedia(P)
@@ -43,8 +44,9 @@ enum APICategory<P: ParameterAble> {
             guard let id = id as? Int else { return "" }
             APICostants.placeID = "\(id)"
             return APICostants.getPlaceOfID
-        case .getNewReview: return APICostants.getNewReview
-        case .getPlaceReview: return APICostants.getReviewOfID
+        case .getReview: return APICostants.getReview
+        case .getPlaceReview: return APICostants.reviewOfId
+        case .postPlaceReview: return APICostants.reviewOfId
         case .scrap: return APICostants.scrap
         case .getCeleb: return APICostants.getCelebList
         case .getMedia: return APICostants.getMeidaList
@@ -150,7 +152,7 @@ enum APICategory<P: ParameterAble> {
             }
             return parameters
         case .getPlaceOfID: return nil
-        case .getNewReview(let reviewParameter):
+        case .getReview(let reviewParameter):
             var parameters: [String: Any] = [:]
             guard let reviewParameter = reviewParameter as? GetReviewParameter else { return nil }
             if let offset = reviewParameter.page {
@@ -180,6 +182,8 @@ enum APICategory<P: ParameterAble> {
                 parameters.updateValue(like_count, forKey: "like-count")
             }
             return parameters
+        case .postPlaceReview(let reviewOfPlaceParameter):
+            return nil
         case .scrap(let scrapParameter):
             guard let scrapParameter = scrapParameter as? ScrapParameter else { return nil }
             return [

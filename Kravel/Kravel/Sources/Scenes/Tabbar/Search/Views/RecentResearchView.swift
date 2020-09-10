@@ -170,7 +170,7 @@ extension RecentResearchView: CellButtonDelegate {
     // 1. 해당 모델 삭제
     // 2. 해당 Row 뒤의 Models index 전부 수정해주기
     // 3. 해당 TableView Row 삭제
-    func click(at indexPath: IndexPath) {
+    func clickHeart(at indexPath: IndexPath) {
         if CoreDataManager.shared.delete(at: recentResearchs.count - indexPath.row - 1, request: RecentResearchTerm.fetchRequest()) {
             recentResearchs.remove(at: recentResearchs.count - indexPath.row - 1)
             if isEmptyResearch() { print("empty") }

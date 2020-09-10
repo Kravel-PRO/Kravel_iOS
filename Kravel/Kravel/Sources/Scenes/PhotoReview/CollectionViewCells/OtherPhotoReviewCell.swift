@@ -29,9 +29,10 @@ class OtherPhotoReviewCell: UICollectionViewCell {
     // MARK: - 좋아요 버튼
     @IBOutlet weak var likeButton: UIButton!
     
+    // Delegate에 전달
     @IBAction func like(_ sender: Any) {
         guard let indexPath = self.indexPath else { return }
-        delegate?.click(at: indexPath)
+        delegate?.clickHeart(at: indexPath)
     }
     
     // MARK: - 좋아요 개수 Label 설정

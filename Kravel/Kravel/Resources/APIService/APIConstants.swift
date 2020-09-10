@@ -33,8 +33,8 @@ struct APICostants {
     static let map = APICostants.baseURL + "/api/places/map"
     
     // 새로운 리뷰 가져오는 API
-    static let getNewReview = APICostants.baseURL + "/api/reviews"
-    static var getReviewOfID: String {
+    static let getReview = APICostants.baseURL + "/api/reviews"
+    static var reviewOfId: String {
         get {
             return APICostants.baseURL + "/api/places/\(placeID)/reviews"
         }
