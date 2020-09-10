@@ -329,11 +329,28 @@ extension ContentDetailVC: UICollectionViewDataSource {
 extension ContentDetailVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == placeCollectionView {
+            // 장소 CollectionView 선택한 경우
             guard let placeDetailVC = UIStoryboard(name: "LocationDetail", bundle: nil).instantiateViewController(withIdentifier: LocationDetailVC.identifier) as? LocationDetailVC else { return }
             placeDetailVC.placeID = places[indexPath.row].placeId
             self.navigationController?.pushViewController(placeDetailVC, animated: true)
         } else {
-            print(indexPath.row)
+            // 포로리뷰 CollectionView 선택한 경우
+            guard let otherPhotoReviewVC = UIStoryboard(name: "OtherPhotoReview", bundle: nil).instantiateViewController(withIdentifier: OtherPhotoReviewVC.identifier) as? OtherPhotoReviewVC else { return }
+            
+            switch self.category {
+            case .celeb:
+                guard let id = self.id else { return }
+                otherPhotoReviewVC.requestType = .celeb(id: id)
+                if indexPath.row != 5 { otherPhotoReviewVC.selectedPhotoReviewID = photoReviewData[indexPath.row].reviewId }
+            case .media:
+                guard let id = self.id else { return }
+                otherPhotoReviewVC.requestType = .media(id: id)
+                if indexPath.row != 5 { otherPhotoReviewVC.selectedPhotoReviewID = photoReviewData[indexPath.row].reviewId }
+            case .none:
+                break
+            }
+            
+            self.navigationController?.pushViewController(otherPhotoReviewVC, animated: true)
         }
     }
 }

@@ -12,8 +12,9 @@ class OtherPhotoReviewVC: UIViewController {
     static let identifier = "OtherPhotoReviewVC"
     
     enum RequestType {
-        case hot
         case place(id: Int)
+        case celeb(id: Int)
+        case media(id: Int)
     }
     
     var requestType: RequestType?
@@ -28,6 +29,35 @@ class OtherPhotoReviewVC: UIViewController {
     }
     
     var photoReviewData: [ReviewInform] = []
+    
+    lazy var photoReviewHandler: ((NetworkResult<Codable>) -> Void) = { result in
+        switch result {
+        case .success(let placeReviewData):
+            guard let placeReviewData = placeReviewData as? APISortableResponseData<ReviewInform> else { return }
+            DispatchQueue.main.async {
+                self.photoReviewData = placeReviewData.content
+                self.photoReviewCollectionView.reloadData()
+                
+                guard let selectedPhotoReviewID = self.selectedPhotoReviewID else { return }
+                for index in 0..<self.photoReviewData.count {
+                    if selectedPhotoReviewID == self.photoReviewData[index].reviewId {
+                        self.photoReviewCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredVertically, animated: false)
+                        break
+                    }
+                }
+            }
+        case .requestErr(let error):
+            print(error)
+            DispatchQueue.main.async {
+                self.photoReviewData = []
+            }
+        case .serverErr: print("Server Err")
+        case .networkFail:
+            guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+            networkFailPopupVC.modalPresentationStyle = .overFullScreen
+            self.present(networkFailPopupVC, animated: false, completion: nil)
+        }
+    }
     
     // MARK: - UIViewController viewDidLoad() Override 설정
     override func viewDidLoad() {
@@ -47,8 +77,12 @@ class OtherPhotoReviewVC: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.topItem?.title = ""
-        let rightButtonItem = UIBarButtonItem(image: UIImage(named: ImageKey.icWrite), style: .done, target: self, action: #selector(writePhotoReview(_:)))
-        self.navigationItem.rightBarButtonItem = rightButtonItem
+        switch requestType {
+        case .place:
+            let rightButtonItem = UIBarButtonItem(image: UIImage(named: ImageKey.icWrite), style: .done, target: self, action: #selector(writePhotoReview(_:)))
+            self.navigationItem.rightBarButtonItem = rightButtonItem
+        default: break
+        }
     }
     
     @objc func writePhotoReview(_ sender: Any) {
@@ -61,46 +95,34 @@ extension OtherPhotoReviewVC {
     // MARK: - API 요청 분기 처리
     private func requestByAPI() {
         switch requestType {
-        case .hot: break
         case .place(let id):
             requestPlacePhotoReview(of: id)
+        case .celeb(let id):
+            requestCelebPhotoReview(id: id)
+        case .media(let id):
+            requestMediaPhotoReview(id: id)
         case .none: break
         }
     }
-    
+}
+
+extension OtherPhotoReviewVC {
     // MARK: - 장소의 포토리뷰 가져오기 API 요청
     private func requestPlacePhotoReview(of placeID: Int) {
         let getPlaceReviewParameter = GetReviewOfPlaceParameter(latitude: nil, longitude: nil, like_count: nil)
         APICostants.placeID = "\(placeID)"
         
-        NetworkHandler.shared.requestAPI(apiCategory: .getPlaceReview(getPlaceReviewParameter)) { result in
-            switch result {
-            case .success(let placeReviewData):
-                guard let placeReviewData = placeReviewData as? APISortableResponseData<ReviewInform> else { return }
-                DispatchQueue.main.async {
-                    self.photoReviewData = placeReviewData.content
-                    self.photoReviewCollectionView.reloadData()
-                    
-                    guard let selectedPhotoReviewID = self.selectedPhotoReviewID else { return }
-                    for index in 0..<self.photoReviewData.count {
-                        if selectedPhotoReviewID == self.photoReviewData[index].reviewId {
-                            self.photoReviewCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredVertically, animated: false)
-                            break
-                        }
-                    }
-                }
-            case .requestErr(let error):
-                print(error)
-                DispatchQueue.main.async {
-                    self.photoReviewData = []
-                }
-            case .serverErr: print("Server Err")
-            case .networkFail:
-                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
-                networkFailPopupVC.modalPresentationStyle = .overFullScreen
-                self.present(networkFailPopupVC, animated: false, completion: nil)
-            }
-        }
+        NetworkHandler.shared.requestAPI(apiCategory: .getPlaceReview(getPlaceReviewParameter), completion: photoReviewHandler)
+    }
+    
+    private func requestCelebPhotoReview(id: Int) {
+        let getReviewParameter = GetReviewParameter(page: nil, size: nil, sort: nil)
+        NetworkHandler.shared.requestAPI(apiCategory: .getReviewOfCeleb(getReviewParameter, id: id), completion: photoReviewHandler)
+    }
+    
+    private func requestMediaPhotoReview(id: Int) {
+        let getReviewParameter = GetReviewParameter(page: nil, size: nil, sort: nil)
+        NetworkHandler.shared.requestAPI(apiCategory: .getReviewOfMedia(getReviewParameter, id: id), completion: photoReviewHandler)
     }
 }
 
