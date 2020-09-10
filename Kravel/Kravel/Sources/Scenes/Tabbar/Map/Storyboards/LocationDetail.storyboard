@@ -131,35 +131,35 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gy6-Z3-9yy" customClass="PhotoReviewView" customModule="Kravel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="435.66666666666674" width="414" height="289"/>
+                                                <rect key="frame" x="0.0" y="435.66666666666669" width="414" height="48"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="289" id="pfD-FS-KjH"/>
+                                                    <constraint firstAttribute="height" constant="48" id="pfD-FS-KjH"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q93-kb-Tfy">
-                                                <rect key="frame" x="0.0" y="724.66666666666663" width="414" height="1"/>
+                                                <rect key="frame" x="0.0" y="483.66666666666669" width="414" height="1"/>
                                                 <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="Nhg-Zg-mHe"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2qT-Kh-WAK" customClass="SubLocationView" customModule="Kravel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="725.66666666666663" width="414" height="359.99999999999989"/>
+                                                <rect key="frame" x="0.0" y="484.66666666666674" width="414" height="360"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="360" id="y8Y-Xb-emK"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BYs-cn-XLo">
-                                                <rect key="frame" x="0.0" y="1085.6666666666667" width="414" height="1"/>
+                                                <rect key="frame" x="0.0" y="844.66666666666663" width="414" height="1"/>
                                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="dSu-Ja-J4P"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QgE-mE-ZfT" customClass="NearByAttractionView" customModule="Kravel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1086.6666666666667" width="414" height="190"/>
+                                                <rect key="frame" x="0.0" y="845.66666666666663" width="414" height="189.99999999999989"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="190" id="3Go-qr-Div"/>

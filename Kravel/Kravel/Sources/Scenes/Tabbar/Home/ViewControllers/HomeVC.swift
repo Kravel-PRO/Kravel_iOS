@@ -236,7 +236,7 @@ extension HomeVC {
     
     // MARK: - 포토리뷰 데이터 API 요청
     private func requestReviewData() {
-        let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "reviewLikes,desc")
+        let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "reviewLikes-count,desc")
         NetworkHandler.shared.requestAPI(apiCategory: .getNewReview(getReviewParameter)) { result in
             switch result {
             case .success(let getReviewResult):
@@ -288,6 +288,7 @@ extension HomeVC: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // FIXME: 이거 AppDelegate에 설정해서 앱 시작할 때 물어야할 듯 -> 시간 나면 고치기
         guard let location = locations.first else { return }
         currentLocation = location.coordinate
     }
@@ -375,7 +376,6 @@ extension HomeVC: UICollectionViewDelegate {
     
     private func touchPhotoCell(at indexPath: IndexPath) {
         // FIXME: 여기 클릭된 ID 넘겨주고 하는 코드 추가해야할 듯.
-//        if indexPath.row != 5 { return }
         guard let morePhotoVC = UIStoryboard(name: "MorePhotoReview", bundle: nil).instantiateViewController(withIdentifier: MorePhotoReviewVC.identifier) as? MorePhotoReviewVC else { return }
         morePhotoVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(morePhotoVC, animated: true)

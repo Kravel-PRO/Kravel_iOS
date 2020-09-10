@@ -23,7 +23,18 @@ class ContentDetailVC: UIViewController {
         switch category {
         case .celeb:
             guard let celebDetailDTO = categoryDetailDTO as? CelebrityDetailDTO else { return }
-            print(celebDetailDTO)
+            // 썸네일 설정
+            thumbnail_imageView.setImage(with: celebDetailDTO.celebrity.imageUrl ?? "")
+            
+            // Label 설정 -> 높이 Constraint 계산해서 적용
+            let introduceText = "\(celebDetailDTO.celebrity.celebrityName ?? "")가\n다녀간 곳은 어딜까요?"
+            introduceLabel.attributedText = createAttributeString(of: introduceText, highlightPart: celebDetailDTO.celebrity.imageUrl ?? "")
+            setLabelHeight()
+            
+            // 관련 장소 설정
+            self.places = celebDetailDTO.places
+            setPlaceCVHeight()
+            placeCollectionView.reloadData()
         case .media:
             guard let mediaDetailDTO = categoryDetailDTO as? MediaDetailDTO else { return }
             // 썸네일 이미지 설정
@@ -36,8 +47,8 @@ class ContentDetailVC: UIViewController {
             
             // 관련 장소 설정
             self.places = mediaDetailDTO.places ?? []
-            placeCollectionView.reloadData()
             setPlaceCVHeight()
+            placeCollectionView.reloadData()
         }
     }
     
@@ -106,13 +117,13 @@ class ContentDetailVC: UIViewController {
             placeCV_height_Constarint.constant = place_Cell_Height
             moreButtonConatinerView.isHidden = true
         } else if places.count <= 4 {
-            placeCV_height_Constarint.constant = place_Cell_Height * 2
+            placeCV_height_Constarint.constant = place_Cell_Height * 2 + 4
             moreButtonConatinerView.isHidden = true
         } else if places.count <= 6 {
-            placeCV_height_Constarint.constant = place_Cell_Height * 3
+            placeCV_height_Constarint.constant = place_Cell_Height * 3 + 4 * 2
             moreButtonConatinerView.isHidden = true
         } else {
-            placeCV_height_Constarint.constant = place_Cell_Height * 3
+            placeCV_height_Constarint.constant = place_Cell_Height * 3 + 4 * 2
             moreButtonConatinerView.isHidden = false
         }
         
@@ -241,7 +252,10 @@ extension ContentDetailVC {
             switch result {
             case .success(let celebResult):
                 guard let celebDetail = celebResult as? CelebrityDetailDTO else { return }
-                print(celebDetail)
+                self.categoryDetailDTO = celebDetail
+                DispatchQueue.main.async {
+                    self.appearDetailData()
+                }
             case .requestErr(let error): print(error)
             case .serverErr: print("Server Error")
             case .networkFail:
