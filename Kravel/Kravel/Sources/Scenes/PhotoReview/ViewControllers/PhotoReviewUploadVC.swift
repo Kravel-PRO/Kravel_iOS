@@ -11,6 +11,8 @@ import UIKit
 class PhotoReviewUploadVC: UIViewController {
     static let identifier = "PhotoReviewUploadVC"
     
+    var placeId: Int?
+    
     // MARK: - UIImagePickerController 설정
     private var picker: UIImagePickerController?
     
@@ -18,6 +20,8 @@ class PhotoReviewUploadVC: UIViewController {
         picker = UIImagePickerController()
         picker?.delegate = self
     }
+    
+    var selectedImage: [String: Any] = [:]
     
     // MARK: - 사진 올리기 Margin View 설정
     @IBOutlet weak var pictureUploadMarginView: UIView! {
@@ -38,6 +42,7 @@ class PhotoReviewUploadVC: UIViewController {
     }
     
     @IBAction func deletePicture(_ sender: Any) {
+        selectedImage.removeAll()
         photoImageView.image = nil
         pictureDeleteButton.isHidden = true
     }
@@ -58,6 +63,27 @@ class PhotoReviewUploadVC: UIViewController {
     @IBOutlet weak var completeButton: CustomButton! {
         didSet {
             completeButton.locationButton = .signupView
+        }
+    }
+    
+    @IBAction func upload(_ sender: Any) {
+        guard let placeId = self.placeId else { return }
+        APICostants.placeID = "\(placeId)"
+        
+        print(selectedImage)
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .postPlaceReview(selectedImage)) { result in
+            switch result {
+            case .success(let data):
+                print(data)
+            case .requestErr(let error): break
+            case .serverErr:
+                print("Server Error")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
         }
     }
     
@@ -84,7 +110,10 @@ class PhotoReviewUploadVC: UIViewController {
 
 extension PhotoReviewUploadVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage,
+            let url = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+            selectedImage.updateValue(url.lastPathComponent, forKey: ImageDictionaryKey.fileName.rawValue)
+            selectedImage.updateValue(image, forKey: ImageDictionaryKey.img.rawValue)
             photoImageView.image = image
             pictureDeleteButton.isHidden = false
             self.dismiss(animated: true, completion: nil)

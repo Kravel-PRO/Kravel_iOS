@@ -6,7 +6,7 @@
 //  Copyright © 2020 윤동민. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Alamofire
 
 class NetworkHandler {
@@ -26,7 +26,7 @@ class NetworkHandler {
         case .getPlaceOfID: requestGetPlaceOfID(apiURL, headers, parameters, completion)
         case .getReview: requestGetReview(apiURL, headers, parameters, completion)
         case .getPlaceReview: requestGetReviewOfPlace(apiURL, headers, parameters, completion)
-        case .postPlaceReview: print("")
+        case .postPlaceReview: requestPostReviewOfPlace(apiURL, headers, parameters, completion)
         case .scrap: requestScrap(apiURL, headers, parameters, completion)
         case .getCeleb: requestCeleb(apiURL, headers, parameters, completion)
         case .getMedia: requestMedia(apiURL, headers, parameters, completion)
@@ -215,6 +215,35 @@ class NetworkHandler {
     private func requestPostReviewOfPlace(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
         guard let url = try? url.asURL() else { return }
         
+        AF.upload(multipartFormData: { multipartFormData in
+            guard let imgDic = parameters
+                , let imgData = (imgDic[ImageDictionaryKey.img.rawValue] as? UIImage)?.jpegData(compressionQuality: 1.0)
+                , let fileName = imgDic[ImageDictionaryKey.fileName.rawValue] as? String
+                else { return }
+            print(imgData)
+            print(fileName)
+            multipartFormData.append(imgData, withName: "file",
+                                     fileName: fileName,
+                                     mimeType: "image/jpeg") },
+            to: url,
+            usingThreshold: UInt64(),
+            method: .post,
+            headers: headers).responseDecodable(of: APIResponseData<APICantSortableDataResult<Int>, APIError>.self) { response in
+                switch response.result {
+                case .success(let postReviewResult):
+                    guard let statusCode = response.response?.statusCode else { return }
+                    print(statusCode)
+                    if statusCode == 200 { completion(.success(postReviewResult.data?.result)) }
+                    else {
+                        print(postReviewResult.error)
+                        completion(.serverErr)
+                    }
+                case .failure(let error):
+                    print(error)
+                    completion(.networkFail)
+                }
+            }
+
     }
     
     private func requestScrap(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {

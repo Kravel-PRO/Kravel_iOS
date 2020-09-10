@@ -83,6 +83,12 @@ enum APICategory<P: ParameterAble> {
                 "Content-Type": "application/json",
                 "Authorization": "KakaoAK \(PrivateKey.kakaoRESTAPIKey)"
             ]
+        case .postPlaceReview:
+            guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
+            return [
+                "Content-Type": "multipart/form-data",
+                "Authorization": token
+            ]
         default:
             guard let token = UserDefaults.standard.object(forKey: UserDefaultKey.token) as? String else { return nil }
             return [
@@ -182,8 +188,11 @@ enum APICategory<P: ParameterAble> {
                 parameters.updateValue(like_count, forKey: "like-count")
             }
             return parameters
-        case .postPlaceReview(let reviewOfPlaceParameter):
-            return nil
+        case .postPlaceReview(let postReviewParameter):
+            guard let postReviewParameter = postReviewParameter as? PostReviewParameter else { return nil }
+            return [
+                "imgageDic": postReviewParameter
+            ]
         case .scrap(let scrapParameter):
             guard let scrapParameter = scrapParameter as? ScrapParameter else { return nil }
             return [

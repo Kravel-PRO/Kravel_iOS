@@ -148,6 +148,7 @@ class ContentDetailVC: UIViewController {
     @IBOutlet weak var photoReviewView: PhotoReviewView! {
         didSet {
             setPhotoReviewLabel()
+            photoReviewView.writeButton.isHidden = true
             photoReviewView.photoReviewCollectionViewDataSource = self
             photoReviewView.photoReviewCollectionViewDelegate = self
         }

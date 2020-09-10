@@ -8,6 +8,13 @@
 
 import UIKit
 
+enum ImageDictionaryKey: String {
+    case fileName = "fileName"
+    case img = "img"
+}
+
+extension Dictionary: ParameterAble { }
+
 struct PostReviewParameter: ParameterAble {
-    let file: UIImage
+    let file: [String: Any]
 }

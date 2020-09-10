@@ -320,6 +320,7 @@ class LocationDetailVC: UIViewController {
 extension LocationDetailVC: PhotoReviewViewDelegate {
     func clickWriteButton() {
         guard let photoReviewUploadVC = UIStoryboard(name: "PhotoReviewUpload", bundle: nil).instantiateViewController(withIdentifier: PhotoReviewUploadVC.identifier) as? PhotoReviewUploadVC else { return }
+        photoReviewUploadVC.placeId = placeID
         self.navigationController?.pushViewController(photoReviewUploadVC, animated: true)
     }
 }
