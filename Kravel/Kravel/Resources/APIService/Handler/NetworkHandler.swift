@@ -232,12 +232,10 @@ class NetworkHandler {
             headers: headers).responseDecodable(of: APIResponseData<APICantSortableDataResult<Int>, APIError>.self) { response in
                 switch response.result {
                 case .success(let postReviewResult):
+                    print("\(postReviewResult)")
                     guard let statusCode = response.response?.statusCode else { return }
-                    print(statusCode)
-                    if statusCode == 200 { completion(.success(postReviewResult.data?.result)) }
-                    else {
-                        completion(.serverErr)
-                    }
+                    if statusCode == 200 { completion(.success(statusCode)) }
+                    else { completion(.serverErr) }
                 case .failure(let error):
                     print(error)
                     completion(.networkFail)

@@ -72,8 +72,13 @@ class PhotoReviewUploadVC: UIViewController {
         
         NetworkHandler.shared.requestAPI(apiCategory: .postPlaceReview(selectedImage)) { result in
             switch result {
-            case .success(let data):
-                print(data)
+            case .success(let uploadResult):
+                guard let uploadResult = uploadResult as? Int else { return }
+                print(uploadResult)
+                if uploadResult == 200 {
+                    DispatchQueue.main.async {
+                        self.navigationController?.popViewController(animated: true)
+                    }}
             case .requestErr: break
             case .serverErr:
                 print("Server Error")
