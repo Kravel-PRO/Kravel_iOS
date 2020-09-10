@@ -19,7 +19,7 @@ class MorePhotoReviewVC: UIViewController {
         }
     }
     
-    private var photoReviewDatas: [String] = ["호텔 세느장", "우각로", "호준이 집", "여기가 명소", "유나 집"]
+    private var photoReviewData: [ReviewInform] = []
     
     // MARK: - UIViewController Override 부분
     override func viewDidLoad() {
@@ -30,6 +30,7 @@ class MorePhotoReviewVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNav()
+        requestPhotoReview()
     }
     
     private func setNav() {
@@ -42,15 +43,52 @@ class MorePhotoReviewVC: UIViewController {
     }
 }
 
+extension MorePhotoReviewVC {
+    // MARK: - 포토리뷰 API 통신
+    private func requestPhotoReview() {
+        let getReviewParameter = GetReviewParameter(page: 0, size: nil, sort: nil)
+        NetworkHandler.shared.requestAPI(apiCategory: .getReview(getReviewParameter)) { result in
+            switch result {
+            case .success(let getReviewResult):
+                guard let getReviewResult = getReviewResult as? APISortableResponseData<ReviewInform> else { return }
+                self.photoReviewData = getReviewResult.content
+                DispatchQueue.main.async {
+                    self.morePhotoReviewCollectionView.reloadData()
+                }
+            case .requestErr(let errorMessage):
+                print(errorMessage)
+            case .serverErr:
+                print("ServerError")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
+    }
+}
+
+extension MorePhotoReviewVC: CellButtonDelegate {
+    func clickHeart(at indexPath: IndexPath) {
+        print(indexPath)
+    }
+}
+
 extension MorePhotoReviewVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photoReviewDatas.count
+        return photoReviewData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let photoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: MorePhotoReviewCell.identifier, for: indexPath) as? MorePhotoReviewCell else { return UICollectionViewCell() }
-        photoReviewCell.photoReviewImage = UIImage(named: "yuna2")
-        photoReviewCell.placeName = photoReviewDatas[indexPath.row]
+        photoReviewCell.delegate = self
+        photoReviewCell.indexPath = indexPath
+        
+        photoReviewCell.photoReviewImageView.setImage(with: photoReviewData[indexPath.row].imageUrl ?? "")
+        photoReviewCell.isLike = photoReviewData[indexPath.row].like
+        photoReviewCell.likeCount = photoReviewData[indexPath.row].likeCount
+        photoReviewCell.placeName = photoReviewData[indexPath.row].placeTitle
+        photoReviewCell.tags = photoReviewData[indexPath.row].tags?.split(separator: " ").map(String.init)
         return photoReviewCell
     }
 }

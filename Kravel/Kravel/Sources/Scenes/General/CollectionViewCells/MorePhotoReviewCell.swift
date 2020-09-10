@@ -11,6 +11,9 @@ import UIKit
 class MorePhotoReviewCell: UICollectionViewCell {
     static let identifier = "MorePhotoReviewCell"
     
+    var indexPath: IndexPath?
+    var delegate: CellButtonDelegate?
+    
     // MARK: - 포토 리뷰 이미지 설정
     @IBOutlet weak var photoReviewImageView: UIImageView! {
         didSet {
@@ -19,9 +22,37 @@ class MorePhotoReviewCell: UICollectionViewCell {
         }
     }
     
-    var photoReviewImage: UIImage? {
+    // MARK: - 하트 버튼
+    @IBOutlet weak var heartButton: UIButton!
+    
+    var isLike: Bool? {
         didSet {
-            photoReviewImageView.image = photoReviewImage
+            guard let isLike = self.isLike else { return }
+            let heartImage = isLike ? UIImage(named: ImageKey.btnLike) : UIImage(named: ImageKey.btnLikeUnclick)
+            heartButton.setImage(heartImage, for: .normal)
+        }
+    }
+    
+    @IBAction func like(_ sender: Any) {
+        guard let indexPath = self.indexPath else { return }
+        delegate?.clickHeart(at: indexPath)
+    }
+    
+    // MARK: - 좋아요 개수 표시 Label 설정
+    @IBOutlet weak var likeCountLabel: UILabel! {
+        didSet {
+            likeCountLabel.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    var likeCountWidthConstraint: NSLayoutConstraint?
+    
+    var likeCount: Int? {
+        didSet {
+            guard let likeCount = self.likeCount else { return }
+            likeCountLabel.text = "\(likeCount)"
+            likeCountWidthConstraint = likeCountLabel.widthAnchor.constraint(equalToConstant: likeCountLabel.intrinsicContentSize.width)
+            likeCountWidthConstraint?.isActive = true
         }
     }
     
@@ -54,7 +85,7 @@ class MorePhotoReviewCell: UICollectionViewCell {
         }
     }
     
-    var tags: [String] = ["호텔 델루나", "여진구", "피오"] {
+    var tags: [String]? {
         didSet {
             tagCollectionView.reloadData()
         }
@@ -63,6 +94,13 @@ class MorePhotoReviewCell: UICollectionViewCell {
     // MARK: - UICollectionViewCell Override 설정
     override func prepareForReuse() {
         super.prepareForReuse()
+        delegate = nil
+        indexPath = nil
+        tags = nil
+        placeName = nil
+        photoReviewImageView.image = nil
+        isLike = nil
+        likeCountWidthConstraint?.isActive = false
     }
     
     override func awakeFromNib() {
@@ -73,12 +111,12 @@ class MorePhotoReviewCell: UICollectionViewCell {
 
 extension MorePhotoReviewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tags.count
+        return tags?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath) as? TagCell else { return UICollectionViewCell() }
-        tagCell.tagTitle = "#\(tags[indexPath.row])"
+        tagCell.tagTitle = "#\(tags?[indexPath.row])"
         return tagCell
     }
 }

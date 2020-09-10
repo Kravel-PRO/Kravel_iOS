@@ -47,6 +47,11 @@ class OtherPhotoReviewCell: UICollectionViewCell {
     // MARK: - UICollectionViewCell Override 설정
     override func prepareForReuse() {
         super.prepareForReuse()
+        indexPath = nil
+        delegate = nil
+        date = nil
+        photoReviewImageView.image = nil
+        likeCount = nil
     }
     
     override func awakeFromNib() {
