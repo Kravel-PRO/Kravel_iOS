@@ -189,10 +189,8 @@ enum APICategory<P: ParameterAble> {
             }
             return parameters
         case .postPlaceReview(let postReviewParameter):
-            guard let postReviewParameter = postReviewParameter as? PostReviewParameter else { return nil }
-            return [
-                "imgageDic": postReviewParameter
-            ]
+            guard let postReviewParameter = postReviewParameter as? [String: Any] else { return nil }
+            return postReviewParameter
         case .scrap(let scrapParameter):
             guard let scrapParameter = scrapParameter as? ScrapParameter else { return nil }
             return [

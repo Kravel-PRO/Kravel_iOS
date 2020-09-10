@@ -199,6 +199,12 @@ class LocationDetailVC: UIViewController {
         } else {
             setBackButtonByNav()
         }
+    }
+    
+    // MARK: - UIViewController viewWillAppear() Override 부분
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNav()
         
         if let placeID = self.placeID {
             requestDetailPlaceData(of: placeID)
@@ -206,6 +212,15 @@ class LocationDetailVC: UIViewController {
         }
     }
     
+    private func setNav() {
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.navigationBar.topItem?.title = ""
+        guard let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else { return }
+        backButtonTopConstraint.constant = window.safeAreaInsets.top
+    }
+}
+
+extension LocationDetailVC {
     // MARK: - 장소 ID로부터 Detail 정보 가져오기
     private func requestDetailPlaceData(of placeID: Int) {
         NetworkHandler.shared.requestAPI(apiCategory: .getPlaceOfID(placeID)) { result in
@@ -301,19 +316,6 @@ class LocationDetailVC: UIViewController {
                 self.present(networkFailPopupVC, animated: false, completion: nil)
             }
         }
-    }
-    
-    // MARK: - UIViewController viewWillAppear() Override 부분
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNav()
-    }
-    
-    private func setNav() {
-        self.navigationController?.navigationBar.isHidden = true
-        self.navigationController?.navigationBar.topItem?.title = ""
-        guard let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else { return }
-        backButtonTopConstraint.constant = window.safeAreaInsets.top
     }
 }
 

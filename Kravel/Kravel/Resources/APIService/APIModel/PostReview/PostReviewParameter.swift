@@ -14,7 +14,3 @@ enum ImageDictionaryKey: String {
 }
 
 extension Dictionary: ParameterAble { }
-
-struct PostReviewParameter: ParameterAble {
-    let file: [String: Any]
-}

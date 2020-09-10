@@ -70,13 +70,11 @@ class PhotoReviewUploadVC: UIViewController {
         guard let placeId = self.placeId else { return }
         APICostants.placeID = "\(placeId)"
         
-        print(selectedImage)
-        
         NetworkHandler.shared.requestAPI(apiCategory: .postPlaceReview(selectedImage)) { result in
             switch result {
             case .success(let data):
                 print(data)
-            case .requestErr(let error): break
+            case .requestErr: break
             case .serverErr:
                 print("Server Error")
             case .networkFail:

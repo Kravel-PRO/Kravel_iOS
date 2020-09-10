@@ -217,11 +217,12 @@ class NetworkHandler {
         
         AF.upload(multipartFormData: { multipartFormData in
             guard let imgDic = parameters
-                , let imgData = (imgDic[ImageDictionaryKey.img.rawValue] as? UIImage)?.jpegData(compressionQuality: 1.0)
+                , let imgData = (imgDic[ImageDictionaryKey.img.rawValue] as? UIImage)?.jpegData(compressionQuality: 0.5)
                 , let fileName = imgDic[ImageDictionaryKey.fileName.rawValue] as? String
                 else { return }
-            print(imgData)
-            print(fileName)
+            
+            print("\(imgData) Hi")
+            
             multipartFormData.append(imgData, withName: "file",
                                      fileName: fileName,
                                      mimeType: "image/jpeg") },
@@ -235,7 +236,6 @@ class NetworkHandler {
                     print(statusCode)
                     if statusCode == 200 { completion(.success(postReviewResult.data?.result)) }
                     else {
-                        print(postReviewResult.error)
                         completion(.serverErr)
                     }
                 case .failure(let error):
