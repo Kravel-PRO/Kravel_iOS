@@ -212,7 +212,9 @@ extension HomeVC {
     
     // MARK: - 인기 장소 데이터 API 요청
     private func requestHotPlaceData() {
-        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 5, review_count: nil, sort: "review-count,asc")
+    // FIXME: - 이거 나중에 데이터 받아오게 하기
+//        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 5, review_count: false, sort: "review-count,asc")
+        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 5, review_count: true, sort: nil)
         NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
             switch result {
             case .success(let getPlaceResult):
@@ -290,7 +292,8 @@ extension HomeVC: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // FIXME: 이거 AppDelegate에 설정해서 앱 시작할 때 물어야할 듯 -> 시간 나면 고치기
         guard let location = locations.first else { return }
-        currentLocation = location.coordinate
+        self.currentLocation = CLLocationCoordinate2D(latitude: 1.0, longitude: 1.0)
+//        currentLocation = location.coordinate
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
