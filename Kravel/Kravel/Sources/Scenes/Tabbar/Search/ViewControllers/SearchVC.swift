@@ -249,6 +249,8 @@ extension SearchVC {
 extension SearchVC: RecentResearchViewDelegate {
     func click(searchTerm: String?) {
         if let searchTerm = searchTerm {
+            searchTextField.text = searchTerm
+            searchText(self.searchTextField)
             request(searchText: searchTerm)
         }
     }
