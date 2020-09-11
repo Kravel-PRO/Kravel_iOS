@@ -470,6 +470,7 @@ class MapVC: UIViewController {
                 guard let detailInform = detailInform as? PlaceDetailInform else { return }
                 DispatchQueue.main.async {
                     self.setDetailPlaceData(detailInform)
+                    self.placePopupView.nearByAttractionContainerView.requestKoreaAPI(mapX: detailInform.longitude, mapY: detailInform.latitude)
                     self.setShowPopup()
                 }
             case .requestErr(let error):

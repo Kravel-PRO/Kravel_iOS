@@ -23,11 +23,7 @@ class NearByAttractionView: UIView {
     }
     
     // MARK: - 주변 관광지 데이터 설정
-    var nearByAttractions: [String] = ["남산", "경복궁", "종묘"] {
-        didSet {
-            nearByAttractionCollectionView.reloadData()
-        }
-    }
+    var nearByAttractions: [KoreaTourist] = []
     
     // MARK: - UIView Override 부분
     override init(frame: CGRect) {
@@ -46,6 +42,91 @@ class NearByAttractionView: UIView {
         self.addSubview(view)
         self.bringSubviewToFront(view)
     }
+    
+    func requestKoreaAPI(mapX: Double, mapY: Double) {
+        nearByAttractions.removeAll()
+        DispatchQueue.main.async {
+            self.nearByAttractionCollectionView.reloadData()
+        }
+        
+        let touristParameter = KoreaTouristParameter(pageNo: 1, mapX: mapX , mapY: mapY)
+        
+        let url = APICostants.koreaTouristURL + "\(KoreaTouristParameterKey.serviceKey.rawValue)=\(touristParameter.serviceKey)&\(KoreaTouristParameterKey.mobileOS.rawValue)=\(touristParameter.mobileOS)&\(KoreaTouristParameterKey.mobileApp.rawValue)=\(touristParameter.mobileApp)&\(KoreaTouristParameterKey.mapX.rawValue)=\(touristParameter.mapX)&\(KoreaTouristParameterKey.mapY.rawValue)=\(touristParameter.mapY)&\(KoreaTouristParameterKey.radius.rawValue)=\(touristParameter.radius)&\(KoreaTouristParameterKey.pageNo.rawValue)=\(touristParameter.pageNo)&\(KoreaTouristParameterKey.numberOfRows)=\(touristParameter.numberOfRows)&\(KoreaTouristParameterKey.arrange)=\(touristParameter.arrange)&\(KoreaTouristParameterKey.listYN.rawValue)=\(touristParameter.listYN)"
+        
+        let xmlParser = XMLParser(contentsOf: URL(string: url)!)
+        xmlParser?.delegate = self
+        xmlParser?.parse()
+        
+        DispatchQueue.main.async {
+            self.nearByAttractionCollectionView.reloadData()
+        }
+    }
+    
+    var tempTouristDic: [String: String]?
+    var crtElementType: KoreaTouristResponseKey?
+}
+
+// MARK: - XML Parsing을 위한 작업
+extension NearByAttractionView: XMLParserDelegate {
+    // MARK: XML 데이터 파싱을 시작했을 때
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+        guard let touristKey = KoreaTouristResponseKey.init(rawValue: elementName) else {
+            print("없는 키 값입니다 \(elementName)")
+            return
+        }
+
+        switch touristKey {
+        case .item:
+            tempTouristDic = [:]
+        default:
+            crtElementType = touristKey
+        }
+    }
+    
+    // MARK: - XML 태그를 시작했을 때
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
+        guard tempTouristDic != nil,
+            let crtElementType = self.crtElementType else { return }
+        tempTouristDic?.updateValue(string, forKey: crtElementType.rawValue)
+    }
+    
+    // MARK: - XML 데이터 파싱이 끝났을 때
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+        guard let touristKey = KoreaTouristResponseKey.init(rawValue: elementName),
+            let tempTouristDic = self.tempTouristDic else {
+            print("없는 키 입니다 \(elementName)")
+            return
+        }
+        
+        switch touristKey {
+        case .item:
+            var touristItem = KoreaTourist(addr1: "", addr2: "", firstimage: "", firstimage2: "", mapx: 0, mapy: 0, title: "")
+            
+            guard let addr1 = tempTouristDic[KoreaTouristResponseKey.addr1.rawValue],
+                let addr2 = tempTouristDic[KoreaTouristResponseKey.addr2.rawValue],
+                let firstimage = tempTouristDic[KoreaTouristResponseKey.firstimage.rawValue],
+                let firstimage2 = tempTouristDic[KoreaTouristResponseKey.firstimage2.rawValue],
+                let mapx = tempTouristDic[KoreaTouristResponseKey.mapx.rawValue],
+                let castingMapx = Double(mapx),
+                let mapy = tempTouristDic[KoreaTouristResponseKey.mapx.rawValue],
+                let castingMapy = Double(mapy),
+                let title = tempTouristDic[KoreaTouristResponseKey.title.rawValue] else { return }
+            
+            touristItem.addr1 = addr1
+            touristItem.addr2 = addr2
+            touristItem.firstimage = firstimage
+            touristItem.firstimage2 = firstimage2
+            touristItem.mapx = castingMapx
+            touristItem.mapy = castingMapy
+            touristItem.title = title
+            
+            self.nearByAttractions.append(touristItem)
+            self.tempTouristDic = nil
+        default: return
+        }
+        
+        crtElementType = nil
+    }
 }
 
 extension NearByAttractionView: UICollectionViewDataSource {
@@ -55,8 +136,8 @@ extension NearByAttractionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let nearByAttractionCell = collectionView.dequeueReusableCell(withReuseIdentifier: NearByAttractionCell.identifier, for: indexPath) as? NearByAttractionCell else { return UICollectionViewCell() }
-        nearByAttractionCell.nearByAttractionImage = UIImage(named: "bitmap_0")
-        nearByAttractionCell.nearByAttractionName = nearByAttractions[indexPath.row]
+        nearByAttractionCell.nearByAttractionImageView.setImage(with: nearByAttractions[indexPath.row].firstimage2)
+        nearByAttractionCell.nearByAttractionName = nearByAttractions[indexPath.row].title
         nearByAttractionCell.layer.cornerRadius = nearByAttractionCell.frame.width / 2
         nearByAttractionCell.clipsToBounds = true
         return nearByAttractionCell

@@ -15,6 +15,9 @@ struct APICostants {
     // 카카오 오픈 API 주소 검색 주소
     static let mapSearchURL = "https://dapi.kakao.com/v2/local/search/keyword.json"
     
+    // 한국 관광 공사 API 주소
+    static let koreaTouristURL = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?"
+    
     // 서버 URL
     static let baseURL = "http://15.164.118.217:8080"
     

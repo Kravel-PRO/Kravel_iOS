@@ -155,6 +155,8 @@
 		9DD7AD13250A4EC000742F25 /* RecentResearchViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7AD12250A4EC000742F25 /* RecentResearchViewDelegate.swift */; };
 		9DD7AD16250A7AF400742F25 /* PostReviewParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7AD15250A7AF400742F25 /* PostReviewParameter.swift */; };
 		9DD7AD1A250ACD7400742F25 /* LikeParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7AD19250ACD7400742F25 /* LikeParameter.swift */; };
+		9DD7AD1E250ADC1000742F25 /* KoreaTouristParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7AD1D250ADC1000742F25 /* KoreaTouristParameter.swift */; };
+		9DD7AD20250BA28E00742F25 /* KoreaTouristResponseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7AD1F250BA28D00742F25 /* KoreaTouristResponseKey.swift */; };
 		9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */; };
 		9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */; };
 		9DEDA6A924BCB70600E978F5 /* CategoryTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */; };
@@ -319,6 +321,8 @@
 		9DD7AD12250A4EC000742F25 /* RecentResearchViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentResearchViewDelegate.swift; sourceTree = "<group>"; };
 		9DD7AD15250A7AF400742F25 /* PostReviewParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReviewParameter.swift; sourceTree = "<group>"; };
 		9DD7AD19250ACD7400742F25 /* LikeParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeParameter.swift; sourceTree = "<group>"; };
+		9DD7AD1D250ADC1000742F25 /* KoreaTouristParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreaTouristParameter.swift; sourceTree = "<group>"; };
+		9DD7AD1F250BA28D00742F25 /* KoreaTouristResponseKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreaTouristResponseKey.swift; sourceTree = "<group>"; };
 		9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTabbar.xib; sourceTree = "<group>"; };
@@ -775,6 +779,7 @@
 				9DD7AD17250ACD3B00742F25 /* Like */,
 				9DD48BAF2504C2C50096DE08 /* Map */,
 				9DD48BBA250511BD0096DE08 /* Search */,
+				9DD7AD1C250ADBCF00742F25 /* KoreaTourist */,
 			);
 			path = APIModel;
 			sourceTree = "<group>";
@@ -1221,6 +1226,15 @@
 			path = Like;
 			sourceTree = "<group>";
 		};
+		9DD7AD1C250ADBCF00742F25 /* KoreaTourist */ = {
+			isa = PBXGroup;
+			children = (
+				9DD7AD1D250ADC1000742F25 /* KoreaTouristParameter.swift */,
+				9DD7AD1F250BA28D00742F25 /* KoreaTouristResponseKey.swift */,
+			);
+			path = KoreaTourist;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1406,6 +1420,7 @@
 				9D4CCF7825000FF2003F73AF /* GetPlaceResponseData.swift in Sources */,
 				9D6FF36E24FA099000E6A8B9 /* CameraVC.swift in Sources */,
 				9D6FF38824FAFC3F00E6A8B9 /* NetworkResult.swift in Sources */,
+				9DD7AD1E250ADC1000742F25 /* KoreaTouristParameter.swift in Sources */,
 				9DBA644324F3B58000E12FA4 /* MyPhotoReviewVC.swift in Sources */,
 				9DBA643424F046A100E12FA4 /* RecentResearchCell.swift in Sources */,
 				9D3D162B2488DA7200AE1B4C /* SetLanguageVC.swift in Sources */,
@@ -1484,6 +1499,7 @@
 				9DD48BBC250511FD0096DE08 /* MediaDTO.swift in Sources */,
 				9D76CD8624FD7025004D7333 /* APIError.swift in Sources */,
 				9DBA644924F507EF00E12FA4 /* NearByAttractionView.swift in Sources */,
+				9DD7AD20250BA28E00742F25 /* KoreaTouristResponseKey.swift in Sources */,
 				9DD48BB12504C4CD0096DE08 /* GetSimplePlaceParameter.swift in Sources */,
 				9DD7AD0D2506BB3300742F25 /* CelebrityDetailDTO.swift in Sources */,
 				9DBA642E24F0414C00E12FA4 /* RecentResearchTerm+CoreDataProperties.swift in Sources */,
