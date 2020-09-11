@@ -81,6 +81,13 @@ struct CustomLocalize {
         case nowadaysPopular = "요즘 여기가 인기 있어요!"
         case popular = "인기 있어요!"
         
+        // MARK: - 검색 텍스트 필드
+        case searchTextField = "연예인, 드라마 등을 검색해주세요."
+        
+        // MARK: - 검색 카테고리
+        case celebrity = "연예인 별"
+        case media = "드라마/영화 별"
+        
         // MARK: - 카메라 POP UP 관련
         case authorCamera = "카메라"
         case authorPhotography = "사진 촬영"
@@ -185,6 +192,15 @@ struct CustomLocalize {
             case .nicknameValid:
                 if language == "KOR" { return "7자 이하로 입력해주세요." }
                 else { return "Please enter no more than 7 characters." }
+            case .searchTextField:
+                if language == "KOR" { return "연예인, 드라마 등을 검색해주세요." }
+                else { return "Please enter a search word." }
+            case .celebrity:
+                if language == "KOR" { return "연예인 별" }
+                else { return "Celebrity" }
+            case .media:
+                if language == "KOR" { return "드라마/영화 별" }
+                else { return "Drame/Movie" }
             case .authorCamera:
                 if language == "KOR" { return "카메라" }
                 else { return "Camera" }

@@ -14,8 +14,8 @@ enum KCategory: Int, CaseIterable {
     
     func getCategoryString() -> String {
         switch self {
-        case .celeb: return "연예인 별"
-        case .media: return "드라마/영화 별"
+        case .celeb: return "연예인 별".localized
+        case .media: return "드라마/영화 별".localized
         }
     }
 }

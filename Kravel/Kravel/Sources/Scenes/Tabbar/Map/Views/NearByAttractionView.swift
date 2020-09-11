@@ -24,6 +24,8 @@ class NearByAttractionView: UIView {
     
     // MARK: - 주변 관광지 데이터 설정
     var nearByAttractions: [KoreaTourist] = []
+    var tempTouristDic: [String: String]?
+    var crtElementType: KoreaTouristResponseKey?
     
     // MARK: - UIView Override 부분
     override init(frame: CGRect) {
@@ -43,17 +45,23 @@ class NearByAttractionView: UIView {
         self.bringSubviewToFront(view)
     }
     
-    func requestKoreaAPI(mapX: Double, mapY: Double) {
-        nearByAttractions.removeAll()
-        DispatchQueue.main.async {
-            self.nearByAttractionCollectionView.reloadData()
-        }
+    func requestTouristAPI(mapX: Double, mapY: Double) {
+        nearByAttractions = []
         
         let touristParameter = KoreaTouristParameter(pageNo: 1, mapX: mapX , mapY: mapY)
+        var url: String
+        let urlQuery: String = "\(KoreaTouristParameterKey.serviceKey.rawValue)=\(touristParameter.serviceKey)&\(KoreaTouristParameterKey.mobileOS.rawValue)=\(touristParameter.mobileOS)&\(KoreaTouristParameterKey.mobileApp.rawValue)=\(touristParameter.mobileApp)&\(KoreaTouristParameterKey.mapX.rawValue)=\(touristParameter.mapX)&\(KoreaTouristParameterKey.mapY.rawValue)=\(touristParameter.mapY)&\(KoreaTouristParameterKey.radius.rawValue)=\(touristParameter.radius)&\(KoreaTouristParameterKey.pageNo.rawValue)=\(touristParameter.pageNo)&\(KoreaTouristParameterKey.numberOfRows)=\(touristParameter.numberOfRows)&\(KoreaTouristParameterKey.arrange)=\(touristParameter.arrange)&\(KoreaTouristParameterKey.listYN.rawValue)=\(touristParameter.listYN)"
+                
+        guard let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return }
         
-        let url = APICostants.koreaTouristURL + "\(KoreaTouristParameterKey.serviceKey.rawValue)=\(touristParameter.serviceKey)&\(KoreaTouristParameterKey.mobileOS.rawValue)=\(touristParameter.mobileOS)&\(KoreaTouristParameterKey.mobileApp.rawValue)=\(touristParameter.mobileApp)&\(KoreaTouristParameterKey.mapX.rawValue)=\(touristParameter.mapX)&\(KoreaTouristParameterKey.mapY.rawValue)=\(touristParameter.mapY)&\(KoreaTouristParameterKey.radius.rawValue)=\(touristParameter.radius)&\(KoreaTouristParameterKey.pageNo.rawValue)=\(touristParameter.pageNo)&\(KoreaTouristParameterKey.numberOfRows)=\(touristParameter.numberOfRows)&\(KoreaTouristParameterKey.arrange)=\(touristParameter.arrange)&\(KoreaTouristParameterKey.listYN.rawValue)=\(touristParameter.listYN)"
+        if language == "KOR" {
+            url = APICostants.koreaTouristURL + urlQuery
+        } else {
+            url = APICostants.engTouristURL + urlQuery
+        }
         
-        let xmlParser = XMLParser(contentsOf: URL(string: url)!)
+        guard let castingURL = URL(string: url) else { return }
+        let xmlParser = XMLParser(contentsOf: castingURL)
         xmlParser?.delegate = self
         xmlParser?.parse()
         
@@ -61,9 +69,6 @@ class NearByAttractionView: UIView {
             self.nearByAttractionCollectionView.reloadData()
         }
     }
-    
-    var tempTouristDic: [String: String]?
-    var crtElementType: KoreaTouristResponseKey?
 }
 
 // MARK: - XML Parsing을 위한 작업

@@ -147,7 +147,8 @@ extension OtherPhotoReviewVC: UICollectionViewDataSource {
         
         otherPhotoReviewCell.likeCount = photoReviewData[indexPath.row].likeCount
         otherPhotoReviewCell.photoReviewImageView.setImage(with: photoReviewData[indexPath.row].imageUrl ?? "")
-        otherPhotoReviewCell.date = "2020.08.24"
+        otherPhotoReviewCell.date = photoReviewData[indexPath.row].createdDate
+        otherPhotoReviewCell.isLike = photoReviewData[indexPath.row].like
         otherPhotoReviewCell.delegate = self
         return otherPhotoReviewCell
     }
@@ -176,25 +177,30 @@ extension OtherPhotoReviewVC: CellButtonDelegate {
     func clickHeart(at indexPath: IndexPath) {
         guard let like = photoReviewData[indexPath.row].like,
             let reviewId = photoReviewData[indexPath.row].reviewId,
+            let placeId = photoReviewData[indexPath.row].place?.placeId,
             let otherCell = photoReviewCollectionView.cellForItem(at: indexPath) as? OtherPhotoReviewCell
             else { return }
         
-        // FIXME: 현재 임의의 Place ID 이거 데이터 들어오면 수정하기
-        requestLike(currentLike: like, placeId: 1, reviewId: reviewId) { result in
+        requestLike(currentLike: !like, placeId: placeId, reviewId: reviewId) { result in
             switch result {
             case .success(let likeResult):
                 guard let likeResult = likeResult as? Int,
                     let likeCount = self.photoReviewData[indexPath.row].likeCount
                     else { return }
+                
                 // 좋아요 결과 반영됨 false -> true 반영
                 if likeResult != -1 {
                     otherCell.isLike = true
                     otherCell.likeCount = likeCount + 1
+                    self.photoReviewData[indexPath.row].like = true
+                    self.photoReviewData[indexPath.row].likeCount = likeCount + 1
                 }
                 // 좋아요 결과 반영됨 true -> false 반영
                 else {
                     otherCell.isLike = false
                     otherCell.likeCount = likeCount - 1
+                    self.photoReviewData[indexPath.row].like = false
+                    self.photoReviewData[indexPath.row].likeCount = likeCount - 1
                 }
             case .requestErr(let error):
                 print(error)

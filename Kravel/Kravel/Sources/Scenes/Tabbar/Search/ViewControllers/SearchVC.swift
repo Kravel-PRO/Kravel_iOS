@@ -174,6 +174,7 @@ class SearchVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setLabelByLanguage()
         setRecentResearchView()
         getRecentResearchTerms()
         addObserver()
@@ -191,6 +192,11 @@ class SearchVC: UIViewController {
             talentVC,
             movieVC
         ]
+    }
+    
+    private func setLabelByLanguage() {
+        searchTextField.placeholder = "연예인, 드라마 등을 검색해주세요.".localized
+        
     }
     
     // MARK: - UIViewController viewWillAppear Override 설정

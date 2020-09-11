@@ -87,7 +87,7 @@ extension MorePhotoReviewVC: UICollectionViewDataSource {
         photoReviewCell.photoReviewImageView.setImage(with: photoReviewData[indexPath.row].imageUrl ?? "")
         photoReviewCell.isLike = photoReviewData[indexPath.row].like
         photoReviewCell.likeCount = photoReviewData[indexPath.row].likeCount
-        photoReviewCell.placeName = photoReviewData[indexPath.row].placeTitle
+        photoReviewCell.placeName = photoReviewData[indexPath.row].place?.title
         photoReviewCell.tags = photoReviewData[indexPath.row].tags?.split(separator: " ").map(String.init)
         return photoReviewCell
     }

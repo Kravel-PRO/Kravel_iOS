@@ -11,14 +11,14 @@ import Foundation
 struct ReviewInform: Codable {
     let reviewId: Int?
     let imageUrl: String?
-    let likeCount: Int?
-    let like: Bool?
+    var likeCount: Int?
+    var like: Bool?
     let createdDate: String?
-    let placeTitle: String?
+    let place: PlaceDataOfReview?
     let tags: String?
     
     enum CodingKeys: String, CodingKey {
-        case reviewId, imageUrl, likeCount, like, createdDate, placeTitle, tags
+        case reviewId, imageUrl, likeCount, like, createdDate, place, tags
     }
     
     init(from decoder: Decoder) throws {
@@ -28,7 +28,7 @@ struct ReviewInform: Codable {
         likeCount = (try? values.decode(Int.self, forKey: .likeCount)) ?? nil
         like = (try? values.decode(Bool.self, forKey: .like)) ?? nil
         createdDate = (try? values.decode(String.self, forKey: .createdDate)) ?? nil
-        placeTitle = (try? values.decode(String.self, forKey: .placeTitle)) ?? nil
+        place = (try? values.decode(PlaceDataOfReview.self, forKey: .place)) ?? nil
         tags = (try? values.decode(String.self, forKey: .tags)) ?? nil
     }
 }

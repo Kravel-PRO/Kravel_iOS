@@ -38,3 +38,9 @@ struct PlaceDetailInform: Codable {
     let reviewCount: Int
     let celebrities: [CelebrityDTO]
 }
+
+struct PlaceDataOfReview: Codable {
+    let placeId: Int
+    let title: String
+    let tags: String?
+}

@@ -48,7 +48,7 @@ class OtherPhotoReviewCell: UICollectionViewCell {
     
     var likeCount: Int? {
         didSet {
-            likeCountLabel.text = "\(likeCount!)"
+            likeCountLabel.text = "\(likeCount ?? 0)"
         }
     }
     

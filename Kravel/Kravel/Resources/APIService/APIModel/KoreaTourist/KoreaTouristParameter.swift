@@ -29,7 +29,7 @@ struct KoreaTouristParameter: ParameterAble {
     let pageNo: Int
     let mapX: Double
     let mapY: Double
-    let radius: Int = 3000
+    let radius: Int = 5000
     let listYN: String = "Y"
     
     // Default로 'E' 사용 -> 거리순 정렬

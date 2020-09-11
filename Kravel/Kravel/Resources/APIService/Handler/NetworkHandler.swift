@@ -28,7 +28,7 @@ class NetworkHandler {
         case .getPlaceReview: requestGetReviewOfPlace(apiURL, headers, parameters, completion)
         case .postPlaceReview: requestPostReviewOfPlace(apiURL, headers, parameters, completion)
         case .scrap: requestScrap(apiURL, headers, parameters, completion)
-        case .like: print("Like")
+        case .like: requestLike(apiURL, headers, parameters, completion)
         case .getCeleb: requestCeleb(apiURL, headers, parameters, completion)
         case .getMedia: requestMedia(apiURL, headers, parameters, completion)
         case .search: requestSearch(apiURL, headers, parameters, completion)

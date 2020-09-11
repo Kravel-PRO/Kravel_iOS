@@ -17,6 +17,7 @@ struct APICostants {
     
     // 한국 관광 공사 API 주소
     static let koreaTouristURL = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?"
+    static let engTouristURL = "http://api.visitkorea.or.kr/openapi/service/rest/EngService/locationBasedList?"
     
     // 서버 URL
     static let baseURL = "http://15.164.118.217:8080"
