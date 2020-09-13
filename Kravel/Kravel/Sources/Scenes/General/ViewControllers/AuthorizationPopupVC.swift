@@ -82,6 +82,7 @@ class AuthorizationPopupVC: UIViewController {
     // 취소 버튼 눌렀을 때, Dismiss
     @IBAction func cancel(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
+        NotificationCenter.default.post(name: .dismissAuthorPopupView, object: nil)
     }
     
     // 설정화면으로 이동

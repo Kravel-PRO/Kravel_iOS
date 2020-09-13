@@ -52,9 +52,7 @@ class CameraVC: UIViewController {
             guard let authorizationVC = UIStoryboard(name: "AuthorizationPopup", bundle: nil).instantiateViewController(withIdentifier: AuthorizationPopupVC.identifier) as? AuthorizationPopupVC else { return }
             authorizationVC.setAuthorType(author: .camera)
             authorizationVC.modalPresentationStyle = .overFullScreen
-            self.present(authorizationVC, animated: false) {
-                self.dismiss(animated: false, completion: nil)
-            }
+            self.present(authorizationVC, animated: false)
         @unknown default:
             fatalError()
         }
@@ -197,7 +195,7 @@ class CameraVC: UIViewController {
     // MARK: - 갤러리 사진 보여주는 ImageView 설정
     let galleryImageView: UIImageView = {
         // FIXME: 여기 갤러리 제일 마지막 사진 보이게 수정
-        let galleryImageView = UIImageView(image: UIImage(named: "yuna"))
+        let galleryImageView = UIImageView()
         galleryImageView.translatesAutoresizingMaskIntoConstraints = false
         galleryImageView.contentMode = .scaleAspectFill
         galleryImageView.clipsToBounds = true
@@ -221,11 +219,11 @@ class CameraVC: UIViewController {
             setPhotoLibraryImage()
             PHPhotoLibrary.shared().register(self)
         case .notDetermined:
-            print("아직 결정안된 경우")
+            galleryImageView.image = UIImage(named: ImageKey.noGallery)
         case .restricted:
-            print("거부된 경우")
+            galleryImageView.image = UIImage(named: ImageKey.noGallery)
         case .denied:
-            print("denied인 경우")
+            galleryImageView.image = UIImage(named: ImageKey.noGallery)
         @unknown default:
             fatalError()
         }
@@ -267,7 +265,7 @@ class CameraVC: UIViewController {
     
     // MARK: - 샘플 사진 보여주는 ImageView 설정
     let sampleImageView: UIImageView = {
-        let sampleImageView = UIImageView(image: UIImage(named: "yuna"))
+        let sampleImageView = UIImageView()
         sampleImageView.translatesAutoresizingMaskIntoConstraints = false
         sampleImageView.contentMode = .scaleAspectFill
         sampleImageView.clipsToBounds = true
@@ -317,6 +315,7 @@ class CameraVC: UIViewController {
         setCaptureButton()
         setCancelButton()
         addImageView()
+        addObserver()
     }
     
     // MARK: - UIViewController viewWillAppear 설정
@@ -344,6 +343,16 @@ class CameraVC: UIViewController {
         setGalleryDescriptionLabelLayout()
         setSampleImageViewLayout()
         setSampleDesctiptionLabelLayout()
+    }
+}
+
+extension CameraVC {
+    private func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(popByNotAllowed), name: .dismissAuthorPopupView, object: nil)
+    }
+    
+    @objc func popByNotAllowed() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

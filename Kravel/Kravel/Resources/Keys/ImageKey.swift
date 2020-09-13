@@ -80,4 +80,8 @@ struct ImageKey {
     static let noAccessLocation = "icLocation"
     static let noAccessGallery = "icNoAccessGallery"
     static let icPhoto = "icPhoto"
+    
+    // 권한 없는 경우 사진 저장소 표시 X
+    static let noGallery = "icGalleryInactivity"
 }
+

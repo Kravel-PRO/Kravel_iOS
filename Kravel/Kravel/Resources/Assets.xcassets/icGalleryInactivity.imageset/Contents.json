@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "IMG_1136.png",
+      "filename" : "icGalleryInactivity.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "icGalleryInactivity@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "icGalleryInactivity@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
