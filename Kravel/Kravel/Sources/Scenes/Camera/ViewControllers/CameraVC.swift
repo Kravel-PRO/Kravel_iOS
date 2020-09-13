@@ -13,6 +13,32 @@ import Photos
 class CameraVC: UIViewController {
     static let identifier = "CameraVC"
     
+    // MARK: - UIImagePickerController 설정
+    private var picker: UIImagePickerController?
+    
+    private func setPickerController() {
+        picker = UIImagePickerController()
+        picker?.delegate = self
+    }
+    
+    private func openLibrary() {
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .authorized:
+            if let picker = self.picker {
+                picker.sourceType = .photoLibrary
+                present(picker, animated: true, completion: nil)
+            }
+        case .notDetermined:
+            presentPopupVC(by: "Gallery")
+        case .restricted:
+            presentPopupVC(by: "Gallery")
+        case .denied:
+            presentPopupVC(by: "Gallery")
+        @unknown default:
+            return
+        }
+    }
+    
     // MARK: - AVFoundation 이용 Camera 설정
     var captureSession = AVCaptureSession()
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
@@ -40,19 +66,9 @@ class CameraVC: UIViewController {
                 }
             }
         case .restricted:
-            // FIXME: 카메라 설정창으로 가서 카메라 허용할 수 있게 설정하는 화면 뜨게 하기
-            guard let authorizationVC = UIStoryboard(name: "AuthorizationPopup", bundle: nil).instantiateViewController(withIdentifier: AuthorizationPopupVC.identifier) as? AuthorizationPopupVC else { return }
-            authorizationVC.setAuthorType(author: .camera)
-            authorizationVC.modalPresentationStyle = .overFullScreen
-            self.present(authorizationVC, animated: false) {
-                self.dismiss(animated: false, completion: nil)
-            }
+            presentPopupVC(by: "Camera")
         case .denied:
-            // FIXME: 카메라 설정창으로 가서 카메라 허용할 수 있게 설장하는 화면 뜨게 하기
-            guard let authorizationVC = UIStoryboard(name: "AuthorizationPopup", bundle: nil).instantiateViewController(withIdentifier: AuthorizationPopupVC.identifier) as? AuthorizationPopupVC else { return }
-            authorizationVC.setAuthorType(author: .camera)
-            authorizationVC.modalPresentationStyle = .overFullScreen
-            self.present(authorizationVC, animated: false)
+            presentPopupVC(by: "Camera")
         @unknown default:
             fatalError()
         }
@@ -193,23 +209,23 @@ class CameraVC: UIViewController {
     }
     
     // MARK: - 갤러리 사진 보여주는 ImageView 설정
-    let galleryImageView: UIImageView = {
+    let galleryButton: UIButton = {
         // FIXME: 여기 갤러리 제일 마지막 사진 보이게 수정
-        let galleryImageView = UIImageView()
-        galleryImageView.translatesAutoresizingMaskIntoConstraints = false
-        galleryImageView.contentMode = .scaleAspectFill
-        galleryImageView.clipsToBounds = true
-        return galleryImageView
+        let galleryButton = UIButton()
+        galleryButton.translatesAutoresizingMaskIntoConstraints = false
+        galleryButton.contentMode = .scaleAspectFill
+        galleryButton.clipsToBounds = true
+        return galleryButton
     }()
     
     private func setGalleryImageViewLayout() {
         NSLayoutConstraint.activate([
-            galleryImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24),
-            galleryImageView.bottomAnchor.constraint(equalTo: galleryDescriptionLabel.topAnchor, constant: -4),
-            galleryImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.112),
-            galleryImageView.heightAnchor.constraint(equalTo: galleryImageView.widthAnchor)
+            galleryButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24),
+            galleryButton.bottomAnchor.constraint(equalTo: galleryDescriptionLabel.topAnchor, constant: -4),
+            galleryButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.112),
+            galleryButton.heightAnchor.constraint(equalTo: galleryButton.widthAnchor)
         ])
-        galleryImageView.layer.cornerRadius = galleryImageView.frame.width / 20
+        galleryButton.layer.cornerRadius = galleryButton.frame.width / 6
     }
     
     private func requestPhotoLibraryAuthor() {
@@ -219,11 +235,11 @@ class CameraVC: UIViewController {
             setPhotoLibraryImage()
             PHPhotoLibrary.shared().register(self)
         case .notDetermined:
-            galleryImageView.image = UIImage(named: ImageKey.noGallery)
+            galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
         case .restricted:
-            galleryImageView.image = UIImage(named: ImageKey.noGallery)
+            galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
         case .denied:
-            galleryImageView.image = UIImage(named: ImageKey.noGallery)
+            galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
         @unknown default:
             fatalError()
         }
@@ -235,14 +251,14 @@ class CameraVC: UIViewController {
         fetchOption.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         let fetchPhotos = PHAsset.fetchAssets(with: fetchOption)
         if let photo = fetchPhotos.firstObject {
-            ImageManager.shared.requestImage(from: photo, thumnailSize: galleryImageView.frame.size) { image in
+            ImageManager.shared.requestImage(from: photo, thumnailSize: galleryButton.frame.size) { image in
                 DispatchQueue.main.async {
-                    self.galleryImageView.image = image
+                    self.galleryButton.setImage(image, for: .normal)
                 }
             }
         } else {
             // FIXME: 만약 사진 앨범 빈 경우 빈 이미지 넣게 설정
-            self.galleryImageView.image = UIImage(named: ImageKey.btnLike)
+            self.galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
         }
     }
     
@@ -252,34 +268,39 @@ class CameraVC: UIViewController {
         galleryDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         galleryDescriptionLabel.font = UIFont.systemFont(ofSize: 12)
         galleryDescriptionLabel.textColor = .white
-        galleryDescriptionLabel.text = "갤러리"
+        galleryDescriptionLabel.text = "갤러리".localized
         return galleryDescriptionLabel
     }()
     
     private func setGalleryDescriptionLabelLayout() {
         NSLayoutConstraint.activate([
             galleryDescriptionLabel.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            galleryDescriptionLabel.centerXAnchor.constraint(equalTo: galleryImageView.centerXAnchor)
+            galleryDescriptionLabel.centerXAnchor.constraint(equalTo: galleryButton.centerXAnchor)
         ])
     }
     
+    // FIXME: 샘플 사진 없을 시 라벨과 Image가 안뜰 수 있게 설정해야함
     // MARK: - 샘플 사진 보여주는 ImageView 설정
-    let sampleImageView: UIImageView = {
-        let sampleImageView = UIImageView()
-        sampleImageView.translatesAutoresizingMaskIntoConstraints = false
-        sampleImageView.contentMode = .scaleAspectFill
-        sampleImageView.clipsToBounds = true
-        return sampleImageView
+    let samepleImageButton: UIButton = {
+        let sampleImageButton = UIButton()
+        // FIXME: 임시로 지정해서 확인
+        sampleImageButton.setImage(UIImage(named: ImageKey.icAccessTiger), for: .normal)
+        sampleImageButton.translatesAutoresizingMaskIntoConstraints = false
+        sampleImageButton.contentMode = .scaleAspectFill
+        sampleImageButton.layer.borderColor = UIColor.white.cgColor
+        sampleImageButton.layer.borderWidth = 1
+        sampleImageButton.clipsToBounds = true
+        return sampleImageButton
     }()
     
     private func setSampleImageViewLayout() {
         NSLayoutConstraint.activate([
-            sampleImageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -24),
-            sampleImageView.bottomAnchor.constraint(equalTo: sampleDescriptionLabel.topAnchor, constant: -4),
-            sampleImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.112),
-            sampleImageView.heightAnchor.constraint(equalTo: sampleImageView.widthAnchor)
+            samepleImageButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -24),
+            samepleImageButton.bottomAnchor.constraint(equalTo: sampleDescriptionLabel.topAnchor, constant: -4),
+            samepleImageButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.112),
+            samepleImageButton.heightAnchor.constraint(equalTo: samepleImageButton.widthAnchor)
         ])
-        sampleImageView.layer.cornerRadius = sampleImageView.frame.width / 20
+        samepleImageButton.layer.cornerRadius = samepleImageButton.frame.width / 6
     }
     
     // MARK: - 샘플 사진 알려주는 설명 Label 설정
@@ -288,21 +309,21 @@ class CameraVC: UIViewController {
         sampleDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         sampleDescriptionLabel.font = UIFont.systemFont(ofSize: 12)
         sampleDescriptionLabel.textColor = .white
-        sampleDescriptionLabel.text = "예시"
+        sampleDescriptionLabel.text = "예시".localized
         return sampleDescriptionLabel
     }()
     
     private func setSampleDesctiptionLabelLayout() {
         NSLayoutConstraint.activate([
             sampleDescriptionLabel.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            sampleDescriptionLabel.centerXAnchor.constraint(equalTo: sampleImageView.centerXAnchor)
+            sampleDescriptionLabel.centerXAnchor.constraint(equalTo: samepleImageButton.centerXAnchor)
         ])
     }
     
     private func addImageView() {
-        self.view.addSubview(galleryImageView)
+        self.view.addSubview(galleryButton)
         self.view.addSubview(galleryDescriptionLabel)
-        self.view.addSubview(sampleImageView)
+        self.view.addSubview(samepleImageButton)
         self.view.addSubview(sampleDescriptionLabel)
     }
     
@@ -312,6 +333,7 @@ class CameraVC: UIViewController {
         // Do any additional setup after loading the view.
         requestCameraAuthor()
         requestPhotoLibraryAuthor()
+        setPickerController()
         setCaptureButton()
         setCancelButton()
         addImageView()
@@ -346,6 +368,7 @@ class CameraVC: UIViewController {
     }
 }
 
+// MAKR: - 팝업 뷰 관련해서 이벤트 드리븐 해주는 구간
 extension CameraVC {
     private func addObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(popByNotAllowed), name: .dismissAuthorPopupView, object: nil)
@@ -356,12 +379,32 @@ extension CameraVC {
     }
 }
 
+// MARK: -
+extension CameraVC {
+    private func presentPopupVC(by authorType: String) {
+        guard let authorizationVC = UIStoryboard(name: "AuthorizationPopup", bundle: nil).instantiateViewController(withIdentifier: AuthorizationPopupVC.identifier) as? AuthorizationPopupVC else { return }
+        authorizationVC.modalPresentationStyle = .overFullScreen
+        if authorType == "Camera" {
+            authorizationVC.setAuthorType(author: .camera)
+        } else {
+            authorizationVC.setAuthorType(author: .gallery)
+        }
+        self.present(authorizationVC, animated: false, completion: nil)
+    }
+}
+
+// MARK: - 사진 촬영을 하고 난 후 이벤트 드리븐을 해주는 구간
 extension CameraVC: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         guard error == nil else { return }
         
         PHPhotoLibrary.requestAuthorization { status in
-            guard status == .authorized else { return }
+            guard status == .authorized else {
+                DispatchQueue.main.async {
+                    self.presentPopupVC(by: "Gallery")
+                }
+                return
+            }
             
             PHPhotoLibrary.shared().performChanges({
                 let creationRequest = PHAssetCreationRequest.forAsset()
@@ -370,9 +413,10 @@ extension CameraVC: AVCapturePhotoCaptureDelegate {
             }, completionHandler: { isCompletion, error in
                 guard error == nil else { return }
                 if isCompletion {
+                    // 사진 찍기를 완료했을 때, 동작하길 원하는 로직 코딩
                     guard let imageData = photo.fileDataRepresentation() else { return }
                     DispatchQueue.main.async {
-                        self.galleryImageView.image = UIImage(data: imageData)
+                        self.galleryButton.setImage(UIImage(data: imageData), for: .normal)
                     }
                 }
             })
@@ -384,6 +428,16 @@ extension CameraVC: PHPhotoLibraryChangeObserver {
     func photoLibraryDidChange(_ changeInstance: PHChange) {
         DispatchQueue.main.async {
             self.setPhotoLibraryImage()
+        }
+    }
+}
+
+extension CameraVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage,
+            let url = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+            print(image)
+            print(url)
         }
     }
 }

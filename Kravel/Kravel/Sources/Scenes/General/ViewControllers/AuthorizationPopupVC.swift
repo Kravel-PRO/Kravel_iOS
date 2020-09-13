@@ -133,6 +133,8 @@ class AuthorizationPopupVC: UIViewController {
             authorMessageLabel.text = "- " + "사진 촬영".localized
         case .gallery:
             authorImageView.image = self.author?.getAuthorImage()
+            authorLabel.text = "사진/파일".localized
+            authorMessageLabel.text = "- " + "사진 자동 저장 및 포토리뷰 업로드".localized
         case .location:
             authorImageView.image = self.author?.getAuthorImage()
             authorLabel.text = "위치 정보".localized

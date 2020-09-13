@@ -96,11 +96,19 @@ struct CustomLocalize {
         case authorLocation = "위치 정보"
         case authorLocationMessage = "GPS 이용 및 지도 검색"
         
+        // MARK: - 갤러리 POP UP 관련
+        case authorGallery = "사진/파일"
+        case authorGalleryMessage = "사진 자동 저장 및 포토리뷰 업로드"
+        
         // MARK: - 권한 허용 POP UP 관련
-        case authorCameraTitle = "앱 접근 권한 허용"
-        case authorCameraMessage = "서비스를 이용하기 위해\n아래와 같은 권한을 허용해주세요."
+        case authorPopupTitle = "앱 접근 권한 허용"
+        case authorPopupMessage = "서비스를 이용하기 위해\n아래와 같은 권한을 허용해주세요."
         case allowed = "허용"
         case notAllowed = "허용 안함"
+        
+        // MARK: - 카메라 뷰 관련 Button Label
+        case gallery = "갤러리"
+        case sample = "예시"
         
         func localize() -> String {
             guard let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return self.rawValue }
@@ -204,13 +212,19 @@ struct CustomLocalize {
             case .authorCamera:
                 if language == "KOR" { return "카메라" }
                 else { return "Camera" }
+            case .authorGallery:
+                if language == "KOR" { return "사진/파일" }
+                else { return "Photo/Files" }
+            case .authorGalleryMessage:
+                if language == "KOR" { return "사진 자동 저장 및 포토리뷰 업로드" }
+                else { return "Automatically save photo and Upload a Photo Review" }
             case .authorPhotography:
                 if language == "KOR" { return "사진 촬영" }
                 else { return "Photography" }
-            case .authorCameraTitle:
+            case .authorPopupTitle:
                 if language == "KOR" { return "앱 접근 권한 허용" }
                 else { return "Allow access to app" }
-            case .authorCameraMessage:
+            case .authorPopupMessage:
                 if language == "KOR" { return "서비스를 이용하기 위해\n아래와 같은 권한을 허용해주세요." }
                 else { return "Please allow the following rights\nto use the service." }
             case .allowed:
@@ -225,6 +239,12 @@ struct CustomLocalize {
             case .authorLocationMessage:
                 if language == "KOR" { return "GPS 이용 및 지도 검색" }
                 else { return "Use GPS and Map Search" }
+            case .gallery:
+                if language == "KOR" { return "갤러리" }
+                else { return "Gallery" }
+            case .sample:
+                if language == "KOR" { return "예시" }
+                else { return "Sample" }
             }
         }
     }
