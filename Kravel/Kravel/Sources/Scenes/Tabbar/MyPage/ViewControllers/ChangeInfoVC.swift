@@ -70,6 +70,12 @@ class ChangeInfoVC: UIViewController {
     }
 }
 
+extension ChangeInfoVC {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+}
+
 extension ChangeInfoVC: XibButtonDelegate {
     func clickButton(of sex: Sex) {
         switch sex {

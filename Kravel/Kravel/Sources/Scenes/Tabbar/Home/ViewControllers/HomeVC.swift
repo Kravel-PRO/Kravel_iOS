@@ -139,8 +139,8 @@ class HomeVC: UIViewController {
         
         moreButton.setTitle("더 보기".localized, for: .normal)
         
-        let attributePhotoReview = "새로운 포토리뷰".localized.makeAttributedText([.font: UIFont.systemFont(ofSize: 18), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)])
-        attributePhotoReview.addAttributes([.font: UIFont.boldSystemFont(ofSize: 18)], range: ("새로운 포토리뷰".localized as NSString).range(of: "포토리뷰".localized))
+        let attributePhotoReview = "새로운 포토 리뷰".localized.makeAttributedText([.font: UIFont.systemFont(ofSize: 18), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)])
+        attributePhotoReview.addAttributes([.font: UIFont.boldSystemFont(ofSize: 18)], range: ("새로운 포토 리뷰".localized as NSString).range(of: "포토 리뷰".localized))
         photoReviewView.attributeTitle = attributePhotoReview
         
         let attributeHotPlace = "요즘 여기가 인기 있어요!".localized.makeAttributedText([.font: UIFont.boldSystemFont(ofSize: 18)])

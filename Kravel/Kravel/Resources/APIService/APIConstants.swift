@@ -95,4 +95,9 @@ struct APICostants {
     
     // 연예인, 미디어 검색 API
     static let search = APICostants.baseURL + "/api/search"
+    
+    static var infoTypeQuery: String = ""
+    
+    // 마이페이지 내 정보 수정
+    static let changeInfo = APICostants.baseURL + "/api/member?type=\(infoTypeQuery)"
 }

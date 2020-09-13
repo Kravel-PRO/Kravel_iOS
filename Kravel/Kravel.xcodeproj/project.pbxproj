@@ -157,6 +157,7 @@
 		9DD7AD1A250ACD7400742F25 /* LikeParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7AD19250ACD7400742F25 /* LikeParameter.swift */; };
 		9DD7AD1E250ADC1000742F25 /* KoreaTouristParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7AD1D250ADC1000742F25 /* KoreaTouristParameter.swift */; };
 		9DD7AD20250BA28E00742F25 /* KoreaTouristResponseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7AD1F250BA28D00742F25 /* KoreaTouristResponseKey.swift */; };
+		9DD7AD23250BFD4A00742F25 /* ChangInfoBodyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7AD22250BFD4A00742F25 /* ChangInfoBodyParameter.swift */; };
 		9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */; };
 		9DEDA6A724BCA87D00E978F5 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */; };
 		9DEDA6A924BCB70600E978F5 /* CategoryTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */; };
@@ -323,6 +324,7 @@
 		9DD7AD19250ACD7400742F25 /* LikeParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeParameter.swift; sourceTree = "<group>"; };
 		9DD7AD1D250ADC1000742F25 /* KoreaTouristParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreaTouristParameter.swift; sourceTree = "<group>"; };
 		9DD7AD1F250BA28D00742F25 /* KoreaTouristResponseKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreaTouristResponseKey.swift; sourceTree = "<group>"; };
+		9DD7AD22250BFD4A00742F25 /* ChangInfoBodyParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangInfoBodyParameter.swift; sourceTree = "<group>"; };
 		9DEDA6A324BC7D5100E978F5 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		9DEDA6A624BCA87D00E978F5 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9DEDA6A824BCB70500E978F5 /* CategoryTabbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTabbar.xib; sourceTree = "<group>"; };
@@ -780,6 +782,7 @@
 				9DD48BAF2504C2C50096DE08 /* Map */,
 				9DD48BBA250511BD0096DE08 /* Search */,
 				9DD7AD1C250ADBCF00742F25 /* KoreaTourist */,
+				9DD7AD21250BFD2E00742F25 /* ChangeInfo */,
 			);
 			path = APIModel;
 			sourceTree = "<group>";
@@ -1235,6 +1238,14 @@
 			path = KoreaTourist;
 			sourceTree = "<group>";
 		};
+		9DD7AD21250BFD2E00742F25 /* ChangeInfo */ = {
+			isa = PBXGroup;
+			children = (
+				9DD7AD22250BFD4A00742F25 /* ChangInfoBodyParameter.swift */,
+			);
+			path = ChangeInfo;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1479,6 +1490,7 @@
 				9D13C7ED2487842E0058A7BF /* AppDelegate.swift in Sources */,
 				9D79E2A524ED02D1006310A2 /* MorePhotoReviewVC.swift in Sources */,
 				9D13C7EF2487842E0058A7BF /* SceneDelegate.swift in Sources */,
+				9DD7AD23250BFD4A00742F25 /* ChangInfoBodyParameter.swift in Sources */,
 				9D4CCF7D25003A95003F73AF /* GetReviewResponseData.swift in Sources */,
 				9D7FB1FA24D16505009A9C0A /* PhotoReviewView.swift in Sources */,
 				9D4CCF7F25003B9D003F73AF /* APISortableResponseData.swift in Sources */,

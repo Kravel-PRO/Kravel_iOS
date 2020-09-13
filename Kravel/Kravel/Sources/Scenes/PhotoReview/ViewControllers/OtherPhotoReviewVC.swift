@@ -64,6 +64,11 @@ class OtherPhotoReviewVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setLabelByLanguage()
+    }
+    
+    private func setLabelByLanguage() {
+        self.navigationItem.title = "포토 리뷰".localized
     }
     
     // MARK: - UIViewController viewWillAppear() Override 설정
@@ -74,7 +79,6 @@ class OtherPhotoReviewVC: UIViewController {
     }
     
     private func setNav() {
-        self.navigationItem.title = "포토 리뷰"
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.topItem?.title = ""

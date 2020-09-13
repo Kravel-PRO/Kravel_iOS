@@ -74,8 +74,8 @@ struct CustomLocalize {
         case more = "더 보기"
         
         // MARK: - 포토리뷰
-        case newPhotoReview = "새로운 포토리뷰"
-        case photoReview = "포토리뷰"
+        case newPhotoReview = "새로운 포토 리뷰"
+        case photoReview = "포토 리뷰"
         
         // MARK: - 인기 있어요
         case nowadaysPopular = "요즘 여기가 인기 있어요!"
@@ -169,11 +169,11 @@ struct CustomLocalize {
                 if language == "KOR" { return "더 보기" }
                 else { return "more" }
             case .newPhotoReview:
-                if language == "KOR" { return "새로운 포토리뷰" }
-                else { return "New PhotoReview" }
+                if language == "KOR" { return "새로운 포토 리뷰" }
+                else { return "New Photo Review" }
             case .photoReview:
-                if language == "KOR" { return "포토리뷰" }
-                else { return "PhotoReview" }
+                if language == "KOR" { return "포토 리뷰" }
+                else { return "Photo Review" }
             case .nowadaysPopular:
                 if language == "KOR" { return "요즘 여기가 인기 있어요!" }
                 else { return "This place is popular these days!" }
