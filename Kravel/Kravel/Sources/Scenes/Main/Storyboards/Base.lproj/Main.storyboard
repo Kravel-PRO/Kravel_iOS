@@ -47,11 +47,20 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgLogo" translatesAutoresizingMaskIntoConstraints="NO" id="kQ9-u7-sYv">
+                                        <rect key="frame" x="142.66666666666666" y="276" width="90" height="84"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="kQ9-u7-sYv" secondAttribute="height" multiplier="15:14" id="Ezf-fq-1fq"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
+                                    <constraint firstItem="kQ9-u7-sYv" firstAttribute="top" secondItem="6yi-JZ-OF4" secondAttribute="top" constant="276" id="2Ry-dd-JmD"/>
+                                    <constraint firstItem="kQ9-u7-sYv" firstAttribute="centerX" secondItem="Xfj-qW-ukN" secondAttribute="centerX" id="3xJ-ka-iHy"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="tXi-2Z-Ntg" secondAttribute="bottom" constant="24" id="Adg-wE-uol"/>
                                     <constraint firstItem="Xfj-qW-ukN" firstAttribute="top" secondItem="6yi-JZ-OF4" secondAttribute="top" id="Hsu-W8-44R"/>
+                                    <constraint firstItem="kQ9-u7-sYv" firstAttribute="width" secondItem="Xfj-qW-ukN" secondAttribute="width" multiplier="0.24" id="I2g-mQ-hJR"/>
                                     <constraint firstItem="NgF-fF-zpJ" firstAttribute="width" secondItem="tXi-2Z-Ntg" secondAttribute="width" id="RTk-Me-lWu"/>
                                     <constraint firstItem="NgF-fF-zpJ" firstAttribute="height" secondItem="tXi-2Z-Ntg" secondAttribute="height" id="Rp6-ko-PgW"/>
                                     <constraint firstItem="tXi-2Z-Ntg" firstAttribute="top" secondItem="NgF-fF-zpJ" secondAttribute="bottom" constant="16" id="T2z-II-RMd"/>
@@ -89,6 +98,8 @@
                         <outlet property="backgroundView" destination="6yi-JZ-OF4" id="z9p-FZ-lRS"/>
                         <outlet property="loginTextView" destination="ybR-bJ-5Ql" id="dbk-tu-fKV"/>
                         <outlet property="loginTextViewTopConstraint" destination="hGN-bD-n6g" id="tvI-T7-Fgs"/>
+                        <outlet property="logoImageView" destination="kQ9-u7-sYv" id="RgF-r3-Rua"/>
+                        <outlet property="logoTopConstraint" destination="2Ry-dd-JmD" id="OtV-AG-e91"/>
                         <outlet property="signinButton" destination="NgF-fF-zpJ" id="KeX-DA-8QM"/>
                         <outlet property="signupButton" destination="tXi-2Z-Ntg" id="SMf-4k-bDW"/>
                         <outlet property="titleLabel" destination="5Xf-q2-WmO" id="gSp-Ay-5jx"/>
@@ -119,5 +130,6 @@
     </scenes>
     <resources>
         <image name="bgSign" width="375" height="812"/>
+        <image name="imgLogo" width="90" height="84"/>
     </resources>
 </document>

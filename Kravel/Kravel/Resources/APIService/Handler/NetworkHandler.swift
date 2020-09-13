@@ -36,6 +36,7 @@ class NetworkHandler {
         case .getMediaOfID: requestMediaOfID(apiURL, headers, parameters, completion)
         case .getReviewOfCeleb: requestGetReview(apiURL, headers, parameters, completion)
         case .getReviewOfMedia: requestGetReview(apiURL, headers, parameters, completion)
+        case .changInfo: print("Change Info")
         }
     }
     

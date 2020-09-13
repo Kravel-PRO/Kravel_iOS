@@ -9,6 +9,10 @@
 import UIKit
 
 class MainVC: UIViewController {
+    // MARK: - 이미지 로고 설정
+    @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var logoTopConstraint: NSLayoutConstraint!
+    
     // MARK: - 초기 화면 로그인 버튼 설정
     @IBOutlet weak var signinButton: UIButton! {
         willSet {
@@ -57,6 +61,7 @@ class MainVC: UIViewController {
                 loginTextViewTopConstraint.constant = -loginTextView.frame.height/2
                 UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
                     self.titleLabel.alpha = 1
+                    self.logoImageView.alpha = 0
                     self.titleLabel.transform = .identity
                     self.view.layoutIfNeeded()
                 }, completion: nil)
@@ -66,6 +71,7 @@ class MainVC: UIViewController {
                 self.view.endEditing(true)
                 UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
                     self.titleLabel.alpha = 0
+                    self.logoImageView.alpha = 1
                     self.view.layoutIfNeeded()
                 }, completion: { isCompletion in
                     self.loginTextView.clear()
@@ -120,6 +126,7 @@ class MainVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         loginTextView.setMarginViewsLayout()
+        logoTopConstraint.constant = self.view.frame.height / 2.94
     }
     
     private func addGesture() {
