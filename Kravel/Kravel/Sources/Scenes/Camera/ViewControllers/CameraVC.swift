@@ -21,7 +21,7 @@ class CameraVC: UIViewController {
         picker?.delegate = self
     }
     
-    private func openLibrary() {
+    @objc func openLibrary() {
         switch PHPhotoLibrary.authorizationStatus() {
         case .authorized:
             if let picker = self.picker {
@@ -218,6 +218,11 @@ class CameraVC: UIViewController {
         return galleryButton
     }()
     
+    private func setGalleryButton() {
+        self.view.addSubview(galleryButton)
+        galleryButton.addTarget(self, action: #selector(openLibrary), for: .touchUpInside)
+    }
+    
     private func setGalleryImageViewLayout() {
         NSLayoutConstraint.activate([
             galleryButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24),
@@ -257,7 +262,6 @@ class CameraVC: UIViewController {
                 }
             }
         } else {
-            // FIXME: 만약 사진 앨범 빈 경우 빈 이미지 넣게 설정
             self.galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
         }
     }
@@ -286,12 +290,20 @@ class CameraVC: UIViewController {
         // FIXME: 임시로 지정해서 확인
         sampleImageButton.setImage(UIImage(named: ImageKey.icAccessTiger), for: .normal)
         sampleImageButton.translatesAutoresizingMaskIntoConstraints = false
-        sampleImageButton.contentMode = .scaleAspectFill
         sampleImageButton.layer.borderColor = UIColor.white.cgColor
         sampleImageButton.layer.borderWidth = 1
         sampleImageButton.clipsToBounds = true
         return sampleImageButton
     }()
+    
+    private func setSampleImageButton() {
+        self.view.addSubview(samepleImageButton)
+        samepleImageButton.addTarget(self, action: #selector(showSampleImage), for: .touchUpInside)
+    }
+    
+    @objc func showSampleImage() {
+        print("여기 눌림")
+    }
     
     private func setSampleImageViewLayout() {
         NSLayoutConstraint.activate([
@@ -321,9 +333,7 @@ class CameraVC: UIViewController {
     }
     
     private func addImageView() {
-        self.view.addSubview(galleryButton)
         self.view.addSubview(galleryDescriptionLabel)
-        self.view.addSubview(samepleImageButton)
         self.view.addSubview(sampleDescriptionLabel)
     }
     
@@ -335,6 +345,8 @@ class CameraVC: UIViewController {
         requestPhotoLibraryAuthor()
         setPickerController()
         setCaptureButton()
+        setGalleryButton()
+        setSampleImageButton()
         setCancelButton()
         addImageView()
         addObserver()
