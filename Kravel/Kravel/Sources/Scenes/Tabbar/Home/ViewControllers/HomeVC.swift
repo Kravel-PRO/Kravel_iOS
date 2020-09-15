@@ -321,13 +321,11 @@ extension HomeVC: UICollectionViewDataSource {
         
         hotPlaceCell.location = hotPlaceData[indexPath.row].title
         
-        // FIXME: 여기 지금 적용이 안됨.
         if let tags = hotPlaceData[indexPath.row].tags {
             hotPlaceCell.tags = tags.split(separator: " ").map({ String($0) })
         } else {
             hotPlaceCell.tags = []
         }
-        hotPlaceCell.tagCollectionView.reloadData()
         
         hotPlaceCell.photoCount = hotPlaceData[indexPath.row].reviewCount
         hotPlaceCell.placeImageView.setImage(with: hotPlaceData[indexPath.row].imageUrl ?? "")

@@ -31,16 +31,17 @@ class HotPlaceCell: UICollectionViewCell {
     @IBOutlet weak var tagCollectionView: UICollectionView! {
         didSet {
             tagCollectionView.dataSource = self
-            if let layout = tagCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-                layout.minimumInteritemSpacing = 4
-                layout.minimumLineSpacing = 4
-                layout.sectionInset = .zero
-            }
+            tagCollectionView.delegate = self
         }
     }
     
-    var tags: [String] = []
+    var tags: [String] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.tagCollectionView.reloadData()
+            }
+        }
+    }
     
     // MARK: - 포토리뷰 개수 라벨
     @IBOutlet weak var photoReviewCountLabel: UILabel!
@@ -60,7 +61,7 @@ class HotPlaceCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-//        tags = []
+        tags = []
         location = nil
         photoCount = nil
     }
@@ -74,7 +75,27 @@ extension HotPlaceCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath) as? TagCell else { return UICollectionViewCell() }
         tagCell.tagTitle = "#\(tags[indexPath.row])"
-        print(tags[indexPath.row])
         return tagCell
+    }
+}
+
+extension HotPlaceCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let tempLabel = UILabel()
+        tempLabel.font = UIFont.systemFont(ofSize: 12)
+        tempLabel.text = "#" + "\(tags[indexPath.row])"
+        return CGSize(width: tempLabel.intrinsicContentSize.width, height: collectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 4
     }
 }
