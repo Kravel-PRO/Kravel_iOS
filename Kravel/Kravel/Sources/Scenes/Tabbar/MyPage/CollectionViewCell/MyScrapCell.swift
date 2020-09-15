@@ -39,17 +39,15 @@ class MyScrapCell: UICollectionViewCell {
     @IBOutlet weak var tagCollectionView: UICollectionView! {
         didSet {
             tagCollectionView.dataSource = self
-            if let layout = tagCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-                layout.minimumInteritemSpacing = 1
-                layout.minimumLineSpacing = 1
-            }
+            tagCollectionView.delegate = self
         }
     }
     
-    var tags: [String] = ["아이유", "호텔 델루나", "피오"] {
+    var tags: [String] = [] {
         didSet {
-            tagCollectionView.reloadData()
+            DispatchQueue.main.async {
+                self.tagCollectionView.reloadData()
+            }
         }
     }
     
@@ -71,5 +69,27 @@ extension MyScrapCell: UICollectionViewDataSource {
         guard let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath) as? TagCell else { return UICollectionViewCell() }
         tagCell.tagTitle = "#\(tags[indexPath.row])"
         return tagCell
+    }
+}
+
+extension MyScrapCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let tempLabel = UILabel()
+        tempLabel.font = UIFont.systemFont(ofSize: 12)
+        tempLabel.text = tags[indexPath.row]
+        tempLabel.sizeToFit()
+        return CGSize(width: tempLabel.intrinsicContentSize.width, height: collectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 4
     }
 }

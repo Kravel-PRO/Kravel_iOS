@@ -34,6 +34,7 @@ enum APICategory<P: ParameterAble> {
     case getReviewOfCeleb(P, id: Int)
     case getReviewOfMedia(P, id: Int)
     case getMyPhotoReview(P)
+    case getMyScrap(P)
     case changInfo(queryType: String, body: P)
     
     func makeURL() -> String {
@@ -77,6 +78,8 @@ enum APICategory<P: ParameterAble> {
             return APICostants.changeInfo
         case .getMyPhotoReview:
             return APICostants.getMyPhotoReview
+        case .getMyScrap:
+            return APICostants.getMyScrap
         }
     }
     
@@ -308,6 +311,23 @@ enum APICategory<P: ParameterAble> {
             }
             
             if let sort = reviewParameter.sort {
+                parameters.updateValue(sort, forKey: "sort")
+            }
+    
+            return parameters
+        case .getMyScrap(let scrapParameter):
+            var parameters: [String: Any] = [:]
+            guard let scrapParameters = scrapParameter as? GetReviewParameter else { return nil }
+            
+            if let page = scrapParameters.page {
+                parameters.updateValue(page, forKey: "page")
+            }
+            
+            if let size = scrapParameters.size {
+                parameters.updateValue(size, forKey: "size")
+            }
+            
+            if let sort = scrapParameters.sort {
                 parameters.updateValue(sort, forKey: "sort")
             }
     

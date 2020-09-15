@@ -103,4 +103,7 @@ struct APICostants {
     
     // 내 포토리뷰 가져오기
     static let getMyPhotoReview = APICostants.baseURL + "/api/member/reviews"
+    
+    // 내 스크랩 가져오기
+    static let getMyScrap = APICostants.baseURL + "/api/member/scraps"
 }

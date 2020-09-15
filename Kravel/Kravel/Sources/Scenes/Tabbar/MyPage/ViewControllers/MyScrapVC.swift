@@ -20,9 +20,7 @@ class MyScrapVC: UIViewController {
     }
     
     // MARK: - 스크랩 데이터 설정
-    var scrapDatas: [String] = ["여기", "스크랩", "정보에욤", "받아가세요", "알겠죠?"]
-    
-    var tags: [[String]] = [["태그", "했나?"], ["여기", "아이유"], ["저긴", "유명한"], ["안녕", "좋네"], ["제주도", "청정"]]
+    var scrapData: [PlaceContentInform] = []
     
     // MARK: - 스크랩 데이터 없을 때 뷰
     var noScrapView: UIView = {
@@ -85,7 +83,7 @@ class MyScrapVC: UIViewController {
     }
     
     private func isEmptyScrap() -> Bool {
-        if scrapDatas.count == 0 {
+        if scrapData.count == 0 {
             noScrapView.isHidden = false
             scrapCollectionView.isHidden = true
             return true
@@ -100,12 +98,16 @@ class MyScrapVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNav()
+        requestMyScrap()
     }
     
     private func setNav() {
+        let backImage = UIImage(named: ImageKey.back)
+        self.navigationController?.navigationBar.backIndicatorImage = backImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.tintColor = .black
-        self.navigationItem.title = "스크랩"
+        self.navigationItem.title = "스크랩".localized
         self.navigationController?.navigationBar.topItem?.title = ""
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18), .foregroundColor: UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1.0)]
@@ -118,16 +120,45 @@ class MyScrapVC: UIViewController {
     }
 }
 
+extension MyScrapVC {
+    // MARK: - 내 스크랩 요청하는 API
+    private func requestMyScrap() {
+        let getScrapParameter = GetReviewParameter(page: nil, size: nil, sort: nil)
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .getMyScrap(getScrapParameter)) { result in
+            switch result {
+            case .success(let placeData):
+                guard let placeData = placeData as? APISortableResponseData<PlaceContentInform> else { return }
+                self.scrapData = placeData.content
+                DispatchQueue.main.async {
+                    if self.isEmptyScrap() { print("empty") }
+                    self.scrapCollectionView.reloadData()
+                }
+            case .requestErr:
+                print("request Err")
+            case .serverErr:
+                print("server Err")
+            case .networkFail:
+                print("NetworkFail")
+            }
+        }
+    }
+}
+
 extension MyScrapVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return scrapDatas.count
+        return scrapData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let myScrapCell = collectionView.dequeueReusableCell(withReuseIdentifier: MyScrapCell.identifier, for: indexPath) as? MyScrapCell else { return UICollectionViewCell() }
-        myScrapCell.scrapImage = UIImage(named: "bitmap_0")
-        myScrapCell.scrapText = scrapDatas[indexPath.row]
-        myScrapCell.tags = tags[indexPath.row]
+        myScrapCell.scrapImageView.setImage(with: scrapData[indexPath.row].imageUrl ?? "")
+        myScrapCell.scrapText = scrapData[indexPath.row].title
+        if let tags = scrapData[indexPath.row].tags?.split(separator: " ").map(String.init) {
+            myScrapCell.tags = tags
+        } else {
+            myScrapCell.tags = []
+        }
         return myScrapCell
     }
 }
