@@ -42,7 +42,6 @@ class SearchAddressVC: UIViewController {
         didSet {
             searchResultTableView.dataSource = self
             searchResultTableView.delegate = self
-            searchResultTableView.separatorInset = .zero
             searchResultTableView.rowHeight = UITableView.automaticDimension
             searchResultTableView.estimatedRowHeight = 74
             searchResultTableView.separatorInset = UIEdgeInsets(top: 0, left: UIScreen.main.bounds.width, bottom: 0, right: 0)

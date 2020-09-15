@@ -43,7 +43,6 @@
 		9D5DBB47248D5BBF00D82D40 /* SexButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5DBB46248D5BBF00D82D40 /* SexButton.swift */; };
 		9D5E3EB724BD952200BA4E5F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5E3EB624BD952200BA4E5F /* SearchCell.swift */; };
 		9D61F6DE24F7AAAF00EF13FB /* EditPassword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D61F6DD24F7AAAF00EF13FB /* EditPassword.storyboard */; };
-		9D61F6E024F7AAE000EF13FB /* EditPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D61F6DF24F7AAE000EF13FB /* EditPasswordVC.swift */; };
 		9D61F6E224F7E97600EF13FB /* LoginTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D61F6E124F7E97600EF13FB /* LoginTextViewDelegate.swift */; };
 		9D61F6E424F7E99F00EF13FB /* PhotoReviewViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D61F6E324F7E99F00EF13FB /* PhotoReviewViewDelegate.swift */; };
 		9D61F6E624F7F2A900EF13FB /* RealEditPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D61F6E524F7F2A900EF13FB /* RealEditPasswordVC.swift */; };
@@ -211,7 +210,6 @@
 		9D5DBB46248D5BBF00D82D40 /* SexButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SexButton.swift; sourceTree = "<group>"; };
 		9D5E3EB624BD952200BA4E5F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		9D61F6DD24F7AAAF00EF13FB /* EditPassword.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditPassword.storyboard; sourceTree = "<group>"; };
-		9D61F6DF24F7AAE000EF13FB /* EditPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPasswordVC.swift; sourceTree = "<group>"; };
 		9D61F6E124F7E97600EF13FB /* LoginTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextViewDelegate.swift; sourceTree = "<group>"; };
 		9D61F6E324F7E99F00EF13FB /* PhotoReviewViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoReviewViewDelegate.swift; sourceTree = "<group>"; };
 		9D61F6E524F7F2A900EF13FB /* RealEditPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealEditPasswordVC.swift; sourceTree = "<group>"; };
@@ -1128,7 +1126,6 @@
 				9DBA644224F3B58000E12FA4 /* MyPhotoReviewVC.swift */,
 				9DBA643C24F392E200E12FA4 /* MyScrapVC.swift */,
 				9D96007A24E5B72B007995EE /* ChangeInfoVC.swift */,
-				9D61F6DF24F7AAE000EF13FB /* EditPasswordVC.swift */,
 				9D61F6E524F7F2A900EF13FB /* RealEditPasswordVC.swift */,
 				9D76CD9124FDA268004D7333 /* ReportVC.swift */,
 				9D76CD9524FE9945004D7333 /* SearchAddressVC.swift */,
@@ -1448,7 +1445,6 @@
 				9DEDA6A424BC7D5100E978F5 /* SearchVC.swift in Sources */,
 				9DA80457248E9200003826B9 /* String+Extensions.swift in Sources */,
 				9D8EA91124E7BE4B00FD5059 /* ImageKey.swift in Sources */,
-				9D61F6E024F7AAE000EF13FB /* EditPasswordVC.swift in Sources */,
 				9D9694CD24C5E7570046CB85 /* PlaceCell.swift in Sources */,
 				9D76CDA124FEBA43004D7333 /* SearchPlaceResponseData.swift in Sources */,
 				9D94BDF224BE2C710027B9BF /* ContentDetailVC.swift in Sources */,

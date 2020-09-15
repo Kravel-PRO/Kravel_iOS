@@ -138,7 +138,7 @@ class SignupVC: UIViewController {
         emailLabel.text = "이메일 계정".localized
         textFields[0].placeholder = "이메일을 입력해주세요.".localized
         pwLabel.text = "비밀번호".localized
-        textFields[1].placeholder = "비밀번호를 입력해주세요.".localized
+        textFields[1].placeholder = "6자리 이상으로 입력해주세요.".localized
         pwConfirmLabel.text = "비밀번호 확인".localized
         textFields[2].placeholder = "다시 한 번 비밀번호를 입력해주세요.".localized
         nicknameLabel.text = "닉네임".localized

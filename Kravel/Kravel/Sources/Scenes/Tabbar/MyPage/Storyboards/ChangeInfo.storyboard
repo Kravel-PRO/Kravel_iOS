@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -68,6 +68,9 @@
                                 <state key="normal" title="회원 탈퇴하기">
                                     <color key="titleColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="withdrawal:" destination="VI2-5c-bLY" eventType="touchUpInside" id="xwf-e5-96x"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJf-Yx-HCi" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
                                 <rect key="frame" x="44" y="698" width="287" height="56"/>
@@ -106,8 +109,10 @@
                     </view>
                     <connections>
                         <outlet property="completeButton" destination="mJf-Yx-HCi" id="dqi-bk-y0G"/>
+                        <outlet property="nickNameLabel" destination="2QC-Ky-a17" id="gGd-aO-Sed"/>
                         <outlet property="nicknameBackView" destination="z3N-op-JO9" id="AiA-20-3AI"/>
                         <outlet property="nicknameTextField" destination="OmY-EI-Kw0" id="PAV-5e-JjF"/>
+                        <outlet property="sexLabel" destination="L0h-ni-hg4" id="Py7-3J-tsk"/>
                         <outletCollection property="sexButtons" destination="j3F-vC-SM7" collectionClass="NSMutableArray" id="Gl6-8Z-NS4"/>
                         <outletCollection property="sexButtons" destination="jqH-vl-Uh3" collectionClass="NSMutableArray" id="kzc-P7-LFv"/>
                     </connections>

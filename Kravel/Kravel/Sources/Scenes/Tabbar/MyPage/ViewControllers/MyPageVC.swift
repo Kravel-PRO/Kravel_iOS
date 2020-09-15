@@ -34,9 +34,9 @@ class MyPageVC: UIViewController {
     // MARK: - Menu 화면 설정
     @IBOutlet weak var menuTableView: UITableView! {
         didSet {
+            menuTableView.separatorInset = UIEdgeInsets(top: 0, left: UIScreen.main.bounds.width, bottom: 0, right: 0)
             menuTableView.dataSource = self
             menuTableView.delegate = self
-            menuTableView.separatorInset = UIEdgeInsets(top: 0, left: UIScreen.main.bounds.width, bottom: 0, right: 0)
         }
     }
     
@@ -92,9 +92,10 @@ extension MyPageVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let myPageCell = tableView.dequeueReusableCell(withIdentifier: "MyPageCell") as? MyPageCell else { return UITableViewCell() }
-        myPageCell.menuName = MyPageMenu(rawValue: indexPath.row)?.getMenuLabel()
         myPageCell.separatorInset = .zero
-        
+        myPageCell.menuName = MyPageMenu(rawValue: indexPath.row)?.getMenuLabel()
+        myPageCell.backgroundColor = .white
+
         guard let menuImageName = MyPageMenu(rawValue: indexPath.row)?.getImageName() else { return UITableViewCell() }
         myPageCell.menuImage = UIImage(named: menuImageName)
         return myPageCell
@@ -103,7 +104,7 @@ extension MyPageVC: UITableViewDataSource {
 
 extension MyPageVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.height / 5
+        return tableView.frame.height / 6.8
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -134,7 +135,7 @@ extension MyPageVC: UITableViewDelegate {
     
     // 비밀번호 변경 화면으로 이동
     private func goEditPasswordVC(navTitle: String) {
-        guard let editPasswordVC = UIStoryboard(name: "EditPassword", bundle: nil).instantiateViewController(withIdentifier: EditPasswordVC.identifier) as? EditPasswordVC else { return }
+        guard let editPasswordVC = UIStoryboard(name: "EditPassword", bundle: nil).instantiateViewController(withIdentifier: RealEditPasswordVC.identifier) as? RealEditPasswordVC else { return }
         editPasswordVC.naviTitle = navTitle
         editPasswordVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(editPasswordVC, animated: true)

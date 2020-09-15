@@ -10,6 +10,8 @@ import UIKit
 
 class RealEditPasswordVC: UIViewController {
     static let identifier = "RealEditPasswordVC"
+    
+    var naviTitle: String?
 
     // MARK: - TextView 바탕 Layer 설정
     @IBOutlet var marginViews: [UIView]! {
@@ -22,12 +24,23 @@ class RealEditPasswordVC: UIViewController {
         }
     }
     
+    // MARK: - PW 확인하는 TextField
+    @IBOutlet weak var checkPwTextField: UITextField! {
+        didSet {
+            checkPwTextField.delegate = self
+        }
+    }
+    
+    @IBOutlet weak var checkPwLabel: UILabel!
+    
     // MARK: - PW 입력하는 TextField
     @IBOutlet weak var pwTextField: UITextField! {
         didSet {
             pwTextField.delegate = self
         }
     }
+    
+    @IBOutlet weak var pwLabel: UILabel!
     
     // MARK: - PW 한번 더 입력하는 TextField
     @IBOutlet weak var oneMoreTextField: UITextField! {
@@ -36,6 +49,8 @@ class RealEditPasswordVC: UIViewController {
         }
     }
     
+    @IBOutlet weak var oneMoreLabel: UILabel!
+    
     // MARK: - 수정 완료 버튼 설정
     @IBOutlet weak var completeButton: CustomButton! {
         didSet {
@@ -43,10 +58,28 @@ class RealEditPasswordVC: UIViewController {
         }
     }
     
+    @IBAction func complete(_ sender: Any) {
+        
+    }
+    
     // MARK: - UIViewController viewDidLoad() Override
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setLabelByLanguage()
+    }
+    
+    private func setLabelByLanguage() {
+        checkPwLabel.text = "본인 확인을 위해 비밀번호를 입력해주세요.".localized
+        checkPwTextField.placeholder = "6자리 이상 입력해주세요.".localized
+        
+        pwLabel.text = "변경할 비밀번호를 입력해주세요.".localized
+        pwTextField.placeholder = "6자리 이상 입력해주세요.".localized
+        
+        oneMoreLabel.text = "비밀번호 확인".localized
+        oneMoreTextField.placeholder = "다시 한 번 비밀번호를 입력해주세요.".localized
+        
+        completeButton.setTitle("수정 완료".localized, for: .normal)
     }
     
     // MARK: - UIViewController viewWillAppear() Override
@@ -56,8 +89,22 @@ class RealEditPasswordVC: UIViewController {
     }
     
     private func setNav() {
+        let backImage = UIImage(named: ImageKey.back)
+        self.navigationController?.navigationBar.backIndicatorImage = backImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.topItem?.title = ""
-        self.navigationItem.title = "비밀번호 수정"
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationItem.title = naviTitle
+    }
+}
+
+extension RealEditPasswordVC {
+    // MARK: - 비밀번호 수정 API 연결
+    private func requestModifyPassword() {
+        NetworkHandler.shared.requestAPI(apiCategory: .changInfo(queryType: <#T##String#>, body: <#T##ParameterAble#>), completion: <#T##(NetworkResult<Codable>) -> Void#>)
     }
 }
 
@@ -68,8 +115,10 @@ extension RealEditPasswordVC: UITextFieldDelegate {
         
         if textField == pwTextField {
             marginViews[0].layer.borderColor = layerColor.cgColor
-        } else {
+        } else if textField == oneMoreTextField {
             marginViews[1].layer.borderColor = layerColor.cgColor
+        } else {
+            marginViews[2].layer.borderColor = layerColor.cgColor
         }
     }
 }

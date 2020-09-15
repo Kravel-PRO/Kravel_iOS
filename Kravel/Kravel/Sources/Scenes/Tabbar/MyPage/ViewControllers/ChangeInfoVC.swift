@@ -16,6 +16,10 @@ class ChangeInfoVC: UIViewController {
     // MARK: - Navigation Bar 설정
     var naviTitle: String?
     
+    // MARK: - 라벨들 설정
+    @IBOutlet weak var nickNameLabel: UILabel!
+    @IBOutlet weak var sexLabel: UILabel!
+    
     // MARK: - 닉네임 수정 화면 설정
     @IBOutlet weak var nicknameBackView: UIView! {
         didSet {
@@ -39,6 +43,10 @@ class ChangeInfoVC: UIViewController {
         }
     }
     
+    // MARK: - 회원 탈퇴
+    @IBAction func withdrawal(_ sender: Any) {
+    }
+    
     // MARK: - 수정 완료 버튼 설정
     @IBOutlet weak var completeButton: UIButton! {
         didSet {
@@ -49,15 +57,26 @@ class ChangeInfoVC: UIViewController {
     
     @IBAction func completeEdit(_ sender: Any) {
         requestChangInfo()
-        self.navigationController?.popViewController(animated: true)
     }
     
-    // MARK: - ViewController Override 설정
+    // MARK: - UIViewController viewDidLoad Override 설정
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setLabelByLanguage()
     }
     
+    private func setLabelByLanguage() {
+        nickNameLabel.text = "닉네임".localized
+        nickNameLabel.sizeToFit()
+        
+        sexLabel.text = "성별".localized
+        sexLabel.sizeToFit()
+        
+        completeButton.setTitle("수정 완료".localized, for: .normal)
+    }
+    
+    
+    // MARK: - UIViewController viewWillAppear Override 설정
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNav()
@@ -70,6 +89,7 @@ class ChangeInfoVC: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.topItem?.title = ""
         self.navigationItem.title = naviTitle
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18), .foregroundColor: UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1.0)]
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
