@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 import NMapsMap
 
 class MapVC: UIViewController {
@@ -384,6 +385,21 @@ class MapVC: UIViewController {
         }
     }
     
+    private func checkLocationAuthor() {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedAlways:
+            print("허용됨")
+        case .authorizedWhenInUse:
+            print("허용되지 않음")
+        case .notDetermined:
+            print("됨")
+        case .restricted:
+            print("허용되지 않음")
+        case .denied:
+            print("거부됨")
+        }
+    }
+    
     // MARK: - 지도 표시를 위한 ID, 위도, 경도 간단한 값 API 요청
     private func requestSimplePlaceData() {
         let simplePlaceParameter = GetSimplePlaceParameter(longitude: nil, latitude: nil)
@@ -490,7 +506,11 @@ class MapVC: UIViewController {
     private func setDetailPlaceData(_ detailInform: PlaceDetailInform) {
         self.selectedPlace = detailInform
         placePopupView.placeName = detailInform.title
-        placePopupView.placeTags = detailInform.tags ?? []
+        if let tags = detailInform.tags {
+            placePopupView.placeTags = tags.split(separator: " ").map({ "#" + String($0) })
+        } else {
+            placePopupView.placeTags = []
+        }
         placePopupView.placeLocation = detailInform.location
         placePopupView.subLocationContainerView.setMarker(latitude: detailInform.latitude, longitude: detailInform.longitude, iconImage: icMarkDefault)
         placePopupView.subLocationContainerView.location = detailInform.location
@@ -625,7 +645,11 @@ extension MapVC: UICollectionViewDataSource {
         nearPlaceCell.clipsToBounds = false
         
         nearPlaceCell.placeName = nearPlaceData[indexPath.row].title
-        nearPlaceCell.tags = nearPlaceData[indexPath.row].tags ?? []
+        if let tags = nearPlaceData[indexPath.row].tags {
+            nearPlaceCell.tags = tags.split(separator: " ").map({ "#" + String($0) })
+        } else {
+            nearPlaceCell.tags = []
+        }
         nearPlaceCell.location = nearPlaceData[indexPath.row].location
         nearPlaceCell.placeImageView.setImage(with: nearPlaceData[indexPath.row].imageUrl ?? "")
         return nearPlaceCell

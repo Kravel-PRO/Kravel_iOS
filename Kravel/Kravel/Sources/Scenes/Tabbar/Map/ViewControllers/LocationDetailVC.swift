@@ -248,7 +248,11 @@ extension LocationDetailVC {
     private func setDetailPlaceData() {
         if let placeData = self.placeData {
             placeName = placeData.title
-            placeTags = placeData.tags ?? []
+            if let tags = placeData.tags {
+                placeTags = tags.split(separator: " ").map({ "#" + String($0) })
+            } else {
+                placeTags = []
+            }
             location = placeData.location
             subLocationView.busDescription = "버스"
             subLocationView.busDatas = placeData.bus

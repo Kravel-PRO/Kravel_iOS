@@ -16,7 +16,7 @@ class SplashVC: UIViewController {
     private func showLoadingLottie() {
         animationView = AnimationView(name: "splash_iOS")
         animationView?.backgroundColor = .white
-        animationView?.contentMode = .scaleToFill
+        animationView?.contentMode = .scaleAspectFill
         animationView?.translatesAutoresizingMaskIntoConstraints = false
         animationView?.play()
         

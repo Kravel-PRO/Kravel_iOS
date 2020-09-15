@@ -76,18 +76,15 @@ class MorePhotoReviewCell: UICollectionViewCell {
     @IBOutlet weak var tagCollectionView: UICollectionView! {
         didSet {
             tagCollectionView.dataSource = self
-            if let layout = tagCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-                layout.minimumInteritemSpacing = 1
-                layout.minimumLineSpacing = 1
-                layout.sectionInset = .zero
-            }
+            tagCollectionView.delegate = self
         }
     }
     
-    var tags: [String]? {
+    var tags: [String] = [] {
         didSet {
-            tagCollectionView.reloadData()
+            DispatchQueue.main.async {
+                self.tagCollectionView.reloadData()
+            }
         }
     }
     
@@ -96,7 +93,6 @@ class MorePhotoReviewCell: UICollectionViewCell {
         super.prepareForReuse()
         delegate = nil
         indexPath = nil
-        tags = nil
         placeName = nil
         photoReviewImageView.image = nil
         isLike = nil
@@ -109,14 +105,34 @@ class MorePhotoReviewCell: UICollectionViewCell {
     }
 }
 
-extension MorePhotoReviewCell: UICollectionViewDataSource {
+extension MorePhotoReviewCell: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tags?.count ?? 0
+        return tags.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath) as? TagCell else { return UICollectionViewCell() }
-        tagCell.tagTitle = "#\(tags?[indexPath.row])"
+        tagCell.tagTitle = "#\(tags[indexPath.row])"
         return tagCell
+    }
+}
+
+extension MorePhotoReviewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let tempLabel = UILabel()
+        tempLabel.text = tags[indexPath.row]
+        return CGSize(width: tempLabel.intrinsicContentSize.width, height: collectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
     }
 }

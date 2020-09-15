@@ -27,12 +27,11 @@ class PlaceCell: UICollectionViewCell {
         }
     }
     
-    var tags: [String]? {
+    var tags: String? {
         didSet {
             if let tags = self.tags {
-                var mutable_tags = tags
-                for index in 0..<tags.count { mutable_tags[index] = "#" + tags[index] }
-                tagLabel.text = mutable_tags.joined(separator: " ")
+                tagLabel.text = tags.split(separator: " ").map({ "#" + String($0) }).joined(separator: " ")
+                tagLabel.sizeToFit()
             }
         }
     }

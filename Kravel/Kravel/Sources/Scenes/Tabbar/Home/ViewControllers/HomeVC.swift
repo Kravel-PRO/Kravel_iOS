@@ -221,7 +221,7 @@ extension HomeVC {
     
     // MARK: - 포토리뷰 데이터 API 요청
     private func requestReviewData() {
-        let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "reviewLikes-count,desc")
+        let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "createdDate")
         NetworkHandler.shared.requestAPI(apiCategory: .getReview(getReviewParameter)) { result in
             switch result {
             case .success(let getReviewResult):
@@ -275,8 +275,7 @@ extension HomeVC: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // FIXME: 이거 AppDelegate에 설정해서 앱 시작할 때 물어야할 듯 -> 시간 나면 고치기
         guard let location = locations.first else { return }
-        self.currentLocation = CLLocationCoordinate2D(latitude: 1.0, longitude: 1.0)
-//        currentLocation = location.coordinate
+        currentLocation = location.coordinate
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -302,7 +301,11 @@ extension HomeVC: UICollectionViewDataSource {
         guard let homeNearPlaceCell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeNearPlaceCell.identifier, for: indexPath) as? HomeNearPlaceCell else { return HomeNearPlaceCell() }
 
         homeNearPlaceCell.placeName = nearPlaceData[indexPath.row].title
-        homeNearPlaceCell.tags = nearPlaceData[indexPath.row].tags ?? []
+        if let tags = nearPlaceData[indexPath.row].tags {
+            homeNearPlaceCell.tags = tags.split(separator: " ").map({ String($0) })
+        } else {
+            homeNearPlaceCell.tags = []
+        }
         homeNearPlaceCell.placeImageView.setImage(with: nearPlaceData[indexPath.row].imageUrl ?? "")
         
         homeNearPlaceCell.layer.cornerRadius = homeNearPlaceCell.frame.width / 15.9
@@ -317,7 +320,15 @@ extension HomeVC: UICollectionViewDataSource {
         hotPlaceCell.clipsToBounds = true
         
         hotPlaceCell.location = hotPlaceData[indexPath.row].title
-        hotPlaceCell.tags = hotPlaceData[indexPath.row].tags ?? []
+        
+        // FIXME: 여기 지금 적용이 안됨.
+        if let tags = hotPlaceData[indexPath.row].tags {
+            hotPlaceCell.tags = tags.split(separator: " ").map({ String($0) })
+        } else {
+            hotPlaceCell.tags = []
+        }
+        hotPlaceCell.tagCollectionView.reloadData()
+        
         hotPlaceCell.photoCount = hotPlaceData[indexPath.row].reviewCount
         hotPlaceCell.placeImageView.setImage(with: hotPlaceData[indexPath.row].imageUrl ?? "")
         
@@ -347,7 +358,6 @@ extension HomeVC: UICollectionViewDelegate {
     
     private func touchNearPlaceCell(at indexPath: IndexPath) {
         guard let locationDetailVC = UIStoryboard(name: "LocationDetail", bundle: nil).instantiateViewController(withIdentifier: LocationDetailVC.identifier) as? LocationDetailVC else { return }
-        print(nearPlaceData[indexPath.row].placeId)
         locationDetailVC.placeID = nearPlaceData[indexPath.row].placeId
         locationDetailVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(locationDetailVC, animated: true)
@@ -361,7 +371,6 @@ extension HomeVC: UICollectionViewDelegate {
     }
     
     private func touchPhotoCell(at indexPath: IndexPath) {
-        // FIXME: 여기 클릭된 ID 넘겨주고 하는 코드 추가해야할 듯.
         guard let morePhotoVC = UIStoryboard(name: "MorePhotoReview", bundle: nil).instantiateViewController(withIdentifier: MorePhotoReviewVC.identifier) as? MorePhotoReviewVC else { return }
         morePhotoVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(morePhotoVC, animated: true)

@@ -33,18 +33,14 @@ class HotPlaceCell: UICollectionViewCell {
             tagCollectionView.dataSource = self
             if let layout = tagCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-                layout.minimumInteritemSpacing = 3
-                layout.minimumLineSpacing = 3
+                layout.minimumInteritemSpacing = 4
+                layout.minimumLineSpacing = 4
                 layout.sectionInset = .zero
             }
         }
     }
     
-    var tags: [String] = [] {
-        didSet {
-            tagCollectionView.reloadData()
-        }
-    }
+    var tags: [String] = []
     
     // MARK: - 포토리뷰 개수 라벨
     @IBOutlet weak var photoReviewCountLabel: UILabel!
@@ -64,7 +60,7 @@ class HotPlaceCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        tags = []
+//        tags = []
         location = nil
         photoCount = nil
     }
@@ -78,6 +74,7 @@ extension HotPlaceCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath) as? TagCell else { return UICollectionViewCell() }
         tagCell.tagTitle = "#\(tags[indexPath.row])"
+        print(tags[indexPath.row])
         return tagCell
     }
 }

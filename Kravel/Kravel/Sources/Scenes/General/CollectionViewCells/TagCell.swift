@@ -17,6 +17,7 @@ class TagCell: UICollectionViewCell {
         didSet {
             tagLabel.text = tagTitle
             tagLabel.sizeToFit()
+            tagLabel.invalidateIntrinsicContentSize()
         }
     }
     

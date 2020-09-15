@@ -34,9 +34,12 @@ class MorePhotoReviewVC: UIViewController {
     }
     
     private func setNav() {
+        let backImage = UIImage(named: ImageKey.back)
+        self.navigationController?.navigationBar.backIndicatorImage = backImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.tintColor = .black
-        self.navigationItem.title = "새로운 포토 리뷰"
+        self.navigationItem.title = "새로운 포토 리뷰".localized
         self.navigationController?.navigationBar.topItem?.title = ""
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18), .foregroundColor: UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1.0)]
@@ -46,7 +49,7 @@ class MorePhotoReviewVC: UIViewController {
 extension MorePhotoReviewVC {
     // MARK: - 포토리뷰 API 통신
     private func requestPhotoReview() {
-        let getReviewParameter = GetReviewParameter(page: 0, size: nil, sort: nil)
+        let getReviewParameter = GetReviewParameter(page: 0, size: nil, sort: "createdDate")
         NetworkHandler.shared.requestAPI(apiCategory: .getReview(getReviewParameter)) { result in
             switch result {
             case .success(let getReviewResult):
@@ -66,11 +69,54 @@ extension MorePhotoReviewVC {
             }
         }
     }
+    
+    // MARK: - 포토리뷰 좋아야 요청 API
+    private func requestLike(currentLike: Bool, placeId: Int, reviewId: Int, completion: @escaping (NetworkResult<Codable>) -> Void) {
+        let likeParameter = LikeParameter(like: currentLike)
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .like(likeParameter, placeId: placeId, reviewId: reviewId), completion: completion)
+    }
 }
 
 extension MorePhotoReviewVC: CellButtonDelegate {
     func clickHeart(at indexPath: IndexPath) {
-        print(indexPath)
+        guard let like = photoReviewData[indexPath.row].like,
+        let reviewId = photoReviewData[indexPath.row].reviewId,
+        let placeId = photoReviewData[indexPath.row].place?.placeId,
+        let moreReviewCell = morePhotoReviewCollectionView.cellForItem(at: indexPath) as? MorePhotoReviewCell
+        else { return }
+        
+        requestLike(currentLike: !like, placeId: placeId, reviewId: reviewId) { result in
+            switch result {
+            case .success(let likeResult):
+                guard let likeResult = likeResult as? Int,
+                    let likeCount = self.photoReviewData[indexPath.row].likeCount
+                    else { return }
+                
+                // 좋아요 결과 반영됨 false -> true 반영
+                if likeResult != -1 {
+                    moreReviewCell.isLike = true
+                    moreReviewCell.likeCount = likeCount + 1
+                    self.photoReviewData[indexPath.row].like = true
+                    self.photoReviewData[indexPath.row].likeCount = likeCount + 1
+                }
+                // 좋아요 결과 반영됨 true -> false 반영
+                else {
+                    moreReviewCell.isLike = false
+                    moreReviewCell.likeCount = likeCount - 1
+                    self.photoReviewData[indexPath.row].like = false
+                    self.photoReviewData[indexPath.row].likeCount = likeCount - 1
+                }
+            case .requestErr(let error):
+                print(error)
+            case .serverErr:
+                print("Server Err")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
     }
 }
 
@@ -88,7 +134,13 @@ extension MorePhotoReviewVC: UICollectionViewDataSource {
         photoReviewCell.isLike = photoReviewData[indexPath.row].like
         photoReviewCell.likeCount = photoReviewData[indexPath.row].likeCount
         photoReviewCell.placeName = photoReviewData[indexPath.row].place?.title
-        photoReviewCell.tags = photoReviewData[indexPath.row].tags?.split(separator: " ").map(String.init)
+        
+        if let tags = photoReviewData[indexPath.row].place?.tags?.split(separator: " ").map(String.init) {
+            photoReviewCell.tags = tags
+        } else {
+            photoReviewCell.tags = []
+        }
+        
         return photoReviewCell
     }
 }
@@ -96,7 +148,7 @@ extension MorePhotoReviewVC: UICollectionViewDataSource {
 extension MorePhotoReviewVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.width - 16*2 - 8) / 2
-        let height = width * 1.28
+        let height = width * 1.38
         return CGSize(width: width, height: height)
     }
     
@@ -105,7 +157,7 @@ extension MorePhotoReviewVC: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 16
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
