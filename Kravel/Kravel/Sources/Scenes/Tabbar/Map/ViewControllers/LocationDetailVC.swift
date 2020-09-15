@@ -254,9 +254,7 @@ extension LocationDetailVC {
                 placeTags = []
             }
             location = placeData.location
-            subLocationView.busDescription = "버스"
             subLocationView.busDatas = placeData.bus
-            subLocationView.subwayDescription = "지하철"
             subLocationView.subwayDatas = placeData.subway
             subLocationView.location = placeData.location
             subLocationView.setMarker(latitude: placeData.latitude, longitude: placeData.longitude, iconImage: NMFOverlayImage(name: ImageKey.icMarkDefault))

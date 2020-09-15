@@ -132,6 +132,13 @@ struct CustomLocalize {
         case checkMyselfPw = "본인 확인을 위해 비밀번호를 입력해주세요."
         case inputModifyPw = "변경할 비밀번호를 입력해주세요."
         
+        // MARK: - 장소 디테일 화면
+        case location = "위치"
+        case attraction = "주변 관광지"
+        case publicTranport = "대중교통"
+        case bus = "버스"
+        case subway = "지하철"
+        
         func localize() -> String {
             guard let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return self.rawValue }
             switch self {
@@ -306,6 +313,21 @@ struct CustomLocalize {
             case .inputModifyPw:
                 if language == "KOR" { return "변경할 비밀번호를 입력해주세요." }
                 else { return "OK" }
+            case .attraction:
+                if language == "KOR" { return "주변 관광지" }
+                else { return "Nearby tourist attraction" }
+            case .publicTranport:
+                if language == "KOR" { return "대중교통" }
+                else { return "Public transport" }
+            case .bus:
+                if language == "KOR" { return "버스" }
+                else { return "bus" }
+            case .subway:
+                if language == "KOR" { return "지하철" }
+                else { return "subway" }
+            case .location:
+                if language == "KOR" { return "위치" }
+                else { return "Location" }
             }
         }
     }

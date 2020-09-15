@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -12,11 +12,11 @@
                 <outlet property="busDescriptionLabel" destination="U7O-6g-waC" id="EyN-MY-sFw"/>
                 <outlet property="busesLabel" destination="UAt-wS-n0P" id="Paw-VF-0eu"/>
                 <outlet property="containerMapView" destination="2ff-2w-boJ" id="dwo-5T-F9d"/>
+                <outlet property="labelWidthConstraint" destination="Jqr-kd-wmD" id="we3-nf-Oqm"/>
                 <outlet property="locationDescriptionLabel" destination="egh-4j-jmh" id="BV8-9a-lz4"/>
                 <outlet property="locationLabel" destination="UhN-Fh-iY5" id="NY6-Nc-Q50"/>
                 <outlet property="publicTransportDescriptionLabel" destination="mmS-75-ndO" id="NQN-Xg-0X7"/>
                 <outlet property="subwayDescriptionLabel" destination="GOQ-UZ-Sww" id="fTg-Zb-mbL"/>
-                <outlet property="subwayDescriptionWidthConstraint" destination="Eq8-wY-zrq" id="4wc-t8-2ff"/>
                 <outlet property="subwaysLabel" destination="eca-Ir-NGc" id="Eod-So-d0U"/>
             </connections>
         </placeholder>
@@ -76,7 +76,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GOQ-UZ-Sww">
                                     <rect key="frame" x="0.0" y="0.0" width="39" height="17"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="39" id="Eq8-wY-zrq"/>
+                                        <constraint firstAttribute="width" constant="39" id="Jqr-kd-wmD"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>

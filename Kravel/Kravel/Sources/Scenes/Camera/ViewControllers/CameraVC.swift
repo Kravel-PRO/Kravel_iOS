@@ -213,7 +213,7 @@ class CameraVC: UIViewController {
         // FIXME: 여기 갤러리 제일 마지막 사진 보이게 수정
         let galleryButton = UIButton()
         galleryButton.translatesAutoresizingMaskIntoConstraints = false
-        galleryButton.contentMode = .scaleAspectFill
+        galleryButton.contentMode = .scaleAspectFit
         galleryButton.clipsToBounds = true
         return galleryButton
     }()

@@ -13,6 +13,8 @@ class NearByAttractionView: UIView {
     
     var view: UIView!
 
+    @IBOutlet weak var titleLabel: UILabel!
+    
     // MARK: - 주변 관광지 CollectionView 설정
     @IBOutlet weak var nearByAttractionCollectionView: UICollectionView! {
         didSet {
@@ -31,11 +33,13 @@ class NearByAttractionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadXib()
+        setLabelByLanguage()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadXib()
+        setLabelByLanguage()
     }
     
     private func loadXib() {
@@ -43,6 +47,10 @@ class NearByAttractionView: UIView {
         self.view.frame = self.bounds
         self.addSubview(view)
         self.bringSubviewToFront(view)
+    }
+    
+    private func setLabelByLanguage() {
+        titleLabel.text = "주변 관광지".localized
     }
     
     func requestTouristAPI(mapX: Double, mapY: Double) {
@@ -67,6 +75,8 @@ class NearByAttractionView: UIView {
         
         DispatchQueue.main.async {
             self.nearByAttractionCollectionView.reloadData()
+            NotificationCenter.default.post(name: .completeAttraction, object: nil
+                , userInfo: ["isEmpty": self.nearByAttractions.isEmpty])
         }
     }
 }
@@ -151,8 +161,7 @@ extension NearByAttractionView: UICollectionViewDataSource {
 
 extension NearByAttractionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = collectionView.frame.height * 0.82
-        return CGSize(width: height, height: height)
+        return CGSize(width: 116, height: 116)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

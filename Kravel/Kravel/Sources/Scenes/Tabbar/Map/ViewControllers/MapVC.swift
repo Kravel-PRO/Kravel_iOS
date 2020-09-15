@@ -397,6 +397,8 @@ class MapVC: UIViewController {
             print("허용되지 않음")
         case .denied:
             print("거부됨")
+        @unknown default:
+            break
         }
     }
     
@@ -507,7 +509,7 @@ class MapVC: UIViewController {
         self.selectedPlace = detailInform
         placePopupView.placeName = detailInform.title
         if let tags = detailInform.tags {
-            placePopupView.placeTags = tags.split(separator: " ").map({ "#" + String($0) })
+            placePopupView.placeTags = tags.split(separator: " ").map({ String($0) })
         } else {
             placePopupView.placeTags = []
         }
@@ -516,8 +518,6 @@ class MapVC: UIViewController {
         placePopupView.subLocationContainerView.location = detailInform.location
         placePopupView.subLocationContainerView.busDatas = detailInform.bus
         placePopupView.subLocationContainerView.subwayDatas = detailInform.subway
-        placePopupView.subLocationContainerView.busDescription = "버스"
-        placePopupView.subLocationContainerView.subwayDescription = "지하철"
         placePopupView.placeImageView.setImage(with: detailInform.imageUrl ?? "")
         
         guard let scrapButton = placePopupView.buttonStackView.arrangedSubviews[1] as? UIButton else { return }

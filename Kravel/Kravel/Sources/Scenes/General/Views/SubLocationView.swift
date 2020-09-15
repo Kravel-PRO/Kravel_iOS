@@ -71,26 +71,21 @@ class SubLocationView: UIView {
     }
     
     // MARK: - 버스을 설명해주는 Label
-    @IBOutlet weak var busDescriptionLabel: UILabel!
-    
-    var busDescription: String? {
+    @IBOutlet weak var busDescriptionLabel: UILabel! {
         didSet {
-            busDescriptionLabel.text = busDescription
+            busDescriptionLabel.text = "버스".localized
         }
     }
     
     // MARK: - 지하철을 설명해주는 Label
-    @IBOutlet weak var subwayDescriptionLabel: UILabel!
-    
-    var subwayDescription: String? {
+    @IBOutlet weak var subwayDescriptionLabel: UILabel! {
         didSet {
-            subwayDescriptionLabel.text = subwayDescription
-            let size = subwayDescriptionLabel.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
-            subwayDescriptionWidthConstraint.constant = size.width
+            subwayDescriptionLabel.text = "지하철".localized
+            labelWidthConstraint.constant = subwayDescriptionLabel.intrinsicContentSize.width
         }
     }
     
-    @IBOutlet weak var subwayDescriptionWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var labelWidthConstraint: NSLayoutConstraint!
     
     // MARK: - 버스로 가는 방법을 알려주는 Label
     @IBOutlet weak var busesLabel: UILabel!

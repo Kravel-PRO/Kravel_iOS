@@ -158,6 +158,19 @@ class PlacePopupView: UIView {
     
     // MARK: - 주변 관광지 나타내는 View을 담는 Container View 설정
     @IBOutlet weak var nearByAttractionContainerView: NearByAttractionView!
+    @IBOutlet weak var nearByAttractionHeightConstraint: NSLayoutConstraint!
+    
+    @objc func setNearAttraction(_ notification: NSNotification) {
+        guard let isEmpty = notification.userInfo?["isEmpty"] as? Bool else { return }
+        
+        DispatchQueue.main.async {
+            if isEmpty {
+                self.nearByAttractionHeightConstraint.constant = 52
+            } else {
+                self.nearByAttractionHeightConstraint.constant = self.nearByAttractionContainerView.nearByAttractionCollectionView.frame.height + 52
+            }
+        }
+    }
     
     // MARK: - Main ScrollView 설정
     @IBOutlet weak var contentScrollView: UIScrollView! {
@@ -174,17 +187,21 @@ class PlacePopupView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadXib()
+        setLabelByLanguage()
         buttonStackContainerView.addSubview(buttonDivideView)
         setDivideViewLayout()
         photoReviewContainerView.calculateCollectionViewHeight()
+        NotificationCenter.default.addObserver(self, selector: #selector(setNearAttraction(_:)), name: .completeAttraction, object: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadXib()
+        setLabelByLanguage()
         buttonStackContainerView.addSubview(buttonDivideView)
         setDivideViewLayout()
         photoReviewContainerView.calculateCollectionViewHeight()
+        NotificationCenter.default.addObserver(self, selector: #selector(setNearAttraction(_:)), name: .completeAttraction, object: nil)
     }
     
     private func loadXib() {
@@ -193,6 +210,12 @@ class PlacePopupView: UIView {
         self.addSubview(view)
         self.bringSubviewToFront(view)
         view.isUserInteractionEnabled = true
+    }
+    
+    private func setLabelByLanguage() {
+        subLocationContainerView.locationDescription = "위치".localized
+        photoReviewContainerView.title = "포토 리뷰".localized
+        subLocationContainerView.publicTransportDescription = "대중교통".localized
     }
 }
 
@@ -229,8 +252,12 @@ extension PlacePopupView: UICollectionViewDelegate {
 
 extension PlacePopupView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == placeTagCollectionView { return UICollectionViewFlowLayout.automaticSize }
-        else {
+        if collectionView == placeTagCollectionView {
+            let tempTag = UILabel()
+            tempTag.font = UIFont.systemFont(ofSize: 12)
+            tempTag.text = placeTags[indexPath.row]
+            return CGSize(width: tempTag.intrinsicContentSize.width, height: collectionView.frame.height)
+        } else {
             let horizontalSpacing = self.frame.width / 23.44
             let cellWidth = (collectionView.frame.width - horizontalSpacing*2 - 4*2) / 3
             return CGSize(width: cellWidth, height: cellWidth)
