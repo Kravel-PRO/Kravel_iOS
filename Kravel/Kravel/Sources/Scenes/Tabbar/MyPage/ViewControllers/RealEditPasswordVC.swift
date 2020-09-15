@@ -59,7 +59,7 @@ class RealEditPasswordVC: UIViewController {
     }
     
     @IBAction func complete(_ sender: Any) {
-        
+        requestModifyPassword()
     }
     
     // MARK: - UIViewController viewDidLoad() Override
@@ -104,7 +104,20 @@ class RealEditPasswordVC: UIViewController {
 extension RealEditPasswordVC {
     // MARK: - 비밀번호 수정 API 연결
     private func requestModifyPassword() {
-        NetworkHandler.shared.requestAPI(apiCategory: .changInfo(queryType: <#T##String#>, body: <#T##ParameterAble#>), completion: <#T##(NetworkResult<Codable>) -> Void#>)
+        let changeInfoParameter = ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: "", nickName: "")
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .changInfo(queryType: "password", body: changeInfoParameter)) { result in
+            switch result {
+            case .success(let successData):
+                print(successData)
+            case .requestErr:
+                print("Request Err")
+            case .serverErr:
+                print("Server Err")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
     }
 }
 

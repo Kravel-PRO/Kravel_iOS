@@ -33,10 +33,12 @@ class MyPhotoReviewCell: UICollectionViewCell {
     // MARK: - 포토리뷰 작성일 라벨 설정
     @IBOutlet weak var dateLabel: UILabel!
     
-    var date: Date? {
+    var date: String? {
         didSet {
-            dateLabel.text = "\(date)"
-            dateLabel.sizeToFit()
+            if let date = self.date {
+                dateLabel.text = date
+                dateLabel.sizeToFit()
+            }
         }
     }
     

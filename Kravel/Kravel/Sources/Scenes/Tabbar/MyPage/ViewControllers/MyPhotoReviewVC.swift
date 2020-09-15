@@ -20,7 +20,7 @@ class MyPhotoReviewVC: UIViewController {
     }
     
     // MARK: - 포토리뷰 데이터 설정
-    var photoReviewDatas: [String] = ["호텔 세느장", "그 밖에 더 있다", "여긴 어딜까?"]
+    var photoReviewData: [ReviewInform] = []
     
     // MARK: - 포토리뷰 없을 때, 화면 설정
     var noPhotoReviewView: UIView = {
@@ -83,7 +83,7 @@ class MyPhotoReviewVC: UIViewController {
     }
     
     private func isEmptyPhotoReview() -> Bool {
-        if photoReviewDatas.count == 0 {
+        if photoReviewData.count == 0 {
             noPhotoReviewView.isHidden = false
             photoReviewCollectionView.isHidden = true
             return true
@@ -98,12 +98,13 @@ class MyPhotoReviewVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNav()
+        requestMyPhotoReview()
     }
     
     private func setNav() {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.topItem?.title = ""
-        self.navigationItem.title = "내 포토리뷰"
+        self.navigationItem.title = "내".localized + " " + "포토 리뷰".localized
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18), .foregroundColor: UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1.0)]
@@ -116,15 +117,48 @@ class MyPhotoReviewVC: UIViewController {
     }
 }
 
+extension MyPhotoReviewVC {
+    // MARK: - 내 포토리뷰 요청 API
+    private func requestMyPhotoReview() {
+        let getReviewParameter = GetReviewParameter(page: 0, size: nil, sort: nil)
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .getMyPhotoReview(getReviewParameter)) { result in
+            switch result {
+            case .success(let reviewData):
+                guard let reviewData = reviewData as? APISortableResponseData<ReviewInform> else { return }
+                self.photoReviewData = reviewData.content
+                DispatchQueue.main.async {
+                    self.isEmptyPhotoReview()
+                    self.photoReviewCollectionView.reloadData()
+                }
+            case .requestErr:
+                print("request Err")
+            case .serverErr:
+                print("server Err")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                networkFailPopupVC.completionHandler = { [weak self] in
+                    self?.navigationController?.popViewController(animated: true)
+                }
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
+    }
+}
+
 extension MyPhotoReviewVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photoReviewDatas.count
+        return photoReviewData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let myPhotoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPhotoReviewCell.identifier, for: indexPath) as? MyPhotoReviewCell else { return UICollectionViewCell() }
-        myPhotoReviewCell.locationName = photoReviewDatas[indexPath.row]
-        myPhotoReviewCell.likeCount = 99
+        
+        myPhotoReviewCell.photoReviewImageView.setImage(with: photoReviewData[indexPath.row].imageUrl ?? "")
+        myPhotoReviewCell.locationName = photoReviewData[indexPath.row].place?.title
+        myPhotoReviewCell.likeCount = photoReviewData[indexPath.row].likeCount
+        myPhotoReviewCell.date = photoReviewData[indexPath.row].createdDate
         return myPhotoReviewCell
     }
 }

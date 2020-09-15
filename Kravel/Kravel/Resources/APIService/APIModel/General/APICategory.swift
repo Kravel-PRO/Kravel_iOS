@@ -33,6 +33,7 @@ enum APICategory<P: ParameterAble> {
     case getMediaOfID(P)
     case getReviewOfCeleb(P, id: Int)
     case getReviewOfMedia(P, id: Int)
+    case getMyPhotoReview(P)
     case changInfo(queryType: String, body: P)
     
     func makeURL() -> String {
@@ -74,6 +75,8 @@ enum APICategory<P: ParameterAble> {
         case .changInfo(let query, _):
             APICostants.infoTypeQuery = query
             return APICostants.changeInfo
+        case .getMyPhotoReview:
+            return APICostants.getMyPhotoReview
         }
     }
     
@@ -291,6 +294,23 @@ enum APICategory<P: ParameterAble> {
             parameters.updateValue(changeInfoBodyParameter.nickName, forKey: "nickName")
             parameters.updateValue(changeInfoBodyParameter.loginPw, forKey: "loginPw")
             parameters.updateValue(changeInfoBodyParameter.modifyLoginPw, forKey: "modifyLoginPw")
+            return parameters
+        case .getMyPhotoReview(let reviewParameter):
+            var parameters: [String: Any] = [:]
+            guard let reviewParameter = reviewParameter as? GetReviewParameter else { return nil }
+            
+            if let page = reviewParameter.page {
+                parameters.updateValue(page, forKey: "page")
+            }
+            
+            if let size = reviewParameter.size {
+                parameters.updateValue(size, forKey: "size")
+            }
+            
+            if let sort = reviewParameter.sort {
+                parameters.updateValue(sort, forKey: "sort")
+            }
+    
             return parameters
         }
     }
