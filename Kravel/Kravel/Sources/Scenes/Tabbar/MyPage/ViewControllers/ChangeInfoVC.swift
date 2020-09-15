@@ -11,17 +11,10 @@ import UIKit
 class ChangeInfoVC: UIViewController {
     static let identifier = "ChangeInfoVC"
     
+    var selectedSex: String?
+    
     // MARK: - Navigation Bar 설정
     var naviTitle: String?
-    
-    private func setNav() {
-        self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.topItem?.title = ""
-        self.navigationItem.title = naviTitle
-        self.navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18), .foregroundColor: UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1.0)]
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-    }
     
     // MARK: - 닉네임 수정 화면 설정
     @IBOutlet weak var nicknameBackView: UIView! {
@@ -55,6 +48,7 @@ class ChangeInfoVC: UIViewController {
     }
     
     @IBAction func completeEdit(_ sender: Any) {
+        requestChangInfo()
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -68,6 +62,45 @@ class ChangeInfoVC: UIViewController {
         super.viewWillAppear(animated)
         setNav()
     }
+    
+    private func setNav() {
+        let backImage = UIImage(named: ImageKey.back)
+        self.navigationController?.navigationBar.backIndicatorImage = backImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationItem.title = naviTitle
+        self.navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18), .foregroundColor: UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1.0)]
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+    }
+}
+
+extension ChangeInfoVC {
+    // MARK: - 정보 수정 API 연결
+    private func requestChangInfo() {
+        guard let selectedSex = self.selectedSex,
+            let modifiedNickName = self.nicknameTextField.text else { return }
+        let changInfoBodyParameter = ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: selectedSex, nickName: modifiedNickName)
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .changInfo(queryType: "nickNameAndGender", body: changInfoBodyParameter)) { result in
+            switch result {
+            case .success(let changeInfoResponse):
+                guard let changeInfoResponse = changeInfoResponse as? ChangeInfoResponseData else { return }
+                if let nickName = changeInfoResponse.nickName { UserDefaults.standard.set(nickName, forKey: UserDefaultKey.nickName) }
+                print(changeInfoResponse)
+                self.navigationController?.popViewController(animated: true)
+            case .requestErr(_):
+                print("tlfvo")
+            case .serverErr:
+                print("tlfvo")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
+    }
 }
 
 extension ChangeInfoVC {
@@ -80,9 +113,11 @@ extension ChangeInfoVC: XibButtonDelegate {
     func clickButton(of sex: Sex) {
         switch sex {
         case .man:
+            selectedSex = "MAN"
             sexButtons[0].setSelectedState(by: true)
             sexButtons[1].setSelectedState(by: false)
         case .woman:
+            selectedSex = "WOMAN"
             sexButtons[0].setSelectedState(by: false)
             sexButtons[1].setSelectedState(by: true)
         }

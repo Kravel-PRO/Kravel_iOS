@@ -14,4 +14,7 @@ struct UserDefaultKey {
     
     // 언어 설정
     static let language = "language"
+    
+    // 닉네임 설정
+    static let nickName = "nickName"
 }

@@ -36,7 +36,7 @@ class NetworkHandler {
         case .getMediaOfID: requestMediaOfID(apiURL, headers, parameters, completion)
         case .getReviewOfCeleb: requestGetReview(apiURL, headers, parameters, completion)
         case .getReviewOfMedia: requestGetReview(apiURL, headers, parameters, completion)
-        case .changInfo: print("Change Info")
+        case .changInfo: requestChangeInfo(apiURL, headers, parameters, completion)
         }
     }
     
@@ -382,6 +382,24 @@ class NetworkHandler {
                     if statusCode == 200 {
                         completion(.success(detailMediaResult.data?.result))
                     }
+                case .failure(let error):
+                    print(error)
+                    completion(.networkFail)
+                }
+        }
+    }
+    
+    private func requestChangeInfo(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
+        guard let url = try? url.asURL() else { return }
+        
+        AF.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .validate(statusCode: 200...500)
+            .responseDecodable(of: APIResponseData<APICantSortableDataResult<ChangeInfoResponseData>, APIError>.self) { response in
+                switch response.result {
+                case .success(let successData):
+                    guard let statusCode = response.response?.statusCode else { return }
+                    if statusCode == 200 { completion(.success(successData.data?.result)) }
+                    else { completion(.serverErr) }
                 case .failure(let error):
                     print(error)
                     completion(.networkFail)

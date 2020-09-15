@@ -9,6 +9,8 @@
 import Foundation
 
 struct ChangeInfoBodyParameter: ParameterAble {
+    let loginPw: String
+    let modifyLoginPw: String
     let gender: String
     let nickName: String
 }
