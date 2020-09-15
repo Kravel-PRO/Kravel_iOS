@@ -17,11 +17,11 @@ enum MyPageMenu: Int, CaseIterable {
     
     func getMenuLabel() -> String {
         switch self {
-        case .editMyInform: return "내 정보 수정"
-        case .editMyPW: return "비밀번호 수정"
-        case .setLanguage: return "언어 설정"
-        case .report: return "제보하기"
-        case .logout: return "로그아웃"
+        case .editMyInform: return "내 정보 수정".localized
+        case .editMyPW: return "비밀번호 수정".localized
+        case .setLanguage: return "언어 설정".localized
+        case .report: return "제보하기".localized
+        case .logout: return "로그아웃".localized
         }
     }
     

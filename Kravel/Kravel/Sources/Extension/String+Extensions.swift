@@ -110,6 +110,21 @@ struct CustomLocalize {
         case gallery = "갤러리"
         case sample = "예시"
         
+        // MARK: - 네트워크 연결 POPUP
+        case networkFail = "네트워크 연결이 끊겼습니다."
+        case networkFailMessage = "네트워크 상태를 확인해주세요.\n문제가 계속되면 잠시 후 다시 시도해주세요."
+        case ok = "확인"
+        
+        // MARK: - 마이페이지
+        case my = "내"
+        case scrap = "스크랩"
+        
+        case modifyInfo = "내 정보 수정"
+        case modifyPw = "비밀번호 수정"
+        case setLanguage = "언어 설정"
+        case report = "제보하기"
+        case logout = "로그아웃"
+        
         func localize() -> String {
             guard let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return self.rawValue }
             switch self {
@@ -245,6 +260,36 @@ struct CustomLocalize {
             case .sample:
                 if language == "KOR" { return "예시" }
                 else { return "Sample" }
+            case .networkFail:
+                if language == "KOR" { return "네트워크 연결이 끊겼습니다." }
+                else { return "The network connection has been lost." }
+            case .networkFailMessage:
+                if language == "KOR" { return "네트워크 상태를 확인해주세요.\n문제가 계속되면 잠시 후 다시 시도해주세요." }
+                else { return "Please check the network status.\nIf the problem persists, please try again later." }
+            case .ok:
+                if language == "KOR" { return "확인" }
+                else { return "OK" }
+            case .my:
+                if language == "KOR" { return "내" }
+                else { return "My" }
+            case .scrap:
+                if language == "KOR" { return "스크랩" }
+                else { return "Scrap" }
+            case .modifyInfo:
+                if language == "KOR" { return "내 정보 수정" }
+                else { return "Modify my info" }
+            case .modifyPw:
+                if language == "KOR" { return "비밀번호 수정" }
+                else { return "Modify Password" }
+            case .setLanguage:
+                if language == "KOR" { return "언어 설정" }
+                else { return "Language setting" }
+            case .report:
+                if language == "KOR" { return "제보하기" }
+                else { return "Report" }
+            case .logout:
+                if language == "KOR" { return "로그아웃" }
+                else { return "Log out" }
             }
         }
     }

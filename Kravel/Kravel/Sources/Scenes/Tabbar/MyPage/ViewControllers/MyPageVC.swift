@@ -11,36 +11,12 @@ import UIKit
 class MyPageVC: UIViewController {
     // MARK: - Name Label 초기 설정
     @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var nameLabel: UILabel!
     
-    @IBOutlet weak var nameLabel: UILabel! {
-        // 임시
-        didSet {
-            nameLabel.text =
-            """
-            뭔가 OOO님 어쩌구 하는
-            멘트가 하나 있으면 좋겠다.
-            """
-        }
-    }
+    var name: String? = "여기"
     
-    @IBOutlet weak var nameBottomConstraint: NSLayoutConstraint!
-    
-    var name: String? = "펭수" {
-        didSet {
-            if let name = self.name {
-                nameLabel.text =
-                """
-                뭔가 \(name)님 어쩌구 하는
-                멘트가 하나 있으면 좋겠다.
-                """
-                nameLabel.sizeToFit()
-            }
-        }
-    }
-    
-    private func setNameLayout() {
-        nameBottomConstraint.constant = backView.frame.height / 5.41
-    }
+    @IBOutlet weak var myPhotoReviewLabel: UILabel!
+    @IBOutlet weak var myScrapLabel: UILabel!
     
     // MARK: - 내 포토 리뷰 / 스크랩 뷰 설정
     @IBAction func goMyPhotoReview(_ sender: Any) {
@@ -60,21 +36,31 @@ class MyPageVC: UIViewController {
         didSet {
             menuTableView.dataSource = self
             menuTableView.delegate = self
-            menuTableView.separatorInset = .zero
+            menuTableView.separatorInset = UIEdgeInsets(top: 0, left: UIScreen.main.bounds.width, bottom: 0, right: 0)
         }
-    }
-    
-    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
-    
-    private func setTableViewHeightConstraint() {
-        tableViewHeightConstraint.constant = menuTableView.frame.width / 6.69 * CGFloat(MyPageMenu.allCases.count)
     }
     
     // MARK: - UIViewController viewDidLoad() Override 설정
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        setNameLayout()
+        setLabelByLanguage()
+    }
+    
+    private func setLabelByLanguage() {
+        guard let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String,
+            let name = self.name else { return }
+        if language == "KOR" {
+            nameLabel.text = "\(name)님의 여행을 함께해요!\nKravel과 당신의 여행을 특별하게 \n만들어보세요."
+        } else {
+            nameLabel.text = "Let's go on \(name)'s trip together!\nMake your trip special\nwith Kravel."
+        }
+        
+        myPhotoReviewLabel.text = "내".localized + " " + "포토 리뷰".localized
+        myPhotoReviewLabel.sizeToFit()
+        
+        myScrapLabel.text = "스크랩".localized
+        myScrapLabel.sizeToFit()
     }
     
     // MARK: - UIViewController viewWillAppear() Override 설정
@@ -96,7 +82,6 @@ class MyPageVC: UIViewController {
     // MARK: - UIViewController viewDidLayoutSubviews() Override 설정
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        setTableViewHeightConstraint()
     }
 }
 
@@ -108,6 +93,7 @@ extension MyPageVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let myPageCell = tableView.dequeueReusableCell(withIdentifier: "MyPageCell") as? MyPageCell else { return UITableViewCell() }
         myPageCell.menuName = MyPageMenu(rawValue: indexPath.row)?.getMenuLabel()
+        myPageCell.separatorInset = .zero
         
         guard let menuImageName = MyPageMenu(rawValue: indexPath.row)?.getImageName() else { return UITableViewCell() }
         myPageCell.menuImage = UIImage(named: menuImageName)
@@ -117,7 +103,7 @@ extension MyPageVC: UITableViewDataSource {
 
 extension MyPageVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.width / 6.69
+        return tableView.frame.height / 5
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

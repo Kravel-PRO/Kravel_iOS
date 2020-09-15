@@ -11,6 +11,8 @@ import UIKit
 class NetworkFailPopupVC: UIViewController {
     static let identifier = "NetworkFailPopupVC"
     
+    var completionHandler: (() -> Void)?
+    
     // MARK: - 팝업 배경 뷰 설정
     @IBOutlet weak var popupView: UIView! {
         didSet {
@@ -30,21 +32,17 @@ class NetworkFailPopupVC: UIViewController {
     }
     
     // MARK: - 팝업 Title Label 설정
-    @IBOutlet weak var popupTitleLabel: UILabel!
-    
-    var popupTitle: String? {
+    @IBOutlet weak var popupTitleLabel: UILabel! {
         didSet {
-            popupTitleLabel.text = popupTitle
+            popupTitleLabel.text = "네트워크 연결이 끊겼습니다.".localized
             popupTitleLabel.sizeToFit()
         }
     }
     
     // MARK: - 팝업 Message Label 설정
-    @IBOutlet weak var popupMessageLabel: UILabel!
-    
-    var popupMessage: String? {
+    @IBOutlet weak var popupMessageLabel: UILabel! {
         didSet {
-            popupMessageLabel.text = popupMessage
+            popupMessageLabel.text = "네트워크 상태를 확인해주세요.\n문제가 계속되면 잠시 후 다시 시도해주세요.".localized
             popupMessageLabel.sizeToFit()
         }
     }
@@ -53,6 +51,7 @@ class NetworkFailPopupVC: UIViewController {
     @IBOutlet weak var completeButton: CustomButton! {
         didSet {
             completeButton.locationButton = .logoutPopupView
+            completeButton.setTitle("확인".localized, for: .normal)
         }
     }
     
@@ -63,6 +62,7 @@ class NetworkFailPopupVC: UIViewController {
     
     @IBAction func complete(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
+        completionHandler?()
     }
     
     // MARK: - UIViewController viewDidLoad 설정
