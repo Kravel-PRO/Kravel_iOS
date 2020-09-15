@@ -154,23 +154,23 @@ extension MyScrapVC: UICollectionViewDataSource {
         guard let myScrapCell = collectionView.dequeueReusableCell(withReuseIdentifier: MyScrapCell.identifier, for: indexPath) as? MyScrapCell else { return UICollectionViewCell() }
         myScrapCell.scrapImageView.setImage(with: scrapData[indexPath.row].imageUrl ?? "")
         myScrapCell.scrapText = scrapData[indexPath.row].title
-        if let tags = scrapData[indexPath.row].tags?.split(separator: " ").map(String.init) {
-            myScrapCell.tags = tags
-        } else {
-            myScrapCell.tags = []
-        }
         return myScrapCell
     }
 }
 
 extension MyScrapVC: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let placeDetailVC = UIStoryboard(name: "LocationDetail", bundle: nil).instantiateViewController(withIdentifier: LocationDetailVC.identifier) as? LocationDetailVC else { return }
+        placeDetailVC.placeID = scrapData[indexPath.row].placeId
+        self.navigationController?.pushViewController(placeDetailVC, animated: true)
+        collectionView.deselectItem(at: indexPath, animated: false)
+    }
 }
 
 extension MyScrapVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.width - 8 - 16*2) / 2
-        let height = width * 0.92
+        let height = width * 0.81
         return CGSize(width: width, height: height)
     }
     

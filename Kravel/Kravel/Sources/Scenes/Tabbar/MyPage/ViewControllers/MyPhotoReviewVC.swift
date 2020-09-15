@@ -128,7 +128,7 @@ extension MyPhotoReviewVC {
                 guard let reviewData = reviewData as? APISortableResponseData<ReviewInform> else { return }
                 self.photoReviewData = reviewData.content
                 DispatchQueue.main.async {
-                    self.isEmptyPhotoReview()
+                    if self.isEmptyPhotoReview() { print("Empty") }
                     self.photoReviewCollectionView.reloadData()
                 }
             case .requestErr:

@@ -45,6 +45,7 @@ class PhotoReviewUploadVC: UIViewController {
         selectedImage.removeAll()
         photoImageView.image = nil
         pictureDeleteButton.isHidden = true
+        completeButton.isUserInteractionEnabled = false
     }
     
     // MARK: - 사진 업로드 버튼
@@ -63,6 +64,7 @@ class PhotoReviewUploadVC: UIViewController {
     @IBOutlet weak var completeButton: CustomButton! {
         didSet {
             completeButton.locationButton = .signupView
+            completeButton.isUserInteractionEnabled = false
         }
     }
     
@@ -78,7 +80,8 @@ class PhotoReviewUploadVC: UIViewController {
                 if uploadResult == 200 {
                     DispatchQueue.main.async {
                         self.navigationController?.popViewController(animated: true)
-                    }}
+                    }
+                }
             case .requestErr: break
             case .serverErr:
                 print("Server Error")
@@ -119,6 +122,7 @@ extension PhotoReviewUploadVC: UIImagePickerControllerDelegate, UINavigationCont
             selectedImage.updateValue(image, forKey: ImageDictionaryKey.img.rawValue)
             photoImageView.image = image
             pictureDeleteButton.isHidden = false
+            completeButton.isUserInteractionEnabled = true
             self.dismiss(animated: true, completion: nil)
         }
     }
