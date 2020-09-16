@@ -145,6 +145,9 @@ struct CustomLocalize {
         case pleaseUploadPicture = "사진을 업로드 해주세요."
         case uploadPicture = "업로드 하기"
         
+        // MARK: - 미디어, 셀럽 디테일 화면
+        case popularPhotoReview = "인기 많은"
+        
         func localize() -> String {
             guard let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return self.rawValue }
             switch self {
@@ -346,6 +349,9 @@ struct CustomLocalize {
             case .uploadPicture:
                 if language == "KOR" { return "업로드 하기" }
                 else { return "Upload" }
+            case .popularPhotoReview:
+                if language == "KOR" { return "인기 많은" }
+                else { return "Popular" }
             }
         }
     }

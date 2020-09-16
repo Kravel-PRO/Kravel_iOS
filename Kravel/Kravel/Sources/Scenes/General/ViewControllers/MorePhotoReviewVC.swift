@@ -49,7 +49,7 @@ class MorePhotoReviewVC: UIViewController {
 extension MorePhotoReviewVC {
     // MARK: - 포토리뷰 API 통신
     private func requestPhotoReview() {
-        let getReviewParameter = GetReviewParameter(page: 0, size: 100, sort: "createdDate,desc")
+        let getReviewParameter = GetReviewParameter(page: 0, size: 20, sort: "createdDate,desc")
         NetworkHandler.shared.requestAPI(apiCategory: .getReview(getReviewParameter)) { result in
             switch result {
             case .success(let getReviewResult):

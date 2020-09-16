@@ -38,11 +38,11 @@ class ContentDetailVC: UIViewController {
         case .media:
             guard let mediaDetailDTO = categoryDetailDTO as? MediaDetailDTO else { return }
             // 썸네일 이미지 설정
-            thumbnail_imageView.setImage(with: mediaDetailDTO.imageUrl ?? "")
+            thumbnail_imageView.setImage(with: mediaDetailDTO.media.imageUrl ?? "")
             
             // Label 설정 -> 높이 Constraint 계산해서 적용
-            let introduceText = "\(mediaDetailDTO.title)\n촬영지가 어딜까요?"
-            introduceLabel.attributedText = createAttributeString(of: introduceText, highlightPart: mediaDetailDTO.title)
+            let introduceText = "\(mediaDetailDTO.media.title)\n촬영지가 어딜까요?"
+            introduceLabel.attributedText = createAttributeString(of: introduceText, highlightPart: mediaDetailDTO.media.title)
             setLabelHeight()
             
             // 관련 장소 설정
@@ -112,19 +112,19 @@ class ContentDetailVC: UIViewController {
     private func setPlaceCVHeight() {
         if places.count == 0 {
             placeCV_height_Constarint.constant = 0
-            moreButtonConatinerView.isHidden = true
+            moreButtonStackView.arrangedSubviews[1].isHidden = true
         } else if places.count <= 2 {
             placeCV_height_Constarint.constant = place_Cell_Height
-            moreButtonConatinerView.isHidden = true
+            moreButtonStackView.arrangedSubviews[1].isHidden = true
         } else if places.count <= 4 {
             placeCV_height_Constarint.constant = place_Cell_Height * 2 + 4
-            moreButtonConatinerView.isHidden = true
+            moreButtonStackView.arrangedSubviews[1].isHidden = true
         } else if places.count <= 6 {
             placeCV_height_Constarint.constant = place_Cell_Height * 3 + 4 * 2
-            moreButtonConatinerView.isHidden = true
+            moreButtonStackView.arrangedSubviews[1].isHidden = true
         } else {
             placeCV_height_Constarint.constant = place_Cell_Height * 3 + 4 * 2
-            moreButtonConatinerView.isHidden = false
+            moreButtonStackView.arrangedSubviews[1].isHidden = false
         }
         
         UIView.animate(withDuration: 0.3) {
@@ -138,7 +138,12 @@ class ContentDetailVC: UIViewController {
             moreButton.layer.borderColor = UIColor.veryLightPink.cgColor
             moreButton.layer.borderWidth = 1
             moreButton.layer.cornerRadius = moreButton.frame.width / 15
-            moreButton.isHidden = true
+        }
+    }
+    
+    @IBOutlet weak var moreButtonStackView: UIStackView! {
+        didSet {
+            moreButtonStackView.arrangedSubviews[1].isHidden = true
         }
     }
     
@@ -200,6 +205,15 @@ class ContentDetailVC: UIViewController {
         // Do any additional setup after loading the view.
         setBackButton()
         requestData()
+        setLabelByLanguage()
+    }
+    
+    private func setLabelByLanguage() {
+        let attributePhotoReview = ("인기 많은".localized + " " + "포토 리뷰".localized).makeAttributedText([.font: UIFont.systemFont(ofSize: 18), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)])
+        attributePhotoReview.addAttributes([.font: UIFont.boldSystemFont(ofSize: 18)], range: ("인기 많은".localized + " " + "포토 리뷰".localized as NSString).range(of: "포토 리뷰".localized))
+        photoReviewView.attributeTitle = attributePhotoReview
+        
+        moreButton.setTitle("더 보기".localized, for: .normal)
     }
     
     // MARK: - UIViewController viewWillApeear 설정
@@ -290,13 +304,15 @@ extension ContentDetailVC {
     
     // MARK: - 유명인 관련 리뷰 데이터 API 요청
     private func requestCelebPhotoReview(id: Int) {
-        let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "reviewLikes,desc")
+//        let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "reviewLikes,desc")
+        let getReviewParameter = GetReviewParameter(page: nil, size: nil, sort: nil)
         NetworkHandler.shared.requestAPI(apiCategory: .getReviewOfCeleb(getReviewParameter, id: id), completion: photoReviewHandler)
     }
     
     // MARK: - 미디어 관련 리뷰 데이터 API 요청
     private func requestMediaPhotoReview(id: Int) {
-        let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "reviewLikes,desc")
+//        let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "reviewLikes,desc")
+        let getReviewParameter = GetReviewParameter(page: nil, size: nil, sort: nil)
         NetworkHandler.shared.requestAPI(apiCategory: .getReviewOfMedia(getReviewParameter, id: id), completion: photoReviewHandler)
     }
 }
@@ -322,7 +338,6 @@ extension ContentDetailVC: UICollectionViewDataSource {
     
     private func createPhotoReviewCell(of collectionView: UICollectionView, at indexPath: IndexPath) -> UICollectionViewCell {
         guard let photoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoReviewCell.identifier, for: indexPath) as? PhotoReviewCell else { return UICollectionViewCell() }
-        print(photoReviewData)
         photoReviewCell.photoImageView.setImage(with: photoReviewData[indexPath.row].imageUrl ?? "")
         if indexPath.row == 5 { photoReviewCell.addMoreView() }
         return photoReviewCell

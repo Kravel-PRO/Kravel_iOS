@@ -15,9 +15,10 @@ struct ReviewInform: Codable {
     var like: Bool?
     let createdDate: String?
     let place: PlaceDataOfReview?
+    let modifiedDate: String?
     
     enum CodingKeys: String, CodingKey {
-        case reviewId, imageUrl, likeCount, like, createdDate, place
+        case reviewId, imageUrl, likeCount, like, createdDate, place, modifiedDate
     }
     
     init(from decoder: Decoder) throws {
@@ -28,5 +29,6 @@ struct ReviewInform: Codable {
         like = (try? values.decode(Bool.self, forKey: .like)) ?? nil
         createdDate = (try? values.decode(String.self, forKey: .createdDate)) ?? nil
         place = (try? values.decode(PlaceDataOfReview.self, forKey: .place)) ?? nil
+        modifiedDate = (try? values.decode(String.self, forKey: .modifiedDate)) ?? nil
     }
 }

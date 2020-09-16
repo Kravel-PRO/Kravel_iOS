@@ -65,7 +65,6 @@ extension MovieChildVC: UICollectionViewDataSource {
         searchCell.profile = mediaDTO[indexPath.row].title
         searchCell.year = "\(mediaDTO[indexPath.row].year)"
         searchCell.profileImageView.setImage(with: mediaDTO[indexPath.row].imageUrl ?? "")
-        // FIXME: - 받아오는 이미지 설정하는 코드 넣기
         return searchCell
     }
 }

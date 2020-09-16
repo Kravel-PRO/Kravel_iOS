@@ -353,6 +353,7 @@
                         <outlet property="introduceLabelHeightConstraint" destination="COo-L5-xCO" id="pPy-Yd-BSK"/>
                         <outlet property="moreButton" destination="69Z-Jp-Uh9" id="DS3-RJ-d7d"/>
                         <outlet property="moreButtonConatinerView" destination="OdT-Mi-cGh" id="6g0-qs-oJJ"/>
+                        <outlet property="moreButtonStackView" destination="q8i-c1-9Bc" id="vjs-wu-Qn0"/>
                         <outlet property="photoReviewView" destination="gEi-u8-pDf" id="60B-o1-zUP"/>
                         <outlet property="photoReviewViewHeightConstraint" destination="6aN-iI-HSz" id="jHf-rE-5yk"/>
                         <outlet property="placeCV_height_Constarint" destination="ccO-c5-Umi" id="Afz-j6-dQ1"/>

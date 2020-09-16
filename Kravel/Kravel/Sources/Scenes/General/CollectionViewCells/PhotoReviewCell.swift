@@ -69,7 +69,7 @@ class PhotoReviewCell: UICollectionViewCell {
         moreLabel.translatesAutoresizingMaskIntoConstraints = false
         moreLabel.textColor = .white
         moreLabel.font = UIFont.systemFont(ofSize: 15)
-        moreLabel.text = "더 보기"
+        moreLabel.text = "더 보기".localized
         moreLabel.sizeToFit()
         moreView.addSubview(moreLabel)
         NSLayoutConstraint.activate([

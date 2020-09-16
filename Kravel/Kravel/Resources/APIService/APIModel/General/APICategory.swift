@@ -69,6 +69,7 @@ enum APICategory<P: ParameterAble> {
             return APICostants.getDetailMedia
         case .getReviewOfCeleb(_, let id):
             APICostants.celebID = "\(id)"
+            print(APICostants.getReviewOfCeleb)
             return APICostants.getReviewOfCeleb
         case .getReviewOfMedia(_, let id):
             APICostants.mediaID = "\(id)"

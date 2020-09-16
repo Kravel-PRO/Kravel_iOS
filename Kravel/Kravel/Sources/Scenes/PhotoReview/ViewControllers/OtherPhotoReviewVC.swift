@@ -117,7 +117,7 @@ extension OtherPhotoReviewVC {
 extension OtherPhotoReviewVC {
     // MARK: - 장소의 포토리뷰 가져오기 API 요청
     private func requestPlacePhotoReview(of placeID: Int) {
-        let getPlaceReviewParameter = GetReviewOfPlaceParameter(latitude: nil, longitude: nil, like_count: nil)
+        let getPlaceReviewParameter = GetReviewParameter(page: 0, size: 100, sort: "createdDate,desc")
         APICostants.placeID = "\(placeID)"
         NetworkHandler.shared.requestAPI(apiCategory: .getPlaceReview(getPlaceReviewParameter), completion: photoReviewHandler)
     }

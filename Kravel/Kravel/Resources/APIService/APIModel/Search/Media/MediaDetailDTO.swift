@@ -9,11 +9,14 @@
 import Foundation
 
 struct MediaDetailDTO: Codable, CategoryAble {
+    let media: MediaSimpleDTO
+    let places: [PlaceContentInform]?
+}
+
+struct MediaSimpleDTO: Codable {
     let mediaId: Int
     let title: String
     let imageUrl: String?
-    // FIXME: 여기는 뭐가 들어가는거지..?
-    let contents: [String]?
-    let places: [PlaceContentInform]?
+    let contents: String?
     let year: String
 }

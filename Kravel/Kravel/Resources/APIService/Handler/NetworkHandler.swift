@@ -182,10 +182,12 @@ class NetworkHandler {
                 switch response.result {
                 case .success(let getReviewResponseData):
                     guard let statusCode = response.response?.statusCode else { return }
+                    print(statusCode)
                     if statusCode == 200 {
                         guard let getReviewResult = getReviewResponseData.data?.result else { return }
                         completion(.success(getReviewResult))
                     } else {
+                        print(getReviewResponseData)
                         completion(.requestErr("실패"))
                     }
                 case .failure(let error):
@@ -315,12 +317,12 @@ class NetworkHandler {
         
         AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
             .validate(statusCode: 200...500)
-            .responseDecodable(of: APIResponseData<APICantSortableDataResult<[MediaDTO]>, APIError>.self) { response in
+            .responseDecodable(of: APIResponseData<APIDataResult<MediaDTO>, APIError>.self) { response in
                 switch response.result {
                 case .success(let mediaResult):
                     guard let statusCode = response.response?.statusCode else { return }
                     if statusCode == 200 {
-                        completion(.success(mediaResult.data?.result))
+                        completion(.success(mediaResult.data?.result?.content))
                     } else {
                         completion(.serverErr)
                     }

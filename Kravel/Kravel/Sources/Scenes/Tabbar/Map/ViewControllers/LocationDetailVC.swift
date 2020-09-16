@@ -386,7 +386,6 @@ extension LocationDetailVC: UICollectionViewDelegate {
         if indexPath.row != 5 { otherPhotoReviewVC.selectedPhotoReviewID = self.photoReviewData[indexPath.row].reviewId }
         
         self.navigationController?.pushViewController(otherPhotoReviewVC, animated: true)
-        
     }
 }
 
