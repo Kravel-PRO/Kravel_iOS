@@ -15,6 +15,7 @@ class CameraVC: UIViewController {
     
     // MARK: - UIImagePickerController 설정
     private var picker: UIImagePickerController?
+    private var photoContainerView: UIView?
     
     private func setPickerController() {
         picker = UIImagePickerController()
@@ -382,7 +383,7 @@ class CameraVC: UIViewController {
     }
 }
 
-// MARK: -
+// MARK: - 팝업 뷰 보이게 세팅
 extension CameraVC {
     private func presentPopupVC(by authorType: String) {
         guard let authorizationVC = UIStoryboard(name: "AuthorizationPopup", bundle: nil).instantiateViewController(withIdentifier: AuthorizationPopupVC.identifier) as? AuthorizationPopupVC else { return }
@@ -442,8 +443,60 @@ extension CameraVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage,
             let url = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-            print(image)
-            print(url)
+            self.dismiss(animated: true) {
+                self.presentPhotoView(image)
+                print(url)
+            }
         }
+    }
+    
+    private func presentPhotoView(_ image: UIImage) {
+        photoContainerView = UIView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 0, height: 0))
+        guard let photoContainerView = self.photoContainerView else { return }
+        photoContainerView.clipsToBounds = true
+        photoContainerView.translatesAutoresizingMaskIntoConstraints = false
+        photoContainerView.backgroundColor = .black
+        
+        let cancelButton = UIButton()
+        cancelButton.setImage(UIImage(named: ImageKey.btnCancelWhite), for: .normal)
+        cancelButton.addTarget(self, action: #selector(dismissPhotoView(_:)), for: .touchUpInside)
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        let photoImageView = UIImageView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: self.view.frame.width, height: self.view.frame.width))
+        photoImageView.clipsToBounds = true
+        photoImageView.image = image
+        photoImageView.contentMode = .scaleAspectFill
+        photoImageView.translatesAutoresizingMaskIntoConstraints = false
+
+        self.view.addSubview(photoContainerView)
+        photoContainerView.addSubview(cancelButton)
+        photoContainerView.addSubview(photoImageView)
+        
+        NSLayoutConstraint.activate([
+            photoContainerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            photoContainerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            photoContainerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            photoContainerView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            cancelButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            cancelButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            cancelButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.1),
+            cancelButton.heightAnchor.constraint(equalTo: cancelButton.widthAnchor, multiplier: 1)
+        ])
+        
+        UIView.animate(withDuration: 0.2) {
+            self.view.layoutIfNeeded()
+        }
+        
+        NSLayoutConstraint.activate([
+            photoImageView.centerXAnchor.constraint(equalTo: photoContainerView.centerXAnchor),
+            photoImageView.centerYAnchor.constraint(equalTo: photoContainerView.centerYAnchor),
+            photoImageView.leadingAnchor.constraint(equalTo: photoContainerView.leadingAnchor),
+            photoImageView.trailingAnchor.constraint(equalTo: photoContainerView.trailingAnchor),
+            photoImageView.heightAnchor.constraint(equalTo: photoContainerView.widthAnchor)
+        ])
+    }
+    
+    @objc func dismissPhotoView(_ sender: Any) {
+        self.photoContainerView?.removeFromSuperview()
     }
 }
