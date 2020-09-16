@@ -73,6 +73,7 @@ class ChangeInfoVC: UIViewController {
         sexLabel.sizeToFit()
         
         completeButton.setTitle("수정 완료".localized, for: .normal)
+        nicknameTextField.placeholder = "닉네임을 입력해주세요.".localized
     }
     
     

@@ -287,6 +287,7 @@ class CameraVC: UIViewController {
     // MARK: - 샘플 사진 보여주는 ImageView 설정
     let samepleImageButton: UIButton = {
         let sampleImageButton = UIButton()
+        sampleImageButton.isHidden = true
         // FIXME: 임시로 지정해서 확인
         sampleImageButton.setImage(UIImage(named: ImageKey.icAccessTiger), for: .normal)
         sampleImageButton.translatesAutoresizingMaskIntoConstraints = false
@@ -318,6 +319,8 @@ class CameraVC: UIViewController {
     // MARK: - 샘플 사진 알려주는 설명 Label 설정
     let sampleDescriptionLabel: UILabel = {
         let sampleDescriptionLabel = UILabel()
+        sampleDescriptionLabel.isHidden = true
+        // FIXME: - 고치기
         sampleDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         sampleDescriptionLabel.font = UIFont.systemFont(ofSize: 12)
         sampleDescriptionLabel.textColor = .white
@@ -349,7 +352,6 @@ class CameraVC: UIViewController {
         setSampleImageButton()
         setCancelButton()
         addImageView()
-        addObserver()
     }
     
     // MARK: - UIViewController viewWillAppear 설정
@@ -380,17 +382,6 @@ class CameraVC: UIViewController {
     }
 }
 
-// MAKR: - 팝업 뷰 관련해서 이벤트 드리븐 해주는 구간
-extension CameraVC {
-    private func addObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(popByNotAllowed), name: .dismissAuthorPopupView, object: nil)
-    }
-    
-    @objc func popByNotAllowed() {
-        self.navigationController?.popViewController(animated: true)
-    }
-}
-
 // MARK: -
 extension CameraVC {
     private func presentPopupVC(by authorType: String) {
@@ -398,6 +389,9 @@ extension CameraVC {
         authorizationVC.modalPresentationStyle = .overFullScreen
         if authorType == "Camera" {
             authorizationVC.setAuthorType(author: .camera)
+            authorizationVC.cancelHandler = { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }
         } else {
             authorizationVC.setAuthorType(author: .gallery)
         }

@@ -30,6 +30,10 @@ class AuthorizationPopupVC: UIViewController {
     func setAuthorType(author: AuthorType) {
         self.author = author
     }
+    
+    // MARK: - Completion Handler
+    var completionHandler: (() -> Void)?
+    var cancelHandler: (() -> Void)?
 
     // MARK: - 아이콘 이미지 설정
     @IBOutlet weak var icImageView: UIImageView!
@@ -82,7 +86,7 @@ class AuthorizationPopupVC: UIViewController {
     // 취소 버튼 눌렀을 때, Dismiss
     @IBAction func cancel(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
-        NotificationCenter.default.post(name: .dismissAuthorPopupView, object: nil)
+        cancelHandler?()
     }
     
     // 설정화면으로 이동
@@ -90,6 +94,7 @@ class AuthorizationPopupVC: UIViewController {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:]) { isComplection in
             self.dismiss(animated: false, completion: nil)
         }
+        completionHandler?()
     }
     
     // MARK: - 카메라 허용 뒷 배경

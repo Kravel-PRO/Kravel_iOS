@@ -120,7 +120,7 @@ class MyPhotoReviewVC: UIViewController {
 extension MyPhotoReviewVC {
     // MARK: - 내 포토리뷰 요청 API
     private func requestMyPhotoReview() {
-        let getReviewParameter = GetReviewParameter(page: 0, size: nil, sort: nil)
+        let getReviewParameter = GetReviewParameter(page: 0, size: 100, sort: "createdDate,asc")
         
         NetworkHandler.shared.requestAPI(apiCategory: .getMyPhotoReview(getReviewParameter)) { result in
             switch result {

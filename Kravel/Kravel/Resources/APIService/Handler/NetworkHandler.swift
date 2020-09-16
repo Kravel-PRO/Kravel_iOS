@@ -113,6 +113,7 @@ class NetworkHandler {
                         }
                         completion(.success(getPlaceResult))
                     } else {
+                        print(getPlaceResponseData.error)
                         completion(.requestErr("실패"))
                     }
                 case .failure(let error):
@@ -293,12 +294,12 @@ class NetworkHandler {
         
         AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
             .validate(statusCode: 200...500)
-            .responseDecodable(of: APIResponseData<APICantSortableDataResult<[CelebrityDTO]>, APIError>.self) { response in
+            .responseDecodable(of: APIResponseData<APIDataResult<CelebrityDTO>, APIError>.self) { response in
                 switch response.result {
                 case .success(let celebResult):
                     guard let statusCode = response.response?.statusCode else { return }
                     if statusCode == 200 {
-                        completion(.success(celebResult.data?.result))
+                        completion(.success(celebResult.data?.result?.content))
                     } else {
                         completion(.serverErr)
                     }

@@ -127,6 +127,7 @@ struct CustomLocalize {
         
         // MARK: - 내 정보수정
         case complete = "수정 완료"
+        case enterNickname = "닉네임을 입력해주세요."
         
         // MARK: - 비밀번호 수정
         case checkMyselfPw = "본인 확인을 위해 비밀번호를 입력해주세요."
@@ -328,6 +329,9 @@ struct CustomLocalize {
             case .location:
                 if language == "KOR" { return "위치" }
                 else { return "Location" }
+            case .enterNickname:
+                if language == "KOR" { return "닉네임을 입력해주세요." }
+                else { return "" }
             }
         }
     }

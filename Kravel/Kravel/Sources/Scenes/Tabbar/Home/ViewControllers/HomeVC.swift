@@ -196,13 +196,14 @@ extension HomeVC {
     // MARK: - 인기 장소 데이터 API 요청
     private func requestHotPlaceData() {
     // FIXME: - 이거 나중에 데이터 받아오게 하기
-//        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 5, review_count: false, sort: "review-count,asc")
-        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 5, review_count: true, sort: nil)
+        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 5, review_count: false, sort: "review-count,asc")
+//        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 5, review_count: true, sort: nil)
         NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
             switch result {
             case .success(let getPlaceResult):
                 guard let getPlaceResult = getPlaceResult as? APISortableResponseData<PlaceContentInform> else { return }
                 self.hotPlaceData = getPlaceResult.content
+                print(getPlaceResult)
                 DispatchQueue.main.async {
                     self.setHotPlaceCollectionViewHeight()
                     self.hotPlaceCollectionView.reloadData()
