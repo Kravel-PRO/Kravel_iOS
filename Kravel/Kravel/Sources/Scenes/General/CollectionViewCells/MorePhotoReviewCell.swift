@@ -45,14 +45,13 @@ class MorePhotoReviewCell: UICollectionViewCell {
         }
     }
     
-    var likeCountWidthConstraint: NSLayoutConstraint?
+    @IBOutlet weak var likeCountWidthConstraint: NSLayoutConstraint!
     
     var likeCount: Int? {
         didSet {
             guard let likeCount = self.likeCount else { return }
             likeCountLabel.text = "\(likeCount)"
-            likeCountWidthConstraint = likeCountLabel.widthAnchor.constraint(equalToConstant: likeCountLabel.intrinsicContentSize.width)
-            likeCountWidthConstraint?.isActive = true
+            likeCountWidthConstraint.constant = likeCountLabel.intrinsicContentSize.width
         }
     }
     
@@ -80,13 +79,7 @@ class MorePhotoReviewCell: UICollectionViewCell {
         }
     }
     
-    var tags: [String] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.tagCollectionView.reloadData()
-            }
-        }
-    }
+    var tags: [String] = []
     
     // MARK: - UICollectionViewCell Override 설정
     override func prepareForReuse() {
@@ -96,7 +89,7 @@ class MorePhotoReviewCell: UICollectionViewCell {
         placeName = nil
         photoReviewImageView.image = nil
         isLike = nil
-        likeCountWidthConstraint?.isActive = false
+        tags = []
     }
     
     override func awakeFromNib() {

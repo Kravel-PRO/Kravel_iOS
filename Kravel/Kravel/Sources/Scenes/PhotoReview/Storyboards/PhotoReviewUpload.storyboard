@@ -105,6 +105,8 @@
                         <outlet property="completeButton" destination="3b8-Ch-rwX" id="sTn-6G-g52"/>
                         <outlet property="photoImageView" destination="DeN-Vv-9zu" id="PhJ-Xj-AJZ"/>
                         <outlet property="pictureDeleteButton" destination="YqY-u5-Zzh" id="Eck-7t-co9"/>
+                        <outlet property="pictureUploadButton" destination="3b8-Ch-rwX" id="29T-iq-Fg9"/>
+                        <outlet property="pictureUploadLabel" destination="2d4-el-JlW" id="bgI-Qa-8ys"/>
                         <outlet property="pictureUploadMarginView" destination="TiZ-Zs-Gwt" id="qyO-6X-nDc"/>
                     </connections>
                 </viewController>

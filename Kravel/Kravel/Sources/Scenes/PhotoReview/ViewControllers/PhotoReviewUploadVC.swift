@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class PhotoReviewUploadVC: UIViewController {
     static let identifier = "PhotoReviewUploadVC"
@@ -22,6 +23,10 @@ class PhotoReviewUploadVC: UIViewController {
     }
     
     var selectedImage: [String: Any] = [:]
+    
+    // MARK: - 사진 업로드 설명 라벨
+    @IBOutlet weak var pictureUploadLabel: UILabel!
+    @IBOutlet weak var pictureUploadButton: CustomButton!
     
     // MARK: - 사진 올리기 Margin View 설정
     @IBOutlet weak var pictureUploadMarginView: UIView! {
@@ -54,10 +59,30 @@ class PhotoReviewUploadVC: UIViewController {
     }
     
     private func openLibrary() {
-        if let picker = self.picker {
-            picker.sourceType = .photoLibrary
-            present(picker, animated: true, completion: nil)
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .authorized:
+            if let picker = self.picker {
+                picker.sourceType = .photoLibrary
+                present(picker, animated: true, completion: nil)
+            }
+        case .notDetermined:
+            presentPopupVC(by: "Gallery")
+        case .restricted:
+            presentPopupVC(by: "Gallery")
+        case .denied:
+            presentPopupVC(by: "Gallery")
+        @unknown default:
+            return
         }
+    }
+    
+    private func presentPopupVC(by authorType: String) {
+        guard let authorizationVC = UIStoryboard(name: "AuthorizationPopup", bundle: nil).instantiateViewController(withIdentifier: AuthorizationPopupVC.identifier) as? AuthorizationPopupVC else { return }
+        authorizationVC.modalPresentationStyle = .overFullScreen
+        if authorType == "Gallery" {
+            authorizationVC.setAuthorType(author: .gallery)
+        }
+        self.present(authorizationVC, animated: false, completion: nil)
     }
     
     // MARK: - 완성 버튼 설정
@@ -98,6 +123,12 @@ class PhotoReviewUploadVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setPickerController()
+        setLabelByLanguage()
+    }
+    
+    private func setLabelByLanguage() {
+        pictureUploadLabel.text = "사진을 업로드 해주세요.".localized
+        pictureUploadButton.setTitle("업로드 하기".localized, for: .normal)
     }
     
     // MARK: - UIViewController viewWillAppear Override 설정
@@ -107,8 +138,12 @@ class PhotoReviewUploadVC: UIViewController {
     }
     
     private func setNav() {
+        let backImage = UIImage(named: ImageKey.back)
+        self.navigationController?.navigationBar.backIndicatorImage = backImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.topItem?.title = ""
-        self.navigationItem.title = "포토 리뷰 올리기"
+        self.navigationItem.title = "포토 리뷰".localized + " " + "올리기".localized
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.tintColor = .black
     }

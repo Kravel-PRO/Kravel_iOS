@@ -107,6 +107,9 @@
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45Y-gn-tKX">
                                                             <rect key="frame" x="21.666666666666671" y="0.0" width="31" height="14.333333333333334"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="31" id="Pkd-xK-lkO"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -136,6 +139,7 @@
                                         <connections>
                                             <outlet property="heartButton" destination="ChZ-NR-r1U" id="f7p-jM-bgn"/>
                                             <outlet property="likeCountLabel" destination="45Y-gn-tKX" id="yK6-Ez-sMF"/>
+                                            <outlet property="likeCountWidthConstraint" destination="Pkd-xK-lkO" id="NnB-dL-okd"/>
                                             <outlet property="photoReviewImageView" destination="cHZ-Yk-jBN" id="kXi-UB-hxe"/>
                                             <outlet property="placeNameLabel" destination="GKZ-0K-BSd" id="0Nw-Pq-bhn"/>
                                             <outlet property="placeNameLabelTopConstraint" destination="tma-3g-xU3" id="vHO-3a-PSp"/>

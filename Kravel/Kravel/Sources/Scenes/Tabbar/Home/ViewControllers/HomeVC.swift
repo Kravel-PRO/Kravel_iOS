@@ -152,6 +152,11 @@ class HomeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNav()
+    }
+    
+    // MARK: - UIViewController viewDidAppear Override
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         requestLocation()
         requestReviewData()
         requestHotPlaceData()
@@ -196,8 +201,8 @@ extension HomeVC {
     // MARK: - 인기 장소 데이터 API 요청
     private func requestHotPlaceData() {
     // FIXME: - 이거 나중에 데이터 받아오게 하기
-        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 5, review_count: false, sort: "review-count,asc")
-//        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 5, review_count: true, sort: nil)
+//        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 5, review_count: false, sort: "review-count,desc")
+        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 5, review_count: true, sort: nil)
         NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
             switch result {
             case .success(let getPlaceResult):
@@ -222,7 +227,7 @@ extension HomeVC {
     
     // MARK: - 포토리뷰 데이터 API 요청
     private func requestReviewData() {
-        let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "createdDate")
+        let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "createdDate,desc")
         NetworkHandler.shared.requestAPI(apiCategory: .getReview(getReviewParameter)) { result in
             switch result {
             case .success(let getReviewResult):

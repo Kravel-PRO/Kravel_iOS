@@ -267,7 +267,7 @@ extension LocationDetailVC {
     
     // MARK: - 장소 ID로부터 포토 리뷰 가져오기
     private func requestPhotoReview(of placeID: Int) {
-        let getPlaceReviewParameter = GetReviewOfPlaceParameter(latitude: nil, longitude: nil, like_count: nil)
+        let getPlaceReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "createdDate,desc")
         APICostants.placeID = "\(placeID)"
         
         NetworkHandler.shared.requestAPI(apiCategory: .getPlaceReview(getPlaceReviewParameter)) { result in

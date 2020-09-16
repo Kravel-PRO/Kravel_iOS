@@ -190,17 +190,17 @@ enum APICategory<P: ParameterAble> {
             return parameters
         case .getPlaceReview(let reviewOfPlaceParameter):
             var parameters: [String: Any] = [:]
-            guard let reviewOfPlaceParameter = reviewOfPlaceParameter as? GetReviewOfPlaceParameter else { return nil }
-            if let latitude = reviewOfPlaceParameter.latitude {
-                parameters.updateValue(latitude, forKey: "latitude")
+            guard let reviewOfPlaceParameter = reviewOfPlaceParameter as? GetReviewParameter else { return nil }
+            if let sort = reviewOfPlaceParameter.sort {
+                parameters.updateValue(sort, forKey: "sort")
             }
             
-            if let longitude = reviewOfPlaceParameter.longitude {
-                parameters.updateValue(longitude, forKey: "longitude")
+            if let size = reviewOfPlaceParameter.size {
+                parameters.updateValue(size, forKey: "size")
             }
             
-            if let like_count = reviewOfPlaceParameter.like_count {
-                parameters.updateValue(like_count, forKey: "like-count")
+            if let page = reviewOfPlaceParameter.page {
+                parameters.updateValue(page, forKey: "page")
             }
             return parameters
         case .postPlaceReview(let postReviewParameter):
