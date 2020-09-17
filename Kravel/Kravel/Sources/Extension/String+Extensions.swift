@@ -39,6 +39,8 @@ struct CustomLocalize {
         case signup = "회원가입 하기"
         case mainDescription = "오늘도\nKravel과 함께\n여행을 떠나볼까요?"
         case mainDescriptionPart = "오늘도"
+        case loginFail = "로그인을 실패했습니다."
+        case loginFailMessage = "가입하지 않은 아이디거나,\n잘못된 비밀번호입니다."
         
         case email = "이메일 계정"
         case pw = "비밀번호"
@@ -172,6 +174,12 @@ struct CustomLocalize {
             case .mainDescriptionPart:
                 if language == "KOR" { return "오늘도" }
                 else { return "Shall we go on a trip" }
+            case .loginFail:
+                if language == "KOR" { return "로그인을 실패했습니다." }
+                else { return "Login failed." }
+            case .loginFailMessage:
+                if language == "KOR" { return "가입하지 않은 아이디거나,\n잘못된 비밀번호입니다." }
+                else { return "Incorrect account\nor password." }
             case .email:
                 if language == "KOR" { return "이메일 계정" }
                 else { return "E-mail" }

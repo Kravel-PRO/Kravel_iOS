@@ -216,8 +216,8 @@ extension MainVC: LoginTextViewDelegate {
                 print(message)
                 guard let loginPopupVC = UIStoryboard(name: "LoginPopup", bundle: nil).instantiateViewController(withIdentifier: LoginPopupVC.identifier) as? LoginPopupVC else { return }
                 loginPopupVC.modalPresentationStyle = .overFullScreen
-                loginPopupVC.titleMessage = "로그인을 실패했습니다."
-                loginPopupVC.message = "존재하지 않는 계정\n또는 비밀번호가 잘못되었습니다."
+                loginPopupVC.titleMessage = "로그인을 실패했습니다.".localized
+                loginPopupVC.message = "가입하지 않은 아이디거나,\n잘못된 비밀번호입니다.".localized
                 self.present(loginPopupVC, animated: false, completion: nil)
                 
             case .serverErr:
