@@ -204,7 +204,6 @@ class ContentDetailVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setBackButton()
-        requestData()
         setLabelByLanguage()
     }
     
@@ -219,6 +218,7 @@ class ContentDetailVC: UIViewController {
     // MARK: - UIViewController viewWillApeear 설정
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        requestData()
         setNav()
     }
     
@@ -254,6 +254,7 @@ extension ContentDetailVC {
         
         switch category {
         case .celeb:
+            print("여기서 요청")
             requestCeleb(id: id)
             requestCelebPhotoReview(id: id)
         case .media:
@@ -304,15 +305,15 @@ extension ContentDetailVC {
     
     // MARK: - 유명인 관련 리뷰 데이터 API 요청
     private func requestCelebPhotoReview(id: Int) {
-//        let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "reviewLikes,desc")
-        let getReviewParameter = GetReviewParameter(page: nil, size: nil, sort: nil)
+        //        let getReviewParameter = GetReviewParameter(page: nil, size: nil, sort: nil)
+        let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "reviewLikes-count,desc")
         NetworkHandler.shared.requestAPI(apiCategory: .getReviewOfCeleb(getReviewParameter, id: id), completion: photoReviewHandler)
     }
     
     // MARK: - 미디어 관련 리뷰 데이터 API 요청
     private func requestMediaPhotoReview(id: Int) {
-//        let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "reviewLikes,desc")
-        let getReviewParameter = GetReviewParameter(page: nil, size: nil, sort: nil)
+        //        let getReviewParameter = GetReviewParameter(page: nil, size: nil, sort: nil)
+        let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "reviewLikes-count,desc")
         NetworkHandler.shared.requestAPI(apiCategory: .getReviewOfMedia(getReviewParameter, id: id), completion: photoReviewHandler)
     }
 }

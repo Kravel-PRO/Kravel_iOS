@@ -11,6 +11,7 @@
             <connections>
                 <outlet property="emptyResultView" destination="NHZ-ec-rWF" id="bOL-AO-qdf"/>
                 <outlet property="resultDescriptionLabel" destination="u1u-Hn-VhI" id="20V-mT-lcl"/>
+                <outlet property="resultEmptyLabel" destination="D78-T4-XHA" id="MVj-Ut-HFx"/>
                 <outlet property="topMarginView" destination="n2a-Iy-90h" id="4au-vg-91c"/>
             </connections>
         </placeholder>

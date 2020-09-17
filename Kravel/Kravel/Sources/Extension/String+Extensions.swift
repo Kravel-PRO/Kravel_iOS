@@ -83,6 +83,8 @@ struct CustomLocalize {
         
         // MARK: - 검색 텍스트 필드
         case searchTextField = "연예인, 드라마 등을 검색해주세요."
+        case searchResult = "검색 결과"
+        case searchResultEmpty = "검색 결과가 없습니다.\n검색어를 다시 한 번 확인해주세요."
         
         // MARK: - 검색 카테고리
         case celebrity = "연예인 별"
@@ -241,6 +243,12 @@ struct CustomLocalize {
             case .searchTextField:
                 if language == "KOR" { return "연예인, 드라마 등을 검색해주세요." }
                 else { return "Please enter a search word." }
+            case .searchResult:
+                if language == "KOR" { return "검색 결과" }
+                else { return "Search Results" }
+            case .searchResultEmpty:
+                if language == "KOR" { return "검색 결과가 없습니다.\n검색어를 다시 한 번 확인해주세요." }
+                else { return "No search results.\nPlease check the search term again." }
             case .celebrity:
                 if language == "KOR" { return "연예인 별" }
                 else { return "Celebrity" }

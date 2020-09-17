@@ -123,12 +123,12 @@ extension OtherPhotoReviewVC {
     }
     
     private func requestCelebPhotoReview(id: Int) {
-        let getReviewParameter = GetReviewParameter(page: nil, size: nil, sort: nil)
+        let getReviewParameter = GetReviewParameter(page: nil, size: 100, sort: "reviewLikes-count,desc")
         NetworkHandler.shared.requestAPI(apiCategory: .getReviewOfCeleb(getReviewParameter, id: id), completion: photoReviewHandler)
     }
     
     private func requestMediaPhotoReview(id: Int) {
-        let getReviewParameter = GetReviewParameter(page: nil, size: nil, sort: nil)
+        let getReviewParameter = GetReviewParameter(page: nil, size: 100, sort: "reviewLikes-count,desc")
         NetworkHandler.shared.requestAPI(apiCategory: .getReviewOfMedia(getReviewParameter, id: id), completion: photoReviewHandler)
     }
     

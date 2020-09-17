@@ -12,13 +12,16 @@ class SearchResultView: UIView {
     static let nibName = "SearchResultView"
     
     var view: UIView!
+    var delegate: SearchResultViewDelegate?
     
+    // MARK: - 화면 Layout 크기 설정
     private lazy var itemSpacing: CGFloat = self.view.frame.width / 21
     private lazy var horizonInset: CGFloat = self.view.frame.width / 23
     
     // MARK: - 윗 부분 설정해주는 화면
     @IBOutlet weak var topMarginView: UIView!
     @IBOutlet weak var resultDescriptionLabel: UILabel!
+    @IBOutlet weak var resultEmptyLabel: UILabel!
     
     // MARK: - 검색 결과가 없는 경우 화면
     @IBOutlet weak var emptyResultView: UIView! {
@@ -35,6 +38,7 @@ class SearchResultView: UIView {
         searchResultCollectionView.backgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 0.25)
         searchResultCollectionView.isHidden = true
         searchResultCollectionView.dataSource = self
+        searchResultCollectionView.delegate = self
         return searchResultCollectionView
     }()
     
@@ -94,11 +98,9 @@ class SearchResultView: UIView {
         if isEmpty {
             emptyResultView.isHidden = false
             searchResultCollectionView.isHidden = true
-            resultDescriptionLabel.text = ""
         } else {
             emptyResultView.isHidden = true
             searchResultCollectionView.isHidden = false
-            resultDescriptionLabel.text = "검색 결과"
         }
     }
     
@@ -108,6 +110,7 @@ class SearchResultView: UIView {
         loadXib()
         setResultCollectionView()
         setResultCollectionViewLayout()
+        setLabelByLanguage()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -115,6 +118,7 @@ class SearchResultView: UIView {
         loadXib()
         setResultCollectionView()
         setResultCollectionViewLayout()
+        setLabelByLanguage()
     }
     
     private func loadXib() {
@@ -122,6 +126,11 @@ class SearchResultView: UIView {
         self.view.frame = self.bounds
         self.addSubview(view)
         self.bringSubviewToFront(view)
+    }
+    
+    private func setLabelByLanguage() {
+        resultEmptyLabel.text = "검색 결과가 없습니다.\n검색어를 다시 한 번 확인해주세요.".localized
+        resultDescriptionLabel.text = "검색 결과".localized
     }
 }
 
@@ -144,5 +153,11 @@ extension SearchResultView: UICollectionViewDataSource {
             searchResultCell.name = celeb.celebrityName
         }
         return searchResultCell
+    }
+}
+
+extension SearchResultView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.click(searchData: searchResult[indexPath.row])
     }
 }

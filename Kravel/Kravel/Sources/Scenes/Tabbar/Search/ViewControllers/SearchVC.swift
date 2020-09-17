@@ -157,6 +157,7 @@ class SearchVC: UIViewController {
     // MARK: - 검색 결과  View 설정
     lazy var searchResultView: SearchResultView = {
         let searchResultView = SearchResultView(frame: CGRect(x: 0, y: searchBarView.frame.maxY, width: self.view.frame.width, height: categoryTabbarView.frame.height + pageCollectionView.frame.height + 16))
+        searchResultView.delegate = self
         searchResultView.translatesAutoresizingMaskIntoConstraints = false
         return searchResultView
     }()
@@ -359,5 +360,27 @@ extension SearchVC {
     @objc func setLastIndex(_ notification: NSNotification) {
         guard let lastIndex = notification.userInfo?["index"] as? Int else { return }
         researchLastIndex = Int32(lastIndex)
+    }
+}
+
+extension SearchVC: SearchResultViewDelegate {
+    func click(searchData: SearchAble) {
+        guard let detail_contentVC = self.storyboard?.instantiateViewController(withIdentifier: ContentDetailVC.identifier) as? ContentDetailVC else { return }
+        
+        if let mediaData = searchData as? MediaDTO {
+            detail_contentVC.category = .media
+            detail_contentVC.id = mediaData.mediaId
+            detail_contentVC.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(detail_contentVC, animated: true)
+            return
+        }
+        
+        if let celebData = searchData as? CelebrityDTO {
+            detail_contentVC.category = .celeb
+            detail_contentVC.id = celebData.celebrityId
+            detail_contentVC.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(detail_contentVC, animated: true)
+            return
+        }
     }
 }
