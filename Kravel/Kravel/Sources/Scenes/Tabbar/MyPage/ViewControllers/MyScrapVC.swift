@@ -46,7 +46,7 @@ class MyScrapVC: UIViewController {
         noScrapLabel.font = UIFont.systemFont(ofSize: 16)
         noScrapLabel.textColor = .veryLightPink
         noScrapLabel.textAlignment = .center
-        noScrapLabel.text = "아직 스크랩 한 장소가 없어요.\n가고 싶은 장소를 스크랩해보세요!"
+        noScrapLabel.text = "아직 스크랩 한 장소가 없어요.\n가고 싶은 장소를 스크랩해보세요!".localized
         noScrapLabel.sizeToFit()
         
         tempView.addArrangedSubview(noScrapImage)
@@ -66,7 +66,7 @@ class MyScrapVC: UIViewController {
             noScrapView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             noScrapView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             noScrapView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            noScrapView.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.86),
+            noScrapView.heightAnchor.constraint(equalTo: self.view.widthAnchor),
             noScrapStackView.centerXAnchor.constraint(equalTo: noScrapView.centerXAnchor),
             noScrapStackView.centerYAnchor.constraint(equalTo: noScrapView.centerYAnchor),
             noScrapStackView.arrangedSubviews[0].widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2),

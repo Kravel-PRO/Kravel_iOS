@@ -132,6 +132,7 @@ struct CustomLocalize {
         // MARK: - 마이페이지
         case my = "내"
         case scrap = "스크랩"
+        case emptyScrap = "아직 스크랩 한 장소가 없어요.\n가고 싶은 장소를 스크랩해보세요!"
         
         case modifyInfo = "내 정보 수정"
         case modifyPw = "비밀번호 수정"
@@ -350,6 +351,9 @@ struct CustomLocalize {
             case .scrap:
                 if language == "KOR" { return "스크랩" }
                 else { return "Scrap" }
+            case .emptyScrap:
+                if language == "KOR" { return "아직 스크랩 한 장소가 없어요.\n가고 싶은 장소를 스크랩해보세요!" }
+                else { return "There's no place for scraping yet.\nScrap the place you want to go!" }
             case .modifyInfo:
                 if language == "KOR" { return "내 정보 수정" }
                 else { return "Modify my info" }
