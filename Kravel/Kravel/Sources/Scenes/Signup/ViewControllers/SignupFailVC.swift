@@ -22,12 +22,7 @@ class SignupFailVC: UIViewController {
     // MARK: - 타이틀 라벨
     @IBOutlet weak var titleLabel: UILabel!
     
-    var titleMessage: String? {
-        didSet {
-            titleLabel.text = titleMessage
-            titleLabel.sizeToFit()
-        }
-    }
+    var titleMessage: String?
     
     // MARK: - 확인 버튼
     @IBOutlet weak var completeButton: CustomButton! {
@@ -44,8 +39,8 @@ class SignupFailVC: UIViewController {
     // MARK: - UIViewController viewDidLoad Override 설정
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        titleLabel.text = titleMessage
     }
     
     // MARK: - UIViewController viewDidLayoutSubviews Override 설정

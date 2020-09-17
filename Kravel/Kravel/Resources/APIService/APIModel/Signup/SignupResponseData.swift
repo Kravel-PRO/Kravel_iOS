@@ -8,15 +8,15 @@
 
 import Foundation
 
-struct SignupResponseData: Codable {
-    let result: Int?
-    
-    enum CodingKeys: String, CodingKey {
-        case result
-    }
-    
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        result = (try? values.decode(Int.self, forKey: .result)) ?? nil
-    }
+struct SignupResponse: Codable {
+    let memberId: Int
+    let loginEmail: String
+    let loginPw: String?
+    let nickName: String
+    let gender: String
+    let roleType: String
+    let speech: String
+    let createdDate: String
+    let modifiedData: String
+    let useAt: String?
 }

@@ -56,14 +56,18 @@ class SignupVC: UIViewController {
         guard let loginEmail = textFields[0].text, let loginPw = textFields[1].text,
             let nickName = textFields[3].text else { return }
         
-        guard let selectedLanguage = UserDefaults.standard.object(forKey: "Language") as? String else { return }
+        print("\(loginEmail)")
+        print("\(loginPw)")
+        
+        guard let selectedLanguage = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return }
         
         let signupParameter = SignupParmeter(loginEmail: loginEmail, loginPw: loginPw, nickName: nickName, gender: gender, speech: selectedLanguage)
         NetworkHandler.shared.requestAPI(apiCategory: .signup(signupParameter)) { result in
             switch result {
             // 데이터 통신 Success
-            case .success(let userIdx):
-                print(userIdx)
+            case .success(let signupResponse):
+                guard let signupResponse = signupResponse as? SignupResponse else { return }
+                print(signupResponse)
                 guard let welcomeVC = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewController(withIdentifier: WelcomeVC.identifier) as? WelcomeVC else { return }
                 welcomeVC.modalPresentationStyle = .fullScreen
                 self.present(welcomeVC, animated: true, completion: nil)

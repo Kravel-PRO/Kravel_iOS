@@ -47,7 +47,7 @@ class NetworkHandler {
         
         AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .validate(statusCode: 200...500)
-            .responseDecodable(of: APIResponseData<SignupResponseData, APIError>.self) { response in
+            .responseDecodable(of: APIResponseData<APICantSortableDataResult<SignupResponse>, APIError>.self) { response in
                 switch response.result {
                 case .success(let signupData):
                     guard let statusCode = response.response?.statusCode else { return }
