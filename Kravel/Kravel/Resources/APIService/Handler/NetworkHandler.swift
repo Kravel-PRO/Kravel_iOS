@@ -49,10 +49,11 @@ class NetworkHandler {
             .validate(statusCode: 200...500)
             .responseDecodable(of: APIResponseData<APICantSortableDataResult<SignupResponse>, APIError>.self) { response in
                 switch response.result {
-                case .success(let signupData):
+                case .success(let signupResponse):
                     guard let statusCode = response.response?.statusCode else { return }
-                    if statusCode == 200 { completion(.success(signupData.data?.result)) }
-                    else { completion(.requestErr(signupData.error?.errorMessage)) }
+                    if statusCode == 200 {
+                        completion(.success(signupResponse.data?.result)) }
+                    else { completion(.requestErr(signupResponse.error?.errorMessage)) }
                 case .failure:
                     completion(.networkFail)
                 }

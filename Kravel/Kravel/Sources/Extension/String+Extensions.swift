@@ -60,11 +60,17 @@ struct CustomLocalize {
         case pwConfirmValid = "비밀번호가 같지 않습니다."
         case nicknameValid = "7자 이하로 입력해주세요."
         
-        case signupFail = "이미 존재하고 있는 이메일 계정입니다.\n다른 계정을 입력해주세요."
+        case signupFailTitle = "회원가입을 실패했습니다."
+        case signupFailMessage = "이미 존재하고 있는 이메일 계정입니다.\n다른 계정을 입력해주세요."
         
         // MARK: - 성별
         case man = "남자"
         case woman = "여자"
+        
+        // MARK: - 환영하는 화면
+        case welcomeTitle = "환영합니다!"
+        case welcomeMessage = "K-culture와 함께하는 색다른 한국여행.\n한국 드라마/영화 속 나온 촬영지와\nK-POP 스타가 다녀간 장소에서\n당신만의 추억을 만들어보세요."
+        case goTrip = "여행 떠나기"
         
         // MARK: - 홈 환영
         case homeWelcom = "당신의 한국 여행을\n더 특별하게,\nKravel만의 장소를 둘러보세요."
@@ -218,7 +224,19 @@ struct CustomLocalize {
             case .woman:
                 if language == "KOR" { return "여자" }
                 else { return "Female" }
-            case .signupFail:
+            case .welcomeTitle:
+                if language == "KOR" { return "환영합니다!" }
+                else { return "Welcome!" }
+            case .welcomeMessage:
+                if language == "KOR" { return "K-culture와 함께하는 색다른 한국여행.\n한국 드라마/영화 속 나온 촬영지와\nK-POP 스타가 다녀간 장소에서\n당신만의 추억을 만들어보세요." }
+                else { return "Special Korean trip with K-culture.\nMake your own memories with Kravel!\nAt shooting spots of K-Drama & K-movie\nAnd at the place where K-pop stars went." }
+            case .goTrip:
+                if language == "KOR" { return "여행 떠나기" }
+                else { return "Let's go on a trip" }
+            case .signupFailTitle:
+                if language == "KOR" { return "회원가입을 실패했습니다." }
+                else { return "Sign up Failed." }
+            case .signupFailMessage:
                 if language == "KOR" { return "이미 존재하고 있는 이메일 계정입니다.\n다른 계정을 입력해주세요." }
                 else { return "Email account already exists.\nPlease enter another account." }
             case .homeWelcom:

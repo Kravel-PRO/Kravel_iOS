@@ -56,9 +56,6 @@ class SignupVC: UIViewController {
         guard let loginEmail = textFields[0].text, let loginPw = textFields[1].text,
             let nickName = textFields[3].text else { return }
         
-        print("\(loginEmail)")
-        print("\(loginPw)")
-        
         guard let selectedLanguage = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return }
         
         let signupParameter = SignupParmeter(loginEmail: loginEmail, loginPw: loginPw, nickName: nickName, gender: gender, speech: selectedLanguage)
@@ -68,16 +65,15 @@ class SignupVC: UIViewController {
             case .success(let signupResponse):
                 guard let signupResponse = signupResponse as? SignupResponse else { return }
                 print(signupResponse)
-                guard let welcomeVC = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewController(withIdentifier: WelcomeVC.identifier) as? WelcomeVC else { return }
-                welcomeVC.modalPresentationStyle = .fullScreen
-                self.present(welcomeVC, animated: true, completion: nil)
+                self.requestSignin(loginEmail: loginEmail, loginPw: loginPw)
                 
             // 사용자 실수 Error
             case .requestErr(let error):
                 print(error)
-                guard let signupFailPopupVC = UIStoryboard(name: "SignupFailPopup", bundle: nil).instantiateViewController(withIdentifier: SignupFailVC.identifier) as? SignupFailVC else { return }
+                guard let signupFailPopupVC = UIStoryboard(name: "LoginPopup", bundle: nil).instantiateViewController(withIdentifier: LoginPopupVC.identifier) as? LoginPopupVC else { return }
                 signupFailPopupVC.modalPresentationStyle = .overFullScreen
-                signupFailPopupVC.titleMessage = "이미 존재하고 있는 이메일 계정입니다.\n다른 계정을 입력해주세요.".localized
+                signupFailPopupVC.titleMessage = "회원가입을 실패했습니다.".localized
+                signupFailPopupVC.message = "이미 존재하고 있는 이메일 계정입니다.\n다른 계정을 입력해주세요.".localized
                 self.present(signupFailPopupVC, animated: false, completion: nil)
                 
             // 서버 연결 실패 Error
@@ -285,3 +281,31 @@ extension SignupVC: XibButtonDelegate {
         }
     }
 }
+
+extension SignupVC {
+    // MARK: - 토큰 받아오기 위한 Login통신
+    private func requestSignin(loginEmail: String, loginPw: String) {
+        let signinParameter = SigninParameter(loginEmail: loginEmail, loginPw: loginPw)
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .signin(signinParameter)) { result in
+            switch result {
+            case .success(let token):
+                guard let token = token as? String else { return }
+                UserDefaults.standard.set(token, forKey: UserDefaultKey.token)
+                
+                guard let welcomeVC = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewController(withIdentifier: WelcomeVC.identifier) as? WelcomeVC else { return }
+                welcomeVC.modalPresentationStyle = .fullScreen
+                self.present(welcomeVC, animated: true, completion: nil)
+            case .requestErr:
+                return
+            case .serverErr:
+                return
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
+    }
+}
+

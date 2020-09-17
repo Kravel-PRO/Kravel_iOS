@@ -17,6 +17,6 @@ struct SignupResponse: Codable {
     let roleType: String
     let speech: String
     let createdDate: String
-    let modifiedData: String
+    let modifiedDate: String
     let useAt: String?
 }
