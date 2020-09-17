@@ -56,15 +56,6 @@ class LogoutPopupVC: UIViewController {
         }
     }
     
-    // 버튼에 들어갈 Text 설정
-    var buttonTexts: [String] = [] {
-        didSet {
-            for index in 0..<buttonTexts.count {
-                buttons[index].setTitle(buttonTexts[index], for: .normal)
-            }
-        }
-    }
-    
     private func setButtonsLayerLayout() {
         buttons.forEach { element in
             element.layer.cornerRadius = element.frame.width / 5.9
@@ -89,6 +80,13 @@ class LogoutPopupVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setLabelByLanguage()
+    }
+    
+    private func setLabelByLanguage() {
+        popupLabel.text = "정말 로그아웃 하시겠습니까?".localized
+        buttons[0].setTitle("취소".localized, for: .normal)
+        buttons[1].setTitle("로그아웃".localized, for: .normal)
     }
     
     // MARK: UIViewController viewDidLayoutSubviews() override 설정

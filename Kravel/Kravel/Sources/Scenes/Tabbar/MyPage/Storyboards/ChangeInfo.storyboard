@@ -113,6 +113,7 @@
                         <outlet property="nicknameBackView" destination="z3N-op-JO9" id="AiA-20-3AI"/>
                         <outlet property="nicknameTextField" destination="OmY-EI-Kw0" id="PAV-5e-JjF"/>
                         <outlet property="sexLabel" destination="L0h-ni-hg4" id="Py7-3J-tsk"/>
+                        <outlet property="withdrawlButton" destination="lzJ-5P-hyc" id="UFS-L3-EOx"/>
                         <outletCollection property="sexButtons" destination="j3F-vC-SM7" collectionClass="NSMutableArray" id="Gl6-8Z-NS4"/>
                         <outletCollection property="sexButtons" destination="jqH-vl-Uh3" collectionClass="NSMutableArray" id="kzc-P7-LFv"/>
                     </connections>

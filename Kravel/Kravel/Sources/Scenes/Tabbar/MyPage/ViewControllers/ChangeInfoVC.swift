@@ -43,6 +43,13 @@ class ChangeInfoVC: UIViewController {
         }
     }
     
+    // MARK: - 회원 탈퇴하기 버튼
+    @IBOutlet weak var withdrawlButton: UIButton! {
+        didSet {
+            withdrawlButton.isHidden = true
+        }
+    }
+    
     // MARK: - 회원 탈퇴
     @IBAction func withdrawal(_ sender: Any) {
     }

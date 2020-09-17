@@ -46,7 +46,7 @@ class MyPhotoReviewVC: UIViewController {
         noPhotoReviewLabel.font = UIFont.systemFont(ofSize: 16)
         noPhotoReviewLabel.textColor = .veryLightPink
         noPhotoReviewLabel.textAlignment = .center
-        noPhotoReviewLabel.text = "포토 리뷰를 올리고\n나만의 여행 앨범을 꾸며봐요!"
+        noPhotoReviewLabel.text = "포토 리뷰를 올리고\n나만의 여행 앨범을 꾸며봐요!".localized
         noPhotoReviewLabel.sizeToFit()
         
         tempView.addArrangedSubview(noPhotoReviewImage)
@@ -120,7 +120,7 @@ class MyPhotoReviewVC: UIViewController {
 extension MyPhotoReviewVC {
     // MARK: - 내 포토리뷰 요청 API
     private func requestMyPhotoReview() {
-        let getReviewParameter = GetReviewParameter(page: 0, size: 100, sort: "createdDate,asc")
+        let getReviewParameter = GetReviewParameter(page: 0, size: 100, sort: "createdDate,desc")
         
         NetworkHandler.shared.requestAPI(apiCategory: .getMyPhotoReview(getReviewParameter)) { result in
             switch result {

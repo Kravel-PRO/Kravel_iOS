@@ -128,10 +128,15 @@ struct CustomLocalize {
         case setLanguage = "언어 설정"
         case report = "제보하기"
         case logout = "로그아웃"
+        case logoutText = "정말 로그아웃 하시겠습니까?"
+        case cancel = "취소"
         
         // MARK: - 내 정보수정
         case complete = "수정 완료"
         case enterNickname = "닉네임을 입력해주세요."
+        
+        // MARK: - 내 포토리뷰
+        case myphotoreviewEmpty = "포토 리뷰를 올리고\n나만의 여행 앨범을 꾸며봐요!"
         
         // MARK: - 비밀번호 수정
         case checkMyselfPw = "본인 확인을 위해 비밀번호를 입력해주세요."
@@ -329,12 +334,21 @@ struct CustomLocalize {
             case .logout:
                 if language == "KOR" { return "로그아웃" }
                 else { return "Log out" }
+            case .cancel:
+                if language == "KOR" { return "취소" }
+                else { return "Cancel" }
+            case .logoutText:
+                if language == "KOR" { return "정말 로그아웃 하시겠습니까?" }
+                else { return "Are you sure you want to log out?" }
             case .complete:
                 if language == "KOR" { return "수정 완료" }
                 else { return "OK" }
             case .checkMyselfPw:
                 if language == "KOR" { return "본인 확인을 위해 비밀번호를 입력해주세요." }
                 else { return "Please enter your password for identification." }
+            case .myphotoreviewEmpty:
+                if language == "KOR" { return "포토 리뷰를 올리고\n나만의 여행 앨범을 꾸며봐요!" }
+                else { return "Post a photo review\nand decorate your own travel album!" }
             case .inputModifyPw:
                 if language == "KOR" { return "변경할 비밀번호를 입력해주세요." }
                 else { return "OK" }
@@ -355,7 +369,7 @@ struct CustomLocalize {
                 else { return "Location" }
             case .enterNickname:
                 if language == "KOR" { return "닉네임을 입력해주세요." }
-                else { return "" }
+                else { return "Please enter nickname" }
             case .upload:
                 if language == "KOR" { return "올리기" }
                 else { return "Upload" }
