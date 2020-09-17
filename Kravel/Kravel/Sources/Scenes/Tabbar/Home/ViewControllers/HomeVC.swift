@@ -125,6 +125,8 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        addObserver()
+        setLabelByLanguage()
     }
     
     private func setLabelByLanguage() {
@@ -151,7 +153,6 @@ class HomeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNav()
-        setLabelByLanguage()
     }
     
     // MARK: - UIViewController viewDidAppear Override
@@ -171,6 +172,16 @@ class HomeVC: UIViewController {
         super.viewDidLayoutSubviews()
         setHotPlaceCollectionViewHeight()
         setPhotoReviewViewLayout()
+    }
+}
+
+extension HomeVC {
+    private func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(setLanguage(_:)), name: .changeLanguage, object: nil)
+    }
+    
+    @objc func setLanguage(_ notification: NSNotification) {
+        setLabelByLanguage()
     }
 }
 

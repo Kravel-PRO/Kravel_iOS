@@ -44,6 +44,8 @@ class MyPageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setLabelByLanguage()
+        addObserver()
     }
     
     private func setLabelByLanguage() {
@@ -65,8 +67,6 @@ class MyPageVC: UIViewController {
     // MARK: - UIViewController viewWillAppear() Override 설정
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setLabelByLanguage()
-        menuTableView.reloadData()
         self.navigationController?.navigationBar.isHidden = true
     }
     
@@ -83,6 +83,17 @@ class MyPageVC: UIViewController {
     // MARK: - UIViewController viewDidLayoutSubviews() Override 설정
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+    }
+}
+
+extension MyPageVC {
+    private func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(setLanguage(_:)), name: .changeLanguage, object: nil)
+    }
+    
+    @objc func setLanguage(_ notification: NSNotification) {
+        setLabelByLanguage()
+        menuTableView.reloadData()
     }
 }
 

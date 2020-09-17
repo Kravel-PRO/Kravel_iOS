@@ -123,10 +123,9 @@ extension SetLanguageVC {
         NetworkHandler.shared.requestAPI(apiCategory: .changInfo(queryType: "speech", body: changeInfoParamter)) { result in
             switch result {
             case .success(let changeInfoResponse):
-                print("aaaaa")
                 guard let changeInfoResponse = changeInfoResponse as? ChangeInfoResponseData else { return }
                 UserDefaults.standard.setValue(changeInfoResponse.speech, forKey: UserDefaultKey.language)
-                print("여기까지도 들어옴")
+                NotificationCenter.default.post(name: .changeLanguage, object: nil)
                 self.navigationController?.popViewController(animated: true)
             case .requestErr: return
             case .serverErr: print("Server Err")

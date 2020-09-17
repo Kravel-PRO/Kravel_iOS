@@ -14,4 +14,5 @@ extension NSNotification.Name {
     static let selectAddress = NSNotification.Name("selectAddress")
     static let dismissAuthorPopupView = NSNotification.Name("dismissAuthorPopupView")
     static let completeAttraction = NSNotification.Name("completeAttraction")
+    static let changeLanguage = NSNotification.Name("changeLanguage")
 }

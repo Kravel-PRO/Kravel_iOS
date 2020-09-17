@@ -175,6 +175,7 @@ class SearchVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setLabelByLanguage()
         setRecentResearchView()
         getRecentResearchTerms()
         addObserver()
@@ -197,7 +198,6 @@ class SearchVC: UIViewController {
     // MARK: - UIViewController viewWillAppear Override 설정
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setLabelByLanguage()
         self.navigationController?.navigationBar.isHidden = true
     }
     
@@ -205,8 +205,12 @@ class SearchVC: UIViewController {
         searchTextField.placeholder = "연예인, 드라마 등을 검색해주세요.".localized
         recentResearchView.setLabelByLanguage()
         searchResultView.setLabelByLanguage()
-        categoryTabbarView.categoryCollectionView.reloadData()
-        categoryTabbarView.categoryCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: [])
+        var index = 0
+        categoryTabbarView.categoryCollectionView.visibleCells.forEach { cell in
+            guard let categoryCell = cell as? CategoryCell else { return }
+            categoryCell.category = KCategory(rawValue: index)?.getCategoryString()
+            index += 1
+        }
     }
     
     // MARK: - UIViewController viewWillLayoutSubviews Override 설정
@@ -227,6 +231,22 @@ class SearchVC: UIViewController {
     deinit {
         print("SearchVC Deinit")
         removeChildVC()
+    }
+}
+
+extension SearchVC {
+    private func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(setLanguage(_:)), name: .changeLanguage, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setLastIndex(_:)), name: .deleteResearchTerm, object: nil)
+    }
+    
+    @objc func setLanguage(_ notification: NSNotification) {
+        setLabelByLanguage()
+    }
+    
+    @objc func setLastIndex(_ notification: NSNotification) {
+        guard let lastIndex = notification.userInfo?["index"] as? Int else { return }
+        researchLastIndex = Int32(lastIndex)
     }
 }
 
@@ -353,17 +373,6 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
 extension SearchVC: PagingTabbarDelegate {
     func scrollToIndex(to index: Int) {
         pageCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: true)
-    }
-}
-
-extension SearchVC {
-    private func addObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(setLastIndex(_:)), name: .deleteResearchTerm, object: nil)
-    }
-    
-    @objc func setLastIndex(_ notification: NSNotification) {
-        guard let lastIndex = notification.userInfo?["index"] as? Int else { return }
-        researchLastIndex = Int32(lastIndex)
     }
 }
 
