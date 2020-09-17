@@ -128,7 +128,7 @@ class SearchResultView: UIView {
         self.bringSubviewToFront(view)
     }
     
-    private func setLabelByLanguage() {
+    func setLabelByLanguage() {
         resultEmptyLabel.text = "검색 결과가 없습니다.\n검색어를 다시 한 번 확인해주세요.".localized
         resultDescriptionLabel.text = "검색 결과".localized
     }

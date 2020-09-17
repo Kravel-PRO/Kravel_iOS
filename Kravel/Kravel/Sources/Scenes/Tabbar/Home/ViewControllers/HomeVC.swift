@@ -125,7 +125,6 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        setLabelByLanguage()
     }
     
     private func setLabelByLanguage() {
@@ -152,6 +151,7 @@ class HomeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNav()
+        setLabelByLanguage()
     }
     
     // MARK: - UIViewController viewDidAppear Override

@@ -27,7 +27,13 @@ class MovieChildVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+//        requestMedia()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         requestMedia()
+        print("aaaa")
     }
 }
 

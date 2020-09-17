@@ -44,7 +44,6 @@ class MyPageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        setLabelByLanguage()
     }
     
     private func setLabelByLanguage() {
@@ -66,6 +65,8 @@ class MyPageVC: UIViewController {
     // MARK: - UIViewController viewWillAppear() Override 설정
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setLabelByLanguage()
+        menuTableView.reloadData()
         self.navigationController?.navigationBar.isHidden = true
     }
     

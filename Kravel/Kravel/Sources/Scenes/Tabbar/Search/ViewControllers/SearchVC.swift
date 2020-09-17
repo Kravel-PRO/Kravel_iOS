@@ -175,7 +175,6 @@ class SearchVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        setLabelByLanguage()
         setRecentResearchView()
         getRecentResearchTerms()
         addObserver()
@@ -195,17 +194,22 @@ class SearchVC: UIViewController {
         ]
     }
     
-    private func setLabelByLanguage() {
-        searchTextField.placeholder = "연예인, 드라마 등을 검색해주세요.".localized
-        
-    }
-    
     // MARK: - UIViewController viewWillAppear Override 설정
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setLabelByLanguage()
         self.navigationController?.navigationBar.isHidden = true
     }
     
+    private func setLabelByLanguage() {
+        searchTextField.placeholder = "연예인, 드라마 등을 검색해주세요.".localized
+        recentResearchView.setLabelByLanguage()
+        searchResultView.setLabelByLanguage()
+        categoryTabbarView.categoryCollectionView.reloadData()
+        categoryTabbarView.categoryCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: [])
+    }
+    
+    // MARK: - UIViewController viewWillLayoutSubviews Override 설정
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         setRecentViewConstraint()

@@ -17,17 +17,17 @@ extension UIImageView {
             placeholder: nil,
             options: [
                 .transition(.fade(1))
-            ])
-        {
-            result in
-            switch result {
-            case .success: break
-            case .failure(let error):
-                print(error)
-                let defaultImage = UIImage(named: "yuna2")
-                self.image = defaultImage
-            }
-        }
+            ], completionHandler:
+                {
+                    result in
+                    switch result {
+                    case .success: break
+                    case .failure(let error):
+                        print(error)
+                        let defaultImage = UIImage(named: "yuna2")
+                        self.image = defaultImage
+                    }
+                })
     }
 }
 

@@ -143,7 +143,7 @@ class RecentResearchView: UIView {
         self.bringSubviewToFront(view)
     }
     
-    private func setLabelByLanguage() {
+    func setLabelByLanguage() {
         recentDescriptionLabel.text = "최근 검색어".localized
         emptyLabel.text = "최근 검색어 내역이 없습니다.".localized
     }

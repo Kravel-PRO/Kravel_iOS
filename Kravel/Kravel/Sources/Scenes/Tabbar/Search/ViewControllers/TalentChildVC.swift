@@ -28,7 +28,13 @@ class TalentChildVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+//        requestCeleb()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         requestCeleb()
+        print("aaaaa")
     }
 }
 
