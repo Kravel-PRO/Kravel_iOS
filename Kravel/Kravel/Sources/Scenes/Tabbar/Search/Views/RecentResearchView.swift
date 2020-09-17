@@ -22,9 +22,11 @@ class RecentResearchView: UIView {
     
     // MARK: - Label 표시를 위한 View
     @IBOutlet weak var topMarginView: UIView!
+    @IBOutlet weak var recentDescriptionLabel: UILabel!
     
     // MARK: - Data가 없는 경우 표시하는 화면
     @IBOutlet weak var labelView: UIView!
+    @IBOutlet weak var emptyLabel: UILabel!
     
     // MARK: - 최근 검색어 모델
     var recentResearchs: [RecentResearchTerm] = []
@@ -119,6 +121,7 @@ class RecentResearchView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadXib()
+        setLabelByLanguage()
         setRecentResearchTableView()
         setTableViewConstraint()
         animateTablewViewHeight()
@@ -127,6 +130,7 @@ class RecentResearchView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadXib()
+        setLabelByLanguage()
         setRecentResearchTableView()
         setTableViewConstraint()
         animateTablewViewHeight()
@@ -137,6 +141,11 @@ class RecentResearchView: UIView {
         self.view.frame = self.bounds
         self.addSubview(view)
         self.bringSubviewToFront(view)
+    }
+    
+    private func setLabelByLanguage() {
+        recentDescriptionLabel.text = "최근 검색어".localized
+        emptyLabel.text = "최근 검색어 내역이 없습니다.".localized
     }
 }
 
