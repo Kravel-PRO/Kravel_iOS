@@ -146,9 +146,6 @@ extension MyPageVC: UITableViewDelegate {
         guard let setLanguageVC = UIStoryboard(name: "SetLanguage", bundle: nil).instantiateViewController(identifier: SetLanguageVC.identifier) as? SetLanguageVC else { return }
         setLanguageVC.navTitle = navTitle
         setLanguageVC.completeButtonText = "Complete"
-        setLanguageVC.complete = { [weak self] language in
-            self?.navigationController?.popViewController(animated: true)
-        }
         setLanguageVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(setLanguageVC, animated: true)
     }

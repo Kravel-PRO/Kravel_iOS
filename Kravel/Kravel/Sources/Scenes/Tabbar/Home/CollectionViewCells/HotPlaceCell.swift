@@ -48,8 +48,12 @@ class HotPlaceCell: UICollectionViewCell {
     
     var photoCount: Int? {
         didSet {
-            if let photoCount = self.photoCount { photoReviewCountLabel.text = "포토리뷰".localized + " \(photoCount)" + "개".localized }
-            else { photoReviewCountLabel.text = "포토리뷰".localized + " 0" + "개".localized }
+            guard let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return }
+            var countUnit: String
+            if language == "KOR" { countUnit = "개" }
+            else { countUnit = "" }
+            if let photoCount = self.photoCount { photoReviewCountLabel.text = "포토 리뷰".localized + " \(photoCount)" + countUnit }
+            else { photoReviewCountLabel.text = "포토 리뷰".localized + " 0" + countUnit }
             photoReviewCountLabel.sizeToFit()
         }
     }

@@ -114,7 +114,7 @@ class NetworkHandler {
                         }
                         completion(.success(getPlaceResult))
                     } else {
-                        print(getPlaceResponseData.error)
+                        print(getPlaceResponseData.error ?? "Error")
                         completion(.requestErr("실패"))
                     }
                 case .failure(let error):

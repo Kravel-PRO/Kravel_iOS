@@ -104,7 +104,7 @@ class RealEditPasswordVC: UIViewController {
 extension RealEditPasswordVC {
     // MARK: - 비밀번호 수정 API 연결
     private func requestModifyPassword() {
-        let changeInfoParameter = ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: "", nickName: "")
+        let changeInfoParameter = ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: "", nickName: "", speech: "")
         
         NetworkHandler.shared.requestAPI(apiCategory: .changInfo(queryType: "password", body: changeInfoParameter)) { result in
             switch result {

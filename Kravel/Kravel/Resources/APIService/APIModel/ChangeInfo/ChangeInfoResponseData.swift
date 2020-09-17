@@ -9,7 +9,6 @@
 import Foundation
 
 struct ChangeInfoResponseData: Codable {
-    let idx: Int
     let memberId: Int
     let loginEmail: String?
     let loginPw: String?

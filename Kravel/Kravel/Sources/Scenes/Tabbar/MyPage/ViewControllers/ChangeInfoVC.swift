@@ -109,7 +109,7 @@ extension ChangeInfoVC {
     private func requestChangInfo() {
         guard let selectedSex = self.selectedSex,
             let modifiedNickName = self.nicknameTextField.text else { return }
-        let changInfoBodyParameter = ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: selectedSex, nickName: modifiedNickName)
+        let changInfoBodyParameter = ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: selectedSex, nickName: modifiedNickName, speech: "")
         
         NetworkHandler.shared.requestAPI(apiCategory: .changInfo(queryType: "nickNameAndGender", body: changInfoBodyParameter)) { result in
             switch result {

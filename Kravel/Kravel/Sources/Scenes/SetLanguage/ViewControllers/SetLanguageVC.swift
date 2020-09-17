@@ -52,13 +52,6 @@ class SetLanguageVC: UIViewController {
         startButton.setTitle(completeButtonText, for: .normal)
     }
     
-    // 완료 버튼 Call Back
-    lazy var complete: ((Language) -> Void) = { [weak self] language in
-        guard let startVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "StartRoot") as? UINavigationController else { return }
-        startVC.modalPresentationStyle = .fullScreen
-        self?.present(startVC, animated: true, completion: nil)
-    }
-    
     // MARK: ViewController Override 설정
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,11 +97,44 @@ class SetLanguageVC: UIViewController {
     // MARK: - 언어 설정 완료
     @IBAction func start(_ sender: Any) {
         // 선택한 언어 핸드폰에 저장
-        switch selectedLanguageButton {
-        case .korean: UserDefaults.standard.set("KOR", forKey: UserDefaultKey.language)
-        case .english: UserDefaults.standard.set("ENG", forKey: UserDefaultKey.language)
-        case .none: return
+        guard let selectedLanguage = self.selectedLanguageButton else { return }
+        
+        if self.navigationController != nil {
+            requestChangeLanguage(selectedLanguage)
+        } else {
+            switch selectedLanguageButton {
+            case .korean: UserDefaults.standard.set("KOR", forKey: UserDefaultKey.language)
+            case .english: UserDefaults.standard.set("ENG", forKey: UserDefaultKey.language)
+            case .none: return
+            }
+            
+            guard let startVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "StartRoot") as? UINavigationController else { return }
+            startVC.modalPresentationStyle = .fullScreen
+            self.present(startVC, animated: true, completion: nil)
         }
-        if let selectedButton = self.selectedLanguageButton { complete(selectedButton) }
+    }
+}
+
+extension SetLanguageVC {
+    // MARK: - 언어 설정 API 요청
+    private func requestChangeLanguage(_ language: Language) {
+        let changeInfoParamter = ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: "", nickName: "", speech: language.getLanguage())
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .changInfo(queryType: "speech", body: changeInfoParamter)) { result in
+            switch result {
+            case .success(let changeInfoResponse):
+                print("aaaaa")
+                guard let changeInfoResponse = changeInfoResponse as? ChangeInfoResponseData else { return }
+                UserDefaults.standard.setValue(changeInfoResponse.speech, forKey: UserDefaultKey.language)
+                print("여기까지도 들어옴")
+                self.navigationController?.popViewController(animated: true)
+            case .requestErr: return
+            case .serverErr: print("Server Err")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
     }
 }
