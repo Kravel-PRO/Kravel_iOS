@@ -60,6 +60,8 @@ struct CustomLocalize {
         case pwConfirmValid = "비밀번호가 같지 않습니다."
         case nicknameValid = "7자 이하로 입력해주세요."
         
+        case signupFail = "이미 존재하고 있는 이메일 계정입니다.\n다른 계정을 입력해주세요."
+        
         // MARK: - 성별
         case man = "남자"
         case woman = "여자"
@@ -216,6 +218,9 @@ struct CustomLocalize {
             case .woman:
                 if language == "KOR" { return "여자" }
                 else { return "Female" }
+            case .signupFail:
+                if language == "KOR" { return "이미 존재하고 있는 이메일 계정입니다.\n다른 계정을 입력해주세요." }
+                else { return "Email account already exists.\nPlease enter another account." }
             case .homeWelcom:
                 if language == "KOR" { return "당신의 한국 여행을\n더 특별하게,\nKravel만의 장소를 둘러보세요." }
                 else { return "Places that will make your trip\nto Korea more special.\nThe popular place these days." }

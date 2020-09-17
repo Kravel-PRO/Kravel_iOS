@@ -44,6 +44,7 @@ class LoginPopupVC: UIViewController {
     @IBOutlet weak var completeButton: CustomButton! {
         didSet {
             completeButton.locationButton = .logoutPopupView
+            completeButton.setTitle("확인".localized, for: .normal)
         }
     }
     

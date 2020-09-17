@@ -71,10 +71,10 @@ class SignupVC: UIViewController {
             // 사용자 실수 Error
             case .requestErr(let error):
                 print(error)
-                let alertVC = UIAlertController(title: "이미 존재하는 계정입니다.", message: "다른 계정으로 만들어주세요", preferredStyle: .alert)
-                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-                alertVC.addAction(action)
-                self.present(alertVC, animated: true, completion: nil)
+                guard let signupFailPopupVC = UIStoryboard(name: "SignupFailPopup", bundle: nil).instantiateViewController(withIdentifier: SignupFailVC.identifier) as? SignupFailVC else { return }
+                signupFailPopupVC.modalPresentationStyle = .overFullScreen
+                signupFailPopupVC.titleMessage = "이미 존재하고 있는 이메일 계정입니다.\n다른 계정을 입력해주세요.".localized
+                self.present(signupFailPopupVC, animated: false, completion: nil)
                 
             // 서버 연결 실패 Error
             case .serverErr:

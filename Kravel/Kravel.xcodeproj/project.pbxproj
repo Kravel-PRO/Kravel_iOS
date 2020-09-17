@@ -20,6 +20,8 @@
 		9D13C811248796900058A7BF /* LoginTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D13C810248796900058A7BF /* LoginTextView.swift */; };
 		9D16A44B24909798005E691E /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D16A44A24909798005E691E /* WelcomeVC.swift */; };
 		9D2390FB2513C3B5006D57E4 /* SearchResultViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2390FA2513C3B5006D57E4 /* SearchResultViewDelegate.swift */; };
+		9D2390FD2513E656006D57E4 /* SignupFailPopup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D2390FC2513E656006D57E4 /* SignupFailPopup.storyboard */; };
+		9D2390FF2513E669006D57E4 /* SignupFailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2390FE2513E669006D57E4 /* SignupFailVC.swift */; };
 		9D2E26A124E935020091643E /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26A024E935020091643E /* Language.swift */; };
 		9D2E26A324E960100091643E /* Report.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D2E26A224E960100091643E /* Report.storyboard */; };
 		9D35749224F8F13B000103E7 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D35749124F8F13B000103E7 /* MyPage.storyboard */; };
@@ -188,6 +190,8 @@
 		9D13C810248796900058A7BF /* LoginTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextView.swift; sourceTree = "<group>"; };
 		9D16A44A24909798005E691E /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		9D2390FA2513C3B5006D57E4 /* SearchResultViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewDelegate.swift; sourceTree = "<group>"; };
+		9D2390FC2513E656006D57E4 /* SignupFailPopup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignupFailPopup.storyboard; sourceTree = "<group>"; };
+		9D2390FE2513E669006D57E4 /* SignupFailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupFailVC.swift; sourceTree = "<group>"; };
 		9D2E26A024E935020091643E /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		9D2E26A224E960100091643E /* Report.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Report.storyboard; sourceTree = "<group>"; };
 		9D35749124F8F13B000103E7 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
@@ -609,6 +613,7 @@
 			isa = PBXGroup;
 			children = (
 				9D43C02D24F9023500184619 /* Signup.storyboard */,
+				9D2390FC2513E656006D57E4 /* SignupFailPopup.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -617,6 +622,7 @@
 			isa = PBXGroup;
 			children = (
 				9D014C3D248C4A5E00758FCC /* SignupVC.swift */,
+				9D2390FE2513E669006D57E4 /* SignupFailVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1346,6 +1352,7 @@
 				9DBA643024F0437E00E12FA4 /* RecentResearchView.xib in Resources */,
 				9D43C02624F8FFB000184619 /* SetLanguage.storyboard in Resources */,
 				9DC8447224F8EF0A00EC1D68 /* Map.storyboard in Resources */,
+				9D2390FD2513E656006D57E4 /* SignupFailPopup.storyboard in Resources */,
 				9D6FF36524F9FF0900E6A8B9 /* PhotoReviewUpload.storyboard in Resources */,
 				9D2E26A324E960100091643E /* Report.storyboard in Resources */,
 				9D43C02E24F9023500184619 /* Signup.storyboard in Resources */,
@@ -1434,6 +1441,7 @@
 				9D2390FB2513C3B5006D57E4 /* SearchResultViewDelegate.swift in Sources */,
 				9D4CCF7825000FF2003F73AF /* GetPlaceResponseData.swift in Sources */,
 				9D6FF36E24FA099000E6A8B9 /* CameraVC.swift in Sources */,
+				9D2390FF2513E669006D57E4 /* SignupFailVC.swift in Sources */,
 				9D6FF38824FAFC3F00E6A8B9 /* NetworkResult.swift in Sources */,
 				9DD7AD1E250ADC1000742F25 /* KoreaTouristParameter.swift in Sources */,
 				9DBA644324F3B58000E12FA4 /* MyPhotoReviewVC.swift in Sources */,
