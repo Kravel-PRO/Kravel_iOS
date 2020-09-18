@@ -164,10 +164,10 @@ extension RecentResearchView: UITableViewDataSource {
 }
 
 extension RecentResearchView: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: false)
-//        delegate?.click(searchTerm: recentResearchs[recentResearchs.count - indexPath.row - 1].term)
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        delegate?.click(searchTerm: recentResearchs[recentResearchs.count - indexPath.row - 1].term)
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return tableViewEachRowHeight

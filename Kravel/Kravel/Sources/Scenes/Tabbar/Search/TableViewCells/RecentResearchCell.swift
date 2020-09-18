@@ -43,6 +43,7 @@ class RecentResearchCell: UITableViewCell {
     var deleteButton: UIButton = {
         let deleteButton = UIButton()
         deleteButton.setImage(UIImage(named: ImageKey.icbtnDelete), for: .normal)
+        deleteButton.isUserInteractionEnabled = true
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         return deleteButton
     }()
@@ -59,9 +60,9 @@ class RecentResearchCell: UITableViewCell {
     
     // MARK: - Constraint 초기 설정
     private func addSubViews() {
-        self.addSubview(searchImageView)
-        self.addSubview(researchLabel)
-        self.addSubview(deleteButton)
+        self.contentView.addSubview(searchImageView)
+        self.contentView.addSubview(researchLabel)
+        self.contentView.addSubview(deleteButton)
     }
     
     private func setConstraint() {
@@ -76,7 +77,7 @@ class RecentResearchCell: UITableViewCell {
             deleteButton.heightAnchor.constraint(equalTo: searchImageView.heightAnchor, multiplier: 1.3),
             deleteButton.widthAnchor.constraint(equalTo: deleteButton.heightAnchor),
             deleteButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18),
-            researchLabel.trailingAnchor.constraint(equalTo: deleteButton.leadingAnchor, constant: 16)
+            researchLabel.trailingAnchor.constraint(equalTo: deleteButton.leadingAnchor, constant: -16)
         ])
     }
     
