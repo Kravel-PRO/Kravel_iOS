@@ -47,6 +47,7 @@ extension MovieChildVC {
             case .success(let mediaResult):
                 guard let medias = mediaResult as? [MediaDTO] else { return }
                 self.mediaDTO = medias
+                print(self.mediaDTO)
                 DispatchQueue.main.async {
                     self.movieCollectionView.reloadData()
                 }
@@ -83,7 +84,7 @@ extension MovieChildVC: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 25, left: horizonInset, bottom: 0, right: horizonInset)
+        return UIEdgeInsets(top: 25, left: horizonInset, bottom: 25, right: horizonInset)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

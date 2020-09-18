@@ -12,5 +12,5 @@ struct MediaDTO: Codable, SearchAble {
     let mediaId: Int
     let title: String
     let imageUrl: String?
-    let year: Int
+    let year: String
 }

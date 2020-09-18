@@ -168,6 +168,12 @@ struct CustomLocalize {
         // MARK: - 미디어, 셀럽 디테일 화면
         case popularPhotoReview = "인기 많은"
         
+        // MARK: - 미디어/셀럽 표시 시 장소 빈 경우
+        case searchAbleEmpty = "조금만 기다려주세요!\n특별한 장소를 찾아올게요!"
+        
+        // MARK: - 포토 리뷰가 비었을 시
+        case photoReviewEmpty = "아직 포토 리뷰가 없어요!\n멋진 인증샷을 기다려볼까요?"
+        
         func localize() -> String {
             guard let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return self.rawValue }
             switch self {
@@ -417,6 +423,12 @@ struct CustomLocalize {
             case .popularPhotoReview:
                 if language == "KOR" { return "인기 많은" }
                 else { return "Popular" }
+            case .searchAbleEmpty:
+                if language == "KOR" { return "조금만 기다려주세요!\n특별한 장소를 찾아올게요!" }
+                else { return "Please wait a little bit!\nWe'll find a special place!" }
+            case .photoReviewEmpty:
+                if language == "KOR" { return "아직 포토 리뷰가 없어요!\n멋진 인증샷을 기다려볼까요?" }
+                else { return "There's no photo review yet!\n Let's wait for a nice snapshot." }
             }
         }
     }

@@ -94,6 +94,9 @@ class ContentDetailVC: UIViewController {
         introduceLabelHeightConstraint.constant = introduceLabel.intrinsicContentSize.height
     }
     
+    // MARK: - 플레이스가 비었을 경우 표시하는 라벨
+    @IBOutlet weak var placeEmptyLabel: UILabel!
+    
     // MARK: - 장소 CollectionView 설정
     @IBOutlet weak var placeCollectionView: UICollectionView! {
         didSet {
@@ -112,19 +115,24 @@ class ContentDetailVC: UIViewController {
     private func setPlaceCVHeight() {
         if places.count == 0 {
             placeCV_height_Constarint.constant = 0
-            moreButtonStackView.arrangedSubviews[1].isHidden = true
+            moreButtonStackView.arrangedSubviews[0].isHidden = false
+            moreButtonStackView.arrangedSubviews[2].isHidden = true
         } else if places.count <= 2 {
             placeCV_height_Constarint.constant = place_Cell_Height
-            moreButtonStackView.arrangedSubviews[1].isHidden = true
+            moreButtonStackView.arrangedSubviews[0].isHidden = true
+            moreButtonStackView.arrangedSubviews[2].isHidden = true
         } else if places.count <= 4 {
             placeCV_height_Constarint.constant = place_Cell_Height * 2 + 4
-            moreButtonStackView.arrangedSubviews[1].isHidden = true
+            moreButtonStackView.arrangedSubviews[0].isHidden = true
+            moreButtonStackView.arrangedSubviews[2].isHidden = true
         } else if places.count <= 6 {
             placeCV_height_Constarint.constant = place_Cell_Height * 3 + 4 * 2
-            moreButtonStackView.arrangedSubviews[1].isHidden = true
+            moreButtonStackView.arrangedSubviews[0].isHidden = true
+            moreButtonStackView.arrangedSubviews[2].isHidden = true
         } else {
             placeCV_height_Constarint.constant = place_Cell_Height * 3 + 4 * 2
-            moreButtonStackView.arrangedSubviews[1].isHidden = false
+            moreButtonStackView.arrangedSubviews[0].isHidden = true
+            moreButtonStackView.arrangedSubviews[2].isHidden = false
         }
         
         UIView.animate(withDuration: 0.3) {
@@ -143,7 +151,8 @@ class ContentDetailVC: UIViewController {
     
     @IBOutlet weak var moreButtonStackView: UIStackView! {
         didSet {
-            moreButtonStackView.arrangedSubviews[1].isHidden = true
+            moreButtonStackView.arrangedSubviews[0].isHidden = true
+            moreButtonStackView.arrangedSubviews[2].isHidden = true
         }
     }
     
@@ -192,9 +201,19 @@ class ContentDetailVC: UIViewController {
         let defaultHeight: CGFloat = 48
         let horizontalSpacing = view.frame.width / 23.44
         let cellHeight: CGFloat = (photoReviewView.frame.width - horizontalSpacing*2 - 4*2) / 3
-        if photoReviewData.count == 0 { photoReviewViewHeightConstraint.constant = defaultHeight }
-        else if photoReviewData.count <= 3 { photoReviewViewHeightConstraint.constant = defaultHeight + cellHeight }
-        else { photoReviewViewHeightConstraint.constant = defaultHeight + 2 * cellHeight }
+        if photoReviewData.count == 0 {
+            photoReviewViewHeightConstraint.constant = defaultHeight + 35 + 75
+            photoReviewView.photoReviewEmptyView.isHidden = false
+            photoReviewView.photoReviewCollectionView.isHidden = true
+        } else if photoReviewData.count <= 3 {
+            photoReviewViewHeightConstraint.constant = defaultHeight + cellHeight
+            photoReviewView.photoReviewEmptyView.isHidden = true
+            photoReviewView.photoReviewCollectionView.isHidden = false
+        } else {
+            photoReviewViewHeightConstraint.constant = defaultHeight + 2 * cellHeight
+            photoReviewView.photoReviewEmptyView.isHidden = true
+            photoReviewView.photoReviewCollectionView.isHidden = false
+        }
     }
     
     lazy var photo_Cell_Width: CGFloat = (photoReviewView.frame.width-2*horizontal_inset-2*4) / 3
@@ -213,6 +232,7 @@ class ContentDetailVC: UIViewController {
         photoReviewView.attributeTitle = attributePhotoReview
         
         moreButton.setTitle("더 보기".localized, for: .normal)
+        placeEmptyLabel.text = "조금만 기다려주세요!\n특별한 장소를 찾아올게요!".localized
     }
     
     // MARK: - UIViewController viewWillApeear 설정
@@ -305,14 +325,12 @@ extension ContentDetailVC {
     
     // MARK: - 유명인 관련 리뷰 데이터 API 요청
     private func requestCelebPhotoReview(id: Int) {
-        //        let getReviewParameter = GetReviewParameter(page: nil, size: nil, sort: nil)
         let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "reviewLikes-count,desc")
         NetworkHandler.shared.requestAPI(apiCategory: .getReviewOfCeleb(getReviewParameter, id: id), completion: photoReviewHandler)
     }
     
     // MARK: - 미디어 관련 리뷰 데이터 API 요청
     private func requestMediaPhotoReview(id: Int) {
-        //        let getReviewParameter = GetReviewParameter(page: nil, size: nil, sort: nil)
         let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "reviewLikes-count,desc")
         NetworkHandler.shared.requestAPI(apiCategory: .getReviewOfMedia(getReviewParameter, id: id), completion: photoReviewHandler)
     }

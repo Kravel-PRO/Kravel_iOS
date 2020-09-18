@@ -176,7 +176,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITf-nc-oF7">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pHH-ZN-ZD9">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pHH-ZN-ZD9">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
                                                     </imageView>
                                                 </subviews>
@@ -199,10 +199,35 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="q8i-c1-9Bc">
-                                                <rect key="frame" x="0.0" y="346.33333333333331" width="375" height="60"/>
+                                                <rect key="frame" x="0.0" y="346.33333333333331" width="375" height="241.99999999999994"/>
                                                 <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="94V-vA-i9e">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="166"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="VLw-qs-jl1">
+                                                                <rect key="frame" x="0.0" y="13" width="375" height="97"/>
+                                                                <subviews>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icNoScrapTiger" translatesAutoresizingMaskIntoConstraints="NO" id="fox-Ss-uxG">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="62"/>
+                                                                    </imageView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7X-vv-Rj4">
+                                                                        <rect key="frame" x="0.0" y="79" width="375" height="18"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                        <color key="textColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstItem="VLw-qs-jl1" firstAttribute="top" secondItem="94V-vA-i9e" secondAttribute="top" constant="13" id="5zK-sr-ENd"/>
+                                                            <constraint firstItem="VLw-qs-jl1" firstAttribute="centerX" secondItem="94V-vA-i9e" secondAttribute="centerX" id="Oed-Hd-7MX"/>
+                                                            <constraint firstAttribute="bottom" secondItem="VLw-qs-jl1" secondAttribute="bottom" constant="56" id="t7f-eD-5dv"/>
+                                                        </constraints>
+                                                    </view>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OeV-uE-7dv">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="182.00000000000006" width="375" height="0.0"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" id="ccO-c5-Umi"/>
@@ -260,7 +285,7 @@
                                                         </cells>
                                                     </collectionView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OdT-Mi-cGh">
-                                                        <rect key="frame" x="0.0" y="16" width="375" height="44"/>
+                                                        <rect key="frame" x="0.0" y="198.00000000000006" width="375" height="44"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69Z-Jp-Uh9">
                                                                 <rect key="frame" x="17" y="0.0" width="341" height="44"/>
@@ -281,16 +306,19 @@
                                                         </constraints>
                                                     </view>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="n7X-vv-Rj4" firstAttribute="width" secondItem="q8i-c1-9Bc" secondAttribute="width" id="OGc-1d-u9A"/>
+                                                </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBu-at-rIr">
-                                                <rect key="frame" x="0.0" y="421.33333333333331" width="375" height="1"/>
+                                                <rect key="frame" x="0.0" y="603.33333333333337" width="375" height="1"/>
                                                 <color key="backgroundColor" white="0.81345781520000005" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="ksX-Q9-WEH"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gEi-u8-pDf" customClass="PhotoReviewView" customModule="Kravel" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="422.33333333333331" width="375" height="48"/>
+                                                <rect key="frame" x="0.0" y="604.33333333333337" width="375" height="48"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="6aN-iI-HSz"/>
@@ -360,6 +388,7 @@
                         <outlet property="photoReviewViewHeightConstraint" destination="6aN-iI-HSz" id="jHf-rE-5yk"/>
                         <outlet property="placeCV_height_Constarint" destination="ccO-c5-Umi" id="Afz-j6-dQ1"/>
                         <outlet property="placeCollectionView" destination="OeV-uE-7dv" id="ujL-2k-6D6"/>
+                        <outlet property="placeEmptyLabel" destination="n7X-vv-Rj4" id="7Pb-jG-483"/>
                         <outlet property="thumbnail_Back_View" destination="ITf-nc-oF7" id="pDT-b6-bgg"/>
                         <outlet property="thumbnail_imageView" destination="pHH-ZN-ZD9" id="X2u-nD-BKg"/>
                     </connections>
@@ -537,6 +566,7 @@
     <resources>
         <image name="btnBack" width="24" height="24"/>
         <image name="btnSearch" width="24" height="24"/>
+        <image name="icNoScrapTiger" width="78" height="62"/>
         <image name="searchActive" width="29" height="28"/>
         <image name="searchInactive" width="24" height="24"/>
         <systemColor name="scrollViewTexturedBackgroundColor">

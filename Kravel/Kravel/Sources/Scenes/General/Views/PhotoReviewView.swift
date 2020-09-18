@@ -23,6 +23,15 @@ class PhotoReviewView: UIView {
         delegate?.clickWriteButton()
     }
     
+    // MARK: - Photo Review가 없을 때 표시하는 화면
+    @IBOutlet weak var photoReviewEmptyView: UIView! {
+        didSet {
+            photoReviewEmptyView.isHidden = true
+        }
+    }
+    
+    @IBOutlet weak var photoReviewEmptyLabel: UILabel!
+    
     // MARK: - Photo Review 보여주는 CollectionView 설정
     @IBOutlet weak var photoReviewCollectionView: UICollectionView! {
         didSet {
@@ -82,11 +91,13 @@ class PhotoReviewView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadXib()
+        photoReviewEmptyLabel.text = "아직 포토 리뷰가 없어요!\n멋진 인증샷을 기다려볼까요?".localized
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadXib()
+        photoReviewEmptyLabel.text = "아직 포토 리뷰가 없어요!\n멋진 인증샷을 기다려볼까요?".localized
     }
 
     private func loadXib() {

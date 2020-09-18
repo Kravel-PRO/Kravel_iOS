@@ -24,7 +24,7 @@ extension UIImageView {
                     case .success: break
                     case .failure(let error):
                         print(error)
-                        let defaultImage = UIImage(named: "yuna2")
+                        let defaultImage = UIImage()
                         self.image = defaultImage
                     }
                 })

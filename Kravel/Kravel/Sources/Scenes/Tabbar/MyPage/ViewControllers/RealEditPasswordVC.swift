@@ -42,6 +42,7 @@ class RealEditPasswordVC: UIViewController {
     }
     
     @IBOutlet weak var pwLabel: UILabel!
+    @IBOutlet weak var pwvalidLabel: UILabel!
     
     // MARK: - PW 한번 더 입력하는 TextField
     @IBOutlet weak var oneMoreTextField: UITextField! {
@@ -51,6 +52,7 @@ class RealEditPasswordVC: UIViewController {
     }
     
     @IBOutlet weak var oneMoreLabel: UILabel!
+    @IBOutlet weak var onemorevalidLabel: UILabel!
     
     // MARK: - 수정 완료 버튼 설정
     @IBOutlet weak var completeButton: CustomButton! {
@@ -81,6 +83,12 @@ class RealEditPasswordVC: UIViewController {
         oneMoreTextField.placeholder = "다시 한 번 비밀번호를 입력해주세요.".localized
         
         completeButton.setTitle("수정 완료".localized, for: .normal)
+        
+        pwvalidLabel.text = "6자리 이상 입력해주세요.".localized
+        onemorevalidLabel.text = "비밀번호가 같지 않습니다.".localized
+        
+        pwvalidLabel.alpha = 0
+        onemorevalidLabel.alpha = 0
     }
     
     // MARK: - UIViewController viewWillAppear() Override
@@ -143,19 +151,35 @@ extension RealEditPasswordVC: UITextFieldDelegate {
             
             if text.count >= 6 || text == "" {
                 marginViews[1].backgroundColor = .white
+                UIView.animate(withDuration: 0.3) {
+                    self.pwvalidLabel.alpha = 0
+                }
+                
                 if text == "" { isEnables[1] = false }
                 else { isEnables[1] = true }
             } else {
                 marginViews[1].backgroundColor = UIColor.grapefruit.withAlphaComponent(0.15)
+                UIView.animate(withDuration: 0.3) {
+                    self.pwvalidLabel.alpha = 1
+                }
+                
                 isEnables[1] = false
             }
             
             if text == oneMoreTextField.text && text != "" || oneMoreTextField.text == "" {
                 marginViews[2].backgroundColor = UIColor.white
+                UIView.animate(withDuration: 0.3) {
+                    self.onemorevalidLabel.alpha = 0
+                }
+                
                 if oneMoreTextField.text == "" { isEnables[2] = false }
                 else { isEnables[2] = true }
             } else {
                 marginViews[2].backgroundColor = UIColor.grapefruit.withAlphaComponent(0.15)
+                UIView.animate(withDuration: 0.3) {
+                    self.onemorevalidLabel.alpha = 1
+                }
+                
                 isEnables[2] = false
             }
         } else {
@@ -163,10 +187,18 @@ extension RealEditPasswordVC: UITextFieldDelegate {
             
             if text == pwTextField.text || text == "" {
                 marginViews[2].backgroundColor = .white
+                
+                UIView.animate(withDuration: 0.3) {
+                    self.onemorevalidLabel.alpha = 0
+                }
                 if text == "" { isEnables[2] = false }
                 else { isEnables[2] = true }
             } else {
                 marginViews[2].backgroundColor = UIColor.grapefruit.withAlphaComponent(0.15)
+                
+                UIView.animate(withDuration: 0.3) {
+                    self.onemorevalidLabel.alpha = 1
+                }
                 isEnables[2] = false
             }
         }
