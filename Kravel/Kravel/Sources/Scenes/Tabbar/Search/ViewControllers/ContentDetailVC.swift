@@ -19,7 +19,8 @@ class ContentDetailVC: UIViewController {
     var places: [PlaceContentInform] = []
     
     private func appearDetailData() {
-        guard let category = self.category else { return }
+        guard let category = self.category,
+              let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return }
         switch category {
         case .celeb:
             guard let celebDetailDTO = categoryDetailDTO as? CelebrityDetailDTO else { return }
@@ -27,8 +28,18 @@ class ContentDetailVC: UIViewController {
             thumbnail_imageView.setImage(with: celebDetailDTO.celebrity.imageUrl ?? "")
             
             // Label 설정 -> 높이 Constraint 계산해서 적용
-            let introduceText = "\(celebDetailDTO.celebrity.celebrityName ?? "")가\n다녀간 곳은 어딜까요?"
-            introduceLabel.attributedText = createAttributeString(of: introduceText, highlightPart: celebDetailDTO.celebrity.imageUrl ?? "")
+            if language == "KOR" {
+                let totalText = (celebDetailDTO.celebrity.celebrityName ?? "") + "가\n다녀간 곳은 어딜까요?"
+                let attributeText = totalText.makeAttributedText([.font: UIFont.systemFont(ofSize: 24), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)])
+                attributeText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 24), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)], range: (totalText as NSString).range(of: celebDetailDTO.celebrity.celebrityName ?? "") )
+                introduceLabel.attributedText = attributeText
+            } else {
+                let totalText = "Where did\n" + (celebDetailDTO.celebrity.celebrityName ?? "") + " go?"
+                let attributeText = totalText.makeAttributedText([.font: UIFont.systemFont(ofSize: 24), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)])
+                attributeText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 24), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)], range: (totalText as NSString).range(of: celebDetailDTO.celebrity.celebrityName ?? ""))
+                introduceLabel.attributedText = attributeText
+            }
+            
             setLabelHeight()
             
             // 관련 장소 설정
@@ -41,8 +52,17 @@ class ContentDetailVC: UIViewController {
             thumbnail_imageView.setImage(with: mediaDetailDTO.media.imageUrl ?? "")
             
             // Label 설정 -> 높이 Constraint 계산해서 적용
-            let introduceText = "\(mediaDetailDTO.media.title)\n촬영지가 어딜까요?"
-            introduceLabel.attributedText = createAttributeString(of: introduceText, highlightPart: mediaDetailDTO.media.title)
+            if language == "KOR" {
+                let totalText = "\(mediaDetailDTO.media.title)" + "\n촬영지가 어딜까요?"
+                let attributeText = totalText.makeAttributedText([.font: UIFont.systemFont(ofSize: 24), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)])
+                attributeText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 24), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)], range: (totalText as NSString).range(of: mediaDetailDTO.media.title))
+                introduceLabel.attributedText = attributeText
+            } else {
+                let totalText = "Where is the location of\n\(mediaDetailDTO.media.title)"
+                let attributeText = totalText.makeAttributedText([.font: UIFont.systemFont(ofSize: 24), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)])
+                attributeText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 24), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)], range: (totalText as NSString).range(of: mediaDetailDTO.media.title))
+                introduceLabel.attributedText = attributeText
+            }
             setLabelHeight()
             
             // 관련 장소 설정
@@ -274,7 +294,6 @@ extension ContentDetailVC {
         
         switch category {
         case .celeb:
-            print("여기서 요청")
             requestCeleb(id: id)
             requestCelebPhotoReview(id: id)
         case .media:

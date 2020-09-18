@@ -10,8 +10,8 @@ import UIKit
 import CoreLocation
 
 class HomeVC: UIViewController {
-    private var activityIndicator: UIActivityIndicatorView?
-    var isLoadingComplete: [Bool] = [false, false]
+//    private var activityIndicator: UIActivityIndicatorView?
+//    var isLoadingComplete: [Bool] = [false, false]
     
     // MARK: - 제일 위 Title View 설정
     @IBOutlet weak var titleStackView: UIStackView! {
@@ -150,7 +150,7 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        setIndicatorView()
+//        setIndicatorView()
         addObserver()
         setLabelByLanguage()
     }
@@ -176,13 +176,13 @@ class HomeVC: UIViewController {
         placeEmptyLabel.text = "조금만 기다려주세요!\n특별한 장소를 찾아올게요!".localized
     }
     
-    private func setIndicatorView() {
-        self.activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator?.center = self.view.center
-        activityIndicator?.startAnimating()
-        guard let indicator = self.activityIndicator else { return }
-        self.view.addSubview(indicator)
-    }
+//    private func setIndicatorView() {
+//        self.activityIndicator = UIActivityIndicatorView(style: .large)
+//        activityIndicator?.center = self.view.center
+//        activityIndicator?.startAnimating()
+//        guard let indicator = self.activityIndicator else { return }
+//        self.view.addSubview(indicator)
+//    }
     
     // MARK: - UIViewController viewWillAppear Override
     override func viewWillAppear(_ animated: Bool) {
@@ -252,12 +252,12 @@ extension HomeVC {
             case .success(let getPlaceResult):
                 guard let getPlaceResult = getPlaceResult as? APISortableResponseData<PlaceContentInform> else { return }
                 self.hotPlaceData = getPlaceResult.content
-                self.isLoadingComplete[0] = true
-                if self.isLoadingComplete.filter({ !$0 }).isEmpty {
-                    self.activityIndicator?.stopAnimating()
-                    self.activityIndicator?.removeFromSuperview()
-                    self.activityIndicator = nil
-                }
+//                self.isLoadingComplete[0] = true
+//                if self.isLoadingComplete.filter({ !$0 }).isEmpty {
+//                    self.activityIndicator?.stopAnimating()
+//                    self.activityIndicator?.removeFromSuperview()
+//                    self.activityIndicator = nil
+//                }
                 DispatchQueue.main.async {
                     self.setHotPlaceCollectionViewHeight()
                     self.hotPlaceCollectionView.reloadData()
@@ -282,12 +282,12 @@ extension HomeVC {
             case .success(let getReviewResult):
                 guard let getReviewResult = getReviewResult as? APISortableResponseData<ReviewInform> else { return }
                 self.photoReviewData = getReviewResult.content
-                self.isLoadingComplete[1] = true
-                if self.isLoadingComplete.filter({ !$0 }).isEmpty {
-                    self.activityIndicator?.stopAnimating()
-                    self.activityIndicator?.removeFromSuperview()
-                    self.activityIndicator = nil
-                }
+//                self.isLoadingComplete[1] = true
+//                if self.isLoadingComplete.filter({ !$0 }).isEmpty {
+//                    self.activityIndicator?.stopAnimating()
+//                    self.activityIndicator?.removeFromSuperview()
+//                    self.activityIndicator = nil
+//                }
                 DispatchQueue.main.async {
                     self.setPhotoReviewViewLayout()
                     self.photoReviewView.photoReviewCollectionView.reloadData()

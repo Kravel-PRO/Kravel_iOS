@@ -48,6 +48,7 @@ extension TalentChildVC {
             case .success(let celebResult):
                 guard let celebrities = celebResult as? [CelebrityDTO] else { return }
                 self.talentDTO = celebrities
+                print(celebrities)
                 DispatchQueue.main.async {
                     self.talentCollectionView.reloadData()
                 }

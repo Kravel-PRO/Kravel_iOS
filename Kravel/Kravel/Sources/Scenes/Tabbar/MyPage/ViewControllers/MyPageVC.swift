@@ -155,8 +155,8 @@ extension MyPageVC: UITableViewDelegate {
             goEditPasswordVC(navTitle: selectedMenu.getMenuLabel())
         case .setLanguage:
             goSetLanguageVC(navTitle: selectedMenu.getMenuLabel())
-        case .report:
-            goReportVC(navTitle: selectedMenu.getMenuLabel())
+//        case .report:
+//            goReportVC(navTitle: selectedMenu.getMenuLabel())
         case .logout:
             presentLogoutAlertView()
         }
