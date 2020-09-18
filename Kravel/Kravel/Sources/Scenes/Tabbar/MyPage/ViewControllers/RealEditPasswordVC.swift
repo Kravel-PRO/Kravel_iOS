@@ -12,6 +12,7 @@ class RealEditPasswordVC: UIViewController {
     static let identifier = "RealEditPasswordVC"
     
     var naviTitle: String?
+    var isEnables: [Bool] = [false, false, false]
 
     // MARK: - TextView 바탕 Layer 설정
     @IBOutlet var marginViews: [UIView]! {
@@ -126,12 +127,54 @@ extension RealEditPasswordVC: UITextFieldDelegate {
         guard let text = textField.text else { return }
         let layerColor: UIColor = text != "" ? UIColor(red: 253/255, green: 9/255, blue: 9/255, alpha: 1.0) : .veryLightPink
         
-        if textField == pwTextField {
+        if textField == checkPwTextField {
             marginViews[0].layer.borderColor = layerColor.cgColor
-        } else if textField == oneMoreTextField {
+            
+            if text.count >= 6 || text == "" {
+                marginViews[0].backgroundColor = .white
+                if text == "" { isEnables[0] = false }
+                else { isEnables[0] = true }
+            } else {
+                marginViews[0].backgroundColor = UIColor.grapefruit.withAlphaComponent(0.15)
+                isEnables[0] = false
+            }
+        } else if textField == pwTextField {
             marginViews[1].layer.borderColor = layerColor.cgColor
+            
+            if text.count >= 6 || text == "" {
+                marginViews[1].backgroundColor = .white
+                if text == "" { isEnables[1] = false }
+                else { isEnables[1] = true }
+            } else {
+                marginViews[1].backgroundColor = UIColor.grapefruit.withAlphaComponent(0.15)
+                isEnables[1] = false
+            }
+            
+            if text == oneMoreTextField.text && text != "" || oneMoreTextField.text == "" {
+                marginViews[2].backgroundColor = UIColor.white
+                if oneMoreTextField.text == "" { isEnables[2] = false }
+                else { isEnables[2] = true }
+            } else {
+                marginViews[2].backgroundColor = UIColor.grapefruit.withAlphaComponent(0.15)
+                isEnables[2] = false
+            }
         } else {
             marginViews[2].layer.borderColor = layerColor.cgColor
+            
+            if text == pwTextField.text || text == "" {
+                marginViews[2].backgroundColor = .white
+                if text == "" { isEnables[2] = false }
+                else { isEnables[2] = true }
+            } else {
+                marginViews[2].backgroundColor = UIColor.grapefruit.withAlphaComponent(0.15)
+                isEnables[2] = false
+            }
+        }
+        
+        if isEnables.filter({ $0 == true }).count == 3 {
+            completeButton.isUserInteractionEnabled = true
+        } else {
+            completeButton.isUserInteractionEnabled = false
         }
     }
 }
