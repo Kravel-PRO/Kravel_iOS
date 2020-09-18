@@ -13,7 +13,7 @@ class MyPageVC: UIViewController {
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     
-    var name: String? = "여기"
+    var name: String?
     
     @IBOutlet weak var myPhotoReviewLabel: UILabel!
     @IBOutlet weak var myScrapLabel: UILabel!
@@ -49,14 +49,6 @@ class MyPageVC: UIViewController {
     }
     
     private func setLabelByLanguage() {
-        guard let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String,
-            let name = self.name else { return }
-        if language == "KOR" {
-            nameLabel.text = "\(name)님의 여행을 함께해요!\nKravel과 당신의 여행을 특별하게 \n만들어보세요."
-        } else {
-            nameLabel.text = "Let's go on \(name)'s trip together!\nMake your trip special\nwith Kravel."
-        }
-        
         myPhotoReviewLabel.text = "내".localized + " " + "포토 리뷰".localized
         myPhotoReviewLabel.sizeToFit()
         
@@ -67,6 +59,7 @@ class MyPageVC: UIViewController {
     // MARK: - UIViewController viewWillAppear() Override 설정
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        requestMyInform()
         self.navigationController?.navigationBar.isHidden = true
     }
     
@@ -94,6 +87,42 @@ extension MyPageVC {
     @objc func setLanguage(_ notification: NSNotification) {
         setLabelByLanguage()
         menuTableView.reloadData()
+    }
+}
+
+extension MyPageVC {
+    // MARK: - 내 정보 요청하는 API
+    private func requestMyInform() {
+        NetworkHandler.shared.requestAPI(apiCategory: .getMyInform(ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: "", nickName: "", speech: ""))) { result in
+            switch result {
+            case .success(let myInformResponse):
+                guard let myInformResponse = myInformResponse as? ChangeInfoResponseData else { return }
+                self.name = myInformResponse.nickName
+                guard let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String,
+                    let name = self.name else { return }
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.lineSpacing = 4
+                DispatchQueue.main.async {
+                    if language == "KOR" {
+                        let attributeText = "\(name)님의 여행을 함께해요!\nKravel과 당신의 여행을 특별하게 \n만들어보세요.".makeAttributedText([.font: UIFont.systemFont(ofSize: 21), .foregroundColor: UIColor.white, .paragraphStyle: paragraphStyle])
+                        attributeText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 21), .foregroundColor: UIColor.white], range: ("\(name)님의 여행을 함께해요!\nKravel과 당신의 여행을 특별하게 \n만들어보세요." as NSString).range(of: "\(name)님의 여행을 함께해요!"))
+                        self.nameLabel.attributedText = attributeText
+                    } else {
+                        let attributeText = "Let's go on \(name)'s trip together!\nMake your trip special\nwith Kravel.".makeAttributedText([.font: UIFont.systemFont(ofSize: 21), .foregroundColor: UIColor.white, .paragraphStyle: paragraphStyle])
+                        attributeText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 21), .foregroundColor: UIColor.white], range: ("Let's go on \(name)'s trip together!\nMake your trip special\nwith Kravel." as NSString).range(of: "Let's go on \(name)'s trip together!"))
+                        self.nameLabel.attributedText = attributeText
+                    }
+                }
+            case .requestErr:
+                print("requestErr")
+            case .serverErr:
+                print("ServerErr")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
     }
 }
 

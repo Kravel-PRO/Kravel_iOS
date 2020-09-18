@@ -36,6 +36,7 @@ enum APICategory<P: ParameterAble> {
     case getMyPhotoReview(P)
     case getMyScrap(P)
     case changInfo(queryType: String, body: P)
+    case getMyInform(P)
     
     func makeURL() -> String {
         switch self {
@@ -81,6 +82,8 @@ enum APICategory<P: ParameterAble> {
             return APICostants.getMyPhotoReview
         case .getMyScrap:
             return APICostants.getMyScrap
+        case .getMyInform:
+            return APICostants.getMyInform
         }
     }
     
@@ -334,6 +337,8 @@ enum APICategory<P: ParameterAble> {
             }
     
             return parameters
+        case .getMyInform:
+            return nil
         }
     }
 }

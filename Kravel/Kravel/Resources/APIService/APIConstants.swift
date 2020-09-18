@@ -106,4 +106,7 @@ struct APICostants {
     
     // 내 스크랩 가져오기
     static let getMyScrap = APICostants.baseURL + "/api/member/scraps"
+    
+    // 내 정보 불러오기
+    static let getMyInform = APICostants.baseURL + "/api/members/me"
 }

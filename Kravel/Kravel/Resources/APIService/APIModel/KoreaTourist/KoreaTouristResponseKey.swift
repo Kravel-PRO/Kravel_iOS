@@ -11,7 +11,6 @@ import Foundation
 enum KoreaTouristResponseKey: String {
     case item = "item"
     case addr1 = "addr1"
-    case addr2 = "addr2"
     case firstimage = "firstimage"
     case firstimage2 = "firstimage2"
     case mapx = "mapx"
@@ -21,7 +20,6 @@ enum KoreaTouristResponseKey: String {
 
 struct KoreaTourist {
     var addr1: String
-    var addr2: String
     var firstimage: String
     var firstimage2: String
     var mapx: Double

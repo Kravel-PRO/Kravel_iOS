@@ -229,6 +229,7 @@ extension LocationDetailVC {
                 guard let detailInform = detailInform as? PlaceDetailInform else { return }
                 self.placeData = detailInform
                 DispatchQueue.main.async {
+                    self.nearByAttractionView.requestTouristAPI(mapX: detailInform.longitude, mapY: detailInform.latitude)
                     self.setDetailPlaceData()
                     self.stopLottieAnimation()
                 }
