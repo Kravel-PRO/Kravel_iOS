@@ -29,16 +29,16 @@ class SplashVC: UIViewController {
         animationView?.removeFromSuperview()
         animationView = nil
         
-        if UserDefaults.standard.object(forKey: UserDefaultKey.token) == nil {
-            
-        }
-        
-        guard let languageVC = UIStoryboard(name: "SetLanguage", bundle: nil).instantiateViewController(withIdentifier: SetLanguageVC.identifier) as? SetLanguageVC else { return }
-        
         guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
-        keyWindow.rootViewController = languageVC
         
-        // FIXME: 여기서 언어 설정했는지 안했는지 판단해서 어느 화면으로 넘어갈지 로직 필요할 듯
+        if UserDefaults.standard.object(forKey: UserDefaultKey.token) != nil {
+            print("notNil")
+            guard let rootTab = UIStoryboard(name: "Tabbar", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as? UITabBarController else { return }
+            keyWindow.rootViewController = rootTab
+        } else {
+            guard let languageVC = UIStoryboard(name: "SetLanguage", bundle: nil).instantiateViewController(withIdentifier: SetLanguageVC.identifier) as? SetLanguageVC else { return }
+            keyWindow.rootViewController = languageVC
+        }
     }
     
     // MARK: - 토큰의 만료기간 검사해서 만료된 경우 발급받는 로직 추가
@@ -67,5 +67,21 @@ class SplashVC: UIViewController {
             animationView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             animationView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+}
+
+extension SplashVC {
+    // MARK: - 언어 설정 동기화 맞추기 필요
+    private func requestMyinfo() {
+        NetworkHandler.shared.requestAPI(apiCategory: .getMyInform(ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: "", nickName: "", speech: ""))) { result in
+            switch result {
+            case .success(let myInformResponse):
+                guard let myInformResponse = myInformResponse as? ChangeInfoResponseData else { return }
+                
+            case .requestErr: break
+            case .serverErr: break
+            case .networkFail: break
+            }
+        }
     }
 }

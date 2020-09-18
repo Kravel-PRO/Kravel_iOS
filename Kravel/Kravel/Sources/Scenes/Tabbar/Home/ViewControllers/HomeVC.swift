@@ -151,6 +151,7 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 //        setIndicatorView()
+        requestLocation()
         addObserver()
         setLabelByLanguage()
     }
@@ -193,7 +194,6 @@ class HomeVC: UIViewController {
     // MARK: - UIViewController viewDidAppear Override
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        requestLocation()
         requestReviewData()
         requestHotPlaceData()
     }

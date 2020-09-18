@@ -140,8 +140,22 @@ class MapVC: UIViewController {
     }
     
     @objc func refresh(_ sender: Any) {
-        let cameraPosition = mapView.cameraPosition.target
-        requestClosePlaceData(latitude: cameraPosition.lat, longitude: cameraPosition.lng)
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedAlways:
+            let cameraPosition = mapView.cameraPosition.target
+            requestClosePlaceData(latitude: cameraPosition.lat, longitude: cameraPosition.lng)
+        case .authorizedWhenInUse:
+            let cameraPosition = mapView.cameraPosition.target
+            requestClosePlaceData(latitude: cameraPosition.lat, longitude: cameraPosition.lng)
+        case .notDetermined:
+            deniedAuthor()
+        case .restricted:
+            deniedAuthor()
+        case .denied:
+            deniedAuthor()
+        @unknown default:
+            break
+        }
     }
     
     private func setRefreshButtonLayout() {
@@ -172,7 +186,33 @@ class MapVC: UIViewController {
 
     // 내 위치 찾아오기 Core Location 설정
     private func setLocationManager() {
-        LocationManager.shared.requestAuthorization()
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:
+            currentLocationButton.isUserInteractionEnabled = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                let cameraPosition = self.mapView.cameraPosition.target
+                self.requestClosePlaceData(latitude: cameraPosition.lat, longitude: cameraPosition.lng)
+            }
+        case .authorizedAlways:
+            break
+        case .notDetermined:
+            deniedAuthor()
+        case .restricted:
+            deniedAuthor()
+        case .denied:
+            deniedAuthor()
+        @unknown default:
+            break
+        }
+    }
+    
+    private func deniedAuthor() {
+        guard let authorizationVC = UIStoryboard(name: "AuthorizationPopup", bundle: nil).instantiateViewController(withIdentifier: AuthorizationPopupVC.identifier) as? AuthorizationPopupVC else { return }
+        authorizationVC.setAuthorType(author: .location)
+        authorizationVC.modalPresentationStyle = .overFullScreen
+        self.present(authorizationVC, animated: false, completion: nil)
+        currentLocationButton.setImage(UIImage(named: ImageKey.icGPSInActive), for: .normal)
+        currentLocationButton.isUserInteractionEnabled = false
     }
     
     // 카메라를 현재 Overlay 위치로 옮겨주는 코드
@@ -220,6 +260,7 @@ class MapVC: UIViewController {
         didSet {
             nearPlaceCollectionView.dataSource = self
             nearPlaceCollectionView.delegate = self
+            nearPlaceCollectionView.isHidden = true
             nearPlaceCollectionView.showsHorizontalScrollIndicator = false
             nearPlaceCollectionView.showsVerticalScrollIndicator = false
         }
@@ -377,29 +418,6 @@ class MapVC: UIViewController {
         
         // FIXME: - 이 부분 카메라 이동에 따라 데이터 받아올 수 있도록 수정해야함
         requestSimplePlaceData()
-        
-        // FIXME: - 여기 가까운 장소 데이터 내 위치로 이동하고 난 후 받아올 수 있게 수정
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-            let cameraPosition = self.mapView.cameraPosition.target
-            self.requestClosePlaceData(latitude: cameraPosition.lat, longitude: cameraPosition.lng)
-        }
-    }
-    
-    private func checkLocationAuthor() {
-        switch CLLocationManager.authorizationStatus() {
-        case .authorizedAlways:
-            print("허용됨")
-        case .authorizedWhenInUse:
-            print("허용되지 않음")
-        case .notDetermined:
-            print("됨")
-        case .restricted:
-            print("허용되지 않음")
-        case .denied:
-            print("거부됨")
-        @unknown default:
-            break
-        }
     }
     
     // MARK: - 지도 표시를 위한 ID, 위도, 경도 간단한 값 API 요청
