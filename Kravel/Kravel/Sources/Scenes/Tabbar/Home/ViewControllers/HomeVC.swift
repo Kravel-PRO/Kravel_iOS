@@ -71,6 +71,13 @@ class HomeVC: UIViewController {
     }
     
     // MARK: - 인기 있는 장소 설정
+    @IBOutlet weak var hotPlaceStackView: UIStackView! {
+        didSet {
+            hotPlaceStackView.arrangedSubviews[0].isHidden = true
+        }
+    }
+    @IBOutlet weak var placeEmptyLabel: UILabel!
+    
     @IBOutlet weak var hotPlaceLabel: UILabel!
     
     @IBOutlet weak var hotPlaceCollectionViewHeightConstraint: NSLayoutConstraint!
@@ -81,6 +88,11 @@ class HomeVC: UIViewController {
         let lineSpacing: CGFloat = 12
         let cellWidth = hotPlaceCollectionView.frame.width - 2*horizontalSpacing
         let cellHeight = cellWidth * 0.46
+        if hotPlaceData.count == 0 {
+            hotPlaceStackView.arrangedSubviews[0].isHidden = false
+        } else {
+            hotPlaceStackView.arrangedSubviews[0].isHidden = true
+        }
         hotPlaceCollectionViewHeightConstraint.constant = cellHeight * CGFloat(hotPlaceData.count) + lineSpacing * CGFloat((hotPlaceData.count-1))
     }
     
@@ -108,9 +120,19 @@ class HomeVC: UIViewController {
         let defaultHeight: CGFloat = 48
         let horizontalSpacing = view.frame.width / 23.44
         let cellHeight: CGFloat = (photoReviewView.frame.width - horizontalSpacing*2 - 4*2) / 3
-        if photoReviewData.count == 0 { photoReviewViewHeightConstraint.constant = defaultHeight }
-        else if photoReviewData.count <= 3 { photoReviewViewHeightConstraint.constant = defaultHeight + cellHeight }
-        else { photoReviewViewHeightConstraint.constant = defaultHeight + 2 * cellHeight }
+        if photoReviewData.count == 0 {
+            photoReviewViewHeightConstraint.constant = defaultHeight + 35 + 75
+            photoReviewView.photoReviewEmptyView.isHidden = false
+            photoReviewView.photoReviewCollectionView.isHidden = true
+        } else if photoReviewData.count <= 3 {
+            photoReviewViewHeightConstraint.constant = defaultHeight + cellHeight
+            photoReviewView.photoReviewEmptyView.isHidden = true
+            photoReviewView.photoReviewCollectionView.isHidden = false
+        } else {
+            photoReviewViewHeightConstraint.constant = defaultHeight + 2 * cellHeight
+            photoReviewView.photoReviewEmptyView.isHidden = true
+            photoReviewView.photoReviewCollectionView.isHidden = false
+        }
     }
     
     // 포토리뷰 보여주는 데이터
@@ -147,6 +169,7 @@ class HomeVC: UIViewController {
         let attributeHotPlace = "요즘 여기가 인기 있어요!".localized.makeAttributedText([.font: UIFont.boldSystemFont(ofSize: 18)])
         attributeHotPlace.addAttributes([.font: UIFont.systemFont(ofSize: 18)], range: ("요즘 여기가 인기 있어요!".localized as NSString).range(of: "인기 있어요!".localized))
         hotPlaceLabel.attributedText = attributeHotPlace
+        placeEmptyLabel.text = "조금만 기다려주세요!\n특별한 장소를 찾아올게요!".localized
     }
     
     // MARK: - UIViewController viewWillAppear Override
