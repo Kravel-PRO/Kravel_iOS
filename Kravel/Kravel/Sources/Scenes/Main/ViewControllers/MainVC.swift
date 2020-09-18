@@ -205,6 +205,8 @@ extension MainVC: LoginTextViewDelegate {
                 // 받은 Token 값 저장
                 guard let token = token as? String else { return }
                 UserDefaults.standard.set(token, forKey: UserDefaultKey.token)
+                UserDefaults.standard.set(id, forKey: UserDefaultKey.loginId)
+                UserDefaults.standard.set(pw, forKey: UserDefaultKey.loginPw)
                 
                 // 메인 화면으로 이동
                 guard let mainTabVC = UIStoryboard(name: "Tabbar", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as? UITabBarController else { return }

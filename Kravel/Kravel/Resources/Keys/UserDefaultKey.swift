@@ -17,4 +17,8 @@ struct UserDefaultKey {
     
     // 닉네임 설정
     static let nickName = "nickName"
+    
+    // 로그인 ID, PW
+    static let loginId = "loginId"
+    static let loginPw = "loginPw"
 }

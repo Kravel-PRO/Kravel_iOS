@@ -13,5 +13,5 @@ struct ChangeInfoBodyParameter: ParameterAble {
     let modifyLoginPw: String
     let gender: String
     let nickName: String
-    let speech: String
+    let speech: String?
 }

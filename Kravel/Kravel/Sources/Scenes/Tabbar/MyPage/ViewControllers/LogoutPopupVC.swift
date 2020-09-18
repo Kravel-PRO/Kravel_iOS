@@ -73,6 +73,9 @@ class LogoutPopupVC: UIViewController {
         UserDefaults.standard.removeObject(forKey: UserDefaultKey.token)
         guard let startRootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "StartRoot") as? UINavigationController else { return }
         guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
+        UserDefaults.standard.removeObject(forKey: UserDefaultKey.loginId)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKey.loginPw)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKey.token)
         window.rootViewController = startRootVC
     }
     

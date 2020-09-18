@@ -108,8 +108,9 @@ extension ChangeInfoVC {
     // MARK: - 정보 수정 API 연결
     private func requestChangInfo() {
         guard let selectedSex = self.selectedSex,
-            let modifiedNickName = self.nicknameTextField.text else { return }
-        let changInfoBodyParameter = ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: selectedSex, nickName: modifiedNickName, speech: "")
+            let modifiedNickName = self.nicknameTextField.text,
+            let currentLang = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return }
+        let changInfoBodyParameter = ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: selectedSex, nickName: modifiedNickName, speech: currentLang)
         
         NetworkHandler.shared.requestAPI(apiCategory: .changInfo(queryType: "nickNameAndGender", body: changInfoBodyParameter)) { result in
             switch result {
@@ -118,10 +119,9 @@ extension ChangeInfoVC {
                 if let nickName = changeInfoResponse.nickName { UserDefaults.standard.set(nickName, forKey: UserDefaultKey.nickName) }
                 print(changeInfoResponse)
                 self.navigationController?.popViewController(animated: true)
-            case .requestErr(_):
-                print("tlfvo")
+            case .requestErr(_): return
             case .serverErr:
-                print("tlfvo")
+                print("serverErr")
             case .networkFail:
                 guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
                 networkFailPopupVC.modalPresentationStyle = .overFullScreen

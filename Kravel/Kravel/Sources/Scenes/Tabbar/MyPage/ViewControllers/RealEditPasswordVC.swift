@@ -111,20 +111,39 @@ class RealEditPasswordVC: UIViewController {
 }
 
 extension RealEditPasswordVC {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+}
+
+extension RealEditPasswordVC {
     // MARK: - 비밀번호 수정 API 연결
     private func requestModifyPassword() {
-        let changeInfoParameter = ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: "", nickName: "", speech: "")
+        guard let loginPw = checkPwTextField.text,
+              let modifiedPw = pwTextField.text else { return }
+        
+        let changeInfoParameter = ChangeInfoBodyParameter(loginPw: loginPw, modifyLoginPw: modifiedPw, gender: "", nickName: "", speech: nil)
         
         NetworkHandler.shared.requestAPI(apiCategory: .changInfo(queryType: "password", body: changeInfoParameter)) { result in
             switch result {
             case .success(let successData):
-                print(successData)
+                guard let changeInfoResponse =  successData as? ChangeInfoResponseData else { return }
+                UserDefaults.standard.setValue(changeInfoResponse.loginEmail, forKey: UserDefaultKey.loginId)
+                UserDefaults.standard.setValue(changeInfoResponse.loginPw, forKey: UserDefaultKey.loginPw)
+                print("성공")
+                self.navigationController?.popViewController(animated: true)
             case .requestErr:
                 print("Request Err")
             case .serverErr:
-                print("Server Err")
+                guard let authorFailPopupVC = UIStoryboard(name: "LoginPopup", bundle: nil).instantiateViewController(withIdentifier: LoginPopupVC.identifier) as? LoginPopupVC else { return }
+                authorFailPopupVC.titleMessage = "인증을 실패했습니다.".localized
+                authorFailPopupVC.message = "비밀번호를 다시 입력해주세요.".localized
+                authorFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(authorFailPopupVC, animated: false, completion: nil)
             case .networkFail:
-                print("networkFail")
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
             }
         }
     }

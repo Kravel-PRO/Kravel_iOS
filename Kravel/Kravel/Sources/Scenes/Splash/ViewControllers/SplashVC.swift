@@ -29,12 +29,21 @@ class SplashVC: UIViewController {
         animationView?.removeFromSuperview()
         animationView = nil
         
+        if UserDefaults.standard.object(forKey: UserDefaultKey.token) == nil {
+            
+        }
+        
         guard let languageVC = UIStoryboard(name: "SetLanguage", bundle: nil).instantiateViewController(withIdentifier: SetLanguageVC.identifier) as? SetLanguageVC else { return }
         
         guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
         keyWindow.rootViewController = languageVC
         
         // FIXME: 여기서 언어 설정했는지 안했는지 판단해서 어느 화면으로 넘어갈지 로직 필요할 듯
+    }
+    
+    // MARK: - 토큰의 만료기간 검사해서 만료된 경우 발급받는 로직 추가
+    private func isOverToken() {
+        
     }
 
     // MARK: - UIViewController viewDidLoad Override 설정

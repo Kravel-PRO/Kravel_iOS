@@ -301,7 +301,10 @@ enum APICategory<P: ParameterAble> {
             parameters.updateValue(changeInfoBodyParameter.nickName, forKey: "nickName")
             parameters.updateValue(changeInfoBodyParameter.loginPw, forKey: "loginPw")
             parameters.updateValue(changeInfoBodyParameter.modifyLoginPw, forKey: "modifyLoginPw")
-            parameters.updateValue(changeInfoBodyParameter.speech, forKey: "speech")
+            
+            if let speech = changeInfoBodyParameter.speech {
+                parameters.updateValue(changeInfoBodyParameter.speech, forKey: "speech")
+            }
             return parameters
         case .getMyPhotoReview(let reviewParameter):
             var parameters: [String: Any] = [:]

@@ -406,7 +406,10 @@ class NetworkHandler {
                 case .success(let successData):
                     guard let statusCode = response.response?.statusCode else { return }
                     if statusCode == 200 { completion(.success(successData.data?.result)) }
-                    else { completion(.serverErr) }
+                    else {
+                        print(statusCode)
+                        print(successData)
+                        completion(.serverErr) }
                 case .failure(let error):
                     print(error)
                     completion(.networkFail)
