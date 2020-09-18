@@ -165,7 +165,7 @@ class LocationDetailVC: UIViewController {
     }
     
     private func setPhotoReviewLabel() {
-        let photoReviewAttributeText = "포토 리뷰".makeAttributedText([.font: UIFont.boldSystemFont(ofSize: 16), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)])
+        let photoReviewAttributeText = "포토 리뷰".localized.makeAttributedText([.font: UIFont.boldSystemFont(ofSize: 16), .foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)])
         photoReviewView.attributeTitle = photoReviewAttributeText
     }
     
@@ -173,9 +173,19 @@ class LocationDetailVC: UIViewController {
         let defaultHeight: CGFloat = 48
         let horizontalSpacing = view.frame.width / 23.44
         let cellHeight: CGFloat = (photoReviewView.frame.width - horizontalSpacing*2 - 4*2) / 3
-        if photoReviewData.count == 0 { photoReviewViewHeightConstraint.constant = defaultHeight }
-        else if photoReviewData.count <= 3 { photoReviewViewHeightConstraint.constant = defaultHeight + cellHeight + 16 }
-        else { photoReviewViewHeightConstraint.constant = defaultHeight + 2 * cellHeight + 16 }
+        if photoReviewData.count == 0 {
+            photoReviewViewHeightConstraint.constant = defaultHeight + 35 + 75
+            photoReviewView.photoReviewEmptyView.isHidden = false
+            photoReviewView.photoReviewCollectionView.isHidden = true
+        } else if photoReviewData.count <= 3 {
+            photoReviewViewHeightConstraint.constant = defaultHeight + cellHeight + 16
+            photoReviewView.photoReviewEmptyView.isHidden = true
+            photoReviewView.photoReviewCollectionView.isHidden = false
+        } else {
+            photoReviewViewHeightConstraint.constant = defaultHeight + 2 * cellHeight + 16
+            photoReviewView.photoReviewEmptyView.isHidden = true
+            photoReviewView.photoReviewCollectionView.isHidden = false
+        }
         
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
@@ -256,7 +266,6 @@ extension LocationDetailVC {
             case .requestErr(let error):
                 print(error)
             case .serverErr:
-                print("여기야?")
                 print("Server Err")
             case .networkFail:
                 guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
