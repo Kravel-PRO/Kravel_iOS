@@ -77,6 +77,8 @@ enum APICategory<P: ParameterAble> {
             return APICostants.getReviewOfMedia
         case .changInfo(let query, _):
             APICostants.infoTypeQuery = query
+            print(query)
+            print(APICostants.changeInfo)
             return APICostants.changeInfo
         case .getMyPhotoReview:
             return APICostants.getMyPhotoReview
@@ -303,7 +305,7 @@ enum APICategory<P: ParameterAble> {
             parameters.updateValue(changeInfoBodyParameter.modifyLoginPw, forKey: "modifyLoginPw")
             
             if let speech = changeInfoBodyParameter.speech {
-                parameters.updateValue(changeInfoBodyParameter.speech, forKey: "speech")
+                parameters.updateValue(speech, forKey: "speech")
             }
             return parameters
         case .getMyPhotoReview(let reviewParameter):

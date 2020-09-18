@@ -99,7 +99,11 @@ struct APICostants {
     static var infoTypeQuery: String = ""
     
     // 마이페이지 내 정보 수정
-    static let changeInfo = APICostants.baseURL + "/api/member?type=\(infoTypeQuery)"
+    static var changeInfo: String {
+        get {
+            APICostants.baseURL + "/api/member?type=\(infoTypeQuery)"
+        }
+    }
     
     // 내 포토리뷰 가져오기
     static let getMyPhotoReview = APICostants.baseURL + "/api/member/reviews"

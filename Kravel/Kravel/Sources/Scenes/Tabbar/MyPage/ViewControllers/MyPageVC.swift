@@ -13,8 +13,6 @@ class MyPageVC: UIViewController {
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     
-    var name: String?
-    
     @IBOutlet weak var myPhotoReviewLabel: UILabel!
     @IBOutlet weak var myScrapLabel: UILabel!
     
@@ -96,20 +94,20 @@ extension MyPageVC {
         NetworkHandler.shared.requestAPI(apiCategory: .getMyInform(ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: "", nickName: "", speech: ""))) { result in
             switch result {
             case .success(let myInformResponse):
-                guard let myInformResponse = myInformResponse as? ChangeInfoResponseData else { return }
-                self.name = myInformResponse.nickName
-                guard let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String,
-                    let name = self.name else { return }
+                guard let myInformResponse = myInformResponse as? ChangeInfoResponseData,
+                      let nickname = myInformResponse.nickName else { return }
+                
+                guard let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return }
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.lineSpacing = 4
                 DispatchQueue.main.async {
                     if language == "KOR" {
-                        let attributeText = "\(name)님의 여행을 함께해요!\nKravel과 당신의 여행을 특별하게 \n만들어보세요.".makeAttributedText([.font: UIFont.systemFont(ofSize: 21), .foregroundColor: UIColor.white, .paragraphStyle: paragraphStyle])
-                        attributeText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 21), .foregroundColor: UIColor.white], range: ("\(name)님의 여행을 함께해요!\nKravel과 당신의 여행을 특별하게 \n만들어보세요." as NSString).range(of: "\(name)님의 여행을 함께해요!"))
+                        let attributeText = "\(nickname)님의 여행을 함께해요!\nKravel과 당신의 여행을 특별하게 \n만들어보세요.".makeAttributedText([.font: UIFont.systemFont(ofSize: 21), .foregroundColor: UIColor.white, .paragraphStyle: paragraphStyle])
+                        attributeText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 21), .foregroundColor: UIColor.white], range: ("\(nickname)님의 여행을 함께해요!\nKravel과 당신의 여행을 특별하게 \n만들어보세요." as NSString).range(of: "\(nickname)님의 여행을 함께해요!"))
                         self.nameLabel.attributedText = attributeText
                     } else {
-                        let attributeText = "Let's go on \(name)'s trip together!\nMake your trip special\nwith Kravel.".makeAttributedText([.font: UIFont.systemFont(ofSize: 21), .foregroundColor: UIColor.white, .paragraphStyle: paragraphStyle])
-                        attributeText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 21), .foregroundColor: UIColor.white], range: ("Let's go on \(name)'s trip together!\nMake your trip special\nwith Kravel." as NSString).range(of: "Let's go on \(name)'s trip together!"))
+                        let attributeText = "Let's go on \(nickname)'s trip together!\nMake your trip special\nwith Kravel.".makeAttributedText([.font: UIFont.systemFont(ofSize: 21), .foregroundColor: UIColor.white, .paragraphStyle: paragraphStyle])
+                        attributeText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 21), .foregroundColor: UIColor.white], range: ("Let's go on \(nickname)'s trip together!\nMake your trip special\nwith Kravel." as NSString).range(of: "Let's go on \(nickname)'s trip together!"))
                         self.nameLabel.attributedText = attributeText
                     }
                 }

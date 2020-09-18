@@ -108,9 +108,9 @@ extension ChangeInfoVC {
     // MARK: - 정보 수정 API 연결
     private func requestChangInfo() {
         guard let selectedSex = self.selectedSex,
-            let modifiedNickName = self.nicknameTextField.text,
-            let currentLang = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return }
-        let changInfoBodyParameter = ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: selectedSex, nickName: modifiedNickName, speech: currentLang)
+            let modifiedNickName = self.nicknameTextField.text else { return }
+
+        let changInfoBodyParameter = ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: selectedSex, nickName: modifiedNickName, speech: "KOR")
         
         NetworkHandler.shared.requestAPI(apiCategory: .changInfo(queryType: "nickNameAndGender", body: changInfoBodyParameter)) { result in
             switch result {
