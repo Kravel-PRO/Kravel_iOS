@@ -143,9 +143,19 @@ class PlacePopupView: UIView {
         let defaultHeight: CGFloat = 48
         let horizontalSpacing = view.frame.width / 23.44
         let cellHeight: CGFloat = (self.frame.width - horizontalSpacing*2 - 4*2) / 3
-        if photoReviewData.count == 0 { photoReviewHeightConstraint.constant = defaultHeight }
-        else if photoReviewData.count <= 3 { photoReviewHeightConstraint.constant = defaultHeight + cellHeight + 16 }
-        else { photoReviewHeightConstraint.constant = defaultHeight + 2 * cellHeight + 16 }
+        if photoReviewData.count == 0 {
+            photoReviewHeightConstraint.constant = defaultHeight + 35 + 75
+            photoReviewContainerView.photoReviewEmptyView.isHidden = false
+            photoReviewContainerView.photoReviewCollectionView.isHidden = true
+        } else if photoReviewData.count <= 3 {
+            photoReviewHeightConstraint.constant = defaultHeight + cellHeight + 16
+            photoReviewContainerView.photoReviewEmptyView.isHidden = true
+            photoReviewContainerView.photoReviewCollectionView.isHidden = false
+        } else {
+            photoReviewHeightConstraint.constant = defaultHeight + 2 * cellHeight + 16
+            photoReviewContainerView.photoReviewEmptyView.isHidden = true
+            photoReviewContainerView.photoReviewCollectionView.isHidden = false
+        }
     }
     
     private func setPhotoReviewLabel() {

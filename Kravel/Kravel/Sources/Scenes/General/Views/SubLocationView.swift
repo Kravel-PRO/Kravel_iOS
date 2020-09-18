@@ -14,7 +14,11 @@ class SubLocationView: UIView {
     var view: UIView!
     
     // MARK: - 위치를 설명해주는 Label
-    @IBOutlet weak var locationDescriptionLabel: UILabel!
+    @IBOutlet weak var locationDescriptionLabel: UILabel! {
+        didSet {
+            locationDescriptionLabel.text = "위치".localized
+        }
+    }
     
     var locationDescription: String? {
         didSet {
