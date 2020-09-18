@@ -83,7 +83,9 @@ class NearByAttractionCell: UICollectionViewCell {
             shadowView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
             shadowView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
             nearByAttractionNameLabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
-            nearByAttractionNameLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
+            nearByAttractionNameLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            nearByAttractionNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            nearByAttractionNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         ])
     }
 }

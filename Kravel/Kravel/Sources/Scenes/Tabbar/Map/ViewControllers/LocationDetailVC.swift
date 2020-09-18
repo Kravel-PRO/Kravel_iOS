@@ -187,11 +187,13 @@ class LocationDetailVC: UIViewController {
     
     // MARK: - 내 주변 관광지 뷰 설정
     @IBOutlet weak var nearByAttractionView: NearByAttractionView!
+    @IBOutlet weak var attrcationViewHeightConstraint: NSLayoutConstraint!
     
     // MARK: - UIViewController viewDidLoad() Override 부분
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        addObserver()
         showLoadingLottie()
         if navigationController?.viewControllers[0] == self {
             addGesture()
@@ -217,6 +219,24 @@ class LocationDetailVC: UIViewController {
         self.navigationController?.navigationBar.topItem?.title = ""
         guard let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else { return }
         backButtonTopConstraint.constant = window.safeAreaInsets.top
+    }
+}
+
+extension LocationDetailVC {
+    private func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(setNearAttrcation(_:)), name: .completeAttraction, object: nil)
+    }
+    
+    @objc func setNearAttrcation(_ notification: NSNotification) {
+        guard let isEmpty = notification.userInfo?["isEmpty"] as? Bool else { return }
+        
+        DispatchQueue.main.async {
+            if isEmpty {
+                self.attrcationViewHeightConstraint.constant = 52
+            } else {
+                self.attrcationViewHeightConstraint.constant = self.nearByAttractionView.nearByAttractionCollectionView.frame.height + 52
+            }
+        }
     }
 }
 

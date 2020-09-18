@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="De7-U9-PzG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="De7-U9-PzG">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,7 +31,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="266"/>
                                                     </imageView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="bN3-Fn-yME" secondAttribute="bottom" id="U14-0j-fyd"/>
                                                     <constraint firstItem="bN3-Fn-yME" firstAttribute="leading" secondItem="kxz-aY-Bcc" secondAttribute="leading" id="byR-A3-EhY"/>
@@ -49,7 +51,7 @@
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sNN-bY-g9G">
                                                 <rect key="frame" x="16" y="305.33333333333331" width="382" height="22"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="xPN-wx-g6I"/>
                                                 </constraints>
@@ -111,7 +113,7 @@
                                                         </constraints>
                                                     </view>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="zQT-Kr-CPh" firstAttribute="centerY" secondItem="7Ni-ef-Vh2" secondAttribute="centerY" id="9qT-eF-wL5"/>
                                                     <constraint firstAttribute="width" secondItem="7Ni-ef-Vh2" secondAttribute="height" multiplier="343:48" id="GcG-Xl-l6c"/>
@@ -132,7 +134,7 @@
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gy6-Z3-9yy" customClass="PhotoReviewView" customModule="Kravel" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="435.66666666666669" width="414" height="48"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="pfD-FS-KjH"/>
                                                 </constraints>
@@ -146,7 +148,7 @@
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2qT-Kh-WAK" customClass="SubLocationView" customModule="Kravel" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="484.66666666666674" width="414" height="360"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="360" id="y8Y-Xb-emK"/>
                                                 </constraints>
@@ -160,12 +162,12 @@
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QgE-mE-ZfT" customClass="NearByAttractionView" customModule="Kravel" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="845.66666666666663" width="414" height="189.99999999999989"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="190" id="3Go-qr-Div"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PLn-bZ-Edg">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PLn-bZ-Edg">
                                                 <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="PLn-bZ-Edg" secondAttribute="height" multiplier="1:1" id="h4P-I2-cYu"/>
@@ -173,7 +175,7 @@
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="2qT-Kh-WAK" firstAttribute="top" secondItem="Q93-kb-Tfy" secondAttribute="bottom" id="28S-AC-kJw"/>
                                             <constraint firstAttribute="trailing" secondItem="QgE-mE-ZfT" secondAttribute="trailing" id="2Ww-xh-8N2"/>
@@ -222,7 +224,8 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="dqO-tx-87Z"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="h70-xP-WHO" firstAttribute="top" secondItem="GhO-OB-mHg" secondAttribute="top" id="9a2-Sw-soI"/>
                             <constraint firstAttribute="bottom" secondItem="h70-xP-WHO" secondAttribute="bottom" id="Er5-3C-4Kc"/>
@@ -231,11 +234,11 @@
                             <constraint firstItem="dqO-tx-87Z" firstAttribute="trailing" secondItem="h70-xP-WHO" secondAttribute="trailing" id="lNm-XU-DcS"/>
                             <constraint firstItem="h70-xP-WHO" firstAttribute="leading" secondItem="dqO-tx-87Z" secondAttribute="leading" id="oxe-Al-Mpf"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="dqO-tx-87Z"/>
                     </view>
                     <navigationItem key="navigationItem" id="3bx-B5-zpb"/>
                     <size key="freeformSize" width="414" height="1400"/>
                     <connections>
+                        <outlet property="attrcationViewHeightConstraint" destination="3Go-qr-Div" id="y9N-4e-Fhg"/>
                         <outlet property="backButton" destination="PLn-bZ-Edg" id="eWa-iM-ejY"/>
                         <outlet property="backButtonTopConstraint" destination="9kp-hH-d9s" id="Yd3-n3-zQe"/>
                         <outlet property="buttonStackContainerView" destination="7Ni-ef-Vh2" id="cA2-ab-Tzh"/>
@@ -277,5 +280,8 @@
     <resources>
         <image name="icPhoto" width="24" height="24"/>
         <image name="icScrap" width="24" height="24"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

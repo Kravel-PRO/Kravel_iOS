@@ -77,7 +77,6 @@ class NearByAttractionView: UIView {
         xmlParser?.parse()
         
         DispatchQueue.main.async {
-            print(self.nearByAttractions)
             self.nearByAttractionCollectionView.reloadData()
             NotificationCenter.default.post(name: .completeAttraction, object: nil
                 , userInfo: ["isEmpty": self.nearByAttractions.isEmpty])
@@ -105,7 +104,6 @@ extension NearByAttractionView: XMLParserDelegate {
         guard tempTouristDic != nil,
             let crtElementType = self.crtElementType else { return }
         tempTouristDic?.updateValue(string, forKey: crtElementType.rawValue)
-        print(tempTouristDic)
         self.crtElementType = nil
     }
     
@@ -129,8 +127,6 @@ extension NearByAttractionView: XMLParserDelegate {
                 let mapy = tempTouristDic[KoreaTouristResponseKey.mapx.rawValue],
                 let castingMapy = Double(mapy),
                 let title = tempTouristDic[KoreaTouristResponseKey.title.rawValue] else { return }
-            
-            print(tempTouristDic)
             
             touristItem.addr1 = addr1
             touristItem.firstimage = firstimage
