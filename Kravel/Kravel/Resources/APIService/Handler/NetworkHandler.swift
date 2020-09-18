@@ -302,6 +302,7 @@ class NetworkHandler {
                 switch response.result {
                 case .success(let celebResult):
                     guard let statusCode = response.response?.statusCode else { return }
+                    print(celebResult)
                     if statusCode == 200 {
                         completion(.success(celebResult.data?.result?.content))
                     } else {

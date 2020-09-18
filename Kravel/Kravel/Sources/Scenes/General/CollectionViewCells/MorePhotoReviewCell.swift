@@ -35,7 +35,7 @@ class MorePhotoReviewCell: UICollectionViewCell {
     
     @IBAction func like(_ sender: Any) {
         guard let indexPath = self.indexPath else { return }
-        delegate?.clickHeart(at: indexPath)
+        delegate?.click(at: indexPath)
     }
     
     // MARK: - 좋아요 개수 표시 Label 설정

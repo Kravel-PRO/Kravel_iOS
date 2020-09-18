@@ -50,7 +50,7 @@ class RecentResearchCell: UITableViewCell {
     // Delete 버튼 클릭했을 때, Delegate에 이벤트 전달
     @objc func deleteRecentResearch(_ sender: Any) {
         guard let indexPath = self.indexPath else { return }
-        cellButtonDelegate?.clickHeart(at: indexPath)
+        cellButtonDelegate?.click(at: indexPath)
     }
     
     private func addDeleteButtonAction() {
@@ -85,13 +85,14 @@ class RecentResearchCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubViews()
-        setConstraint()
         addDeleteButtonAction()
+        setConstraint()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         addSubViews()
+        addDeleteButtonAction()
         setConstraint()
     }
     

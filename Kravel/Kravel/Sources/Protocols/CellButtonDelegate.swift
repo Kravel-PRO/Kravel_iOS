@@ -9,5 +9,5 @@
 import Foundation
 
 protocol CellButtonDelegate {
-    func clickHeart(at indexPath: IndexPath)
+    func click(at indexPath: IndexPath)
 }

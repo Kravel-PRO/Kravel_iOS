@@ -178,7 +178,7 @@ extension OtherPhotoReviewVC: UICollectionViewDelegateFlowLayout {
 }
 
 extension OtherPhotoReviewVC: CellButtonDelegate {
-    func clickHeart(at indexPath: IndexPath) {
+    func click(at indexPath: IndexPath) {
         guard let like = photoReviewData[indexPath.row].like,
             let reviewId = photoReviewData[indexPath.row].reviewId,
             let placeId = photoReviewData[indexPath.row].place?.placeId,

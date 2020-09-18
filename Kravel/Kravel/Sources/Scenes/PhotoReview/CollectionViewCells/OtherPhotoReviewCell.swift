@@ -40,7 +40,7 @@ class OtherPhotoReviewCell: UICollectionViewCell {
     // Delegate에 전달
     @IBAction func like(_ sender: Any) {
         guard let indexPath = self.indexPath else { return }
-        delegate?.clickHeart(at: indexPath)
+        delegate?.click(at: indexPath)
     }
     
     // MARK: - 좋아요 개수 Label 설정
