@@ -35,13 +35,13 @@
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="bN3-Fn-yME" secondAttribute="bottom" id="U14-0j-fyd"/>
                                                     <constraint firstItem="bN3-Fn-yME" firstAttribute="leading" secondItem="kxz-aY-Bcc" secondAttribute="leading" id="byR-A3-EhY"/>
-                                                    <constraint firstAttribute="width" secondItem="kxz-aY-Bcc" secondAttribute="height" multiplier="207:133" id="i8C-s9-m2I"/>
                                                     <constraint firstItem="bN3-Fn-yME" firstAttribute="top" secondItem="kxz-aY-Bcc" secondAttribute="top" id="lgZ-Eg-K2h"/>
+                                                    <constraint firstAttribute="height" constant="266" id="oXL-Jb-Hn9"/>
                                                     <constraint firstAttribute="trailing" secondItem="bN3-Fn-yME" secondAttribute="trailing" id="yvp-HS-tPT"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TZG-Bf-OBu">
-                                                <rect key="frame" x="16.000000000000004" y="282" width="42.333333333333343" height="19.333333333333314"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TZG-Bf-OBu">
+                                                <rect key="frame" x="16" y="282" width="0.0" height="19.333333333333314"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="19.329999999999998" id="Otr-Hb-chI"/>
                                                 </constraints>
@@ -73,8 +73,8 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fI2-wj-W2V">
-                                                <rect key="frame" x="16" y="339.33333333333331" width="28.666666666666671" height="10"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fI2-wj-W2V">
+                                                <rect key="frame" x="16" y="339.33333333333331" width="0.0" height="10"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="10" id="w5X-Gn-MCf"/>
                                                 </constraints>
@@ -203,11 +203,11 @@
                                             <constraint firstItem="BYs-cn-XLo" firstAttribute="leading" secondItem="VAc-2F-GVg" secondAttribute="leading" id="YWc-JX-ezf"/>
                                             <constraint firstItem="TZG-Bf-OBu" firstAttribute="leading" secondItem="VAc-2F-GVg" secondAttribute="leading" constant="16" id="cTM-Rn-SNu"/>
                                             <constraint firstAttribute="trailing" secondItem="2qT-Kh-WAK" secondAttribute="trailing" id="dEh-6B-hfZ"/>
-                                            <constraint firstItem="TZG-Bf-OBu" firstAttribute="top" secondItem="kxz-aY-Bcc" secondAttribute="bottom" constant="16" id="fIa-6Z-E3B"/>
                                             <constraint firstItem="kxz-aY-Bcc" firstAttribute="top" secondItem="VAc-2F-GVg" secondAttribute="top" id="hVo-1N-Feq"/>
                                             <constraint firstItem="BYs-cn-XLo" firstAttribute="top" secondItem="2qT-Kh-WAK" secondAttribute="bottom" id="her-En-vw9"/>
                                             <constraint firstAttribute="trailing" secondItem="gy6-Z3-9yy" secondAttribute="trailing" id="hog-4X-xuK"/>
                                             <constraint firstItem="QgE-mE-ZfT" firstAttribute="top" secondItem="BYs-cn-XLo" secondAttribute="bottom" id="jeS-T0-fmS"/>
+                                            <constraint firstItem="TZG-Bf-OBu" firstAttribute="top" secondItem="VAc-2F-GVg" secondAttribute="top" constant="282" id="l8I-Km-e8J"/>
                                             <constraint firstItem="Q93-kb-Tfy" firstAttribute="leading" secondItem="VAc-2F-GVg" secondAttribute="leading" id="ngK-Ru-Obj"/>
                                             <constraint firstItem="Q93-kb-Tfy" firstAttribute="top" secondItem="gy6-Z3-9yy" secondAttribute="bottom" id="tpb-ld-JWv"/>
                                             <constraint firstAttribute="trailing" secondItem="aU3-T3-CZt" secondAttribute="trailing" id="w30-o4-eh1"/>
@@ -247,6 +247,8 @@
                         <outlet property="photoReviewView" destination="gy6-Z3-9yy" id="KEo-pS-BB7"/>
                         <outlet property="photoReviewViewHeightConstraint" destination="pfD-FS-KjH" id="R5T-MY-Xyu"/>
                         <outlet property="placeImageView" destination="bN3-Fn-yME" id="n0q-JK-eUZ"/>
+                        <outlet property="placeImageViewHeightConstraint" destination="oXL-Jb-Hn9" id="2kA-nm-Fuc"/>
+                        <outlet property="placeImageViewTopConstraint" destination="hVo-1N-Feq" id="7fs-bH-tb6"/>
                         <outlet property="placeLocationLabel" destination="fI2-wj-W2V" id="gis-UE-aoQ"/>
                         <outlet property="placeNameLabel" destination="TZG-Bf-OBu" id="Cq0-R1-ueW"/>
                         <outlet property="scrapButton" destination="cNQ-2R-fyN" id="1oT-E9-GRq"/>
@@ -256,7 +258,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WrI-Sp-cds" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1189" y="-288"/>
+            <point key="canvasLocation" x="1188.8" y="-288.17733990147786"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VeC-ef-pa6">

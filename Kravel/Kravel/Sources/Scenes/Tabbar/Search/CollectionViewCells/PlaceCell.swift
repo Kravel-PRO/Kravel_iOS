@@ -30,7 +30,7 @@ class PlaceCell: UICollectionViewCell {
     var tags: String? {
         didSet {
             if let tags = self.tags {
-                tagLabel.text = tags.split(separator: " ").map({ "#" + String($0) }).joined(separator: " ")
+                tagLabel.text = tags.split(separator: ",").map({ "#" + String($0) }).joined(separator: " ")
                 tagLabel.sizeToFit()
             }
         }

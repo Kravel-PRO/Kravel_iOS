@@ -63,16 +63,19 @@ class PlacePopupView: UIView {
     // MARK: - 장소별 태그 설정
     @IBOutlet weak var placeTagCollectionView: UICollectionView! {
         didSet {
-            placeTagCollectionView.register(BackgroundTagCell.self, forCellWithReuseIdentifier: BackgroundTagCell.identifier)
             placeTagCollectionView.dataSource = self
-            if let layout = placeTagCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-                layout.minimumLineSpacing = 4
-            }
+            placeTagCollectionView.delegate = self
+            placeTagCollectionView.showsHorizontalScrollIndicator = false
+            placeTagCollectionView.showsVerticalScrollIndicator = false
+            placeTagCollectionView.register(BackgroundTagCell.self, forCellWithReuseIdentifier: BackgroundTagCell.identifier)
         }
     }
     
-    var placeTags: [String] = []
+    var placeTags: [String] = [] {
+        didSet {
+            placeTagCollectionView.reloadData()
+        }
+    }
     
     // MARK: - 장소 위치 Label 설정
     @IBOutlet weak var placeLocationLabel: UILabel!
@@ -265,7 +268,7 @@ extension PlacePopupView: UICollectionViewDelegateFlowLayout {
         if collectionView == placeTagCollectionView {
             let tempTag = UILabel()
             tempTag.font = UIFont.systemFont(ofSize: 12)
-            tempTag.text = placeTags[indexPath.row]
+            tempTag.text = "#\(placeTags[indexPath.row])     "
             return CGSize(width: tempTag.intrinsicContentSize.width, height: collectionView.frame.height)
         } else {
             let horizontalSpacing = self.frame.width / 23.44

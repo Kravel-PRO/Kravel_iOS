@@ -10,8 +10,13 @@ import UIKit
 import CoreLocation
 
 class HomeVC: UIViewController {
-//    private var activityIndicator: UIActivityIndicatorView?
-//    var isLoadingComplete: [Bool] = [false, false]
+    private var activityIndicator: UIActivityIndicatorView?
+    var isLoadingComplete: [Bool] = [false, false]
+    @IBOutlet weak var contentScrollView: UIScrollView! {
+        didSet {
+            contentScrollView.delegate = self
+        }
+    }
     
     // MARK: - 제일 위 Title View 설정
     @IBOutlet weak var titleStackView: UIStackView! {
@@ -74,13 +79,12 @@ class HomeVC: UIViewController {
     }
     
     // MARK: - 인기 있는 장소 설정
-    @IBOutlet weak var hotPlaceStackView: UIStackView! {
+    @IBOutlet weak var emptyLabel: UILabel!
+    @IBOutlet weak var emptyView: UIView! {
         didSet {
-            hotPlaceStackView.arrangedSubviews[0].isHidden = true
+            emptyView.isHidden = true
         }
     }
-    @IBOutlet weak var placeEmptyLabel: UILabel!
-    
     @IBOutlet weak var hotPlaceLabel: UILabel!
     
     @IBOutlet weak var hotPlaceCollectionViewHeightConstraint: NSLayoutConstraint!
@@ -92,11 +96,15 @@ class HomeVC: UIViewController {
         let cellWidth = hotPlaceCollectionView.frame.width - 2*horizontalSpacing
         let cellHeight = cellWidth * 0.46
         if hotPlaceData.count == 0 {
-            hotPlaceStackView.arrangedSubviews[0].isHidden = false
+            emptyView.isHidden = false
+            hotPlaceCollectionView.isHidden = true
         } else {
-            hotPlaceStackView.arrangedSubviews[0].isHidden = true
+            emptyView.isHidden = true
+            hotPlaceCollectionView.isHidden = false
         }
         hotPlaceCollectionViewHeightConstraint.constant = cellHeight * CGFloat(hotPlaceData.count) + lineSpacing * CGFloat((hotPlaceData.count-1))
+        
+        self.view.layoutIfNeeded()
     }
     
     private var hotPlaceData: [PlaceContentInform] = []
@@ -150,7 +158,6 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-//        setIndicatorView()
         requestLocation()
         addObserver()
         setLabelByLanguage()
@@ -174,16 +181,16 @@ class HomeVC: UIViewController {
         let attributeHotPlace = "요즘 여기가 인기 있어요!".localized.makeAttributedText([.font: UIFont.boldSystemFont(ofSize: 18)])
         attributeHotPlace.addAttributes([.font: UIFont.systemFont(ofSize: 18)], range: ("요즘 여기가 인기 있어요!".localized as NSString).range(of: "인기 있어요!".localized))
         hotPlaceLabel.attributedText = attributeHotPlace
-        placeEmptyLabel.text = "조금만 기다려주세요!\n특별한 장소를 찾아올게요!".localized
+        emptyLabel.text = "조금만 기다려주세요!\n특별한 장소를 찾아올게요!".localized
     }
     
-//    private func setIndicatorView() {
-//        self.activityIndicator = UIActivityIndicatorView(style: .large)
-//        activityIndicator?.center = self.view.center
-//        activityIndicator?.startAnimating()
-//        guard let indicator = self.activityIndicator else { return }
-//        self.view.addSubview(indicator)
-//    }
+    private func setIndicatorView() {
+        self.activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator?.center = self.view.center
+        activityIndicator?.startAnimating()
+        guard let indicator = self.activityIndicator else { return }
+        self.view.addSubview(indicator)
+    }
     
     // MARK: - UIViewController viewWillAppear Override
     override func viewWillAppear(_ animated: Bool) {
@@ -194,6 +201,7 @@ class HomeVC: UIViewController {
     // MARK: - UIViewController viewDidAppear Override
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        setIndicatorView()
         requestReviewData()
         requestHotPlaceData()
     }
@@ -205,7 +213,7 @@ class HomeVC: UIViewController {
     // MARK: - UIViewController viewDidLayoutSubviews Override
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        setHotPlaceCollectionViewHeight()
+//        setHotPlaceCollectionViewHeight()
         setPhotoReviewViewLayout()
     }
 }
@@ -246,18 +254,20 @@ extension HomeVC {
     
     // MARK: - 인기 장소 데이터 API 요청
     private func requestHotPlaceData() {
-        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 5, review_count: false, sort: "review-count,desc")
+        let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 5, review_count: nil, sort: "review-count,desc")
         NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
             switch result {
             case .success(let getPlaceResult):
                 guard let getPlaceResult = getPlaceResult as? APISortableResponseData<PlaceContentInform> else { return }
                 self.hotPlaceData = getPlaceResult.content
-//                self.isLoadingComplete[0] = true
-//                if self.isLoadingComplete.filter({ !$0 }).isEmpty {
-//                    self.activityIndicator?.stopAnimating()
-//                    self.activityIndicator?.removeFromSuperview()
-//                    self.activityIndicator = nil
-//                }
+                
+                // 로딩화면 처리하기 위한 표시
+                self.isLoadingComplete[0] = true
+                if self.isLoadingComplete.filter({ !$0 }).isEmpty {
+                    self.activityIndicator?.stopAnimating()
+                    self.activityIndicator?.removeFromSuperview()
+                    self.activityIndicator = nil
+                }
                 DispatchQueue.main.async {
                     self.setHotPlaceCollectionViewHeight()
                     self.hotPlaceCollectionView.reloadData()
@@ -282,12 +292,12 @@ extension HomeVC {
             case .success(let getReviewResult):
                 guard let getReviewResult = getReviewResult as? APISortableResponseData<ReviewInform> else { return }
                 self.photoReviewData = getReviewResult.content
-//                self.isLoadingComplete[1] = true
-//                if self.isLoadingComplete.filter({ !$0 }).isEmpty {
-//                    self.activityIndicator?.stopAnimating()
-//                    self.activityIndicator?.removeFromSuperview()
-//                    self.activityIndicator = nil
-//                }
+                self.isLoadingComplete[1] = true
+                if self.isLoadingComplete.filter({ !$0 }).isEmpty {
+                    self.activityIndicator?.stopAnimating()
+                    self.activityIndicator?.removeFromSuperview()
+                    self.activityIndicator = nil
+                }
                 DispatchQueue.main.async {
                     self.setPhotoReviewViewLayout()
                     self.photoReviewView.photoReviewCollectionView.reloadData()
@@ -363,7 +373,7 @@ extension HomeVC: UICollectionViewDataSource {
 
         homeNearPlaceCell.placeName = nearPlaceData[indexPath.row].title
         if let tags = nearPlaceData[indexPath.row].tags {
-            homeNearPlaceCell.tags = tags.split(separator: " ").map({ String($0) })
+            homeNearPlaceCell.tags = tags.split(separator: ",").map({ String($0) })
         } else {
             homeNearPlaceCell.tags = []
         }
@@ -383,7 +393,7 @@ extension HomeVC: UICollectionViewDataSource {
         hotPlaceCell.location = hotPlaceData[indexPath.row].title
         
         if let tags = hotPlaceData[indexPath.row].tags {
-            hotPlaceCell.tags = tags.split(separator: " ").map({ String($0) })
+            hotPlaceCell.tags = tags.split(separator: ",").map({ String($0) })
         } else {
             hotPlaceCell.tags = []
         }
@@ -405,6 +415,12 @@ extension HomeVC: UICollectionViewDataSource {
 }
 
 extension HomeVC: UICollectionViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < 0 {
+            scrollView.contentOffset.y = 0
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == nearPlaceCollectionView {
             touchNearPlaceCell(at: indexPath)

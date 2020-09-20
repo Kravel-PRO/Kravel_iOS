@@ -527,7 +527,7 @@ class MapVC: UIViewController {
         self.selectedPlace = detailInform
         placePopupView.placeName = detailInform.title
         if let tags = detailInform.tags {
-            placePopupView.placeTags = tags.split(separator: " ").map({ String($0) })
+            placePopupView.placeTags = tags.split(separator: ",").map({ String($0) })
         } else {
             placePopupView.placeTags = []
         }
@@ -664,7 +664,7 @@ extension MapVC: UICollectionViewDataSource {
         
         nearPlaceCell.placeName = nearPlaceData[indexPath.row].title
         if let tags = nearPlaceData[indexPath.row].tags {
-            nearPlaceCell.tags = tags.split(separator: " ").map({ String($0) })
+            nearPlaceCell.tags = tags.split(separator: ",").map({ String($0) })
         } else {
             nearPlaceCell.tags = []
         }

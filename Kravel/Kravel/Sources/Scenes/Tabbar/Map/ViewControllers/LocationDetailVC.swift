@@ -24,20 +24,28 @@ class LocationDetailVC: UIViewController {
     
     // MARK: - 데이터 로딩 중 Lottie 화면
     private var animationView: AnimationView?
+    private var loadingView: UIActivityIndicatorView?
     
     private func showLoadingLottie() {
-        animationView = AnimationView(name: "loading_map")
-        animationView?.backgroundColor = .white
-        animationView?.contentMode = .scaleAspectFit
-        animationView?.frame = self.view.bounds
-        animationView?.play()
+        loadingView = UIActivityIndicatorView(style: .large)
+        self.view.addSubview(loadingView!)
+        loadingView?.center = self.view.center
+        loadingView?.startAnimating()
         
-        self.view.addSubview(animationView!)
+//        animationView = AnimationView(name: "loading_map")
+//        animationView?.backgroundColor = .white
+//        animationView?.contentMode = .scaleAspectFit
+//        animationView?.frame = self.view.bounds
+//        animationView?.play()
+//
+//        self.view.addSubview(animationView!)
     }
     
     func stopLottieAnimation() {
-        animationView?.removeFromSuperview()
-        animationView = nil
+        loadingView?.removeFromSuperview()
+        loadingView = nil
+//        animationView?.removeFromSuperview()
+//        animationView = nil
     }
     
     // MARK: - 전체 Content 나타내는 ScrollView
@@ -80,6 +88,8 @@ class LocationDetailVC: UIViewController {
     
     // MARK: - 장소 이미지 설정
     @IBOutlet weak var placeImageView: UIImageView!
+    @IBOutlet weak var placeImageViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var placeImageViewHeightConstraint: NSLayoutConstraint!
     
     // MARK: - 장소 이름 Label 설정
     @IBOutlet weak var placeNameLabel: UILabel!
@@ -210,6 +220,7 @@ class LocationDetailVC: UIViewController {
             setBackButtonByPresent()
         } else {
             setBackButtonByNav()
+            contentScrollView.delegate = self
         }
     }
     
@@ -229,6 +240,14 @@ class LocationDetailVC: UIViewController {
         self.navigationController?.navigationBar.topItem?.title = ""
         guard let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else { return }
         backButtonTopConstraint.constant = window.safeAreaInsets.top
+    }
+    
+    var initHeight: CGFloat = 0
+    // MARK: - UIViewController ViewDidLayoutSubviews Override 설정
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        initHeight = placeImageView.frame.width / 207 * 133
+        placeImageViewHeightConstraint.constant = placeImageView.frame.width / 207 * 133
     }
 }
 
@@ -279,7 +298,7 @@ extension LocationDetailVC {
         if let placeData = self.placeData {
             placeName = placeData.title
             if let tags = placeData.tags {
-                placeTags = tags.split(separator: " ").map({ "#" + String($0) })
+                placeTags = tags.split(separator: ",").map({ String($0) })
             } else {
                 placeTags = []
             }
@@ -416,6 +435,16 @@ extension LocationDetailVC: UICollectionViewDelegate {
         if indexPath.row != 5 { otherPhotoReviewVC.selectedPhotoReviewID = self.photoReviewData[indexPath.row].reviewId }
         
         self.navigationController?.pushViewController(otherPhotoReviewVC, animated: true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < 0 {
+            placeImageViewHeightConstraint.constant = initHeight - scrollView.contentOffset.y
+            placeImageViewTopConstraint.constant = scrollView.contentOffset.y
+        
+            guard let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else { return }
+            backButtonTopConstraint.constant = window.safeAreaInsets.top + scrollView.contentOffset.y
+        }
     }
 }
 

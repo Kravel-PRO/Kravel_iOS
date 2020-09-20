@@ -93,6 +93,12 @@ extension NearPlaceVC: UICollectionViewDataSource {
         
         nearPlaceCell.placeImageView.setImage(with: nearPlaceData[indexPath.row].imageUrl ?? "")
         nearPlaceCell.placeName = nearPlaceData[indexPath.row].title
+        if let tags = nearPlaceData[indexPath.row].tags {
+            nearPlaceCell.tags = tags.split(separator: ",").map(String.init)
+        } else {
+            nearPlaceCell.tags = []
+        }
+        
         return nearPlaceCell
     }
 }

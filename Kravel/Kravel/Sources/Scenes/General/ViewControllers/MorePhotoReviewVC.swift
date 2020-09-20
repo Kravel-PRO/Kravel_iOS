@@ -135,7 +135,7 @@ extension MorePhotoReviewVC: UICollectionViewDataSource {
         photoReviewCell.likeCount = photoReviewData[indexPath.row].likeCount
         photoReviewCell.placeName = photoReviewData[indexPath.row].place?.title
         
-        if let tags = photoReviewData[indexPath.row].place?.tags?.split(separator: " ").map(String.init) {
+        if let tags = photoReviewData[indexPath.row].place?.tags?.split(separator: ",").map(String.init) {
             photoReviewCell.tags = tags
             photoReviewCell.tagCollectionView.reloadData()
         } else {
