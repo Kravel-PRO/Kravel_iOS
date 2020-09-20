@@ -95,3 +95,14 @@ Kravel iOS💻
 
 ```
 
+<br>
+
+8️⃣ 다크 모드 지원 막기
+
+```swift
+// SceneDelegated에 구현하기
+if #available(iOS 13.0, *) {
+  self.window?.overrideUserInterfaceStyle = .light
+}
+```
+
