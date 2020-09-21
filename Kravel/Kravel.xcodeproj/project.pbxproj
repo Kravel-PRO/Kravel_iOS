@@ -20,6 +20,7 @@
 		9D13C811248796900058A7BF /* LoginTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D13C810248796900058A7BF /* LoginTextView.swift */; };
 		9D16A44B24909798005E691E /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D16A44A24909798005E691E /* WelcomeVC.swift */; };
 		9D2390FB2513C3B5006D57E4 /* SearchResultViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2390FA2513C3B5006D57E4 /* SearchResultViewDelegate.swift */; };
+		9D24525C2519011800A2D958 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D24525B2519011700A2D958 /* FilterCell.swift */; };
 		9D2E26A124E935020091643E /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26A024E935020091643E /* Language.swift */; };
 		9D2E26A324E960100091643E /* Report.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D2E26A224E960100091643E /* Report.storyboard */; };
 		9D35749224F8F13B000103E7 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D35749124F8F13B000103E7 /* MyPage.storyboard */; };
@@ -188,6 +189,7 @@
 		9D13C810248796900058A7BF /* LoginTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextView.swift; sourceTree = "<group>"; };
 		9D16A44A24909798005E691E /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		9D2390FA2513C3B5006D57E4 /* SearchResultViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewDelegate.swift; sourceTree = "<group>"; };
+		9D24525B2519011700A2D958 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		9D2E26A024E935020091643E /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		9D2E26A224E960100091643E /* Report.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Report.storyboard; sourceTree = "<group>"; };
 		9D35749124F8F13B000103E7 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
@@ -447,6 +449,14 @@
 				9D6FF38C24FAFE0400E6A8B9 /* APIModel */,
 			);
 			path = APIService;
+			sourceTree = "<group>";
+		};
+		9D24525E2519011C00A2D958 /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				9D24525B2519011700A2D958 /* FilterCell.swift */,
+			);
+			path = CollectionViewCell;
 			sourceTree = "<group>";
 		};
 		9D35749324F8F256000103E7 /* CollectionViewCells */ = {
@@ -733,6 +743,7 @@
 			children = (
 				9D6FF36924FA096500E6A8B9 /* Storyboards */,
 				9D6FF36A24FA096E00E6A8B9 /* ViewControllers */,
+				9D24525E2519011C00A2D958 /* CollectionViewCell */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -1469,6 +1480,7 @@
 				9D8EA91124E7BE4B00FD5059 /* ImageKey.swift in Sources */,
 				9D9694CD24C5E7570046CB85 /* PlaceCell.swift in Sources */,
 				9D76CDA124FEBA43004D7333 /* SearchPlaceResponseData.swift in Sources */,
+				9D24525C2519011800A2D958 /* FilterCell.swift in Sources */,
 				9D94BDF224BE2C710027B9BF /* ContentDetailVC.swift in Sources */,
 				9DBA641E24EFB1DE00E12FA4 /* CoreDataManager.swift in Sources */,
 				9D79E2A924ED045F006310A2 /* MorePhotoReviewCell.swift in Sources */,

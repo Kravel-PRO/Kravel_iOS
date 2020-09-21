@@ -106,3 +106,6 @@ if #available(iOS 13.0, *) {
 }
 ```
 
+<br>
+
+9️⃣ CollectionView Paging 구현

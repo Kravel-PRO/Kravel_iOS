@@ -371,6 +371,9 @@ class CameraVC: UIViewController {
         ])
     }
     
+    // MARK: - 필터 CollectionView 구현
+    var filterCollectionView: UICollectionView?
+    
     // MARK: - 샘플 사진 보여주는 ImageView 설정
     let sampleImageButton: UIButton = {
         let sampleImageButton = UIButton()
@@ -614,6 +617,54 @@ extension CameraVC {
             self.sampleDescriptionLabel.isHidden = false
         }
         
-        print(filterImageUrl)
+        initFilterView()
     }
+    
+    private func initFilterView() {
+        let cellWidth: CGFloat = self.view.frame.width / 5.6
+        let cellHeight: CGFloat = 26
+        
+        let collectionViewLayout = UICollectionViewFlowLayout()
+        collectionViewLayout.itemSize = CGSize(width: cellWidth, height: cellHeight)
+        collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: self.view.frame.width/2 - cellWidth/2, bottom: 0, right: self.view.frame.width/2 - cellWidth/2)
+        collectionViewLayout.scrollDirection = .horizontal
+        collectionViewLayout.minimumLineSpacing = 7
+        
+        filterCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 26), collectionViewLayout: collectionViewLayout)
+        
+        guard let filterCollectionView = self.filterCollectionView else { return }
+        filterCollectionView.backgroundColor = .clear
+        filterCollectionView.showsHorizontalScrollIndicator = false
+        filterCollectionView.dataSource = self
+        filterCollectionView.delegate = self
+        filterCollectionView.register(FilterCell.self, forCellWithReuseIdentifier: FilterCell.identifier)
+        filterCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: [])
+        filterCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.addSubview(filterCollectionView)
+        NSLayoutConstraint.activate([
+            filterCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            filterCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            filterCollectionView.bottomAnchor.constraint(equalTo: captureOutlineImageView.topAnchor, constant: -36),
+            filterCollectionView.heightAnchor.constraint(equalToConstant: 26)
+        ])
+        
+    }
+}
+
+extension CameraVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let filterCell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterCell.identifier, for: indexPath) as? FilterCell else { return UICollectionViewCell() }
+        filterCell.layer.cornerRadius = filterCell.frame.width / 5.28
+        filterCell.clipsToBounds = true
+        filterCell.filterName = "기생충"
+        return filterCell
+    }
+}
+
+extension CameraVC: UICollectionViewDelegate {
 }
