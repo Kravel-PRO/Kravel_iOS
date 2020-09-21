@@ -184,7 +184,7 @@ class HomeVC: UIViewController {
         emptyLabel.text = "조금만 기다려주세요!\n특별한 장소를 찾아올게요!".localized
     }
     
-    private func setIndicatorView() {
+    private func startIndicatorView() {
         self.activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator?.center = self.view.center
         activityIndicator?.startAnimating()
@@ -192,16 +192,25 @@ class HomeVC: UIViewController {
         self.view.addSubview(indicator)
     }
     
+    private func stopIndicatorView() {
+        self.activityIndicator?.stopAnimating()
+        self.activityIndicator?.removeFromSuperview()
+        self.activityIndicator = nil
+        for index in 0..<isLoadingComplete.count {
+            isLoadingComplete[index] = false
+        }
+    }
+    
     // MARK: - UIViewController viewWillAppear Override
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        startIndicatorView()
         setNav()
     }
     
     // MARK: - UIViewController viewDidAppear Override
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setIndicatorView()
         requestReviewData()
         requestHotPlaceData()
     }
@@ -263,9 +272,7 @@ extension HomeVC {
                 // 로딩화면 처리하기 위한 표시
                 self.isLoadingComplete[0] = true
                 if self.isLoadingComplete.filter({ !$0 }).isEmpty {
-                    self.activityIndicator?.stopAnimating()
-                    self.activityIndicator?.removeFromSuperview()
-                    self.activityIndicator = nil
+                    self.stopIndicatorView()
                 }
                 DispatchQueue.main.async {
                     self.setHotPlaceCollectionViewHeight()
@@ -283,6 +290,8 @@ extension HomeVC {
         }
     }
     
+    
+    
     // MARK: - 포토리뷰 데이터 API 요청
     private func requestReviewData() {
         let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "createdDate,desc")
@@ -293,9 +302,7 @@ extension HomeVC {
                 self.photoReviewData = getReviewResult.content
                 self.isLoadingComplete[1] = true
                 if self.isLoadingComplete.filter({ !$0 }).isEmpty {
-                    self.activityIndicator?.stopAnimating()
-                    self.activityIndicator?.removeFromSuperview()
-                    self.activityIndicator = nil
+                    self.stopIndicatorView()
                 }
                 DispatchQueue.main.async {
                     self.setPhotoReviewViewLayout()

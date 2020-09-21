@@ -67,21 +67,18 @@ class CameraVC: UIViewController {
     private func requestCameraAuthor() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
-            initCameraDevice()
-            initCameraInputData()
-            initCameraOutputData()
-            displayPreview()
+            setCameraView()
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { granted in
-                if granted {
-                    DispatchQueue.main.async {
-                        self.initCameraDevice()
-                        self.initCameraInputData()
-                        self.initCameraOutputData()
-                        self.displayPreview()
+                DispatchQueue.main.async {
+                    if granted {
+                        DispatchQueue.main.async {
+                            self.setCameraView()
+                            self.setCameraLayout()
+                        }
+                    } else {
+                        self.navigationController?.popViewController(animated: true)
                     }
-                } else {
-                    self.navigationController?.popViewController(animated: true)
                 }
             }
         case .restricted:
@@ -138,6 +135,40 @@ class CameraVC: UIViewController {
         }
     }
     
+    // 카메라 총합적으로 설정하기
+    private func setCameraView() {
+        initCameraDevice()
+        initCameraInputData()
+        initCameraOutputData()
+        displayPreview()
+    }
+    
+    // 카메라에 대한 기능 UI 요소 추가
+    private func setCameraLayout() {
+        setCaptureButton()
+        setGalleryButton()
+        setSampleImageButton()
+        setCancelButton()
+        setDescriptionLabel()
+        setCaptureButtonLayout()
+        setCancelButtonLayout()
+        setGalleryImageViewLayout()
+        setGalleryDescriptionLabelLayout()
+        setSampleImageViewLayout()
+        setSampleDesctiptionLabelLayout()
+    }
+    
+    private func removeCamera() {
+        cancelButton.removeFromSuperview()
+        captureButton.removeFromSuperview()
+        captureInlineImageView.removeFromSuperview()
+        captureOutlineImageView.removeFromSuperview()
+        sampleDescriptionLabel.removeFromSuperview()
+        galleryButton.removeFromSuperview()
+        galleryDescriptionLabel.removeFromSuperview()
+        sampleImageButton.removeFromSuperview()
+    }
+    
     // MARK: - 사진 찍는 버튼 설정
     var captureButton: UIButton = {
         let captureButton = UIButton()
@@ -164,13 +195,14 @@ class CameraVC: UIViewController {
     
     // 사진찍기 버튼 Layout 수정
     private func setCaptureButtonLayout() {
+        guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
         NSLayoutConstraint.activate([
-            captureButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -24),
-            captureButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            captureButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.19),
+            captureButton.bottomAnchor.constraint(equalTo: keyWindow.safeAreaLayoutGuide.bottomAnchor, constant: -24),
+            captureButton.centerXAnchor.constraint(equalTo: keyWindow.centerXAnchor),
+            captureButton.widthAnchor.constraint(equalTo: keyWindow.widthAnchor, multiplier: 0.19),
             captureButton.heightAnchor.constraint(equalTo: captureButton.widthAnchor),
-            captureOutlineImageView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -24),
-            captureOutlineImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            captureOutlineImageView.bottomAnchor.constraint(equalTo: keyWindow.safeAreaLayoutGuide.bottomAnchor, constant: -24),
+            captureOutlineImageView.centerXAnchor.constraint(equalTo: keyWindow.centerXAnchor),
             captureOutlineImageView.widthAnchor.constraint(equalTo: captureButton.widthAnchor),
             captureOutlineImageView.heightAnchor.constraint(equalTo: captureButton.heightAnchor),
             captureInlineImageView.bottomAnchor.constraint(equalTo: captureOutlineImageView.bottomAnchor, constant: -8),
@@ -213,10 +245,11 @@ class CameraVC: UIViewController {
     }()
     
     private func setCancelButtonLayout() {
+        guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
         NSLayoutConstraint.activate([
-            cancelButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            cancelButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
-            cancelButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.1),
+            cancelButton.topAnchor.constraint(equalTo: keyWindow.safeAreaLayoutGuide.topAnchor, constant: 16),
+            cancelButton.trailingAnchor.constraint(equalTo: keyWindow.trailingAnchor, constant: -16),
+            cancelButton.widthAnchor.constraint(equalTo: keyWindow.widthAnchor, multiplier: 0.1),
             cancelButton.heightAnchor.constraint(equalTo: cancelButton.widthAnchor, multiplier: 1.0)
         ])
     }
@@ -235,6 +268,7 @@ class CameraVC: UIViewController {
     let galleryButton: UIButton = {
         // FIXME: 여기 갤러리 제일 마지막 사진 보이게 수정
         let galleryButton = UIButton()
+        galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
         galleryButton.translatesAutoresizingMaskIntoConstraints = false
         galleryButton.contentMode = .scaleAspectFit
         galleryButton.clipsToBounds = true
@@ -248,13 +282,14 @@ class CameraVC: UIViewController {
     }
     
     private func setGalleryImageViewLayout() {
+        guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
         NSLayoutConstraint.activate([
-            galleryButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 24),
+            galleryButton.leadingAnchor.constraint(equalTo: keyWindow.leadingAnchor, constant: 24),
             galleryButton.bottomAnchor.constraint(equalTo: galleryDescriptionLabel.topAnchor, constant: -4),
-            galleryButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.112),
+            galleryButton.widthAnchor.constraint(equalTo: keyWindow.widthAnchor, multiplier: 0.112),
             galleryButton.heightAnchor.constraint(equalTo: galleryButton.widthAnchor)
         ])
-        galleryButton.layer.cornerRadius = galleryButton.frame.width / 6
+        galleryButton.layer.cornerRadius = keyWindow.frame.width * 0.112 / 6
     }
     
     private func requestPhotoLibraryAuthor() {
@@ -262,21 +297,31 @@ class CameraVC: UIViewController {
             switch PHPhotoLibrary.authorizationStatus() {
             case .authorized:
                 self.setPhotoLibraryImage()
+                self.setPickerController()
                 PHPhotoLibrary.shared().register(self)
             case .notDetermined:
                 PHPhotoLibrary.requestAuthorization { status in
                     switch status {
                     case .authorized:
                         self.setPhotoLibraryImage()
+                        self.setPickerController()
                         PHPhotoLibrary.shared().register(self)
                     case .notDetermined:
-                        self.galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
+                        DispatchQueue.main.async {
+                            self.galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
+                        }
                     case .restricted:
-                        self.galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
+                        DispatchQueue.main.async {
+                            self.galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
+                        }
                     case .denied:
-                        self.galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
+                        DispatchQueue.main.async {
+                            self.galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
+                        }
                     case .limited:
-                        self.galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
+                        DispatchQueue.main.async {
+                            self.galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
+                        }
                     @unknown default:
                         break
                     }
@@ -322,15 +367,16 @@ class CameraVC: UIViewController {
     }()
     
     private func setGalleryDescriptionLabelLayout() {
+        guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
         NSLayoutConstraint.activate([
-            galleryDescriptionLabel.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            galleryDescriptionLabel.bottomAnchor.constraint(equalTo: keyWindow.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             galleryDescriptionLabel.centerXAnchor.constraint(equalTo: galleryButton.centerXAnchor)
         ])
     }
     
     // FIXME: 샘플 사진 없을 시 라벨과 Image가 안뜰 수 있게 설정해야함
     // MARK: - 샘플 사진 보여주는 ImageView 설정
-    let samepleImageButton: UIButton = {
+    let sampleImageButton: UIButton = {
         let sampleImageButton = UIButton()
         sampleImageButton.isHidden = true
         sampleImageButton.translatesAutoresizingMaskIntoConstraints = false
@@ -342,8 +388,8 @@ class CameraVC: UIViewController {
     
     private func setSampleImageButton() {
         guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
-        keyWindow.addSubview(samepleImageButton)
-        samepleImageButton.addTarget(self, action: #selector(showSampleImage), for: .touchUpInside)
+        keyWindow.addSubview(sampleImageButton)
+        sampleImageButton.addTarget(self, action: #selector(showSampleImage), for: .touchUpInside)
     }
     
     @objc func showSampleImage() {
@@ -351,13 +397,14 @@ class CameraVC: UIViewController {
     }
     
     private func setSampleImageViewLayout() {
+        guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
         NSLayoutConstraint.activate([
-            samepleImageButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -24),
-            samepleImageButton.bottomAnchor.constraint(equalTo: sampleDescriptionLabel.topAnchor, constant: -4),
-            samepleImageButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.112),
-            samepleImageButton.heightAnchor.constraint(equalTo: samepleImageButton.widthAnchor)
+            sampleImageButton.trailingAnchor.constraint(equalTo: keyWindow.trailingAnchor, constant: -24),
+            sampleImageButton.bottomAnchor.constraint(equalTo: sampleDescriptionLabel.topAnchor, constant: -4),
+            sampleImageButton.widthAnchor.constraint(equalTo: keyWindow.widthAnchor, multiplier: 0.112),
+            sampleImageButton.heightAnchor.constraint(equalTo: sampleImageButton.widthAnchor)
         ])
-        samepleImageButton.layer.cornerRadius = samepleImageButton.frame.width / 6
+        sampleImageButton.layer.cornerRadius = sampleImageButton.frame.width / 6
     }
     
     // MARK: - 샘플 사진 알려주는 설명 Label 설정
@@ -373,13 +420,14 @@ class CameraVC: UIViewController {
     }()
     
     private func setSampleDesctiptionLabelLayout() {
+        guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
         NSLayoutConstraint.activate([
-            sampleDescriptionLabel.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            sampleDescriptionLabel.centerXAnchor.constraint(equalTo: samepleImageButton.centerXAnchor)
+            sampleDescriptionLabel.bottomAnchor.constraint(equalTo: keyWindow.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            sampleDescriptionLabel.centerXAnchor.constraint(equalTo: sampleImageButton.centerXAnchor)
         ])
     }
     
-    private func addImageView() {
+    private func setDescriptionLabel() {
         guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
         keyWindow.addSubview(galleryDescriptionLabel)
         keyWindow.addSubview(sampleDescriptionLabel)
@@ -391,12 +439,6 @@ class CameraVC: UIViewController {
         // Do any additional setup after loading the view.
         requestCameraAuthor()
         requestPhotoLibraryAuthor()
-        setPickerController()
-        setCaptureButton()
-        setGalleryButton()
-        setSampleImageButton()
-        setCancelButton()
-        addImageView()
     }
     
     // MARK: - UIViewController viewWillAppear 설정
@@ -409,30 +451,30 @@ class CameraVC: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
     }
     
+    // MARK: - UIViewController viewDidAppear 설정
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized: setCameraLayout()
+        case .notDetermined: break
+        case .restricted: break
+        case .denied: break
+        @unknown default: break
+        }
+    }
+    
+    // MARK: - UIViewController viewWillDisappear override 설정
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeCamera()
+    }
+    
     // MARK: - UIViewController viewDidDisappear override 설정
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        captureSession.stopRunning()
-        captureButton.removeFromSuperview()
-        captureInlineImageView.removeFromSuperview()
-        captureOutlineImageView.removeFromSuperview()
-        galleryButton.removeFromSuperview()
-        galleryDescriptionLabel.removeFromSuperview()
-        sampleDescriptionLabel.removeFromSuperview()
-        samepleImageButton.removeFromSuperview()
-        cancelButton.removeFromSuperview()
+        self.captureSession.stopRunning()
     }
-    
-    // MARK: - UIViewController viewDidLayoutSubviews override 설정
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setCaptureButtonLayout()
-        setCancelButtonLayout()
-        setGalleryImageViewLayout()
-        setGalleryDescriptionLabelLayout()
-        setSampleImageViewLayout()
-        setSampleDesctiptionLabelLayout()
-    }
+
 }
 
 // MARK: - 팝업 뷰 보이게 세팅
@@ -503,7 +545,9 @@ extension CameraVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
     }
     
     private func presentPhotoView(_ image: UIImage) {
-        photoContainerView = UIView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 0, height: 0))
+        guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
+        
+        photoContainerView = UIView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: self.view.frame.width, height: self.view.frame.height))
         guard let photoContainerView = self.photoContainerView else { return }
         photoContainerView.clipsToBounds = true
         photoContainerView.translatesAutoresizingMaskIntoConstraints = false
@@ -519,24 +563,27 @@ extension CameraVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
         photoImageView.image = image
         photoImageView.contentMode = .scaleAspectFill
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
-
-        self.view.addSubview(photoContainerView)
+        
+        
+        keyWindow.addSubview(photoContainerView)
         photoContainerView.addSubview(cancelButton)
         photoContainerView.addSubview(photoImageView)
         
         NSLayoutConstraint.activate([
-            photoContainerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            photoContainerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            photoContainerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            photoContainerView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            cancelButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            cancelButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            cancelButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.1),
+            photoContainerView.leadingAnchor.constraint(equalTo: keyWindow.leadingAnchor),
+            photoContainerView.trailingAnchor.constraint(equalTo: keyWindow.trailingAnchor),
+            photoContainerView.bottomAnchor.constraint(equalTo: keyWindow.bottomAnchor),
+            photoContainerView.topAnchor.constraint(equalTo: keyWindow.topAnchor),
+            cancelButton.topAnchor.constraint(equalTo: keyWindow.safeAreaLayoutGuide.topAnchor, constant: 16),
+            cancelButton.trailingAnchor.constraint(equalTo: keyWindow.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            cancelButton.widthAnchor.constraint(equalTo: keyWindow.widthAnchor, multiplier: 0.1),
             cancelButton.heightAnchor.constraint(equalTo: cancelButton.widthAnchor, multiplier: 1)
         ])
         
+        photoContainerView.transform = CGAffineTransform(scaleX: 0, y: 0)
+        
         UIView.animate(withDuration: 0.2) {
-            self.view.layoutIfNeeded()
+            photoContainerView.transform = .identity
         }
         
         NSLayoutConstraint.activate([
