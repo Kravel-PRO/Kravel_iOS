@@ -14,6 +14,7 @@ class CameraVC: UIViewController {
     static let identifier = "CameraVC"
     
     var placeId: Int?
+    var selectedFilterIndex: Int?
     
     // MARK: - UIImagePickerController 설정
     private var picker: UIImagePickerController?
@@ -635,6 +636,8 @@ extension CameraVC {
         guard let filterCollectionView = self.filterCollectionView else { return }
         filterCollectionView.backgroundColor = .clear
         filterCollectionView.showsHorizontalScrollIndicator = false
+        filterCollectionView.decelerationRate = .fast
+        filterCollectionView.isPagingEnabled = false
         filterCollectionView.dataSource = self
         filterCollectionView.delegate = self
         filterCollectionView.register(FilterCell.self, forCellWithReuseIdentifier: FilterCell.identifier)
@@ -654,7 +657,7 @@ extension CameraVC {
 
 extension CameraVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -667,4 +670,31 @@ extension CameraVC: UICollectionViewDataSource {
 }
 
 extension CameraVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let cellWidthWithSpacing = self.view.frame.width / 5.6 + 7
+        let estimateIndex = targetContentOffset.pointee.x / cellWidthWithSpacing
+    
+        var selectIndex: Int
+        if velocity.x > 0 {
+            selectIndex = Int(ceil(estimateIndex))
+        } else if velocity.x < 0 {
+            selectIndex = Int(floor(estimateIndex))
+        } else {
+            selectIndex = Int(round(estimateIndex))
+        }
+        
+        let estimatePointeeX = CGFloat(selectIndex) * cellWidthWithSpacing
+        targetContentOffset.pointee = CGPoint(x: estimatePointeeX, y: 0)
+        selectedFilterIndex = selectIndex
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if let selectedIndex = self.selectedFilterIndex {
+            filterCollectionView?.selectItem(at: IndexPath(row: selectedIndex, section: 0), animated: false, scrollPosition: [])
+        }
+    }
 }
