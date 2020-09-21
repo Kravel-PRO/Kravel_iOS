@@ -704,6 +704,12 @@ extension MapVC: UICollectionViewDelegateFlowLayout {
 }
 
 extension MapVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let placeDetailVC = UIStoryboard(name: "LocationDetail", bundle: nil).instantiateViewController(withIdentifier: LocationDetailVC.identifier) as? LocationDetailVC else { return }
+        placeDetailVC.placeID = nearPlaceData[indexPath.row].placeId
+        placeDetailVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(placeDetailVC, animated: true)
+    }
 }
 
 extension MapVC: NMFMapViewCameraDelegate {
