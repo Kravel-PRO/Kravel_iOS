@@ -539,16 +539,16 @@ extension CameraVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
         cancelButton.addTarget(self, action: #selector(dismissPhotoView(_:)), for: .touchUpInside)
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         
-        let photoImageView = UIImageView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: self.view.frame.width, height: self.view.frame.width))
+        let photoImageView = UIImageView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: self.view.frame.width, height: self.view.frame.height))
         photoImageView.clipsToBounds = true
         photoImageView.image = image
-        photoImageView.contentMode = .scaleAspectFill
+        photoImageView.contentMode = .scaleAspectFit
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
         
         
         keyWindow.addSubview(photoContainerView)
-        photoContainerView.addSubview(cancelButton)
         photoContainerView.addSubview(photoImageView)
+        photoContainerView.addSubview(cancelButton)
         
         NSLayoutConstraint.activate([
             photoContainerView.leadingAnchor.constraint(equalTo: keyWindow.leadingAnchor),
@@ -572,7 +572,7 @@ extension CameraVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
             photoImageView.centerYAnchor.constraint(equalTo: photoContainerView.centerYAnchor),
             photoImageView.leadingAnchor.constraint(equalTo: photoContainerView.leadingAnchor),
             photoImageView.trailingAnchor.constraint(equalTo: photoContainerView.trailingAnchor),
-            photoImageView.heightAnchor.constraint(equalTo: photoContainerView.widthAnchor)
+            photoImageView.heightAnchor.constraint(equalTo: photoContainerView.heightAnchor)
         ])
     }
     
