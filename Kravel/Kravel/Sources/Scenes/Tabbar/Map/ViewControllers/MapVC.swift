@@ -142,17 +142,16 @@ class MapVC: UIViewController {
     @objc func refresh(_ sender: Any) {
         switch CLLocationManager.authorizationStatus() {
         case .authorizedAlways:
-            let cameraPosition = mapView.cameraPosition.target
-            requestClosePlaceData(latitude: cameraPosition.lat, longitude: cameraPosition.lng)
+            break
         case .authorizedWhenInUse:
             let cameraPosition = mapView.cameraPosition.target
             requestClosePlaceData(latitude: cameraPosition.lat, longitude: cameraPosition.lng)
         case .notDetermined:
-            deniedAuthor()
+            break
         case .restricted:
-            deniedAuthor()
+            break
         case .denied:
-            deniedAuthor()
+            break
         @unknown default:
             break
         }
@@ -196,11 +195,13 @@ class MapVC: UIViewController {
         case .authorizedAlways:
             break
         case .notDetermined:
-            deniedAuthor()
+            LocationManager.shared.requestAuthorization()
         case .restricted:
-            deniedAuthor()
+            currentLocationButton.setImage(UIImage(named: ImageKey.icGPSInActive), for: .normal)
+            currentLocationButton.isUserInteractionEnabled = false
         case .denied:
-            deniedAuthor()
+            currentLocationButton.setImage(UIImage(named: ImageKey.icGPSInActive), for: .normal)
+            currentLocationButton.isUserInteractionEnabled = false
         @unknown default:
             break
         }

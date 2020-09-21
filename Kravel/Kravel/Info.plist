@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>2020092121</string>
+	<string>2020092139</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -26,11 +26,11 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>For use camera, access must be allowed</string>
+	<string>Require access to camera for taking pictures.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>For use Map, access must be allowed.</string>
+	<string>Require access to location information for using map and providing place location.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>For use photo library, access must be allowed</string>
+	<string>Require access to photos/files for automatic photo storage and photo review upload</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -72,7 +72,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>buildCount</key>
-	<string>21</string>
+	<string>39</string>
 	<key>buildDay</key>
 	<string>20200921</string>
 </dict>

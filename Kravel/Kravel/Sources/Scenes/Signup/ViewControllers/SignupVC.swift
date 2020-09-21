@@ -11,8 +11,8 @@ import UIKit
 class SignupVC: UIViewController {
     static let identifier = "SignupVC"
     
-    // MARK: - 모든 필요사항 입력한 경우 5로 됨
-    var enables: [Bool] = [false, false, false, false, false]
+    // MARK: - 모든 필요사항 입력한 경우 4로 됨
+    var enables: [Bool] = [false, false, false, false]
     var gender: String = ""
     
     // MARK: - 메인 ScrollView 설정
@@ -57,7 +57,7 @@ class SignupVC: UIViewController {
             let nickName = textFields[3].text else { return }
         
         guard let selectedLanguage = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return }
-        
+        if gender == "" { gender = "MAN" }
         let signupParameter = SignupParmeter(loginEmail: loginEmail, loginPw: loginPw, nickName: nickName, gender: gender, speech: selectedLanguage)
         NetworkHandler.shared.requestAPI(apiCategory: .signup(signupParameter)) { result in
             switch result {
@@ -143,7 +143,7 @@ class SignupVC: UIViewController {
         textFields[2].placeholder = "다시 한 번 비밀번호를 입력해주세요.".localized
         nicknameLabel.text = "닉네임".localized
         textFields[3].placeholder = "사용할 닉네임을 7자 이하로 적어주세요.".localized
-        genderLabel.text = "성별".localized
+        genderLabel.text = "성별".localized + " " + "(" + "선택".localized + ")"
         
         validLabels[0].text = "이메일 형식이 옳지 않습니다.".localized
         validLabels[1].text = "6자리 이상 입력해주세요.".localized
@@ -235,7 +235,7 @@ extension SignupVC: UITextFieldDelegate {
             }
         }
         
-        if enables.filter({ $0 == true }).count == 5 {
+        if enables.filter({ $0 == true }).count == 4 {
             signupButton.isUserInteractionEnabled = true
         } else {
             signupButton.isUserInteractionEnabled = false
@@ -262,7 +262,6 @@ extension SignupVC: UITextFieldDelegate {
 
 extension SignupVC: XibButtonDelegate {
     func clickButton(of sex: Sex) {
-        enables[4] = true
         switch sex {
         case .man:
             sexButtons[0].setSelectedState(by: true)
@@ -272,12 +271,6 @@ extension SignupVC: XibButtonDelegate {
             sexButtons[0].setSelectedState(by: false)
             sexButtons[1].setSelectedState(by: true)
             gender = "WOMAN"
-        }
-        
-        if enables.filter({ $0 == true }).count == 5 {
-            signupButton.isUserInteractionEnabled = true
-        } else {
-            signupButton.isUserInteractionEnabled = false
         }
     }
 }

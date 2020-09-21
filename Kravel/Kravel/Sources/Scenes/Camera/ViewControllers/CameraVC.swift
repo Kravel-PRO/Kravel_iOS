@@ -30,11 +30,28 @@ class CameraVC: UIViewController {
                 present(picker, animated: true, completion: nil)
             }
         case .notDetermined:
-            presentPopupVC(by: "Gallery")
+            PHPhotoLibrary.requestAuthorization { status in
+                switch status {
+                case .authorized:
+                    DispatchQueue.main.async {
+                        if let picker = self.picker {
+                            picker.sourceType = .photoLibrary
+                            self.present(picker, animated: true, completion: nil)
+                        }
+                    }
+                case .notDetermined: return
+                case .restricted: return
+                case .denied: return
+                case .limited: return
+                @unknown default: return
+                }
+            }
         case .restricted:
             presentPopupVC(by: "Gallery")
         case .denied:
             presentPopupVC(by: "Gallery")
+        case .limited:
+            return
         @unknown default:
             return
         }
@@ -57,10 +74,18 @@ class CameraVC: UIViewController {
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { granted in
                 if granted {
-                    self.initCameraDevice()
-                    self.initCameraInputData()
-                    self.initCameraOutputData()
-                    self.displayPreview()
+                    DispatchQueue.main.async {
+                        self.initCameraDevice()
+                        self.initCameraInputData()
+                        self.initCameraOutputData()
+                        self.displayPreview()
+                        
+//                        self.captureButton.bringSubviewToFront(self.videoPreviewLayer as! UIView)
+//                        self.galleryButton.bringSubviewToFront(self.videoPreviewLayer as! UIView)
+//                        self.sampleDescriptionLabel.bringSubviewToFront(self.videoPreviewLayer as! UIView)
+//                        self.galleryDescriptionLabel.bringSubviewToFront(self.videoPreviewLayer as! UIView)
+//                        self.captureButton.bringSubviewToFront(self.videoPreviewLayer as! UIView)
+                    }
                 } else {
                     // FIXME: 카메라 설정창으로 가서 카메라 허용할 수 있게 설정하는 화면 뜨게 하기
                     self.navigationController?.popViewController(animated: true)
@@ -110,8 +135,10 @@ class CameraVC: UIViewController {
     private func displayPreview() {
         videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        videoPreviewLayer?.frame = view.layer.bounds
-        view.layer.addSublayer(videoPreviewLayer!)
+        DispatchQueue.main.async {
+            self.videoPreviewLayer?.frame = self.view.layer.bounds
+            self.view.layer.addSublayer(self.videoPreviewLayer!)
+        }
         
         DispatchQueue.global(qos: .userInitiated).async {
             self.captureSession.startRunning()
@@ -162,9 +189,10 @@ class CameraVC: UIViewController {
     
     // 버튼 화면에 추가해주기
     private func setCaptureButton() {
-        self.view.addSubview(captureOutlineImageView)
-        self.view.addSubview(captureInlineImageView)
-        self.view.addSubview(captureButton)
+        guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
+        keyWindow.addSubview(captureOutlineImageView)
+        keyWindow.addSubview(captureInlineImageView)
+        keyWindow.addSubview(captureButton)
         captureButton.addTarget(self, action: #selector(takePicture(_:)), for: .touchUpInside)
     }
     
@@ -201,7 +229,8 @@ class CameraVC: UIViewController {
     }
     
     private func setCancelButton() {
-        self.view.addSubview(cancelButton)
+        guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
+        keyWindow.addSubview(cancelButton)
         cancelButton.addTarget(self, action: #selector(cancel(_:)), for: .touchUpInside)
     }
     
@@ -220,7 +249,8 @@ class CameraVC: UIViewController {
     }()
     
     private func setGalleryButton() {
-        self.view.addSubview(galleryButton)
+        guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
+        keyWindow.addSubview(galleryButton)
         galleryButton.addTarget(self, action: #selector(openLibrary), for: .touchUpInside)
     }
     
@@ -235,19 +265,38 @@ class CameraVC: UIViewController {
     }
     
     private func requestPhotoLibraryAuthor() {
-        switch PHPhotoLibrary.authorizationStatus() {
-        case .authorized:
-            // FIXME: 첫번째 Photo Library 사진 가져오도록 수정
-            setPhotoLibraryImage()
-            PHPhotoLibrary.shared().register(self)
-        case .notDetermined:
-            galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
-        case .restricted:
-            galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
-        case .denied:
-            galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
-        @unknown default:
-            fatalError()
+        DispatchQueue.main.async {
+            switch PHPhotoLibrary.authorizationStatus() {
+            case .authorized:
+                self.setPhotoLibraryImage()
+                PHPhotoLibrary.shared().register(self)
+            case .notDetermined:
+                PHPhotoLibrary.requestAuthorization { status in
+                    switch status {
+                    case .authorized:
+                        self.setPhotoLibraryImage()
+                        PHPhotoLibrary.shared().register(self)
+                    case .notDetermined:
+                        self.galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
+                    case .restricted:
+                        self.galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
+                    case .denied:
+                        self.galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
+                    case .limited:
+                        self.galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
+                    @unknown default:
+                        break
+                    }
+                }
+            case .restricted:
+                self.galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
+            case .denied:
+                self.galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
+            case .limited:
+                self.galleryButton.setImage(UIImage(named: ImageKey.noGallery), for: .normal)
+            @unknown default:
+                fatalError()
+            }
         }
     }
     
@@ -257,9 +306,11 @@ class CameraVC: UIViewController {
         fetchOption.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         let fetchPhotos = PHAsset.fetchAssets(with: fetchOption)
         if let photo = fetchPhotos.firstObject {
-            ImageManager.shared.requestImage(from: photo, thumnailSize: galleryButton.frame.size) { image in
-                DispatchQueue.main.async {
-                    self.galleryButton.setImage(image, for: .normal)
+            DispatchQueue.main.async {
+                ImageManager.shared.requestImage(from: photo, thumnailSize: self.galleryButton.frame.size) { image in
+                    DispatchQueue.main.async {
+                        self.galleryButton.setImage(image, for: .normal)
+                    }
                 }
             }
         } else {
@@ -289,8 +340,6 @@ class CameraVC: UIViewController {
     let samepleImageButton: UIButton = {
         let sampleImageButton = UIButton()
         sampleImageButton.isHidden = true
-        // FIXME: 임시로 지정해서 확인
-        sampleImageButton.setImage(UIImage(named: ImageKey.icAccessTiger), for: .normal)
         sampleImageButton.translatesAutoresizingMaskIntoConstraints = false
         sampleImageButton.layer.borderColor = UIColor.white.cgColor
         sampleImageButton.layer.borderWidth = 1
@@ -299,7 +348,8 @@ class CameraVC: UIViewController {
     }()
     
     private func setSampleImageButton() {
-        self.view.addSubview(samepleImageButton)
+        guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
+        keyWindow.addSubview(samepleImageButton)
         samepleImageButton.addTarget(self, action: #selector(showSampleImage), for: .touchUpInside)
     }
     
@@ -337,8 +387,9 @@ class CameraVC: UIViewController {
     }
     
     private func addImageView() {
-        self.view.addSubview(galleryDescriptionLabel)
-        self.view.addSubview(sampleDescriptionLabel)
+        guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
+        keyWindow.addSubview(galleryDescriptionLabel)
+        keyWindow.addSubview(sampleDescriptionLabel)
     }
     
     // MARK: - UIViewController viewDidLoad 설정

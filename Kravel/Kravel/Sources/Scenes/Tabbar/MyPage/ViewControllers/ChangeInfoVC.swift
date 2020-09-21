@@ -11,7 +11,7 @@ import UIKit
 class ChangeInfoVC: UIViewController {
     static let identifier = "ChangeInfoVC"
     
-    var selectedSex: String?
+    var selectedSex: String = ""
     
     // MARK: - Navigation Bar 설정
     var naviTitle: String?
@@ -19,6 +19,11 @@ class ChangeInfoVC: UIViewController {
     // MARK: - 라벨들 설정
     @IBOutlet weak var nickNameLabel: UILabel!
     @IBOutlet weak var sexLabel: UILabel!
+    @IBOutlet weak var nickNameVaildLabel: UILabel! {
+        didSet {
+            nickNameVaildLabel.alpha = 0
+        }
+    }
     
     // MARK: - 닉네임 수정 화면 설정
     @IBOutlet weak var nicknameBackView: UIView! {
@@ -30,7 +35,11 @@ class ChangeInfoVC: UIViewController {
         }
     }
     
-    @IBOutlet weak var nicknameTextField: UITextField!
+    @IBOutlet weak var nicknameTextField: UITextField! {
+        didSet {
+            nicknameTextField.delegate = self
+        }
+    }
     
     // MARK: - 성별 버튼 설정
     @IBOutlet var sexButtons: [SexButton]! {
@@ -57,6 +66,7 @@ class ChangeInfoVC: UIViewController {
     // MARK: - 수정 완료 버튼 설정
     @IBOutlet weak var completeButton: UIButton! {
         didSet {
+            completeButton.isUserInteractionEnabled = false
             guard let customButton = completeButton as? CustomButton else { return }
             customButton.locationButton = .signupView
         }
@@ -76,11 +86,12 @@ class ChangeInfoVC: UIViewController {
         nickNameLabel.text = "닉네임".localized
         nickNameLabel.sizeToFit()
         
-        sexLabel.text = "성별".localized
+        sexLabel.text = "성별".localized + " " + "(" + "선택".localized + ")"
         sexLabel.sizeToFit()
         
         completeButton.setTitle("수정 완료".localized, for: .normal)
         nicknameTextField.placeholder = "닉네임을 입력해주세요.".localized
+        nickNameVaildLabel.text = "7자 이하로 입력해주세요.".localized
     }
     
     
@@ -107,9 +118,9 @@ class ChangeInfoVC: UIViewController {
 extension ChangeInfoVC {
     // MARK: - 정보 수정 API 연결
     private func requestChangInfo() {
-        guard let selectedSex = self.selectedSex,
-            let modifiedNickName = self.nicknameTextField.text else { return }
-
+        guard let modifiedNickName = self.nicknameTextField.text else { return }
+        if selectedSex == "" { selectedSex = "MAN" }
+        
         let changInfoBodyParameter = ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: selectedSex, nickName: modifiedNickName, speech: "KOR")
         
         NetworkHandler.shared.requestAPI(apiCategory: .changInfo(queryType: "nickNameAndGender", body: changInfoBodyParameter)) { result in
@@ -134,6 +145,27 @@ extension ChangeInfoVC {
 extension ChangeInfoVC {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+}
+
+extension ChangeInfoVC: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        let layerColor: UIColor = text != "" ? UIColor(red: 253/255, green: 9/255, blue: 9/255, alpha: 1.0) : .veryLightPink
+        
+        nicknameBackView.layer.borderColor = layerColor.cgColor
+        
+        if text == "" || text.count > 7 {
+            completeButton.isUserInteractionEnabled = false
+            UIView.animate(withDuration: 0.3) {
+                self.nickNameVaildLabel.alpha = 1.0
+            }
+        } else {
+            completeButton.isUserInteractionEnabled = true
+            UIView.animate(withDuration: 0.3) {
+                self.nickNameVaildLabel.alpha = 0
+            }
+        }
     }
 }
 

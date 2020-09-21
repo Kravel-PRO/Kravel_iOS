@@ -54,6 +54,7 @@ struct CustomLocalize {
         case nickname = "닉네임"
         case nicknameTextField = "사용할 닉네임을 7자 이하로 적어주세요."
         case gender = "성별"
+        case optional = "선택"
         
         case emailValid = "이메일 형식이 옳지 않습니다."
         case pwValid = "6자리 이상 입력해주세요."
@@ -225,6 +226,9 @@ struct CustomLocalize {
             case .gender:
                 if language == "KOR" { return "성별" }
                 else { return "Gender" }
+            case .optional:
+                if language == "KOR" { return "선택" }
+                else { return "Optional" }
             case .man:
                 if language == "KOR" { return "남자" }
                 else { return "Male" }

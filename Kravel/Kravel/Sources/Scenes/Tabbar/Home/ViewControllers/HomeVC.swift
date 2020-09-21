@@ -319,11 +319,13 @@ extension HomeVC: CLLocationManagerDelegate {
     // MARK: - 위치 관련 설정
     private func requestLocation() {
         switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:
+            LocationManager.shared.setManager(delegate: self)
+            LocationManager.shared.requestLocation()
+        case .authorizedAlways:
+            break
         case .notDetermined:
-            guard let authorizationVC = UIStoryboard(name: "AuthorizationPopup", bundle: nil).instantiateViewController(withIdentifier: AuthorizationPopupVC.identifier) as? AuthorizationPopupVC else { return }
-            authorizationVC.setAuthorType(author: .location)
-            authorizationVC.modalPresentationStyle = .overFullScreen
-            self.present(authorizationVC, animated: false, completion: nil)
+            LocationManager.shared.requestAuthorization()
         case .restricted:
             guard let authorizationVC = UIStoryboard(name: "AuthorizationPopup", bundle: nil).instantiateViewController(withIdentifier: AuthorizationPopupVC.identifier) as? AuthorizationPopupVC else { return }
             authorizationVC.setAuthorType(author: .location)
@@ -334,10 +336,6 @@ extension HomeVC: CLLocationManagerDelegate {
             authorizationVC.setAuthorType(author: .location)
             authorizationVC.modalPresentationStyle = .overFullScreen
             self.present(authorizationVC, animated: false, completion: nil)
-        case .authorizedWhenInUse:
-            LocationManager.shared.setManager(delegate: self)
-            LocationManager.shared.requestLocation()
-        case .authorizedAlways: break
         @unknown default:
             break
         }
