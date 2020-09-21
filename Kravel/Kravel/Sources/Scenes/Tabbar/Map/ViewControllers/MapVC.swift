@@ -527,6 +527,7 @@ class MapVC: UIViewController {
     private func setDetailPlaceData(_ detailInform: PlaceDetailInform) {
         self.selectedPlace = detailInform
         placePopupView.placeName = detailInform.title
+        placePopupView.placeId = detailInform.placeId
         if let tags = detailInform.tags {
             placePopupView.placeTags = tags.split(separator: ",").map({ String($0) })
         } else {
@@ -645,6 +646,14 @@ extension MapVC: PlacePopupViewDelegate {
                 self.present(networkFailPopupVC, animated: false, completion: nil)
             }
         }
+    }
+    
+    func clickPhotoReview(at indexPath: IndexPath, placeId: Int, selectedReviewId: Int?) {
+        guard let otherPhotoReviewVC = UIStoryboard(name: "OtherPhotoReview", bundle: nil).instantiateViewController(withIdentifier: OtherPhotoReviewVC.identifier) as? OtherPhotoReviewVC else { return }
+        otherPhotoReviewVC.requestType = .place(id: placeId)
+        
+        if let selectedReviewId = selectedReviewId { otherPhotoReviewVC.selectedPhotoReviewID = selectedReviewId }
+        self.navigationController?.pushViewController(otherPhotoReviewVC, animated: true)
     }
 }
 

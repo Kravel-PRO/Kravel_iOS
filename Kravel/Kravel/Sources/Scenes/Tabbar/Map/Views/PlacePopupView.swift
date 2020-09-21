@@ -36,6 +36,9 @@ class PlacePopupView: UIView {
         }
     }
     
+    // MARK: - 장소 ID
+    var placeId: Int?
+    
     // MARK: - 장소 Image View 설정
     @IBOutlet weak var placeImageView: UIImageView! {
         didSet {
@@ -260,7 +263,12 @@ extension PlacePopupView: UICollectionViewDataSource {
 }
 
 extension PlacePopupView: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let placeId = self.placeId else { return }
+        if indexPath.row != 5 { delegate?.clickPhotoReview(at: indexPath, placeId: placeId, selectedReviewId: photoReviewData[indexPath.row
+        ].reviewId) }
+        else { delegate?.clickPhotoReview(at: indexPath, placeId: placeId, selectedReviewId: nil) }
+    }
 }
 
 extension PlacePopupView: UICollectionViewDelegateFlowLayout {

@@ -11,4 +11,5 @@ import Foundation
 protocol PlacePopupViewDelegate {
     func clickPhotoButton()
     func clickScrapButton()
+    func clickPhotoReview(at indexPath: IndexPath, placeId: Int, selectedReviewId: Int?)
 }
