@@ -14,7 +14,6 @@ class CameraVC: UIViewController {
     static let identifier = "CameraVC"
     
     var placeId: Int?
-    var selectedFilterIndex: Int?
     
     // MARK: - UIImagePickerController 설정
     private var picker: UIImagePickerController?
@@ -190,7 +189,6 @@ class CameraVC: UIViewController {
     
     // 사진찍기 버튼 Layout 수정
     private func setCaptureButtonLayout() {
-//        guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
         NSLayoutConstraint.activate([
             captureButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -24),
             captureButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
@@ -374,6 +372,23 @@ class CameraVC: UIViewController {
     
     // MARK: - 필터 CollectionView 구현
     var filterCollectionView: UICollectionView?
+    var filterImageView: UIImageView = {
+        let filterImageView = UIImageView()
+        filterImageView.contentMode = .scaleAspectFit
+        filterImageView.translatesAutoresizingMaskIntoConstraints = false
+        return filterImageView
+    }()
+    
+    // 현재 선택된 필터
+    var selectedFilterIndex: Int?
+    
+    // 필터에 들어있는 이미지들
+    var filterDatas: [FilterData] = []
+    
+    struct FilterData {
+        let name: String
+        let filterImage: UIImage?
+    }
     
     // MARK: - 샘플 사진 보여주는 ImageView 설정
     let sampleImageButton: UIButton = {
@@ -593,7 +608,7 @@ extension CameraVC {
             case .success(let detailInform):
                 guard let detailInform = detailInform as? PlaceDetailInform else { return }
                 DispatchQueue.main.async {
-                    self.setFilterByImage(detailInform.subImageUrl, detailInform.filterImageUrl)
+                    self.setFilterByImage(detailInform.subImageUrl, detailInform.filterImageUrl, detailInform.mediaTitle)
                 }
             case .requestErr:
                 break
@@ -607,9 +622,10 @@ extension CameraVC {
         }
     }
     
-    private func setFilterByImage(_ subImageUrl: String?, _ filterImageUrl: String?) {
+    private func setFilterByImage(_ subImageUrl: String?, _ filterImageUrl: String?, _ filterName: String?) {
         guard let subImageUrl = subImageUrl,
-              let filterImageUrl = filterImageUrl else { return }
+              let filterImageUrl = filterImageUrl,
+              let filterName = filterName else { return }
         
         let tempImageView = UIImageView()
         tempImageView.setImage(with: subImageUrl) { successImage in
@@ -618,7 +634,14 @@ extension CameraVC {
             self.sampleDescriptionLabel.isHidden = false
         }
         
-        initFilterView()
+        tempImageView.setImage(with: filterImageUrl) { successImage in
+            let filterData = FilterData(name: filterName, filterImage: successImage)
+            self.filterDatas.append(FilterData(name: "일반".localized, filterImage: nil))
+            self.filterDatas.append(filterData)
+            DispatchQueue.main.async {
+                self.initFilterView()
+            }
+        }
     }
     
     private func initFilterView() {
@@ -652,19 +675,28 @@ extension CameraVC {
             filterCollectionView.heightAnchor.constraint(equalToConstant: 26)
         ])
         
+        self.view.addSubview(filterImageView)
+        self.view.insertSubview(filterImageView, at: 2)
+        
+        NSLayoutConstraint.activate([
+            filterImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            filterImageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            filterImageView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            filterImageView.topAnchor.constraint(equalTo: self.view.topAnchor)
+        ])
     }
 }
 
 extension CameraVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return filterDatas.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let filterCell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterCell.identifier, for: indexPath) as? FilterCell else { return UICollectionViewCell() }
         filterCell.layer.cornerRadius = filterCell.frame.width / 5.28
         filterCell.clipsToBounds = true
-        filterCell.filterName = "기생충"
+        filterCell.filterName = filterDatas[indexPath.row].name
         return filterCell
     }
 }
@@ -672,6 +704,7 @@ extension CameraVC: UICollectionViewDataSource {
 extension CameraVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        filterImageView.image = filterDatas[indexPath.row].filterImage
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {

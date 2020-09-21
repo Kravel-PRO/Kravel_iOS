@@ -124,6 +124,7 @@ struct CustomLocalize {
         // MARK: - 카메라 뷰 관련 Button Label
         case gallery = "갤러리"
         case sample = "예시"
+        case normal = "일반"
         
         // MARK: - 네트워크 연결 POPUP
         case networkFail = "네트워크 연결이 끊겼습니다."
@@ -346,6 +347,9 @@ struct CustomLocalize {
             case .sample:
                 if language == "KOR" { return "예시" }
                 else { return "Sample" }
+            case .normal:
+                if language == "KOR" { return "일반" }
+                else { return "Basic" }
             case .networkFail:
                 if language == "KOR" { return "네트워크 연결이 끊겼습니다." }
                 else { return "The network connection has been lost." }

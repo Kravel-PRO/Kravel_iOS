@@ -57,7 +57,9 @@ class FilterCell: UICollectionViewCell {
         self.contentView.addSubview(filterNameLabel)
         NSLayoutConstraint.activate([
             filterNameLabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
-            filterNameLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
+            filterNameLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            filterNameLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 6),
+            filterNameLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -6)
         ])
     }
 }
