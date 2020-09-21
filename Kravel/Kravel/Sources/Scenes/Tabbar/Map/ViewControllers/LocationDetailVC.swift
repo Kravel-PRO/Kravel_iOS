@@ -144,6 +144,7 @@ class LocationDetailVC: UIViewController {
     @IBAction func takePicture(_ sender: Any) {
         guard let cameraVC = UIStoryboard(name: "Camera", bundle: nil).instantiateViewController(withIdentifier: CameraVC.identifier) as? CameraVC else { return }
         cameraVC.hidesBottomBarWhenPushed = true
+        cameraVC.placeId = self.placeID
         self.navigationController?.pushViewController(cameraVC, animated: true)
     }
     

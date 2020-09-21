@@ -103,7 +103,7 @@ class PlacePopupView: UIView {
     @IBOutlet weak var buttonStackView: UIStackView!
     
     @IBAction func clickPhoto(_ sender: Any) {
-        delegate?.clickPhotoButton()
+        delegate?.clickPhotoButton(placeId: placeId)
     }
     
     @IBAction func clickScrap(_ sender: Any) {

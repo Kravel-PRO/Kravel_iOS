@@ -608,8 +608,9 @@ extension MapVC {
 
 extension MapVC: PlacePopupViewDelegate {
     // MARK: - 팝업 뷰에서 사진찍기 버튼을 누른 경우
-    func clickPhotoButton() {
+    func clickPhotoButton(placeId: Int?) {
         guard let cameraVC = UIStoryboard(name: "Camera", bundle: nil).instantiateViewController(withIdentifier: CameraVC.identifier) as? CameraVC else { return }
+        cameraVC.placeId = placeId
         cameraVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(cameraVC, animated: true)
     }

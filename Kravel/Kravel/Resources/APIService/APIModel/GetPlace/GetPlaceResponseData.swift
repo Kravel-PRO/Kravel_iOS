@@ -26,6 +26,8 @@ struct PlaceDetailInform: Codable {
     let title: String?
     let contents: [String]?
     let imageUrl: String?
+    let subImageUrl: String?
+    let filterImageUrl: String?
     let location: String?
     let latitude: Double
     let longitude: Double

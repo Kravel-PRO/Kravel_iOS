@@ -29,5 +29,17 @@ extension UIImageView {
                     }
                 })
     }
+    
+    func setImage(with urlString: String, completion: @escaping (UIImage) -> Void) {
+        let url = URL(string: urlString)
+        self.kf.setImage(with: url, completionHandler:  { result in
+            switch result {
+            case .success(let successData):
+                completion(successData.image)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        })
+    }
 }
 

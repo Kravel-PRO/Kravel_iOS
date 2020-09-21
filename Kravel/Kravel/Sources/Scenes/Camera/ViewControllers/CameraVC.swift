@@ -13,6 +13,8 @@ import Photos
 class CameraVC: UIViewController {
     static let identifier = "CameraVC"
     
+    var placeId: Int?
+    
     // MARK: - UIImagePickerController 설정
     private var picker: UIImagePickerController?
     private var photoContainerView: UIView?
@@ -369,15 +371,14 @@ class CameraVC: UIViewController {
         ])
     }
     
-    // FIXME: 샘플 사진 없을 시 라벨과 Image가 안뜰 수 있게 설정해야함
     // MARK: - 샘플 사진 보여주는 ImageView 설정
     let sampleImageButton: UIButton = {
         let sampleImageButton = UIButton()
-        sampleImageButton.isHidden = true
         sampleImageButton.translatesAutoresizingMaskIntoConstraints = false
         sampleImageButton.layer.borderColor = UIColor.white.cgColor
         sampleImageButton.layer.borderWidth = 1
         sampleImageButton.clipsToBounds = true
+        sampleImageButton.isHidden = true
         return sampleImageButton
     }()
     
@@ -388,7 +389,7 @@ class CameraVC: UIViewController {
     }
     
     @objc func showSampleImage() {
-        print("여기 눌림")
+        if let buttonImage = sampleImageButton.currentImage { presentPhotoView(buttonImage) }
     }
     
     private func setSampleImageViewLayout() {
@@ -398,14 +399,13 @@ class CameraVC: UIViewController {
             sampleImageButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.112),
             sampleImageButton.heightAnchor.constraint(equalTo: sampleImageButton.widthAnchor)
         ])
-        sampleImageButton.layer.cornerRadius = sampleImageButton.frame.width / 6
+        sampleImageButton.layer.cornerRadius = self.view.frame.width * 0.112 / 6
     }
     
     // MARK: - 샘플 사진 알려주는 설명 Label 설정
     let sampleDescriptionLabel: UILabel = {
         let sampleDescriptionLabel = UILabel()
         sampleDescriptionLabel.isHidden = true
-        // FIXME: - 고치기
         sampleDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         sampleDescriptionLabel.font = UIFont.systemFont(ofSize: 12)
         sampleDescriptionLabel.textColor = .white
@@ -433,6 +433,7 @@ class CameraVC: UIViewController {
         // Do any additional setup after loading the view.
         requestCameraAuthor()
         requestPhotoLibraryAuthor()
+        if let placeId = self.placeId { requestDetailInform(of: placeId) }
     }
     
     // MARK: - UIViewController viewWillAppear 설정
@@ -444,18 +445,6 @@ class CameraVC: UIViewController {
     private func setNav() {
         self.navigationController?.navigationBar.isHidden = true
     }
-    
-    // MARK: - UIViewController viewDidAppear 설정
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        switch AVCaptureDevice.authorizationStatus(for: .video) {
-//        case .authorized: setCameraLayout()
-//        case .notDetermined: break
-//        case .restricted: break
-//        case .denied: break
-//        @unknown default: break
-//        }
-//    }
     
     // MARK: - UIViewController viewWillDisappear override 설정
     override func viewWillDisappear(_ animated: Bool) {
@@ -589,5 +578,42 @@ extension CameraVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
     
     @objc func dismissPhotoView(_ sender: Any) {
         self.photoContainerView?.removeFromSuperview()
+    }
+}
+
+extension CameraVC {
+    // MARK: - 장소 디테일 API 요청
+    private func requestDetailInform(of placeId: Int) {
+        NetworkHandler.shared.requestAPI(apiCategory: .getPlaceOfID(placeId)) { result in
+            switch result {
+            case .success(let detailInform):
+                guard let detailInform = detailInform as? PlaceDetailInform else { return }
+                DispatchQueue.main.async {
+                    self.setFilterByImage(detailInform.subImageUrl, detailInform.filterImageUrl)
+                }
+            case .requestErr:
+                break
+            case .serverErr:
+                print("Server Error")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
+    }
+    
+    private func setFilterByImage(_ subImageUrl: String?, _ filterImageUrl: String?) {
+        guard let subImageUrl = subImageUrl,
+              let filterImageUrl = filterImageUrl else { return }
+        
+        let tempImageView = UIImageView()
+        tempImageView.setImage(with: subImageUrl) { successImage in
+            self.sampleImageButton.setImage(successImage, for: .normal)
+            self.sampleImageButton.isHidden = false
+            self.sampleDescriptionLabel.isHidden = false
+        }
+        
+        print(filterImageUrl)
     }
 }

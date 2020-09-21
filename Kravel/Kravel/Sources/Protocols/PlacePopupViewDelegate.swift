@@ -9,7 +9,7 @@
 import Foundation
 
 protocol PlacePopupViewDelegate {
-    func clickPhotoButton()
+    func clickPhotoButton(placeId: Int?)
     func clickScrapButton()
     func clickPhotoReview(at indexPath: IndexPath, placeId: Int, selectedReviewId: Int?)
 }
