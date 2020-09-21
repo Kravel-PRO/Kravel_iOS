@@ -213,7 +213,6 @@ class HomeVC: UIViewController {
     // MARK: - UIViewController viewDidLayoutSubviews Override
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        setHotPlaceCollectionViewHeight()
         setPhotoReviewViewLayout()
     }
 }

@@ -79,15 +79,8 @@ class CameraVC: UIViewController {
                         self.initCameraInputData()
                         self.initCameraOutputData()
                         self.displayPreview()
-                        
-//                        self.captureButton.bringSubviewToFront(self.videoPreviewLayer as! UIView)
-//                        self.galleryButton.bringSubviewToFront(self.videoPreviewLayer as! UIView)
-//                        self.sampleDescriptionLabel.bringSubviewToFront(self.videoPreviewLayer as! UIView)
-//                        self.galleryDescriptionLabel.bringSubviewToFront(self.videoPreviewLayer as! UIView)
-//                        self.captureButton.bringSubviewToFront(self.videoPreviewLayer as! UIView)
                     }
                 } else {
-                    // FIXME: 카메라 설정창으로 가서 카메라 허용할 수 있게 설정하는 화면 뜨게 하기
                     self.navigationController?.popViewController(animated: true)
                 }
             }
@@ -420,6 +413,14 @@ class CameraVC: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         captureSession.stopRunning()
+        captureButton.removeFromSuperview()
+        captureInlineImageView.removeFromSuperview()
+        captureOutlineImageView.removeFromSuperview()
+        galleryButton.removeFromSuperview()
+        galleryDescriptionLabel.removeFromSuperview()
+        sampleDescriptionLabel.removeFromSuperview()
+        samepleImageButton.removeFromSuperview()
+        cancelButton.removeFromSuperview()
     }
     
     // MARK: - UIViewController viewDidLayoutSubviews override 설정

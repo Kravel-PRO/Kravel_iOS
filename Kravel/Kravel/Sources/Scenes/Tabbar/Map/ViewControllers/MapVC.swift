@@ -147,11 +147,11 @@ class MapVC: UIViewController {
             let cameraPosition = mapView.cameraPosition.target
             requestClosePlaceData(latitude: cameraPosition.lat, longitude: cameraPosition.lng)
         case .notDetermined:
-            break
+            deniedAuthor()
         case .restricted:
-            break
+            deniedAuthor()
         case .denied:
-            break
+            deniedAuthor()
         @unknown default:
             break
         }
