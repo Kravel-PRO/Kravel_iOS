@@ -14,6 +14,7 @@ class CameraVC: UIViewController {
     static let identifier = "CameraVC"
     
     var placeId: Int?
+    var placeDetailData: PlaceDetailInform?
     
     // MARK: - UIImagePickerController 설정
     private var picker: UIImagePickerController?
@@ -73,15 +74,17 @@ class CameraVC: UIViewController {
             DispatchQueue.main.async {
                 self.setCameraLayout()
             }
+            if let placeId = self.placeId { self.requestDetailInform(of: placeId) }
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { granted in
-                DispatchQueue.main.async {
-                    if granted {
-                        self.setCameraView()
-                        DispatchQueue.main.async {
-                            self.setCameraLayout()
-                        }
-                    } else {
+                if granted {
+                    self.setCameraView()
+                    DispatchQueue.main.async {
+                        self.setCameraLayout()
+                    }
+                    if let placeId = self.placeId { self.requestDetailInform(of: placeId) }
+                } else {
+                    DispatchQueue.main.async {
                         self.navigationController?.popViewController(animated: true)
                     }
                 }
@@ -393,11 +396,11 @@ class CameraVC: UIViewController {
     // MARK: - 샘플 사진 보여주는 ImageView 설정
     let sampleImageButton: UIButton = {
         let sampleImageButton = UIButton()
+        sampleImageButton.isHidden = true
         sampleImageButton.translatesAutoresizingMaskIntoConstraints = false
         sampleImageButton.layer.borderColor = UIColor.white.cgColor
         sampleImageButton.layer.borderWidth = 1
         sampleImageButton.clipsToBounds = true
-        sampleImageButton.isHidden = true
         return sampleImageButton
     }()
     
@@ -452,7 +455,6 @@ class CameraVC: UIViewController {
         // Do any additional setup after loading the view.
         requestCameraAuthor()
         requestPhotoLibraryAuthor()
-        if let placeId = self.placeId { requestDetailInform(of: placeId) }
     }
     
     // MARK: - UIViewController viewWillAppear 설정
@@ -607,9 +609,7 @@ extension CameraVC {
             switch result {
             case .success(let detailInform):
                 guard let detailInform = detailInform as? PlaceDetailInform else { return }
-                DispatchQueue.main.async {
-                    self.setFilterByImage(detailInform.subImageUrl, detailInform.filterImageUrl, detailInform.mediaTitle)
-                }
+                self.setFilterByImage(detailInform.subImageUrl, detailInform.filterImageUrl, detailInform.mediaTitle)
             case .requestErr:
                 break
             case .serverErr:
@@ -627,20 +627,22 @@ extension CameraVC {
               let filterImageUrl = filterImageUrl,
               let filterName = filterName else { return }
         
-        let tempImageView = UIImageView()
-        tempImageView.setImage(with: subImageUrl) { successImage in
-            self.sampleImageButton.setImage(successImage, for: .normal)
-            self.sampleImageButton.isHidden = false
-            self.sampleDescriptionLabel.isHidden = false
-        }
-        
-        tempImageView.setImage(with: filterImageUrl) { successImage in
-            let filterData = FilterData(name: filterName, filterImage: successImage)
+        let tempFilterImageView = UIImageView()
+        tempFilterImageView.setImage(with: filterImageUrl) { successImage in
+            print(filterName)
+            let filterData = FilterData(name: "필터".localized, filterImage: successImage)
             self.filterDatas.append(FilterData(name: "일반".localized, filterImage: nil))
             self.filterDatas.append(filterData)
             DispatchQueue.main.async {
                 self.initFilterView()
             }
+        }
+        
+        let tempSampleImageView = UIImageView()
+        tempSampleImageView.setImage(with: subImageUrl) { successImage in
+            self.sampleDescriptionLabel.isHidden = false
+            self.sampleImageButton.isHidden = false
+            self.sampleImageButton.setImage(successImage, for: .normal)
         }
     }
     
@@ -722,12 +724,15 @@ extension CameraVC: UICollectionViewDelegate {
         
         let estimatePointeeX = CGFloat(selectIndex) * cellWidthWithSpacing
         targetContentOffset.pointee = CGPoint(x: estimatePointeeX, y: 0)
-        selectedFilterIndex = selectIndex
+        if selectIndex >= filterDatas.count { selectedFilterIndex = filterDatas.count-1 }
+        else { selectedFilterIndex = selectIndex }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if let selectedIndex = self.selectedFilterIndex {
-            filterCollectionView?.selectItem(at: IndexPath(row: selectedIndex, section: 0), animated: false, scrollPosition: [])
+        if let selectedIndex = self.selectedFilterIndex,
+           let collectionView = self.filterCollectionView {
+            self.collectionView(collectionView, didSelectItemAt: IndexPath(row: selectedIndex, section: 0))
+            collectionView.selectItem(at: IndexPath(row: selectedIndex, section: 0), animated: false, scrollPosition: [])
         }
     }
 }
