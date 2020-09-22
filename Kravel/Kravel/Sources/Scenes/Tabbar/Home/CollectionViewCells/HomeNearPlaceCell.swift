@@ -32,6 +32,7 @@ class HomeNearPlaceCell: UICollectionViewCell {
     // MARK: - Tag CollectionView 설정
     @IBOutlet weak var tagCollectionView: UICollectionView! {
         didSet {
+            tagCollectionView.showsHorizontalScrollIndicator = false
             tagCollectionView.dataSource = self
             tagCollectionView.delegate = self
         }
@@ -63,7 +64,7 @@ extension HomeNearPlaceCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath) as? TagCell else { return UICollectionViewCell() }
-        tagCell.tagTitle = "#\(tags[indexPath.row])     "
+        tagCell.tagTitle = "#\(tags[indexPath.row])"
         return tagCell
     }
 }

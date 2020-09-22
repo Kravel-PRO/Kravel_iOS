@@ -30,6 +30,7 @@ class HotPlaceCell: UICollectionViewCell {
     // MARK: - 태그 CollectionView 설정
     @IBOutlet weak var tagCollectionView: UICollectionView! {
         didSet {
+            tagCollectionView.showsHorizontalScrollIndicator = false
             tagCollectionView.dataSource = self
             tagCollectionView.delegate = self
         }

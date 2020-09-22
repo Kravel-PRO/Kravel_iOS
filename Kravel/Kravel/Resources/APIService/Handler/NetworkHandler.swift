@@ -406,8 +406,11 @@ class NetworkHandler {
                 switch response.result {
                 case .success(let successData):
                     guard let statusCode = response.response?.statusCode else { return }
-                    if statusCode == 200 { completion(.success(successData.data?.result)) }
-                    else {
+                    if statusCode == 200 {
+                        completion(.success(successData.data?.result))
+                        guard let token = response.response?.headers["Authorization"] else { return }
+                        UserDefaults.standard.setValue(token, forKey: UserDefaultKey.token)
+                    } else {
                         print(statusCode)
                         print(successData)
                         completion(.serverErr) }

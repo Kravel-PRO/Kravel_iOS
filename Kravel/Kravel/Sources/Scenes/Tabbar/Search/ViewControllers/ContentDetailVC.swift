@@ -369,7 +369,11 @@ extension ContentDetailVC: UICollectionViewDataSource {
     private func createPlaceCell(of collectionView: UICollectionView, at indexPath: IndexPath) -> UICollectionViewCell {
         guard let placeCell = collectionView.dequeueReusableCell(withReuseIdentifier: PlaceCell.identifier, for: indexPath) as? PlaceCell else { return UICollectionViewCell() }
         placeCell.placeImageView.setImage(with: places[indexPath.row].imageUrl ?? "")
-        placeCell.tags = places[indexPath.row].tags
+        if let tags = places[indexPath.row].tags {
+            placeCell.tags = tags.split(separator: ",").map(String.init)
+        } else {
+            placeCell.tags = []
+        }
         placeCell.placeName = places[indexPath.row].title
         return placeCell
     }
