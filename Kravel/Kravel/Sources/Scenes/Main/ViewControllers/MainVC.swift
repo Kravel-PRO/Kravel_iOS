@@ -208,6 +208,7 @@ extension MainVC: LoginTextViewDelegate {
                 UserDefaults.standard.set(id, forKey: UserDefaultKey.loginId)
                 UserDefaults.standard.set(pw, forKey: UserDefaultKey.loginPw)
                 
+                self.requestMyInform()
                 // 메인 화면으로 이동
                 guard let mainTabVC = UIStoryboard(name: "Tabbar", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as? UITabBarController else { return }
                 mainTabVC.modalPresentationStyle = .fullScreen
@@ -226,6 +227,25 @@ extension MainVC: LoginTextViewDelegate {
                 print("ServrError")
                 
             // 네트워크 연결 안 된 경우 Error 처리
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
+    }
+    
+    // MARK: - 로그인 후, 언어 설정을 위한 정보 요청
+    private func requestMyInform() {
+        NetworkHandler.shared.requestAPI(apiCategory: .getMyInform(ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: "", nickName: "", speech: ""))) { result in
+            switch result {
+            case .success(let myInformResponse):
+                guard let myInformResponse = myInformResponse as? ChangeInfoResponseData else { return }
+                if let speech = myInformResponse.speech { UserDefaults.standard.setValue(speech, forKey: UserDefaultKey.language) }
+            case .requestErr:
+                print("requestErr")
+            case .serverErr:
+                print("ServerErr")
             case .networkFail:
                 guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
                 networkFailPopupVC.modalPresentationStyle = .overFullScreen
