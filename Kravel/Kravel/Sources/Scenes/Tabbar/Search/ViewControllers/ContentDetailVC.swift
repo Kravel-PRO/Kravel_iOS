@@ -87,11 +87,7 @@ class ContentDetailVC: UIViewController {
     
     // MARK: - Thumnail Image 설정
     @IBOutlet weak var thumbnail_Back_View: UIView!
-    @IBOutlet weak var thumbnail_imageView: UIImageView! {
-        didSet {
-            setGradientLayer()
-        }
-    }
+    @IBOutlet weak var thumbnail_imageView: UIImageView!
     
     var thumnail_Gradient_Layer: CAGradientLayer = {
         let gradientLayer = CAGradientLayer()
@@ -266,11 +262,6 @@ class ContentDetailVC: UIViewController {
         setNav()
     }
     
-    // MARK: - UIViewController viewWillLayoutSubviews 설정
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-    }
-    
     // MARK: - Set Navigation
     private func setNav() {
         self.navigationController?.navigationBar.isHidden = true
@@ -279,11 +270,12 @@ class ContentDetailVC: UIViewController {
         backButtonTopConstraint.constant = window.safeAreaInsets.top
     }
     
-    private func createAttributeString(of str: String, highlightPart: String) -> NSMutableAttributedString {
-        let attributeString = NSMutableAttributedString(string: str, attributes: [.foregroundColor: UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0), .font: UIFont.systemFont(ofSize: 24)])
-        attributeString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 24), range: (str as NSString).range(of: highlightPart))
-        return attributeString
+    // MARK: - UIViewController viewDidLayoutSubviews 설정
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setGradientLayer()
     }
+    
 }
 
 extension ContentDetailVC {

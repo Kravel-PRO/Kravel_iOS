@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>2020092298</string>
+	<string>2020092299</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -72,7 +72,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>buildCount</key>
-	<string>98</string>
+	<string>99</string>
 	<key>buildDay</key>
 	<string>20200922</string>
 </dict>
