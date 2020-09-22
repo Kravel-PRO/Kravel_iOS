@@ -142,15 +142,15 @@ class ContentDetailVC: UIViewController {
             moreButtonStackView.arrangedSubviews[0].isHidden = true
             moreButtonStackView.arrangedSubviews[2].isHidden = true
         } else if places.count <= 4 {
-            placeCV_height_Constarint.constant = place_Cell_Height * 2 + 4
+            placeCV_height_Constarint.constant = place_Cell_Height * 2 + 16
             moreButtonStackView.arrangedSubviews[0].isHidden = true
             moreButtonStackView.arrangedSubviews[2].isHidden = true
         } else if places.count <= 6 {
-            placeCV_height_Constarint.constant = place_Cell_Height * 3 + 4 * 2
+            placeCV_height_Constarint.constant = place_Cell_Height * 3 + 16 * 2
             moreButtonStackView.arrangedSubviews[0].isHidden = true
             moreButtonStackView.arrangedSubviews[2].isHidden = true
         } else {
-            placeCV_height_Constarint.constant = place_Cell_Height * 3 + 4 * 2
+            placeCV_height_Constarint.constant = place_Cell_Height * 3 + 16 * 2
             moreButtonStackView.arrangedSubviews[0].isHidden = true
             moreButtonStackView.arrangedSubviews[2].isHidden = false
         }
@@ -265,10 +265,6 @@ class ContentDetailVC: UIViewController {
     // MARK: - UIViewController viewWillLayoutSubviews 설정
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-    }
-    
-    private func setCollectionViewHeight() {
-        placeCV_height_Constarint.constant = place_Cell_Height * 3 + 16 * 2
     }
     
     // MARK: - Set Navigation
