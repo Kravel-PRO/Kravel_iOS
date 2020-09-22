@@ -143,7 +143,7 @@ extension MyPageVC: UITableViewDataSource {
 
 extension MyPageVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.height / 6.8
+        return 56
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

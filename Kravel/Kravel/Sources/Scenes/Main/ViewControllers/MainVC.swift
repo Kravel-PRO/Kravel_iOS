@@ -241,7 +241,10 @@ extension MainVC: LoginTextViewDelegate {
             switch result {
             case .success(let myInformResponse):
                 guard let myInformResponse = myInformResponse as? ChangeInfoResponseData else { return }
-                if let speech = myInformResponse.speech { UserDefaults.standard.setValue(speech, forKey: UserDefaultKey.language) }
+                if let speech = myInformResponse.speech {
+                    UserDefaults.standard.setValue(speech, forKey: UserDefaultKey.language)
+                    NotificationCenter.default.post(name: .changeLanguage, object: nil)
+                }
             case .requestErr:
                 print("requestErr")
             case .serverErr:
