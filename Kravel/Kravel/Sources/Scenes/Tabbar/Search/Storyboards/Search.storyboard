@@ -168,10 +168,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="2PH-tH-6Yz">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="1266"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="1300"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H8t-1X-UEF">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1266"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1300"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITf-nc-oF7">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
@@ -409,7 +409,7 @@
                             <constraint firstItem="kin-xH-LNe" firstAttribute="width" secondItem="Qi1-oZ-sX9" secondAttribute="width" multiplier="0.112" id="ODl-5V-XqY"/>
                             <constraint firstItem="vU3-Sd-Zs8" firstAttribute="trailing" secondItem="2PH-tH-6Yz" secondAttribute="trailing" id="OQ7-Jb-tg7"/>
                             <constraint firstItem="2PH-tH-6Yz" firstAttribute="top" secondItem="Qi1-oZ-sX9" secondAttribute="top" id="XNl-eo-i3Q"/>
-                            <constraint firstItem="vU3-Sd-Zs8" firstAttribute="bottom" secondItem="2PH-tH-6Yz" secondAttribute="bottom" id="cqj-1g-vS5"/>
+                            <constraint firstAttribute="bottom" secondItem="2PH-tH-6Yz" secondAttribute="bottom" id="cqj-1g-vS5"/>
                         </constraints>
                     </view>
                     <size key="freeformSize" width="375" height="1300"/>

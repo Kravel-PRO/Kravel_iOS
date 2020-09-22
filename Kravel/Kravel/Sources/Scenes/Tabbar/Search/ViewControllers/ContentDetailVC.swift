@@ -38,6 +38,7 @@ class ContentDetailVC: UIViewController {
     @IBOutlet weak var contentScrollView: UIScrollView! {
         didSet {
             contentScrollView.delegate = self
+            contentScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
         }
     }
     

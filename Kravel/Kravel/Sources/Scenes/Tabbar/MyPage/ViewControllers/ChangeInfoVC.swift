@@ -111,7 +111,6 @@ class ChangeInfoVC: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18), .foregroundColor: UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1.0)]
         self.navigationController?.navigationBar.tintColor = .black
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
     }
 }
 
