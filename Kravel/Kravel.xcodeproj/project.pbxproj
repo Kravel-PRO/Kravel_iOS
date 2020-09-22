@@ -41,6 +41,7 @@
 		9D4CCF7D25003A95003F73AF /* GetReviewResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CCF7C25003A95003F73AF /* GetReviewResponseData.swift */; };
 		9D4CCF7F25003B9D003F73AF /* APISortableResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CCF7E25003B9D003F73AF /* APISortableResponseData.swift */; };
 		9D4CCF8125003E25003F73AF /* APIDataResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CCF8025003E25003F73AF /* APIDataResult.swift */; };
+		9D57B102251A5E3C00BC192B /* refresh_loading_iOS.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D57B101251A5E3C00BC192B /* refresh_loading_iOS.json */; };
 		9D5DBB45248D5BAD00D82D40 /* SexButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D5DBB44248D5BAD00D82D40 /* SexButton.xib */; };
 		9D5DBB47248D5BBF00D82D40 /* SexButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5DBB46248D5BBF00D82D40 /* SexButton.swift */; };
 		9D5E3EB724BD952200BA4E5F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5E3EB624BD952200BA4E5F /* SearchCell.swift */; };
@@ -210,6 +211,7 @@
 		9D4CCF7C25003A95003F73AF /* GetReviewResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReviewResponseData.swift; sourceTree = "<group>"; };
 		9D4CCF7E25003B9D003F73AF /* APISortableResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISortableResponseData.swift; sourceTree = "<group>"; };
 		9D4CCF8025003E25003F73AF /* APIDataResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDataResult.swift; sourceTree = "<group>"; };
+		9D57B101251A5E3C00BC192B /* refresh_loading_iOS.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = refresh_loading_iOS.json; path = ../../../../../../Downloads/refresh_loading_iOS.json; sourceTree = "<group>"; };
 		9D5DBB44248D5BAD00D82D40 /* SexButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SexButton.xib; sourceTree = "<group>"; };
 		9D5DBB46248D5BBF00D82D40 /* SexButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SexButton.swift; sourceTree = "<group>"; };
 		9D5E3EB624BD952200BA4E5F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
@@ -917,6 +919,7 @@
 				9D6FF37D24FAB26F00E6A8B9 /* splash_iOS.json */,
 				9D6FF38324FAC36200E6A8B9 /* loading.json */,
 				9D6FF39124FB096600E6A8B9 /* loading_map.json */,
+				9D57B101251A5E3C00BC192B /* refresh_loading_iOS.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -1349,6 +1352,7 @@
 				9D76CD9424FE992F004D7333 /* SearchAddress.storyboard in Resources */,
 				9D6FF37724FAAF0500E6A8B9 /* Splash.storyboard in Resources */,
 				9DD7AD0F2507BE6D00742F25 /* AuthorizationPopup.storyboard in Resources */,
+				9D57B102251A5E3C00BC192B /* refresh_loading_iOS.json in Resources */,
 				9D6FF35324F91B3500E6A8B9 /* LoginPopup.storyboard in Resources */,
 				9D13C80F248795E40058A7BF /* LoginTextView.xib in Resources */,
 				9D61F6DE24F7AAAF00EF13FB /* EditPassword.storyboard in Resources */,

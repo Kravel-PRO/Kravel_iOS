@@ -18,6 +18,22 @@ class ContentDetailVC: UIViewController {
     var categoryDetailDTO: CategoryAble?
     var places: [PlaceContentInform] = []
     
+    // MARK: - 데이터 로딩 중 Lottie 화면
+    private var loadingView: UIActivityIndicatorView?
+    
+    private func showLoadingLottie() {
+        loadingView = UIActivityIndicatorView(style: .large)
+        self.view.addSubview(loadingView!)
+        loadingView?.center = self.view.center
+        loadingView?.startAnimating()
+    }
+    
+    func stopLottieAnimation() {
+        loadingView?.removeFromSuperview()
+        loadingView = nil
+    }
+    
+    // MARK: - 전체 화면 세팅
     private func appearDetailData() {
         guard let category = self.category,
               let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return }

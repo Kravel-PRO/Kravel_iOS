@@ -12,6 +12,21 @@ import CoreLocation
 class NearPlaceVC: UIViewController {
     static let identifier = "NearPlaceVC"
     
+    // MARK: - 데이터 로딩 중 Lottie 화면
+    private var loadingView: UIActivityIndicatorView?
+    
+    private func showLoadingLottie() {
+        loadingView = UIActivityIndicatorView(style: .large)
+        self.view.addSubview(loadingView!)
+        loadingView?.center = self.view.center
+        loadingView?.startAnimating()
+    }
+    
+    func stopLottieAnimation() {
+        loadingView?.removeFromSuperview()
+        loadingView = nil
+    }
+    
     // MARK: - 가까운 장소 표시 CollectionView
     @IBOutlet weak var nearPlaceCollectionView: UICollectionView! {
         didSet {
@@ -27,6 +42,7 @@ class NearPlaceVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        showLoadingLottie()
         if let currentLocation = self.currentLocation {
             requestPlaceData(lat: currentLocation.latitude, lng: currentLocation.longitude)
         }
@@ -62,6 +78,7 @@ extension NearPlaceVC {
                 guard let getPlaceResult = getPlaceResult as? APISortableResponseData<PlaceContentInform> else { return }
                 self.nearPlaceData = getPlaceResult.content
                 DispatchQueue.main.async {
+                    self.stopLottieAnimation()
                     self.nearPlaceCollectionView.reloadData()
                 }
             // FIXME: 요청 에러 있을 시 에러 처리 필요

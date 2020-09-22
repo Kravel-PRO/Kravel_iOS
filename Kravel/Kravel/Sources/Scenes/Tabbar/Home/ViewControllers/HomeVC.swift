@@ -291,8 +291,6 @@ extension HomeVC {
         }
     }
     
-    
-    
     // MARK: - 포토리뷰 데이터 API 요청
     private func requestReviewData() {
         let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "createdDate,desc")
