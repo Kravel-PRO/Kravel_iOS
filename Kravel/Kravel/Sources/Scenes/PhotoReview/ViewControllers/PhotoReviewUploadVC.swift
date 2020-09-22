@@ -14,6 +14,23 @@ class PhotoReviewUploadVC: UIViewController {
     
     var placeId: Int?
     
+    // MARK: - 데이터 로딩 중 Lottie 화면
+    private var loadingView: UIActivityIndicatorView?
+    
+    private func showLoadingLottie() {
+        loadingView = UIActivityIndicatorView(style: .large)
+        loadingView?.tintColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
+        self.view.addSubview(loadingView!)
+        loadingView?.center = self.view.center
+        loadingView?.startAnimating()
+    }
+    
+    private func stopLottieAnimation() {
+        loadingView?.stopAnimating()
+        loadingView?.removeFromSuperview()
+        loadingView = nil
+    }
+    
     // MARK: - UIImagePickerController 설정
     private var picker: UIImagePickerController?
     
@@ -71,6 +88,8 @@ class PhotoReviewUploadVC: UIViewController {
             presentPopupVC(by: "Gallery")
         case .denied:
             presentPopupVC(by: "Gallery")
+        case .limited:
+            break
         @unknown default:
             return
         }
@@ -96,6 +115,7 @@ class PhotoReviewUploadVC: UIViewController {
     @IBAction func upload(_ sender: Any) {
         guard let placeId = self.placeId else { return }
         APICostants.placeID = "\(placeId)"
+        showLoadingLottie()
         
         NetworkHandler.shared.requestAPI(apiCategory: .postPlaceReview(selectedImage)) { result in
             switch result {
@@ -104,6 +124,7 @@ class PhotoReviewUploadVC: UIViewController {
                 print(uploadResult)
                 if uploadResult == 200 {
                     DispatchQueue.main.async {
+                        self.stopLottieAnimation()
                         self.navigationController?.popViewController(animated: true)
                     }
                 }

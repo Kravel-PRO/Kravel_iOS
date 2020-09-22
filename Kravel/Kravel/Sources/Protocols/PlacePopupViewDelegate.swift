@@ -12,4 +12,5 @@ protocol PlacePopupViewDelegate {
     func clickPhotoButton(placeId: Int?)
     func clickScrapButton()
     func clickPhotoReview(at indexPath: IndexPath, placeId: Int, selectedReviewId: Int?)
+    func clickPhotoUpload(at placeId: Int)
 }

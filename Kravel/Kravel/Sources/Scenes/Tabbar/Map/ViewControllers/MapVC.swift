@@ -710,6 +710,12 @@ extension MapVC: PlacePopupViewDelegate {
         if let selectedReviewId = selectedReviewId { otherPhotoReviewVC.selectedPhotoReviewID = selectedReviewId }
         self.navigationController?.pushViewController(otherPhotoReviewVC, animated: true)
     }
+    
+    func clickPhotoUpload(at placeId: Int) {
+        guard let photoReviewUploadVC = UIStoryboard(name: "PhotoReviewUpload", bundle: nil).instantiateViewController(withIdentifier: PhotoReviewUploadVC.identifier) as? PhotoReviewUploadVC else { return }
+        photoReviewUploadVC.placeId = placeId
+        self.navigationController?.pushViewController(photoReviewUploadVC, animated: true)
+    }
 }
 
 extension MapVC: UICollectionViewDataSource {

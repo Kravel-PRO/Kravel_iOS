@@ -134,6 +134,7 @@ class PlacePopupView: UIView {
     @IBOutlet weak var photoReviewContainerView: PhotoReviewView! {
         didSet {
             setPhotoReviewLabel()
+            photoReviewContainerView.delegate = self
             photoReviewContainerView.photoReviewCollectionViewDelegate = self
             photoReviewContainerView.photoReviewCollectionViewDataSource = self
         }
@@ -292,5 +293,11 @@ extension PlacePopupView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 4
+    }
+}
+
+extension PlacePopupView: PhotoReviewViewDelegate {
+    func clickWriteButton() {
+        if let placeId = self.placeId { delegate?.clickPhotoUpload(at: placeId ) }
     }
 }
