@@ -140,7 +140,8 @@ class HomeVC: UIViewController {
             photoReviewView.photoReviewEmptyView.isHidden = true
             photoReviewView.photoReviewCollectionView.isHidden = false
         } else {
-            photoReviewViewHeightConstraint.constant = defaultHeight + 2 * cellHeight
+            photoReviewViewHeightConstraint.constant = defaultHeight + 2 * cellHeight + 4
+            photoReviewView.calculateCollectionViewHeight()
             photoReviewView.photoReviewEmptyView.isHidden = true
             photoReviewView.photoReviewCollectionView.isHidden = false
         }
@@ -300,6 +301,8 @@ extension HomeVC {
             case .success(let getReviewResult):
                 guard let getReviewResult = getReviewResult as? APISortableResponseData<ReviewInform> else { return }
                 self.photoReviewData = getReviewResult.content
+                
+                // 로딩화면 처리하기 위한 표시
                 self.isLoadingComplete[1] = true
                 if self.isLoadingComplete.filter({ !$0 }).isEmpty {
                     self.stopIndicatorView()

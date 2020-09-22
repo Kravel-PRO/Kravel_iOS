@@ -17,8 +17,9 @@ class MapVC: UIViewController {
     @IBOutlet weak var containerMapView: UIView!
 
     lazy var mapView: NMFMapView = {
-        let map = NMFMapView(frame: containerMapView.frame)
+        let map = NMFMapView(frame: containerMapView.bounds)
         map.positionMode = .direction
+        map.translatesAutoresizingMaskIntoConstraints = false
         return map
     }()
     
@@ -586,6 +587,17 @@ class MapVC: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         setRefreshButtonLayout()
+    }
+    
+    // MARK: - UIViewController viewDidLayoutSubviews override 부분
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        NSLayoutConstraint.activate([
+            mapView.leadingAnchor.constraint(equalTo: containerMapView.leadingAnchor),
+            mapView.trailingAnchor.constraint(equalTo: containerMapView.trailingAnchor),
+            mapView.bottomAnchor.constraint(equalTo: containerMapView.bottomAnchor),
+            mapView.topAnchor.constraint(equalTo: containerMapView.topAnchor)
+        ])
     }
 }
 
