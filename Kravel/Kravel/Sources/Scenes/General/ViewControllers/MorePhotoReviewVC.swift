@@ -11,6 +11,22 @@ import UIKit
 class MorePhotoReviewVC: UIViewController {
     static let identifier = "MorePhotoReviewVC"
     
+    // MARK: - 데이터 로딩 중 Lottie 화면
+    private var loadingView: UIActivityIndicatorView?
+    
+    private func showLoadingLottie() {
+        loadingView = UIActivityIndicatorView(style: .large)
+        self.view.addSubview(loadingView!)
+        loadingView?.center = self.view.center
+        loadingView?.startAnimating()
+    }
+    
+    private func stopLottieAnimation() {
+        loadingView?.stopAnimating()
+        loadingView?.removeFromSuperview()
+        loadingView = nil
+    }
+    
     // MARK: - CollectionView 설정
     @IBOutlet weak var morePhotoReviewCollectionView: UICollectionView! {
         didSet {
@@ -25,6 +41,7 @@ class MorePhotoReviewVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        showLoadingLottie()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +73,7 @@ extension MorePhotoReviewVC {
                 guard let getReviewResult = getReviewResult as? APISortableResponseData<ReviewInform> else { return }
                 self.photoReviewData = getReviewResult.content
                 DispatchQueue.main.async {
+                    self.stopLottieAnimation()
                     self.morePhotoReviewCollectionView.reloadData()
                 }
             case .requestErr(let errorMessage):

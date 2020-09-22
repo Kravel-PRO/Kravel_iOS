@@ -23,6 +23,7 @@ class NearPlaceVC: UIViewController {
     }
     
     func stopLottieAnimation() {
+        loadingView?.stopAnimating()
         loadingView?.removeFromSuperview()
         loadingView = nil
     }

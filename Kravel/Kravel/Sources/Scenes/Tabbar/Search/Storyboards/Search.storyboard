@@ -182,7 +182,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="ITf-nc-oF7" secondAttribute="height" multiplier="75:56" id="GOz-ca-LZl"/>
+                                                    <constraint firstAttribute="height" constant="280" id="E7f-Hb-aNA"/>
                                                     <constraint firstItem="pHH-ZN-ZD9" firstAttribute="leading" secondItem="ITf-nc-oF7" secondAttribute="leading" id="bEH-h4-LOd"/>
                                                     <constraint firstItem="pHH-ZN-ZD9" firstAttribute="top" secondItem="ITf-nc-oF7" secondAttribute="top" id="clc-6n-q0f"/>
                                                     <constraint firstAttribute="trailing" secondItem="pHH-ZN-ZD9" secondAttribute="trailing" id="tMq-Q1-ze5"/>
@@ -416,6 +416,7 @@
                     <connections>
                         <outlet property="backButton" destination="kin-xH-LNe" id="NhY-xb-Dal"/>
                         <outlet property="backButtonTopConstraint" destination="Ik5-9s-5pA" id="KzH-kH-lTI"/>
+                        <outlet property="contentScrollView" destination="2PH-tH-6Yz" id="9bi-Pw-yek"/>
                         <outlet property="introduceLabel" destination="9cB-Tc-Jne" id="vZn-CP-PyR"/>
                         <outlet property="introduceLabelHeightConstraint" destination="COo-L5-xCO" id="pPy-Yd-BSK"/>
                         <outlet property="moreButton" destination="69Z-Jp-Uh9" id="DS3-RJ-d7d"/>
@@ -428,6 +429,7 @@
                         <outlet property="placeEmptyLabel" destination="n7X-vv-Rj4" id="7Pb-jG-483"/>
                         <outlet property="thumbnail_Back_View" destination="ITf-nc-oF7" id="pDT-b6-bgg"/>
                         <outlet property="thumbnail_imageView" destination="pHH-ZN-ZD9" id="X2u-nD-BKg"/>
+                        <outlet property="thumnail_View_Height_Constraint" destination="E7f-Hb-aNA" id="v8f-CA-NQF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tU8-lo-GFE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

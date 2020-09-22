@@ -28,9 +28,17 @@ class ContentDetailVC: UIViewController {
         loadingView?.startAnimating()
     }
     
-    func stopLottieAnimation() {
+    private func stopLottieAnimation() {
+        loadingView?.stopAnimating()
         loadingView?.removeFromSuperview()
         loadingView = nil
+    }
+    
+    // MARK: - 전체 스크롤 뷰
+    @IBOutlet weak var contentScrollView: UIScrollView! {
+        didSet {
+            contentScrollView.delegate = self
+        }
     }
     
     // MARK: - 전체 화면 세팅
@@ -104,6 +112,7 @@ class ContentDetailVC: UIViewController {
     // MARK: - Thumnail Image 설정
     @IBOutlet weak var thumbnail_Back_View: UIView!
     @IBOutlet weak var thumbnail_imageView: UIImageView!
+    @IBOutlet weak var thumnail_View_Height_Constraint: NSLayoutConstraint!
     
     var thumnail_Gradient_Layer: CAGradientLayer = {
         let gradientLayer = CAGradientLayer()
@@ -213,6 +222,7 @@ class ContentDetailVC: UIViewController {
             guard let getReviewResult = getReviewResult as? APISortableResponseData<ReviewInform> else { return }
             self.photoReviewData = getReviewResult.content
             DispatchQueue.main.async {
+                self.stopLottieAnimation()
                 self.photoReviewView.photoReviewCollectionView.reloadData()
                 self.setPhotoReviewViewLayout()
             }
@@ -258,6 +268,7 @@ class ContentDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        showLoadingLottie()
         setBackButton()
         setLabelByLanguage()
     }
@@ -290,6 +301,7 @@ class ContentDetailVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setGradientLayer()
+        thumnail_View_Height_Constraint.constant = thumbnail_Back_View.frame.width / 75 * 56
     }
 }
 
