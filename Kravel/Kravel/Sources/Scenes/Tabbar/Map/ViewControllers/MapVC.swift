@@ -540,7 +540,7 @@ class MapVC: UIViewController {
             placePopupView.placeTags = []
         }
         placePopupView.placeLocation = detailInform.location
-        placePopupView.subLocationContainerView.setMarker(latitude: detailInform.latitude, longitude: detailInform.longitude, iconImage: icMarkDefault)
+        placePopupView.subLocationContainerView.setMarker(latitude: detailInform.latitude, longitude: detailInform.longitude, iconImage: icMarkFocus)
         placePopupView.subLocationContainerView.location = detailInform.location
         placePopupView.subLocationContainerView.busDatas = detailInform.bus
         placePopupView.subLocationContainerView.subwayDatas = detailInform.subway

@@ -295,7 +295,7 @@ extension LocationDetailVC {
             subLocationView.busDatas = placeData.bus
             subLocationView.subwayDatas = placeData.subway
             subLocationView.location = placeData.location
-            subLocationView.setMarker(latitude: placeData.latitude, longitude: placeData.longitude, iconImage: NMFOverlayImage(name: ImageKey.icMarkDefault))
+            subLocationView.setMarker(latitude: placeData.latitude, longitude: placeData.longitude, iconImage: NMFOverlayImage(name: ImageKey.icMarkFocus))
             placeImageView.setImage(with: placeData.imageUrl ?? "")
             
             let scrapImage = placeData.scrap ? UIImage(named: ImageKey.icScrapFill) : UIImage(named: ImageKey.icScrap)
