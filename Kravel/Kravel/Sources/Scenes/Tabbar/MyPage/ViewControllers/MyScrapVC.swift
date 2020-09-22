@@ -10,6 +10,22 @@ import UIKit
 
 class MyScrapVC: UIViewController {
     static let identifier = "MyScrapVC"
+    
+    // MARK: - 데이터 로딩 중 Lottie 화면
+    private var loadingView: UIActivityIndicatorView?
+    
+    private func showLoadingLottie() {
+        loadingView = UIActivityIndicatorView(style: .large)
+        self.view.addSubview(loadingView!)
+        loadingView?.center = self.view.center
+        loadingView?.startAnimating()
+    }
+    
+    private func stopLottieAnimation() {
+        loadingView?.stopAnimating()
+        loadingView?.removeFromSuperview()
+        loadingView = nil
+    }
 
     // MARK: - 스크랩 CollectionView 설정
     @IBOutlet weak var scrapCollectionView: UICollectionView! {
@@ -26,6 +42,7 @@ class MyScrapVC: UIViewController {
     var noScrapView: UIView = {
         let tempView = UIView()
         tempView.translatesAutoresizingMaskIntoConstraints = false
+        tempView.isHidden = true
         return tempView
     }()
     
@@ -78,6 +95,7 @@ class MyScrapVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        showLoadingLottie()
         setNoScrapView()
         if isEmptyScrap() { print("EmptyView") }
     }
@@ -131,6 +149,7 @@ extension MyScrapVC {
                 guard let placeData = placeData as? APISortableResponseData<PlaceContentInform> else { return }
                 self.scrapData = placeData.content
                 DispatchQueue.main.async {
+                    self.stopLottieAnimation()
                     if self.isEmptyScrap() { print("empty") }
                     self.scrapCollectionView.reloadData()
                 }

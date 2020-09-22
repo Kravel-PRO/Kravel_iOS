@@ -11,6 +11,22 @@ import UIKit
 class MyPhotoReviewVC: UIViewController {
     static let identifier = "MyPhotoReviewVC"
     
+    // MARK: - 데이터 로딩 중 Lottie 화면
+    private var loadingView: UIActivityIndicatorView?
+    
+    private func showLoadingLottie() {
+        loadingView = UIActivityIndicatorView(style: .large)
+        self.view.addSubview(loadingView!)
+        loadingView?.center = self.view.center
+        loadingView?.startAnimating()
+    }
+    
+    private func stopLottieAnimation() {
+        loadingView?.stopAnimating()
+        loadingView?.removeFromSuperview()
+        loadingView = nil
+    }
+    
     // MARK: - 포토리뷰 CollectionView 설정
     @IBOutlet weak var photoReviewCollectionView: UICollectionView! {
         didSet {
@@ -26,6 +42,7 @@ class MyPhotoReviewVC: UIViewController {
     var noPhotoReviewView: UIView = {
         let tempView = UIView()
         tempView.translatesAutoresizingMaskIntoConstraints = false
+        tempView.isHidden = true
         return tempView
     }()
     
@@ -78,6 +95,7 @@ class MyPhotoReviewVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        showLoadingLottie()
         setNoPhotoReviewView()
         if isEmptyPhotoReview() { print("Empty View") }
     }
@@ -128,6 +146,7 @@ extension MyPhotoReviewVC {
                 guard let reviewData = reviewData as? APISortableResponseData<ReviewInform> else { return }
                 self.photoReviewData = reviewData.content
                 DispatchQueue.main.async {
+                    self.stopLottieAnimation()
                     if self.isEmptyPhotoReview() { print("Empty") }
                     self.photoReviewCollectionView.reloadData()
                 }
