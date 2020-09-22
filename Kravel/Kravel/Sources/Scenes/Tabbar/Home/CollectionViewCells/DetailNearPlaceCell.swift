@@ -74,7 +74,7 @@ extension DetailNearPlaceCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let tempLabel = UILabel()
         tempLabel.font = UIFont.systemFont(ofSize: 12)
-        tempLabel.text = tags[indexPath.row]
+        tempLabel.text = "#\(tags[indexPath.row])"
         return CGSize(width: tempLabel.intrinsicContentSize.width, height: collectionView.frame.height)
     }
     

@@ -63,7 +63,7 @@ extension HomeNearPlaceCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let tagCell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath) as? TagCell else { return UICollectionViewCell() }
-        tagCell.tagTitle = "#\(tags[indexPath.row])"
+        tagCell.tagTitle = "#\(tags[indexPath.row])     "
         return tagCell
     }
 }
@@ -72,12 +72,12 @@ extension HomeNearPlaceCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let tempLabel = UILabel()
         tempLabel.font = UIFont.systemFont(ofSize: 12)
-        tempLabel.text = tags[indexPath.row]
+        tempLabel.text = "#\(tags[indexPath.row])"
         return CGSize(width: tempLabel.intrinsicContentSize.width, height: collectionView.frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        .zero
+        return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
