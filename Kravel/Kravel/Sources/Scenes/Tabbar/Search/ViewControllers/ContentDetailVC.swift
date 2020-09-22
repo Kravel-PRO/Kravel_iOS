@@ -275,7 +275,6 @@ class ContentDetailVC: UIViewController {
         super.viewDidLayoutSubviews()
         setGradientLayer()
     }
-    
 }
 
 extension ContentDetailVC {
