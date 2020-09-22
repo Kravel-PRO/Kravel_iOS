@@ -111,6 +111,7 @@ class MapVC: UIViewController {
                 self.requestDetailPlaceData(of: selectID)
                 self.requestPhotoReview(of: selectID)
             } else {
+                self.selectedPlace = nil
                 self.hideShowPopup()
                 self.placeShadowView.transform = .identity
             }
@@ -604,6 +605,7 @@ class MapVC: UIViewController {
 extension MapVC {
     private func addObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(scrollDownView(_:)), name: .dismissDetailView, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadPhotoReview), name: .completeUpload, object: nil)
     }
     
     @objc func scrollDownView(_ notification: NSNotification) {
@@ -620,6 +622,10 @@ extension MapVC {
         guard let scrapButton = self.placePopupView.buttonStackView.arrangedSubviews[1] as? UIButton else { return }
         let scrapImage = scrap ? UIImage(named: ImageKey.icScrapFill) : UIImage(named: ImageKey.icScrap)
         scrapButton.setImage(scrapImage, for: .normal)
+    }
+    
+    @objc func reloadPhotoReview() {
+        if let selectedPlace = self.selectedPlace { self.requestPhotoReview(of: selectedPlace.placeId) }
     }
 }
 

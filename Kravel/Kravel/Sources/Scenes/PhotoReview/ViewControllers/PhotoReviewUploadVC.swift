@@ -19,7 +19,6 @@ class PhotoReviewUploadVC: UIViewController {
     
     private func showLoadingLottie() {
         loadingView = UIActivityIndicatorView(style: .large)
-        loadingView?.tintColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
         self.view.addSubview(loadingView!)
         loadingView?.center = self.view.center
         loadingView?.startAnimating()
@@ -126,6 +125,7 @@ class PhotoReviewUploadVC: UIViewController {
                     DispatchQueue.main.async {
                         self.stopLottieAnimation()
                         self.navigationController?.popViewController(animated: true)
+                        NotificationCenter.default.post(name: .completeUpload, object: nil)
                     }
                 }
             case .requestErr: break

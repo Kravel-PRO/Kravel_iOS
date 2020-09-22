@@ -15,4 +15,5 @@ extension NSNotification.Name {
     static let dismissAuthorPopupView = NSNotification.Name("dismissAuthorPopupView")
     static let completeAttraction = NSNotification.Name("completeAttraction")
     static let changeLanguage = NSNotification.Name("changeLanguage")
+    static let completeUpload = NSNotification.Name("completeUpload")
 }
