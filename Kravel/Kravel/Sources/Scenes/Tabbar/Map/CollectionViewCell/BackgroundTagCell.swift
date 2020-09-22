@@ -15,6 +15,7 @@ class BackgroundTagCell: UICollectionViewCell {
     var tagLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
+        label.textAlignment = .center
         label.textColor = UIColor(red: 255/255, green: 99/255, blue: 89/255, alpha: 1.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

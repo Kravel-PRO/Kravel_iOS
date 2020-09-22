@@ -41,6 +41,7 @@ class NearPlaceCell: UICollectionViewCell {
     @IBOutlet weak var tagCollectionView: UICollectionView! {
         didSet {
             tagCollectionView.dataSource = self
+            tagCollectionView.showsHorizontalScrollIndicator = false
             if let layout = tagCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
                 layout.minimumInteritemSpacing = 0

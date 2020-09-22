@@ -11,9 +11,11 @@ import CoreLocation
 import NMapsMap
 
 class MapVC: UIViewController {
+    private var locationManager: CLLocationManager?
+    
     // MARK: - MapView 설정
     @IBOutlet weak var containerMapView: UIView!
-    
+
     lazy var mapView: NMFMapView = {
         let map = NMFMapView(frame: containerMapView.frame)
         map.positionMode = .direction
@@ -419,6 +421,9 @@ class MapVC: UIViewController {
         
         // FIXME: - 이 부분 카메라 이동에 따라 데이터 받아올 수 있도록 수정해야함
         requestSimplePlaceData()
+        
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
     }
     
     // MARK: - 지도 표시를 위한 ID, 위도, 경도 간단한 값 API 요청
@@ -603,6 +608,43 @@ extension MapVC {
         guard let scrapButton = self.placePopupView.buttonStackView.arrangedSubviews[1] as? UIButton else { return }
         let scrapImage = scrap ? UIImage(named: ImageKey.icScrapFill) : UIImage(named: ImageKey.icScrap)
         scrapButton.setImage(scrapImage, for: .normal)
+    }
+}
+
+extension MapVC: CLLocationManagerDelegate {
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedAlways:
+            return
+        case .authorizedWhenInUse:
+            DispatchQueue.main.async {
+                self.currentLocationButton.setImage(UIImage(named: ImageKey.icGPS), for: .normal)
+                self.currentLocationButton.isUserInteractionEnabled = true
+                self.setMapCameraMyLocation()
+            }
+            let cameraPosition = self.mapView.cameraPosition.target
+            self.requestClosePlaceData(latitude: cameraPosition.lat, longitude: cameraPosition.lng)
+        case .notDetermined:
+            return
+        case .restricted:
+            DispatchQueue.main.async {
+                self.currentLocationButton.setImage(UIImage(named: ImageKey.icGPSInActive), for: .normal)
+                self.currentLocationButton.isUserInteractionEnabled = false
+                self.overlay?.hidden = true
+            }
+        case .denied:
+            DispatchQueue.main.async {
+                self.currentLocationButton.setImage(UIImage(named: ImageKey.icGPSInActive), for: .normal)
+                self.currentLocationButton.isUserInteractionEnabled = false
+                self.overlay?.hidden = true
+            }
+        @unknown default:
+            DispatchQueue.main.async {
+                self.currentLocationButton.setImage(UIImage(named: ImageKey.icGPSInActive), for: .normal)
+                self.currentLocationButton.isUserInteractionEnabled = false
+                self.overlay?.hidden = true
+            }
+        }
     }
 }
 

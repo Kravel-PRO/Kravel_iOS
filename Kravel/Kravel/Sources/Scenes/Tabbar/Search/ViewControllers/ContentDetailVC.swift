@@ -169,6 +169,10 @@ class ContentDetailVC: UIViewController {
         }
     }
     
+    @IBAction func clickMore(_ sender: Any) {
+        
+    }
+    
     @IBOutlet weak var moreButtonStackView: UIStackView! {
         didSet {
             moreButtonStackView.arrangedSubviews[0].isHidden = true

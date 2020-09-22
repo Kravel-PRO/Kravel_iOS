@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Lottie
 import NMapsMap
 
 class LocationDetailVC: UIViewController {
@@ -23,7 +22,6 @@ class LocationDetailVC: UIViewController {
     var panGesture: UIPanGestureRecognizer!
     
     // MARK: - 데이터 로딩 중 Lottie 화면
-    private var animationView: AnimationView?
     private var loadingView: UIActivityIndicatorView?
     
     private func showLoadingLottie() {
@@ -31,21 +29,11 @@ class LocationDetailVC: UIViewController {
         self.view.addSubview(loadingView!)
         loadingView?.center = self.view.center
         loadingView?.startAnimating()
-        
-//        animationView = AnimationView(name: "loading_map")
-//        animationView?.backgroundColor = .white
-//        animationView?.contentMode = .scaleAspectFit
-//        animationView?.frame = self.view.bounds
-//        animationView?.play()
-//
-//        self.view.addSubview(animationView!)
     }
     
     func stopLottieAnimation() {
         loadingView?.removeFromSuperview()
         loadingView = nil
-//        animationView?.removeFromSuperview()
-//        animationView = nil
     }
     
     // MARK: - 전체 Content 나타내는 ScrollView

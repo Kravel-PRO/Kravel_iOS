@@ -329,6 +329,9 @@
                                                                 <state key="normal" title="더 보기">
                                                                     <color key="titleColor" red="0.72549019609999998" green="0.72549019609999998" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="clickMore:" destination="uNp-3n-AfL" eventType="touchUpInside" id="x8m-1p-9Ow"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
