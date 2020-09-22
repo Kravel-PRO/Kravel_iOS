@@ -8,19 +8,31 @@
 
 import UIKit
 import CoreLocation
+import Lottie
 
 class HomeVC: UIViewController {
     private var activityIndicator: UIActivityIndicatorView?
-    var isLoadingComplete: [Bool] = [false, false]
+    private var isLoadingComplete: [Bool] = [false, false]
+    private var isRefreshComplete: [Bool] = [false, false, false]
+    
     @IBOutlet weak var contentScrollView: UIScrollView! {
         didSet {
             contentScrollView.delegate = self
         }
     }
     
+    @IBOutlet weak var contentInsetView: UIView! {
+        didSet {
+            contentInsetView.backgroundColor = .grapefruit
+        }
+    }
+    
     // MARK: - 제일 위 Title View 설정
     @IBOutlet weak var titleStackView: UIStackView! {
         didSet {
+            titleStackView.arrangedSubviews.forEach { element in
+                element.backgroundColor = .grapefruit
+            }
             titleStackView.arrangedSubviews[1].isHidden = true
         }
     }
@@ -159,9 +171,27 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setRefreshView()
+        startIndicatorView()
         requestLocation()
         addObserver()
         setLabelByLanguage()
+        
+        requestReviewData {
+            // 로딩화면 처리하기 위한 표시
+            self.isLoadingComplete[1] = true
+            if self.isLoadingComplete.filter({ !$0 }).isEmpty {
+                self.stopIndicatorView()
+            }
+        }
+        
+        requestHotPlaceData {
+            // 로딩화면 처리하기 위한 표시
+            self.isLoadingComplete[0] = true
+            if self.isLoadingComplete.filter({ !$0 }).isEmpty {
+                self.stopIndicatorView()
+            }
+        }
     }
     
     private func setLabelByLanguage() {
@@ -185,6 +215,7 @@ class HomeVC: UIViewController {
         emptyLabel.text = "조금만 기다려주세요!\n특별한 장소를 찾아올게요!".localized
     }
     
+    // MARK: - 서버 로딩 중 띄어지는 Loading 화면
     private func startIndicatorView() {
         self.activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator?.center = self.view.center
@@ -197,23 +228,69 @@ class HomeVC: UIViewController {
         self.activityIndicator?.stopAnimating()
         self.activityIndicator?.removeFromSuperview()
         self.activityIndicator = nil
-        for index in 0..<isLoadingComplete.count {
-            isLoadingComplete[index] = false
+    }
+    
+    // MARK: - 홈 리로딩 중 띄어지는 Loading 화면
+    private func setRefreshView() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.backgroundColor = .grapefruit
+        refreshControl.tintColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
+        refreshControl.addTarget(self, action: #selector(reloadAllDatas), for: .valueChanged)
+        contentScrollView.refreshControl = refreshControl
+    }
+    
+    @objc func reloadAllDatas() {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedAlways:
+            isRefreshComplete[0] = true
+            break
+        case .notDetermined:
+            isRefreshComplete[0] = true
+            break
+        case .authorizedWhenInUse:
+            requestLocation()
+        case .restricted:
+            isRefreshComplete[0] = true
+            break
+        case .denied:
+            isRefreshComplete[0] = true
+            break
+        @unknown default:
+            isRefreshComplete[0] = true
+            break
         }
+        
+        requestHotPlaceData {
+            self.isRefreshComplete[1] = true
+            if self.isRefreshComplete.filter({ !$0 }).isEmpty {
+                self.stopRefresh()
+            }
+        }
+        
+        requestReviewData {
+            self.isRefreshComplete[2] = true
+            if self.isRefreshComplete.filter({ !$0 }).isEmpty {
+                self.stopRefresh()
+            }
+        }
+    }
+    
+    private func stopRefresh() {
+        for index in 0..<isRefreshComplete.count {
+            isRefreshComplete[index] = false
+        }
+        contentScrollView.refreshControl?.endRefreshing()
     }
     
     // MARK: - UIViewController viewWillAppear Override
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        startIndicatorView()
         setNav()
     }
     
     // MARK: - UIViewController viewDidAppear Override
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        requestReviewData()
-        requestHotPlaceData()
     }
     
     private func setNav() {
@@ -246,6 +323,12 @@ extension HomeVC {
             case .success(let getPlaceResult):
                 guard let getPlaceResult = getPlaceResult as? APISortableResponseData<PlaceContentInform> else { return }
                 self.nearPlaceData = getPlaceResult.content
+                
+                self.isRefreshComplete[0] = true
+                if self.isRefreshComplete.filter({ !$0 }).isEmpty {
+                    self.stopRefresh()
+                }
+                
                 DispatchQueue.main.async {
                     self.setNearPlaceCollectionView()
                 }
@@ -262,7 +345,7 @@ extension HomeVC {
     }
     
     // MARK: - 인기 장소 데이터 API 요청
-    private func requestHotPlaceData() {
+    private func requestHotPlaceData(loadingCompletion: @escaping () -> Void) {
         let getPlaceParameter = GetPlaceParameter(latitude: nil, longitude: nil, page: nil, size: 5, review_count: nil, sort: "review-count,desc")
         NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
             switch result {
@@ -271,10 +354,7 @@ extension HomeVC {
                 self.hotPlaceData = getPlaceResult.content
                 
                 // 로딩화면 처리하기 위한 표시
-                self.isLoadingComplete[0] = true
-                if self.isLoadingComplete.filter({ !$0 }).isEmpty {
-                    self.stopIndicatorView()
-                }
+                loadingCompletion()
                 DispatchQueue.main.async {
                     self.setHotPlaceCollectionViewHeight()
                     self.hotPlaceCollectionView.reloadData()
@@ -292,7 +372,7 @@ extension HomeVC {
     }
     
     // MARK: - 포토리뷰 데이터 API 요청
-    private func requestReviewData() {
+    private func requestReviewData(loadingCompletion: @escaping () -> Void) {
         let getReviewParameter = GetReviewParameter(page: 0, size: 6, sort: "createdDate,desc")
         NetworkHandler.shared.requestAPI(apiCategory: .getReview(getReviewParameter)) { result in
             switch result {
@@ -301,10 +381,7 @@ extension HomeVC {
                 self.photoReviewData = getReviewResult.content
                 
                 // 로딩화면 처리하기 위한 표시
-                self.isLoadingComplete[1] = true
-                if self.isLoadingComplete.filter({ !$0 }).isEmpty {
-                    self.stopIndicatorView()
-                }
+                loadingCompletion()
                 DispatchQueue.main.async {
                     self.setPhotoReviewViewLayout()
                     self.photoReviewView.photoReviewCollectionView.reloadData()
@@ -422,7 +499,7 @@ extension HomeVC: UICollectionViewDataSource {
 extension HomeVC: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y < 0 {
-            scrollView.contentOffset.y = 0
+            
         }
     }
     

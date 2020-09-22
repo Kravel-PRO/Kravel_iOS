@@ -18,7 +18,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="SjX-fO-taf">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ptu-KO-Ud3">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                                <color key="backgroundColor" red="1" green="0.40392156862745099" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="500" id="bFi-M1-to6"/>
+                                </constraints>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SjX-fO-taf">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1417"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fex-Hh-STn">
@@ -37,7 +44,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="1" green="0.38823529410000002" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="backgroundColor" red="1" green="0.40392156862745099" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstItem="O9b-Nd-4li" firstAttribute="leading" secondItem="LJI-sW-pM7" secondAttribute="leading" constant="16" id="2a4-Rc-CBL"/>
                                                             <constraint firstAttribute="width" secondItem="LJI-sW-pM7" secondAttribute="height" multiplier="75:44" id="5XP-84-88l"/>
@@ -152,7 +159,7 @@
                                                                 </cells>
                                                             </collectionView>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="1" green="0.38823529410000002" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="backgroundColor" red="1" green="0.40392156862745099" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstItem="Dau-5f-wpU" firstAttribute="leading" secondItem="Kil-mf-678" secondAttribute="leading" constant="16" id="5SZ-Jd-HJU"/>
                                                             <constraint firstAttribute="trailing" secondItem="sF5-4g-7xo" secondAttribute="trailing" constant="16" id="F1c-2t-W9N"/>
@@ -363,17 +370,21 @@
                         <viewLayoutGuide key="safeArea" id="mwR-1w-cdi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="ptu-KO-Ud3" firstAttribute="leading" secondItem="mwR-1w-cdi" secondAttribute="leading" id="2dT-LG-USd"/>
                             <constraint firstItem="mwR-1w-cdi" firstAttribute="trailing" secondItem="SjX-fO-taf" secondAttribute="trailing" id="6pm-23-b21"/>
                             <constraint firstItem="SjX-fO-taf" firstAttribute="leading" secondItem="mwR-1w-cdi" secondAttribute="leading" id="RZl-un-laY"/>
+                            <constraint firstItem="ptu-KO-Ud3" firstAttribute="top" secondItem="ylU-5N-CfP" secondAttribute="top" id="Xil-tg-0pv"/>
                             <constraint firstItem="fex-Hh-STn" firstAttribute="width" secondItem="ylU-5N-CfP" secondAttribute="width" id="f4v-Jl-3cx"/>
                             <constraint firstItem="SjX-fO-taf" firstAttribute="top" secondItem="ylU-5N-CfP" secondAttribute="top" id="g0q-5M-Q6P"/>
                             <constraint firstItem="mwR-1w-cdi" firstAttribute="bottom" secondItem="SjX-fO-taf" secondAttribute="bottom" id="kWh-p8-xVz"/>
+                            <constraint firstItem="mwR-1w-cdi" firstAttribute="trailing" secondItem="ptu-KO-Ud3" secondAttribute="trailing" id="nZf-Ci-Zrc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KXs-SG-VVN"/>
                     <size key="freeformSize" width="375" height="1500"/>
                     <connections>
                         <outlet property="closerLabel" destination="Dau-5f-wpU" id="gDD-Uw-EJJ"/>
+                        <outlet property="contentInsetView" destination="ptu-KO-Ud3" id="Wio-V7-tRL"/>
                         <outlet property="contentScrollView" destination="SjX-fO-taf" id="S9i-PF-K4N"/>
                         <outlet property="emptyLabel" destination="97Y-yR-999" id="Vq7-zt-X22"/>
                         <outlet property="emptyView" destination="HGh-LP-iQL" id="MJe-KF-neU"/>

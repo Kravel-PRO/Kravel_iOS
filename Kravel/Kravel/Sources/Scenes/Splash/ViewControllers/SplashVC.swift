@@ -14,7 +14,7 @@ class SplashVC: UIViewController {
     private var animationView: AnimationView?
     
     private func showLoadingLottie() {
-        animationView = AnimationView(name: "splash_iOS")
+        animationView = AnimationView(name: LottieFile.splash)
         animationView?.backgroundColor = .white
         animationView?.contentMode = .scaleAspectFill
         animationView?.translatesAutoresizingMaskIntoConstraints = false
@@ -67,21 +67,5 @@ class SplashVC: UIViewController {
             animationView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             animationView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
-    }
-}
-
-extension SplashVC {
-    // MARK: - 언어 설정 동기화 맞추기 필요
-    private func requestMyinfo() {
-        NetworkHandler.shared.requestAPI(apiCategory: .getMyInform(ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: "", nickName: "", speech: ""))) { result in
-            switch result {
-            case .success(let myInformResponse):
-                guard let myInformResponse = myInformResponse as? ChangeInfoResponseData else { return }
-                
-            case .requestErr: break
-            case .serverErr: break
-            case .networkFail: break
-            }
-        }
     }
 }

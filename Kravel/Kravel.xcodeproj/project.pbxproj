@@ -41,7 +41,7 @@
 		9D4CCF7D25003A95003F73AF /* GetReviewResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CCF7C25003A95003F73AF /* GetReviewResponseData.swift */; };
 		9D4CCF7F25003B9D003F73AF /* APISortableResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CCF7E25003B9D003F73AF /* APISortableResponseData.swift */; };
 		9D4CCF8125003E25003F73AF /* APIDataResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CCF8025003E25003F73AF /* APIDataResult.swift */; };
-		9D57B102251A5E3C00BC192B /* refresh_loading_iOS.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D57B101251A5E3C00BC192B /* refresh_loading_iOS.json */; };
+		9D57B105251A703500BC192B /* LottieFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D57B104251A703500BC192B /* LottieFile.swift */; };
 		9D5DBB45248D5BAD00D82D40 /* SexButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D5DBB44248D5BAD00D82D40 /* SexButton.xib */; };
 		9D5DBB47248D5BBF00D82D40 /* SexButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5DBB46248D5BBF00D82D40 /* SexButton.swift */; };
 		9D5E3EB724BD952200BA4E5F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5E3EB624BD952200BA4E5F /* SearchCell.swift */; };
@@ -65,11 +65,9 @@
 		9D6FF37924FAAF2600E6A8B9 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6FF37824FAAF2600E6A8B9 /* SplashVC.swift */; };
 		9D6FF37E24FAB26F00E6A8B9 /* splash_iOS.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D6FF37D24FAB26F00E6A8B9 /* splash_iOS.json */; };
 		9D6FF38224FAC31C00E6A8B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D6FF38124FAC31C00E6A8B9 /* Assets.xcassets */; };
-		9D6FF38424FAC36300E6A8B9 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D6FF38324FAC36200E6A8B9 /* loading.json */; };
 		9D6FF38624FAFBD100E6A8B9 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6FF38524FAFBD100E6A8B9 /* APIConstants.swift */; };
 		9D6FF38824FAFC3F00E6A8B9 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6FF38724FAFC3F00E6A8B9 /* NetworkResult.swift */; };
 		9D6FF38A24FAFC6300E6A8B9 /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6FF38924FAFC6300E6A8B9 /* NetworkHandler.swift */; };
-		9D6FF39224FB096600E6A8B9 /* loading_map.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D6FF39124FB096600E6A8B9 /* loading_map.json */; };
 		9D76CD7D24FC29CD004D7333 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD7C24FC29CD004D7333 /* ImageManager.swift */; };
 		9D76CD7F24FD3641004D7333 /* APIResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD7E24FD3641004D7333 /* APIResponseData.swift */; };
 		9D76CD8124FD3864004D7333 /* SignupResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76CD8024FD3864004D7333 /* SignupResponseData.swift */; };
@@ -211,7 +209,7 @@
 		9D4CCF7C25003A95003F73AF /* GetReviewResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReviewResponseData.swift; sourceTree = "<group>"; };
 		9D4CCF7E25003B9D003F73AF /* APISortableResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISortableResponseData.swift; sourceTree = "<group>"; };
 		9D4CCF8025003E25003F73AF /* APIDataResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDataResult.swift; sourceTree = "<group>"; };
-		9D57B101251A5E3C00BC192B /* refresh_loading_iOS.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = refresh_loading_iOS.json; path = ../../../../../../Downloads/refresh_loading_iOS.json; sourceTree = "<group>"; };
+		9D57B104251A703500BC192B /* LottieFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieFile.swift; sourceTree = "<group>"; };
 		9D5DBB44248D5BAD00D82D40 /* SexButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SexButton.xib; sourceTree = "<group>"; };
 		9D5DBB46248D5BBF00D82D40 /* SexButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SexButton.swift; sourceTree = "<group>"; };
 		9D5E3EB624BD952200BA4E5F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
@@ -235,11 +233,9 @@
 		9D6FF37824FAAF2600E6A8B9 /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		9D6FF37D24FAB26F00E6A8B9 /* splash_iOS.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash_iOS.json; sourceTree = "<group>"; };
 		9D6FF38124FAC31C00E6A8B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9D6FF38324FAC36200E6A8B9 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		9D6FF38524FAFBD100E6A8B9 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		9D6FF38724FAFC3F00E6A8B9 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		9D6FF38924FAFC6300E6A8B9 /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
-		9D6FF39124FB096600E6A8B9 /* loading_map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_map.json; sourceTree = "<group>"; };
 		9D76CD7C24FC29CD004D7333 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		9D76CD7E24FD3641004D7333 /* APIResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponseData.swift; sourceTree = "<group>"; };
 		9D76CD8024FD3864004D7333 /* SignupResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupResponseData.swift; sourceTree = "<group>"; };
@@ -909,6 +905,7 @@
 				9D49E8B324C6DCBE007CD948 /* PrivateKey.swift */,
 				9D8EA91024E7BE4B00FD5059 /* ImageKey.swift */,
 				9D76CD8F24FD8D90004D7333 /* UserDefaultKey.swift */,
+				9D57B104251A703500BC192B /* LottieFile.swift */,
 			);
 			path = Keys;
 			sourceTree = "<group>";
@@ -917,9 +914,6 @@
 			isa = PBXGroup;
 			children = (
 				9D6FF37D24FAB26F00E6A8B9 /* splash_iOS.json */,
-				9D6FF38324FAC36200E6A8B9 /* loading.json */,
-				9D6FF39124FB096600E6A8B9 /* loading_map.json */,
-				9D57B101251A5E3C00BC192B /* refresh_loading_iOS.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -1324,7 +1318,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D6FF39224FB096600E6A8B9 /* loading_map.json in Resources */,
 				9D8C0A2524BC515A005C1F58 /* Tabbar.storyboard in Resources */,
 				9D61F6E824F81D5500EF13FB /* LogoutPopup.storyboard in Resources */,
 				9D13C7F9248784330058A7BF /* LaunchScreen.storyboard in Resources */,
@@ -1352,11 +1345,9 @@
 				9D76CD9424FE992F004D7333 /* SearchAddress.storyboard in Resources */,
 				9D6FF37724FAAF0500E6A8B9 /* Splash.storyboard in Resources */,
 				9DD7AD0F2507BE6D00742F25 /* AuthorizationPopup.storyboard in Resources */,
-				9D57B102251A5E3C00BC192B /* refresh_loading_iOS.json in Resources */,
 				9D6FF35324F91B3500E6A8B9 /* LoginPopup.storyboard in Resources */,
 				9D13C80F248795E40058A7BF /* LoginTextView.xib in Resources */,
 				9D61F6DE24F7AAAF00EF13FB /* EditPassword.storyboard in Resources */,
-				9D6FF38424FAC36300E6A8B9 /* loading.json in Resources */,
 				9D6FF36C24FA098400E6A8B9 /* Camera.storyboard in Resources */,
 				9DEDA6B024BCC74300E978F5 /* CategoryCell.xib in Resources */,
 				9DBA643024F0437E00E12FA4 /* RecentResearchView.xib in Resources */,
@@ -1508,6 +1499,7 @@
 				9DD48BB32504C5590096DE08 /* GetSimplePlaceResponseData.swift in Sources */,
 				9D61F6EA24F81D7200EF13FB /* LogoutPopupVC.swift in Sources */,
 				9DD48BBE250512AB0096DE08 /* CelebrityDTO.swift in Sources */,
+				9D57B105251A703500BC192B /* LottieFile.swift in Sources */,
 				9D9694D624C6D4810046CB85 /* MapVC.swift in Sources */,
 				9D014C40248C4C3600758FCC /* UIViewController+Extensions.swift in Sources */,
 				9D76CD7D24FC29CD004D7333 /* ImageManager.swift in Sources */,
