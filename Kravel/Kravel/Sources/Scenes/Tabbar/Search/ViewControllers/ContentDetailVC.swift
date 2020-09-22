@@ -297,10 +297,12 @@ class ContentDetailVC: UIViewController {
         backButtonTopConstraint.constant = window.safeAreaInsets.top
     }
     
+    private var thumbnail_init_Height: CGFloat = 0
     // MARK: - UIViewController viewDidLayoutSubviews 설정
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setGradientLayer()
+        thumbnail_init_Height = thumbnail_Back_View.frame.width / 75 * 56
         thumnail_View_Height_Constraint.constant = thumbnail_Back_View.frame.width / 75 * 56
     }
 }
@@ -406,6 +408,13 @@ extension ContentDetailVC: UICollectionViewDataSource {
 }
 
 extension ContentDetailVC: UICollectionViewDelegate {
+    // MARK: - 스크롤 하는 중, 화면 커지게
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < 0 {
+            scrollView.contentOffset.y = 0
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == placeCollectionView {
             // 장소 CollectionView 선택한 경우
