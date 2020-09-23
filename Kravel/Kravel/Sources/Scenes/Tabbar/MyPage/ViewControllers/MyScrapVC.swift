@@ -26,6 +26,17 @@ class MyScrapVC: UIViewController {
         loadingView?.removeFromSuperview()
         loadingView = nil
     }
+    
+    // MARK: - 리프레쉬
+    private func setRefresh() {
+        let refreshControl = UIRefreshControl()
+        scrapCollectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+    }
+    
+    @objc func reloadData() {
+        requestMyScrap()
+    }
 
     // MARK: - 스크랩 CollectionView 설정
     @IBOutlet weak var scrapCollectionView: UICollectionView! {
@@ -95,6 +106,7 @@ class MyScrapVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setRefresh()
         showLoadingLottie()
         setNoScrapView()
         if isEmptyScrap() { print("EmptyView") }
@@ -149,6 +161,7 @@ extension MyScrapVC {
                 guard let placeData = placeData as? APISortableResponseData<PlaceContentInform> else { return }
                 self.scrapData = placeData.content
                 DispatchQueue.main.async {
+                    self.scrapCollectionView.refreshControl?.endRefreshing()
                     self.stopLottieAnimation()
                     if self.isEmptyScrap() { print("empty") }
                     self.scrapCollectionView.reloadData()
