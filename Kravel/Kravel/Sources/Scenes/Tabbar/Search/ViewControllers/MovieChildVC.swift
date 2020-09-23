@@ -40,14 +40,13 @@ class MovieChildVC: UIViewController {
 extension MovieChildVC {
     // MARK: - Media 요청 API
     private func requestMedia() {
-        let mediaRequestParameter = GetListParameter(size: nil, search: nil, page: nil)
+        let mediaRequestParameter = GetListParameter(size: 100, search: nil, page: nil)
         
         NetworkHandler.shared.requestAPI(apiCategory: .getMedia(mediaRequestParameter)) { result in
             switch result {
             case .success(let mediaResult):
                 guard let medias = mediaResult as? [MediaDTO] else { return }
                 self.mediaDTO = medias
-                print(self.mediaDTO)
                 DispatchQueue.main.async {
                     self.movieCollectionView.reloadData()
                 }

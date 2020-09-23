@@ -13,6 +13,22 @@ class MorePlaceVC: UIViewController {
     
     var category: KCategory?
     var id: Int?
+    
+    // MARK: - 데이터 로딩 중 Lottie 화면
+    private var loadingView: UIActivityIndicatorView?
+    
+    private func showLoadingLottie() {
+        loadingView = UIActivityIndicatorView(style: .large)
+        self.view.addSubview(loadingView!)
+        loadingView?.center = self.view.center
+        loadingView?.startAnimating()
+    }
+    
+    private func stopLottieAnimation() {
+        loadingView?.stopAnimating()
+        loadingView?.removeFromSuperview()
+        loadingView = nil
+    }
 
     // MARK: - 장소 더보기 CollectionView
     @IBOutlet weak var morePlaceCollectionView: UICollectionView! {
@@ -28,11 +44,8 @@ class MorePlaceVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        showLoadingLottie()
         requestData()
-    }
-    
-    private func setLabelByLanguage() {
-        
     }
     
     // MARK: - UIViewController viewWillAppear Override 설정
@@ -77,6 +90,7 @@ extension MorePlaceVC {
                 guard let celebDetail = celebResult as? CelebrityDetailDTO else { return }
                 self.placeData = celebDetail.places
                 DispatchQueue.main.async {
+                    self.stopLottieAnimation()
                     self.morePlaceCollectionView.reloadData()
                 }
             case .requestErr(let error): print(error)
@@ -132,12 +146,16 @@ extension MorePlaceVC: UICollectionViewDataSource {
 }
 
 extension MorePlaceVC: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let placeDetailVC = UIStoryboard(name: "LocationDetail", bundle: nil).instantiateViewController(withIdentifier: LocationDetailVC.identifier) as? LocationDetailVC else { return }
+        placeDetailVC.placeID = placeData[indexPath.row].placeId
+        self.navigationController?.pushViewController(placeDetailVC, animated: true)
+    }
 }
 
 extension MorePlaceVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let place_Cell_Width = collectionView.frame.width - 16 * 2 - 7
+        let place_Cell_Width = (collectionView.frame.width - 16 * 2 - 7)/2
         let place_Cell_Height = place_Cell_Width / 168 * 159
         return CGSize(width: place_Cell_Width, height: place_Cell_Height)
     }

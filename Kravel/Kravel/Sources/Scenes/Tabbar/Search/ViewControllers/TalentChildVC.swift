@@ -40,7 +40,7 @@ class TalentChildVC: UIViewController {
 extension TalentChildVC {
     // MARK: - Celebrity 요청 API
     private func requestCeleb() {
-        let celebRequestParameter = GetListParameter(size: nil, search: nil, page: nil)
+        let celebRequestParameter = GetListParameter(size: 100, search: nil, page: nil)
         
         NetworkHandler.shared.requestAPI(apiCategory: .getCeleb(celebRequestParameter)) { result in
             switch result {
