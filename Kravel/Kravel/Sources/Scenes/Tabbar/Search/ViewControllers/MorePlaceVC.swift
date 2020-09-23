@@ -10,6 +10,9 @@ import UIKit
 
 class MorePlaceVC: UIViewController {
     static let identifier = "MorePlaceVC"
+    
+    var category: KCategory?
+    var id: Int?
 
     // MARK: - 장소 더보기 CollectionView
     @IBOutlet weak var morePlaceCollectionView: UICollectionView! {
@@ -25,6 +28,11 @@ class MorePlaceVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        requestData()
+    }
+    
+    private func setLabelByLanguage() {
+        
     }
     
     // MARK: - UIViewController viewWillAppear Override 설정
@@ -38,9 +46,69 @@ class MorePlaceVC: UIViewController {
         self.navigationController?.navigationBar.backIndicatorImage = backImage
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
         self.navigationController?.navigationBar.isHidden = false
+        self.navigationItem.title = "장소 더 보기".localized
         self.navigationController?.navigationBar.topItem?.title = ""
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.tintColor = .black
+    }
+}
+
+extension MorePlaceVC {
+    // MARK: - ID에 따라 요청
+    private func requestData() {
+        guard let category = self.category,
+              let id = self.id else { return }
+        
+        switch category {
+        case .celeb:
+            requestCeleb(id: id)
+        case .media:
+            requestMedia(id: id)
+        }
+    }
+    
+    // MARK: - 셀럽 장소 더보기 API 요청
+    private func requestCeleb(id: Int) {
+        let getReviewParameter = GetReviewParameter(page: 0, size: 20, sort: nil)
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .getCelebOfID(getReviewParameter, id: id)) { result in
+            switch result {
+            case .success(let celebResult):
+                guard let celebDetail = celebResult as? CelebrityDetailDTO else { return }
+                self.placeData = celebDetail.places
+                DispatchQueue.main.async {
+                    self.morePlaceCollectionView.reloadData()
+                }
+            case .requestErr(let error): print(error)
+            case .serverErr: print("Server Error")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
+    }
+    
+    // MARK: - 미디어 장소 더보기 API 요청
+    private func requestMedia(id: Int) {
+        let getReviewParameter = GetReviewParameter(page: 0, size: 20, sort: nil)
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .getMediaOfID(getReviewParameter, id: id)) { result in
+            switch result {
+            case .success(let mediaResult):
+                guard let mediaDetail = mediaResult as? MediaDetailDTO else { return }
+                self.placeData = mediaDetail.places ?? []
+                DispatchQueue.main.async {
+                    self.morePlaceCollectionView.reloadData()
+                }
+            case .requestErr(let error): print(error)
+            case .serverErr: print("Server Error")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
     }
 }
 
@@ -52,8 +120,14 @@ extension MorePlaceVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let placeCell = collectionView.dequeueReusableCell(withReuseIdentifier: PlaceCell.identifier, for: indexPath) as? PlaceCell else { return UICollectionViewCell() }
-        placeCell
-        return UICollectionViewCell()
+        placeCell.placeImageView.setImage(with: placeData[indexPath.row].imageUrl ?? "")
+        placeCell.placeName = placeData[indexPath.row].title
+        if let tags = placeData[indexPath.row].tags {
+            placeCell.tags = tags.split(separator: ",").map(String.init)
+        } else {
+            placeCell.tags = []
+        }
+        return placeCell
     }
 }
 

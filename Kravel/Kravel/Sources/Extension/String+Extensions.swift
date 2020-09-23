@@ -34,6 +34,8 @@ extension String {
 
 struct CustomLocalize {
     enum LocalKey: String {
+        case morePlace = "장소 더 보기"
+        
         // MARK: - 로그인 화면
         case login = "로그인 하기"
         case signup = "회원가입 하기"
@@ -180,6 +182,9 @@ struct CustomLocalize {
         func localize() -> String {
             guard let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return self.rawValue }
             switch self {
+            case .morePlace:
+                if language == "KOR" { return "장소 더 보기" }
+                else { return "More Place" }
             case .login:
                 if language == "KOR" { return "로그인 하기" }
                 else { return "Log In" }

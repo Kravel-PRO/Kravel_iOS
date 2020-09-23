@@ -29,8 +29,8 @@ enum APICategory<P: ParameterAble> {
     case getCeleb(P)
     case getMedia(P)
     case search(P)
-    case getCelebOfID(P)
-    case getMediaOfID(P)
+    case getCelebOfID(P, id: Int)
+    case getMediaOfID(P, id: Int)
     case getReviewOfCeleb(P, id: Int)
     case getReviewOfMedia(P, id: Int)
     case getMyPhotoReview(P)
@@ -60,12 +60,10 @@ enum APICategory<P: ParameterAble> {
         case .getCeleb: return APICostants.getCelebList
         case .getMedia: return APICostants.getMeidaList
         case .search: return APICostants.search
-        case .getCelebOfID(let id):
-            guard let id = id as? Int else { return "" }
+        case .getCelebOfID(_, let id):
             APICostants.celebID = "\(id)"
             return APICostants.getDetailCeleb
-        case .getMediaOfID(let id):
-            guard let id = id as? Int else { return "" }
+        case .getMediaOfID(_, let id):
             APICostants.mediaID = "\(id)"
             return APICostants.getDetailMedia
         case .getReviewOfCeleb(_, let id):
@@ -262,8 +260,36 @@ enum APICategory<P: ParameterAble> {
                 parameters.updateValue(search, forKey: "search")
             }
             return parameters
-        case .getCelebOfID: return nil
-        case .getMediaOfID: return nil
+        case .getCelebOfID(let pageableParameter, _):
+            var parameters: [String: Any] = [:]
+            guard let reviewParameter = pageableParameter as? GetReviewParameter else { return nil }
+            if let page = reviewParameter.page {
+                parameters.updateValue(page, forKey: "page")
+            }
+            
+            if let size = reviewParameter.size {
+                parameters.updateValue(size, forKey: "size")
+            }
+            
+            if let sort = reviewParameter.sort {
+                parameters.updateValue(sort, forKey: "sort")
+            }
+            return parameters
+        case .getMediaOfID(let pageableParameter, _):
+            var parameters: [String: Any] = [:]
+            guard let reviewParameter = pageableParameter as? GetReviewParameter else { return nil }
+            if let page = reviewParameter.page {
+                parameters.updateValue(page, forKey: "page")
+            }
+            
+            if let size = reviewParameter.size {
+                parameters.updateValue(size, forKey: "size")
+            }
+            
+            if let sort = reviewParameter.sort {
+                parameters.updateValue(sort, forKey: "sort")
+            }
+            return parameters
         case .getReviewOfCeleb(let reviewParameter, _):
             var parameters: [String: Any] = [:]
             guard let reviewParameter = reviewParameter as? GetReviewParameter else { return nil }

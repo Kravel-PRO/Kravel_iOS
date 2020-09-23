@@ -360,7 +360,7 @@ class NetworkHandler {
     private func requestCelebOfID(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
         guard let url = try? url.asURL() else { return }
         
-        AF.request(url, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+        AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
             .validate(statusCode: 200...500)
             .responseDecodable(of: APIResponseData<APICantSortableDataResult<CelebrityDetailDTO>, APIError>.self) { response in
                 switch response.result {
@@ -381,7 +381,7 @@ class NetworkHandler {
     private func requestMediaOfID(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
         guard let url = try? url.asURL() else { return }
         
-        AF.request(url, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+        AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
             .validate(statusCode: 200...500)
             .responseDecodable(of: APIResponseData<APICantSortableDataResult<MediaDetailDTO>, APIError>.self) { response in
                 switch response.result {

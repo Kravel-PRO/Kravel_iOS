@@ -192,7 +192,10 @@ class ContentDetailVC: UIViewController {
     }
     
     @IBAction func clickMore(_ sender: Any) {
-        
+        guard let morePlaceVC = UIStoryboard(name: "MorePlace", bundle: nil).instantiateViewController(withIdentifier: MorePlaceVC.identifier) as? MorePlaceVC else { return }
+        morePlaceVC.category = self.category
+        morePlaceVC.id = self.id
+        self.navigationController?.pushViewController(morePlaceVC, animated: true)
     }
     
     @IBOutlet weak var moreButtonStackView: UIStackView! {
@@ -311,8 +314,8 @@ class ContentDetailVC: UIViewController {
 extension ContentDetailVC {
     // MARK: - ID에 따라 요청
     private func requestData() {
-        guard let category = self.category
-            , let id = self.id else { return }
+        guard let category = self.category,
+              let id = self.id else { return }
         
         switch category {
         case .celeb:
@@ -326,11 +329,14 @@ extension ContentDetailVC {
     
     // MARK: - 유명인 API 요청
     private func requestCeleb(id: Int) {
-        NetworkHandler.shared.requestAPI(apiCategory: .getCelebOfID(id)) { result in
+        let getReviewParameter = GetReviewParameter(page: 0, size: 7, sort: nil)
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .getCelebOfID(getReviewParameter, id: id)) { result in
             switch result {
             case .success(let celebResult):
                 guard let celebDetail = celebResult as? CelebrityDetailDTO else { return }
                 self.categoryDetailDTO = celebDetail
+                print(celebDetail.places.count)
                 DispatchQueue.main.async {
                     self.appearDetailData()
                 }
@@ -346,7 +352,9 @@ extension ContentDetailVC {
     
     // MARK: - 미디어 API 요청
     private func requestMedia(id: Int) {
-        NetworkHandler.shared.requestAPI(apiCategory: .getMediaOfID(id)) { result in
+        let getReviewParameter = GetReviewParameter(page: 0, size: 7, sort: nil)
+        
+        NetworkHandler.shared.requestAPI(apiCategory: .getMediaOfID(getReviewParameter, id: id)) { result in
             switch result {
             case .success(let mediaResult):
                 guard let mediaDetail = mediaResult as? MediaDetailDTO else { return }
