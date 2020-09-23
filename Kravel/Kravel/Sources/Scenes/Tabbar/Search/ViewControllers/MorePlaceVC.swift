@@ -29,6 +29,17 @@ class MorePlaceVC: UIViewController {
         loadingView?.removeFromSuperview()
         loadingView = nil
     }
+    
+    // MARK: - 리프레쉬 Scroll
+    private func setRefresh() {
+        let refreshControl = UIRefreshControl()
+        morePlaceCollectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+    }
+    
+    @objc func reloadData() {
+        requestData()
+    }
 
     // MARK: - 장소 더보기 CollectionView
     @IBOutlet weak var morePlaceCollectionView: UICollectionView! {
@@ -44,6 +55,7 @@ class MorePlaceVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setRefresh()
         showLoadingLottie()
         requestData()
     }
@@ -91,6 +103,7 @@ extension MorePlaceVC {
                 self.placeData = celebDetail.places
                 DispatchQueue.main.async {
                     self.stopLottieAnimation()
+                    self.morePlaceCollectionView.refreshControl?.endRefreshing()
                     self.morePlaceCollectionView.reloadData()
                 }
             case .requestErr(let error): print(error)

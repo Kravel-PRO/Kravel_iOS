@@ -19,6 +19,33 @@ class OtherPhotoReviewVC: UIViewController {
     
     var requestType: RequestType?
     var selectedPhotoReviewID: Int?
+    
+    // MARK: - 데이터 로딩 중 Lottie 화면
+    private var loadingView: UIActivityIndicatorView?
+    
+    private func showLoadingLottie() {
+        loadingView = UIActivityIndicatorView(style: .large)
+        self.view.addSubview(loadingView!)
+        loadingView?.center = self.view.center
+        loadingView?.startAnimating()
+    }
+    
+    private func stopLottieAnimation() {
+        loadingView?.stopAnimating()
+        loadingView?.removeFromSuperview()
+        loadingView = nil
+    }
+    
+    // MARK: - 리프레쉬
+    private func setRefresh() {
+        let refreshControl = UIRefreshControl()
+        photoReviewCollectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+    }
+    
+    @objc func reloadData() {
+        requestByAPI()
+    }
 
     // MARK: - 포토리뷰 CollectionView 설정
     @IBOutlet weak var photoReviewCollectionView: UICollectionView! {
@@ -36,6 +63,8 @@ class OtherPhotoReviewVC: UIViewController {
         case .success(let placeReviewData):
             guard let placeReviewData = placeReviewData as? APISortableResponseData<ReviewInform> else { return }
             DispatchQueue.main.async {
+                self.stopLottieAnimation()
+                self.photoReviewCollectionView.refreshControl?.endRefreshing()
                 self.photoReviewData = placeReviewData.content
                 self.photoReviewCollectionView.reloadData()
                 
@@ -64,7 +93,10 @@ class OtherPhotoReviewVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setRefresh()
+        showLoadingLottie()
         setLabelByLanguage()
+        requestByAPI()
     }
     
     private func setLabelByLanguage() {
@@ -75,7 +107,6 @@ class OtherPhotoReviewVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNav()
-        requestByAPI()
     }
     
     private func setNav() {
