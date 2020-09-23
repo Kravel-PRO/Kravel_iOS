@@ -223,7 +223,7 @@ class HomeVC: UIViewController {
         guard let indicator = self.activityIndicator else { return }
         self.view.addSubview(indicator)
     }
-    
+
     private func stopIndicatorView() {
         self.activityIndicator?.stopAnimating()
         self.activityIndicator?.removeFromSuperview()

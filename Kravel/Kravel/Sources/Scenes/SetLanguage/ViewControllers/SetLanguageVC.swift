@@ -7,9 +7,25 @@
 //
 
 import UIKit
+import Lottie
 
 class SetLanguageVC: UIViewController {
     static let identifier = "SetLanguageVC"
+    
+    // MARK: - 데이터 로딩 중 Lottie 화면
+    private var loadingView: UIActivityIndicatorView?
+
+    private func showLoadingLottie() {
+        loadingView = UIActivityIndicatorView(style: .large)
+        self.view.addSubview(loadingView!)
+        loadingView?.center = self.view.center
+        loadingView?.startAnimating()
+    }
+
+    func stopLottieAnimation() {
+        loadingView?.removeFromSuperview()
+        loadingView = nil
+    }
     
     // MARK: NavigationController 설정
    var navTitle: String?
@@ -100,6 +116,7 @@ class SetLanguageVC: UIViewController {
         guard let selectedLanguage = self.selectedLanguageButton else { return }
         
         if self.navigationController != nil {
+            showLoadingLottie()
             requestChangeLanguage(selectedLanguage)
         } else {
             switch selectedLanguageButton {
@@ -121,11 +138,12 @@ extension SetLanguageVC {
         let changeInfoParamter = ChangeInfoBodyParameter(loginPw: "", modifyLoginPw: "", gender: "", nickName: "", speech: language.getLanguage())
         
         NetworkHandler.shared.requestAPI(apiCategory: .changInfo(queryType: "speech", body: changeInfoParamter)) { result in
+            self.stopLottieAnimation()
             switch result {
             case .success(let changeInfoResponse):
                 guard let changeInfoResponse = changeInfoResponse as? ChangeInfoResponseData,
                       let crtSpeech = changeInfoResponse.speech else { return }
-                print(changeInfoResponse)
+                
                 UserDefaults.standard.setValue(crtSpeech, forKey: UserDefaultKey.language)
                 NotificationCenter.default.post(name: .changeLanguage, object: nil)
                 self.navigationController?.popViewController(animated: true)

@@ -10,4 +10,6 @@ import Foundation
 
 struct LottieFile {
     static let splash = "splash_iOS"
+    static let heartLoading = "heart_loading_iOS_white"
+    static let heartLoadingA = "heart_loading_iOS"
 }

@@ -14,6 +14,7 @@ class SearchCell: UICollectionViewCell {
     @IBOutlet weak var profileImageView: UIImageView! {
         didSet {
             profileImageView.layer.cornerRadius = profileImageView.frame.width/2
+            profileImageView.clipsToBounds = true
         }
     }
     

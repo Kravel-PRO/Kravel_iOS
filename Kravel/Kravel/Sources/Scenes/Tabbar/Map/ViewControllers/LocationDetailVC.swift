@@ -8,6 +8,7 @@
 
 import UIKit
 import NMapsMap
+import Lottie
 
 class LocationDetailVC: UIViewController {
     static let identifier = "LocationDetailVC"
@@ -23,14 +24,14 @@ class LocationDetailVC: UIViewController {
     
     // MARK: - 데이터 로딩 중 Lottie 화면
     private var loadingView: UIActivityIndicatorView?
-    
+
     private func showLoadingLottie() {
         loadingView = UIActivityIndicatorView(style: .large)
         self.view.addSubview(loadingView!)
         loadingView?.center = self.view.center
         loadingView?.startAnimating()
     }
-    
+
     func stopLottieAnimation() {
         loadingView?.removeFromSuperview()
         loadingView = nil
@@ -204,6 +205,7 @@ class LocationDetailVC: UIViewController {
         // Do any additional setup after loading the view.
         addObserver()
         showLoadingLottie()
+        
         if navigationController?.viewControllers[0] == self {
             addGesture()
             setBackButtonByPresent()
