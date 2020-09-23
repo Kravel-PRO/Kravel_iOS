@@ -152,6 +152,14 @@ extension MorePhotoReviewVC: CellButtonDelegate {
     }
 }
 
+extension MorePhotoReviewVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let placeDetailVC = UIStoryboard(name: "LocationDetail", bundle: nil).instantiateViewController(withIdentifier: LocationDetailVC.identifier) as? LocationDetailVC else { return }
+        placeDetailVC.placeID = photoReviewData[indexPath.row].place?.placeId
+        self.navigationController?.pushViewController(placeDetailVC, animated: true)
+    }
+}
+
 extension MorePhotoReviewVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoReviewData.count
