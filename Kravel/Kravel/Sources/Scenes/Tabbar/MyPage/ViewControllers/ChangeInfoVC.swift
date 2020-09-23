@@ -127,11 +127,14 @@ extension ChangeInfoVC {
             case .success(let changeInfoResponse):
                 guard let changeInfoResponse = changeInfoResponse as? ChangeInfoResponseData else { return }
                 if let nickName = changeInfoResponse.nickName { UserDefaults.standard.set(nickName, forKey: UserDefaultKey.nickName) }
-                print(changeInfoResponse)
                 self.navigationController?.popViewController(animated: true)
             case .requestErr(_): return
             case .serverErr:
-                print("serverErr")
+                guard let loginPopupVC = UIStoryboard(name: "LoginPopup", bundle: nil).instantiateViewController(withIdentifier: LoginPopupVC.identifier) as? LoginPopupVC else { return }
+                loginPopupVC.modalPresentationStyle = .overFullScreen
+                loginPopupVC.titleMessage = "인증을 실패했습니다.".localized
+                loginPopupVC.message = "비밀번호를 다시 입력해주세요.".localized
+                self.present(loginPopupVC, animated: false, completion: nil)
             case .networkFail:
                 guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
                 networkFailPopupVC.modalPresentationStyle = .overFullScreen

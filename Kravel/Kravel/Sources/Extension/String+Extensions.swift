@@ -157,6 +157,8 @@ struct CustomLocalize {
         // MARK: - 비밀번호 수정
         case checkMyselfPw = "본인 확인을 위해 비밀번호를 입력해주세요."
         case inputModifyPw = "변경할 비밀번호를 입력해주세요."
+        case authFail = "인증을 실패했습니다."
+        case authFailMessage = "비밀번호를 다시 입력해주세요."
         
         // MARK: - 장소 디테일 화면
         case location = "위치"
@@ -409,7 +411,13 @@ struct CustomLocalize {
                 else { return "Post a photo review\nand decorate your own travel album!" }
             case .inputModifyPw:
                 if language == "KOR" { return "변경할 비밀번호를 입력해주세요." }
-                else { return "OK" }
+                else { return "Please enter a password to change." }
+            case .authFail:
+                if language == "KOR" { return "인증을 실패했습니다." }
+                else { return "Auth failed." }
+            case .authFailMessage:
+                if language == "KOR" { return "비밀번호를 다시 입력해주세요." }
+                else { return "Please re-enter your password." }
             case .attraction:
                 if language == "KOR" { return "주변 관광지" }
                 else { return "Nearby tourist attraction" }

@@ -13,6 +13,22 @@ class RealEditPasswordVC: UIViewController {
     
     var naviTitle: String?
     var isEnables: [Bool] = [false, false, false]
+    
+    // MARK: - 데이터 로딩 중 Lottie 화면
+    private var loadingView: UIActivityIndicatorView?
+    
+    private func showLoadingLottie() {
+        loadingView = UIActivityIndicatorView(style: .large)
+        self.view.addSubview(loadingView!)
+        loadingView?.center = self.view.center
+        loadingView?.startAnimating()
+    }
+    
+    private func stopLottieAnimation() {
+        loadingView?.stopAnimating()
+        loadingView?.removeFromSuperview()
+        loadingView = nil
+    }
 
     // MARK: - TextView 바탕 Layer 설정
     @IBOutlet var marginViews: [UIView]! {
@@ -62,6 +78,7 @@ class RealEditPasswordVC: UIViewController {
     }
     
     @IBAction func complete(_ sender: Any) {
+        showLoadingLottie()
         requestModifyPassword()
     }
     
@@ -125,6 +142,7 @@ extension RealEditPasswordVC {
         let changeInfoParameter = ChangeInfoBodyParameter(loginPw: loginPw, modifyLoginPw: modifiedPw, gender: "", nickName: "", speech: nil)
         
         NetworkHandler.shared.requestAPI(apiCategory: .changInfo(queryType: "password", body: changeInfoParameter)) { result in
+            self.stopLottieAnimation()
             switch result {
             case .success(let successData):
                 guard let changeInfoResponse =  successData as? ChangeInfoResponseData else { return }
