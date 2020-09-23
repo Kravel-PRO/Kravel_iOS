@@ -73,7 +73,7 @@ class CustomButton: UIButton {
                     self.backgroundColor = isHighlighted ? .grapefruit : UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
                 case .languageView: break
                 case .signupView:
-                    self.backgroundColor = isHighlighted ? .grapefruit : UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
+                    self.backgroundColor = isHighlighted ? UIColor(red: 205/255, green: 52/255, blue: 52/255, alpha: 1.0) : .grapefruit
                 case .welcomeView:
                     self.backgroundColor = isHighlighted ? UIColor(red: 205/255, green: 52/255, blue: 52/255, alpha: 1.0) : .grapefruit
                 case .languageViewStart:

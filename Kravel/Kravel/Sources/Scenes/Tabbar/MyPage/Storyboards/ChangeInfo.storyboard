@@ -80,7 +80,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="mJf-Yx-HCi" secondAttribute="height" multiplier="41:8" id="q7c-Nl-0wr"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <state key="normal" title="수정 완료">
                                     <color key="titleColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>

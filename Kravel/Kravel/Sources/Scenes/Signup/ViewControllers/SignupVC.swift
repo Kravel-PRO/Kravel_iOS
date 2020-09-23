@@ -237,7 +237,11 @@ extension SignupVC: UITextFieldDelegate {
         
         if enables.filter({ $0 == true }).count == 4 {
             signupButton.isUserInteractionEnabled = true
+            signupButton.backgroundColor = .grapefruit
+            signupButton.setTitleColor(.white, for: .normal)
         } else {
+            signupButton.backgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
+            signupButton.setTitleColor(.veryLightPink, for: .normal)
             signupButton.isUserInteractionEnabled = false
         }
     }

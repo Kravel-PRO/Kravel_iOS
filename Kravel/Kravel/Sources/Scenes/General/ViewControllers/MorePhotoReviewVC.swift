@@ -54,12 +54,12 @@ class MorePhotoReviewVC: UIViewController {
         // Do any additional setup after loading the view.
         setRefresh()
         showLoadingLottie()
+        requestPhotoReview()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNav()
-        requestPhotoReview()
     }
     
     private func setNav() {
@@ -84,6 +84,7 @@ extension MorePhotoReviewVC {
             case .success(let getReviewResult):
                 guard let getReviewResult = getReviewResult as? APISortableResponseData<ReviewInform> else { return }
                 self.photoReviewData = getReviewResult.content
+                
                 DispatchQueue.main.async {
                     self.morePhotoReviewCollectionView.refreshControl?.endRefreshing()
                     self.stopLottieAnimation()

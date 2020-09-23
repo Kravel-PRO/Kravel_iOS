@@ -158,11 +158,15 @@ extension ChangeInfoVC: UITextFieldDelegate {
         nicknameBackView.layer.borderColor = layerColor.cgColor
         
         if text == "" || text.count > 7 {
+            completeButton.backgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
+            completeButton.setTitleColor(.veryLightPink, for: .normal)
             completeButton.isUserInteractionEnabled = false
             UIView.animate(withDuration: 0.3) {
                 self.nickNameVaildLabel.alpha = 1.0
             }
         } else {
+            completeButton.backgroundColor = .grapefruit
+            completeButton.setTitleColor(.white, for: .normal)
             completeButton.isUserInteractionEnabled = true
             UIView.animate(withDuration: 0.3) {
                 self.nickNameVaildLabel.alpha = 0

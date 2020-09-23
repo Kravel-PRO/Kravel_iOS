@@ -184,7 +184,6 @@ class NetworkHandler {
                 switch response.result {
                 case .success(let getReviewResponseData):
                     guard let statusCode = response.response?.statusCode else { return }
-                    print(statusCode)
                     if statusCode == 200 {
                         guard let getReviewResult = getReviewResponseData.data?.result else { return }
                         completion(.success(getReviewResult))

@@ -32,12 +32,19 @@ class SubLocationView: UIView {
     
     lazy var mapView: NMFMapView = {
         let map = NMFMapView(frame: containerMapView.bounds)
+        map.translatesAutoresizingMaskIntoConstraints = false
         return map
     }()
     
     // Map View 추가
     private func setMapView() {
         containerMapView.addSubview(mapView)
+        NSLayoutConstraint.activate([
+            mapView.leadingAnchor.constraint(equalTo: containerMapView.leadingAnchor),
+            mapView.trailingAnchor.constraint(equalTo: containerMapView.trailingAnchor),
+            mapView.bottomAnchor.constraint(equalTo: containerMapView.bottomAnchor),
+            mapView.topAnchor.constraint(equalTo: containerMapView.topAnchor)
+        ])
     }
     
     // MARK: - Marker 세팅
