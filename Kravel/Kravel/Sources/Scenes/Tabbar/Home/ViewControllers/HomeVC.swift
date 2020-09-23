@@ -497,12 +497,6 @@ extension HomeVC: UICollectionViewDataSource {
 }
 
 extension HomeVC: UICollectionViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y < 0 {
-            
-        }
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == nearPlaceCollectionView {
             touchNearPlaceCell(at: indexPath)

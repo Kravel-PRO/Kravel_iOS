@@ -27,6 +27,17 @@ class MyPhotoReviewVC: UIViewController {
         loadingView = nil
     }
     
+    // MARK: - 리프레쉬
+    private func setRefresh() {
+        let refreshControl = UIRefreshControl()
+        photoReviewCollectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+    }
+    
+    @objc func reloadData() {
+        requestMyPhotoReview()
+    }
+    
     // MARK: - 포토리뷰 CollectionView 설정
     @IBOutlet weak var photoReviewCollectionView: UICollectionView! {
         didSet {
@@ -95,6 +106,7 @@ class MyPhotoReviewVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setRefresh()
         showLoadingLottie()
         setNoPhotoReviewView()
         if isEmptyPhotoReview() { print("Empty View") }
@@ -146,6 +158,7 @@ extension MyPhotoReviewVC {
                 guard let reviewData = reviewData as? APISortableResponseData<ReviewInform> else { return }
                 self.photoReviewData = reviewData.content
                 DispatchQueue.main.async {
+                    self.photoReviewCollectionView.refreshControl?.endRefreshing()
                     self.stopLottieAnimation()
                     if self.isEmptyPhotoReview() { print("Empty") }
                     self.photoReviewCollectionView.reloadData()

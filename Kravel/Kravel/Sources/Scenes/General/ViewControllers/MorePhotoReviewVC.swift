@@ -27,6 +27,17 @@ class MorePhotoReviewVC: UIViewController {
         loadingView = nil
     }
     
+    // MARK: - 리프레쉬
+    private func setRefresh() {
+        let refreshControl = UIRefreshControl()
+        morePhotoReviewCollectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+    }
+    
+    @objc func reloadData() {
+        requestPhotoReview()
+    }
+    
     // MARK: - CollectionView 설정
     @IBOutlet weak var morePhotoReviewCollectionView: UICollectionView! {
         didSet {
@@ -41,6 +52,7 @@ class MorePhotoReviewVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setRefresh()
         showLoadingLottie()
     }
     
@@ -73,6 +85,7 @@ extension MorePhotoReviewVC {
                 guard let getReviewResult = getReviewResult as? APISortableResponseData<ReviewInform> else { return }
                 self.photoReviewData = getReviewResult.content
                 DispatchQueue.main.async {
+                    self.morePhotoReviewCollectionView.refreshControl?.endRefreshing()
                     self.stopLottieAnimation()
                     self.morePhotoReviewCollectionView.reloadData()
                 }
