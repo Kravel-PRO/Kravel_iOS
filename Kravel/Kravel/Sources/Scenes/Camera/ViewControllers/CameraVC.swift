@@ -609,7 +609,8 @@ extension CameraVC {
             switch result {
             case .success(let detailInform):
                 guard let detailInform = detailInform as? PlaceDetailInform else { return }
-                self.setFilterByImage(detailInform.subImageUrl, detailInform.filterImageUrl, detailInform.mediaTitle)
+                print(detailInform)
+                self.setFilterByImage(detailInform.subImageUrl, detailInform.filterImageUrl, "필터")
             case .requestErr:
                 break
             case .serverErr:
@@ -626,6 +627,8 @@ extension CameraVC {
         guard let subImageUrl = subImageUrl,
               let filterImageUrl = filterImageUrl,
               let filterName = filterName else { return }
+        
+        print("역까지 들어옴")
         
         let tempFilterImageView = UIImageView()
         tempFilterImageView.setImage(with: filterImageUrl) { successImage in

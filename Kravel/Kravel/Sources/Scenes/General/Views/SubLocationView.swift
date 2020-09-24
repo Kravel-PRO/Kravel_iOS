@@ -62,7 +62,11 @@ class SubLocationView: UIView {
     }
     
     // MARK: - 주소 표시하는 Label 설정
-    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel! {
+        didSet {
+            locationLabel.text = " "
+        }
+    }
     
     var location: String? {
         didSet {
@@ -99,7 +103,11 @@ class SubLocationView: UIView {
     @IBOutlet weak var labelWidthConstraint: NSLayoutConstraint!
     
     // MARK: - 버스로 가는 방법을 알려주는 Label
-    @IBOutlet weak var busesLabel: UILabel!
+    @IBOutlet weak var busesLabel: UILabel! {
+        didSet {
+            busesLabel.text = "X"
+        }
+    }
     
     var busDatas: String? {
         didSet {
@@ -109,7 +117,11 @@ class SubLocationView: UIView {
     }
     
     // MARK: - 지하철로 가는 방법을 알려주는 Label
-    @IBOutlet weak var subwaysLabel: UILabel!
+    @IBOutlet weak var subwaysLabel: UILabel! {
+        didSet {
+            subwaysLabel.text = "X"
+        }
+    }
     
     var subwayDatas: String? {
         didSet {
