@@ -193,10 +193,19 @@ class LocationDetailVC: UIViewController {
     }
     
     // MARK: - 위치 정보 나타내는 뷰 설정
-    @IBOutlet weak var subLocationView: SubLocationView!
+    @IBOutlet weak var subLocationView: SubLocationView! {
+        didSet {
+            subLocationView.locationDescription = "위치".localized
+        }
+    }
     
     // MARK: - 내 주변 관광지 뷰 설정
-    @IBOutlet weak var nearByAttractionView: NearByAttractionView!
+    @IBOutlet weak var nearByAttractionView: NearByAttractionView! {
+        didSet {
+            nearByAttractionView.titleLabel.text = "주변 관광지".localized
+        }
+    }
+    
     @IBOutlet weak var attrcationViewHeightConstraint: NSLayoutConstraint!
     
     // MARK: - UIViewController viewDidLoad() Override 부분

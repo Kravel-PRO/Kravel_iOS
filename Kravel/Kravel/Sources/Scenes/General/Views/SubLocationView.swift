@@ -135,12 +135,14 @@ class SubLocationView: UIView {
         super.init(frame: frame)
         loadXib()
         setMapView()
+        setLabelByLanguage()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadXib()
         setMapView()
+        setLabelByLanguage()
     }
     
     private func loadXib() {
@@ -148,5 +150,19 @@ class SubLocationView: UIView {
         self.view.frame = self.bounds
         self.addSubview(view)
         self.bringSubviewToFront(view)
+    }
+    
+    func setLabelByLanguage() {
+        locationDescriptionLabel.text = "위치".localized
+        locationDescriptionLabel.sizeToFit()
+        
+        publicTransportDescriptionLabel.text = "대중교통".localized
+        publicTransportDescriptionLabel.sizeToFit()
+        
+        busDescriptionLabel.text = "버스".localized
+        busDescriptionLabel.sizeToFit()
+        
+        subwayDescriptionLabel.text = "지하철".localized
+        labelWidthConstraint.constant = subwayDescriptionLabel.intrinsicContentSize.width
     }
 }

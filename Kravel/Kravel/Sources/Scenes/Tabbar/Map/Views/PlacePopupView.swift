@@ -232,10 +232,10 @@ class PlacePopupView: UIView {
         view.isUserInteractionEnabled = true
     }
     
-    private func setLabelByLanguage() {
-        subLocationContainerView.locationDescription = "위치".localized
+    func setLabelByLanguage() {
+        subLocationContainerView.setLabelByLanguage()
         photoReviewContainerView.title = "포토 리뷰".localized
-        subLocationContainerView.publicTransportDescription = "대중교통".localized
+        nearByAttractionContainerView.titleLabel.text = "주변 관광지".localized
     }
 }
 

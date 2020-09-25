@@ -482,6 +482,7 @@ class MapVC: UIViewController {
                 
                 if selectedMarkers.count != 0 {
                     self.hideShowPopup()
+                    self.selectedPlace = nil
                     selectedMarkers.forEach {
                         $0.userInfo["isTouch"] = false
                         $0.iconImage = self.icMarkDefault
@@ -582,6 +583,32 @@ class MapVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        
+        if let selectedPlace = self.selectedPlace {
+            NetworkHandler.shared.requestAPI(apiCategory: .getPlaceOfID(selectedPlace.placeId)) { result in
+                switch result {
+                case .success(let detailInform):
+                    guard let detailInform = detailInform as? PlaceDetailInform else { return }
+                    DispatchQueue.main.async {
+                        self.placePopupView.setLabelByLanguage()
+                        self.setDetailPlaceData(detailInform)
+                        self.placePopupView.nearByAttractionContainerView.requestTouristAPI(mapX: detailInform.longitude, mapY: detailInform.latitude)
+                    }
+                case .requestErr(let error):
+                    print(error)
+                case .serverErr:
+                    print("Server Err")
+                case .networkFail:
+                    guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                    networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                    self.present(networkFailPopupVC, animated: false, completion: nil)
+                }
+            }
+            requestPhotoReview(of: selectedPlace.placeId)
+        } else {
+            let cameraPosition = mapView.cameraPosition.target
+            requestClosePlaceData(latitude: cameraPosition.lat, longitude: cameraPosition.lng)
+        }
     }
     
     // MARK: - UIViewController viewWillLayoutSubviews override 부분

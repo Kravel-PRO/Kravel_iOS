@@ -33,13 +33,11 @@ class NearByAttractionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadXib()
-        setLabelByLanguage()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadXib()
-        setLabelByLanguage()
     }
     
     private func loadXib() {
@@ -49,15 +47,8 @@ class NearByAttractionView: UIView {
         self.bringSubviewToFront(view)
     }
     
-    private func setLabelByLanguage() {
-        titleLabel.text = "주변 관광지".localized
-    }
-    
     func requestTouristAPI(mapX: Double, mapY: Double) {
         nearByAttractions = []
-        
-        print(mapX)
-        print(mapY)
         
         let touristParameter = KoreaTouristParameter(pageNo: 1, mapX: mapX , mapY: mapY)
         var url: String
@@ -89,7 +80,6 @@ extension NearByAttractionView: XMLParserDelegate {
     // MARK: XML 데이터 파싱을 시작했을 때
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         guard let touristKey = KoreaTouristResponseKey.init(rawValue: elementName) else { return }
-        print("touristKey \(touristKey)")
         
         switch touristKey {
         case .item:
