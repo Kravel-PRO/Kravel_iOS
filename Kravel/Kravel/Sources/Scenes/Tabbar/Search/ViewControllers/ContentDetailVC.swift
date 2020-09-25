@@ -137,7 +137,11 @@ class ContentDetailVC: UIViewController {
     }
     
     // MARK: - 플레이스가 비었을 경우 표시하는 라벨
-    @IBOutlet weak var placeEmptyLabel: UILabel!
+    @IBOutlet weak var placeEmptyLabel: UILabel! {
+        didSet {
+            placeEmptyLabel.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
     
     // MARK: - 장소 CollectionView 설정
     @IBOutlet weak var placeCollectionView: UICollectionView! {
@@ -284,6 +288,7 @@ class ContentDetailVC: UIViewController {
         
         moreButton.setTitle("더 보기".localized, for: .normal)
         placeEmptyLabel.text = "조금만 기다려주세요!\n특별한 장소를 찾아올게요!".localized
+        placeEmptyLabel.heightAnchor.constraint(equalToConstant: placeEmptyLabel.intrinsicContentSize.height).isActive = true
     }
     
     // MARK: - UIViewController viewWillApeear 설정
