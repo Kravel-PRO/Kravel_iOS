@@ -50,7 +50,9 @@ class K_SearchResultCell: UICollectionViewCell {
     private func setNameLabelLayout() {
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: searchImageView.bottomAnchor, constant: 4),
-            nameLabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor)
+            nameLabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            nameLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
         ])
     }
     

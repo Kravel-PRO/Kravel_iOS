@@ -471,8 +471,8 @@
                                                         <constraint firstAttribute="width" secondItem="gug-6V-NDp" secondAttribute="height" multiplier="1:1" id="kIF-2V-oNh"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vT5-L1-Puc">
-                                                    <rect key="frame" x="51" y="106" width="0.0" height="0.0"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vT5-L1-Puc">
+                                                    <rect key="frame" x="0.0" y="106" width="102" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -490,6 +490,8 @@
                                                 <constraint firstItem="gug-6V-NDp" firstAttribute="centerX" secondItem="zeU-bt-1Ad" secondAttribute="centerX" id="NqG-qa-azH"/>
                                                 <constraint firstItem="vT5-L1-Puc" firstAttribute="centerX" secondItem="zeU-bt-1Ad" secondAttribute="centerX" id="QuU-9k-bGS"/>
                                                 <constraint firstItem="dxk-Wm-g22" firstAttribute="centerX" secondItem="zeU-bt-1Ad" secondAttribute="centerX" id="WgJ-fL-fAM"/>
+                                                <constraint firstItem="vT5-L1-Puc" firstAttribute="leading" secondItem="zeU-bt-1Ad" secondAttribute="leading" id="iEU-MA-wuk"/>
+                                                <constraint firstAttribute="trailing" secondItem="vT5-L1-Puc" secondAttribute="trailing" id="ofe-Jy-VYK"/>
                                                 <constraint firstItem="gug-6V-NDp" firstAttribute="top" secondItem="zeU-bt-1Ad" secondAttribute="top" id="rPE-vL-dHU"/>
                                                 <constraint firstItem="dxk-Wm-g22" firstAttribute="top" secondItem="vT5-L1-Puc" secondAttribute="bottom" id="tPd-Eb-unR"/>
                                             </constraints>
@@ -553,8 +555,8 @@
                                                         <constraint firstAttribute="width" secondItem="3e4-4G-pQJ" secondAttribute="height" multiplier="1:1" id="ucc-Ep-bLa"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YgO-QS-YYU">
-                                                    <rect key="frame" x="51" y="106" width="0.0" height="0.0"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YgO-QS-YYU">
+                                                    <rect key="frame" x="0.0" y="106" width="102" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -572,7 +574,9 @@
                                                 <constraint firstItem="3e4-4G-pQJ" firstAttribute="width" secondItem="Ane-1v-mJa" secondAttribute="width" id="ZFw-Kw-aZY"/>
                                                 <constraint firstItem="3e4-4G-pQJ" firstAttribute="centerX" secondItem="Ane-1v-mJa" secondAttribute="centerX" id="aiC-JU-sUT"/>
                                                 <constraint firstItem="YgO-QS-YYU" firstAttribute="top" secondItem="3e4-4G-pQJ" secondAttribute="bottom" constant="4" id="cV0-4E-BY8"/>
+                                                <constraint firstAttribute="trailing" secondItem="YgO-QS-YYU" secondAttribute="trailing" id="fgV-aR-2HY"/>
                                                 <constraint firstItem="7S1-FO-X5D" firstAttribute="top" secondItem="YgO-QS-YYU" secondAttribute="bottom" id="obm-Rn-Y3f"/>
+                                                <constraint firstItem="YgO-QS-YYU" firstAttribute="leading" secondItem="Ane-1v-mJa" secondAttribute="leading" id="oh5-6x-vjA"/>
                                                 <constraint firstItem="YgO-QS-YYU" firstAttribute="centerX" secondItem="Ane-1v-mJa" secondAttribute="centerX" id="qnI-yp-ZQX"/>
                                             </constraints>
                                         </collectionViewCellContentView>
