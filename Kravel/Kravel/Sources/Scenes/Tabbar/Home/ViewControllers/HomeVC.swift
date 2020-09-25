@@ -317,6 +317,24 @@ extension HomeVC {
     
     @objc func setLanguage(_ notification: NSNotification) {
         setLabelByLanguage()
+        
+        requestReviewData {
+            // 로딩화면 처리하기 위한 표시
+            self.isLoadingComplete[1] = true
+            if self.isLoadingComplete.filter({ !$0 }).isEmpty {
+                self.stopIndicatorView()
+            }
+        }
+        
+        requestHotPlaceData {
+            // 로딩화면 처리하기 위한 표시
+            self.isLoadingComplete[0] = true
+            if self.isLoadingComplete.filter({ !$0 }).isEmpty {
+                self.stopIndicatorView()
+            }
+        }
+        
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse { LocationManager.shared.startTracking() }
     }
 }
 
@@ -358,7 +376,7 @@ extension HomeVC {
             case .success(let getPlaceResult):
                 guard let getPlaceResult = getPlaceResult as? APISortableResponseData<PlaceContentInform> else { return }
                 self.hotPlaceData = getPlaceResult.content
-                
+                print(self.hotPlaceData)
                 // 로딩화면 처리하기 위한 표시
                 loadingCompletion()
                 DispatchQueue.main.async {
@@ -385,7 +403,6 @@ extension HomeVC {
             case .success(let getReviewResult):
                 guard let getReviewResult = getReviewResult as? APISortableResponseData<ReviewInform> else { return }
                 self.photoReviewData = getReviewResult.content
-                
                 // 로딩화면 처리하기 위한 표시
                 loadingCompletion()
                 DispatchQueue.main.async {

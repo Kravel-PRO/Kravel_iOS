@@ -27,6 +27,7 @@ class NetworkHandler {
         case .getReview: requestGetReview(apiURL, headers, parameters, completion)
         case .getPlaceReview: requestGetReviewOfPlace(apiURL, headers, parameters, completion)
         case .postPlaceReview: requestPostReviewOfPlace(apiURL, headers, parameters, completion)
+        case .deletePlaceReview: requestDeleteReview(apiURL, headers, parameters, completion)
         case .scrap: requestScrap(apiURL, headers, parameters, completion)
         case .like: requestLike(apiURL, headers, parameters, completion)
         case .getCeleb: requestCeleb(apiURL, headers, parameters, completion)
@@ -247,9 +248,27 @@ class NetworkHandler {
                     completion(.networkFail)
                 }
             }
-
     }
     
+    private func requestDeleteReview(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
+        guard let url = try? url.asURL() else { return }
+        
+        AF.request(url, method: .delete, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .validate(statusCode: 200...500)
+            .responseDecodable(of: APIResponseData<APICantSortableDataResult<Int>, APIError>.self) {
+                response in
+                switch response.result {
+                case .success(let deleteResult):
+                    guard let statusCode = response.response?.statusCode else { return }
+                    if statusCode == 200 { completion(.success(deleteResult.data?.result)) }
+                    else { completion(.serverErr) }
+                case .failure(let error):
+                    print(error)
+                    completion(.networkFail)
+                }
+            }
+    }
+     
     private func requestScrap(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
         guard let url = try? url.asURL() else { return }
         
@@ -406,9 +425,9 @@ class NetworkHandler {
                 case .success(let successData):
                     guard let statusCode = response.response?.statusCode else { return }
                     if statusCode == 200 {
-                        completion(.success(successData.data?.result))
                         guard let token = response.response?.headers["Authorization"] else { return }
                         UserDefaults.standard.setValue(token, forKey: UserDefaultKey.token)
+                        completion(.success(successData.data?.result))
                     } else {
                         print(statusCode)
                         print(successData)

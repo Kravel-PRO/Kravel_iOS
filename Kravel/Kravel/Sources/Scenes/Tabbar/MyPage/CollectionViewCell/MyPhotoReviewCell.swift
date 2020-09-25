@@ -11,6 +11,9 @@ import UIKit
 class MyPhotoReviewCell: UICollectionViewCell {
     static let identifier = "MyPhotoReviewCell"
     
+    var delegate: CellButtonDelegate?
+    var indexPath: IndexPath?
+    
     // MARK: - 포토리뷰 이미지 설정
     @IBOutlet weak var photoReviewImageView: UIImageView!
     
@@ -52,6 +55,11 @@ class MyPhotoReviewCell: UICollectionViewCell {
         }
     }
     
+    // MARK: - 삭제하는 로직
+    @IBAction func deleteItem(_ sender: Any) {
+        if let indexPath = self.indexPath { delegate?.click(at: indexPath) }
+    }
+    
     // MARK: - UICollectionViewCell Override 설정
     override class func awakeFromNib() {
         super.awakeFromNib()
@@ -59,5 +67,6 @@ class MyPhotoReviewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        indexPath = nil
     }
 }

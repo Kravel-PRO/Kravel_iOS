@@ -113,7 +113,7 @@ class PhotoReviewUploadVC: UIViewController {
     
     @IBAction func upload(_ sender: Any) {
         guard let placeId = self.placeId else { return }
-        APICostants.placeID = "\(placeId)"
+        APIConstants.placeID = "\(placeId)"
         showLoadingLottie()
         
         NetworkHandler.shared.requestAPI(apiCategory: .postPlaceReview(selectedImage)) { result in

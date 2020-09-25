@@ -556,7 +556,7 @@ class MapVC: UIViewController {
     // MARK: - 선택한 장소 Photo Review 가져오기
     private func requestPhotoReview(of placeID: Int) {
         let getPlaceReviewParameter = GetReviewOfPlaceParameter(latitude: nil, longitude: nil, like_count: nil)
-        APICostants.placeID = "\(placeID)"
+        APIConstants.placeID = "\(placeID)"
         
         NetworkHandler.shared.requestAPI(apiCategory: .getPlaceReview(getPlaceReviewParameter)) { result in
             switch result {
@@ -705,7 +705,7 @@ extension MapVC: PlacePopupViewDelegate {
     // MARK: - 스크랩 버튼 누른 경우
     func clickScrapButton() {
         guard let selectedPlace = self.selectedPlace else { return }
-        APICostants.placeID = "\(selectedPlace.placeId)"
+        APIConstants.placeID = "\(selectedPlace.placeId)"
         
         // 스크랩 데이터가 있는 경우 반대의 경우로 바꾸어 줌
         let scrapParameter = ScrapParameter(scrap: !selectedPlace.scrap)

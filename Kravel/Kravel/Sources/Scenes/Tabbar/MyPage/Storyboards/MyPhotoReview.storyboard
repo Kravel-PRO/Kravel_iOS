@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -39,13 +41,26 @@
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bitmap_1" translatesAutoresizingMaskIntoConstraints="NO" id="Dow-Qp-us9">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                                         </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wou-kD-fZZ">
+                                                            <rect key="frame" x="321" y="16" width="38" height="38"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="Wou-kD-fZZ" secondAttribute="height" multiplier="1:1" id="4rW-fl-gRa"/>
+                                                            </constraints>
+                                                            <state key="normal" image="btnCancelWhite"/>
+                                                            <connections>
+                                                                <action selector="deleteItem:" destination="ezL-WA-kMS" eventType="touchUpInside" id="3im-Kk-IGv"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="Dow-Qp-us9" secondAttribute="bottom" id="Kyp-1H-pfi"/>
                                                         <constraint firstAttribute="trailing" secondItem="Dow-Qp-us9" secondAttribute="trailing" id="UmG-JZ-fuX"/>
                                                         <constraint firstAttribute="width" secondItem="Ukx-xM-xXc" secondAttribute="height" multiplier="1:1" id="YVB-rO-iYm"/>
+                                                        <constraint firstItem="Wou-kD-fZZ" firstAttribute="width" secondItem="Dow-Qp-us9" secondAttribute="width" multiplier="0.101333" id="hEF-lG-REC"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Wou-kD-fZZ" secondAttribute="trailing" constant="16" id="iEW-bV-i4B"/>
                                                         <constraint firstItem="Dow-Qp-us9" firstAttribute="top" secondItem="Ukx-xM-xXc" secondAttribute="top" id="n9c-y4-HH2"/>
+                                                        <constraint firstItem="Wou-kD-fZZ" firstAttribute="top" secondItem="Ukx-xM-xXc" secondAttribute="top" constant="16" id="uWL-of-naY"/>
                                                         <constraint firstItem="Dow-Qp-us9" firstAttribute="leading" secondItem="Ukx-xM-xXc" secondAttribute="leading" id="zYS-lS-Yhq"/>
                                                     </constraints>
                                                 </view>
@@ -87,7 +102,7 @@
                                                             </subviews>
                                                         </stackView>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstItem="blN-0G-Br9" firstAttribute="leading" secondItem="bQe-w7-Hgd" secondAttribute="leading" constant="16" id="3fn-sU-D18"/>
                                                         <constraint firstItem="blN-0G-Br9" firstAttribute="centerY" secondItem="bQe-w7-Hgd" secondAttribute="centerY" id="9gJ-Fc-Jyj"/>
@@ -117,14 +132,14 @@
                                 </cells>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="HfF-fX-CqJ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="HfF-fX-CqJ" firstAttribute="trailing" secondItem="nkg-7j-nE5" secondAttribute="trailing" id="3a7-t9-tyc"/>
                             <constraint firstItem="nkg-7j-nE5" firstAttribute="top" secondItem="HfF-fX-CqJ" secondAttribute="top" id="5qc-tm-t6J"/>
                             <constraint firstAttribute="bottom" secondItem="nkg-7j-nE5" secondAttribute="bottom" id="A1P-GD-OgL"/>
                             <constraint firstItem="nkg-7j-nE5" firstAttribute="leading" secondItem="HfF-fX-CqJ" secondAttribute="leading" id="YUe-Dp-8JU"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="HfF-fX-CqJ"/>
                     </view>
                     <connections>
                         <outlet property="photoReviewCollectionView" destination="nkg-7j-nE5" id="zZb-dJ-0Ws"/>
@@ -137,6 +152,10 @@
     </scenes>
     <resources>
         <image name="bitmap_1" width="168" height="112"/>
+        <image name="btnCancelWhite" width="38" height="38"/>
         <image name="icSmallHeart" width="16" height="14"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

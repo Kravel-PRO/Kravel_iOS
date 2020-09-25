@@ -24,6 +24,7 @@ enum APICategory<P: ParameterAble> {
     case getReview(P)
     case getPlaceReview(P)
     case postPlaceReview(P)
+    case deletePlaceReview(reviewId: P)
     case scrap(P)
     case like(P, placeId: Int, reviewId: Int)
     case getCeleb(P)
@@ -40,50 +41,50 @@ enum APICategory<P: ParameterAble> {
     
     func makeURL() -> String {
         switch self {
-        case .signin: return APICostants.signin
-        case .signup: return APICostants.signup
-        case .searchPlaceKakao: return APICostants.mapSearchURL
-        case .getPlace: return APICostants.getPlace
-        case .getSimplePlace: return APICostants.map
+        case .signin: return APIConstants.signin
+        case .signup: return APIConstants.signup
+        case .searchPlaceKakao: return APIConstants.mapSearchURL
+        case .getPlace: return APIConstants.getPlace
+        case .getSimplePlace: return APIConstants.map
         case .getPlaceOfID(let id):
             guard let id = id as? Int else { return "" }
-            APICostants.placeID = "\(id)"
-            return APICostants.getPlaceOfID
-        case .getReview: return APICostants.getReview
-        case .getPlaceReview: return APICostants.reviewOfId
-        case .postPlaceReview: return APICostants.reviewOfId
+            APIConstants.placeID = "\(id)"
+            return APIConstants.getPlaceOfID
+        case .getReview: return APIConstants.getReview
+        case .getPlaceReview: return APIConstants.reviewOfId
+        case .postPlaceReview: return APIConstants.reviewOfId
+        case .deletePlaceReview(let reviewId):
+            guard let castingReviewId = reviewId as? Int else { return APIConstants.baseURL }
+            return APIConstants.getReview + "/\(castingReviewId)"
         case .like(_, let placeId, let reviewId):
-            APICostants.placeID = "\(placeId)"
-            APICostants.reviewID = "\(reviewId)"
-            return APICostants.like
-        case .scrap: return APICostants.scrap
-        case .getCeleb: return APICostants.getCelebList
-        case .getMedia: return APICostants.getMeidaList
-        case .search: return APICostants.search
+            APIConstants.placeID = "\(placeId)"
+            APIConstants.reviewID = "\(reviewId)"
+            return APIConstants.like
+        case .scrap: return APIConstants.scrap
+        case .getCeleb: return APIConstants.getCelebList
+        case .getMedia: return APIConstants.getMeidaList
+        case .search: return APIConstants.search
         case .getCelebOfID(_, let id):
-            APICostants.celebID = "\(id)"
-            return APICostants.getDetailCeleb
+            APIConstants.celebID = "\(id)"
+            return APIConstants.getDetailCeleb
         case .getMediaOfID(_, let id):
-            APICostants.mediaID = "\(id)"
-            return APICostants.getDetailMedia
+            APIConstants.mediaID = "\(id)"
+            return APIConstants.getDetailMedia
         case .getReviewOfCeleb(_, let id):
-            APICostants.celebID = "\(id)"
-            print(APICostants.getReviewOfCeleb)
-            return APICostants.getReviewOfCeleb
+            APIConstants.celebID = "\(id)"
+            return APIConstants.getReviewOfCeleb
         case .getReviewOfMedia(_, let id):
-            APICostants.mediaID = "\(id)"
-            return APICostants.getReviewOfMedia
+            APIConstants.mediaID = "\(id)"
+            return APIConstants.getReviewOfMedia
         case .changInfo(let query, _):
-            APICostants.infoTypeQuery = query
-            print(query)
-            print(APICostants.changeInfo)
-            return APICostants.changeInfo
+            APIConstants.infoTypeQuery = query
+            return APIConstants.changeInfo
         case .getMyPhotoReview:
-            return APICostants.getMyPhotoReview
+            return APIConstants.getMyPhotoReview
         case .getMyScrap:
-            return APICostants.getMyScrap
+            return APIConstants.getMyScrap
         case .getMyInform:
-            return APICostants.getMyInform
+            return APIConstants.getMyInform
         }
     }
     
@@ -210,6 +211,8 @@ enum APICategory<P: ParameterAble> {
         case .postPlaceReview(let postReviewParameter):
             guard let postReviewParameter = postReviewParameter as? [String: Any] else { return nil }
             return postReviewParameter
+        case .deletePlaceReview:
+            return nil
         case .scrap(let scrapParameter):
             guard let scrapParameter = scrapParameter as? ScrapParameter else { return nil }
             return [

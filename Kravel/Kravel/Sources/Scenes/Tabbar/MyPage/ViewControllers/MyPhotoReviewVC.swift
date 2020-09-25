@@ -177,6 +177,25 @@ extension MyPhotoReviewVC {
             }
         }
     }
+    
+    private func requestDeletePhotoReview(reviewId: Int) {
+        NetworkHandler.shared.requestAPI(apiCategory: .deletePlaceReview(reviewId: reviewId)) { result in
+            switch result {
+            case .success(let deleteResult):
+                print(deleteResult)
+            case .requestErr: return
+            case .serverErr:
+                print("게시글 삭제 실패의 로직")
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                networkFailPopupVC.completionHandler = { [weak self] in
+                    self?.navigationController?.popViewController(animated: true)
+                }
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
+    }
 }
 
 extension MyPhotoReviewVC: UICollectionViewDataSource {
@@ -186,6 +205,8 @@ extension MyPhotoReviewVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let myPhotoReviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPhotoReviewCell.identifier, for: indexPath) as? MyPhotoReviewCell else { return UICollectionViewCell() }
+        myPhotoReviewCell.delegate = self
+        myPhotoReviewCell.indexPath = indexPath
         
         myPhotoReviewCell.photoReviewImageView.setImage(with: photoReviewData[indexPath.row].imageUrl ?? "")
         myPhotoReviewCell.locationName = photoReviewData[indexPath.row].place?.title
@@ -211,5 +232,13 @@ extension MyPhotoReviewVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
+    }
+}
+
+extension MyPhotoReviewVC: CellButtonDelegate {
+    func click(at indexPath: IndexPath) {
+        if let reviewId = photoReviewData[indexPath.row].reviewId {
+            requestDeletePhotoReview(reviewId: reviewId)
+        }
     }
 }

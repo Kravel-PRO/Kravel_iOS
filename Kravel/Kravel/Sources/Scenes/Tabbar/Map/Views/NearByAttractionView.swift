@@ -57,9 +57,9 @@ class NearByAttractionView: UIView {
         guard let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return }
         
         if language == "KOR" {
-            url = APICostants.koreaTouristURL + urlQuery
+            url = APIConstants.koreaTouristURL + urlQuery
         } else {
-            url = APICostants.engTouristURL + urlQuery
+            url = APIConstants.engTouristURL + urlQuery
         }
         
         guard let castingURL = URL(string: url) else { return }
