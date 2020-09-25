@@ -74,6 +74,8 @@ class HomeVC: UIViewController {
         didSet {
             guard let currentLocation = currentLocation else { return }
             requestClosePlaceData(lat: currentLocation.latitude, lng: currentLocation.longitude)
+            self.currentLocation = nil
+            LocationManager.shared.stopTracking()
         }
     }
     
@@ -171,6 +173,7 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        LocationManager.shared.setManager(delegate: self)
         setRefreshView()
         startIndicatorView()
         requestLocation()
@@ -248,6 +251,7 @@ class HomeVC: UIViewController {
             isRefreshComplete[0] = true
             break
         case .authorizedWhenInUse:
+            LocationManager.shared.startTracking()
             requestLocation()
         case .restricted:
             isRefreshComplete[0] = true
@@ -404,8 +408,7 @@ extension HomeVC: CLLocationManagerDelegate {
     private func requestLocation() {
         switch CLLocationManager.authorizationStatus() {
         case .authorizedWhenInUse:
-            LocationManager.shared.setManager(delegate: self)
-            LocationManager.shared.requestLocation()
+            LocationManager.shared.startTracking()
         case .authorizedAlways:
             break
         case .notDetermined:
@@ -425,14 +428,41 @@ extension HomeVC: CLLocationManagerDelegate {
         }
     }
     
+    // MARK: - 장소 받아오기
+    /*
+     장소를 받아올 때마다, 현재 장소가 저장되어 있는지 확인 후, 데이터를 리로드 할 수 있게 구현
+     장소가 이미 받아온 경우 -> return
+     장소가 nil 인 경우 -> 받아오고 가까운 장소 Reload 실행
+    */
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
         // FIXME: 이거 AppDelegate에 설정해서 앱 시작할 때 물어야할 듯 -> 시간 나면 고치기
-        guard let location = locations.first else { return }
+        guard let location = locations.first, currentLocation == nil else { return }
         currentLocation = location.coordinate
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to find User Location \(error.localizedDescription)")
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedAlways:
+            return
+        case .notDetermined:
+            currentLocation = nil
+            LocationManager.shared.stopTracking()
+            return
+        case .authorizedWhenInUse:
+            LocationManager.shared.startTracking()
+        case .restricted:
+            currentLocation = nil
+            LocationManager.shared.stopTracking()
+        case .denied:
+            currentLocation = nil
+            LocationManager.shared.stopTracking()
+        @unknown default: return
+        }
     }
 }
 
