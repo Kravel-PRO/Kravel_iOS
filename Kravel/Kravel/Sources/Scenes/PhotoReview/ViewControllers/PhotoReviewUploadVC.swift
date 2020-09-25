@@ -67,6 +67,9 @@ class PhotoReviewUploadVC: UIViewController {
         photoImageView.image = nil
         pictureDeleteButton.isHidden = true
         completeButton.isUserInteractionEnabled = false
+        
+        completeButton.backgroundColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
+        completeButton.setTitleColor(.veryLightPink, for: .normal)
     }
     
     // MARK: - 사진 업로드 버튼
@@ -145,6 +148,17 @@ class PhotoReviewUploadVC: UIViewController {
         // Do any additional setup after loading the view.
         setPickerController()
         setLabelByLanguage()
+        
+        PHPhotoLibrary.requestAuthorization { status in
+            switch status {
+            case .authorized: return
+            case .notDetermined: return
+            case .limited: return
+            case .restricted: return
+            case .denied: return
+            @unknown default: return
+            }
+        }
     }
     
     private func setLabelByLanguage() {
@@ -179,6 +193,9 @@ extension PhotoReviewUploadVC: UIImagePickerControllerDelegate, UINavigationCont
             photoImageView.image = image
             pictureDeleteButton.isHidden = false
             completeButton.isUserInteractionEnabled = true
+            
+            completeButton.backgroundColor = .grapefruit
+            completeButton.setTitleColor(.white, for: .normal)
             self.dismiss(animated: true, completion: nil)
         }
     }
