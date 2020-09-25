@@ -69,10 +69,10 @@ extension TalentChildVC: UICollectionViewDataSource {
         guard let searchCell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCell.identifier, for: indexPath) as? SearchCell else { return UICollectionViewCell() }
         searchCell.profile = talentDTO[indexPath.row].celebrityName
         searchCell.profileImageView.setImage(with: talentDTO[indexPath.row].imageUrl ?? "")
+        searchCell.yearLabel.text = nil
         
         searchCell.profileImageView.layer.cornerRadius = searchCell.frame.width/2
         searchCell.clipsToBounds = true
-        searchCell.yearLabel.text = nil
         return searchCell
     }
 }

@@ -37,6 +37,7 @@ class SearchVC: UIViewController {
     
     // 최근 검색 뷰 없앰
     @IBAction func clickBackButton(_ sender: Any) {
+        self.view.endEditing(true)
         if searchResultView.superview != nil {
             searchResultView.removeFromSuperview()
         } else {

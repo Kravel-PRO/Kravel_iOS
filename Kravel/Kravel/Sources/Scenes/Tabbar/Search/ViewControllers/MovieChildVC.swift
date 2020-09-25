@@ -27,7 +27,6 @@ class MovieChildVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-//        requestMedia()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +69,9 @@ extension MovieChildVC: UICollectionViewDataSource {
         searchCell.profile = mediaDTO[indexPath.row].title
         searchCell.year = "\(mediaDTO[indexPath.row].year)"
         searchCell.profileImageView.setImage(with: mediaDTO[indexPath.row].imageUrl ?? "")
+        
+        searchCell.profileImageView.layer.cornerRadius = searchCell.frame.width/2
+        searchCell.clipsToBounds = true
         return searchCell
     }
 }
