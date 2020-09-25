@@ -11,13 +11,7 @@ import UIKit
 class SearchCell: UICollectionViewCell {
     static let identifier = "SearchCell"
     
-    @IBOutlet weak var profileImageView: UIImageView! {
-        didSet {
-            profileImageView.layer.cornerRadius = profileImageView.frame.width/2
-            profileImageView.clipsToBounds = true
-        }
-    }
-    
+    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
     

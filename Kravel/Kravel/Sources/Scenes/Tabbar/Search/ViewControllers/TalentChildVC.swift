@@ -28,7 +28,6 @@ class TalentChildVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-//        requestCeleb()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,7 +46,6 @@ extension TalentChildVC {
             case .success(let celebResult):
                 guard let celebrities = celebResult as? [CelebrityDTO] else { return }
                 self.talentDTO = celebrities
-                print(celebrities)
                 DispatchQueue.main.async {
                     self.talentCollectionView.reloadData()
                 }
@@ -71,6 +69,9 @@ extension TalentChildVC: UICollectionViewDataSource {
         guard let searchCell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCell.identifier, for: indexPath) as? SearchCell else { return UICollectionViewCell() }
         searchCell.profile = talentDTO[indexPath.row].celebrityName
         searchCell.profileImageView.setImage(with: talentDTO[indexPath.row].imageUrl ?? "")
+        
+        searchCell.profileImageView.layer.cornerRadius = searchCell.frame.width/2
+        searchCell.clipsToBounds = true
         searchCell.yearLabel.text = nil
         return searchCell
     }
