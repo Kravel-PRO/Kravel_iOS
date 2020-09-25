@@ -39,13 +39,29 @@ class RecentResearchCell: UITableViewCell {
         }
     }
     
+    // MARK: - 삭제 배경 뷰
+    var deleteMarginView: UIView = {
+        let deleteMarginView = UIView()
+        deleteMarginView.translatesAutoresizingMaskIntoConstraints = false
+        deleteMarginView.backgroundColor = .clear
+        return deleteMarginView
+    }()
+    
     // MARK: - 삭제 표시
-    var deleteButton: UIButton = {
-        let deleteButton = UIButton()
-        deleteButton.setImage(UIImage(named: ImageKey.icbtnDelete), for: .normal)
-        deleteButton.isUserInteractionEnabled = true
-        deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        return deleteButton
+    var deleteMarginButton: UIButton = {
+        let deleteMarginButton = UIButton()
+        deleteMarginButton.backgroundColor = .clear
+        deleteMarginButton.translatesAutoresizingMaskIntoConstraints = false
+        deleteMarginButton.isUserInteractionEnabled = true
+        return deleteMarginButton
+    }()
+    
+    // MARK: - 삭제
+    var deleteImageView: UIImageView = {
+        let deleteImageView = UIImageView(image: UIImage(named: ImageKey.icbtnDelete))
+        deleteImageView.translatesAutoresizingMaskIntoConstraints = false
+        deleteImageView.contentMode = .scaleAspectFit
+        return deleteImageView
     }()
     
     // Delete 버튼 클릭했을 때, Delegate에 이벤트 전달
@@ -55,14 +71,16 @@ class RecentResearchCell: UITableViewCell {
     }
     
     private func addDeleteButtonAction() {
-        deleteButton.addTarget(self, action: #selector(deleteRecentResearch(_:)), for: .touchUpInside)
+        deleteMarginButton.addTarget(self, action: #selector(deleteRecentResearch(_:)), for: .touchUpInside)
     }
     
     // MARK: - Constraint 초기 설정
     private func addSubViews() {
         self.contentView.addSubview(searchImageView)
         self.contentView.addSubview(researchLabel)
-        self.contentView.addSubview(deleteButton)
+        self.contentView.addSubview(deleteMarginView)
+        deleteMarginView.addSubview(deleteImageView)
+        deleteMarginView.addSubview(deleteMarginButton)
     }
     
     private func setConstraint() {
@@ -73,11 +91,17 @@ class RecentResearchCell: UITableViewCell {
             searchImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18),
             researchLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             researchLabel.leadingAnchor.constraint(equalTo: searchImageView.trailingAnchor, constant: 26),
-            deleteButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            deleteButton.heightAnchor.constraint(equalTo: searchImageView.heightAnchor, multiplier: 1.3),
-            deleteButton.widthAnchor.constraint(equalTo: deleteButton.heightAnchor),
-            deleteButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18),
-            researchLabel.trailingAnchor.constraint(equalTo: deleteButton.leadingAnchor, constant: -16)
+            
+            deleteMarginView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            deleteMarginView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            deleteMarginView.heightAnchor.constraint(equalTo: self.heightAnchor),
+            deleteMarginView.widthAnchor.constraint(equalTo: deleteMarginView.heightAnchor),
+            deleteMarginButton.trailingAnchor.constraint(equalTo: deleteMarginView.trailingAnchor),
+            deleteMarginButton.leadingAnchor.constraint(equalTo: deleteMarginView.leadingAnchor),
+            deleteMarginButton.bottomAnchor.constraint(equalTo: deleteMarginView.bottomAnchor),
+            deleteMarginButton.topAnchor.constraint(equalTo: deleteMarginView.topAnchor),
+            deleteImageView.centerXAnchor.constraint(equalTo: deleteMarginView.centerXAnchor),
+            deleteImageView.centerYAnchor.constraint(equalTo: deleteMarginView.centerYAnchor)
         ])
     }
     

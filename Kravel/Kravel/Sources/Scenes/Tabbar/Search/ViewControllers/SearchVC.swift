@@ -255,6 +255,7 @@ extension SearchVC {
     // MARK: - 검색 정보 요청하는 API
     private func request(searchText: String) {
         let searchParameter = SearchParameter(search: searchText)
+        
         NetworkHandler.shared.requestAPI(apiCategory: .search(searchParameter)) { result in
             switch result {
             case .success(let searchResult):
