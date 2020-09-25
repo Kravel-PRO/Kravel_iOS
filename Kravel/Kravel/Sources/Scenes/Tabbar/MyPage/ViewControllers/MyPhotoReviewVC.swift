@@ -178,11 +178,16 @@ extension MyPhotoReviewVC {
         }
     }
     
-    private func requestDeletePhotoReview(reviewId: Int) {
+    private func requestDeletePhotoReview(reviewId: Int, at indexPath: IndexPath) {
         NetworkHandler.shared.requestAPI(apiCategory: .deletePlaceReview(reviewId: reviewId)) { result in
             switch result {
             case .success(let deleteResult):
-                print(deleteResult)
+                print("Data")
+                DispatchQueue.main.async {
+                    self.stopLottieAnimation()
+                    self.photoReviewData.remove(at: indexPath.row)
+                    self.photoReviewCollectionView.deleteItems(at: [indexPath])
+                }
             case .requestErr: return
             case .serverErr:
                 print("게시글 삭제 실패의 로직")
@@ -238,7 +243,8 @@ extension MyPhotoReviewVC: UICollectionViewDelegateFlowLayout {
 extension MyPhotoReviewVC: CellButtonDelegate {
     func click(at indexPath: IndexPath) {
         if let reviewId = photoReviewData[indexPath.row].reviewId {
-            requestDeletePhotoReview(reviewId: reviewId)
+            showLoadingLottie()
+            requestDeletePhotoReview(reviewId: reviewId, at: indexPath)
         }
     }
 }
