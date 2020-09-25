@@ -72,7 +72,7 @@ extension NearPlaceVC {
     // MARK: - 장소 데이터 API 요청
     private func requestPlaceData(lat: Double, lng: Double) {
         // FIXME: - 현재 내 위치 기준으로 요청할 수 있게 해야함
-        let getPlaceParameter = GetPlaceParameter(latitude: lat, longitude: lng, page: nil, size: nil, review_count: nil, sort: nil)
+        let getPlaceParameter = GetPlaceParameter(latitude: lat, longitude: lng, page: nil, size: 100, review_count: nil, sort: nil)
         NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
             switch result {
             case .success(let getPlaceResult):

@@ -55,7 +55,7 @@ class HomeVC: UIViewController {
     // 더 보기 버튼 클릭했을 시, 더 많은 장소 요청
     @IBAction func requstMorePlace(_ sender: Any) {
         guard let detailNearPlaceVC = UIStoryboard(name: "NearPlace", bundle: nil).instantiateViewController(withIdentifier: NearPlaceVC.identifier) as? NearPlaceVC else { return }
-        detailNearPlaceVC.currentLocation = currentLocation
+        detailNearPlaceVC.currentLocation = historyLocation
         detailNearPlaceVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(detailNearPlaceVC, animated: true)
     }
@@ -78,6 +78,8 @@ class HomeVC: UIViewController {
             LocationManager.shared.stopTracking()
         }
     }
+    
+    private var historyLocation: CLLocationCoordinate2D?
     
     // 근처 지역 데이터 보여주는 화면 데이터 있을 시, 없을 시 세팅
     private func setNearPlaceCollectionView() {
@@ -435,9 +437,8 @@ extension HomeVC: CLLocationManagerDelegate {
      장소가 nil 인 경우 -> 받아오고 가까운 장소 Reload 실행
     */
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-
-        // FIXME: 이거 AppDelegate에 설정해서 앱 시작할 때 물어야할 듯 -> 시간 나면 고치기
         guard let location = locations.first, currentLocation == nil else { return }
+        historyLocation = location.coordinate
         currentLocation = location.coordinate
     }
     
