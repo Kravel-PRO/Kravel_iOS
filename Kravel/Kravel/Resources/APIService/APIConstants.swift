@@ -65,13 +65,13 @@ struct APIConstants {
     
     static var getDetailMedia: String {
         get {
-            return APIConstants.getMeidaList + "/\(mediaID)"
+            return APIConstants.getMedias + "/\(mediaID)"
         }
     }
     
     static var getReviewOfMedia: String {
         get {
-            return APIConstants.getMeidaList + "/\(mediaID)" + "/reviews"
+            return APIConstants.getMedias + "/\(mediaID)" + "/reviews"
         }
     }
     
@@ -91,7 +91,7 @@ struct APIConstants {
     static let getCelebList = APIConstants.baseURL + "/api/celebrities"
     
     // 미디어 검색 API
-    static let getMeidaList = APIConstants.baseURL + "/api/medias"
+    static let getMedias = APIConstants.baseURL + "/api/medias"
     
     // 연예인, 미디어 검색 API
     static let search = APIConstants.baseURL + "/api/search"

@@ -342,6 +342,8 @@ class NetworkHandler {
                 switch response.result {
                 case .success(let mediaResult):
                     guard let statusCode = response.response?.statusCode else { return }
+                    print(statusCode)
+                    print(mediaResult)
                     if statusCode == 200 {
                         completion(.success(mediaResult.data?.result?.content))
                     } else {

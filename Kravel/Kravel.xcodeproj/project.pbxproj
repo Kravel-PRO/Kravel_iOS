@@ -23,6 +23,7 @@
 		9D24525C2519011800A2D958 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D24525B2519011700A2D958 /* FilterCell.swift */; };
 		9D2E26A124E935020091643E /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E26A024E935020091643E /* Language.swift */; };
 		9D2E26A324E960100091643E /* Report.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D2E26A224E960100091643E /* Report.storyboard */; };
+		9D300340252092AD00EAC348 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D30033F252092AD00EAC348 /* ToastView.swift */; };
 		9D35749224F8F13B000103E7 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D35749124F8F13B000103E7 /* MyPage.storyboard */; };
 		9D3D162B2488DA7200AE1B4C /* SetLanguageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3D162A2488DA7200AE1B4C /* SetLanguageVC.swift */; };
 		9D3D162F2488E2C700AE1B4C /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3D162E2488E2C700AE1B4C /* UIColor+Additions.swift */; };
@@ -193,6 +194,7 @@
 		9D24525B2519011700A2D958 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		9D2E26A024E935020091643E /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		9D2E26A224E960100091643E /* Report.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Report.storyboard; sourceTree = "<group>"; };
+		9D30033F252092AD00EAC348 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		9D35749124F8F13B000103E7 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		9D3D162A2488DA7200AE1B4C /* SetLanguageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLanguageVC.swift; sourceTree = "<group>"; };
 		9D3D162E2488E2C700AE1B4C /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
@@ -1074,6 +1076,7 @@
 			children = (
 				9D7FB1FF24D16AA9009A9C0A /* PlacePopupView.swift */,
 				9DBA644824F507EF00E12FA4 /* NearByAttractionView.swift */,
+				9D30033F252092AD00EAC348 /* ToastView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1539,6 +1542,7 @@
 				9DBA643724F11E6700E12FA4 /* CellButtonDelegate.swift in Sources */,
 				9D76CD8924FD7463004D7333 /* APICategory.swift in Sources */,
 				9D8EA91324E85D3600FD5059 /* LocationManager.swift in Sources */,
+				9D300340252092AD00EAC348 /* ToastView.swift in Sources */,
 				9DD7AD13250A4EC000742F25 /* RecentResearchViewDelegate.swift in Sources */,
 				9DBA642D24F0414C00E12FA4 /* RecentResearchTerm+CoreDataClass.swift in Sources */,
 				9D96007B24E5B72B007995EE /* ChangeInfoVC.swift in Sources */,

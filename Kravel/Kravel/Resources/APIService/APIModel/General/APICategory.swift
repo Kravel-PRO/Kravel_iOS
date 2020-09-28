@@ -62,7 +62,7 @@ enum APICategory<P: ParameterAble> {
             return APIConstants.like
         case .scrap: return APIConstants.scrap
         case .getCeleb: return APIConstants.getCelebList
-        case .getMedia: return APIConstants.getMeidaList
+        case .getMedia: return APIConstants.getMedias
         case .search: return APIConstants.search
         case .getCelebOfID(_, let id):
             APIConstants.celebID = "\(id)"

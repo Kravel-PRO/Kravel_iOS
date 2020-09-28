@@ -273,6 +273,21 @@ class MapVC: UIViewController {
     
     private var nearPlaceData: [PlaceContentInform] = []
     
+    // MARK: - 가까운 장소가 없다는 토스트 화면
+    private var toastView: ToastView = {
+        let toastView = ToastView()
+        toastView.translatesAutoresizingMaskIntoConstraints = false
+        toastView.toastMessage = "주위에 Kravel 장소가 없어요!\n다른 지역을 탐색해볼까요?"
+        return toastView
+    }()
+    
+    private func setToastLayout() {
+        NSLayoutConstraint.activate([
+            toastView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            toastView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+        ])
+    }
+    
     // MARK: - Floating Panel View
     lazy var placePopupView: PlacePopupView = {
         // PopupView 초기 위치 설정
@@ -413,6 +428,7 @@ class MapVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.view.addSubview(toastView)
         addObserver()
         setLocationManager()
         setMapView()
@@ -620,6 +636,7 @@ class MapVC: UIViewController {
     // MARK: - UIViewController viewDidLayoutSubviews override 부분
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        setToastLayout()
         NSLayoutConstraint.activate([
             mapView.leadingAnchor.constraint(equalTo: containerMapView.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: containerMapView.trailingAnchor),

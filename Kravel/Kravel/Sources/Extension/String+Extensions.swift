@@ -318,7 +318,7 @@ struct CustomLocalize {
                 else { return "Celebrity" }
             case .media:
                 if language == "KOR" { return "드라마/영화 별" }
-                else { return "Drame/Movie" }
+                else { return "Drama/Movie" }
             case .authorCamera:
                 if language == "KOR" { return "카메라" }
                 else { return "Camera" }

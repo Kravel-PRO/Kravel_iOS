@@ -38,6 +38,7 @@ class MovieChildVC: UIViewController {
 extension MovieChildVC {
     // MARK: - Media 요청 API
     private func requestMedia() {
+        print("requestMedia")
         let mediaRequestParameter = GetListParameter(size: 100, search: nil, page: nil)
         
         NetworkHandler.shared.requestAPI(apiCategory: .getMedia(mediaRequestParameter)) { result in
@@ -45,10 +46,13 @@ extension MovieChildVC {
             case .success(let mediaResult):
                 guard let medias = mediaResult as? [MediaDTO] else { return }
                 self.mediaDTO = medias
+                print(medias)
                 DispatchQueue.main.async {
                     self.movieCollectionView.reloadData()
                 }
-            case .requestErr: break
+            case .requestErr:
+                print("Durl?")
+                break
             case .serverErr: print("ServerErr")
             case .networkFail:
                 guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
@@ -67,7 +71,12 @@ extension MovieChildVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let searchCell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCell.identifier, for: indexPath) as? SearchCell else { return UICollectionViewCell() }
         searchCell.profile = mediaDTO[indexPath.row].title
-        searchCell.year = "\(mediaDTO[indexPath.row].year)"
+        
+        if let year = mediaDTO[indexPath.row].year {
+            searchCell.year = year
+        } else {
+            searchCell.year = nil
+        }
         searchCell.profileImageView.setImage(with: mediaDTO[indexPath.row].imageUrl ?? "")
         
         searchCell.profileImageView.layer.cornerRadius = searchCell.frame.width/2
