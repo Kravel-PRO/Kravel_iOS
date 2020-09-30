@@ -37,6 +37,21 @@ class LocationDetailVC: UIViewController {
         loadingView = nil
     }
     
+    // MARK: - 로그인 필요 서비스 팝업 화면
+    private func showRequirePopup() {
+        guard let requireLogin = UIStoryboard(name: "TwoButtonPopup", bundle: nil).instantiateViewController(withIdentifier: TwoButtonPopupVC.identifier) as? TwoButtonPopupVC else { return }
+        requireLogin.modalPresentationStyle = .overFullScreen
+        requireLogin.popupCategory = .guestMode
+        requireLogin.completion = {
+            UserDefaults.standard.removeObject(forKey: UserDefaultKey.guestMode)
+            UserDefaults.standard.removeObject(forKey: UserDefaultKey.token)
+            guard let startRootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "StartRoot") as? UINavigationController else { return }
+            guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
+            window.rootViewController = startRootVC
+        }
+        self.present(requireLogin, animated: false, completion: nil)
+    }
+    
     // MARK: - 전체 Content 나타내는 ScrollView
     @IBOutlet weak var contentScrollView: UIScrollView!
     
@@ -131,16 +146,24 @@ class LocationDetailVC: UIViewController {
     
     // 사진 화면으로 이동
     @IBAction func takePicture(_ sender: Any) {
-        guard let cameraVC = UIStoryboard(name: "Camera", bundle: nil).instantiateViewController(withIdentifier: CameraVC.identifier) as? CameraVC else { return }
-        cameraVC.hidesBottomBarWhenPushed = true
-        cameraVC.placeId = self.placeID
-        self.navigationController?.pushViewController(cameraVC, animated: true)
+        if UserDefaults.standard.object(forKey: UserDefaultKey.guestMode) != nil {
+            showRequirePopup()
+        } else {
+            guard let cameraVC = UIStoryboard(name: "Camera", bundle: nil).instantiateViewController(withIdentifier: CameraVC.identifier) as? CameraVC else { return }
+            cameraVC.hidesBottomBarWhenPushed = true
+            cameraVC.placeId = self.placeID
+            self.navigationController?.pushViewController(cameraVC, animated: true)
+        }
     }
     
     // 스크랩하기 버튼
     @IBAction func scrap(_ sender: Any) {
-        if let placeID = self.placeID {
-            requestScrap(of: placeID)
+        if UserDefaults.standard.object(forKey: UserDefaultKey.guestMode) != nil {
+            showRequirePopup()
+        } else {
+            if let placeID = self.placeID {
+                requestScrap(of: placeID)
+            }
         }
     }
     
@@ -373,17 +396,7 @@ extension LocationDetailVC {
 extension LocationDetailVC: PhotoReviewViewDelegate {
     func clickWriteButton() {
         if UserDefaults.standard.object(forKey: UserDefaultKey.guestMode) != nil {
-            guard let requireLogin = UIStoryboard(name: "TwoButtonPopup", bundle: nil).instantiateViewController(withIdentifier: TwoButtonPopupVC.identifier) as? TwoButtonPopupVC else { return }
-            requireLogin.modalPresentationStyle = .overFullScreen
-            requireLogin.popupCategory = .guestMode
-            requireLogin.completion = {
-                UserDefaults.standard.removeObject(forKey: UserDefaultKey.guestMode)
-                UserDefaults.standard.removeObject(forKey: UserDefaultKey.token)
-                guard let startRootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "StartRoot") as? UINavigationController else { return }
-                guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
-                window.rootViewController = startRootVC
-            }
-            self.present(requireLogin, animated: false, completion: nil)
+            showRequirePopup()
         } else {
             guard let photoReviewUploadVC = UIStoryboard(name: "PhotoReviewUpload", bundle: nil).instantiateViewController(withIdentifier: PhotoReviewUploadVC.identifier) as? PhotoReviewUploadVC else { return }
             photoReviewUploadVC.placeId = placeID
