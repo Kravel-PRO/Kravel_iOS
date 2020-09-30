@@ -19,6 +19,7 @@ class CustomButton: UIButton {
         case reportView
         case editPasswordView
         case logoutPopupView
+        case galleryUploadPhotoView
     }
     
     var locationButton: LocationButton? = nil {
@@ -58,6 +59,10 @@ class CustomButton: UIButton {
                     setTitleColor(.veryLightPink, for: .normal)
                     setTitleColor(.white, for: .highlighted)
                     layer.borderColor = UIColor.veryLightPink.cgColor
+                case .galleryUploadPhotoView:
+                    setTitleColor(.white, for: .normal)
+                    setTitleColor(.white, for: .highlighted)
+                    layer.borderColor = UIColor.white.cgColor
                 }
             }
         }
@@ -85,6 +90,8 @@ class CustomButton: UIButton {
                 case .logoutPopupView:
                     self.backgroundColor = isHighlighted ? .grapefruit : .white
                     layer.borderColor = isHighlighted ? UIColor.grapefruit.cgColor : UIColor.veryLightPink.cgColor
+                case .galleryUploadPhotoView:
+                    self.backgroundColor = isHighlighted ? UIColor(red: 205/255, green: 52/255, blue: 52/255, alpha: 1.0) : .grapefruit
                 }
             }
         }

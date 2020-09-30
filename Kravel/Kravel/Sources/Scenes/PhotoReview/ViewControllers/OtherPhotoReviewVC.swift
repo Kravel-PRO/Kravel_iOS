@@ -110,6 +110,7 @@ class OtherPhotoReviewVC: UIViewController {
     }
     
     private func setNav() {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.topItem?.title = ""

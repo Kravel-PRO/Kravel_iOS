@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Gallery Photo UploadVC-->
+        <scene sceneID="5H8-iP-4I3">
+            <objects>
+                <viewController storyboardIdentifier="GalleryPhotoUploadVC" id="OK0-eP-F2c" customClass="GalleryPhotoUploadVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="I8Z-YC-sm2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqp-4C-g7E" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
+                                <rect key="frame" x="44" y="698" width="287" height="56"/>
+                                <color key="backgroundColor" red="1" green="0.40392156862745099" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="yqp-4C-g7E" secondAttribute="height" multiplier="41:8" id="Wpe-ug-aBA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <state key="normal" title="리뷰 쓰기">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="upload:" destination="OK0-eP-F2c" eventType="touchUpInside" id="Z4U-6m-rKm"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3e7-7E-or1">
+                                <rect key="frame" x="0.0" y="223.66666666666663" width="375" height="375"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="3e7-7E-or1" secondAttribute="height" multiplier="1:1" id="usd-mm-eq5"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7V4-4m-04L"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7V4-4m-04L" firstAttribute="trailing" secondItem="3e7-7E-or1" secondAttribute="trailing" id="2Ud-YN-Mlx"/>
+                            <constraint firstItem="7V4-4m-04L" firstAttribute="bottom" secondItem="yqp-4C-g7E" secondAttribute="bottom" constant="24" id="Egq-AL-r0N"/>
+                            <constraint firstItem="3e7-7E-or1" firstAttribute="leading" secondItem="7V4-4m-04L" secondAttribute="leading" id="K6g-E7-CBM"/>
+                            <constraint firstItem="yqp-4C-g7E" firstAttribute="centerX" secondItem="7V4-4m-04L" secondAttribute="centerX" id="OKy-jZ-KEy"/>
+                            <constraint firstItem="3e7-7E-or1" firstAttribute="centerY" secondItem="7V4-4m-04L" secondAttribute="centerY" id="fbE-GU-dvV"/>
+                            <constraint firstItem="yqp-4C-g7E" firstAttribute="width" secondItem="I8Z-YC-sm2" secondAttribute="width" multiplier="0.765333" id="nPY-E2-2ec"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="photoImageView" destination="3e7-7E-or1" id="Q5P-y9-0lj"/>
+                        <outlet property="writeReviewButton" destination="yqp-4C-g7E" id="na3-C9-l7h"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fzt-K9-oZ6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-21" y="111"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

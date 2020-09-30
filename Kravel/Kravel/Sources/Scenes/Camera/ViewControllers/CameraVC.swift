@@ -460,6 +460,7 @@ class CameraVC: UIViewController {
     // MARK: - UIViewController viewWillAppear 설정
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.captureSession.startRunning()
         setNav()
     }
     
@@ -540,8 +541,15 @@ extension CameraVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage,
             let url = info[UIImagePickerController.InfoKey.imageURL] as? URL {
             self.dismiss(animated: true) {
-                self.presentPhotoView(image)
-                print(url)
+                
+                var selectedImage: [String: Any] = [:]
+                selectedImage.updateValue(url.lastPathComponent, forKey: ImageDictionaryKey.fileName.rawValue)
+                selectedImage.updateValue(image, forKey: ImageDictionaryKey.img.rawValue)
+                
+                guard let reviewUploadVC = UIStoryboard(name: "GalleryPhotoUpload", bundle: nil).instantiateViewController(withIdentifier: GalleryPhotoUploadVC.identifier) as? GalleryPhotoUploadVC else { return }
+                reviewUploadVC.selectedImage = selectedImage
+                reviewUploadVC.placeId = self.placeId
+                self.navigationController?.pushViewController(reviewUploadVC, animated: true)
             }
         }
     }

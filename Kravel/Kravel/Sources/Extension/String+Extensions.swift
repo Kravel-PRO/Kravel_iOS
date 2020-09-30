@@ -181,6 +181,9 @@ struct CustomLocalize {
         // MARK: - 포토 리뷰가 비었을 시
         case photoReviewEmpty = "아직 포토 리뷰가 없어요!\n멋진 인증샷을 기다려볼까요?"
         
+        // MARK: - 리뷰 쓰기
+        case writeReview
+        
         func localize() -> String {
             guard let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return self.rawValue }
             switch self {
@@ -454,6 +457,9 @@ struct CustomLocalize {
             case .photoReviewEmpty:
                 if language == "KOR" { return "아직 포토 리뷰가 없어요!\n멋진 인증샷을 기다려볼까요?" }
                 else { return "There's no photo review yet!\n Let's wait for a nice snapshot." }
+            case .writeReview:
+                if language == "KOR" { return "리뷰 쓰기" }
+                else { return "Write review" }
             }
         }
     }
