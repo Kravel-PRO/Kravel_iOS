@@ -52,8 +52,8 @@
 		9D61F6E224F7E97600EF13FB /* LoginTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D61F6E124F7E97600EF13FB /* LoginTextViewDelegate.swift */; };
 		9D61F6E424F7E99F00EF13FB /* PhotoReviewViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D61F6E324F7E99F00EF13FB /* PhotoReviewViewDelegate.swift */; };
 		9D61F6E624F7F2A900EF13FB /* RealEditPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D61F6E524F7F2A900EF13FB /* RealEditPasswordVC.swift */; };
-		9D61F6E824F81D5500EF13FB /* LogoutPopup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D61F6E724F81D5500EF13FB /* LogoutPopup.storyboard */; };
-		9D61F6EA24F81D7200EF13FB /* LogoutPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D61F6E924F81D7200EF13FB /* LogoutPopupVC.swift */; };
+		9D61F6E824F81D5500EF13FB /* TwoButtonPopup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D61F6E724F81D5500EF13FB /* TwoButtonPopup.storyboard */; };
+		9D61F6EA24F81D7200EF13FB /* TwoButtonPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D61F6E924F81D7200EF13FB /* TwoButtonPopupVC.swift */; };
 		9D6FF35324F91B3500E6A8B9 /* LoginPopup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D6FF35224F91B3500E6A8B9 /* LoginPopup.storyboard */; };
 		9D6FF35524F91B4400E6A8B9 /* LoginPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6FF35424F91B4400E6A8B9 /* LoginPopupVC.swift */; };
 		9D6FF35724F9773200E6A8B9 /* MyPhotoReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6FF35624F9773200E6A8B9 /* MyPhotoReviewCell.swift */; };
@@ -225,8 +225,8 @@
 		9D61F6E124F7E97600EF13FB /* LoginTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextViewDelegate.swift; sourceTree = "<group>"; };
 		9D61F6E324F7E99F00EF13FB /* PhotoReviewViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoReviewViewDelegate.swift; sourceTree = "<group>"; };
 		9D61F6E524F7F2A900EF13FB /* RealEditPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealEditPasswordVC.swift; sourceTree = "<group>"; };
-		9D61F6E724F81D5500EF13FB /* LogoutPopup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LogoutPopup.storyboard; sourceTree = "<group>"; };
-		9D61F6E924F81D7200EF13FB /* LogoutPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutPopupVC.swift; sourceTree = "<group>"; };
+		9D61F6E724F81D5500EF13FB /* TwoButtonPopup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TwoButtonPopup.storyboard; sourceTree = "<group>"; };
+		9D61F6E924F81D7200EF13FB /* TwoButtonPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoButtonPopupVC.swift; sourceTree = "<group>"; };
 		9D6FF35224F91B3500E6A8B9 /* LoginPopup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginPopup.storyboard; sourceTree = "<group>"; };
 		9D6FF35424F91B4400E6A8B9 /* LoginPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPopupVC.swift; sourceTree = "<group>"; };
 		9D6FF35624F9773200E6A8B9 /* MyPhotoReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPhotoReviewCell.swift; sourceTree = "<group>"; };
@@ -532,6 +532,7 @@
 				9D79E2A424ED02D1006310A2 /* MorePhotoReviewVC.swift */,
 				9D4CCF7224FFFD6F003F73AF /* NetworkFailPopupVC.swift */,
 				9DD7AD102507BE8700742F25 /* AuthorizationPopupVC.swift */,
+				9D61F6E924F81D7200EF13FB /* TwoButtonPopupVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -898,6 +899,7 @@
 				9D79E2A624ED02FA006310A2 /* MorePhotoReview.storyboard */,
 				9D4CCF7024FFFD55003F73AF /* NetworkFailPopup.storyboard */,
 				9DD7AD0E2507BE6D00742F25 /* AuthorizationPopup.storyboard */,
+				9D61F6E724F81D5500EF13FB /* TwoButtonPopup.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1155,7 +1157,6 @@
 				9D61F6E524F7F2A900EF13FB /* RealEditPasswordVC.swift */,
 				9D76CD9124FDA268004D7333 /* ReportVC.swift */,
 				9D76CD9524FE9945004D7333 /* SearchAddressVC.swift */,
-				9D61F6E924F81D7200EF13FB /* LogoutPopupVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1177,7 +1178,6 @@
 				9D61F6DD24F7AAAF00EF13FB /* EditPassword.storyboard */,
 				9D2E26A224E960100091643E /* Report.storyboard */,
 				9D76CD9324FE992F004D7333 /* SearchAddress.storyboard */,
-				9D61F6E724F81D5500EF13FB /* LogoutPopup.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1334,7 +1334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D8C0A2524BC515A005C1F58 /* Tabbar.storyboard in Resources */,
-				9D61F6E824F81D5500EF13FB /* LogoutPopup.storyboard in Resources */,
+				9D61F6E824F81D5500EF13FB /* TwoButtonPopup.storyboard in Resources */,
 				9D13C7F9248784330058A7BF /* LaunchScreen.storyboard in Resources */,
 				9D57B10A251A860900BC192B /* MorePlace.storyboard in Resources */,
 				9D96007924E5B6FE007995EE /* ChangeInfo.storyboard in Resources */,
@@ -1516,7 +1516,7 @@
 				9D76CD9024FD8D90004D7333 /* UserDefaultKey.swift in Sources */,
 				9DEDA6AC24BCB76E00E978F5 /* CategoryTabbar.swift in Sources */,
 				9DD48BB32504C5590096DE08 /* GetSimplePlaceResponseData.swift in Sources */,
-				9D61F6EA24F81D7200EF13FB /* LogoutPopupVC.swift in Sources */,
+				9D61F6EA24F81D7200EF13FB /* TwoButtonPopupVC.swift in Sources */,
 				9DD48BBE250512AB0096DE08 /* CelebrityDTO.swift in Sources */,
 				9D57B105251A703500BC192B /* LottieFile.swift in Sources */,
 				9D9694D624C6D4810046CB85 /* MapVC.swift in Sources */,

@@ -199,8 +199,20 @@ extension MyPageVC: UITableViewDelegate {
     
     // 로그아웃 선택
     private func presentLogoutAlertView() {
-        guard let logout = UIStoryboard(name: "LogoutPopup", bundle: nil).instantiateViewController(withIdentifier: LogoutPopupVC.identifier) as? LogoutPopupVC else { return }
+        guard let logout = UIStoryboard(name: "TwoButtonPopup", bundle: nil).instantiateViewController(withIdentifier: TwoButtonPopupVC.identifier) as? TwoButtonPopupVC else { return }
         logout.modalPresentationStyle = .overFullScreen
+        logout.popupCategory = .logout
+        logout.completion = {
+            UserDefaults.standard.removeObject(forKey: UserDefaultKey.token)
+            guard let startRootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "StartRoot") as? UINavigationController else { return }
+            guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
+            UserDefaults.standard.removeObject(forKey: UserDefaultKey.loginId)
+            UserDefaults.standard.removeObject(forKey: UserDefaultKey.loginPw)
+            UserDefaults.standard.removeObject(forKey: UserDefaultKey.token)
+            window.rootViewController = startRootVC
+        }
+        
+        
         self.present(logout, animated: false, completion: nil)
     }
 }

@@ -243,8 +243,15 @@ extension MyPhotoReviewVC: UICollectionViewDelegateFlowLayout {
 extension MyPhotoReviewVC: CellButtonDelegate {
     func click(at indexPath: IndexPath) {
         if let reviewId = photoReviewData[indexPath.row].reviewId {
-            showLoadingLottie()
-            requestDeletePhotoReview(reviewId: reviewId, at: indexPath)
+            guard let deletePopup = UIStoryboard(name: "TwoButtonPopup", bundle: nil).instantiateViewController(withIdentifier: TwoButtonPopupVC.identifier) as? TwoButtonPopupVC else { return }
+            deletePopup.modalPresentationStyle = .overFullScreen
+            deletePopup.popupCategory = .deleteReview
+            deletePopup.completion = {
+                self.showLoadingLottie()
+                self.requestDeletePhotoReview(reviewId: reviewId, at: indexPath)
+            }
+            
+            self.present(deletePopup, animated: false, completion: nil)
         }
     }
 }

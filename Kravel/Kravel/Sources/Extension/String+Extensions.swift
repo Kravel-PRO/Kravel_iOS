@@ -182,7 +182,9 @@ struct CustomLocalize {
         case photoReviewEmpty = "아직 포토 리뷰가 없어요!\n멋진 인증샷을 기다려볼까요?"
         
         // MARK: - 리뷰 쓰기
-        case writeReview
+        case writeReview = "리뷰 쓰기"
+        case deleteReviewPopup = "정말 삭제하시겠습니까?"
+        case delete = "삭제"
         
         func localize() -> String {
             guard let language = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return self.rawValue }
@@ -460,6 +462,12 @@ struct CustomLocalize {
             case .writeReview:
                 if language == "KOR" { return "리뷰 쓰기" }
                 else { return "Write review" }
+            case .deleteReviewPopup:
+                if language == "KOR" { return "정말 삭제하시겠습니까?" }
+                else { return "Are you sure you want to delete it?" }
+            case .delete:
+                if language == "KOR" { return "삭제" }
+                else { return "Delete" }
             }
         }
     }

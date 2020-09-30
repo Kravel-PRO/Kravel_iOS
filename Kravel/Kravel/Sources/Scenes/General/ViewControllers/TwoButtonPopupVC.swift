@@ -8,8 +8,19 @@
 
 import UIKit
 
-class LogoutPopupVC: UIViewController {
-    static let identifier = "LogoutPopupVC"
+class TwoButtonPopupVC: UIViewController {
+    static let identifier = "TwoButtonPopupVC"
+    
+    enum PopupCategory {
+        case logout
+        case deleteReview
+    }
+    
+    var popupCategory: PopupCategory?
+    
+    // MARK: - 확인 버튼 눌렀을 때, 일어날 액션
+    var completion: (() -> Void)?
+    
 
     // MARK: - 팝업 배경 뷰 설정
     @IBOutlet weak var popupView: UIView! {
@@ -70,13 +81,9 @@ class LogoutPopupVC: UIViewController {
     
     // 로그 아웃 - Token 값 삭제, 초기 화면으로 돌아가기
     @IBAction func logout(_ sender: Any) {
-        UserDefaults.standard.removeObject(forKey: UserDefaultKey.token)
-        guard let startRootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "StartRoot") as? UINavigationController else { return }
-        guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
-        UserDefaults.standard.removeObject(forKey: UserDefaultKey.loginId)
-        UserDefaults.standard.removeObject(forKey: UserDefaultKey.loginPw)
-        UserDefaults.standard.removeObject(forKey: UserDefaultKey.token)
-        window.rootViewController = startRootVC
+        self.dismiss(animated: false) {
+            self.completion?()
+        }
     }
     
     // MARK: UIViewController viewDidLoad() override 설정
@@ -87,9 +94,18 @@ class LogoutPopupVC: UIViewController {
     }
     
     private func setLabelByLanguage() {
-        popupLabel.text = "정말 로그아웃 하시겠습니까?".localized
-        buttons[0].setTitle("취소".localized, for: .normal)
-        buttons[1].setTitle("로그아웃".localized, for: .normal)
+        switch popupCategory {
+        case .logout:
+            popupLabel.text = "정말 로그아웃 하시겠습니까?".localized
+            buttons[0].setTitle("취소".localized, for: .normal)
+            buttons[1].setTitle("로그아웃".localized, for: .normal)
+        case .deleteReview:
+            popupLabel.text = "정말 삭제하시겠습니까?".localized
+            buttons[0].setTitle("취소".localized, for: .normal)
+            buttons[1].setTitle("삭제".localized, for: .normal)
+        case .none:
+            return
+        }
     }
     
     // MARK: UIViewController viewDidLayoutSubviews() override 설정
