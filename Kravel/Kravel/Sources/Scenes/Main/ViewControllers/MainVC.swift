@@ -16,6 +16,15 @@ class MainVC: UIViewController {
     // MARK: - 게스트 모드 로그인 설정
     @IBOutlet weak var guestSigninButton: UIButton!
     
+    @IBAction func signinGuestMode(_ sender: Any) {
+        // FIXME: 여기서 게스트모드용 Token 발급 필요
+        UserDefaults.standard.setValue(true, forKey: UserDefaultKey.guestMode)
+        
+        guard let mainTabVC = UIStoryboard(name: "Tabbar", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as? UITabBarController else { return }
+        mainTabVC.modalPresentationStyle = .fullScreen
+        self.present(mainTabVC, animated: true, completion: nil)
+    }
+    
     // MARK: - 초기 화면 로그인 버튼 설정
     @IBOutlet weak var signinButton: UIButton! {
         willSet {

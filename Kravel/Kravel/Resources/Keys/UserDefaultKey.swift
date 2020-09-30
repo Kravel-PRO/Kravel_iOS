@@ -21,4 +21,7 @@ struct UserDefaultKey {
     // 로그인 ID, PW
     static let loginId = "loginId"
     static let loginPw = "loginPw"
+    
+    // 게스트 모드인지 확인
+    static let guestMode = "geustmode"
 }

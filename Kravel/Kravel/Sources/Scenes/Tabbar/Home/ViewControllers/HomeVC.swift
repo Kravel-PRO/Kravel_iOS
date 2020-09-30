@@ -307,6 +307,7 @@ class HomeVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setPhotoReviewViewLayout()
+        setHotPlaceCollectionViewHeight()
     }
 }
 
@@ -385,9 +386,20 @@ extension HomeVC {
                 }
             case .requestErr(let errorMessage):
                 print(errorMessage)
+                self.hotPlaceData = []
+                DispatchQueue.main.async {
+                    self.setHotPlaceCollectionViewHeight()
+                }
             case .serverErr:
-                print("ServerError")
+                self.hotPlaceData = []
+                DispatchQueue.main.async {
+                    self.setHotPlaceCollectionViewHeight()
+                }
             case .networkFail:
+                self.hotPlaceData = []
+                DispatchQueue.main.async {
+                    self.setHotPlaceCollectionViewHeight()
+                }
                 guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
                 networkFailPopupVC.modalPresentationStyle = .overFullScreen
                 self.present(networkFailPopupVC, animated: false, completion: nil)
@@ -409,11 +421,21 @@ extension HomeVC {
                     self.setPhotoReviewViewLayout()
                     self.photoReviewView.photoReviewCollectionView.reloadData()
                 }
-            case .requestErr(let errorMessage):
-                print(errorMessage)
+            case .requestErr:
+                self.photoReviewData = []
+                DispatchQueue.main.async {
+                    self.setPhotoReviewViewLayout()
+                }
             case .serverErr:
-                print("ServerError")
+                self.photoReviewData = []
+                DispatchQueue.main.async {
+                    self.setPhotoReviewViewLayout()
+                }
             case .networkFail:
+                self.photoReviewData = []
+                DispatchQueue.main.async {
+                    self.setPhotoReviewViewLayout()
+                }
                 guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
                 networkFailPopupVC.modalPresentationStyle = .overFullScreen
                 self.present(networkFailPopupVC, animated: false, completion: nil)

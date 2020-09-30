@@ -70,6 +70,9 @@
                                                 <state key="normal" title="게스트 모드로 로그인">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="signinGuestMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="46Z-Zs-A64"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
