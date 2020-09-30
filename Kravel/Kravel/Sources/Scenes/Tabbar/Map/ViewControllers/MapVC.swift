@@ -149,7 +149,11 @@ class MapVC: UIViewController {
             break
         case .authorizedWhenInUse:
             let cameraPosition = mapView.cameraPosition.target
-            requestClosePlaceData(latitude: cameraPosition.lat, longitude: cameraPosition.lng)
+            requestClosePlaceData(latitude: cameraPosition.lat, longitude: cameraPosition.lng) {
+                if self.nearPlaceData.count == 0 {
+                    self.toastView.show()
+                }
+            }
         case .notDetermined:
             deniedAuthor()
         case .restricted:
@@ -277,6 +281,7 @@ class MapVC: UIViewController {
     private var toastView: ToastView = {
         let toastView = ToastView()
         toastView.translatesAutoresizingMaskIntoConstraints = false
+        toastView.isHidden = true
         toastView.toastMessage = "주위에 Kravel 장소가 없어요!\n다른 지역을 탐색해볼까요?"
         return toastView
     }()
@@ -477,7 +482,7 @@ class MapVC: UIViewController {
     }
     
     // MARK: - 지도 표시 위한 장소 가져오는 API 요청
-    private func requestClosePlaceData(latitude: Double, longitude: Double) {
+    private func requestClosePlaceData(latitude: Double, longitude: Double, completion: (() -> Void)? = nil) {
         let getPlaceParameter = GetPlaceParameter(latitude: latitude, longitude: longitude, page: nil, size: 10, review_count: nil, sort: nil)
         
         NetworkHandler.shared.requestAPI(apiCategory: .getPlace(getPlaceParameter)) { result in
@@ -493,6 +498,7 @@ class MapVC: UIViewController {
                 }
                                 
                 self.nearPlaceData = getPlaceResult.content
+                completion?()
                 
                 let selectedMarkers = self.markers.filter({$0.userInfo["isTouch"] as! Bool})
                 

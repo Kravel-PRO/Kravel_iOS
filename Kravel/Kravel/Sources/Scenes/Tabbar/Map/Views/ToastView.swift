@@ -14,6 +14,7 @@ class ToastView: UIView {
         let toastLabel = UILabel()
         toastLabel.font = UIFont.systemFont(ofSize: 12)
         toastLabel.numberOfLines = 0
+        toastLabel.textColor = .white
         toastLabel.textAlignment = .center
         toastLabel.translatesAutoresizingMaskIntoConstraints = false
         return toastLabel
@@ -24,6 +25,9 @@ class ToastView: UIView {
         didSet {
             toastLabel.text = toastMessage
             toastLabel.sizeToFit()
+            
+            let cornerRadius = toastLabel.intrinsicContentSize.width + 8 * 2
+            self.layer.cornerRadius = cornerRadius / 8.55
         }
     }
     
@@ -31,16 +35,23 @@ class ToastView: UIView {
     func show() {
         self.isHidden = false
         UIView.animate(withDuration: 0.3) {
-            self.layoutIfNeeded()
+            self.alpha = 1.0
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()+2) {
+            self.hide()
         }
     }
     
     // MARK: - 숨기기
     func hide() {
-        self.isHidden = true
-        UIView.animate(withDuration: 0.3) {
-            self.layoutIfNeeded()
-        }
+        UIView.animate(withDuration: 0.3, animations: {
+            self.alpha = 0
+        }, completion: { isCompletion in
+            if isCompletion {
+                self.isHidden = true
+            }
+        })
     }
 
     // MARK: - UIView Override
@@ -49,7 +60,6 @@ class ToastView: UIView {
         self.addSubview(toastLabel)
         setLayout()
         self.backgroundColor = UIColor(red: 104/255, green: 100/255, blue: 100/255, alpha: 0.84)
-        self.layer.cornerRadius = frame.width / 8.55
         self.clipsToBounds = true
     }
     
@@ -58,7 +68,6 @@ class ToastView: UIView {
         self.addSubview(toastLabel)
         setLayout()
         self.backgroundColor = UIColor(red: 104/255, green: 100/255, blue: 100/255, alpha: 0.84)
-        self.layer.cornerRadius = frame.width / 8.55
         self.clipsToBounds = true
     }
     
