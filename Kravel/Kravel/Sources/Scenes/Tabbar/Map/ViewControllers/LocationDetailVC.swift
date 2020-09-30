@@ -373,7 +373,17 @@ extension LocationDetailVC {
 extension LocationDetailVC: PhotoReviewViewDelegate {
     func clickWriteButton() {
         if UserDefaults.standard.object(forKey: UserDefaultKey.guestMode) != nil {
-            
+            guard let requireLogin = UIStoryboard(name: "TwoButtonPopup", bundle: nil).instantiateViewController(withIdentifier: TwoButtonPopupVC.identifier) as? TwoButtonPopupVC else { return }
+            requireLogin.modalPresentationStyle = .overFullScreen
+            requireLogin.popupCategory = .guestMode
+            requireLogin.completion = {
+                UserDefaults.standard.removeObject(forKey: UserDefaultKey.guestMode)
+                UserDefaults.standard.removeObject(forKey: UserDefaultKey.token)
+                guard let startRootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "StartRoot") as? UINavigationController else { return }
+                guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
+                window.rootViewController = startRootVC
+            }
+            self.present(requireLogin, animated: false, completion: nil)
         } else {
             guard let photoReviewUploadVC = UIStoryboard(name: "PhotoReviewUpload", bundle: nil).instantiateViewController(withIdentifier: PhotoReviewUploadVC.identifier) as? PhotoReviewUploadVC else { return }
             photoReviewUploadVC.placeId = placeID

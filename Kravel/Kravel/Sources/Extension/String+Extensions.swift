@@ -36,6 +36,10 @@ struct CustomLocalize {
     enum LocalKey: String {
         case morePlace = "장소 더 보기"
         
+        // MARK: - 로그인 필요 서비스 팝업
+        case requireLoginTitle = "로그인이 필요한 서비스입니다."
+        case requireLoginMessage = "로그인을 해주세요!"
+        
         // MARK: - 주변 장소 없음 Toast 화면
         case notExistClosePlace = "주위에 Kravel 장소가 없어요!\n다른 지역을 탐색해볼까요?"
         
@@ -196,6 +200,12 @@ struct CustomLocalize {
             case .morePlace:
                 if language == "KOR" { return "장소 더 보기" }
                 else { return "More Place" }
+            case .requireLoginTitle:
+                if language == "KOR" { return "로그인이 필요한 서비스입니다." }
+                else { return "This service requires login." }
+            case .requireLoginMessage:
+                if language == "KOR" { return "로그인을 해주세요!" }
+                else { return "Please log in!" }
             case .notExistClosePlace:
                 if language == "KOR" { return "주위에 Kravel 장소가 없어요!\n다른 지역을 탐색해볼까요?" }
                 else { return "There's no place for Kravel around!\nLet's explore a different area" }

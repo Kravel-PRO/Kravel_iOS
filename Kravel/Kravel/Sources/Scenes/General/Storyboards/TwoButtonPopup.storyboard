@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M4F-0r-xk5">
-                                <rect key="frame" x="30" y="326.66666666666669" width="315" height="169"/>
+                                <rect key="frame" x="30" y="309" width="315" height="204"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icLogoutPopup" translatesAutoresizingMaskIntoConstraints="NO" id="nXf-gN-38E">
                                         <rect key="frame" x="107.66666666666666" y="-50" width="100" height="75"/>
@@ -27,7 +27,7 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="0pu-jI-n3L">
-                                        <rect key="frame" x="16" y="102" width="283" height="50"/>
+                                        <rect key="frame" x="16" y="137" width="283" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQK-6F-K8u" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="136" height="50"/>
@@ -54,24 +54,35 @@
                                             <constraint firstAttribute="width" secondItem="0pu-jI-n3L" secondAttribute="height" multiplier="283:50" id="Yrq-Re-9mB"/>
                                         </constraints>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="정말 로그아웃 하시겠습니까?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRm-JR-Rmy">
-                                        <rect key="frame" x="66.333333333333329" y="56.000000000000007" width="182.66666666666669" height="19.333333333333336"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="gSs-cv-edU">
+                                        <rect key="frame" x="132.66666666666666" y="56" width="50" height="54"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1t-uv-6U0">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <color key="textColor" red="1" green="0.40392156862745099" blue="0.38039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRm-JR-Rmy">
+                                                <rect key="frame" x="0.0" y="54" width="50" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="gSs-cv-edU" firstAttribute="top" secondItem="M4F-0r-xk5" secondAttribute="top" constant="56" id="1ja-mn-Akd"/>
                                     <constraint firstItem="nXf-gN-38E" firstAttribute="centerX" secondItem="M4F-0r-xk5" secondAttribute="centerX" id="Fqg-MR-mfH"/>
                                     <constraint firstItem="0pu-jI-n3L" firstAttribute="leading" secondItem="M4F-0r-xk5" secondAttribute="leading" constant="16" id="JwV-uj-gsb"/>
                                     <constraint firstAttribute="bottom" secondItem="0pu-jI-n3L" secondAttribute="bottom" constant="17" id="MXm-7L-08i"/>
+                                    <constraint firstItem="gSs-cv-edU" firstAttribute="centerX" secondItem="M4F-0r-xk5" secondAttribute="centerX" id="QrL-8U-ZXW"/>
                                     <constraint firstAttribute="trailing" secondItem="0pu-jI-n3L" secondAttribute="trailing" constant="16" id="g0o-Rg-0t0"/>
                                     <constraint firstItem="nXf-gN-38E" firstAttribute="top" secondItem="M4F-0r-xk5" secondAttribute="top" constant="-50" id="hgK-VB-MlO"/>
                                     <constraint firstItem="nXf-gN-38E" firstAttribute="width" secondItem="M4F-0r-xk5" secondAttribute="width" multiplier="0.31746" id="iQP-fR-kmR"/>
-                                    <constraint firstItem="kRm-JR-Rmy" firstAttribute="top" secondItem="M4F-0r-xk5" secondAttribute="top" constant="56" id="mpM-52-mS4"/>
-                                    <constraint firstAttribute="width" secondItem="M4F-0r-xk5" secondAttribute="height" multiplier="315:169" id="mtP-Lq-mBK"/>
-                                    <constraint firstItem="kRm-JR-Rmy" firstAttribute="centerX" secondItem="M4F-0r-xk5" secondAttribute="centerX" id="n3a-b7-sOS"/>
+                                    <constraint firstItem="0pu-jI-n3L" firstAttribute="top" secondItem="gSs-cv-edU" secondAttribute="bottom" constant="27" id="w9c-lY-hxX"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -86,7 +97,8 @@
                     <connections>
                         <outlet property="icTopConstraint" destination="hgK-VB-MlO" id="3OJ-pc-jaG"/>
                         <outlet property="popupLabel" destination="kRm-JR-Rmy" id="y0V-9i-ouD"/>
-                        <outlet property="popupLabelTopConstraint" destination="mpM-52-mS4" id="V0g-9w-X5P"/>
+                        <outlet property="popupLabelTopConstraint" destination="1ja-mn-Akd" id="pdo-ZI-mLC"/>
+                        <outlet property="popupTitleLabel" destination="r1t-uv-6U0" id="MCb-GE-5Rt"/>
                         <outlet property="popupView" destination="M4F-0r-xk5" id="h96-9V-dUq"/>
                         <outletCollection property="buttons" destination="gQK-6F-K8u" collectionClass="NSMutableArray" id="CqD-KG-mB9"/>
                         <outletCollection property="buttons" destination="18G-Wi-iIv" collectionClass="NSMutableArray" id="6jK-15-DLv"/>

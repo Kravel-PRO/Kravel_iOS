@@ -14,6 +14,7 @@ class TwoButtonPopupVC: UIViewController {
     enum PopupCategory {
         case logout
         case deleteReview
+        case guestMode
     }
     
     var popupCategory: PopupCategory?
@@ -40,16 +41,11 @@ class TwoButtonPopupVC: UIViewController {
         popupView.layer.cornerRadius = popupView.frame.width / 17
     }
     
+    // MARK: - 팝업 뷰 타이틀 라벨 설정
+    @IBOutlet weak var popupTitleLabel: UILabel!
+    
     // MARK: - 팝업 뷰 라벨 설정
     @IBOutlet weak var popupLabel: UILabel!
-    
-    // 팜업 뷰 라벨 이름
-    var popupDesctiption: String? {
-        didSet {
-            popupLabel.text = popupDesctiption
-            popupLabel.sizeToFit()
-        }
-    }
     
     // 팝업 뷰 라벨의 Top Constraint
     @IBOutlet weak var popupLabelTopConstraint: NSLayoutConstraint!
@@ -103,6 +99,11 @@ class TwoButtonPopupVC: UIViewController {
             popupLabel.text = "정말 삭제하시겠습니까?".localized
             buttons[0].setTitle("취소".localized, for: .normal)
             buttons[1].setTitle("삭제".localized, for: .normal)
+        case .guestMode:
+            popupTitleLabel.text = "로그인이 필요한 서비스입니다.".localized
+            popupLabel.text = "로그인을 해주세요!".localized
+            buttons[0].setTitle("취소".localized, for: .normal)
+            buttons[1].setTitle("로그인 하기".localized, for: .normal)
         case .none:
             return
         }
