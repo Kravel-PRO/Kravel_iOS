@@ -282,7 +282,7 @@ class MapVC: UIViewController {
         let toastView = ToastView()
         toastView.translatesAutoresizingMaskIntoConstraints = false
         toastView.isHidden = true
-        toastView.toastMessage = "주위에 Kravel 장소가 없어요!\n다른 지역을 탐색해볼까요?"
+        toastView.toastMessage = "주위에 Kravel 장소가 없어요!\n다른 지역을 탐색해볼까요?".localized
         return toastView
     }()
     
@@ -656,6 +656,7 @@ extension MapVC {
     private func addObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(scrollDownView(_:)), name: .dismissDetailView, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadPhotoReview), name: .completeUpload, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setLabelByLanguage), name: .changeLanguage, object: nil)
     }
     
     @objc func scrollDownView(_ notification: NSNotification) {
@@ -676,6 +677,10 @@ extension MapVC {
     
     @objc func reloadPhotoReview() {
         if let selectedPlace = self.selectedPlace { self.requestPhotoReview(of: selectedPlace.placeId) }
+    }
+    
+    @objc func setLabelByLanguage() {
+        toastView.toastMessage = "주위에 Kravel 장소가 없어요!\n다른 지역을 탐색해볼까요?".localized
     }
 }
 

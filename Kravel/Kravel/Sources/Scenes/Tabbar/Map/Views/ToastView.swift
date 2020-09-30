@@ -27,7 +27,7 @@ class ToastView: UIView {
             toastLabel.sizeToFit()
             
             let cornerRadius = toastLabel.intrinsicContentSize.width + 8 * 2
-            self.layer.cornerRadius = cornerRadius / 8.55
+            self.layer.cornerRadius = cornerRadius / 9.5
         }
     }
     
