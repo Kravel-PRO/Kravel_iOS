@@ -13,11 +13,15 @@ class MainVC: UIViewController {
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var logoTopConstraint: NSLayoutConstraint!
     
+    // MARK: - 게스트 모드 로그인 설정
+    @IBOutlet weak var guestSigninButton: UIButton!
+    
     // MARK: - 초기 화면 로그인 버튼 설정
     @IBOutlet weak var signinButton: UIButton! {
         willSet {
             guard let signinButton = newValue as? CustomButton else { return }
             signinButton.locationButton = .initView
+            signinButton.layer.cornerRadius = signinButton.frame.width / 10.25
         }
     }
     
@@ -26,6 +30,7 @@ class MainVC: UIViewController {
         willSet {
             guard let signupButton = newValue as? CustomButton else { return }
             signupButton.locationButton = .initView
+            signupButton.layer.cornerRadius = signupButton.frame.width / 10.25
         }
     }
     
@@ -56,6 +61,7 @@ class MainVC: UIViewController {
             if isToggle {
                 signupButton.alpha = 0
                 signinButton.alpha = 0
+                guestSigninButton.alpha = 0
                 titleLabel.transform = CGAffineTransform(translationX: 0, y: 50)
                 backViewBottomConstraint.constant = loginTextView.frame.height - (loginTextView.frame.height/2)
                 loginTextViewTopConstraint.constant = -loginTextView.frame.height/2
@@ -84,6 +90,7 @@ class MainVC: UIViewController {
                     self.signupButton.transform = .identity
                     self.signinButton.alpha = 1
                     self.signupButton.alpha = 1
+                    self.guestSigninButton.alpha = 1
                 }
             }
         }
@@ -100,6 +107,7 @@ class MainVC: UIViewController {
     private func setTextByLanguage() {
         signinButton.setTitle("로그인 하기".localized, for: .normal)
         signupButton.setTitle("회원가입 하기".localized, for: .normal)
+        guestSigninButton.setTitle("게스트 모드로 로그인".localized, for: .normal)
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 10

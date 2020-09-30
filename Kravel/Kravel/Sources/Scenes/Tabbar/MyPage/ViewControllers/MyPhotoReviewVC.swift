@@ -182,7 +182,6 @@ extension MyPhotoReviewVC {
         NetworkHandler.shared.requestAPI(apiCategory: .deletePlaceReview(reviewId: reviewId)) { result in
             switch result {
             case .success(let deleteResult):
-                print(deleteResult)
                 DispatchQueue.main.async {
                     self.stopLottieAnimation()
                     self.photoReviewData.remove(at: indexPath.row)

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,26 +23,6 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgSign" translatesAutoresizingMaskIntoConstraints="NO" id="Xfj-qW-ukN">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tXi-2Z-Ntg" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
-                                        <rect key="frame" x="44" y="690" width="287" height="56"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="tXi-2Z-Ntg" secondAttribute="height" multiplier="41:8" id="AHm-RX-GL4"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                        <state key="normal">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="goSignupView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qf9-EW-1wJ"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgF-fF-zpJ" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
-                                        <rect key="frame" x="44" y="618" width="287" height="56"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                        <connections>
-                                            <action selector="clickLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dlL-01-Fc5"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Xf-q2-WmO">
                                         <rect key="frame" x="16" y="174" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
@@ -53,32 +35,67 @@
                                             <constraint firstAttribute="width" secondItem="kQ9-u7-sYv" secondAttribute="height" multiplier="15:14" id="Ezf-fq-1fq"/>
                                         </constraints>
                                     </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="DMf-AC-cKg">
+                                        <rect key="frame" x="59.666666666666657" y="546" width="255.99999999999997" height="200"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgF-fF-zpJ" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="256" height="56"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="NgF-fF-zpJ" secondAttribute="height" multiplier="32:7" id="ebx-tn-O7u"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <connections>
+                                                    <action selector="clickLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dlL-01-Fc5"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tXi-2Z-Ntg" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="72" width="256" height="56"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="tXi-2Z-Ntg" secondAttribute="height" multiplier="32:7" id="5Br-68-zYY"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="goSignupView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qf9-EW-1wJ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JgD-li-lKX">
+                                                <rect key="frame" x="0.0" y="144" width="256" height="56"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="JgD-li-lKX" secondAttribute="height" multiplier="32:7" id="QBh-5o-zhe"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <state key="normal" title="게스트 모드로 로그인">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="kQ9-u7-sYv" firstAttribute="top" secondItem="6yi-JZ-OF4" secondAttribute="top" constant="276" id="2Ry-dd-JmD"/>
                                     <constraint firstItem="kQ9-u7-sYv" firstAttribute="centerX" secondItem="Xfj-qW-ukN" secondAttribute="centerX" id="3xJ-ka-iHy"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="tXi-2Z-Ntg" secondAttribute="bottom" constant="24" id="Adg-wE-uol"/>
+                                    <constraint firstItem="DMf-AC-cKg" firstAttribute="centerX" secondItem="Xfj-qW-ukN" secondAttribute="centerX" id="FZt-xq-Wch"/>
                                     <constraint firstItem="Xfj-qW-ukN" firstAttribute="top" secondItem="6yi-JZ-OF4" secondAttribute="top" id="Hsu-W8-44R"/>
                                     <constraint firstItem="kQ9-u7-sYv" firstAttribute="width" secondItem="Xfj-qW-ukN" secondAttribute="width" multiplier="0.24" id="I2g-mQ-hJR"/>
-                                    <constraint firstItem="NgF-fF-zpJ" firstAttribute="width" secondItem="tXi-2Z-Ntg" secondAttribute="width" id="RTk-Me-lWu"/>
-                                    <constraint firstItem="NgF-fF-zpJ" firstAttribute="height" secondItem="tXi-2Z-Ntg" secondAttribute="height" id="Rp6-ko-PgW"/>
-                                    <constraint firstItem="tXi-2Z-Ntg" firstAttribute="top" secondItem="NgF-fF-zpJ" secondAttribute="bottom" constant="16" id="T2z-II-RMd"/>
+                                    <constraint firstItem="JgD-li-lKX" firstAttribute="width" secondItem="Xfj-qW-ukN" secondAttribute="width" multiplier="0.682667" id="O9g-md-a5a"/>
                                     <constraint firstAttribute="trailing" secondItem="Xfj-qW-ukN" secondAttribute="trailing" id="e35-jw-jfr"/>
                                     <constraint firstAttribute="bottom" secondItem="Xfj-qW-ukN" secondAttribute="bottom" id="fp4-RE-dGe"/>
-                                    <constraint firstItem="tXi-2Z-Ntg" firstAttribute="centerX" secondItem="Xfj-qW-ukN" secondAttribute="centerX" id="fs1-tw-yjA"/>
                                     <constraint firstItem="Xfj-qW-ukN" firstAttribute="leading" secondItem="6yi-JZ-OF4" secondAttribute="leading" id="hIO-HZ-Ftv"/>
-                                    <constraint firstItem="NgF-fF-zpJ" firstAttribute="centerX" secondItem="Xfj-qW-ukN" secondAttribute="centerX" id="rCB-W9-5Zv"/>
                                     <constraint firstItem="5Xf-q2-WmO" firstAttribute="leading" secondItem="6yi-JZ-OF4" secondAttribute="leading" constant="16" id="t68-8N-Rue"/>
-                                    <constraint firstItem="tXi-2Z-Ntg" firstAttribute="width" secondItem="Xfj-qW-ukN" secondAttribute="width" multiplier="0.765333" id="wT9-Cb-RsN"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="DMf-AC-cKg" secondAttribute="bottom" constant="24" id="yhc-K2-ab5"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ybR-bJ-5Ql" customClass="LoginTextView" customModule="Kravel" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="812" width="375" height="370"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6yi-JZ-OF4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="CKH-Ja-vkG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6yi-JZ-OF4" secondAttribute="trailing" id="F08-gX-5Xq"/>
@@ -90,12 +107,12 @@
                             <constraint firstAttribute="bottom" secondItem="6yi-JZ-OF4" secondAttribute="bottom" id="quc-e9-vmM"/>
                             <constraint firstItem="ybR-bJ-5Ql" firstAttribute="width" secondItem="6yi-JZ-OF4" secondAttribute="width" id="toF-cy-wUa"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Ted-rG-VhO"/>
                     <connections>
                         <outlet property="backViewBottomConstraint" destination="quc-e9-vmM" id="aDX-jd-FPI"/>
                         <outlet property="backgroundView" destination="6yi-JZ-OF4" id="z9p-FZ-lRS"/>
+                        <outlet property="guestSigninButton" destination="JgD-li-lKX" id="Q40-G5-lGM"/>
                         <outlet property="loginTextView" destination="ybR-bJ-5Ql" id="dbk-tu-fKV"/>
                         <outlet property="loginTextViewTopConstraint" destination="hGN-bD-n6g" id="tvI-T7-Fgs"/>
                         <outlet property="logoImageView" destination="kQ9-u7-sYv" id="RgF-r3-Rua"/>
@@ -131,5 +148,8 @@
     <resources>
         <image name="bgSign" width="375" height="812"/>
         <image name="imgLogo" width="90" height="84"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
