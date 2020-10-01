@@ -71,7 +71,7 @@ class NearPlaceVC: UIViewController {
     
     private func setNav() {
         self.navigationController?.navigationBar.isHidden = false
-        self.navigationItem.title = "나와 가까운 Kravel"
+        self.navigationItem.title = "나와 가까운 Kravel".localized
          self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.topItem?.title = ""

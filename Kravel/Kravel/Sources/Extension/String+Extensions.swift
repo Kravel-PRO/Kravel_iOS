@@ -296,7 +296,7 @@ struct CustomLocalize {
                 else { return "The popular place these days" }
             case .close:
                 if language == "KOR" { return "나와 가까운 Kravel" }
-                else { return "a Kravel close to me" }
+                else { return "Kravel close to me" }
             case .closepart:
                 if language == "KOR" { return "나와 가까운" }
                 else { return "close to me" }

@@ -38,6 +38,21 @@ class MorePhotoReviewVC: UIViewController {
         requestPhotoReview()
     }
     
+    // MARK: - 로그인 필요 서비스 팝업 화면
+    private func showRequirePopup() {
+        guard let requireLogin = UIStoryboard(name: "TwoButtonPopup", bundle: nil).instantiateViewController(withIdentifier: TwoButtonPopupVC.identifier) as? TwoButtonPopupVC else { return }
+        requireLogin.modalPresentationStyle = .overFullScreen
+        requireLogin.popupCategory = .guestMode
+        requireLogin.completion = {
+            UserDefaults.standard.removeObject(forKey: UserDefaultKey.guestMode)
+            UserDefaults.standard.removeObject(forKey: UserDefaultKey.token)
+            guard let startRootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "StartRoot") as? UINavigationController else { return }
+            guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
+            window.rootViewController = startRootVC
+        }
+        self.present(requireLogin, animated: false, completion: nil)
+    }
+    
     // MARK: - CollectionView 설정
     @IBOutlet weak var morePhotoReviewCollectionView: UICollectionView! {
         didSet {
@@ -112,6 +127,11 @@ extension MorePhotoReviewVC {
 
 extension MorePhotoReviewVC: CellButtonDelegate {
     func click(at indexPath: IndexPath) {
+        guard UserDefaults.standard.object(forKey: UserDefaultKey.guestMode) == nil else {
+            showRequirePopup()
+            return
+        }
+        
         guard let like = photoReviewData[indexPath.row].like,
         let reviewId = photoReviewData[indexPath.row].reviewId,
         let placeId = photoReviewData[indexPath.row].place?.placeId,
