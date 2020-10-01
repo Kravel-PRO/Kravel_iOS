@@ -17,12 +17,28 @@ class MainVC: UIViewController {
     @IBOutlet weak var guestSigninButton: UIButton!
     
     @IBAction func signinGuestMode(_ sender: Any) {
-        // FIXME: 여기서 게스트모드용 Token 발급 필요
-        UserDefaults.standard.setValue(true, forKey: UserDefaultKey.guestMode)
+        guard let selectedLang = UserDefaults.standard.object(forKey: UserDefaultKey.language) as? String else { return }
         
-        guard let mainTabVC = UIStoryboard(name: "Tabbar", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as? UITabBarController else { return }
-        mainTabVC.modalPresentationStyle = .fullScreen
-        self.present(mainTabVC, animated: true, completion: nil)
+        NetworkHandler.shared.requestAPI(apiCategory: .guest(GuestParameter(speech: selectedLang))) { result in
+            switch result {
+            case .success(let token):
+                guard let token = token as? String else { return }
+                UserDefaults.standard.setValue(token, forKey: UserDefaultKey.token)
+                UserDefaults.standard.setValue(true, forKey: UserDefaultKey.guestMode)
+                
+                guard let mainTabVC = UIStoryboard(name: "Tabbar", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as? UITabBarController else { return }
+                mainTabVC.modalPresentationStyle = .fullScreen
+                self.present(mainTabVC, animated: true, completion: nil)
+            case .requestErr:
+                return
+            case .serverErr:
+                return
+            case .networkFail:
+                guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                self.present(networkFailPopupVC, animated: false, completion: nil)
+            }
+        }
     }
     
     // MARK: - 초기 화면 로그인 버튼 설정
@@ -222,8 +238,6 @@ extension MainVC: LoginTextViewDelegate {
                 // 받은 Token 값 저장
                 guard let token = token as? String else { return }
                 UserDefaults.standard.set(token, forKey: UserDefaultKey.token)
-                UserDefaults.standard.set(id, forKey: UserDefaultKey.loginId)
-                UserDefaults.standard.set(pw, forKey: UserDefaultKey.loginPw)
                 
                 self.requestMyInform()
                 // 메인 화면으로 이동

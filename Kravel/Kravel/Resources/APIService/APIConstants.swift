@@ -25,6 +25,7 @@ struct APIConstants {
     // 로그인, 로그아웃 URL
     static let signin = APIConstants.baseURL + "/auth/sign-in"
     static let signup = APIConstants.baseURL + "/auth/sign-up"
+    static let guest = APIConstants.baseURL + "/auth/guest"
     
     // 장소 가져오는 API
     static let getPlace = APIConstants.baseURL + "/api/places"

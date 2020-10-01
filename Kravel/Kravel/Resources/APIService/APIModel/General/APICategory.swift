@@ -17,6 +17,7 @@ enum APICategory<P: ParameterAble> {
     // P에 파라메터 변수 넣어 보내기
     case signup(P)
     case signin(P)
+    case guest(P)
     case searchPlaceKakao(P)
     case getPlace(P)
     case getSimplePlace(P)
@@ -43,6 +44,7 @@ enum APICategory<P: ParameterAble> {
         switch self {
         case .signin: return APIConstants.signin
         case .signup: return APIConstants.signup
+        case .guest: return APIConstants.guest
         case .searchPlaceKakao: return APIConstants.mapSearchURL
         case .getPlace: return APIConstants.getPlace
         case .getSimplePlace: return APIConstants.map
@@ -98,6 +100,10 @@ enum APICategory<P: ParameterAble> {
             return [
                 "Content-Type": "application/json"
             ]
+        case .guest:
+            return [
+                "Content-Type": "application/json"
+            ]
         case .searchPlaceKakao:
             return [
                 "Content-Type": "application/json",
@@ -134,6 +140,11 @@ enum APICategory<P: ParameterAble> {
             return [
                 "loginEmail": signin.loginEmail,
                 "loginPw": signin.loginPw
+            ]
+        case .guest(let guest):
+            guard let guest = guest as? GuestParameter else { return nil }
+            return [
+                "speech": guest.speech
             ]
         case .searchPlaceKakao(let kakaoParameter):
             guard let kakaoParameter = kakaoParameter as? SearchPlaceParameter else { return nil }

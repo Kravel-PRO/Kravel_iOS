@@ -44,9 +44,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-        UserDefaults.standard.removeObject(forKey: UserDefaultKey.guestMode)
+        if UserDefaults.standard.object(forKey: UserDefaultKey.guestMode) != nil {
+            UserDefaults.standard.removeObject(forKey: UserDefaultKey.guestMode)
+            UserDefaults.standard.removeObject(forKey: UserDefaultKey.token)
+            print("게스트 모드일 경우 들어옴")
+        }
     }
-
-
 }
 

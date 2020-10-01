@@ -20,6 +20,7 @@ class NetworkHandler {
         switch apiCategory {
         case .signup: requestSignup(apiURL, headers, parameters, completion)
         case .signin: requestSignin(apiURL, headers, parameters, completion)
+        case .guest: requestGuestToken(apiURL, headers, parameters, completion)
         case .searchPlaceKakao: requestSearchPlace(apiURL, headers, parameters, completion)
         case .getPlace: requestGetPlace(apiURL, headers, parameters, completion)
         case .getSimplePlace: requestSimplePlace(apiURL, headers, parameters, completion)
@@ -79,6 +80,28 @@ class NetworkHandler {
                     completion(.networkFail)
                 }
         }
+    }
+    
+    private func requestGuestToken(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {
+        guard let url = try? url.asURL() else { return }
+        
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .validate(statusCode: 200...500)
+            .responseData { response in
+                switch response.result {
+                case .success:
+                    guard let statusCode = response.response?.statusCode else { return }
+                    if statusCode == 200 {
+                        guard let token = response.response?.headers["Authorization"] else { return }
+                        completion(.success(token))
+                    } else {
+                        completion(.serverErr)
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completion(.networkFail)
+                }
+            }
     }
     
     private func requestSearchPlace(_ url: String, _ headers: HTTPHeaders?, _ parameters: Parameters?, _ completion: @escaping (NetworkResult<Codable>) -> Void) {

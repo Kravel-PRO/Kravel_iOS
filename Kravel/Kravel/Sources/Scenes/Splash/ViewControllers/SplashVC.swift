@@ -32,7 +32,6 @@ class SplashVC: UIViewController {
         guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
         
         if UserDefaults.standard.object(forKey: UserDefaultKey.token) != nil {
-            print("notNil")
             guard let rootTab = UIStoryboard(name: "Tabbar", bundle: nil).instantiateViewController(withIdentifier: "MainTabVC") as? UITabBarController else { return }
             keyWindow.rootViewController = rootTab
         } else {
