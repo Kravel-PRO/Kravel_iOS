@@ -18,7 +18,7 @@ class LoginRequireVC: UIViewController {
     @IBOutlet weak var loginButton: CustomButton! {
         didSet {
             loginButton.locationButton = .galleryUploadPhotoView
-            loginButton.setTitle("aa", for: .normal)
+            loginButton.setTitle("로그인 하기".localized, for: .normal)
         }
     }
     
@@ -38,7 +38,7 @@ class LoginRequireVC: UIViewController {
     }
     
     private func setLabelByLanguage() {
-        messageLabel.text = "로그인을 하면\n위치 기반 서비스, 내 주변 멋진 장소 등\nKravel을 더 알차게 사용할 수 있어요!".localized
+        messageLabel.text = "로그인을 하면\nKravel이 당신 주변의\n멋진 여행지를 추천해줘요!".localized
         messageLabel.sizeToFit()
     }
 }
