@@ -101,6 +101,8 @@
 		9D7FB1FC24D16A15009A9C0A /* PlacePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D7FB1FB24D16A15009A9C0A /* PlacePopupView.xib */; };
 		9D7FB20024D16AA9009A9C0A /* PlacePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FB1FF24D16AA9009A9C0A /* PlacePopupView.swift */; };
 		9D88E0BD2525E363007ECC34 /* GuestParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D88E0BC2525E363007ECC34 /* GuestParameter.swift */; };
+		9D88E0C12525F130007ECC34 /* LoginRequire.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D88E0C02525F130007ECC34 /* LoginRequire.storyboard */; };
+		9D88E0C42525F1B2007ECC34 /* LoginRequireVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D88E0C32525F1B2007ECC34 /* LoginRequireVC.swift */; };
 		9D8C0A2524BC515A005C1F58 /* Tabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D8C0A2424BC515A005C1F58 /* Tabbar.storyboard */; };
 		9D8C0A2724BC525C005C1F58 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8C0A2624BC525C005C1F58 /* HomeVC.swift */; };
 		9D8EA91124E7BE4B00FD5059 /* ImageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA91024E7BE4B00FD5059 /* ImageKey.swift */; };
@@ -275,6 +277,8 @@
 		9D7FB1FB24D16A15009A9C0A /* PlacePopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlacePopupView.xib; sourceTree = "<group>"; };
 		9D7FB1FF24D16AA9009A9C0A /* PlacePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePopupView.swift; sourceTree = "<group>"; };
 		9D88E0BC2525E363007ECC34 /* GuestParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestParameter.swift; sourceTree = "<group>"; };
+		9D88E0C02525F130007ECC34 /* LoginRequire.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginRequire.storyboard; sourceTree = "<group>"; };
+		9D88E0C32525F1B2007ECC34 /* LoginRequireVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequireVC.swift; sourceTree = "<group>"; };
 		9D8C0A2424BC515A005C1F58 /* Tabbar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tabbar.storyboard; sourceTree = "<group>"; };
 		9D8C0A2624BC525C005C1F58 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		9D8EA91024E7BE4B00FD5059 /* ImageKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageKey.swift; sourceTree = "<group>"; };
@@ -535,6 +539,7 @@
 				9D4CCF7224FFFD6F003F73AF /* NetworkFailPopupVC.swift */,
 				9DD7AD102507BE8700742F25 /* AuthorizationPopupVC.swift */,
 				9D61F6E924F81D7200EF13FB /* TwoButtonPopupVC.swift */,
+				9D88E0C32525F1B2007ECC34 /* LoginRequireVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -903,6 +908,7 @@
 				9D4CCF7024FFFD55003F73AF /* NetworkFailPopup.storyboard */,
 				9DD7AD0E2507BE6D00742F25 /* AuthorizationPopup.storyboard */,
 				9D61F6E724F81D5500EF13FB /* TwoButtonPopup.storyboard */,
+				9D88E0C02525F130007ECC34 /* LoginRequire.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1370,6 +1376,7 @@
 				9D13C7F42487842E0058A7BF /* Main.storyboard in Resources */,
 				9D7FB1F424D15DE7009A9C0A /* SubLocationView.xib in Resources */,
 				9D76CD9424FE992F004D7333 /* SearchAddress.storyboard in Resources */,
+				9D88E0C12525F130007ECC34 /* LoginRequire.storyboard in Resources */,
 				9D6FF37724FAAF0500E6A8B9 /* Splash.storyboard in Resources */,
 				9DD7AD0F2507BE6D00742F25 /* AuthorizationPopup.storyboard in Resources */,
 				9D6FF35324F91B3500E6A8B9 /* LoginPopup.storyboard in Resources */,
@@ -1504,6 +1511,7 @@
 				9DA80457248E9200003826B9 /* String+Extensions.swift in Sources */,
 				9D8EA91124E7BE4B00FD5059 /* ImageKey.swift in Sources */,
 				9D9694CD24C5E7570046CB85 /* PlaceCell.swift in Sources */,
+				9D88E0C42525F1B2007ECC34 /* LoginRequireVC.swift in Sources */,
 				9D76CDA124FEBA43004D7333 /* SearchPlaceResponseData.swift in Sources */,
 				9D24525C2519011800A2D958 /* FilterCell.swift in Sources */,
 				9D94BDF224BE2C710027B9BF /* ContentDetailVC.swift in Sources */,

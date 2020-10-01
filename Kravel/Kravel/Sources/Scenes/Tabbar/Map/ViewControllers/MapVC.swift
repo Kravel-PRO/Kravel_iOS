@@ -28,6 +28,13 @@ class MapVC: UIViewController {
         mapView.addCameraDelegate(delegate: self)
         overlay = mapView.locationOverlay
         overlay?.hidden = false
+        
+        NSLayoutConstraint.activate([
+            mapView.leadingAnchor.constraint(equalTo: containerMapView.leadingAnchor),
+            mapView.trailingAnchor.constraint(equalTo: containerMapView.trailingAnchor),
+            mapView.bottomAnchor.constraint(equalTo: containerMapView.bottomAnchor),
+            mapView.topAnchor.constraint(equalTo: containerMapView.topAnchor)
+        ])
     }
     
     // MARK: - 마커 데이터 설정
@@ -141,6 +148,14 @@ class MapVC: UIViewController {
     private func setRefreshButton() {
         refreshButton.addTarget(self, action: #selector(refresh(_:)), for: .touchUpInside)
         self.view.addSubview(refreshButton)
+        
+        NSLayoutConstraint.activate([
+            refreshButton.leadingAnchor.constraint(equalTo: currentLocationButton.leadingAnchor),
+            refreshButton.trailingAnchor.constraint(equalTo: currentLocationButton.trailingAnchor),
+            refreshButton.bottomAnchor.constraint(equalTo: currentLocationButton.topAnchor, constant: -16),
+            refreshButton.widthAnchor.constraint(equalTo: currentLocationButton.widthAnchor),
+            refreshButton.heightAnchor.constraint(equalTo: currentLocationButton.heightAnchor)
+        ])
     }
     
     @objc func refresh(_ sender: Any) {
@@ -165,15 +180,15 @@ class MapVC: UIViewController {
         }
     }
     
-    private func setRefreshButtonLayout() {
-        NSLayoutConstraint.activate([
-            refreshButton.leadingAnchor.constraint(equalTo: currentLocationButton.leadingAnchor),
-            refreshButton.trailingAnchor.constraint(equalTo: currentLocationButton.trailingAnchor),
-            refreshButton.bottomAnchor.constraint(equalTo: currentLocationButton.topAnchor, constant: -16),
-            refreshButton.widthAnchor.constraint(equalTo: currentLocationButton.widthAnchor),
-            refreshButton.heightAnchor.constraint(equalTo: currentLocationButton.heightAnchor)
-        ])
-    }
+//    private func setRefreshButtonLayout() {
+//        NSLayoutConstraint.activate([
+//            refreshButton.leadingAnchor.constraint(equalTo: currentLocationButton.leadingAnchor),
+//            refreshButton.trailingAnchor.constraint(equalTo: currentLocationButton.trailingAnchor),
+//            refreshButton.bottomAnchor.constraint(equalTo: currentLocationButton.topAnchor, constant: -16),
+//            refreshButton.widthAnchor.constraint(equalTo: currentLocationButton.widthAnchor),
+//            refreshButton.heightAnchor.constraint(equalTo: currentLocationButton.heightAnchor)
+//        ])
+//    }
     
     // MARK: - 현재 내위치 찾기 설정
     var overlay: NMFLocationOverlay?
@@ -285,13 +300,6 @@ class MapVC: UIViewController {
         toastView.toastMessage = "주위에 Kravel 장소가 없어요!\n다른 지역을 탐색해볼까요?".localized
         return toastView
     }()
-    
-    private func setToastLayout() {
-        NSLayoutConstraint.activate([
-            toastView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
-            toastView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
-        ])
-    }
     
     // MARK: - Floating Panel View
     lazy var placePopupView: PlacePopupView = {
@@ -433,20 +441,42 @@ class MapVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setViewByMode()
+    }
+    
+    private func setToastView() {
         self.view.addSubview(toastView)
-        addObserver()
-        setLocationManager()
-        setMapView()
-        setCurrentLocationButton()
-        setRefreshButton()
-        showPlacePopupView()
-        setCurrentLocationButtonLayout()
         
-        // FIXME: - 이 부분 카메라 이동에 따라 데이터 받아올 수 있도록 수정해야함
-        requestSimplePlaceData()
-        
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
+        NSLayoutConstraint.activate([
+            toastView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            toastView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+        ])
+    }
+    
+    // MARK: - 게스트 모드와 로그인 시 구분해서 모드 지원
+    private func setViewByMode() {
+        if UserDefaults.standard.object(forKey: UserDefaultKey.guestMode) != nil {
+            guard let loginRequireVC = UIStoryboard(name: "LoginRequire", bundle: nil).instantiateViewController(withIdentifier: LoginRequireVC.identifier) as? LoginRequireVC else { return }
+            self.addChild(loginRequireVC)
+            loginRequireVC.view.frame = containerMapView.bounds
+            containerMapView.addSubview(loginRequireVC.view)
+            loginRequireVC.didMove(toParent: self)
+        } else {
+            addObserver()
+            setLocationManager()
+            setMapView()
+            setToastView()
+            setCurrentLocationButton()
+            setRefreshButton()
+            showPlacePopupView()
+            setCurrentLocationButtonLayout()
+            
+            // FIXME: - 이 부분 카메라 이동에 따라 데이터 받아올 수 있도록 수정해야함
+            requestSimplePlaceData()
+            
+            locationManager = CLLocationManager()
+            locationManager?.delegate = self
+        }
     }
     
     // MARK: - 지도 표시를 위한 ID, 위도, 경도 간단한 값 API 요청
@@ -605,50 +635,48 @@ class MapVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
-        
-        if let selectedPlace = self.selectedPlace {
-            NetworkHandler.shared.requestAPI(apiCategory: .getPlaceOfID(selectedPlace.placeId)) { result in
-                switch result {
-                case .success(let detailInform):
-                    guard let detailInform = detailInform as? PlaceDetailInform else { return }
-                    DispatchQueue.main.async {
-                        self.placePopupView.setLabelByLanguage()
-                        self.setDetailPlaceData(detailInform)
-                        self.placePopupView.nearByAttractionContainerView.requestTouristAPI(mapX: detailInform.longitude, mapY: detailInform.latitude)
-                    }
-                case .requestErr(let error):
-                    print(error)
-                case .serverErr:
-                    print("Server Err")
-                case .networkFail:
-                    guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
-                    networkFailPopupVC.modalPresentationStyle = .overFullScreen
-                    self.present(networkFailPopupVC, animated: false, completion: nil)
-                }
-            }
-            requestPhotoReview(of: selectedPlace.placeId)
+        requestDataByMode()
+    }
+    
+    private func requestDataByMode() {
+        if UserDefaults.standard.object(forKey: UserDefaultKey.guestMode) != nil {
+            return
         } else {
-            let cameraPosition = mapView.cameraPosition.target
-            requestClosePlaceData(latitude: cameraPosition.lat, longitude: cameraPosition.lng)
+            if let selectedPlace = self.selectedPlace {
+                NetworkHandler.shared.requestAPI(apiCategory: .getPlaceOfID(selectedPlace.placeId)) { result in
+                    switch result {
+                    case .success(let detailInform):
+                        guard let detailInform = detailInform as? PlaceDetailInform else { return }
+                        DispatchQueue.main.async {
+                            self.placePopupView.setLabelByLanguage()
+                            self.setDetailPlaceData(detailInform)
+                            self.placePopupView.nearByAttractionContainerView.requestTouristAPI(mapX: detailInform.longitude, mapY: detailInform.latitude)
+                        }
+                    case .requestErr(let error):
+                        print(error)
+                    case .serverErr:
+                        print("Server Err")
+                    case .networkFail:
+                        guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
+                        networkFailPopupVC.modalPresentationStyle = .overFullScreen
+                        self.present(networkFailPopupVC, animated: false, completion: nil)
+                    }
+                }
+                requestPhotoReview(of: selectedPlace.placeId)
+            } else {
+                let cameraPosition = mapView.cameraPosition.target
+                requestClosePlaceData(latitude: cameraPosition.lat, longitude: cameraPosition.lng)
+            }
         }
     }
     
     // MARK: - UIViewController viewWillLayoutSubviews override 부분
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        setRefreshButtonLayout()
     }
     
-    // MARK: - UIViewController viewDidLayoutSubviews override 부분
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setToastLayout()
-        NSLayoutConstraint.activate([
-            mapView.leadingAnchor.constraint(equalTo: containerMapView.leadingAnchor),
-            mapView.trailingAnchor.constraint(equalTo: containerMapView.trailingAnchor),
-            mapView.bottomAnchor.constraint(equalTo: containerMapView.bottomAnchor),
-            mapView.topAnchor.constraint(equalTo: containerMapView.topAnchor)
-        ])
+    deinit {
+        print("De Init")
     }
 }
 

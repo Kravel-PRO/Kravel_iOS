@@ -39,6 +39,7 @@ struct CustomLocalize {
         // MARK: - 로그인 필요 서비스 팝업
         case requireLoginTitle = "로그인이 필요한 서비스입니다."
         case requireLoginMessage = "로그인을 해주세요!"
+        case requireLoginVC = "로그인을 하면\n위치 기반 서비스, 내 주변 멋진 장소 등\nKravel을 더 알차게 사용할 수 있어요!"
         
         // MARK: - 주변 장소 없음 Toast 화면
         case notExistClosePlace = "주위에 Kravel 장소가 없어요!\n다른 지역을 탐색해볼까요?"
@@ -206,6 +207,9 @@ struct CustomLocalize {
             case .requireLoginMessage:
                 if language == "KOR" { return "로그인을 해주세요!" }
                 else { return "Please log in!" }
+            case .requireLoginVC:
+                if language == "KOR" { return "로그인을 하면\n위치 기반 서비스, 내 주변 멋진 장소 등\nKravel을 더 알차게 사용할 수 있어요!" }
+                else { return "You can use additional features\nincluding recommending nice places around you by logging in!" }
             case .notExistClosePlace:
                 if language == "KOR" { return "주위에 Kravel 장소가 없어요!\n다른 지역을 탐색해볼까요?" }
                 else { return "There's no place for Kravel around!\nLet's explore a different area" }

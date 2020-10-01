@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login RequireVC-->
+        <scene sceneID="l4F-aP-lgg">
+            <objects>
+                <viewController storyboardIdentifier="LoginRequireVC" id="LCI-By-ayc" customClass="LoginRequireVC" customModule="Kravel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="59Y-q5-C69">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="UsD-bz-buH">
+                                <rect key="frame" x="44" y="291.33333333333331" width="287" height="239.33333333333331"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icNoAreaTiger" translatesAutoresizingMaskIntoConstraints="NO" id="OFp-sm-FaR">
+                                        <rect key="frame" x="0.0" y="0.0" width="287" height="92"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7f-W0-Wet">
+                                        <rect key="frame" x="0.0" y="127.99999999999999" width="287" height="19.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.15294117647058825" green="0.15294117647058825" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f77-Ww-Rfj" customClass="CustomButton" customModule="Kravel" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="183.33333333333337" width="287" height="56"/>
+                                        <color key="backgroundColor" red="1" green="0.40392156862745099" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="f77-Ww-Rfj" secondAttribute="height" multiplier="41:8" id="X6N-sI-1LZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <connections>
+                                            <action selector="goLogin:" destination="LCI-By-ayc" eventType="touchUpInside" id="b51-i0-TuZ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="KzY-vl-kBe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="UsD-bz-buH" firstAttribute="centerY" secondItem="KzY-vl-kBe" secondAttribute="centerY" id="4PZ-cO-gRL"/>
+                            <constraint firstItem="UsD-bz-buH" firstAttribute="centerX" secondItem="KzY-vl-kBe" secondAttribute="centerX" id="LE5-BH-zKf"/>
+                            <constraint firstItem="f77-Ww-Rfj" firstAttribute="width" secondItem="59Y-q5-C69" secondAttribute="width" multiplier="0.765333" id="eoV-Qx-6jd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loginButton" destination="f77-Ww-Rfj" id="G2n-J9-IDQ"/>
+                        <outlet property="messageLabel" destination="p7f-W0-Wet" id="bfz-bI-IdL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V4Y-Fx-EDO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="194" y="104"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icNoAreaTiger" width="116" height="92"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
