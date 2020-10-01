@@ -42,8 +42,16 @@ class MyPageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        setLabelByLanguage()
-        addObserver()
+        if UserDefaults.standard.object(forKey: UserDefaultKey.guestMode) != nil {
+            guard let loginRequireVC = UIStoryboard(name: "LoginRequire", bundle: nil).instantiateViewController(withIdentifier: LoginRequireVC.identifier) as? LoginRequireVC else { return }
+            self.addChild(loginRequireVC)
+            loginRequireVC.view.frame = self.view.bounds
+            self.view.addSubview(loginRequireVC.view)
+            loginRequireVC.didMove(toParent: self)
+        } else {
+            setLabelByLanguage()
+            addObserver()
+        }
     }
     
     private func setLabelByLanguage() {
@@ -57,8 +65,12 @@ class MyPageVC: UIViewController {
     // MARK: - UIViewController viewWillAppear() Override 설정
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        requestMyInform()
         self.navigationController?.navigationBar.isHidden = true
+        if UserDefaults.standard.object(forKey: UserDefaultKey.guestMode) != nil {
+            return
+        } else {
+            requestMyInform()
+        }
     }
     
     // MARK: - UIViewController viewDidDisappear() Override 설정
@@ -74,6 +86,10 @@ class MyPageVC: UIViewController {
     // MARK: - UIViewController viewDidLayoutSubviews() Override 설정
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+    }
+    
+    deinit {
+        print("De Init")
     }
 }
 
