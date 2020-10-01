@@ -114,11 +114,12 @@ class HomeVC: UIViewController {
         if hotPlaceData.count == 0 {
             emptyView.isHidden = false
             hotPlaceCollectionView.isHidden = true
+            hotPlaceCollectionViewHeightConstraint.constant = 0
         } else {
             emptyView.isHidden = true
             hotPlaceCollectionView.isHidden = false
+            hotPlaceCollectionViewHeightConstraint.constant = cellHeight * CGFloat(hotPlaceData.count) + lineSpacing * CGFloat((hotPlaceData.count-1))
         }
-        hotPlaceCollectionViewHeightConstraint.constant = cellHeight * CGFloat(hotPlaceData.count) + lineSpacing * CGFloat((hotPlaceData.count-1))
         
         self.view.layoutIfNeeded()
     }
@@ -377,10 +378,9 @@ extension HomeVC {
             case .success(let getPlaceResult):
                 guard let getPlaceResult = getPlaceResult as? APISortableResponseData<PlaceContentInform> else { return }
                 self.hotPlaceData = getPlaceResult.content
-                print(self.hotPlaceData)
                 // 로딩화면 처리하기 위한 표시
-                loadingCompletion()
                 DispatchQueue.main.async {
+                    loadingCompletion()
                     self.setHotPlaceCollectionViewHeight()
                     self.hotPlaceCollectionView.reloadData()
                 }
@@ -388,17 +388,23 @@ extension HomeVC {
                 print(errorMessage)
                 self.hotPlaceData = []
                 DispatchQueue.main.async {
+                    loadingCompletion()
                     self.setHotPlaceCollectionViewHeight()
+                    self.hotPlaceCollectionView.reloadData()
                 }
             case .serverErr:
                 self.hotPlaceData = []
                 DispatchQueue.main.async {
+                    loadingCompletion()
                     self.setHotPlaceCollectionViewHeight()
+                    self.hotPlaceCollectionView.reloadData()
                 }
             case .networkFail:
                 self.hotPlaceData = []
                 DispatchQueue.main.async {
+                    loadingCompletion()
                     self.setHotPlaceCollectionViewHeight()
+                    self.hotPlaceCollectionView.reloadData()
                 }
                 guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
                 networkFailPopupVC.modalPresentationStyle = .overFullScreen
@@ -416,25 +422,31 @@ extension HomeVC {
                 guard let getReviewResult = getReviewResult as? APISortableResponseData<ReviewInform> else { return }
                 self.photoReviewData = getReviewResult.content
                 // 로딩화면 처리하기 위한 표시
-                loadingCompletion()
                 DispatchQueue.main.async {
+                    loadingCompletion()
                     self.setPhotoReviewViewLayout()
                     self.photoReviewView.photoReviewCollectionView.reloadData()
                 }
             case .requestErr:
                 self.photoReviewData = []
                 DispatchQueue.main.async {
+                    loadingCompletion()
                     self.setPhotoReviewViewLayout()
+                    self.photoReviewView.photoReviewCollectionView.reloadData()
                 }
             case .serverErr:
                 self.photoReviewData = []
                 DispatchQueue.main.async {
+                    loadingCompletion()
                     self.setPhotoReviewViewLayout()
+                    self.photoReviewView.photoReviewCollectionView.reloadData()
                 }
             case .networkFail:
                 self.photoReviewData = []
                 DispatchQueue.main.async {
+                    loadingCompletion()
                     self.setPhotoReviewViewLayout()
+                    self.photoReviewView.photoReviewCollectionView.reloadData()
                 }
                 guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
                 networkFailPopupVC.modalPresentationStyle = .overFullScreen

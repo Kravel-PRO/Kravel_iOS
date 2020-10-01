@@ -212,7 +212,6 @@ class NetworkHandler {
                         guard let getReviewResult = getReviewResponseData.data?.result else { return }
                         completion(.success(getReviewResult))
                     } else {
-                        print(getReviewResponseData)
                         completion(.requestErr("실패"))
                     }
                 case .failure(let error):
@@ -262,7 +261,6 @@ class NetworkHandler {
             headers: headers).responseDecodable(of: APIResponseData<APICantSortableDataResult<Int>, APIError>.self) { response in
                 switch response.result {
                 case .success(let postReviewResult):
-                    print("\(postReviewResult)")
                     guard let statusCode = response.response?.statusCode else { return }
                     if statusCode == 200 { completion(.success(statusCode)) }
                     else { completion(.serverErr) }
@@ -343,7 +341,6 @@ class NetworkHandler {
                 switch response.result {
                 case .success(let celebResult):
                     guard let statusCode = response.response?.statusCode else { return }
-                    print(celebResult)
                     if statusCode == 200 {
                         completion(.success(celebResult.data?.result?.content))
                     } else {
@@ -365,8 +362,6 @@ class NetworkHandler {
                 switch response.result {
                 case .success(let mediaResult):
                     guard let statusCode = response.response?.statusCode else { return }
-                    print(statusCode)
-                    print(mediaResult)
                     if statusCode == 200 {
                         completion(.success(mediaResult.data?.result?.content))
                     } else {
@@ -454,8 +449,6 @@ class NetworkHandler {
                         UserDefaults.standard.setValue(token, forKey: UserDefaultKey.token)
                         completion(.success(successData.data?.result))
                     } else {
-                        print(statusCode)
-                        print(successData)
                         completion(.serverErr) }
                 case .failure(let error):
                     print(error)
