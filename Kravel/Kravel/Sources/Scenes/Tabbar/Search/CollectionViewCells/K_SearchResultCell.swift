@@ -35,6 +35,7 @@ class K_SearchResultCell: UICollectionViewCell {
     var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.font = UIFont.systemFont(ofSize: 12)
+        nameLabel.textAlignment = .center
         nameLabel.textColor = UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 1.0)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         return nameLabel
@@ -60,6 +61,7 @@ class K_SearchResultCell: UICollectionViewCell {
     var yearLabel: UILabel = {
         let yearLabel = UILabel()
         yearLabel.font = UIFont.systemFont(ofSize: 12)
+        yearLabel.textAlignment = .center
         yearLabel.textColor = UIColor(red: 39/255, green: 39/255, blue: 39/255, alpha: 0.6)
         yearLabel.translatesAutoresizingMaskIntoConstraints = false
         return yearLabel
@@ -75,7 +77,9 @@ class K_SearchResultCell: UICollectionViewCell {
     private func setYearLabel() {
         NSLayoutConstraint.activate([
             yearLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
-            yearLabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor)
+            yearLabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+            yearLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            yearLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
         ])
     }
     

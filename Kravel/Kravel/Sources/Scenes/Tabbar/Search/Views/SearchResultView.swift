@@ -145,7 +145,11 @@ extension SearchResultView: UICollectionViewDataSource {
         if let media = searchResult[indexPath.row] as? MediaDTO {
             searchResultCell.searchImageView.setImage(with: media.imageUrl ?? "")
             searchResultCell.name = media.title
-            searchResultCell.year = media.year
+            if let year = media.year {
+                searchResultCell.year = year
+            } else {
+                searchResultCell.year = ""
+            }
         }
         
         if let celeb = searchResult[indexPath.row] as? CelebrityDTO {
