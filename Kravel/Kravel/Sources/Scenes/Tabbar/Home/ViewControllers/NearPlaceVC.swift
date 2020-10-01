@@ -28,6 +28,19 @@ class NearPlaceVC: UIViewController {
         loadingView = nil
     }
     
+    // MARK: - 리프레쉬
+    private func setRefresh() {
+        let refreshControl = UIRefreshControl()
+        nearPlaceCollectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+    }
+    
+    @objc func reloadData() {
+        if let currentLocation = self.currentLocation {
+            requestPlaceData(lat: currentLocation.latitude, lng: currentLocation.longitude)
+        }
+    }
+    
     // MARK: - 가까운 장소 표시 CollectionView
     @IBOutlet weak var nearPlaceCollectionView: UICollectionView! {
         didSet {
@@ -44,6 +57,7 @@ class NearPlaceVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         showLoadingLottie()
+        setRefresh()
         if let currentLocation = self.currentLocation {
             requestPlaceData(lat: currentLocation.latitude, lng: currentLocation.longitude)
         }
@@ -80,6 +94,7 @@ extension NearPlaceVC {
                 self.nearPlaceData = getPlaceResult.content
                 DispatchQueue.main.async {
                     self.stopLottieAnimation()
+                    self.nearPlaceCollectionView.refreshControl?.endRefreshing()
                     self.nearPlaceCollectionView.reloadData()
                 }
             // FIXME: 요청 에러 있을 시 에러 처리 필요
