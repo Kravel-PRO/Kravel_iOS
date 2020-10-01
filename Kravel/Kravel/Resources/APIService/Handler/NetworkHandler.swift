@@ -383,6 +383,7 @@ class NetworkHandler {
                 switch response.result {
                 case .success(let searchResult):
                     guard let statusCode = response.response?.statusCode else { return }
+                    print(statusCode)
                     if statusCode == 200 {
                         completion(.success(searchResult.data?.result))
                     } else {

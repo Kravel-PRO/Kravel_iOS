@@ -267,9 +267,16 @@ extension SearchVC {
                         self.setSearchResultViewLayout()
                     }
                 }
-            case .requestErr(let erorr):
-                print(erorr)
-            case .serverErr: print("Server Err")
+            case .requestErr:
+                return
+            case .serverErr:
+                self.searchResultView.searchResultDTO = SearchResultDTO(celebrities: [], medias: [])
+                DispatchQueue.main.async {
+                    if self.searchResultView.superview == nil {
+                        self.view.addSubview(self.searchResultView)
+                        self.setSearchResultViewLayout()
+                    }
+                }
             case .networkFail:
                 guard let networkFailPopupVC = UIStoryboard(name: "NetworkFailPopup", bundle: nil).instantiateViewController(withIdentifier: NetworkFailPopupVC.identifier) as? NetworkFailPopupVC else { return }
                 networkFailPopupVC.modalPresentationStyle = .overFullScreen
