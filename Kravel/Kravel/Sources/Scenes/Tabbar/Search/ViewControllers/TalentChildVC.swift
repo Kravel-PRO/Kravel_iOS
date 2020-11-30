@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class TalentChildVC: UIViewController {
     static let identifier = "TalentChildVC"
     

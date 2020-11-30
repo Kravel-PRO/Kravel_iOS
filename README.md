@@ -71,6 +71,91 @@
 
 ---
 
+###  🛠 설계 및 구현
+
+<br>
+
+> **검색 화면** - MVC Pattern, Delegate Pattern
+
+<img src="./images/searcharch.png" width="500px">
+
+* `MovieViewController` --- `TalentViewController` --- `PageCollectionView` --- `SearchViewController`
+  * **PageCollectionView**에서 **ChildViewController**로 **MovieViewController**, **TalentViewController**로 임명 
+  * 각 **MovieViewController**, **TalentViewController**가 **Celeb**, **Movie** 모델을 가지고 있는 것이 **SearchViewController**의 역할을 덜어줄 것 같아서 Child로 나눔
+  * **CollectionView** 터치 시, Parent로 이벤트를 넘겨서 새로운 화면 띄울 수 있게 처리
+  * **MovieViewController**, **TalentViewController**에서 APIService에 HTTP 요청 및 응답하여 데이터 표시
+* `CategoryTabbarView` --- `SearchViewController` 
+  * **Controller**를 **CategoryTabbarView**의 **Delegate**로 임명
+  * CategoryTabbar의 메뉴가 눌렸을 때, Delegate가 PageCollectionView Index로 스크롤 될 수 있게 구현
+  * PageCollectionView을 스크롤하면 contentOffset에 나누기 2를 수행해서 CategoryTabbar Indicator View 스크롤될 수 있게 구현
+
+<br>
+
+***고민한 내용***
+
+* CollectionCell 안의 내용들을 SearchViewController에서 로드할 지, Cell안에서 할 지 고민했었습니다.
+  * SearchViewController의 역할을 줄여주기 위해서 Cell 안에 ViewController을 넣어서 Parent, Child 관계로 유지하여 Child ViewController 안에서 처리할 수 있게 역할을 나누었습니다.
+  * Cell을 Qeueu안에서 꺼내올 때, ChildViewController의 view을 추가해서 바로 사용할 수 있게 구현
+
+<br>
+
+> **최근 검색어 화면** - MVC Pattern, Delegate Pattern
+
+<img src="./images/searchpattern.png" width="500px">
+
+* `RecentReserachView` --- `SearchViewController` --- `RecentResearchTerm` (MVC Pattern)
+  * **Controller**에서 **RecentResearchTerm** 데이터 로드
+  * **Controller**에서 **RecentResearchView** 화면 업데이트
+  * **Controller**를 **RecentResearchView**의 Delegate로 임명 => 검색어 클릭 이벤트 및 삭제 이벤트에 맞는 동작
+    * 최근 검색어 클릭 시, Delegate에 검색어 전달 후 APIService Singleton 객체에 API 요청
+    * 최근 검색어 클릭 시, Delegate에 검색어 전달 후 RecentResearchTerm에 최근 검색어 추가
+    * 최근 검색어 삭제 버튼 클릭 시, RecentResearchTerm 객체에 이벤트 알리고 해당 ID 검색어 삭제
+* `SearchViewController` --- `NetworkHandler(APIService)` 객체
+  * requestAPI<P: ParameterAble>(_: APICategory<P>, _: @esacping (NetworkResult<Codable>) -> Void) 메소드 요청으로 HTTP 요청
+  * completion을 이용, 네트워크 작업 후 **SearchResultDTO** 데이터를 이용 **ResultView** 업데이트
+* `RecentResearchView` --- `TableView Cell Button`
+  * RecentResearchView을 TableViewCell의 Delegate로 임명
+  * Button Click시 해당 Index에 해당하는 `RecentResearchView`에서 최근 검색어 삭제
+
+<br>
+
+***고민한 내용***
+
+* 서로 다른 계층에 이벤트를 전달하기 위해 Delegate를 사용할 지, NotificationCenter을 사용할지 고민
+  * NotificationCenter을 사용할 경우 1:N 의 관계에서 이벤트를 전달하기 유용하다. 그러나 1:1의 관계에서 Delegate가 더 효율적이라고 생각했다. - NotificationCenter의 경우 post을 할 때, Observer들을 탐색할 때 비용이 소비되기 때문에
+
+* CoreData에 접근하는데 이 주체를 Controller로 할지, 해당 모델을 가지는 View로 할지
+  * MVC Pattern에서 Controller가 중간이 되어야한다고 생각해서 Controller로 부여 - 그러나 너무 Controller가 무거워진 것 같고 이 과정에서 한 단계 더 전달하는 Depth가 생겼다. 그냥 View로 연결하는게 Controller의 과중된 역할도 줄여주고 더 좋았을 것 같다.
+
+<br>
+
+> **지도 화면** - MVC Pattern, Delegate Pattern
+
+<img src="./images/maparchi.png" width="500px">
+
+* `NaverMapView` --- `MapViewController` --- `PlaceData` (MVC Pattern)
+  * **Controller**에서 **APIService Singleton** 객체 이용 **PlaceData** 데이터 로드
+  * **Controller**에서 받은 **PlaceData** 모델을 **NaverMapView** 업데이트 (Marker 표시)
+  * **MapViewController**를 **NaverMapView**의 **Delegate**로 임명
+    * 카메라 이동의 원인이 Direction Search에 따라 바뀌면 현재 위치 추적 모드 UIImage 바뀌게 구현
+* `NearPlaceCollectionView` --- `MapViewController` --- `NearPlaceData`
+  * **Controller**에서 **APIService Singleton** 객체 이용 **NearPlaceData** 데이터 로드 (Query로 현재 경도, 위도 삽입)
+  * **Controller**에서 받은 **NearPlaceData** 모델을 **NearPlaceCollectionView**에 업데이트 (reloadData이용)
+  * **MapViewController**를 **NearPlaceCollectionView**의 **DataSource**, **Delegate로** 임명
+    * MapViewController의 데이터를 전달 + 터치 이벤트 전달
+
+<br>
+
+***고민한 내용***
+
+* Marker에 해당하는 데이터를 받아올 때, 모든 장소를 받아올 지 현재 카메라에 해당하는 장소만 받아올 지 고민
+  * 카메라를 이동할 때마다 많은 이벤트가 발생해서 그 때마다 Networking이 일어나면 비용이 너무 많이 들 것 같아서 데이터가 너무 많지 않은 지금은 지도에 표시하는 데이터를 간편화(id, Longitude, Latitude) 시켜서 전부 표시되게 하였습니다. 
+  * 데이터가 많아졌을 때는, 현재 로딩중인지를 표시하는 변수를 두고 로딩중이지 않을 경우에 API 요청을 보내는 방식으로 리모델링하는게 좋을 것 같다.
+
+<br>
+
+---
+
 ### 📕 새롭게 알게 된 것
 
 <br>

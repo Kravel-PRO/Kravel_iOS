@@ -315,10 +315,6 @@ extension SearchVC: UITextFieldDelegate {
         searchText(textField)
         return true
     }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        
-    }
 }
 
 extension SearchVC: RecentResearchCoreDataUsable {
